@@ -10,7 +10,7 @@ env:
 
 install:
     - pip install -r ./src/requirements.txt
-    - pip install twine
+    - pip install --upgrade twine
 
 script:
   - set -e
