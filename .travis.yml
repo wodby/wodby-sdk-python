@@ -9,4 +9,4 @@ python:
 
 install: pip install -r ./src/requirements.txt
 
-script: nosetests
+script: cd ./src && nosetests
