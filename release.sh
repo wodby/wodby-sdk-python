@@ -13,5 +13,5 @@ fi
 if [[ "${TRAVIS_PULL_REQUEST}" == "false" && ("${TRAVIS_BRANCH}" == "master"  || -n "${TRAVIS_TAG}") ]]; then
     cd ./src
     python setup.py sdist bdist_wheel
-    twine upload --repository-url -u "${PIPY_USERNAME}" -p "${PIPY_PASSWORD}" https://upload.pypi.org/legacy/ dist/*
+    twine upload -u "${PIPY_USERNAME}" -p "${PIPY_PASSWORD}" --repository-url https://upload.pypi.org/legacy/ dist/*
 fi
