@@ -30,7 +30,7 @@ codegen:
 			-o ./src \
 			-D packageName=wodby_sdk \
 			-D infoEmail='hello@wodby.com' \
-			-D packageUrl='https://wodby.com/dev'
+			-D packageUrl='https://wodby.com/docs/dev'
 
 	[ -z "$(TRAVIS)" ] || sudo chown -R $(UID) ./
 
