@@ -1,0 +1,7 @@
+# IDE
+/.idea
+!/.idea/codeStyles
+!/.idea/inspectionProfiles
+
+# Build artefacts
+codegen.jar
