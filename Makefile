@@ -40,7 +40,7 @@ codegen:
 .PHONY: codegen
 
 clean:
-	mv ./pkg/.swagger-codegen-ignore ./
-	rm -rf ./codegen.jar ./pkg/*
-	mv ./.swagger-codegen-ignore ./pkg/
+	mv ./src/.swagger-codegen-ignore ./
+	rm -rf ./codegen.jar ./src/*
+	mv ./.swagger-codegen-ignore ./src/
 .PHONY: clean
