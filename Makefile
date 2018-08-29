@@ -27,14 +27,16 @@ codegen:
 		maven:"$(MAVEN_VER)" java $(SWAGGER_CODEGEN_JAVA_OPTS) -jar ./codegen.jar generate \
 			-i ./swagger.json \
 			-l python \
-			-o ./pkg \
-			-D packageName=client
+			-o ./src \
+			-D packageName=wodby_sdk \
+			-D infoEmail='hello@wodby.com' \
+			-D packageUrl='https://wodby.com/dev'
 
 	[ -z "$(TRAVIS)" ] || sudo chown -R $(UID) ./
 
-#	rm -f ./pkg/.travis.yml \
-#		./pkg/git_push.sh \
-#		./pkg/.gitignore
+	rm -f ./src/.travis.yml \
+		./src/git_push.sh \
+		./src/.gitignore
 .PHONY: codegen
 
 clean:

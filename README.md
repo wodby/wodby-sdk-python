@@ -12,7 +12,7 @@ The Wodby SDK for Python makes it easy for developers to access Wodby in their P
 ## Documentation
 
 * [API reference](https://wodby.com/docs/api)
-* [Automatically generated documentation](pkg/README.md)
+* [Automatically generated documentation](src/README.md)
 
 ## Basic usage
 

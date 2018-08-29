@@ -1,9 +1,12 @@
-language: go
-sudo: false
+language: python
 
-go:
-- "1.10.x"
+python:
+  - 2.7
+  - 3.2
+  - 3.3
+  - 3.4
+  - 3.5
 
-install: go get -d -v ./pkg
+install: pip install -r ./src/requirements.txt
 
-script: go build -v ./pkg
+script: nosetests
