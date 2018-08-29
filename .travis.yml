@@ -5,7 +5,12 @@ python:
   - 3.4
   - 3.5
 
-script:
-  - set -e
-  - make setup
-  - make test
+install:
+  - pip install --user --upgrade --no-warn-script-location twine
+  - pip install -r ./src/requirements.txt
+
+script: ./src && python test.py
+
+after_success:
+  - python setup.py sdist bdist_wheel
+  - ~/.local/bin/twine upload --repository-url -u "${PIPY_USERNAME}" -p "${PIPY_PASSWORD}" https://upload.pypi.org/legacy/ dist/*

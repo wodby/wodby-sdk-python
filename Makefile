@@ -46,19 +46,7 @@ clean:
 	mv ./.swagger-codegen-ignore ./src/
 .PHONY: clean
 
-setup:
-	[ -z "$(TRAVIS)" ] || pip install -r ./src/requirements.txt
-.PHONY: setup
-
-test:
-	cd ./src && python test.py
-.PHONY: test
-
 testenv:
 	docker build -t wodby-sdk-python-test-env ./
-.PHONY: testenv
-
-testenv-shell:
 	docker run --rm -v$(PWD):/opt/sdk -it wodby-sdk-python-test-env bash
-#	docker run --rm -it wodby-sdk-python-test-env bash
-.PHONY: testenv-shell
+.PHONY: testenv
