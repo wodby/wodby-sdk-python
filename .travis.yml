@@ -7,7 +7,7 @@ python:
 
 install: pip install -r ./src/requirements.txt
 
-script: ./src && python test.py
+script: cd ./src && python test.py
 
 after_success:
   - python setup.py sdist bdist_wheel
