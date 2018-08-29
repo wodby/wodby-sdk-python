@@ -6,7 +6,7 @@ python:
   - 3.5
 
 install:
-  - pip install --user --upgrade --no-warn-script-location twine
+  - pip install --user --upgrade twine
   - pip install -r ./src/requirements.txt
 
 script: ./src && python test.py
