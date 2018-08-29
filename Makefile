@@ -36,7 +36,8 @@ codegen:
 
 	rm -f ./src/.travis.yml \
 		./src/git_push.sh \
-		./src/.gitignore
+		./src/.gitignore \
+		./src/test-requirements.txt
 .PHONY: codegen
 
 clean:
@@ -44,3 +45,11 @@ clean:
 	rm -rf ./codegen.jar ./src/*
 	mv ./.swagger-codegen-ignore ./src/
 .PHONY: clean
+
+testenv:
+	docker build -t wodby-sdk-python-test-env ./
+.PHONY: testenv
+
+testenv-shell:
+	docker run --rm -v$(PWD):/opt/sdk -it wodby-sdk-python-test-env bash
+.PHONY: testenv-shell

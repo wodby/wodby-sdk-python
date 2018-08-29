@@ -7,4 +7,4 @@ python:
 
 install: pip install -r ./src/requirements.txt
 
-script: cd ./src && nosetests
+script: cd ./src && python test.py
