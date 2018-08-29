@@ -11,6 +11,7 @@ if [[ ! "$(python --version | grep "Python ${RELEASE_ON_VER}")" ]]; then
 fi
 
 if [[ "${TRAVIS_PULL_REQUEST}" == "false" && ("${TRAVIS_BRANCH}" == "master"  || -n "${TRAVIS_TAG}") ]]; then
+    cd ./src
     python setup.py sdist bdist_wheel
     twine upload --repository-url -u "${PIPY_USERNAME}" -p "${PIPY_PASSWORD}" https://upload.pypi.org/legacy/ dist/*
 fi
