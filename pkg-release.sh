@@ -18,10 +18,11 @@ function pkg_release() {
 
     if [[ "${test}" ]]; then
         echo "Releasing ${dir} (test) ..."
-        twine upload -u "${PYPI_USERNAME}" -p "${PYPI_PASSWORD}" \
-            --repository-url https://test.pypi.org/legacy/ dist/* \
-            --skip-existing
+#        twine upload -u "${PYPI_USERNAME}" -p "${PYPI_PASSWORD}" \
+#            --repository-url https://test.pypi.org/legacy/ dist/*
     else
+        # Pay attention!!!
+        # There is no way to remove published package.
         echo "Releasing ${dir} ..."
         twine upload -u "${PYPI_USERNAME}" -p "${PYPI_PASSWORD}" \
             --repository-url https://test.pypi.org/legacy/ dist/*
