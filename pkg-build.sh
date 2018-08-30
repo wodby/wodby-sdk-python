@@ -63,6 +63,11 @@ if [[ "${TRAVIS}" ]]; then
     pkg_build ./src-master "${schema_ver_dev}"
 
     if [[ "${TRAVIS_TAG}" ]]; then
+        if [[ "${schema_ver}" != "${TRAVIS_TAG}" ]]; then
+            echo "ERROR: Schema version (${schema_ver}) mismatches git tag (${TRAVIS_TAG})" 1>&2
+            exit 1
+        fi
+
         pkg_build ./src-tag "${schema_ver}"
     fi
 else
