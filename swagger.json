@@ -767,7 +767,7 @@
     "description": "Wodby Developer Documentation https://wodby.com/docs/dev",
     "termsOfService": "https://wodby.com/legal",
     "title": "Wodby API Client",
-    "version": "1.0.3",
+    "version": "1.0.2",
     "contact": {
       "email": "hello@wodby.com"
     }
