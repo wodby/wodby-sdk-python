@@ -76,6 +76,4 @@ fi
 schema_ver_minor="${BASH_REMATCH[1]}.${BASH_REMATCH[2]}"
 schema_ver_dev="${schema_ver_minor}d${build}"
 
-rm -rf "${dir}"
-mkdir -p "${dir}"
 pkg_codegen "./src" "${schema_ver_dev}"
