@@ -8,9 +8,9 @@ fi
 
 function pkg_test() {
     local dir="${1}"
+    local stored_dir=$(pwd)
 
     echo "Testing ${dir} ..."
-
     cp ./tests/test.py "${dir}"/
     cd "${dir}"
 
@@ -20,6 +20,8 @@ function pkg_test() {
 
     python test.py
     rm -f test.py
+
+    cd "${stored_dir}"
 }
 
 if [[ "${TRAVIS}" ]]; then

@@ -9,6 +9,7 @@ fi
 function pkg_release() {
     local dir="${1}"
     local test="${2}"
+    local stored_dir=$(pwd)
 
     cd "${dir}"
 
@@ -27,6 +28,8 @@ function pkg_release() {
         twine upload -u "${PYPI_USERNAME}" -p "${PYPI_PASSWORD}" \
             --repository-url https://test.pypi.org/legacy/ dist/*
     fi
+
+    cd "${stored_dir}"
 }
 
 if [[ "${TRAVIS}" ]]; then
@@ -50,5 +53,3 @@ if [[ "${TRAVIS}" ]]; then
 else
     pkg_release ./src test
 fi
-
-# trigger ci 1
