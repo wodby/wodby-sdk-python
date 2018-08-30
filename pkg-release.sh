@@ -38,7 +38,7 @@ if [[ "${TRAVIS}" ]]; then
         exit 0
     fi
 
-    if [[ "${TRAVIS_BRANCH}" != "master"  ]]; then
+    if [[ "${TRAVIS_BRANCH}" == "master"  ]]; then
         pkg_release ./src-master
     fi
 
