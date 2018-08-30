@@ -15,7 +15,7 @@ function pkg_test() {
     cd "${dir}"
 
     if [[ "${TRAVIS}" ]]; then
-        pip install -r ./requirements.txt
+        python setup.py install
     fi
 
     python test.py
