@@ -74,6 +74,6 @@ if [[ ! ${schema_ver} =~ ${schema_ver_pattern} ]]; then
 fi
 
 schema_ver_minor="${BASH_REMATCH[1]}.${BASH_REMATCH[2]}"
-schema_ver_dev="${schema_ver_minor}d${build}"
+schema_ver_dev="${schema_ver_minor}.d${build}"
 
 pkg_codegen "./src" "${schema_ver_dev}"
