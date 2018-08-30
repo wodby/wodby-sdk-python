@@ -24,7 +24,5 @@ if [[ ! "${TRAVIS}" ]]; then
     done
 fi
 
-cp tests/test.py "${dir}"/
-cd "${dir}"
-pip install -r ./requirements.txt
-python ./test.py
+pip install -r "${dir}"/requirements.txt
+python "${dir}"/test.py

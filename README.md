@@ -20,13 +20,13 @@ The Wodby SDK for Python makes it easy for developers to access Wodby in their P
 
 ```python
 import os
-import wodby_sdk
+import wodby
 from pprint import pprint
 
-configuration = wodby_sdk.Configuration()
+configuration = wodby.Configuration()
 configuration.api_key['X-API-KEY'] = os.environ['WODBY_API_KEY']
 
 # Get user`s organizations
-org_api = wodby_sdk.OrganizationApi(wodby_sdk.ApiClient(configuration))
+org_api = wodby.OrganizationApi(wodby.ApiClient(configuration))
 org_api.get_orgs()
 ```
