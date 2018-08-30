@@ -10,7 +10,6 @@ function pkg_test() {
     local dir="${1}"
     local stored_dir=$(pwd)
 
-    echo "Testing ${dir} ..."
     cp ./tests/test.py "${dir}"/
     cd "${dir}"
 
