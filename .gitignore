@@ -5,7 +5,9 @@
 
 # Build artefacts
 codegen.jar
-src-tag/
 src/build
 src/dist
 src/wodby_sdk.egg-info
+src/test.py
+src-tag
+src-master

@@ -6,23 +6,28 @@ if [[ "${DEBUG}" ]]; then
     set -x
 fi
 
-dir="${1}"
+function pkg_test() {
+    local dir="${1}"
 
-if [[ ! "${dir}" ]]; then
-    echo "ERROR: Package dir have to be specified" 1>&2
-    exit 1
+    echo "Testing ${dir} ..."
+
+    cp ./tests/test.py "${dir}"/
+    cd "${dir}"
+
+    if [[ "${TRAVIS}" ]]; then
+        pip install -r ./requirements.txt
+    fi
+
+    python test.py
+    rm -f test.py
+}
+
+if [[ "${TRAVIS}" ]]; then
+    pkg_test ./src-master
+
+    if [[ "${TRAVIS_TAG}" ]]; then
+        pkg_test ./src-tag
+    fi
+else
+    pkg_test ./src
 fi
-
-if [[ ! "${TRAVIS}" ]]; then
-    while true; do
-        read -p 'Do you wish to proceed with non-travis environment (Python packages will be installed)? ' yn
-        case ${yn} in
-            [Yy]* ) break;;
-            [Nn]* ) exit;;
-            * ) echo "Please answer yes or no.";;
-        esac
-    done
-fi
-
-pip install -r "${dir}"/requirements.txt
-python "${dir}"/test.py

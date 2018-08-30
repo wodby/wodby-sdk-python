@@ -6,64 +6,47 @@ if [[ "${DEBUG}" ]]; then
     set -x
 fi
 
-function pkg_codegen() {
-    local out="${1}"
+function pkg_build() {
+    local dir="${1}"
     local pkg_ver="${2}"
+    local codegen_ver='2.3.1'
+    local codegen_url="http://central.maven.org/maven2/io/swagger/swagger-codegen-cli/${codegen_ver}/swagger-codegen-cli-${codegen_ver}.jar"
+    local codegen_java_ops='-Xmx1024M -DapiTests=false -DmodelTests=false'
+    local codegen_user=''
+    local maven_ver='3-jdk-7-alpine'
+
+    echo "Building ${pkg_ver} in ${dir} ..."
+
+    if [[ ! "${TRAVIS}" ]]; then
+        local codegen_user="-u ${UID}"
+    fi
 
     if [[ ! -f ./codegen.jar ]]; then
-        wget -nv "${CODEGEN_URL}" -O ./codegen.jar
+        wget -nv "${codegen_url}" -O ./codegen.jar
     fi
 
     docker run -it --rm \
         -v "${PWD}":/gen \
         -w /gen \
-        ${CODEGEN_USER} \
-        maven:"${CODEGEN_MAVEN_VER}" java ${CODEGEN_JAVA_OPTS} -jar ./codegen.jar generate \
+        ${codegen_user} \
+        maven:"${maven_ver}" java ${codegen_java_ops} -jar ./codegen.jar generate \
             -i ./swagger.json \
             -l python \
-            -o "${out}" \
+            -o "${dir}" \
             -D packageName=wodby \
             -D packageUrl=https://github.com/wodby/wodby-sdk-python \
             -D packageVersion="${pkg_ver}"
 
     if [[ "${TRAVIS}" ]]; then
-        sudo chown -R ${UID} "${out}"
+        sudo chown -R ${UID} "${dir}"
     fi
 
-    rm -f "${out}"/.travis.yml \
-        "${out}"/git_push.sh \
-        "${out}"/.gitignore \
-        "${out}"/tox.ini \
-        "${out}"/test-requirements.txt
+    rm -f "${dir}"/.travis.yml \
+        "${dir}"/git_push.sh \
+        "${dir}"/.gitignore \
+        "${dir}"/tox.ini \
+        "${dir}"/test-requirements.txt
 }
-
-dir="${1}"
-
-if [[ ! "${dir}" ]]; then
-    echo "ERROR: Package dir have to be specified" 1>&2
-    exit 1
-fi
-
-CODEGEN_MAVEN_VER='3-jdk-7-alpine'
-CODEGEN_VER=2.3.1
-CODEGEN_URL=http://central.maven.org/maven2/io/swagger/swagger-codegen-cli/${CODEGEN_VER}/swagger-codegen-cli-${CODEGEN_VER}.jar
-CODEGEN_JAVA_OPTS='-Xmx1024M -DapiTests=false -DmodelTests=false'
-
-if [[ ! "${TRAVIS}" ]]; then
-    CODEGEN_USER="-u ${UID}"
-fi
-
-if [[ "${TRAVIS}" ]]; then
-    if [[ "${TRAVIS_BUILD_NUMBER}" ]]; then
-        build="${TRAVIS_BUILD_NUMBER}"
-    else
-        echo 'ERROR: TRAVIS_BUILD_NUMBER env var have to be defined' 1>&2
-        exit 1
-    fi
-else
-    # For local dev and tests.
-    build=0
-fi
 
 schema_ver=$(cat ./swagger.json | yq '.info.version' | cut -d '"' -f 2)
 schema_ver_pattern='^([0-9]+).([0-9]+)(.([0-9]+))?$'
@@ -74,6 +57,14 @@ if [[ ! ${schema_ver} =~ ${schema_ver_pattern} ]]; then
 fi
 
 schema_ver_minor="${BASH_REMATCH[1]}.${BASH_REMATCH[2]}"
-schema_ver_dev="${schema_ver_minor}.dev${build}"
+schema_ver_dev="${schema_ver_minor}.dev${TRAVIS_BUILD_NUMBER:=0}"
 
-pkg_codegen "./src" "${schema_ver_dev}"
+if [[ "${TRAVIS}" ]]; then
+    pkg_build ./src-master "${schema_ver_dev}"
+
+    if [[ "${TRAVIS_TAG}" ]]; then
+        pkg_build ./src-tag "${schema_ver}"
+    fi
+else
+    pkg_build ./src "${schema_ver}"
+fi
