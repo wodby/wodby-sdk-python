@@ -32,11 +32,11 @@ if [[ "${TRAVIS_PULL_REQUEST}" == "false" && ("${TRAVIS_BRANCH}" == "master"  ||
 
     if [[ "${only_test_release}" ]]; then
         echo 'Releasing test package'
-        twine upload -u "${PIPY_USERNAME}" -p "${PIPY_PASSWORD}" --skip-existing \
+        twine upload -u "${PYPI_USERNAME}" -p "${PYPI_PASSWORD}" --skip-existing \
             --repository-url https://test.pypi.org/legacy/ dist/*
     else
         echo '!!! Releasing package !!!'
-        twine upload -u "${PIPY_USERNAME}" -p "${PIPY_PASSWORD}" --skip-existing \
+        twine upload -u "${PYPI_USERNAME}" -p "${PYPI_PASSWORD}" --skip-existing \
             --repository-url https://upload.pypi.org/legacy/ dist/*
     fi
 fi
