@@ -9,10 +9,10 @@ env:
   - RELEASE_ON_VER=3.5
 
 install:
-    - pip install -r ./src/requirements.txt
-    - pip install twine==1.11.0
+  - pip install jq yq twine
 
 script:
   - set -e
-  - python ./src/test.py
-  - ./release.sh
+  - ./pkg-build.sh ./build ./src
+  - ./pkg-test.sh ./build ./src
+  - ./pkg-release.sh ./build ./src

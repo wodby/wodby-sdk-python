@@ -20,6 +20,7 @@ build: clean codegen
 
 codegen:
 	[ -f ./codegen.jar ] || wget -nv "$(SWAGGER_CODEGEN_URL)" -O ./codegen.jar
+
 	docker run -it --rm \
 		-v "$(PWD)":/gen \
 		-w /gen \
@@ -29,14 +30,16 @@ codegen:
 			-l python \
 			-o ./src \
 			-D packageName=wodby_sdk \
-			-D infoEmail='hello@wodby.com' \
-			-D packageUrl='https://wodby.com/docs/dev'
+			-D developerEmail=hello@wodby.com \
+			-D packageUrl=https://github.com/wodby/wodby-sdk-python \
+			-D packageVersion=3.0.dev1
 
 	[ -z "$(TRAVIS)" ] || sudo chown -R $(UID) ./
 
 	rm -f ./src/.travis.yml \
 		./src/git_push.sh \
 		./src/.gitignore \
+		./src/tox.ini \
 		./src/test-requirements.txt
 .PHONY: codegen
 

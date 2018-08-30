@@ -1,4 +1,4 @@
-# wodby_sdk.InstanceApi
+# wodby.InstanceApi
 
 All URIs are relative to *https://api.wodby.com/api/v3*
 
@@ -23,19 +23,19 @@ Create instance
 ```python
 from __future__ import print_function
 import time
-import wodby_sdk
-from wodby_sdk.rest import ApiException
+import wodby
+from wodby.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: ApiKeyAuth
-configuration = wodby_sdk.Configuration()
+configuration = wodby.Configuration()
 configuration.api_key['X-API-KEY'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['X-API-KEY'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = wodby_sdk.InstanceApi(wodby_sdk.ApiClient(configuration))
-data = wodby_sdk.RequestInstanceCreate() # RequestInstanceCreate | 
+api_instance = wodby.InstanceApi(wodby.ApiClient(configuration))
+data = wodby.RequestInstanceCreate() # RequestInstanceCreate | 
 
 try:
     api_response = api_instance.create_instance(data)
@@ -76,18 +76,18 @@ Delete application instance
 ```python
 from __future__ import print_function
 import time
-import wodby_sdk
-from wodby_sdk.rest import ApiException
+import wodby
+from wodby.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: ApiKeyAuth
-configuration = wodby_sdk.Configuration()
+configuration = wodby.Configuration()
 configuration.api_key['X-API-KEY'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['X-API-KEY'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = wodby_sdk.InstanceApi(wodby_sdk.ApiClient(configuration))
+api_instance = wodby.InstanceApi(wodby.ApiClient(configuration))
 id = 'id_example' # str | Instance ID
 
 try:
@@ -129,20 +129,20 @@ Deploy instance
 ```python
 from __future__ import print_function
 import time
-import wodby_sdk
-from wodby_sdk.rest import ApiException
+import wodby
+from wodby.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: ApiKeyAuth
-configuration = wodby_sdk.Configuration()
+configuration = wodby.Configuration()
 configuration.api_key['X-API-KEY'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['X-API-KEY'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = wodby_sdk.InstanceApi(wodby_sdk.ApiClient(configuration))
+api_instance = wodby.InstanceApi(wodby.ApiClient(configuration))
 id = 'id_example' # str | Instance ID
-data = wodby_sdk.RequestInstanceDeploy() # RequestInstanceDeploy |  (optional)
+data = wodby.RequestInstanceDeploy() # RequestInstanceDeploy |  (optional)
 
 try:
     api_response = api_instance.deploy_instance(id, data=data)
@@ -184,20 +184,20 @@ Deploy instance codebase
 ```python
 from __future__ import print_function
 import time
-import wodby_sdk
-from wodby_sdk.rest import ApiException
+import wodby
+from wodby.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: ApiKeyAuth
-configuration = wodby_sdk.Configuration()
+configuration = wodby.Configuration()
 configuration.api_key['X-API-KEY'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['X-API-KEY'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = wodby_sdk.InstanceApi(wodby_sdk.ApiClient(configuration))
+api_instance = wodby.InstanceApi(wodby.ApiClient(configuration))
 id = 'id_example' # str | Instance ID
-data = wodby_sdk.RequestInstanceDeployCodebase() # RequestInstanceDeployCodebase |  (optional)
+data = wodby.RequestInstanceDeployCodebase() # RequestInstanceDeployCodebase |  (optional)
 
 try:
     api_response = api_instance.deploy_instance_codebase(id, data=data)
@@ -239,18 +239,18 @@ Retrieve application instance
 ```python
 from __future__ import print_function
 import time
-import wodby_sdk
-from wodby_sdk.rest import ApiException
+import wodby
+from wodby.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: ApiKeyAuth
-configuration = wodby_sdk.Configuration()
+configuration = wodby.Configuration()
 configuration.api_key['X-API-KEY'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['X-API-KEY'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = wodby_sdk.InstanceApi(wodby_sdk.ApiClient(configuration))
+api_instance = wodby.InstanceApi(wodby.ApiClient(configuration))
 id = 'id_example' # str | Instance ID
 
 try:
@@ -292,18 +292,18 @@ Retrieve instances
 ```python
 from __future__ import print_function
 import time
-import wodby_sdk
-from wodby_sdk.rest import ApiException
+import wodby
+from wodby.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: ApiKeyAuth
-configuration = wodby_sdk.Configuration()
+configuration = wodby.Configuration()
 configuration.api_key['X-API-KEY'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['X-API-KEY'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = wodby_sdk.InstanceApi(wodby_sdk.ApiClient(configuration))
+api_instance = wodby.InstanceApi(wodby.ApiClient(configuration))
 org_id = 'org_id_example' # str | Organization ID (optional)
 server_id = 'server_id_example' # str | Server ID (optional)
 app_id = 'app_id_example' # str | Application ID (optional)

@@ -1,4 +1,4 @@
-# wodby_sdk.StackApi
+# wodby.StackApi
 
 All URIs are relative to *https://api.wodby.com/api/v3*
 
@@ -19,18 +19,18 @@ Retrieve stack
 ```python
 from __future__ import print_function
 import time
-import wodby_sdk
-from wodby_sdk.rest import ApiException
+import wodby
+from wodby.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: ApiKeyAuth
-configuration = wodby_sdk.Configuration()
+configuration = wodby.Configuration()
 configuration.api_key['X-API-KEY'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['X-API-KEY'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = wodby_sdk.StackApi(wodby_sdk.ApiClient(configuration))
+api_instance = wodby.StackApi(wodby.ApiClient(configuration))
 id = 'id_example' # str | Stack ID
 
 try:
@@ -72,18 +72,18 @@ Retrieve stacks
 ```python
 from __future__ import print_function
 import time
-import wodby_sdk
-from wodby_sdk.rest import ApiException
+import wodby
+from wodby.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: ApiKeyAuth
-configuration = wodby_sdk.Configuration()
+configuration = wodby.Configuration()
 configuration.api_key['X-API-KEY'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['X-API-KEY'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = wodby_sdk.StackApi(wodby_sdk.ApiClient(configuration))
+api_instance = wodby.StackApi(wodby.ApiClient(configuration))
 id = 'id_example' # str | Organization ID (optional)
 
 try:
