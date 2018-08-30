@@ -7,7 +7,6 @@ if [[ "${DEBUG}" ]]; then
 fi
 
 dir="${1}"
-type="${2}"
 
 if [[ ! "${dir}" ]]; then
     echo "ERROR: Package dir have to be specified" 1>&2

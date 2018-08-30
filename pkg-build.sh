@@ -6,8 +6,6 @@ if [[ "${DEBUG}" ]]; then
     set -x
 fi
 
-# See PyPi versioning convention https://www.python.org/dev/peps/pep-0440/
-
 function pkg_codegen() {
     local out="${1}"
     local pkg_ver="${2}"
@@ -39,15 +37,12 @@ function pkg_codegen() {
         "${out}"/test-requirements.txt
 }
 
-function pkg_test() {
-    local out="${1}"
-
-    cp tests/test.ph "${1}"/
-    python tests/test.ph
-}
-
 dir="${1}"
-tag=${CODEGEN_TAG:=}
+
+if [[ ! "${dir}" ]]; then
+    echo "ERROR: Package dir have to be specified" 1>&2
+    exit 1
+fi
 
 CODEGEN_MAVEN_VER='3-jdk-7-alpine'
 CODEGEN_VER=2.3.1
@@ -81,31 +76,6 @@ fi
 schema_ver_minor="${BASH_REMATCH[1]}.${BASH_REMATCH[2]}"
 schema_ver_dev="${schema_ver_minor}d${build}"
 
+rm -rf "${dir}"
+mkdir -p "${dir}"
 pkg_codegen "./src" "${schema_ver_dev}"
-
-if [[ "${TRAVIS}" ]]; then
-    pkg_test "./src"
-fi
-
-#rm -rf "${dir}"
-#mkdir -p "${dir}"
-
-#echo $schema_ver_minor
-#echo $schema_ver_dev
-
-
-
-#if [[ ! "$(python --version | grep "Python ${RELEASE_ON_VER}")" ]]; then
-#    exit 0
-#fi
-#
-#if [[ "${TRAVIS_PULL_REQUEST}" == "false" && ("${TRAVIS_BRANCH}" == "master"  || -n "${TRAVIS_TAG}") ]]; then
-#    cd ./src
-#    python setup.py sdist bdist_wheel
-#
-##    twine upload -u "${PIPY_USERNAME}" -p "${PIPY_PASSWORD}" --skip-existing \
-##        --repository-url https://upload.pypi.org/legacy/ dist/*
-#
-##    twine upload -u "${PIPY_USERNAME}" -p "${PIPY_PASSWORD}" --skip-existing \
-##        --repository-url https://upload.pypi.org/legacy/ dist/*
-#fi
