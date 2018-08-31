@@ -50,5 +50,3 @@ if [[ "${TRAVIS}" ]]; then
 else
     pkg_release ./src test
 fi
-
-# trigger ci
