@@ -1,6 +1,8 @@
 # Wodby SDK Python
 
 [![TravisCI](https://travis-ci.com/wodby/wodby-sdk-python.svg)](https://travis-ci.com/wodby/wodby-sdk-python)
+[![PyPi](https://img.shields.io/pypi/v/wodby.svg)](https://pypi.org/project/wodby/)
+
 
 The Wodby SDK for Python makes it easy for developers to access Wodby in their Python code. You can get started in minutes by installing the SDK through Composer or by downloading a single zip. 
 
