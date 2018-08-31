@@ -3,8 +3,8 @@ IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- src/setup.py	(date 1535700136000)
-+++ src/setup.py	(date 1535700405000)
+--- setup.py	(date 1535700136000)
++++ setup.py	(date 1535700405000)
 @@ -25,6 +25,8 @@
  REQUIRES = ["urllib3 >= 1.15", "six >= 1.10", "certifi", "python-dateutil"]
  
