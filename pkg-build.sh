@@ -64,7 +64,7 @@ if [[ "${TRAVIS}" ]]; then
 
     if [[ "${TRAVIS_TAG}" ]]; then
         if [[ "${schema_ver}" != "${TRAVIS_TAG}" ]]; then
-            echo "ERROR: Schema version (${schema_ver}) mismatches git tag (${TRAVIS_TAG})" 1>&2
+            echo "ERROR: Schema version (${schema_ver}) mismatch git tag (${TRAVIS_TAG})" 1>&2
             exit 1
         fi
 
