@@ -46,6 +46,8 @@ function pkg_build() {
         "${dir}"/.gitignore \
         "${dir}"/tox.ini \
         "${dir}"/test-requirements.txt
+
+     patch -p0 < ./setup.py.patch
 }
 
 schema_ver=$(cat ./swagger.json | yq '.info.version' | cut -d '"' -f 2)

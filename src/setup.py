@@ -25,6 +25,8 @@ VERSION = "3.0.4"
 REQUIRES = ["urllib3 >= 1.15", "six >= 1.10", "certifi", "python-dateutil"]
 
 setup(
+    maintainer="Wodby",
+    maintainer_email="hello@wodby.com",
     name=NAME,
     version=VERSION,
     description="Wodby API Client",
