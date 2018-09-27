@@ -3,11 +3,11 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**app_id** | [**Uuid**](Uuid.md) |  | 
+**app_id** | **str** |  | 
 **git** | [**RequestInstanceCreateGit**](RequestInstanceCreateGit.md) |  | [optional] 
 **name** | **str** |  | 
 **post_deployment** | **bool** |  | [optional] 
-**server_id** | [**Uuid**](Uuid.md) |  | 
+**server_id** | **str** |  | 
 **title** | **str** |  | [optional] 
 **type** | [**InstanceType**](InstanceType.md) |  | 
 

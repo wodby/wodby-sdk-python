@@ -10,6 +10,8 @@ Method | HTTP request | Description
 [**deploy_instance_codebase**](InstanceApi.md#deploy_instance_codebase) | **POST** /instances/{id}/deploy-codebase | 
 [**get_instance**](InstanceApi.md#get_instance) | **GET** /instances/{id} | 
 [**get_instances**](InstanceApi.md#get_instances) | **GET** /instances | 
+[**upgrade_instance**](InstanceApi.md#upgrade_instance) | **POST** /instances/{id}/upgrade | 
+[**upgrade_instances**](InstanceApi.md#upgrade_instances) | **POST** /instances/upgrade | 
 
 
 # **create_instance**
@@ -330,6 +332,112 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**list[Instance]**](Instance.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **upgrade_instance**
+> ResponseTask upgrade_instance(id)
+
+
+
+Upgrade instance
+
+### Example
+```python
+from __future__ import print_function
+import time
+import wodby
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: ApiKeyAuth
+configuration = wodby.Configuration()
+configuration.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['X-API-KEY'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = wodby.InstanceApi(wodby.ApiClient(configuration))
+id = 'id_example' # str | Instance ID
+
+try:
+    api_response = api_instance.upgrade_instance(id)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling InstanceApi->upgrade_instance: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | [**str**](.md)| Instance ID | 
+
+### Return type
+
+[**ResponseTask**](ResponseTask.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **upgrade_instances**
+> ResponseTask upgrade_instances(data)
+
+
+
+Upgrade instances
+
+### Example
+```python
+from __future__ import print_function
+import time
+import wodby
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: ApiKeyAuth
+configuration = wodby.Configuration()
+configuration.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['X-API-KEY'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = wodby.InstanceApi(wodby.ApiClient(configuration))
+data = wodby.RequestInstancesUpgrade() # RequestInstancesUpgrade | 
+
+try:
+    api_response = api_instance.upgrade_instances(data)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling InstanceApi->upgrade_instances: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **data** | [**RequestInstancesUpgrade**](RequestInstancesUpgrade.md)|  | 
+
+### Return type
+
+[**ResponseTask**](ResponseTask.md)
 
 ### Authorization
 

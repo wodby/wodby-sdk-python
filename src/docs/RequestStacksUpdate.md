@@ -1,10 +1,9 @@
-# RequestAppCreateGit
+# RequestStacksUpdate
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**repo_id** | **str** |  | 
-**tree_ish** | **str** | Commit, branch or tag | [optional] 
+**stacks** | **list[str]** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

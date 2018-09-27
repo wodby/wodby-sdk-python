@@ -10,9 +10,9 @@ Name | Type | Description | Notes
 **instance_title** | **str** |  | [optional] 
 **instance_type** | [**InstanceType**](InstanceType.md) |  | [optional] 
 **name** | **str** |  | 
-**org_id** | [**Uuid**](Uuid.md) |  | 
+**org_id** | **str** |  | 
 **post_deployment** | **bool** |  | [optional] 
-**server_id** | [**Uuid**](Uuid.md) |  | 
+**server_id** | **str** |  | 
 **services** | [**list[RequestAppCreateServices]**](RequestAppCreateServices.md) |  | [optional] 
 **sitename** | **str** |  | [optional] 
 **stack_id** | **str** |  | 
