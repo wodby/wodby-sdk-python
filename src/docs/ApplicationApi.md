@@ -171,7 +171,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_app_drush_aliases**
-> get_app_drush_aliases(id)
+> str get_app_drush_aliases(id)
 
 
 
@@ -196,7 +196,8 @@ api_instance = wodby.ApplicationApi(wodby.ApiClient(configuration))
 id = 'id_example' # str | Application ID
 
 try:
-    api_instance.get_app_drush_aliases(id)
+    api_response = api_instance.get_app_drush_aliases(id)
+    pprint(api_response)
 except ApiException as e:
     print("Exception when calling ApplicationApi->get_app_drush_aliases: %s\n" % e)
 ```
@@ -209,7 +210,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+**str**
 
 ### Authorization
 
