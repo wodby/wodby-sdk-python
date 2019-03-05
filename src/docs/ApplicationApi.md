@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**create_app**](ApplicationApi.md#create_app) | **POST** /apps | 
 [**delete_app**](ApplicationApi.md#delete_app) | **DELETE** /apps/{id} | 
 [**get_app**](ApplicationApi.md#get_app) | **GET** /apps/{id} | 
+[**get_app_drush_aliases**](ApplicationApi.md#get_app_drush_aliases) | **GET** /apps/{id}/drush-aliases | 
 [**get_apps**](ApplicationApi.md#get_apps) | **GET** /apps | 
 
 
@@ -157,6 +158,58 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**App**](App.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_app_drush_aliases**
+> get_app_drush_aliases(id)
+
+
+
+Retrieve Drupal application`s instances Drush aliases
+
+### Example
+```python
+from __future__ import print_function
+import time
+import wodby
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: ApiKeyAuth
+configuration = wodby.Configuration()
+configuration.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['X-API-KEY'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = wodby.ApplicationApi(wodby.ApiClient(configuration))
+id = 'id_example' # str | Application ID
+
+try:
+    api_instance.get_app_drush_aliases(id)
+except ApiException as e:
+    print("Exception when calling ApplicationApi->get_app_drush_aliases: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | [**str**](.md)| Application ID | 
+
+### Return type
+
+void (empty response body)
 
 ### Authorization
 
