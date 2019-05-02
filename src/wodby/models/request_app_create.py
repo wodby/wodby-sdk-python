@@ -199,8 +199,8 @@ class RequestAppCreate(object):
         :param instance_name: The instance_name of this RequestAppCreate.  # noqa: E501
         :type: str
         """
-        if instance_name is not None and not re.search('^[a-z0-9][a-z0-9-]{0,18}[a-z0-9]$', instance_name):  # noqa: E501
-            raise ValueError("Invalid value for `instance_name`, must be a follow pattern or equal to `/^[a-z0-9][a-z0-9-]{0,18}[a-z0-9]$/`")  # noqa: E501
+        if instance_name is not None and not re.search(r'^[a-z0-9][a-z0-9-]{0,18}[a-z0-9]$', instance_name):  # noqa: E501
+            raise ValueError(r"Invalid value for `instance_name`, must be a follow pattern or equal to `/^[a-z0-9][a-z0-9-]{0,18}[a-z0-9]$/`")  # noqa: E501
 
         self._instance_name = instance_name
 
@@ -266,8 +266,8 @@ class RequestAppCreate(object):
         """
         if name is None:
             raise ValueError("Invalid value for `name`, must not be `None`")  # noqa: E501
-        if name is not None and not re.search('^[a-z0-9][a-z0-9-]{0,28}[a-z0-9]$', name):  # noqa: E501
-            raise ValueError("Invalid value for `name`, must be a follow pattern or equal to `/^[a-z0-9][a-z0-9-]{0,28}[a-z0-9]$/`")  # noqa: E501
+        if name is not None and not re.search(r'^[a-z0-9][a-z0-9-]{0,28}[a-z0-9]$', name):  # noqa: E501
+            raise ValueError(r"Invalid value for `name`, must be a follow pattern or equal to `/^[a-z0-9][a-z0-9-]{0,28}[a-z0-9]$/`")  # noqa: E501
 
         self._name = name
 
@@ -291,8 +291,8 @@ class RequestAppCreate(object):
         """
         if org_id is None:
             raise ValueError("Invalid value for `org_id`, must not be `None`")  # noqa: E501
-        if org_id is not None and not re.search('^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$', org_id):  # noqa: E501
-            raise ValueError("Invalid value for `org_id`, must be a follow pattern or equal to `/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/`")  # noqa: E501
+        if org_id is not None and not re.search(r'^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$', org_id):  # noqa: E501
+            raise ValueError(r"Invalid value for `org_id`, must be a follow pattern or equal to `/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/`")  # noqa: E501
 
         self._org_id = org_id
 
@@ -337,8 +337,8 @@ class RequestAppCreate(object):
         """
         if server_id is None:
             raise ValueError("Invalid value for `server_id`, must not be `None`")  # noqa: E501
-        if server_id is not None and not re.search('^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$', server_id):  # noqa: E501
-            raise ValueError("Invalid value for `server_id`, must be a follow pattern or equal to `/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/`")  # noqa: E501
+        if server_id is not None and not re.search(r'^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$', server_id):  # noqa: E501
+            raise ValueError(r"Invalid value for `server_id`, must be a follow pattern or equal to `/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/`")  # noqa: E501
 
         self._server_id = server_id
 
@@ -404,8 +404,8 @@ class RequestAppCreate(object):
         """
         if stack_id is None:
             raise ValueError("Invalid value for `stack_id`, must not be `None`")  # noqa: E501
-        if stack_id is not None and not re.search('^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$', stack_id):  # noqa: E501
-            raise ValueError("Invalid value for `stack_id`, must be a follow pattern or equal to `/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/`")  # noqa: E501
+        if stack_id is not None and not re.search(r'^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$', stack_id):  # noqa: E501
+            raise ValueError(r"Invalid value for `stack_id`, must be a follow pattern or equal to `/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/`")  # noqa: E501
 
         self._stack_id = stack_id
 
@@ -451,6 +451,9 @@ class RequestAppCreate(object):
                 ))
             else:
                 result[attr] = value
+        if issubclass(RequestAppCreate, dict):
+            for key, value in self.items():
+                result[key] = value
 
         return result
 

@@ -52,11 +52,13 @@ from wodby.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: ApiKeyAuth
-wodby.configuration.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+configuration = wodby.Configuration()
+configuration.api_key['X-API-KEY'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# wodby.configuration.api_key_prefix['X-API-KEY'] = 'Bearer'
+# configuration.api_key_prefix['X-API-KEY'] = 'Bearer'
+
 # create an instance of the API class
-api_instance = wodby.ApplicationApi()
+api_instance = wodby.ApplicationApi(wodby.ApiClient(configuration))
 data = wodby.RequestAppCreate() # RequestAppCreate | 
 
 try:

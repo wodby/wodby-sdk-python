@@ -116,8 +116,8 @@ class App(object):
         :param git_repo_id: The git_repo_id of this App.  # noqa: E501
         :type: str
         """
-        if git_repo_id is not None and not re.search('^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?$', git_repo_id):  # noqa: E501
-            raise ValueError("Invalid value for `git_repo_id`, must be a follow pattern or equal to `/^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?$/`")  # noqa: E501
+        if git_repo_id is not None and not re.search(r'^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?$', git_repo_id):  # noqa: E501
+            raise ValueError(r"Invalid value for `git_repo_id`, must be a follow pattern or equal to `/^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?$/`")  # noqa: E501
 
         self._git_repo_id = git_repo_id
 
@@ -141,8 +141,8 @@ class App(object):
         """
         if id is None:
             raise ValueError("Invalid value for `id`, must not be `None`")  # noqa: E501
-        if id is not None and not re.search('^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$', id):  # noqa: E501
-            raise ValueError("Invalid value for `id`, must be a follow pattern or equal to `/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/`")  # noqa: E501
+        if id is not None and not re.search(r'^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$', id):  # noqa: E501
+            raise ValueError(r"Invalid value for `id`, must be a follow pattern or equal to `/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/`")  # noqa: E501
 
         self._id = id
 
@@ -189,8 +189,8 @@ class App(object):
         """
         if org_id is None:
             raise ValueError("Invalid value for `org_id`, must not be `None`")  # noqa: E501
-        if org_id is not None and not re.search('^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$', org_id):  # noqa: E501
-            raise ValueError("Invalid value for `org_id`, must be a follow pattern or equal to `/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/`")  # noqa: E501
+        if org_id is not None and not re.search(r'^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$', org_id):  # noqa: E501
+            raise ValueError(r"Invalid value for `org_id`, must be a follow pattern or equal to `/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/`")  # noqa: E501
 
         self._org_id = org_id
 
@@ -290,6 +290,9 @@ class App(object):
                 ))
             else:
                 result[attr] = value
+        if issubclass(App, dict):
+            for key, value in self.items():
+                result[key] = value
 
         return result
 

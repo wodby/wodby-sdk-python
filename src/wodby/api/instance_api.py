@@ -38,18 +38,18 @@ class InstanceApi(object):
 
         Create instance  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.create_instance(data, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_instance(data, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param RequestInstanceCreate data:  (required)
         :return: ResponseTaskInstance
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.create_instance_with_http_info(data, **kwargs)  # noqa: E501
         else:
             (data) = self.create_instance_with_http_info(data, **kwargs)  # noqa: E501
@@ -60,11 +60,11 @@ class InstanceApi(object):
 
         Create instance  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.create_instance_with_http_info(data, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_instance_with_http_info(data, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param RequestInstanceCreate data:  (required)
         :return: ResponseTaskInstance
                  If the method is called asynchronously,
@@ -72,7 +72,7 @@ class InstanceApi(object):
         """
 
         all_params = ['data']  # noqa: E501
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -126,7 +126,7 @@ class InstanceApi(object):
             files=local_var_files,
             response_type='ResponseTaskInstance',  # noqa: E501
             auth_settings=auth_settings,
-            async=params.get('async'),
+            async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
             _preload_content=params.get('_preload_content', True),
             _request_timeout=params.get('_request_timeout'),
@@ -137,18 +137,18 @@ class InstanceApi(object):
 
         Delete application instance  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.delete_instance(id, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_instance(id, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str id: Instance ID (required)
         :return: ResponseTask
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.delete_instance_with_http_info(id, **kwargs)  # noqa: E501
         else:
             (data) = self.delete_instance_with_http_info(id, **kwargs)  # noqa: E501
@@ -159,11 +159,11 @@ class InstanceApi(object):
 
         Delete application instance  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.delete_instance_with_http_info(id, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_instance_with_http_info(id, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str id: Instance ID (required)
         :return: ResponseTask
                  If the method is called asynchronously,
@@ -171,7 +171,7 @@ class InstanceApi(object):
         """
 
         all_params = ['id']  # noqa: E501
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -225,7 +225,7 @@ class InstanceApi(object):
             files=local_var_files,
             response_type='ResponseTask',  # noqa: E501
             auth_settings=auth_settings,
-            async=params.get('async'),
+            async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
             _preload_content=params.get('_preload_content', True),
             _request_timeout=params.get('_request_timeout'),
@@ -236,11 +236,11 @@ class InstanceApi(object):
 
         Deploy instance  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.deploy_instance(id, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.deploy_instance(id, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str id: Instance ID (required)
         :param RequestInstanceDeploy data: 
         :return: ResponseTask
@@ -248,7 +248,7 @@ class InstanceApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.deploy_instance_with_http_info(id, **kwargs)  # noqa: E501
         else:
             (data) = self.deploy_instance_with_http_info(id, **kwargs)  # noqa: E501
@@ -259,11 +259,11 @@ class InstanceApi(object):
 
         Deploy instance  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.deploy_instance_with_http_info(id, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.deploy_instance_with_http_info(id, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str id: Instance ID (required)
         :param RequestInstanceDeploy data: 
         :return: ResponseTask
@@ -272,7 +272,7 @@ class InstanceApi(object):
         """
 
         all_params = ['id', 'data']  # noqa: E501
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -328,7 +328,7 @@ class InstanceApi(object):
             files=local_var_files,
             response_type='ResponseTask',  # noqa: E501
             auth_settings=auth_settings,
-            async=params.get('async'),
+            async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
             _preload_content=params.get('_preload_content', True),
             _request_timeout=params.get('_request_timeout'),
@@ -339,11 +339,11 @@ class InstanceApi(object):
 
         Deploy instance codebase  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.deploy_instance_codebase(id, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.deploy_instance_codebase(id, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str id: Instance ID (required)
         :param RequestInstanceDeployCodebase data: 
         :return: ResponseTask
@@ -351,7 +351,7 @@ class InstanceApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.deploy_instance_codebase_with_http_info(id, **kwargs)  # noqa: E501
         else:
             (data) = self.deploy_instance_codebase_with_http_info(id, **kwargs)  # noqa: E501
@@ -362,11 +362,11 @@ class InstanceApi(object):
 
         Deploy instance codebase  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.deploy_instance_codebase_with_http_info(id, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.deploy_instance_codebase_with_http_info(id, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str id: Instance ID (required)
         :param RequestInstanceDeployCodebase data: 
         :return: ResponseTask
@@ -375,7 +375,7 @@ class InstanceApi(object):
         """
 
         all_params = ['id', 'data']  # noqa: E501
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -431,7 +431,7 @@ class InstanceApi(object):
             files=local_var_files,
             response_type='ResponseTask',  # noqa: E501
             auth_settings=auth_settings,
-            async=params.get('async'),
+            async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
             _preload_content=params.get('_preload_content', True),
             _request_timeout=params.get('_request_timeout'),
@@ -442,18 +442,18 @@ class InstanceApi(object):
 
         Retrieve application instance  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.get_instance(id, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_instance(id, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str id: Instance ID (required)
         :return: Instance
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.get_instance_with_http_info(id, **kwargs)  # noqa: E501
         else:
             (data) = self.get_instance_with_http_info(id, **kwargs)  # noqa: E501
@@ -464,11 +464,11 @@ class InstanceApi(object):
 
         Retrieve application instance  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.get_instance_with_http_info(id, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_instance_with_http_info(id, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str id: Instance ID (required)
         :return: Instance
                  If the method is called asynchronously,
@@ -476,7 +476,7 @@ class InstanceApi(object):
         """
 
         all_params = ['id']  # noqa: E501
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -530,7 +530,7 @@ class InstanceApi(object):
             files=local_var_files,
             response_type='Instance',  # noqa: E501
             auth_settings=auth_settings,
-            async=params.get('async'),
+            async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
             _preload_content=params.get('_preload_content', True),
             _request_timeout=params.get('_request_timeout'),
@@ -541,11 +541,11 @@ class InstanceApi(object):
 
         Retrieve instances  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.get_instances(async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_instances(async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str org_id: Organization ID
         :param str server_id: Server ID
         :param str app_id: Application ID
@@ -556,7 +556,7 @@ class InstanceApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.get_instances_with_http_info(**kwargs)  # noqa: E501
         else:
             (data) = self.get_instances_with_http_info(**kwargs)  # noqa: E501
@@ -567,11 +567,11 @@ class InstanceApi(object):
 
         Retrieve instances  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.get_instances_with_http_info(async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_instances_with_http_info(async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str org_id: Organization ID
         :param str server_id: Server ID
         :param str app_id: Application ID
@@ -583,7 +583,7 @@ class InstanceApi(object):
         """
 
         all_params = ['org_id', 'server_id', 'app_id', 'type', 'name']  # noqa: E501
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -641,7 +641,7 @@ class InstanceApi(object):
             files=local_var_files,
             response_type='list[Instance]',  # noqa: E501
             auth_settings=auth_settings,
-            async=params.get('async'),
+            async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
             _preload_content=params.get('_preload_content', True),
             _request_timeout=params.get('_request_timeout'),
@@ -652,18 +652,18 @@ class InstanceApi(object):
 
         Upgrade instance  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.upgrade_instance(id, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.upgrade_instance(id, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str id: Instance ID (required)
         :return: ResponseTask
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.upgrade_instance_with_http_info(id, **kwargs)  # noqa: E501
         else:
             (data) = self.upgrade_instance_with_http_info(id, **kwargs)  # noqa: E501
@@ -674,11 +674,11 @@ class InstanceApi(object):
 
         Upgrade instance  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.upgrade_instance_with_http_info(id, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.upgrade_instance_with_http_info(id, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str id: Instance ID (required)
         :return: ResponseTask
                  If the method is called asynchronously,
@@ -686,7 +686,7 @@ class InstanceApi(object):
         """
 
         all_params = ['id']  # noqa: E501
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -740,7 +740,7 @@ class InstanceApi(object):
             files=local_var_files,
             response_type='ResponseTask',  # noqa: E501
             auth_settings=auth_settings,
-            async=params.get('async'),
+            async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
             _preload_content=params.get('_preload_content', True),
             _request_timeout=params.get('_request_timeout'),
@@ -751,18 +751,18 @@ class InstanceApi(object):
 
         Upgrade instances  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.upgrade_instances(data, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.upgrade_instances(data, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param RequestInstancesUpgrade data:  (required)
         :return: ResponseTask
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.upgrade_instances_with_http_info(data, **kwargs)  # noqa: E501
         else:
             (data) = self.upgrade_instances_with_http_info(data, **kwargs)  # noqa: E501
@@ -773,11 +773,11 @@ class InstanceApi(object):
 
         Upgrade instances  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.upgrade_instances_with_http_info(data, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.upgrade_instances_with_http_info(data, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param RequestInstancesUpgrade data:  (required)
         :return: ResponseTask
                  If the method is called asynchronously,
@@ -785,7 +785,7 @@ class InstanceApi(object):
         """
 
         all_params = ['data']  # noqa: E501
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -839,7 +839,7 @@ class InstanceApi(object):
             files=local_var_files,
             response_type='ResponseTask',  # noqa: E501
             auth_settings=auth_settings,
-            async=params.get('async'),
+            async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
             _preload_content=params.get('_preload_content', True),
             _request_timeout=params.get('_request_timeout'),

@@ -71,8 +71,8 @@ class RequestAppCreateGit(object):
         """
         if repo_id is None:
             raise ValueError("Invalid value for `repo_id`, must not be `None`")  # noqa: E501
-        if repo_id is not None and not re.search('^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$', repo_id):  # noqa: E501
-            raise ValueError("Invalid value for `repo_id`, must be a follow pattern or equal to `/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/`")  # noqa: E501
+        if repo_id is not None and not re.search(r'^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$', repo_id):  # noqa: E501
+            raise ValueError(r"Invalid value for `repo_id`, must be a follow pattern or equal to `/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/`")  # noqa: E501
 
         self._repo_id = repo_id
 
@@ -120,6 +120,9 @@ class RequestAppCreateGit(object):
                 ))
             else:
                 result[attr] = value
+        if issubclass(RequestAppCreateGit, dict):
+            for key, value in self.items():
+                result[key] = value
 
         return result
 

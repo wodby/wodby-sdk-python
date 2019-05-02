@@ -92,6 +92,9 @@ class ResponseTask(object):
                 ))
             else:
                 result[attr] = value
+        if issubclass(ResponseTask, dict):
+            for key, value in self.items():
+                result[key] = value
 
         return result
 

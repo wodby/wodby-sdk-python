@@ -38,18 +38,18 @@ class ApplicationApi(object):
 
         Create application  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.create_app(data, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_app(data, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param RequestAppCreate data:  (required)
         :return: ResponseTaskApp
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.create_app_with_http_info(data, **kwargs)  # noqa: E501
         else:
             (data) = self.create_app_with_http_info(data, **kwargs)  # noqa: E501
@@ -60,11 +60,11 @@ class ApplicationApi(object):
 
         Create application  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.create_app_with_http_info(data, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_app_with_http_info(data, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param RequestAppCreate data:  (required)
         :return: ResponseTaskApp
                  If the method is called asynchronously,
@@ -72,7 +72,7 @@ class ApplicationApi(object):
         """
 
         all_params = ['data']  # noqa: E501
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -126,7 +126,7 @@ class ApplicationApi(object):
             files=local_var_files,
             response_type='ResponseTaskApp',  # noqa: E501
             auth_settings=auth_settings,
-            async=params.get('async'),
+            async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
             _preload_content=params.get('_preload_content', True),
             _request_timeout=params.get('_request_timeout'),
@@ -137,18 +137,18 @@ class ApplicationApi(object):
 
         Delete application  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.delete_app(id, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_app(id, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str id: Application ID (required)
         :return: ResponseTask
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.delete_app_with_http_info(id, **kwargs)  # noqa: E501
         else:
             (data) = self.delete_app_with_http_info(id, **kwargs)  # noqa: E501
@@ -159,11 +159,11 @@ class ApplicationApi(object):
 
         Delete application  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.delete_app_with_http_info(id, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_app_with_http_info(id, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str id: Application ID (required)
         :return: ResponseTask
                  If the method is called asynchronously,
@@ -171,7 +171,7 @@ class ApplicationApi(object):
         """
 
         all_params = ['id']  # noqa: E501
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -225,7 +225,7 @@ class ApplicationApi(object):
             files=local_var_files,
             response_type='ResponseTask',  # noqa: E501
             auth_settings=auth_settings,
-            async=params.get('async'),
+            async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
             _preload_content=params.get('_preload_content', True),
             _request_timeout=params.get('_request_timeout'),
@@ -236,18 +236,18 @@ class ApplicationApi(object):
 
         Retrieve application  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.get_app(id, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_app(id, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str id: Application ID (required)
         :return: App
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.get_app_with_http_info(id, **kwargs)  # noqa: E501
         else:
             (data) = self.get_app_with_http_info(id, **kwargs)  # noqa: E501
@@ -258,11 +258,11 @@ class ApplicationApi(object):
 
         Retrieve application  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.get_app_with_http_info(id, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_app_with_http_info(id, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str id: Application ID (required)
         :return: App
                  If the method is called asynchronously,
@@ -270,7 +270,7 @@ class ApplicationApi(object):
         """
 
         all_params = ['id']  # noqa: E501
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -324,7 +324,7 @@ class ApplicationApi(object):
             files=local_var_files,
             response_type='App',  # noqa: E501
             auth_settings=auth_settings,
-            async=params.get('async'),
+            async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
             _preload_content=params.get('_preload_content', True),
             _request_timeout=params.get('_request_timeout'),
@@ -335,18 +335,18 @@ class ApplicationApi(object):
 
         Retrieve Drupal application`s instances Drush aliases  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.get_app_drush_aliases(id, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_app_drush_aliases(id, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str id: Application ID (required)
         :return: str
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.get_app_drush_aliases_with_http_info(id, **kwargs)  # noqa: E501
         else:
             (data) = self.get_app_drush_aliases_with_http_info(id, **kwargs)  # noqa: E501
@@ -357,11 +357,11 @@ class ApplicationApi(object):
 
         Retrieve Drupal application`s instances Drush aliases  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.get_app_drush_aliases_with_http_info(id, async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_app_drush_aliases_with_http_info(id, async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str id: Application ID (required)
         :return: str
                  If the method is called asynchronously,
@@ -369,7 +369,7 @@ class ApplicationApi(object):
         """
 
         all_params = ['id']  # noqa: E501
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -423,7 +423,7 @@ class ApplicationApi(object):
             files=local_var_files,
             response_type='str',  # noqa: E501
             auth_settings=auth_settings,
-            async=params.get('async'),
+            async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
             _preload_content=params.get('_preload_content', True),
             _request_timeout=params.get('_request_timeout'),
@@ -434,11 +434,11 @@ class ApplicationApi(object):
 
         Retrieve applications  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.get_apps(async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_apps(async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str org_id: Organization ID
         :param str name: Application name
         :return: list[App]
@@ -446,7 +446,7 @@ class ApplicationApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('async'):
+        if kwargs.get('async_req'):
             return self.get_apps_with_http_info(**kwargs)  # noqa: E501
         else:
             (data) = self.get_apps_with_http_info(**kwargs)  # noqa: E501
@@ -457,11 +457,11 @@ class ApplicationApi(object):
 
         Retrieve applications  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async=True
-        >>> thread = api.get_apps_with_http_info(async=True)
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_apps_with_http_info(async_req=True)
         >>> result = thread.get()
 
-        :param async bool
+        :param async_req bool
         :param str org_id: Organization ID
         :param str name: Application name
         :return: list[App]
@@ -470,7 +470,7 @@ class ApplicationApi(object):
         """
 
         all_params = ['org_id', 'name']  # noqa: E501
-        all_params.append('async')
+        all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -522,7 +522,7 @@ class ApplicationApi(object):
             files=local_var_files,
             response_type='list[App]',  # noqa: E501
             auth_settings=auth_settings,
-            async=params.get('async'),
+            async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
             _preload_content=params.get('_preload_content', True),
             _request_timeout=params.get('_request_timeout'),

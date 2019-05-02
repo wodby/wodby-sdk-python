@@ -31,8 +31,6 @@ REQUIRES = [
     
 
 setup(
-    maintainer="Wodby",
-    maintainer_email="hello@wodby.com",
     name=NAME,
     version=VERSION,
     description="Wodby API Client",

@@ -9,7 +9,7 @@ fi
 function pkg_build() {
     local dir="${1}"
     local pkg_ver="${2}"
-    local codegen_ver='2.3.1'
+    local codegen_ver='2.4.5'
     local codegen_url="http://central.maven.org/maven2/io/swagger/swagger-codegen-cli/${codegen_ver}/swagger-codegen-cli-${codegen_ver}.jar"
     local codegen_java_ops='-Xmx1024M -DapiTests=false -DmodelTests=false'
     local codegen_user=''
