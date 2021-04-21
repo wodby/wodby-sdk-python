@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **id** | **str** |  | 
 **name** | **str** |  | 
 **org_id** | **str** |  | 
+**stack_id** | **str** |  | 
 **status** | **str** |  | 
 **title** | **str** |  | 
 **updated** | **int** |  | 
