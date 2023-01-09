@@ -11,6 +11,9 @@ Name | Type | Description | Notes
 **id** | **str** |  | 
 **name** | **str** |  | 
 **org_id** | **str** |  | 
+**server_id** | **str** |  | 
+**stack_id** | **str** |  | 
+**stack_rev_id** | **str** |  | 
 **status** | **str** |  | 
 **title** | **str** |  | 
 **type** | [**InstanceType**](InstanceType.md) |  | [optional] 
