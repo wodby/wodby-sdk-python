@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **org_id** | **str** |  | 
 **server_id** | **str** |  | 
 **stack_id** | **str** |  | 
-**stack_rev_id** | **str** |  | 
+**stack_rev_number** | **int** |  | 
 **status** | **str** |  | 
 **title** | **str** |  | 
 **type** | [**InstanceType**](InstanceType.md) |  | [optional] 
