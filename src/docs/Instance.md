@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **git_repo_target** | **str** |  | [optional] 
 **has_new_version** | **bool** |  | [optional] 
 **id** | **str** |  | 
+**last_deploy** | **int** |  | 
 **name** | **str** |  | 
 **org_id** | **str** |  | 
 **server_id** | **str** |  | 
