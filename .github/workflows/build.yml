@@ -1,0 +1,25 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - 2.0
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.x'
+          cache: pip
+          cache-dependency-path: src/requirements.txt
+
+      - name: Install generated client
+        run: python -m pip install ./src
+
+      - name: Compile generated client
+        run: python -m compileall -q src/wodby
