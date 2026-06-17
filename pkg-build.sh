@@ -25,7 +25,7 @@ function pkg_build() {
         wget -nv "${codegen_url}" -O ./codegen.jar
     fi
 
-    docker run -it --rm \
+    docker run --rm \
         -v "${PWD}":/gen \
         -w /gen \
         ${codegen_user} \
