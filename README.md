@@ -1,40 +1,42 @@
-# Wodby SDK Python
+# Wodby SDK for Python
 
-[![TravisCI](https://travis-ci.com/wodby/wodby-sdk-python.svg)](https://travis-ci.com/wodby/wodby-sdk-python)
-[![PyPi](https://img.shields.io/pypi/v/wodby.svg)](https://pypi.org/project/wodby/)
+Python client for the Wodby Public API.
 
-
-The Wodby SDK for Python makes it easy for developers to access Wodby in their Python code. You can get started in minutes by installing the SDK through Composer or by downloading a single zip. 
-
----
-
-## Table of Contents
-
-- [Documentation](#documentation)
-- [Basic usage](#basic-usage)
+This repository is generated from the OpenAPI 3 schema maintained in
+[`wodby/backend-api`](https://github.com/wodby/backend-api). The `2.0` branch is
+updated by the backend API release pipeline.
 
 ## Documentation
 
-- [API reference](https://wodby.com/docs/api)
-- [Automatically generated documentation](src/README.md)
+- [API reference](https://wodby.com/docs/2.0/api/)
+- [OpenAPI schema](https://wodby.com/docs/2.0/api/openapi.yaml)
+- Generated SDK docs: `src/docs`
 
-## Basic usage
+## Install
 
-Install wodby client:
 ```bash
 pip install wodby
-
 ```
 
-Fetch user`s organizations: 
+## Authentication
+
+Wodby API requests use an API key in the `X-API-KEY` header.
+
 ```python
 import os
 import wodby
-from pprint import pprint
 
 configuration = wodby.Configuration()
-configuration.api_key['X-API-KEY'] = os.environ['WODBY_API_KEY']
-
-org_api = wodby.OrganizationApi(wodby.ApiClient(configuration))
-org_api.get_orgs()
+configuration.api_key["X-API-KEY"] = os.environ["WODBY_API_KEY"]
 ```
+
+## Regenerate
+
+The backend API pipeline copies `swagger.json` into this repository and runs:
+
+```bash
+make build
+```
+
+This uses `openapitools/openapi-generator-cli:v7.10.0` and writes generated code
+to `src`.
