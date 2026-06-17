@@ -13,9 +13,7 @@ function pkg_release() {
 
     cd "${dir}"
 
-    if [[ "${TRAVIS}" ]]; then
-        python setup.py sdist bdist_wheel
-    fi
+    python setup.py sdist bdist_wheel
 
     if [[ "${test}" ]]; then
         echo "Releasing ${dir} (test) ..."
@@ -29,24 +27,4 @@ function pkg_release() {
     cd "${stored_dir}"
 }
 
-if [[ "${TRAVIS}" ]]; then
-    if [[ ! "$(python --version | grep "Python ${RELEASE_ON_VER}")" ]]; then
-        echo 'Exit because of Python version'
-        exit 0
-    fi
-
-    if [[ "${TRAVIS_PULL_REQUEST}" != "false"  ]]; then
-        echo 'Ignore pull request'
-        exit 0
-    fi
-
-    if [[ "${TRAVIS_BRANCH}" == "master"  ]]; then
-        pkg_release ./src-master
-    fi
-
-    if [[ "${TRAVIS_TAG}"  ]]; then
-        pkg_release ./src-tag
-    fi
-else
-    pkg_release ./src test
-fi
+pkg_release ./src test

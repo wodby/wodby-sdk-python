@@ -13,22 +13,10 @@ function pkg_test() {
     cp ./tests/test.py "${dir}"/
     cd "${dir}"
 
-    if [[ "${TRAVIS}" ]]; then
-        python setup.py install
-    fi
-
     python test.py
     rm -f test.py
 
     cd "${stored_dir}"
 }
 
-if [[ "${TRAVIS}" ]]; then
-    pkg_test ./src-master
-
-    if [[ "${TRAVIS_TAG}" ]]; then
-        pkg_test ./src-tag
-    fi
-else
-    pkg_test ./src
-fi
+pkg_test ./src
