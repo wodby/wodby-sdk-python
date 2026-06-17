@@ -38,6 +38,25 @@ function pkg_build() {
     cp ./patches/*.patch ./"${dir}"/
     ( cd "${dir}" && patch < ./setup.py.patch )
     rm -f "${dir}"/*.patch
+    rm -f "${dir}"/setup.py.orig
+
+    cat > "${dir}"/requirements.txt <<'EOF'
+urllib3 >= 2.7.0, < 3.0.0
+python-dateutil >= 2.9.0.post0
+pydantic >= 2.13.4
+typing-extensions >= 4.15.0
+EOF
+
+    perl -0pi -e '
+        s/urllib3 >= 1\.25\.3, < 3\.0\.0/urllib3 >= 2.7.0, < 3.0.0/g;
+        s/python-dateutil >= 2\.8\.2/python-dateutil >= 2.9.0.post0/g;
+        s/pydantic >= 2(?![.\d])/pydantic >= 2.13.4/g;
+        s/typing-extensions >= 4\.7\.1/typing-extensions >= 4.15.0/g;
+        s/urllib3 = ">= 1\.25\.3 < 3\.0\.0"/urllib3 = ">= 2.7.0 < 3.0.0"/g;
+        s/python-dateutil = ">= 2\.8\.2"/python-dateutil = ">= 2.9.0.post0"/g;
+        s/pydantic = ">= 2"/pydantic = ">= 2.13.4"/g;
+        s/typing-extensions = ">= 4\.7\.1"/typing-extensions = ">= 4.15.0"/g;
+    ' "${dir}"/setup.py "${dir}"/pyproject.toml
 }
 
 schema_ver=$(python3 -c 'import json; print(json.load(open("swagger.json"))["info"]["version"])')

@@ -24,10 +24,10 @@ NAME = "wodby"
 VERSION = "1.0.0"
 PYTHON_REQUIRES = ">= 3.8"
 REQUIRES = [
-    "urllib3 >= 1.25.3, < 3.0.0",
-    "python-dateutil >= 2.8.2",
-    "pydantic >= 2",
-    "typing-extensions >= 4.7.1",
+    "urllib3 >= 2.7.0, < 3.0.0",
+    "python-dateutil >= 2.9.0.post0",
+    "pydantic >= 2.13.4",
+    "typing-extensions >= 4.15.0",
 ]
 
 setup(
