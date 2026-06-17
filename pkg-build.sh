@@ -59,7 +59,7 @@ EOF
     ' "${dir}"/setup.py "${dir}"/pyproject.toml
 }
 
-schema_ver=$(python3 -c 'import json; print(json.load(open("swagger.json"))["info"]["version"])')
+schema_ver="${PKG_VERSION:-$(python3 -c 'import json; print(json.load(open("swagger.json"))["info"]["version"])')}"
 schema_ver_pattern='^([0-9]+).([0-9]+)(.([0-9]+))?$'
 
 if [[ ! ${schema_ver} =~ ${schema_ver_pattern} ]]; then
