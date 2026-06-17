@@ -18,16 +18,17 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
 class CreateBuildRequest(BaseModel):
     """
-    CreateBuildRequest
+    Specify either appServiceId for one service or appServiceIds for a multi-service build.
     """ # noqa: E501
-    app_service_id: StrictInt = Field(alias="appServiceId")
-    __properties: ClassVar[List[str]] = ["appServiceId"]
+    app_service_id: Optional[StrictInt] = Field(default=None, alias="appServiceId")
+    app_service_ids: Optional[List[StrictInt]] = Field(default=None, alias="appServiceIds")
+    __properties: ClassVar[List[str]] = ["appServiceId", "appServiceIds"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -80,7 +81,8 @@ class CreateBuildRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "appServiceId": obj.get("appServiceId")
+            "appServiceId": obj.get("appServiceId"),
+            "appServiceIds": obj.get("appServiceIds")
         })
         return _obj
 

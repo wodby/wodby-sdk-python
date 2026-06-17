@@ -1,0 +1,31 @@
+# LogLine
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**sequence_id** | **int** |  | 
+**level** | **str** |  | 
+**message** | **str** |  | 
+
+## Example
+
+```python
+from wodby.models.log_line import LogLine
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of LogLine from a JSON string
+log_line_instance = LogLine.from_json(json)
+# print the JSON string representation of the object
+print(LogLine.to_json())
+
+# convert the object into a dict
+log_line_dict = log_line_instance.to_dict()
+# create an instance of LogLine from a dict
+log_line_from_dict = LogLine.from_dict(log_line_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

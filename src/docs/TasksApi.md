@@ -4,8 +4,209 @@ All URIs are relative to */v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**tasks_get**](TasksApi.md#tasks_get) | **GET** /tasks | List tasks
+[**tasks_id_cancel_post**](TasksApi.md#tasks_id_cancel_post) | **POST** /tasks/{id}/cancel | Cancel task
 [**tasks_id_get**](TasksApi.md#tasks_id_get) | **GET** /tasks/{id} | Get task
+[**tasks_id_repeat_post**](TasksApi.md#tasks_id_repeat_post) | **POST** /tasks/{id}/repeat | Repeat task
 
+
+# **tasks_get**
+> TasksResponse tasks_get(scope=scope, org_id=org_id, project_ids=project_ids, without_origin=without_origin, statuses=statuses, search=search, app_id=app_id, app_instance_id=app_instance_id, stack_id=stack_id, database_id=database_id, cluster_id=cluster_id, service_id=service_id, integration_id=integration_id, provider_id=provider_id, page=page, page_size=page_size)
+
+List tasks
+
+### Example
+
+* Api Key Authentication (accessTokenHeader):
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.tasks_response import TasksResponse
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: accessTokenHeader
+configuration.api_key['accessTokenHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['accessTokenHeader'] = 'Bearer'
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.TasksApi(api_client)
+    scope = 'scope_example' # str |  (optional)
+    org_id = 56 # int |  (optional)
+    project_ids = 'project_ids_example' # str | Comma-separated project ids (optional)
+    without_origin = True # bool |  (optional)
+    statuses = 'statuses_example' # str | Comma-separated task statuses (optional)
+    search = 'search_example' # str |  (optional)
+    app_id = 56 # int |  (optional)
+    app_instance_id = 56 # int |  (optional)
+    stack_id = 56 # int |  (optional)
+    database_id = 56 # int |  (optional)
+    cluster_id = 56 # int |  (optional)
+    service_id = 56 # int |  (optional)
+    integration_id = 56 # int |  (optional)
+    provider_id = 56 # int |  (optional)
+    page = 56 # int | Page number, defaults to 1 (optional)
+    page_size = 56 # int | Page size, defaults to 30 (optional)
+
+    try:
+        # List tasks
+        api_response = api_instance.tasks_get(scope=scope, org_id=org_id, project_ids=project_ids, without_origin=without_origin, statuses=statuses, search=search, app_id=app_id, app_instance_id=app_instance_id, stack_id=stack_id, database_id=database_id, cluster_id=cluster_id, service_id=service_id, integration_id=integration_id, provider_id=provider_id, page=page, page_size=page_size)
+        print("The response of TasksApi->tasks_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling TasksApi->tasks_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**|  | [optional] 
+ **org_id** | **int**|  | [optional] 
+ **project_ids** | **str**| Comma-separated project ids | [optional] 
+ **without_origin** | **bool**|  | [optional] 
+ **statuses** | **str**| Comma-separated task statuses | [optional] 
+ **search** | **str**|  | [optional] 
+ **app_id** | **int**|  | [optional] 
+ **app_instance_id** | **int**|  | [optional] 
+ **stack_id** | **int**|  | [optional] 
+ **database_id** | **int**|  | [optional] 
+ **cluster_id** | **int**|  | [optional] 
+ **service_id** | **int**|  | [optional] 
+ **integration_id** | **int**|  | [optional] 
+ **provider_id** | **int**|  | [optional] 
+ **page** | **int**| Page number, defaults to 1 | [optional] 
+ **page_size** | **int**| Page size, defaults to 30 | [optional] 
+
+### Return type
+
+[**TasksResponse**](TasksResponse.md)
+
+### Authorization
+
+[accessTokenHeader](../README.md#accessTokenHeader), [apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Tasks response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **tasks_id_cancel_post**
+> OperationResult tasks_id_cancel_post(id)
+
+Cancel task
+
+### Example
+
+* Api Key Authentication (accessTokenHeader):
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.operation_result import OperationResult
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: accessTokenHeader
+configuration.api_key['accessTokenHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['accessTokenHeader'] = 'Bearer'
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.TasksApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # Cancel task
+        api_response = api_instance.tasks_id_cancel_post(id)
+        print("The response of TasksApi->tasks_id_cancel_post:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling TasksApi->tasks_id_cancel_post: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**OperationResult**](OperationResult.md)
+
+### Authorization
+
+[accessTokenHeader](../README.md#accessTokenHeader), [apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Cancel result |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **tasks_id_get**
 > Task tasks_id_get(id)
@@ -88,6 +289,93 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Task |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **tasks_id_repeat_post**
+> OperationResult tasks_id_repeat_post(id, repeat_task_request)
+
+Repeat task
+
+### Example
+
+* Api Key Authentication (accessTokenHeader):
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.operation_result import OperationResult
+from wodby.models.repeat_task_request import RepeatTaskRequest
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: accessTokenHeader
+configuration.api_key['accessTokenHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['accessTokenHeader'] = 'Bearer'
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.TasksApi(api_client)
+    id = 56 # int | 
+    repeat_task_request = wodby.RepeatTaskRequest() # RepeatTaskRequest | 
+
+    try:
+        # Repeat task
+        api_response = api_instance.tasks_id_repeat_post(id, repeat_task_request)
+        print("The response of TasksApi->tasks_id_repeat_post:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling TasksApi->tasks_id_repeat_post: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **repeat_task_request** | [**RepeatTaskRequest**](RepeatTaskRequest.md)|  | 
+
+### Return type
+
+[**OperationResult**](OperationResult.md)
+
+### Authorization
+
+[accessTokenHeader](../README.md#accessTokenHeader), [apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Repeat task result |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
