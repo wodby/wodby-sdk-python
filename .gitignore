@@ -1,0 +1,13 @@
+# IDE
+/.idea
+!/.idea/codeStyles
+!/.idea/inspectionProfiles
+
+# Build artefacts
+codegen.jar
+src/build
+src/dist
+src/wodby_sdk.egg-info
+src/test.py
+src-tag
+src-master
