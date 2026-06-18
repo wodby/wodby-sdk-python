@@ -4,16 +4,275 @@ All URIs are relative to */v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**apps_by_name_name_get**](AppsApi.md#apps_by_name_name_get) | **GET** /apps/by-name/{name} | Get app by name
-[**apps_get**](AppsApi.md#apps_get) | **GET** /apps | List apps
-[**apps_id_delete**](AppsApi.md#apps_id_delete) | **DELETE** /apps/{id} | Delete app
-[**apps_id_get**](AppsApi.md#apps_id_get) | **GET** /apps/{id} | Get app
-[**apps_id_put**](AppsApi.md#apps_id_put) | **PUT** /apps/{id} | Update app
-[**apps_post**](AppsApi.md#apps_post) | **POST** /apps | Create app
+[**create_app**](AppsApi.md#create_app) | **POST** /apps | Create app
+[**delete_app**](AppsApi.md#delete_app) | **DELETE** /apps/{id} | Delete app
+[**get_app**](AppsApi.md#get_app) | **GET** /apps/{id} | Get app
+[**get_app_by_name**](AppsApi.md#get_app_by_name) | **GET** /apps/by-name/{name} | Get app by name
+[**list_apps**](AppsApi.md#list_apps) | **GET** /apps | List apps
+[**update_app**](AppsApi.md#update_app) | **PUT** /apps/{id} | Update app
 
 
-# **apps_by_name_name_get**
-> App apps_by_name_name_get(name, org_id)
+# **create_app**
+> App create_app(new_app_input)
+
+Create app
+
+### Example
+
+* Api Key Authentication (accessTokenHeader):
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.app import App
+from wodby.models.new_app_input import NewAppInput
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: accessTokenHeader
+configuration.api_key['accessTokenHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['accessTokenHeader'] = 'Bearer'
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppsApi(api_client)
+    new_app_input = wodby.NewAppInput() # NewAppInput | 
+
+    try:
+        # Create app
+        api_response = api_instance.create_app(new_app_input)
+        print("The response of AppsApi->create_app:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppsApi->create_app: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **new_app_input** | [**NewAppInput**](NewAppInput.md)|  | 
+
+### Return type
+
+[**App**](App.md)
+
+### Authorization
+
+[accessTokenHeader](../README.md#accessTokenHeader), [apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Created app |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_app**
+> OperationResult delete_app(id)
+
+Delete app
+
+### Example
+
+* Api Key Authentication (accessTokenHeader):
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.operation_result import OperationResult
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: accessTokenHeader
+configuration.api_key['accessTokenHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['accessTokenHeader'] = 'Bearer'
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppsApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # Delete app
+        api_response = api_instance.delete_app(id)
+        print("The response of AppsApi->delete_app:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppsApi->delete_app: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**OperationResult**](OperationResult.md)
+
+### Authorization
+
+[accessTokenHeader](../README.md#accessTokenHeader), [apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Delete result |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_app**
+> App get_app(id)
+
+Get app
+
+### Example
+
+* Api Key Authentication (accessTokenHeader):
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.app import App
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: accessTokenHeader
+configuration.api_key['accessTokenHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['accessTokenHeader'] = 'Bearer'
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppsApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # Get app
+        api_response = api_instance.get_app(id)
+        print("The response of AppsApi->get_app:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppsApi->get_app: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**App**](App.md)
+
+### Authorization
+
+[accessTokenHeader](../README.md#accessTokenHeader), [apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | App |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_app_by_name**
+> App get_app_by_name(name, org_id)
 
 Get app by name
 
@@ -60,11 +319,11 @@ with wodby.ApiClient(configuration) as api_client:
 
     try:
         # Get app by name
-        api_response = api_instance.apps_by_name_name_get(name, org_id)
-        print("The response of AppsApi->apps_by_name_name_get:\n")
+        api_response = api_instance.get_app_by_name(name, org_id)
+        print("The response of AppsApi->get_app_by_name:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling AppsApi->apps_by_name_name_get: %s\n" % e)
+        print("Exception when calling AppsApi->get_app_by_name: %s\n" % e)
 ```
 
 
@@ -95,11 +354,13 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | App |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **apps_get**
-> List[App] apps_get(org_id, project_ids=project_ids, cluster_app=cluster_app)
+# **list_apps**
+> List[App] list_apps(org_id, project_ids=project_ids, cluster_app=cluster_app)
 
 List apps
 
@@ -147,11 +408,11 @@ with wodby.ApiClient(configuration) as api_client:
 
     try:
         # List apps
-        api_response = api_instance.apps_get(org_id, project_ids=project_ids, cluster_app=cluster_app)
-        print("The response of AppsApi->apps_get:\n")
+        api_response = api_instance.list_apps(org_id, project_ids=project_ids, cluster_app=cluster_app)
+        print("The response of AppsApi->list_apps:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling AppsApi->apps_get: %s\n" % e)
+        print("Exception when calling AppsApi->list_apps: %s\n" % e)
 ```
 
 
@@ -183,179 +444,13 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of apps |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **apps_id_delete**
-> OperationResult apps_id_delete(id)
-
-Delete app
-
-### Example
-
-* Api Key Authentication (accessTokenHeader):
-* Api Key Authentication (apiKeyHeader):
-
-```python
-import wodby
-from wodby.models.operation_result import OperationResult
-from wodby.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to /v1
-# See configuration.py for a list of all supported configuration parameters.
-configuration = wodby.Configuration(
-    host = "/v1"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: accessTokenHeader
-configuration.api_key['accessTokenHeader'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['accessTokenHeader'] = 'Bearer'
-
-# Configure API key authorization: apiKeyHeader
-configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with wodby.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = wodby.AppsApi(api_client)
-    id = 56 # int | 
-
-    try:
-        # Delete app
-        api_response = api_instance.apps_id_delete(id)
-        print("The response of AppsApi->apps_id_delete:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling AppsApi->apps_id_delete: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **int**|  | 
-
-### Return type
-
-[**OperationResult**](OperationResult.md)
-
-### Authorization
-
-[accessTokenHeader](../README.md#accessTokenHeader), [apiKeyHeader](../README.md#apiKeyHeader)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Delete result |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **apps_id_get**
-> App apps_id_get(id)
-
-Get app
-
-### Example
-
-* Api Key Authentication (accessTokenHeader):
-* Api Key Authentication (apiKeyHeader):
-
-```python
-import wodby
-from wodby.models.app import App
-from wodby.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to /v1
-# See configuration.py for a list of all supported configuration parameters.
-configuration = wodby.Configuration(
-    host = "/v1"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: accessTokenHeader
-configuration.api_key['accessTokenHeader'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['accessTokenHeader'] = 'Bearer'
-
-# Configure API key authorization: apiKeyHeader
-configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with wodby.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = wodby.AppsApi(api_client)
-    id = 56 # int | 
-
-    try:
-        # Get app
-        api_response = api_instance.apps_id_get(id)
-        print("The response of AppsApi->apps_id_get:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling AppsApi->apps_id_get: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **int**|  | 
-
-### Return type
-
-[**App**](App.md)
-
-### Authorization
-
-[accessTokenHeader](../README.md#accessTokenHeader), [apiKeyHeader](../README.md#apiKeyHeader)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | App |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **apps_id_put**
-> App apps_id_put(id, update_title_request)
+# **update_app**
+> App update_app(id, update_title_request)
 
 Update app
 
@@ -403,11 +498,11 @@ with wodby.ApiClient(configuration) as api_client:
 
     try:
         # Update app
-        api_response = api_instance.apps_id_put(id, update_title_request)
-        print("The response of AppsApi->apps_id_put:\n")
+        api_response = api_instance.update_app(id, update_title_request)
+        print("The response of AppsApi->update_app:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling AppsApi->apps_id_put: %s\n" % e)
+        print("Exception when calling AppsApi->update_app: %s\n" % e)
 ```
 
 
@@ -438,91 +533,8 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Updated app |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **apps_post**
-> App apps_post(new_app_input)
-
-Create app
-
-### Example
-
-* Api Key Authentication (accessTokenHeader):
-* Api Key Authentication (apiKeyHeader):
-
-```python
-import wodby
-from wodby.models.app import App
-from wodby.models.new_app_input import NewAppInput
-from wodby.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to /v1
-# See configuration.py for a list of all supported configuration parameters.
-configuration = wodby.Configuration(
-    host = "/v1"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: accessTokenHeader
-configuration.api_key['accessTokenHeader'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['accessTokenHeader'] = 'Bearer'
-
-# Configure API key authorization: apiKeyHeader
-configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with wodby.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = wodby.AppsApi(api_client)
-    new_app_input = wodby.NewAppInput() # NewAppInput | 
-
-    try:
-        # Create app
-        api_response = api_instance.apps_post(new_app_input)
-        print("The response of AppsApi->apps_post:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling AppsApi->apps_post: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **new_app_input** | [**NewAppInput**](NewAppInput.md)|  | 
-
-### Return type
-
-[**App**](App.md)
-
-### Authorization
-
-[accessTokenHeader](../README.md#accessTokenHeader), [apiKeyHeader](../README.md#apiKeyHeader)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**201** | Created app |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

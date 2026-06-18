@@ -1,7 +1,7 @@
 # coding: utf-8
 
 """
-    Wodby 2.0 Public API
+    Wodby 2 Public API
 
     Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface. 
 
@@ -26,9 +26,9 @@ class NewClusterInput(BaseModel):
     """
     NewClusterInput
     """ # noqa: E501
-    org_id: StrictInt = Field(alias="orgID")
-    project_id: Optional[StrictInt] = Field(default=None, alias="projectID")
-    integration_id: StrictInt = Field(alias="integrationID")
+    org_id: StrictInt = Field(alias="orgId")
+    project_id: Optional[StrictInt] = Field(default=None, alias="projectId")
+    integration_id: StrictInt = Field(alias="integrationId")
     name: StrictStr
     title: StrictStr
     serverless: StrictBool
@@ -42,7 +42,7 @@ class NewClusterInput(BaseModel):
     region: Optional[StrictStr] = None
     billing_option: Optional[StrictStr] = Field(default=None, alias="billingOption")
     disable_monitoring: StrictBool = Field(alias="disableMonitoring")
-    __properties: ClassVar[List[str]] = ["orgID", "projectID", "integrationID", "name", "title", "serverless", "singleNode", "version", "machineType", "minNodeCount", "maxNodeCount", "nodeDiskSize", "zone", "region", "billingOption", "disableMonitoring"]
+    __properties: ClassVar[List[str]] = ["orgId", "projectId", "integrationId", "name", "title", "serverless", "singleNode", "version", "machineType", "minNodeCount", "maxNodeCount", "nodeDiskSize", "zone", "region", "billingOption", "disableMonitoring"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -86,7 +86,7 @@ class NewClusterInput(BaseModel):
         # set to None if project_id (nullable) is None
         # and model_fields_set contains the field
         if self.project_id is None and "project_id" in self.model_fields_set:
-            _dict['projectID'] = None
+            _dict['projectId'] = None
 
         # set to None if single_node (nullable) is None
         # and model_fields_set contains the field
@@ -145,9 +145,9 @@ class NewClusterInput(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "orgID": obj.get("orgID"),
-            "projectID": obj.get("projectID"),
-            "integrationID": obj.get("integrationID"),
+            "orgId": obj.get("orgId"),
+            "projectId": obj.get("projectId"),
+            "integrationId": obj.get("integrationId"),
             "name": obj.get("name"),
             "title": obj.get("title"),
             "serverless": obj.get("serverless"),

@@ -1,7 +1,7 @@
 # coding: utf-8
 
 """
-    Wodby 2.0 Public API
+    Wodby 2 Public API
 
     Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface. 
 
@@ -26,9 +26,9 @@ class AppServiceDatabaseInput(BaseModel):
     """
     AppServiceDatabaseInput
     """ # noqa: E501
-    database_id: StrictInt = Field(alias="databaseID")
-    database_dbid: Optional[StrictInt] = Field(default=None, alias="databaseDBID")
-    __properties: ClassVar[List[str]] = ["databaseID", "databaseDBID"]
+    database_id: StrictInt = Field(alias="databaseId")
+    database_db_id: Optional[StrictInt] = Field(default=None, alias="databaseDbId")
+    __properties: ClassVar[List[str]] = ["databaseId", "databaseDbId"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -69,10 +69,10 @@ class AppServiceDatabaseInput(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if database_dbid (nullable) is None
+        # set to None if database_db_id (nullable) is None
         # and model_fields_set contains the field
-        if self.database_dbid is None and "database_dbid" in self.model_fields_set:
-            _dict['databaseDBID'] = None
+        if self.database_db_id is None and "database_db_id" in self.model_fields_set:
+            _dict['databaseDbId'] = None
 
         return _dict
 
@@ -86,8 +86,8 @@ class AppServiceDatabaseInput(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "databaseID": obj.get("databaseID"),
-            "databaseDBID": obj.get("databaseDBID")
+            "databaseId": obj.get("databaseId"),
+            "databaseDbId": obj.get("databaseDbId")
         })
         return _obj
 

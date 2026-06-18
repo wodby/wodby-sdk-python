@@ -1,7 +1,7 @@
 # coding: utf-8
 
 """
-    Wodby 2.0 Public API
+    Wodby 2 Public API
 
     Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface. 
 
@@ -26,12 +26,12 @@ class NewDatabaseInput(BaseModel):
     """
     NewDatabaseInput
     """ # noqa: E501
-    org_id: StrictInt = Field(alias="orgID")
-    project_id: Optional[StrictInt] = Field(default=None, alias="projectID")
-    env_id: StrictInt = Field(alias="envID")
+    org_id: StrictInt = Field(alias="orgId")
+    project_id: Optional[StrictInt] = Field(default=None, alias="projectId")
+    env_id: StrictInt = Field(alias="envId")
     name: StrictStr
     title: StrictStr
-    integration_kind_id: StrictInt = Field(alias="integrationKindID")
+    integration_kind_id: StrictInt = Field(alias="integrationKindId")
     type: StrictStr
     version: StrictStr
     machine_type: StrictStr = Field(alias="machineType")
@@ -41,9 +41,9 @@ class NewDatabaseInput(BaseModel):
     high_availability: Optional[StrictBool] = Field(default=None, alias="highAvailability")
     region: Optional[StrictStr] = None
     zone: Optional[StrictStr] = None
-    resided_cluster_id: Optional[StrictInt] = Field(default=None, alias="residedClusterID")
+    resided_cluster_id: Optional[StrictInt] = Field(default=None, alias="residedClusterId")
     iops: Optional[StrictInt] = None
-    __properties: ClassVar[List[str]] = ["orgID", "projectID", "envID", "name", "title", "integrationKindID", "type", "version", "machineType", "storageSize", "password", "storageAutoscaling", "highAvailability", "region", "zone", "residedClusterID", "iops"]
+    __properties: ClassVar[List[str]] = ["orgId", "projectId", "envId", "name", "title", "integrationKindId", "type", "version", "machineType", "storageSize", "password", "storageAutoscaling", "highAvailability", "region", "zone", "residedClusterId", "iops"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -87,7 +87,7 @@ class NewDatabaseInput(BaseModel):
         # set to None if project_id (nullable) is None
         # and model_fields_set contains the field
         if self.project_id is None and "project_id" in self.model_fields_set:
-            _dict['projectID'] = None
+            _dict['projectId'] = None
 
         # set to None if storage_size (nullable) is None
         # and model_fields_set contains the field
@@ -122,7 +122,7 @@ class NewDatabaseInput(BaseModel):
         # set to None if resided_cluster_id (nullable) is None
         # and model_fields_set contains the field
         if self.resided_cluster_id is None and "resided_cluster_id" in self.model_fields_set:
-            _dict['residedClusterID'] = None
+            _dict['residedClusterId'] = None
 
         # set to None if iops (nullable) is None
         # and model_fields_set contains the field
@@ -141,12 +141,12 @@ class NewDatabaseInput(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "orgID": obj.get("orgID"),
-            "projectID": obj.get("projectID"),
-            "envID": obj.get("envID"),
+            "orgId": obj.get("orgId"),
+            "projectId": obj.get("projectId"),
+            "envId": obj.get("envId"),
             "name": obj.get("name"),
             "title": obj.get("title"),
-            "integrationKindID": obj.get("integrationKindID"),
+            "integrationKindId": obj.get("integrationKindId"),
             "type": obj.get("type"),
             "version": obj.get("version"),
             "machineType": obj.get("machineType"),
@@ -156,7 +156,7 @@ class NewDatabaseInput(BaseModel):
             "highAvailability": obj.get("highAvailability"),
             "region": obj.get("region"),
             "zone": obj.get("zone"),
-            "residedClusterID": obj.get("residedClusterID"),
+            "residedClusterId": obj.get("residedClusterId"),
             "iops": obj.get("iops")
         })
         return _obj

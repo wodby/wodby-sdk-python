@@ -1,7 +1,7 @@
 # coding: utf-8
 
 """
-    Wodby 2.0 Public API
+    Wodby 2 Public API
 
     Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface. 
 
@@ -30,9 +30,9 @@ class ImportInput(BaseModel):
     import_name: Optional[StrictStr] = Field(default=None, alias="importName")
     source: StrictStr
     url: Optional[StrictStr] = None
-    backup_id: Optional[StrictInt] = Field(default=None, alias="backupID")
+    backup_id: Optional[StrictInt] = Field(default=None, alias="backupId")
     var_from: Optional[ImportFromInput] = Field(default=None, alias="from")
-    __properties: ClassVar[List[str]] = ["importName", "source", "url", "backupID", "from"]
+    __properties: ClassVar[List[str]] = ["importName", "source", "url", "backupId", "from"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -89,7 +89,7 @@ class ImportInput(BaseModel):
         # set to None if backup_id (nullable) is None
         # and model_fields_set contains the field
         if self.backup_id is None and "backup_id" in self.model_fields_set:
-            _dict['backupID'] = None
+            _dict['backupId'] = None
 
         return _dict
 
@@ -106,7 +106,7 @@ class ImportInput(BaseModel):
             "importName": obj.get("importName"),
             "source": obj.get("source"),
             "url": obj.get("url"),
-            "backupID": obj.get("backupID"),
+            "backupId": obj.get("backupId"),
             "from": ImportFromInput.from_dict(obj["from"]) if obj.get("from") is not None else None
         })
         return _obj

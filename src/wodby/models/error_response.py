@@ -17,29 +17,17 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictStr
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
-class Service(BaseModel):
+class ErrorResponse(BaseModel):
     """
-    Service
+    ErrorResponse
     """ # noqa: E501
-    id: StrictInt
-    name: StrictStr
-    title: StrictStr
-    type: StrictStr
-    status: StrictStr
-    external: StrictBool
-    public: StrictBool
-    rev_id: StrictInt = Field(alias="revId")
-    latest_rev_number: StrictInt = Field(alias="latestRevNumber")
-    org_id: StrictInt = Field(alias="orgId")
-    created_at: datetime = Field(alias="createdAt")
-    updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "type", "status", "external", "public", "revId", "latestRevNumber", "orgId", "createdAt", "updatedAt"]
+    message: StrictStr
+    __properties: ClassVar[List[str]] = ["message"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -59,7 +47,7 @@ class Service(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of Service from a JSON string"""
+        """Create an instance of ErrorResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -84,7 +72,7 @@ class Service(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of Service from a dict"""
+        """Create an instance of ErrorResponse from a dict"""
         if obj is None:
             return None
 
@@ -92,18 +80,7 @@ class Service(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "name": obj.get("name"),
-            "title": obj.get("title"),
-            "type": obj.get("type"),
-            "status": obj.get("status"),
-            "external": obj.get("external"),
-            "public": obj.get("public"),
-            "revId": obj.get("revId"),
-            "latestRevNumber": obj.get("latestRevNumber"),
-            "orgId": obj.get("orgId"),
-            "createdAt": obj.get("createdAt"),
-            "updatedAt": obj.get("updatedAt")
+            "message": obj.get("message")
         })
         return _obj
 

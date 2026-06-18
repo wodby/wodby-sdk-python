@@ -1,7 +1,7 @@
 # coding: utf-8
 
 """
-    Wodby 2.0 Public API
+    Wodby 2 Public API
 
     Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface. 
 
@@ -28,21 +28,21 @@ class NewAppInput(BaseModel):
     """
     NewAppInput
     """ # noqa: E501
-    org_id: StrictInt = Field(alias="orgID")
+    org_id: StrictInt = Field(alias="orgId")
     name: StrictStr
     title: StrictStr
     instance_name: StrictStr = Field(alias="instanceName")
     instance_title: StrictStr = Field(alias="instanceTitle")
     domain: StrictStr
-    project_id: Optional[StrictInt] = Field(default=None, alias="projectID")
-    stack_rev_id: StrictInt = Field(alias="stackRevID")
+    project_id: Optional[StrictInt] = Field(default=None, alias="projectId")
+    stack_rev_id: StrictInt = Field(alias="stackRevId")
     services: List[NewAppServiceInput]
-    cluster_id: Optional[StrictInt] = Field(default=None, alias="clusterID")
+    cluster_id: Optional[StrictInt] = Field(default=None, alias="clusterId")
     new_cluster: Optional[NewManagedClusterInput] = Field(default=None, alias="newCluster")
-    env_id: StrictInt = Field(alias="envID")
-    ci_integration_id: Optional[StrictInt] = Field(default=None, alias="ciIntegrationID")
-    registry_integration_id: Optional[StrictInt] = Field(default=None, alias="registryIntegrationID")
-    __properties: ClassVar[List[str]] = ["orgID", "name", "title", "instanceName", "instanceTitle", "domain", "projectID", "stackRevID", "services", "clusterID", "newCluster", "envID", "ciIntegrationID", "registryIntegrationID"]
+    env_id: StrictInt = Field(alias="envId")
+    ci_integration_id: Optional[StrictInt] = Field(default=None, alias="ciIntegrationId")
+    registry_integration_id: Optional[StrictInt] = Field(default=None, alias="registryIntegrationId")
+    __properties: ClassVar[List[str]] = ["orgId", "name", "title", "instanceName", "instanceTitle", "domain", "projectId", "stackRevId", "services", "clusterId", "newCluster", "envId", "ciIntegrationId", "registryIntegrationId"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -96,22 +96,22 @@ class NewAppInput(BaseModel):
         # set to None if project_id (nullable) is None
         # and model_fields_set contains the field
         if self.project_id is None and "project_id" in self.model_fields_set:
-            _dict['projectID'] = None
+            _dict['projectId'] = None
 
         # set to None if cluster_id (nullable) is None
         # and model_fields_set contains the field
         if self.cluster_id is None and "cluster_id" in self.model_fields_set:
-            _dict['clusterID'] = None
+            _dict['clusterId'] = None
 
         # set to None if ci_integration_id (nullable) is None
         # and model_fields_set contains the field
         if self.ci_integration_id is None and "ci_integration_id" in self.model_fields_set:
-            _dict['ciIntegrationID'] = None
+            _dict['ciIntegrationId'] = None
 
         # set to None if registry_integration_id (nullable) is None
         # and model_fields_set contains the field
         if self.registry_integration_id is None and "registry_integration_id" in self.model_fields_set:
-            _dict['registryIntegrationID'] = None
+            _dict['registryIntegrationId'] = None
 
         return _dict
 
@@ -125,20 +125,20 @@ class NewAppInput(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "orgID": obj.get("orgID"),
+            "orgId": obj.get("orgId"),
             "name": obj.get("name"),
             "title": obj.get("title"),
             "instanceName": obj.get("instanceName"),
             "instanceTitle": obj.get("instanceTitle"),
             "domain": obj.get("domain"),
-            "projectID": obj.get("projectID"),
-            "stackRevID": obj.get("stackRevID"),
+            "projectId": obj.get("projectId"),
+            "stackRevId": obj.get("stackRevId"),
             "services": [NewAppServiceInput.from_dict(_item) for _item in obj["services"]] if obj.get("services") is not None else None,
-            "clusterID": obj.get("clusterID"),
+            "clusterId": obj.get("clusterId"),
             "newCluster": NewManagedClusterInput.from_dict(obj["newCluster"]) if obj.get("newCluster") is not None else None,
-            "envID": obj.get("envID"),
-            "ciIntegrationID": obj.get("ciIntegrationID"),
-            "registryIntegrationID": obj.get("registryIntegrationID")
+            "envId": obj.get("envId"),
+            "ciIntegrationId": obj.get("ciIntegrationId"),
+            "registryIntegrationId": obj.get("registryIntegrationId")
         })
         return _obj
 

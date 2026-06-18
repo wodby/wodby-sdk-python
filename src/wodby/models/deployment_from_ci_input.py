@@ -1,7 +1,7 @@
 # coding: utf-8
 
 """
-    Wodby 2.0 Public API
+    Wodby 2 Public API
 
     Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface. 
 
@@ -27,10 +27,10 @@ class DeploymentFromCIInput(BaseModel):
     """
     DeploymentFromCIInput
     """ # noqa: E501
-    app_build_id: StrictInt = Field(alias="appBuildID")
+    app_build_id: StrictInt = Field(alias="appBuildId")
     services: List[ServiceDeploymentInput]
     skip_post_deployment: StrictBool = Field(alias="skipPostDeployment")
-    __properties: ClassVar[List[str]] = ["appBuildID", "services", "skipPostDeployment"]
+    __properties: ClassVar[List[str]] = ["appBuildId", "services", "skipPostDeployment"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -90,7 +90,7 @@ class DeploymentFromCIInput(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "appBuildID": obj.get("appBuildID"),
+            "appBuildId": obj.get("appBuildId"),
             "services": [ServiceDeploymentInput.from_dict(_item) for _item in obj["services"]] if obj.get("services") is not None else None,
             "skipPostDeployment": obj.get("skipPostDeployment")
         })

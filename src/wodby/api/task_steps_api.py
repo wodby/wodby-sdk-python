@@ -1,7 +1,7 @@
 # coding: utf-8
 
 """
-    Wodby 2.0 Public API
+    Wodby 2 Public API
 
     Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface. 
 
@@ -39,7 +39,7 @@ class TaskStepsApi:
 
 
     @validate_call
-    def task_steps_id_log_url_get(
+    def get_task_step_log_url(
         self,
         id: StrictInt,
         _request_timeout: Union[
@@ -82,7 +82,7 @@ class TaskStepsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._task_steps_id_log_url_get_serialize(
+        _param = self._get_task_step_log_url_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -92,6 +92,7 @@ class TaskStepsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "URLResponse",
+            '4XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -105,7 +106,7 @@ class TaskStepsApi:
 
 
     @validate_call
-    def task_steps_id_log_url_get_with_http_info(
+    def get_task_step_log_url_with_http_info(
         self,
         id: StrictInt,
         _request_timeout: Union[
@@ -148,7 +149,7 @@ class TaskStepsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._task_steps_id_log_url_get_serialize(
+        _param = self._get_task_step_log_url_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -158,6 +159,7 @@ class TaskStepsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "URLResponse",
+            '4XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -171,7 +173,7 @@ class TaskStepsApi:
 
 
     @validate_call
-    def task_steps_id_log_url_get_without_preload_content(
+    def get_task_step_log_url_without_preload_content(
         self,
         id: StrictInt,
         _request_timeout: Union[
@@ -214,7 +216,7 @@ class TaskStepsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._task_steps_id_log_url_get_serialize(
+        _param = self._get_task_step_log_url_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -224,6 +226,7 @@ class TaskStepsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "URLResponse",
+            '4XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -232,7 +235,7 @@ class TaskStepsApi:
         return response_data.response
 
 
-    def _task_steps_id_log_url_get_serialize(
+    def _get_task_step_log_url_serialize(
         self,
         id,
         _request_auth,
@@ -298,7 +301,7 @@ class TaskStepsApi:
 
 
     @validate_call
-    def task_steps_id_logs_get(
+    def get_task_step_logs(
         self,
         id: StrictInt,
         _request_timeout: Union[
@@ -341,7 +344,7 @@ class TaskStepsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._task_steps_id_logs_get_serialize(
+        _param = self._get_task_step_logs_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -351,6 +354,7 @@ class TaskStepsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskStepLogs",
+            '4XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -364,7 +368,7 @@ class TaskStepsApi:
 
 
     @validate_call
-    def task_steps_id_logs_get_with_http_info(
+    def get_task_step_logs_with_http_info(
         self,
         id: StrictInt,
         _request_timeout: Union[
@@ -407,7 +411,7 @@ class TaskStepsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._task_steps_id_logs_get_serialize(
+        _param = self._get_task_step_logs_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -417,6 +421,7 @@ class TaskStepsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskStepLogs",
+            '4XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -430,7 +435,7 @@ class TaskStepsApi:
 
 
     @validate_call
-    def task_steps_id_logs_get_without_preload_content(
+    def get_task_step_logs_without_preload_content(
         self,
         id: StrictInt,
         _request_timeout: Union[
@@ -473,7 +478,7 @@ class TaskStepsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._task_steps_id_logs_get_serialize(
+        _param = self._get_task_step_logs_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -483,6 +488,7 @@ class TaskStepsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskStepLogs",
+            '4XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -491,7 +497,7 @@ class TaskStepsApi:
         return response_data.response
 
 
-    def _task_steps_id_logs_get_serialize(
+    def _get_task_step_logs_serialize(
         self,
         id,
         _request_auth,

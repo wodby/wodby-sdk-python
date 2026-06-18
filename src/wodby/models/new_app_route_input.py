@@ -1,7 +1,7 @@
 # coding: utf-8
 
 """
-    Wodby 2.0 Public API
+    Wodby 2 Public API
 
     Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface. 
 
@@ -27,7 +27,7 @@ class NewAppRouteInput(BaseModel):
     """
     NewAppRouteInput
     """ # noqa: E501
-    app_service_id: StrictInt = Field(alias="appServiceID")
+    app_service_id: StrictInt = Field(alias="appServiceId")
     main: StrictBool
     primary: StrictBool
     port: StrictInt
@@ -42,9 +42,9 @@ class NewAppRouteInput(BaseModel):
     letsencrypt: Optional[StrictBool] = None
     auth_login: Optional[StrictStr] = Field(default=None, alias="authLogin")
     auth_password: Optional[StrictStr] = Field(default=None, alias="authPassword")
-    auth_id: Optional[StrictInt] = Field(default=None, alias="authID")
+    auth_id: Optional[StrictInt] = Field(default=None, alias="authId")
     options: Optional[List[AppEndpointOptionInput]] = None
-    __properties: ClassVar[List[str]] = ["appServiceID", "main", "primary", "port", "host", "path", "pathType", "action", "redirectScheme", "redirectHost", "redirectPath", "redirectStatusCode", "letsencrypt", "authLogin", "authPassword", "authID", "options"]
+    __properties: ClassVar[List[str]] = ["appServiceId", "main", "primary", "port", "host", "path", "pathType", "action", "redirectScheme", "redirectHost", "redirectPath", "redirectStatusCode", "letsencrypt", "authLogin", "authPassword", "authId", "options"]
 
     @field_validator('path_type')
     def path_type_validate_enum(cls, value):
@@ -165,7 +165,7 @@ class NewAppRouteInput(BaseModel):
         # set to None if auth_id (nullable) is None
         # and model_fields_set contains the field
         if self.auth_id is None and "auth_id" in self.model_fields_set:
-            _dict['authID'] = None
+            _dict['authId'] = None
 
         return _dict
 
@@ -179,7 +179,7 @@ class NewAppRouteInput(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "appServiceID": obj.get("appServiceID"),
+            "appServiceId": obj.get("appServiceId"),
             "main": obj.get("main"),
             "primary": obj.get("primary"),
             "port": obj.get("port"),
@@ -194,7 +194,7 @@ class NewAppRouteInput(BaseModel):
             "letsencrypt": obj.get("letsencrypt"),
             "authLogin": obj.get("authLogin"),
             "authPassword": obj.get("authPassword"),
-            "authID": obj.get("authID"),
+            "authId": obj.get("authId"),
             "options": [AppEndpointOptionInput.from_dict(_item) for _item in obj["options"]] if obj.get("options") is not None else None
         })
         return _obj

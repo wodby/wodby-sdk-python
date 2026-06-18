@@ -2,7 +2,7 @@
 
 # flake8: noqa
 """
-    Wodby 2.0 Public API
+    Wodby 2 Public API
 
     Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface. 
 
@@ -41,6 +41,7 @@ from wodby.models.database_version import DatabaseVersion
 from wodby.models.deployment_from_ci_input import DeploymentFromCIInput
 from wodby.models.docker_registry_credentials import DockerRegistryCredentials
 from wodby.models.env import Env
+from wodby.models.error_response import ErrorResponse
 from wodby.models.field_input import FieldInput
 from wodby.models.import_from_input import ImportFromInput
 from wodby.models.import_input import ImportInput

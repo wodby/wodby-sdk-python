@@ -1,7 +1,7 @@
 # coding: utf-8
 
 """
-    Wodby 2.0 Public API
+    Wodby 2 Public API
 
     Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface. 
 
@@ -27,9 +27,9 @@ class UpdateOrgRequest(BaseModel):
     UpdateOrgRequest
     """ # noqa: E501
     title: StrictStr
-    registry_integration_id: Optional[StrictInt] = Field(default=None, alias="registryIntegrationID")
-    ci_integration_id: Optional[StrictInt] = Field(default=None, alias="ciIntegrationID")
-    __properties: ClassVar[List[str]] = ["title", "registryIntegrationID", "ciIntegrationID"]
+    registry_integration_id: Optional[StrictInt] = Field(default=None, alias="registryIntegrationId")
+    ci_integration_id: Optional[StrictInt] = Field(default=None, alias="ciIntegrationId")
+    __properties: ClassVar[List[str]] = ["title", "registryIntegrationId", "ciIntegrationId"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -73,12 +73,12 @@ class UpdateOrgRequest(BaseModel):
         # set to None if registry_integration_id (nullable) is None
         # and model_fields_set contains the field
         if self.registry_integration_id is None and "registry_integration_id" in self.model_fields_set:
-            _dict['registryIntegrationID'] = None
+            _dict['registryIntegrationId'] = None
 
         # set to None if ci_integration_id (nullable) is None
         # and model_fields_set contains the field
         if self.ci_integration_id is None and "ci_integration_id" in self.model_fields_set:
-            _dict['ciIntegrationID'] = None
+            _dict['ciIntegrationId'] = None
 
         return _dict
 
@@ -93,8 +93,8 @@ class UpdateOrgRequest(BaseModel):
 
         _obj = cls.model_validate({
             "title": obj.get("title"),
-            "registryIntegrationID": obj.get("registryIntegrationID"),
-            "ciIntegrationID": obj.get("ciIntegrationID")
+            "registryIntegrationId": obj.get("registryIntegrationId"),
+            "ciIntegrationId": obj.get("ciIntegrationId")
         })
         return _obj
 

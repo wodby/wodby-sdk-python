@@ -1,7 +1,7 @@
 # coding: utf-8
 
 """
-    Wodby 2.0 Public API
+    Wodby 2 Public API
 
     Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface. 
 
@@ -26,19 +26,19 @@ class NewBuildFromCIInput(BaseModel):
     """
     NewBuildFromCIInput
     """ # noqa: E501
-    app_service_id: StrictInt = Field(alias="appServiceID")
+    app_service_id: StrictInt = Field(alias="appServiceId")
     git_commit_sha: StrictStr = Field(alias="gitCommitSHA")
     git_ref: StrictStr = Field(alias="gitRef")
     git_ref_type: StrictStr = Field(alias="gitRefType")
     build_num: StrictInt = Field(alias="buildNum")
-    build_id: StrictStr = Field(alias="buildID")
+    build_id: StrictStr = Field(alias="buildId")
     workflow: Optional[StrictStr] = None
     git_commit_author_name: Optional[StrictStr] = Field(default=None, alias="gitCommitAuthorName")
     git_commit_author_email: Optional[StrictStr] = Field(default=None, alias="gitCommitAuthorEmail")
     git_commit_message: Optional[StrictStr] = Field(default=None, alias="gitCommitMessage")
     provider: StrictStr
     post_deployment: Optional[StrictStr] = Field(default=None, alias="postDeployment")
-    __properties: ClassVar[List[str]] = ["appServiceID", "gitCommitSHA", "gitRef", "gitRefType", "buildNum", "buildID", "workflow", "gitCommitAuthorName", "gitCommitAuthorEmail", "gitCommitMessage", "provider", "postDeployment"]
+    __properties: ClassVar[List[str]] = ["appServiceId", "gitCommitSHA", "gitRef", "gitRefType", "buildNum", "buildId", "workflow", "gitCommitAuthorName", "gitCommitAuthorEmail", "gitCommitMessage", "provider", "postDeployment"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -116,12 +116,12 @@ class NewBuildFromCIInput(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "appServiceID": obj.get("appServiceID"),
+            "appServiceId": obj.get("appServiceId"),
             "gitCommitSHA": obj.get("gitCommitSHA"),
             "gitRef": obj.get("gitRef"),
             "gitRefType": obj.get("gitRefType"),
             "buildNum": obj.get("buildNum"),
-            "buildID": obj.get("buildID"),
+            "buildId": obj.get("buildId"),
             "workflow": obj.get("workflow"),
             "gitCommitAuthorName": obj.get("gitCommitAuthorName"),
             "gitCommitAuthorEmail": obj.get("gitCommitAuthorEmail"),

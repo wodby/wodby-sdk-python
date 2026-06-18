@@ -1,7 +1,7 @@
 # coding: utf-8
 
 """
-    Wodby 2.0 Public API
+    Wodby 2 Public API
 
     Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface. 
 
@@ -38,7 +38,7 @@ class DefaultApi:
 
 
     @validate_call
-    def openapi_json_get(
+    def get_open_api_json(
         self,
         _request_timeout: Union[
             None,
@@ -78,7 +78,7 @@ class DefaultApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._openapi_json_get_serialize(
+        _param = self._get_open_api_json_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -87,6 +87,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
+            '4XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -100,7 +101,7 @@ class DefaultApi:
 
 
     @validate_call
-    def openapi_json_get_with_http_info(
+    def get_open_api_json_with_http_info(
         self,
         _request_timeout: Union[
             None,
@@ -140,7 +141,7 @@ class DefaultApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._openapi_json_get_serialize(
+        _param = self._get_open_api_json_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -149,6 +150,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
+            '4XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -162,7 +164,7 @@ class DefaultApi:
 
 
     @validate_call
-    def openapi_json_get_without_preload_content(
+    def get_open_api_json_without_preload_content(
         self,
         _request_timeout: Union[
             None,
@@ -202,7 +204,7 @@ class DefaultApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._openapi_json_get_serialize(
+        _param = self._get_open_api_json_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -211,6 +213,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "object",
+            '4XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -219,7 +222,7 @@ class DefaultApi:
         return response_data.response
 
 
-    def _openapi_json_get_serialize(
+    def _get_open_api_json_serialize(
         self,
         _request_auth,
         _content_type,
@@ -280,7 +283,7 @@ class DefaultApi:
 
 
     @validate_call
-    def openapi_yaml_get(
+    def get_open_api_yaml(
         self,
         _request_timeout: Union[
             None,
@@ -320,7 +323,7 @@ class DefaultApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._openapi_yaml_get_serialize(
+        _param = self._get_open_api_yaml_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -329,6 +332,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "str",
+            '4XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -342,7 +346,7 @@ class DefaultApi:
 
 
     @validate_call
-    def openapi_yaml_get_with_http_info(
+    def get_open_api_yaml_with_http_info(
         self,
         _request_timeout: Union[
             None,
@@ -382,7 +386,7 @@ class DefaultApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._openapi_yaml_get_serialize(
+        _param = self._get_open_api_yaml_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -391,6 +395,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "str",
+            '4XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -404,7 +409,7 @@ class DefaultApi:
 
 
     @validate_call
-    def openapi_yaml_get_without_preload_content(
+    def get_open_api_yaml_without_preload_content(
         self,
         _request_timeout: Union[
             None,
@@ -444,7 +449,7 @@ class DefaultApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._openapi_yaml_get_serialize(
+        _param = self._get_open_api_yaml_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -453,6 +458,7 @@ class DefaultApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "str",
+            '4XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -461,7 +467,7 @@ class DefaultApi:
         return response_data.response
 
 
-    def _openapi_yaml_get_serialize(
+    def _get_open_api_yaml_serialize(
         self,
         _request_auth,
         _content_type,
@@ -494,7 +500,8 @@ class DefaultApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/yaml'
+                    'application/yaml', 
+                    'application/json'
                 ]
             )
 

@@ -4,12 +4,12 @@ All URIs are relative to */v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**task_steps_id_log_url_get**](TaskStepsApi.md#task_steps_id_log_url_get) | **GET** /task-steps/{id}/log-url | Get task step log URL
-[**task_steps_id_logs_get**](TaskStepsApi.md#task_steps_id_logs_get) | **GET** /task-steps/{id}/logs | Get task step logs
+[**get_task_step_log_url**](TaskStepsApi.md#get_task_step_log_url) | **GET** /task-steps/{id}/log-url | Get task step log URL
+[**get_task_step_logs**](TaskStepsApi.md#get_task_step_logs) | **GET** /task-steps/{id}/logs | Get task step logs
 
 
-# **task_steps_id_log_url_get**
-> URLResponse task_steps_id_log_url_get(id)
+# **get_task_step_log_url**
+> URLResponse get_task_step_log_url(id)
 
 Get task step log URL
 
@@ -55,11 +55,11 @@ with wodby.ApiClient(configuration) as api_client:
 
     try:
         # Get task step log URL
-        api_response = api_instance.task_steps_id_log_url_get(id)
-        print("The response of TaskStepsApi->task_steps_id_log_url_get:\n")
+        api_response = api_instance.get_task_step_log_url(id)
+        print("The response of TaskStepsApi->get_task_step_log_url:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling TaskStepsApi->task_steps_id_log_url_get: %s\n" % e)
+        print("Exception when calling TaskStepsApi->get_task_step_log_url: %s\n" % e)
 ```
 
 
@@ -89,11 +89,13 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Task step log URL |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **task_steps_id_logs_get**
-> TaskStepLogs task_steps_id_logs_get(id)
+# **get_task_step_logs**
+> TaskStepLogs get_task_step_logs(id)
 
 Get task step logs
 
@@ -139,11 +141,11 @@ with wodby.ApiClient(configuration) as api_client:
 
     try:
         # Get task step logs
-        api_response = api_instance.task_steps_id_logs_get(id)
-        print("The response of TaskStepsApi->task_steps_id_logs_get:\n")
+        api_response = api_instance.get_task_step_logs(id)
+        print("The response of TaskStepsApi->get_task_step_logs:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling TaskStepsApi->task_steps_id_logs_get: %s\n" % e)
+        print("Exception when calling TaskStepsApi->get_task_step_logs: %s\n" % e)
 ```
 
 
@@ -173,6 +175,8 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Task step logs |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

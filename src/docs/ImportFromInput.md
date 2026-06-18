@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**database_dbid** | **int** |  | [optional] 
+**database_db_id** | **int** |  | [optional] 
 **app_service_id** | **int** |  | [optional] 
 **backup_name** | **str** |  | [optional] 
 

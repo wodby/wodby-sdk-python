@@ -1,7 +1,7 @@
 # coding: utf-8
 
 """
-    Wodby 2.0 Public API
+    Wodby 2 Public API
 
     Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface. 
 
@@ -26,13 +26,13 @@ class NewProjectInput(BaseModel):
     """
     NewProjectInput
     """ # noqa: E501
-    org_id: StrictInt = Field(alias="orgID")
+    org_id: StrictInt = Field(alias="orgId")
     name: StrictStr
     title: StrictStr
-    team_ids: Optional[List[StrictInt]] = Field(default=None, alias="teamIDs")
-    org_membership_ids: Optional[List[StrictInt]] = Field(default=None, alias="orgMembershipIDs")
+    team_ids: Optional[List[StrictInt]] = Field(default=None, alias="teamIds")
+    org_membership_ids: Optional[List[StrictInt]] = Field(default=None, alias="orgMembershipIds")
     role: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["orgID", "name", "title", "teamIDs", "orgMembershipIDs", "role"]
+    __properties: ClassVar[List[str]] = ["orgId", "name", "title", "teamIds", "orgMembershipIds", "role"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,11 +85,11 @@ class NewProjectInput(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "orgID": obj.get("orgID"),
+            "orgId": obj.get("orgId"),
             "name": obj.get("name"),
             "title": obj.get("title"),
-            "teamIDs": obj.get("teamIDs"),
-            "orgMembershipIDs": obj.get("orgMembershipIDs"),
+            "teamIds": obj.get("teamIds"),
+            "orgMembershipIds": obj.get("orgMembershipIds"),
             "role": obj.get("role")
         })
         return _obj

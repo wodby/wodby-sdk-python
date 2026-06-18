@@ -1,7 +1,7 @@
 # coding: utf-8
 
 """
-    Wodby 2.0 Public API
+    Wodby 2 Public API
 
     Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface. 
 
@@ -18,17 +18,17 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
 class CreateBuildRequest(BaseModel):
     """
-    Specify either appServiceId for one service or appServiceIds for a multi-service build.
+    App service IDs to build.
     """ # noqa: E501
-    app_service_id: Optional[StrictInt] = Field(default=None, alias="appServiceId")
-    app_service_ids: Optional[List[StrictInt]] = Field(default=None, alias="appServiceIds")
-    __properties: ClassVar[List[str]] = ["appServiceId", "appServiceIds"]
+    app_service_ids: Annotated[List[StrictInt], Field(min_length=1)] = Field(alias="appServiceIds")
+    __properties: ClassVar[List[str]] = ["appServiceIds"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -81,7 +81,6 @@ class CreateBuildRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "appServiceId": obj.get("appServiceId"),
             "appServiceIds": obj.get("appServiceIds")
         })
         return _obj

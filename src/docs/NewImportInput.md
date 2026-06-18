@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **app_service_id** | **int** |  | [optional] 
-**database_dbid** | **int** |  | [optional] 
+**database_db_id** | **int** |  | [optional] 
 **var_import** | [**ImportInput**](ImportInput.md) |  | 
 
 ## Example

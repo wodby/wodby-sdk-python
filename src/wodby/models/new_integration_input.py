@@ -1,7 +1,7 @@
 # coding: utf-8
 
 """
-    Wodby 2.0 Public API
+    Wodby 2 Public API
 
     Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface. 
 
@@ -27,16 +27,16 @@ class NewIntegrationInput(BaseModel):
     """
     NewIntegrationInput
     """ # noqa: E501
-    org_id: StrictInt = Field(alias="orgID")
-    provider_id: StrictInt = Field(alias="providerID")
+    org_id: StrictInt = Field(alias="orgId")
+    provider_id: StrictInt = Field(alias="providerId")
     name: StrictStr
     title: StrictStr
     kinds: List[StrictStr]
     auth: Optional[StrictStr] = None
-    project_id: Optional[StrictInt] = Field(default=None, alias="projectID")
+    project_id: Optional[StrictInt] = Field(default=None, alias="projectId")
     fields_input: Optional[List[FieldInput]] = Field(default=None, alias="fieldsInput")
     scope: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["orgID", "providerID", "name", "title", "kinds", "auth", "projectID", "fieldsInput", "scope"]
+    __properties: ClassVar[List[str]] = ["orgId", "providerId", "name", "title", "kinds", "auth", "projectId", "fieldsInput", "scope"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -92,7 +92,7 @@ class NewIntegrationInput(BaseModel):
         # set to None if project_id (nullable) is None
         # and model_fields_set contains the field
         if self.project_id is None and "project_id" in self.model_fields_set:
-            _dict['projectID'] = None
+            _dict['projectId'] = None
 
         # set to None if scope (nullable) is None
         # and model_fields_set contains the field
@@ -111,13 +111,13 @@ class NewIntegrationInput(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "orgID": obj.get("orgID"),
-            "providerID": obj.get("providerID"),
+            "orgId": obj.get("orgId"),
+            "providerId": obj.get("providerId"),
             "name": obj.get("name"),
             "title": obj.get("title"),
             "kinds": obj.get("kinds"),
             "auth": obj.get("auth"),
-            "projectID": obj.get("projectID"),
+            "projectId": obj.get("projectId"),
             "fieldsInput": [FieldInput.from_dict(_item) for _item in obj["fieldsInput"]] if obj.get("fieldsInput") is not None else None,
             "scope": obj.get("scope")
         })

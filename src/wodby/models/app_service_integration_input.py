@@ -1,7 +1,7 @@
 # coding: utf-8
 
 """
-    Wodby 2.0 Public API
+    Wodby 2 Public API
 
     Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface. 
 
@@ -27,8 +27,8 @@ class AppServiceIntegrationInput(BaseModel):
     AppServiceIntegrationInput
     """ # noqa: E501
     name: StrictStr
-    integration_ids: List[StrictInt] = Field(alias="integrationIDs")
-    __properties: ClassVar[List[str]] = ["name", "integrationIDs"]
+    integration_ids: List[StrictInt] = Field(alias="integrationIds")
+    __properties: ClassVar[List[str]] = ["name", "integrationIds"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,7 +82,7 @@ class AppServiceIntegrationInput(BaseModel):
 
         _obj = cls.model_validate({
             "name": obj.get("name"),
-            "integrationIDs": obj.get("integrationIDs")
+            "integrationIds": obj.get("integrationIds")
         })
         return _obj
 

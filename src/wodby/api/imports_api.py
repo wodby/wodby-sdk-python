@@ -1,7 +1,7 @@
 # coding: utf-8
 
 """
-    Wodby 2.0 Public API
+    Wodby 2 Public API
 
     Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface. 
 
@@ -41,12 +41,9 @@ class ImportsApi:
 
 
     @validate_call
-    def imports_get(
+    def create_import(
         self,
-        app_instance_id: Optional[StrictInt] = None,
-        app_service_id: Optional[StrictInt] = None,
-        database_id: Optional[StrictInt] = None,
-        database_db_id: Optional[StrictInt] = None,
+        new_import_input: NewImportInput,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -59,18 +56,12 @@ class ImportsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[ModelImport]:
-        """List imports
+    ) -> OperationResult:
+        """Create import
 
 
-        :param app_instance_id:
-        :type app_instance_id: int
-        :param app_service_id:
-        :type app_service_id: int
-        :param database_id:
-        :type database_id: int
-        :param database_db_id:
-        :type database_db_id: int
+        :param new_import_input: (required)
+        :type new_import_input: NewImportInput
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -93,11 +84,8 @@ class ImportsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._imports_get_serialize(
-            app_instance_id=app_instance_id,
-            app_service_id=app_service_id,
-            database_id=database_id,
-            database_db_id=database_db_id,
+        _param = self._create_import_serialize(
+            new_import_input=new_import_input,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -105,7 +93,8 @@ class ImportsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[ModelImport]",
+            '201': "OperationResult",
+            '4XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -119,12 +108,9 @@ class ImportsApi:
 
 
     @validate_call
-    def imports_get_with_http_info(
+    def create_import_with_http_info(
         self,
-        app_instance_id: Optional[StrictInt] = None,
-        app_service_id: Optional[StrictInt] = None,
-        database_id: Optional[StrictInt] = None,
-        database_db_id: Optional[StrictInt] = None,
+        new_import_input: NewImportInput,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -137,18 +123,12 @@ class ImportsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[ModelImport]]:
-        """List imports
+    ) -> ApiResponse[OperationResult]:
+        """Create import
 
 
-        :param app_instance_id:
-        :type app_instance_id: int
-        :param app_service_id:
-        :type app_service_id: int
-        :param database_id:
-        :type database_id: int
-        :param database_db_id:
-        :type database_db_id: int
+        :param new_import_input: (required)
+        :type new_import_input: NewImportInput
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -171,11 +151,8 @@ class ImportsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._imports_get_serialize(
-            app_instance_id=app_instance_id,
-            app_service_id=app_service_id,
-            database_id=database_id,
-            database_db_id=database_db_id,
+        _param = self._create_import_serialize(
+            new_import_input=new_import_input,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -183,7 +160,8 @@ class ImportsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[ModelImport]",
+            '201': "OperationResult",
+            '4XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -197,12 +175,9 @@ class ImportsApi:
 
 
     @validate_call
-    def imports_get_without_preload_content(
+    def create_import_without_preload_content(
         self,
-        app_instance_id: Optional[StrictInt] = None,
-        app_service_id: Optional[StrictInt] = None,
-        database_id: Optional[StrictInt] = None,
-        database_db_id: Optional[StrictInt] = None,
+        new_import_input: NewImportInput,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -216,17 +191,11 @@ class ImportsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """List imports
+        """Create import
 
 
-        :param app_instance_id:
-        :type app_instance_id: int
-        :param app_service_id:
-        :type app_service_id: int
-        :param database_id:
-        :type database_id: int
-        :param database_db_id:
-        :type database_db_id: int
+        :param new_import_input: (required)
+        :type new_import_input: NewImportInput
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -249,11 +218,8 @@ class ImportsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._imports_get_serialize(
-            app_instance_id=app_instance_id,
-            app_service_id=app_service_id,
-            database_id=database_id,
-            database_db_id=database_db_id,
+        _param = self._create_import_serialize(
+            new_import_input=new_import_input,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -261,7 +227,8 @@ class ImportsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[ModelImport]",
+            '201': "OperationResult",
+            '4XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -270,12 +237,9 @@ class ImportsApi:
         return response_data.response
 
 
-    def _imports_get_serialize(
+    def _create_import_serialize(
         self,
-        app_instance_id,
-        app_service_id,
-        database_id,
-        database_db_id,
+        new_import_input,
         _request_auth,
         _content_type,
         _headers,
@@ -298,25 +262,11 @@ class ImportsApi:
 
         # process the path parameters
         # process the query parameters
-        if app_instance_id is not None:
-            
-            _query_params.append(('appInstanceId', app_instance_id))
-            
-        if app_service_id is not None:
-            
-            _query_params.append(('appServiceId', app_service_id))
-            
-        if database_id is not None:
-            
-            _query_params.append(('databaseId', database_id))
-            
-        if database_db_id is not None:
-            
-            _query_params.append(('databaseDbId', database_db_id))
-            
         # process the header parameters
         # process the form parameters
         # process the body parameter
+        if new_import_input is not None:
+            _body_params = new_import_input
 
 
         # set the HTTP header `Accept`
@@ -327,6 +277,19 @@ class ImportsApi:
                 ]
             )
 
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
 
         # authentication setting
         _auth_settings: List[str] = [
@@ -335,7 +298,7 @@ class ImportsApi:
         ]
 
         return self.api_client.param_serialize(
-            method='GET',
+            method='POST',
             resource_path='/imports',
             path_params=_path_params,
             query_params=_query_params,
@@ -353,7 +316,7 @@ class ImportsApi:
 
 
     @validate_call
-    def imports_id_get(
+    def get_import(
         self,
         id: StrictInt,
         _request_timeout: Union[
@@ -396,7 +359,7 @@ class ImportsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._imports_id_get_serialize(
+        _param = self._get_import_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -406,6 +369,7 @@ class ImportsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ModelImport",
+            '4XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -419,7 +383,7 @@ class ImportsApi:
 
 
     @validate_call
-    def imports_id_get_with_http_info(
+    def get_import_with_http_info(
         self,
         id: StrictInt,
         _request_timeout: Union[
@@ -462,7 +426,7 @@ class ImportsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._imports_id_get_serialize(
+        _param = self._get_import_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -472,6 +436,7 @@ class ImportsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ModelImport",
+            '4XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -485,7 +450,7 @@ class ImportsApi:
 
 
     @validate_call
-    def imports_id_get_without_preload_content(
+    def get_import_without_preload_content(
         self,
         id: StrictInt,
         _request_timeout: Union[
@@ -528,7 +493,7 @@ class ImportsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._imports_id_get_serialize(
+        _param = self._get_import_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -538,6 +503,7 @@ class ImportsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ModelImport",
+            '4XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -546,7 +512,7 @@ class ImportsApi:
         return response_data.response
 
 
-    def _imports_id_get_serialize(
+    def _get_import_serialize(
         self,
         id,
         _request_auth,
@@ -612,9 +578,12 @@ class ImportsApi:
 
 
     @validate_call
-    def imports_post(
+    def list_imports(
         self,
-        new_import_input: NewImportInput,
+        app_instance_id: Optional[StrictInt] = None,
+        app_service_id: Optional[StrictInt] = None,
+        database_id: Optional[StrictInt] = None,
+        database_db_id: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -627,12 +596,18 @@ class ImportsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> OperationResult:
-        """Create import
+    ) -> List[ModelImport]:
+        """List imports
 
 
-        :param new_import_input: (required)
-        :type new_import_input: NewImportInput
+        :param app_instance_id:
+        :type app_instance_id: int
+        :param app_service_id:
+        :type app_service_id: int
+        :param database_id:
+        :type database_id: int
+        :param database_db_id:
+        :type database_db_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -655,8 +630,11 @@ class ImportsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._imports_post_serialize(
-            new_import_input=new_import_input,
+        _param = self._list_imports_serialize(
+            app_instance_id=app_instance_id,
+            app_service_id=app_service_id,
+            database_id=database_id,
+            database_db_id=database_db_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -664,7 +642,8 @@ class ImportsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "OperationResult",
+            '200': "List[ModelImport]",
+            '4XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -678,9 +657,12 @@ class ImportsApi:
 
 
     @validate_call
-    def imports_post_with_http_info(
+    def list_imports_with_http_info(
         self,
-        new_import_input: NewImportInput,
+        app_instance_id: Optional[StrictInt] = None,
+        app_service_id: Optional[StrictInt] = None,
+        database_id: Optional[StrictInt] = None,
+        database_db_id: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -693,12 +675,18 @@ class ImportsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[OperationResult]:
-        """Create import
+    ) -> ApiResponse[List[ModelImport]]:
+        """List imports
 
 
-        :param new_import_input: (required)
-        :type new_import_input: NewImportInput
+        :param app_instance_id:
+        :type app_instance_id: int
+        :param app_service_id:
+        :type app_service_id: int
+        :param database_id:
+        :type database_id: int
+        :param database_db_id:
+        :type database_db_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -721,8 +709,11 @@ class ImportsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._imports_post_serialize(
-            new_import_input=new_import_input,
+        _param = self._list_imports_serialize(
+            app_instance_id=app_instance_id,
+            app_service_id=app_service_id,
+            database_id=database_id,
+            database_db_id=database_db_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -730,7 +721,8 @@ class ImportsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "OperationResult",
+            '200': "List[ModelImport]",
+            '4XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -744,9 +736,12 @@ class ImportsApi:
 
 
     @validate_call
-    def imports_post_without_preload_content(
+    def list_imports_without_preload_content(
         self,
-        new_import_input: NewImportInput,
+        app_instance_id: Optional[StrictInt] = None,
+        app_service_id: Optional[StrictInt] = None,
+        database_id: Optional[StrictInt] = None,
+        database_db_id: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -760,11 +755,17 @@ class ImportsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Create import
+        """List imports
 
 
-        :param new_import_input: (required)
-        :type new_import_input: NewImportInput
+        :param app_instance_id:
+        :type app_instance_id: int
+        :param app_service_id:
+        :type app_service_id: int
+        :param database_id:
+        :type database_id: int
+        :param database_db_id:
+        :type database_db_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -787,8 +788,11 @@ class ImportsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._imports_post_serialize(
-            new_import_input=new_import_input,
+        _param = self._list_imports_serialize(
+            app_instance_id=app_instance_id,
+            app_service_id=app_service_id,
+            database_id=database_id,
+            database_db_id=database_db_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -796,7 +800,8 @@ class ImportsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "OperationResult",
+            '200': "List[ModelImport]",
+            '4XX': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -805,9 +810,12 @@ class ImportsApi:
         return response_data.response
 
 
-    def _imports_post_serialize(
+    def _list_imports_serialize(
         self,
-        new_import_input,
+        app_instance_id,
+        app_service_id,
+        database_id,
+        database_db_id,
         _request_auth,
         _content_type,
         _headers,
@@ -830,11 +838,25 @@ class ImportsApi:
 
         # process the path parameters
         # process the query parameters
+        if app_instance_id is not None:
+            
+            _query_params.append(('appInstanceId', app_instance_id))
+            
+        if app_service_id is not None:
+            
+            _query_params.append(('appServiceId', app_service_id))
+            
+        if database_id is not None:
+            
+            _query_params.append(('databaseId', database_id))
+            
+        if database_db_id is not None:
+            
+            _query_params.append(('databaseDbId', database_db_id))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if new_import_input is not None:
-            _body_params = new_import_input
 
 
         # set the HTTP header `Accept`
@@ -845,19 +867,6 @@ class ImportsApi:
                 ]
             )
 
-        # set the HTTP header `Content-Type`
-        if _content_type:
-            _header_params['Content-Type'] = _content_type
-        else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
-            )
-            if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
 
         # authentication setting
         _auth_settings: List[str] = [
@@ -866,7 +875,7 @@ class ImportsApi:
         ]
 
         return self.api_client.param_serialize(
-            method='POST',
+            method='GET',
             resource_path='/imports',
             path_params=_path_params,
             query_params=_query_params,

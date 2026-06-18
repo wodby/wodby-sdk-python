@@ -4,17 +4,17 @@ All URIs are relative to */v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**app_routes_get**](AppRoutesApi.md#app_routes_get) | **GET** /app-routes | List app routes
-[**app_routes_id_delete**](AppRoutesApi.md#app_routes_id_delete) | **DELETE** /app-routes/{id} | Delete app route
-[**app_routes_id_get**](AppRoutesApi.md#app_routes_id_get) | **GET** /app-routes/{id} | Get app route
-[**app_routes_id_put**](AppRoutesApi.md#app_routes_id_put) | **PUT** /app-routes/{id} | Update app route
-[**app_routes_post**](AppRoutesApi.md#app_routes_post) | **POST** /app-routes | Create app route
+[**create_app_route**](AppRoutesApi.md#create_app_route) | **POST** /app-routes | Create app route
+[**delete_app_route**](AppRoutesApi.md#delete_app_route) | **DELETE** /app-routes/{id} | Delete app route
+[**get_app_route**](AppRoutesApi.md#get_app_route) | **GET** /app-routes/{id} | Get app route
+[**list_app_routes**](AppRoutesApi.md#list_app_routes) | **GET** /app-routes | List app routes
+[**update_app_route**](AppRoutesApi.md#update_app_route) | **PUT** /app-routes/{id} | Update app route
 
 
-# **app_routes_get**
-> List[AppRoute] app_routes_get(app_instance_id)
+# **create_app_route**
+> AppRoute create_app_route(new_app_route_input)
 
-List app routes
+Create app route
 
 ### Example
 
@@ -24,6 +24,7 @@ List app routes
 ```python
 import wodby
 from wodby.models.app_route import AppRoute
+from wodby.models.new_app_route_input import NewAppRouteInput
 from wodby.rest import ApiException
 from pprint import pprint
 
@@ -54,15 +55,15 @@ configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
 with wodby.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = wodby.AppRoutesApi(api_client)
-    app_instance_id = 56 # int | 
+    new_app_route_input = wodby.NewAppRouteInput() # NewAppRouteInput | 
 
     try:
-        # List app routes
-        api_response = api_instance.app_routes_get(app_instance_id)
-        print("The response of AppRoutesApi->app_routes_get:\n")
+        # Create app route
+        api_response = api_instance.create_app_route(new_app_route_input)
+        print("The response of AppRoutesApi->create_app_route:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling AppRoutesApi->app_routes_get: %s\n" % e)
+        print("Exception when calling AppRoutesApi->create_app_route: %s\n" % e)
 ```
 
 
@@ -72,11 +73,11 @@ with wodby.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **app_instance_id** | **int**|  | 
+ **new_app_route_input** | [**NewAppRouteInput**](NewAppRouteInput.md)|  | 
 
 ### Return type
 
-[**List[AppRoute]**](AppRoute.md)
+[**AppRoute**](AppRoute.md)
 
 ### Authorization
 
@@ -84,19 +85,21 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | List of app routes |  -  |
+**201** | Created app route |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **app_routes_id_delete**
-> OperationResult app_routes_id_delete(id)
+# **delete_app_route**
+> OperationResult delete_app_route(id)
 
 Delete app route
 
@@ -142,11 +145,11 @@ with wodby.ApiClient(configuration) as api_client:
 
     try:
         # Delete app route
-        api_response = api_instance.app_routes_id_delete(id)
-        print("The response of AppRoutesApi->app_routes_id_delete:\n")
+        api_response = api_instance.delete_app_route(id)
+        print("The response of AppRoutesApi->delete_app_route:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling AppRoutesApi->app_routes_id_delete: %s\n" % e)
+        print("Exception when calling AppRoutesApi->delete_app_route: %s\n" % e)
 ```
 
 
@@ -176,11 +179,13 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Delete result |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **app_routes_id_get**
-> AppRoute app_routes_id_get(id)
+# **get_app_route**
+> AppRoute get_app_route(id)
 
 Get app route
 
@@ -226,11 +231,11 @@ with wodby.ApiClient(configuration) as api_client:
 
     try:
         # Get app route
-        api_response = api_instance.app_routes_id_get(id)
-        print("The response of AppRoutesApi->app_routes_id_get:\n")
+        api_response = api_instance.get_app_route(id)
+        print("The response of AppRoutesApi->get_app_route:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling AppRoutesApi->app_routes_id_get: %s\n" % e)
+        print("Exception when calling AppRoutesApi->get_app_route: %s\n" % e)
 ```
 
 
@@ -260,11 +265,99 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | App route |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **app_routes_id_put**
-> AppRoute app_routes_id_put(id, update_app_route_input)
+# **list_app_routes**
+> List[AppRoute] list_app_routes(app_instance_id)
+
+List app routes
+
+### Example
+
+* Api Key Authentication (accessTokenHeader):
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.app_route import AppRoute
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: accessTokenHeader
+configuration.api_key['accessTokenHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['accessTokenHeader'] = 'Bearer'
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppRoutesApi(api_client)
+    app_instance_id = 56 # int | 
+
+    try:
+        # List app routes
+        api_response = api_instance.list_app_routes(app_instance_id)
+        print("The response of AppRoutesApi->list_app_routes:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppRoutesApi->list_app_routes: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **app_instance_id** | **int**|  | 
+
+### Return type
+
+[**List[AppRoute]**](AppRoute.md)
+
+### Authorization
+
+[accessTokenHeader](../README.md#accessTokenHeader), [apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | List of app routes |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_app_route**
+> AppRoute update_app_route(id, update_app_route_input)
 
 Update app route
 
@@ -312,11 +405,11 @@ with wodby.ApiClient(configuration) as api_client:
 
     try:
         # Update app route
-        api_response = api_instance.app_routes_id_put(id, update_app_route_input)
-        print("The response of AppRoutesApi->app_routes_id_put:\n")
+        api_response = api_instance.update_app_route(id, update_app_route_input)
+        print("The response of AppRoutesApi->update_app_route:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling AppRoutesApi->app_routes_id_put: %s\n" % e)
+        print("Exception when calling AppRoutesApi->update_app_route: %s\n" % e)
 ```
 
 
@@ -347,91 +440,8 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Updated app route |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **app_routes_post**
-> AppRoute app_routes_post(new_app_route_input)
-
-Create app route
-
-### Example
-
-* Api Key Authentication (accessTokenHeader):
-* Api Key Authentication (apiKeyHeader):
-
-```python
-import wodby
-from wodby.models.app_route import AppRoute
-from wodby.models.new_app_route_input import NewAppRouteInput
-from wodby.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to /v1
-# See configuration.py for a list of all supported configuration parameters.
-configuration = wodby.Configuration(
-    host = "/v1"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: accessTokenHeader
-configuration.api_key['accessTokenHeader'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['accessTokenHeader'] = 'Bearer'
-
-# Configure API key authorization: apiKeyHeader
-configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with wodby.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = wodby.AppRoutesApi(api_client)
-    new_app_route_input = wodby.NewAppRouteInput() # NewAppRouteInput | 
-
-    try:
-        # Create app route
-        api_response = api_instance.app_routes_post(new_app_route_input)
-        print("The response of AppRoutesApi->app_routes_post:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling AppRoutesApi->app_routes_post: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **new_app_route_input** | [**NewAppRouteInput**](NewAppRouteInput.md)|  | 
-
-### Return type
-
-[**AppRoute**](AppRoute.md)
-
-### Authorization
-
-[accessTokenHeader](../README.md#accessTokenHeader), [apiKeyHeader](../README.md#apiKeyHeader)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**201** | Created app route |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

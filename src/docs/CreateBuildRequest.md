@@ -1,13 +1,12 @@
 # CreateBuildRequest
 
-Specify either appServiceId for one service or appServiceIds for a multi-service build.
+App service IDs to build.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**app_service_id** | **int** |  | [optional] 
-**app_service_ids** | **List[int]** |  | [optional] 
+**app_service_ids** | **List[int]** |  | 
 
 ## Example
 

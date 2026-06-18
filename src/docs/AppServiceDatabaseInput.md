@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **database_id** | **int** |  | 
-**database_dbid** | **int** |  | [optional] 
+**database_db_id** | **int** |  | [optional] 
 
 ## Example
 

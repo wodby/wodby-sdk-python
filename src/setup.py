@@ -1,7 +1,7 @@
 # coding: utf-8
 
 """
-    Wodby 2.0 Public API
+    Wodby 2 Public API
 
     Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface. 
 
@@ -35,14 +35,15 @@ setup(
     maintainer_email="hello@wodby.com",
     name=NAME,
     version=VERSION,
-    description="Wodby 2.0 Public API",
+    description="Wodby 2 Public API",
     author="OpenAPI Generator community",
     author_email="team@openapitools.org",
     url="https://github.com/wodby/wodby-sdk-python",
-    keywords=["OpenAPI", "OpenAPI-Generator", "Wodby 2.0 Public API"],
+    keywords=["OpenAPI", "OpenAPI-Generator", "Wodby 2 Public API"],
     install_requires=REQUIRES,
     packages=find_packages(exclude=["test", "tests"]),
     include_package_data=True,
+    license="Proprietary",
     long_description_content_type='text/markdown',
     long_description="""\
     Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface. 
