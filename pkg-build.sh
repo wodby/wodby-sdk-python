@@ -56,6 +56,11 @@ EOF
         s/python-dateutil = ">= 2\.8\.2"/python-dateutil = ">= 2.9.0.post0"/g;
         s/pydantic = ">= 2"/pydantic = ">= 2.13.4"/g;
         s/typing-extensions = ">= 4\.7\.1"/typing-extensions = ">= 4.15.0"/g;
+        s/description = ".*?"/description = "Python SDK for the Wodby 2.0 Public API"/g;
+        s#repository = ".*?"#repository = "https://github.com/wodby/wodby-sdk-python"#g;
+        s/keywords = \[.*?\]/keywords = ["wodby", "sdk", "api", "cloud", "python"]/g;
+        s/description=".*?"/description="Python SDK for the Wodby 2.0 Public API"/g;
+        s/keywords=\[.*?\]/keywords=["wodby", "sdk", "api", "cloud", "python"]/g;
     ' "${dir}"/setup.py "${dir}"/pyproject.toml
 }
 

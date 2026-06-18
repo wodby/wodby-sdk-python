@@ -2,6 +2,11 @@
 
 Python client for the Wodby 2.0 Public API.
 
+## Package
+
+- [PyPI: `wodby`](https://pypi.org/project/wodby/)
+- Python package: `wodby`
+
 ## Documentation
 
 - [API reference](https://wodby.com/docs/2.0/api/)
