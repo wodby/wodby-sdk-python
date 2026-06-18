@@ -33,12 +33,6 @@ jobs:
           python -m pip install ./src
           python -m compileall -q src/wodby
 
-      - name: Publish package to PyPI
-        env:
-          PYPI_USERNAME: ${{ secrets.PYPI_USERNAME }}
-          PYPI_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
-        run: make release
-
       - name: Create GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
@@ -60,3 +54,15 @@ jobs:
               --title "${GITHUB_REF_NAME}" \
               --notes-file release-notes.md
           fi
+
+      - name: Publish package to PyPI
+        env:
+          PYPI_USERNAME: ${{ secrets.PYPI_USERNAME }}
+          PYPI_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+        run: |
+          if [[ -z "${PYPI_USERNAME}" || -z "${PYPI_PASSWORD}" ]]; then
+            echo "Skipping PyPI publish because PYPI_USERNAME or PYPI_PASSWORD is not configured."
+            exit 0
+          fi
+
+          make release
