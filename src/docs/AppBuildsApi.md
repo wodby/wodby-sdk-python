@@ -20,7 +20,6 @@ Create build
 
 ### Example
 
-* Api Key Authentication (accessTokenHeader):
 * Api Key Authentication (apiKeyHeader):
 
 ```python
@@ -40,12 +39,6 @@ configuration = wodby.Configuration(
 # in accordance with the API server security policy.
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
-
-# Configure API key authorization: accessTokenHeader
-configuration.api_key['accessTokenHeader'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['accessTokenHeader'] = 'Bearer'
 
 # Configure API key authorization: apiKeyHeader
 configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
@@ -83,7 +76,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[accessTokenHeader](../README.md#accessTokenHeader), [apiKeyHeader](../README.md#apiKeyHeader)
+[apiKeyHeader](../README.md#apiKeyHeader)
 
 ### HTTP request headers
 
@@ -107,7 +100,6 @@ Create build from CI
 
 ### Example
 
-* Api Key Authentication (accessTokenHeader):
 * Api Key Authentication (apiKeyHeader):
 
 ```python
@@ -127,12 +119,6 @@ configuration = wodby.Configuration(
 # in accordance with the API server security policy.
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
-
-# Configure API key authorization: accessTokenHeader
-configuration.api_key['accessTokenHeader'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['accessTokenHeader'] = 'Bearer'
 
 # Configure API key authorization: apiKeyHeader
 configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
@@ -170,7 +156,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[accessTokenHeader](../README.md#accessTokenHeader), [apiKeyHeader](../README.md#apiKeyHeader)
+[apiKeyHeader](../README.md#apiKeyHeader)
 
 ### HTTP request headers
 
@@ -194,7 +180,6 @@ Deploy build
 
 ### Example
 
-* Api Key Authentication (accessTokenHeader):
 * Api Key Authentication (apiKeyHeader):
 
 ```python
@@ -213,12 +198,6 @@ configuration = wodby.Configuration(
 # in accordance with the API server security policy.
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
-
-# Configure API key authorization: accessTokenHeader
-configuration.api_key['accessTokenHeader'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['accessTokenHeader'] = 'Bearer'
 
 # Configure API key authorization: apiKeyHeader
 configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
@@ -256,7 +235,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[accessTokenHeader](../README.md#accessTokenHeader), [apiKeyHeader](../README.md#apiKeyHeader)
+[apiKeyHeader](../README.md#apiKeyHeader)
 
 ### HTTP request headers
 
@@ -280,8 +259,8 @@ Get build
 
 ### Example
 
-* Api Key Authentication (accessTokenHeader):
 * Api Key Authentication (apiKeyHeader):
+* Api Key Authentication (ciAccessTokenHeader):
 
 ```python
 import wodby
@@ -300,17 +279,17 @@ configuration = wodby.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: accessTokenHeader
-configuration.api_key['accessTokenHeader'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['accessTokenHeader'] = 'Bearer'
-
 # Configure API key authorization: apiKeyHeader
 configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Configure API key authorization: ciAccessTokenHeader
+configuration.api_key['ciAccessTokenHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ciAccessTokenHeader'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 with wodby.ApiClient(configuration) as api_client:
@@ -342,7 +321,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[accessTokenHeader](../README.md#accessTokenHeader), [apiKeyHeader](../README.md#apiKeyHeader)
+[apiKeyHeader](../README.md#apiKeyHeader), [ciAccessTokenHeader](../README.md#ciAccessTokenHeader)
 
 ### HTTP request headers
 
@@ -366,8 +345,8 @@ Get Docker registry credentials for build
 
 ### Example
 
-* Api Key Authentication (accessTokenHeader):
 * Api Key Authentication (apiKeyHeader):
+* Api Key Authentication (ciAccessTokenHeader):
 
 ```python
 import wodby
@@ -386,17 +365,17 @@ configuration = wodby.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: accessTokenHeader
-configuration.api_key['accessTokenHeader'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['accessTokenHeader'] = 'Bearer'
-
 # Configure API key authorization: apiKeyHeader
 configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Configure API key authorization: ciAccessTokenHeader
+configuration.api_key['ciAccessTokenHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ciAccessTokenHeader'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 with wodby.ApiClient(configuration) as api_client:
@@ -428,7 +407,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[accessTokenHeader](../README.md#accessTokenHeader), [apiKeyHeader](../README.md#apiKeyHeader)
+[apiKeyHeader](../README.md#apiKeyHeader), [ciAccessTokenHeader](../README.md#ciAccessTokenHeader)
 
 ### HTTP request headers
 
@@ -452,7 +431,6 @@ List app builds
 
 ### Example
 
-* Api Key Authentication (accessTokenHeader):
 * Api Key Authentication (apiKeyHeader):
 
 ```python
@@ -471,12 +449,6 @@ configuration = wodby.Configuration(
 # in accordance with the API server security policy.
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
-
-# Configure API key authorization: accessTokenHeader
-configuration.api_key['accessTokenHeader'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['accessTokenHeader'] = 'Bearer'
 
 # Configure API key authorization: apiKeyHeader
 configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
@@ -518,7 +490,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[accessTokenHeader](../README.md#accessTokenHeader), [apiKeyHeader](../README.md#apiKeyHeader)
+[apiKeyHeader](../README.md#apiKeyHeader)
 
 ### HTTP request headers
 
@@ -542,7 +514,6 @@ Void build images
 
 ### Example
 
-* Api Key Authentication (accessTokenHeader):
 * Api Key Authentication (apiKeyHeader):
 
 ```python
@@ -561,12 +532,6 @@ configuration = wodby.Configuration(
 # in accordance with the API server security policy.
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
-
-# Configure API key authorization: accessTokenHeader
-configuration.api_key['accessTokenHeader'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['accessTokenHeader'] = 'Bearer'
 
 # Configure API key authorization: apiKeyHeader
 configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
@@ -604,7 +569,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[accessTokenHeader](../README.md#accessTokenHeader), [apiKeyHeader](../README.md#apiKeyHeader)
+[apiKeyHeader](../README.md#apiKeyHeader)
 
 ### HTTP request headers
 

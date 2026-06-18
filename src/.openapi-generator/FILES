@@ -31,7 +31,6 @@ docs/ClustersApi.md
 docs/CreateBuildRequest.md
 docs/CreateDeploymentRequest.md
 docs/CreateEnvRequest.md
-docs/CreateOrgRequest.md
 docs/Database.md
 docs/DatabaseType.md
 docs/DatabaseVersion.md
@@ -159,7 +158,6 @@ wodby/models/cluster.py
 wodby/models/create_build_request.py
 wodby/models/create_deployment_request.py
 wodby/models/create_env_request.py
-wodby/models/create_org_request.py
 wodby/models/database.py
 wodby/models/database_type.py
 wodby/models/database_version.py

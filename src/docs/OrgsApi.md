@@ -4,99 +4,11 @@ All URIs are relative to */v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_org**](OrgsApi.md#create_org) | **POST** /orgs | Create org
 [**delete_org**](OrgsApi.md#delete_org) | **DELETE** /orgs/{id} | Delete org
 [**get_org**](OrgsApi.md#get_org) | **GET** /orgs/{id} | Get org
 [**list_orgs**](OrgsApi.md#list_orgs) | **GET** /orgs | List orgs
 [**update_org**](OrgsApi.md#update_org) | **PUT** /orgs/{id} | Update org
 
-
-# **create_org**
-> Org create_org(create_org_request)
-
-Create org
-
-### Example
-
-* Api Key Authentication (accessTokenHeader):
-* Api Key Authentication (apiKeyHeader):
-
-```python
-import wodby
-from wodby.models.create_org_request import CreateOrgRequest
-from wodby.models.org import Org
-from wodby.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to /v1
-# See configuration.py for a list of all supported configuration parameters.
-configuration = wodby.Configuration(
-    host = "/v1"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: accessTokenHeader
-configuration.api_key['accessTokenHeader'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['accessTokenHeader'] = 'Bearer'
-
-# Configure API key authorization: apiKeyHeader
-configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with wodby.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = wodby.OrgsApi(api_client)
-    create_org_request = wodby.CreateOrgRequest() # CreateOrgRequest | 
-
-    try:
-        # Create org
-        api_response = api_instance.create_org(create_org_request)
-        print("The response of OrgsApi->create_org:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling OrgsApi->create_org: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **create_org_request** | [**CreateOrgRequest**](CreateOrgRequest.md)|  | 
-
-### Return type
-
-[**Org**](Org.md)
-
-### Authorization
-
-[accessTokenHeader](../README.md#accessTokenHeader), [apiKeyHeader](../README.md#apiKeyHeader)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**201** | Created org |  -  |
-**4XX** | Error response |  -  |
-**0** | Error response |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_org**
 > OperationResult delete_org(id)
@@ -105,7 +17,6 @@ Delete org
 
 ### Example
 
-* Api Key Authentication (accessTokenHeader):
 * Api Key Authentication (apiKeyHeader):
 
 ```python
@@ -124,12 +35,6 @@ configuration = wodby.Configuration(
 # in accordance with the API server security policy.
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
-
-# Configure API key authorization: accessTokenHeader
-configuration.api_key['accessTokenHeader'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['accessTokenHeader'] = 'Bearer'
 
 # Configure API key authorization: apiKeyHeader
 configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
@@ -167,7 +72,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[accessTokenHeader](../README.md#accessTokenHeader), [apiKeyHeader](../README.md#apiKeyHeader)
+[apiKeyHeader](../README.md#apiKeyHeader)
 
 ### HTTP request headers
 
@@ -191,7 +96,6 @@ Get org
 
 ### Example
 
-* Api Key Authentication (accessTokenHeader):
 * Api Key Authentication (apiKeyHeader):
 
 ```python
@@ -210,12 +114,6 @@ configuration = wodby.Configuration(
 # in accordance with the API server security policy.
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
-
-# Configure API key authorization: accessTokenHeader
-configuration.api_key['accessTokenHeader'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['accessTokenHeader'] = 'Bearer'
 
 # Configure API key authorization: apiKeyHeader
 configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
@@ -253,7 +151,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[accessTokenHeader](../README.md#accessTokenHeader), [apiKeyHeader](../README.md#apiKeyHeader)
+[apiKeyHeader](../README.md#apiKeyHeader)
 
 ### HTTP request headers
 
@@ -277,7 +175,6 @@ List orgs
 
 ### Example
 
-* Api Key Authentication (accessTokenHeader):
 * Api Key Authentication (apiKeyHeader):
 
 ```python
@@ -296,12 +193,6 @@ configuration = wodby.Configuration(
 # in accordance with the API server security policy.
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
-
-# Configure API key authorization: accessTokenHeader
-configuration.api_key['accessTokenHeader'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['accessTokenHeader'] = 'Bearer'
 
 # Configure API key authorization: apiKeyHeader
 configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
@@ -335,7 +226,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[accessTokenHeader](../README.md#accessTokenHeader), [apiKeyHeader](../README.md#apiKeyHeader)
+[apiKeyHeader](../README.md#apiKeyHeader)
 
 ### HTTP request headers
 
@@ -359,7 +250,6 @@ Update org
 
 ### Example
 
-* Api Key Authentication (accessTokenHeader):
 * Api Key Authentication (apiKeyHeader):
 
 ```python
@@ -379,12 +269,6 @@ configuration = wodby.Configuration(
 # in accordance with the API server security policy.
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
-
-# Configure API key authorization: accessTokenHeader
-configuration.api_key['accessTokenHeader'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['accessTokenHeader'] = 'Bearer'
 
 # Configure API key authorization: apiKeyHeader
 configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
@@ -424,7 +308,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[accessTokenHeader](../README.md#accessTokenHeader), [apiKeyHeader](../README.md#apiKeyHeader)
+[apiKeyHeader](../README.md#apiKeyHeader)
 
 ### HTTP request headers
 

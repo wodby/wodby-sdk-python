@@ -19,7 +19,6 @@ Create app instance
 
 ### Example
 
-* Api Key Authentication (accessTokenHeader):
 * Api Key Authentication (apiKeyHeader):
 
 ```python
@@ -39,12 +38,6 @@ configuration = wodby.Configuration(
 # in accordance with the API server security policy.
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
-
-# Configure API key authorization: accessTokenHeader
-configuration.api_key['accessTokenHeader'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['accessTokenHeader'] = 'Bearer'
 
 # Configure API key authorization: apiKeyHeader
 configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
@@ -82,7 +75,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[accessTokenHeader](../README.md#accessTokenHeader), [apiKeyHeader](../README.md#apiKeyHeader)
+[apiKeyHeader](../README.md#apiKeyHeader)
 
 ### HTTP request headers
 
@@ -106,7 +99,6 @@ Delete app instance
 
 ### Example
 
-* Api Key Authentication (accessTokenHeader):
 * Api Key Authentication (apiKeyHeader):
 
 ```python
@@ -125,12 +117,6 @@ configuration = wodby.Configuration(
 # in accordance with the API server security policy.
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
-
-# Configure API key authorization: accessTokenHeader
-configuration.api_key['accessTokenHeader'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['accessTokenHeader'] = 'Bearer'
 
 # Configure API key authorization: apiKeyHeader
 configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
@@ -170,7 +156,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[accessTokenHeader](../README.md#accessTokenHeader), [apiKeyHeader](../README.md#apiKeyHeader)
+[apiKeyHeader](../README.md#apiKeyHeader)
 
 ### HTTP request headers
 
@@ -194,7 +180,6 @@ Get app instance
 
 ### Example
 
-* Api Key Authentication (accessTokenHeader):
 * Api Key Authentication (apiKeyHeader):
 
 ```python
@@ -213,12 +198,6 @@ configuration = wodby.Configuration(
 # in accordance with the API server security policy.
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
-
-# Configure API key authorization: accessTokenHeader
-configuration.api_key['accessTokenHeader'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['accessTokenHeader'] = 'Bearer'
 
 # Configure API key authorization: apiKeyHeader
 configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
@@ -256,7 +235,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[accessTokenHeader](../README.md#accessTokenHeader), [apiKeyHeader](../README.md#apiKeyHeader)
+[apiKeyHeader](../README.md#apiKeyHeader)
 
 ### HTTP request headers
 
@@ -274,13 +253,12 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_app_instance_by_name**
-> AppInstance get_app_instance_by_name(app_name, instance_name, org_id)
+> AppInstance get_app_instance_by_name(app_name, instance_name, org_id=org_id)
 
 Get app instance by app and instance name
 
 ### Example
 
-* Api Key Authentication (accessTokenHeader):
 * Api Key Authentication (apiKeyHeader):
 
 ```python
@@ -300,12 +278,6 @@ configuration = wodby.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: accessTokenHeader
-configuration.api_key['accessTokenHeader'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['accessTokenHeader'] = 'Bearer'
-
 # Configure API key authorization: apiKeyHeader
 configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
 
@@ -318,11 +290,11 @@ with wodby.ApiClient(configuration) as api_client:
     api_instance = wodby.AppInstancesApi(api_client)
     app_name = 'app_name_example' # str | 
     instance_name = 'instance_name_example' # str | 
-    org_id = 56 # int | 
+    org_id = 56 # int | Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization. (optional)
 
     try:
         # Get app instance by app and instance name
-        api_response = api_instance.get_app_instance_by_name(app_name, instance_name, org_id)
+        api_response = api_instance.get_app_instance_by_name(app_name, instance_name, org_id=org_id)
         print("The response of AppInstancesApi->get_app_instance_by_name:\n")
         pprint(api_response)
     except Exception as e:
@@ -338,7 +310,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **app_name** | **str**|  | 
  **instance_name** | **str**|  | 
- **org_id** | **int**|  | 
+ **org_id** | **int**| Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. | [optional] 
 
 ### Return type
 
@@ -346,7 +318,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[accessTokenHeader](../README.md#accessTokenHeader), [apiKeyHeader](../README.md#apiKeyHeader)
+[apiKeyHeader](../README.md#apiKeyHeader)
 
 ### HTTP request headers
 
@@ -364,13 +336,12 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_app_instances**
-> List[AppInstance] list_app_instances(org_id, project_ids=project_ids, app_id=app_id, cluster_id=cluster_id, cluster_app=cluster_app)
+> List[AppInstance] list_app_instances(org_id=org_id, project_ids=project_ids, app_id=app_id, cluster_id=cluster_id, cluster_app=cluster_app)
 
 List app instances
 
 ### Example
 
-* Api Key Authentication (accessTokenHeader):
 * Api Key Authentication (apiKeyHeader):
 
 ```python
@@ -390,12 +361,6 @@ configuration = wodby.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: accessTokenHeader
-configuration.api_key['accessTokenHeader'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['accessTokenHeader'] = 'Bearer'
-
 # Configure API key authorization: apiKeyHeader
 configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
 
@@ -406,7 +371,7 @@ configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
 with wodby.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = wodby.AppInstancesApi(api_client)
-    org_id = 56 # int | 
+    org_id = 56 # int | Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization. (optional)
     project_ids = 'project_ids_example' # str | Comma-separated project ids (optional)
     app_id = 56 # int |  (optional)
     cluster_id = 56 # int |  (optional)
@@ -414,7 +379,7 @@ with wodby.ApiClient(configuration) as api_client:
 
     try:
         # List app instances
-        api_response = api_instance.list_app_instances(org_id, project_ids=project_ids, app_id=app_id, cluster_id=cluster_id, cluster_app=cluster_app)
+        api_response = api_instance.list_app_instances(org_id=org_id, project_ids=project_ids, app_id=app_id, cluster_id=cluster_id, cluster_app=cluster_app)
         print("The response of AppInstancesApi->list_app_instances:\n")
         pprint(api_response)
     except Exception as e:
@@ -428,7 +393,7 @@ with wodby.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **org_id** | **int**|  | 
+ **org_id** | **int**| Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. | [optional] 
  **project_ids** | **str**| Comma-separated project ids | [optional] 
  **app_id** | **int**|  | [optional] 
  **cluster_id** | **int**|  | [optional] 
@@ -440,7 +405,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[accessTokenHeader](../README.md#accessTokenHeader), [apiKeyHeader](../README.md#apiKeyHeader)
+[apiKeyHeader](../README.md#apiKeyHeader)
 
 ### HTTP request headers
 
@@ -464,7 +429,6 @@ Update app instance
 
 ### Example
 
-* Api Key Authentication (accessTokenHeader):
 * Api Key Authentication (apiKeyHeader):
 
 ```python
@@ -484,12 +448,6 @@ configuration = wodby.Configuration(
 # in accordance with the API server security policy.
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
-
-# Configure API key authorization: accessTokenHeader
-configuration.api_key['accessTokenHeader'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['accessTokenHeader'] = 'Bearer'
 
 # Configure API key authorization: apiKeyHeader
 configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
@@ -529,7 +487,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[accessTokenHeader](../README.md#accessTokenHeader), [apiKeyHeader](../README.md#apiKeyHeader)
+[apiKeyHeader](../README.md#apiKeyHeader)
 
 ### HTTP request headers
 

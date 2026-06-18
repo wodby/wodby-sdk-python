@@ -27,7 +27,7 @@ class NewIntegrationInput(BaseModel):
     """
     NewIntegrationInput
     """ # noqa: E501
-    org_id: StrictInt = Field(alias="orgId")
+    org_id: Optional[StrictInt] = Field(default=None, description="Optional for API-key requests; defaults to the API key's organization.", alias="orgId")
     provider_id: StrictInt = Field(alias="providerId")
     name: StrictStr
     title: StrictStr

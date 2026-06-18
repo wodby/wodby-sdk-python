@@ -298,7 +298,6 @@ class IntegrationsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -560,7 +559,6 @@ class IntegrationsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -822,7 +820,6 @@ class IntegrationsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -848,7 +845,7 @@ class IntegrationsApi:
     def get_integration_by_name(
         self,
         name: StrictStr,
-        org_id: StrictInt,
+        org_id: Annotated[Optional[StrictInt], Field(description="Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -867,7 +864,7 @@ class IntegrationsApi:
 
         :param name: (required)
         :type name: str
-        :param org_id: (required)
+        :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -919,7 +916,7 @@ class IntegrationsApi:
     def get_integration_by_name_with_http_info(
         self,
         name: StrictStr,
-        org_id: StrictInt,
+        org_id: Annotated[Optional[StrictInt], Field(description="Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -938,7 +935,7 @@ class IntegrationsApi:
 
         :param name: (required)
         :type name: str
-        :param org_id: (required)
+        :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -990,7 +987,7 @@ class IntegrationsApi:
     def get_integration_by_name_without_preload_content(
         self,
         name: StrictStr,
-        org_id: StrictInt,
+        org_id: Annotated[Optional[StrictInt], Field(description="Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1009,7 +1006,7 @@ class IntegrationsApi:
 
         :param name: (required)
         :type name: str
-        :param org_id: (required)
+        :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1101,7 +1098,6 @@ class IntegrationsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -1363,7 +1359,6 @@ class IntegrationsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -1642,7 +1637,6 @@ class IntegrationsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -1904,7 +1898,6 @@ class IntegrationsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -2183,7 +2176,6 @@ class IntegrationsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -2445,7 +2437,6 @@ class IntegrationsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -2724,7 +2715,6 @@ class IntegrationsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -3003,7 +2993,6 @@ class IntegrationsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -3265,7 +3254,6 @@ class IntegrationsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -3527,7 +3515,6 @@ class IntegrationsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -3789,7 +3776,6 @@ class IntegrationsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -4051,7 +4037,6 @@ class IntegrationsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -4076,7 +4061,7 @@ class IntegrationsApi:
     @validate_call
     def list_integrations(
         self,
-        org_id: StrictInt,
+        org_id: Annotated[Optional[StrictInt], Field(description="Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.")] = None,
         project_ids: Annotated[Optional[StrictStr], Field(description="Comma-separated project ids")] = None,
         labels: Annotated[Optional[StrictStr], Field(description="Comma-separated labels")] = None,
         _request_timeout: Union[
@@ -4095,7 +4080,7 @@ class IntegrationsApi:
         """List integrations
 
 
-        :param org_id: (required)
+        :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
         :param project_ids: Comma-separated project ids
         :type project_ids: str
@@ -4151,7 +4136,7 @@ class IntegrationsApi:
     @validate_call
     def list_integrations_with_http_info(
         self,
-        org_id: StrictInt,
+        org_id: Annotated[Optional[StrictInt], Field(description="Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.")] = None,
         project_ids: Annotated[Optional[StrictStr], Field(description="Comma-separated project ids")] = None,
         labels: Annotated[Optional[StrictStr], Field(description="Comma-separated labels")] = None,
         _request_timeout: Union[
@@ -4170,7 +4155,7 @@ class IntegrationsApi:
         """List integrations
 
 
-        :param org_id: (required)
+        :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
         :param project_ids: Comma-separated project ids
         :type project_ids: str
@@ -4226,7 +4211,7 @@ class IntegrationsApi:
     @validate_call
     def list_integrations_without_preload_content(
         self,
-        org_id: StrictInt,
+        org_id: Annotated[Optional[StrictInt], Field(description="Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.")] = None,
         project_ids: Annotated[Optional[StrictStr], Field(description="Comma-separated project ids")] = None,
         labels: Annotated[Optional[StrictStr], Field(description="Comma-separated labels")] = None,
         _request_timeout: Union[
@@ -4245,7 +4230,7 @@ class IntegrationsApi:
         """List integrations
 
 
-        :param org_id: (required)
+        :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
         :param project_ids: Comma-separated project ids
         :type project_ids: str
@@ -4349,7 +4334,6 @@ class IntegrationsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -4639,7 +4623,6 @@ class IntegrationsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 

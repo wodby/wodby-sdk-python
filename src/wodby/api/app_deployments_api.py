@@ -295,7 +295,6 @@ class AppDeploymentsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -570,8 +569,8 @@ class AppDeploymentsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
-            'apiKeyHeader'
+            'apiKeyHeader', 
+            'ciAccessTokenHeader'
         ]
 
         return self.api_client.param_serialize(
@@ -832,7 +831,6 @@ class AppDeploymentsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -1130,7 +1128,6 @@ class AppDeploymentsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -1392,7 +1389,6 @@ class AppDeploymentsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 

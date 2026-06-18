@@ -297,7 +297,6 @@ class AppBuildsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -572,7 +571,6 @@ class AppBuildsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -834,7 +832,6 @@ class AppBuildsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -1096,8 +1093,8 @@ class AppBuildsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
-            'apiKeyHeader'
+            'apiKeyHeader', 
+            'ciAccessTokenHeader'
         ]
 
         return self.api_client.param_serialize(
@@ -1358,8 +1355,8 @@ class AppBuildsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
-            'apiKeyHeader'
+            'apiKeyHeader', 
+            'ciAccessTokenHeader'
         ]
 
         return self.api_client.param_serialize(
@@ -1656,7 +1653,6 @@ class AppBuildsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -1918,7 +1914,6 @@ class AppBuildsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 

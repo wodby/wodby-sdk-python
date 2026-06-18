@@ -26,7 +26,7 @@ class NewClusterInput(BaseModel):
     """
     NewClusterInput
     """ # noqa: E501
-    org_id: StrictInt = Field(alias="orgId")
+    org_id: Optional[StrictInt] = Field(default=None, description="Optional for API-key requests; defaults to the API key's organization.", alias="orgId")
     project_id: Optional[StrictInt] = Field(default=None, alias="projectId")
     integration_id: StrictInt = Field(alias="integrationId")
     name: StrictStr

@@ -282,7 +282,6 @@ class TasksApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -544,7 +543,6 @@ class TasksApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -570,7 +568,7 @@ class TasksApi:
     def list_tasks(
         self,
         scope: Optional[StrictStr] = None,
-        org_id: Optional[StrictInt] = None,
+        org_id: Annotated[Optional[StrictInt], Field(description="Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.")] = None,
         project_ids: Annotated[Optional[StrictStr], Field(description="Comma-separated project ids")] = None,
         without_origin: Optional[StrictBool] = None,
         statuses: Annotated[Optional[StrictStr], Field(description="Comma-separated task statuses")] = None,
@@ -603,7 +601,7 @@ class TasksApi:
 
         :param scope:
         :type scope: str
-        :param org_id:
+        :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
         :param project_ids: Comma-separated project ids
         :type project_ids: str
@@ -697,7 +695,7 @@ class TasksApi:
     def list_tasks_with_http_info(
         self,
         scope: Optional[StrictStr] = None,
-        org_id: Optional[StrictInt] = None,
+        org_id: Annotated[Optional[StrictInt], Field(description="Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.")] = None,
         project_ids: Annotated[Optional[StrictStr], Field(description="Comma-separated project ids")] = None,
         without_origin: Optional[StrictBool] = None,
         statuses: Annotated[Optional[StrictStr], Field(description="Comma-separated task statuses")] = None,
@@ -730,7 +728,7 @@ class TasksApi:
 
         :param scope:
         :type scope: str
-        :param org_id:
+        :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
         :param project_ids: Comma-separated project ids
         :type project_ids: str
@@ -824,7 +822,7 @@ class TasksApi:
     def list_tasks_without_preload_content(
         self,
         scope: Optional[StrictStr] = None,
-        org_id: Optional[StrictInt] = None,
+        org_id: Annotated[Optional[StrictInt], Field(description="Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.")] = None,
         project_ids: Annotated[Optional[StrictStr], Field(description="Comma-separated project ids")] = None,
         without_origin: Optional[StrictBool] = None,
         statuses: Annotated[Optional[StrictStr], Field(description="Comma-separated task statuses")] = None,
@@ -857,7 +855,7 @@ class TasksApi:
 
         :param scope:
         :type scope: str
-        :param org_id:
+        :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
         :param project_ids: Comma-separated project ids
         :type project_ids: str
@@ -1063,7 +1061,6 @@ class TasksApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -1353,7 +1350,6 @@ class TasksApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 

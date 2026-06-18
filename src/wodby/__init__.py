@@ -71,7 +71,6 @@ from wodby.models.cluster import Cluster
 from wodby.models.create_build_request import CreateBuildRequest
 from wodby.models.create_deployment_request import CreateDeploymentRequest
 from wodby.models.create_env_request import CreateEnvRequest
-from wodby.models.create_org_request import CreateOrgRequest
 from wodby.models.database import Database
 from wodby.models.database_type import DatabaseType
 from wodby.models.database_version import DatabaseVersion

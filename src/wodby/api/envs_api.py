@@ -16,8 +16,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import StrictInt, StrictStr
-from typing import List
+from pydantic import Field, StrictInt, StrictStr
+from typing import List, Optional
+from typing_extensions import Annotated
 from wodby.models.create_env_request import CreateEnvRequest
 from wodby.models.env import Env
 from wodby.models.operation_result import OperationResult
@@ -294,7 +295,6 @@ class EnvsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -556,7 +556,6 @@ class EnvsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -818,7 +817,6 @@ class EnvsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -844,7 +842,7 @@ class EnvsApi:
     def get_env_by_name(
         self,
         name: StrictStr,
-        org_id: StrictInt,
+        org_id: Annotated[Optional[StrictInt], Field(description="Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -863,7 +861,7 @@ class EnvsApi:
 
         :param name: (required)
         :type name: str
-        :param org_id: (required)
+        :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -915,7 +913,7 @@ class EnvsApi:
     def get_env_by_name_with_http_info(
         self,
         name: StrictStr,
-        org_id: StrictInt,
+        org_id: Annotated[Optional[StrictInt], Field(description="Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -934,7 +932,7 @@ class EnvsApi:
 
         :param name: (required)
         :type name: str
-        :param org_id: (required)
+        :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -986,7 +984,7 @@ class EnvsApi:
     def get_env_by_name_without_preload_content(
         self,
         name: StrictStr,
-        org_id: StrictInt,
+        org_id: Annotated[Optional[StrictInt], Field(description="Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1005,7 +1003,7 @@ class EnvsApi:
 
         :param name: (required)
         :type name: str
-        :param org_id: (required)
+        :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1097,7 +1095,6 @@ class EnvsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -1122,7 +1119,7 @@ class EnvsApi:
     @validate_call
     def list_envs(
         self,
-        org_id: StrictInt,
+        org_id: Annotated[Optional[StrictInt], Field(description="Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1139,7 +1136,7 @@ class EnvsApi:
         """List envs
 
 
-        :param org_id: (required)
+        :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1189,7 +1186,7 @@ class EnvsApi:
     @validate_call
     def list_envs_with_http_info(
         self,
-        org_id: StrictInt,
+        org_id: Annotated[Optional[StrictInt], Field(description="Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1206,7 +1203,7 @@ class EnvsApi:
         """List envs
 
 
-        :param org_id: (required)
+        :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1256,7 +1253,7 @@ class EnvsApi:
     @validate_call
     def list_envs_without_preload_content(
         self,
-        org_id: StrictInt,
+        org_id: Annotated[Optional[StrictInt], Field(description="Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1273,7 +1270,7 @@ class EnvsApi:
         """List envs
 
 
-        :param org_id: (required)
+        :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1361,7 +1358,6 @@ class EnvsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -1651,7 +1647,6 @@ class EnvsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 

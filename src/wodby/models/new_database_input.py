@@ -26,7 +26,7 @@ class NewDatabaseInput(BaseModel):
     """
     NewDatabaseInput
     """ # noqa: E501
-    org_id: StrictInt = Field(alias="orgId")
+    org_id: Optional[StrictInt] = Field(default=None, description="Optional for API-key requests; defaults to the API key's organization.", alias="orgId")
     project_id: Optional[StrictInt] = Field(default=None, alias="projectId")
     env_id: StrictInt = Field(alias="envId")
     name: StrictStr

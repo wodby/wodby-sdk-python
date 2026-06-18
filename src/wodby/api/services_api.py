@@ -281,7 +281,6 @@ class ServicesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -560,7 +559,6 @@ class ServicesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -822,7 +820,6 @@ class ServicesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -1084,7 +1081,6 @@ class ServicesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -1109,7 +1105,7 @@ class ServicesApi:
     @validate_call
     def list_services(
         self,
-        org_id: StrictInt,
+        org_id: Annotated[Optional[StrictInt], Field(description="Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.")] = None,
         project_ids: Annotated[Optional[StrictStr], Field(description="Comma-separated project ids")] = None,
         search: Optional[StrictStr] = None,
         page: Annotated[Optional[Annotated[int, Field(strict=True, ge=1)]], Field(description="Page number, defaults to 1")] = None,
@@ -1130,7 +1126,7 @@ class ServicesApi:
         """List services
 
 
-        :param org_id: (required)
+        :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
         :param project_ids: Comma-separated project ids
         :type project_ids: str
@@ -1192,7 +1188,7 @@ class ServicesApi:
     @validate_call
     def list_services_with_http_info(
         self,
-        org_id: StrictInt,
+        org_id: Annotated[Optional[StrictInt], Field(description="Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.")] = None,
         project_ids: Annotated[Optional[StrictStr], Field(description="Comma-separated project ids")] = None,
         search: Optional[StrictStr] = None,
         page: Annotated[Optional[Annotated[int, Field(strict=True, ge=1)]], Field(description="Page number, defaults to 1")] = None,
@@ -1213,7 +1209,7 @@ class ServicesApi:
         """List services
 
 
-        :param org_id: (required)
+        :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
         :param project_ids: Comma-separated project ids
         :type project_ids: str
@@ -1275,7 +1271,7 @@ class ServicesApi:
     @validate_call
     def list_services_without_preload_content(
         self,
-        org_id: StrictInt,
+        org_id: Annotated[Optional[StrictInt], Field(description="Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.")] = None,
         project_ids: Annotated[Optional[StrictStr], Field(description="Comma-separated project ids")] = None,
         search: Optional[StrictStr] = None,
         page: Annotated[Optional[Annotated[int, Field(strict=True, ge=1)]], Field(description="Page number, defaults to 1")] = None,
@@ -1296,7 +1292,7 @@ class ServicesApi:
         """List services
 
 
-        :param org_id: (required)
+        :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
         :param project_ids: Comma-separated project ids
         :type project_ids: str
@@ -1416,7 +1412,6 @@ class ServicesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 

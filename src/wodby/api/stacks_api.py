@@ -282,7 +282,6 @@ class StacksApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -561,7 +560,6 @@ class StacksApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -823,7 +821,6 @@ class StacksApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -1085,7 +1082,6 @@ class StacksApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -1110,7 +1106,7 @@ class StacksApi:
     @validate_call
     def list_stacks(
         self,
-        org_id: StrictInt,
+        org_id: Annotated[Optional[StrictInt], Field(description="Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.")] = None,
         project_ids: Annotated[Optional[StrictStr], Field(description="Comma-separated project ids")] = None,
         search: Optional[StrictStr] = None,
         page: Annotated[Optional[Annotated[int, Field(strict=True, ge=1)]], Field(description="Page number, defaults to 1")] = None,
@@ -1131,7 +1127,7 @@ class StacksApi:
         """List stacks
 
 
-        :param org_id: (required)
+        :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
         :param project_ids: Comma-separated project ids
         :type project_ids: str
@@ -1193,7 +1189,7 @@ class StacksApi:
     @validate_call
     def list_stacks_with_http_info(
         self,
-        org_id: StrictInt,
+        org_id: Annotated[Optional[StrictInt], Field(description="Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.")] = None,
         project_ids: Annotated[Optional[StrictStr], Field(description="Comma-separated project ids")] = None,
         search: Optional[StrictStr] = None,
         page: Annotated[Optional[Annotated[int, Field(strict=True, ge=1)]], Field(description="Page number, defaults to 1")] = None,
@@ -1214,7 +1210,7 @@ class StacksApi:
         """List stacks
 
 
-        :param org_id: (required)
+        :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
         :param project_ids: Comma-separated project ids
         :type project_ids: str
@@ -1276,7 +1272,7 @@ class StacksApi:
     @validate_call
     def list_stacks_without_preload_content(
         self,
-        org_id: StrictInt,
+        org_id: Annotated[Optional[StrictInt], Field(description="Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.")] = None,
         project_ids: Annotated[Optional[StrictStr], Field(description="Comma-separated project ids")] = None,
         search: Optional[StrictStr] = None,
         page: Annotated[Optional[Annotated[int, Field(strict=True, ge=1)]], Field(description="Page number, defaults to 1")] = None,
@@ -1297,7 +1293,7 @@ class StacksApi:
         """List stacks
 
 
-        :param org_id: (required)
+        :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
         :param project_ids: Comma-separated project ids
         :type project_ids: str
@@ -1417,7 +1413,6 @@ class StacksApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 

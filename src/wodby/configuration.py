@@ -114,7 +114,7 @@ AuthSettings = TypedDict(
     "AuthSettings",
     {
         "apiKeyHeader": APIKeyAuthSetting,
-        "accessTokenHeader": APIKeyAuthSetting,
+        "ciAccessTokenHeader": APIKeyAuthSetting,
     },
     total=False,
 )
@@ -514,13 +514,13 @@ conf = wodby.Configuration(
                     'apiKeyHeader',
                 ),
             }
-        if 'accessTokenHeader' in self.api_key:
-            auth['accessTokenHeader'] = {
+        if 'ciAccessTokenHeader' in self.api_key:
+            auth['ciAccessTokenHeader'] = {
                 'type': 'api_key',
                 'in': 'header',
                 'key': 'X-ACCESS-TOKEN',
                 'value': self.get_api_key_with_prefix(
-                    'accessTokenHeader',
+                    'ciAccessTokenHeader',
                 ),
             }
         return auth

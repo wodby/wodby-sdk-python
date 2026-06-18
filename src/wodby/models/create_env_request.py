@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -26,7 +26,7 @@ class CreateEnvRequest(BaseModel):
     """
     CreateEnvRequest
     """ # noqa: E501
-    org_id: StrictInt = Field(alias="orgId")
+    org_id: Optional[StrictInt] = Field(default=None, description="Optional for API-key requests; defaults to the API key's organization.", alias="orgId")
     name: StrictStr
     title: StrictStr
     type: StrictStr

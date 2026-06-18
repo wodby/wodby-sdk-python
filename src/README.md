@@ -68,12 +68,6 @@ configuration = wodby.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: accessTokenHeader
-configuration.api_key['accessTokenHeader'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['accessTokenHeader'] = 'Bearer'
-
 # Configure API key authorization: apiKeyHeader
 configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
 
@@ -184,7 +178,6 @@ Class | Method | HTTP request | Description
 *IntegrationsApi* | [**list_integration_storage_classes**](docs/IntegrationsApi.md#list_integration_storage_classes) | **GET** /integrations/{id}/options/storage-classes | List storage classes
 *IntegrationsApi* | [**list_integrations**](docs/IntegrationsApi.md#list_integrations) | **GET** /integrations | List integrations
 *IntegrationsApi* | [**update_integration**](docs/IntegrationsApi.md#update_integration) | **PUT** /integrations/{id} | Update integration
-*OrgsApi* | [**create_org**](docs/OrgsApi.md#create_org) | **POST** /orgs | Create org
 *OrgsApi* | [**delete_org**](docs/OrgsApi.md#delete_org) | **DELETE** /orgs/{id} | Delete org
 *OrgsApi* | [**get_org**](docs/OrgsApi.md#get_org) | **GET** /orgs/{id} | Get org
 *OrgsApi* | [**list_orgs**](docs/OrgsApi.md#list_orgs) | **GET** /orgs | List orgs
@@ -239,7 +232,6 @@ Class | Method | HTTP request | Description
  - [CreateBuildRequest](docs/CreateBuildRequest.md)
  - [CreateDeploymentRequest](docs/CreateDeploymentRequest.md)
  - [CreateEnvRequest](docs/CreateEnvRequest.md)
- - [CreateOrgRequest](docs/CreateOrgRequest.md)
  - [Database](docs/Database.md)
  - [DatabaseType](docs/DatabaseType.md)
  - [DatabaseVersion](docs/DatabaseVersion.md)
@@ -312,8 +304,8 @@ Authentication schemes defined for the API:
 - **API key parameter name**: X-API-KEY
 - **Location**: HTTP header
 
-<a id="accessTokenHeader"></a>
-### accessTokenHeader
+<a id="ciAccessTokenHeader"></a>
+### ciAccessTokenHeader
 
 - **Type**: API key
 - **API key parameter name**: X-ACCESS-TOKEN

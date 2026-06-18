@@ -295,7 +295,6 @@ class AppInstancesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -574,7 +573,6 @@ class AppInstancesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -836,7 +834,6 @@ class AppInstancesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -863,7 +860,7 @@ class AppInstancesApi:
         self,
         app_name: StrictStr,
         instance_name: StrictStr,
-        org_id: StrictInt,
+        org_id: Annotated[Optional[StrictInt], Field(description="Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -884,7 +881,7 @@ class AppInstancesApi:
         :type app_name: str
         :param instance_name: (required)
         :type instance_name: str
-        :param org_id: (required)
+        :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -938,7 +935,7 @@ class AppInstancesApi:
         self,
         app_name: StrictStr,
         instance_name: StrictStr,
-        org_id: StrictInt,
+        org_id: Annotated[Optional[StrictInt], Field(description="Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -959,7 +956,7 @@ class AppInstancesApi:
         :type app_name: str
         :param instance_name: (required)
         :type instance_name: str
-        :param org_id: (required)
+        :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1013,7 +1010,7 @@ class AppInstancesApi:
         self,
         app_name: StrictStr,
         instance_name: StrictStr,
-        org_id: StrictInt,
+        org_id: Annotated[Optional[StrictInt], Field(description="Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1034,7 +1031,7 @@ class AppInstancesApi:
         :type app_name: str
         :param instance_name: (required)
         :type instance_name: str
-        :param org_id: (required)
+        :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1130,7 +1127,6 @@ class AppInstancesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -1155,7 +1151,7 @@ class AppInstancesApi:
     @validate_call
     def list_app_instances(
         self,
-        org_id: StrictInt,
+        org_id: Annotated[Optional[StrictInt], Field(description="Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.")] = None,
         project_ids: Annotated[Optional[StrictStr], Field(description="Comma-separated project ids")] = None,
         app_id: Optional[StrictInt] = None,
         cluster_id: Optional[StrictInt] = None,
@@ -1176,7 +1172,7 @@ class AppInstancesApi:
         """List app instances
 
 
-        :param org_id: (required)
+        :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
         :param project_ids: Comma-separated project ids
         :type project_ids: str
@@ -1238,7 +1234,7 @@ class AppInstancesApi:
     @validate_call
     def list_app_instances_with_http_info(
         self,
-        org_id: StrictInt,
+        org_id: Annotated[Optional[StrictInt], Field(description="Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.")] = None,
         project_ids: Annotated[Optional[StrictStr], Field(description="Comma-separated project ids")] = None,
         app_id: Optional[StrictInt] = None,
         cluster_id: Optional[StrictInt] = None,
@@ -1259,7 +1255,7 @@ class AppInstancesApi:
         """List app instances
 
 
-        :param org_id: (required)
+        :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
         :param project_ids: Comma-separated project ids
         :type project_ids: str
@@ -1321,7 +1317,7 @@ class AppInstancesApi:
     @validate_call
     def list_app_instances_without_preload_content(
         self,
-        org_id: StrictInt,
+        org_id: Annotated[Optional[StrictInt], Field(description="Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.")] = None,
         project_ids: Annotated[Optional[StrictStr], Field(description="Comma-separated project ids")] = None,
         app_id: Optional[StrictInt] = None,
         cluster_id: Optional[StrictInt] = None,
@@ -1342,7 +1338,7 @@ class AppInstancesApi:
         """List app instances
 
 
-        :param org_id: (required)
+        :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
         :param project_ids: Comma-separated project ids
         :type project_ids: str
@@ -1462,7 +1458,6 @@ class AppInstancesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
@@ -1752,7 +1747,6 @@ class AppInstancesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'accessTokenHeader', 
             'apiKeyHeader'
         ]
 
