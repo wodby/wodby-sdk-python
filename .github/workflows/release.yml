@@ -57,11 +57,17 @@ jobs:
 
       - name: Publish package to PyPI
         env:
+          PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
           PYPI_USERNAME: ${{ secrets.PYPI_USERNAME }}
           PYPI_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
         run: |
+          if [[ -n "${PYPI_TOKEN}" ]]; then
+            export PYPI_USERNAME='__token__'
+            export PYPI_PASSWORD="${PYPI_TOKEN}"
+          fi
+
           if [[ -z "${PYPI_USERNAME}" || -z "${PYPI_PASSWORD}" ]]; then
-            echo "Skipping PyPI publish because PYPI_USERNAME or PYPI_PASSWORD is not configured."
+            echo "Skipping PyPI publish because PYPI_TOKEN or PYPI_USERNAME/PYPI_PASSWORD is not configured."
             exit 0
           fi
 

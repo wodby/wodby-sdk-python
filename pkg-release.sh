@@ -11,6 +11,16 @@ function pkg_release() {
     local repository_url='https://upload.pypi.org/legacy/'
     local stored_dir=$(pwd)
 
+    if [[ -n "${PYPI_TOKEN:-}" ]]; then
+        export PYPI_USERNAME='__token__'
+        export PYPI_PASSWORD="${PYPI_TOKEN}"
+    fi
+
+    if [[ -z "${PYPI_USERNAME:-}" || -z "${PYPI_PASSWORD:-}" ]]; then
+        echo "ERROR: Set PYPI_TOKEN or PYPI_USERNAME/PYPI_PASSWORD before publishing." 1>&2
+        exit 1
+    fi
+
     if [[ -n "${TEST_PYPI:-}" ]]; then
         repository_url='https://test.pypi.org/legacy/'
     fi
