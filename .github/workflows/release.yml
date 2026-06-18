@@ -13,6 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-python@v6
         with:
@@ -33,16 +35,18 @@ jobs:
           python -m pip install ./src
           python -m compileall -q src/wodby
 
+      - name: Extract release notes from tag
+        run: |
+          git for-each-ref "refs/tags/${GITHUB_REF_NAME}" --format='%(contents)' > release-notes.md
+          if [[ ! -s release-notes.md ]]; then
+            echo "::error::Release tag ${GITHUB_REF_NAME} must have a description"
+            exit 1
+          fi
+
       - name: Create GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          cat > release-notes.md <<'EOF'
-          Wodby Python SDK for the Wodby 2.0 Public API.
-
-          This release contains the generated Python client for the 2.0 API branch, with basic GitHub Actions validation and updated dependency constraints.
-          EOF
-
           if gh release view "${GITHUB_REF_NAME}" --repo "${GITHUB_REPOSITORY}" >/dev/null 2>&1; then
             gh release edit "${GITHUB_REF_NAME}" \
               --repo "${GITHUB_REPOSITORY}" \
@@ -51,6 +55,7 @@ jobs:
           else
             gh release create "${GITHUB_REF_NAME}" \
               --repo "${GITHUB_REPOSITORY}" \
+              --verify-tag \
               --title "${GITHUB_REF_NAME}" \
               --notes-file release-notes.md
           fi
