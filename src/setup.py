@@ -45,7 +45,7 @@ setup(
     include_package_data=True,
     license="Proprietary",
     long_description_content_type='text/markdown',
-    long_description="Python SDK for the Wodby 2.0 Public API""\
+    long_description="""\
     Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface. 
     """,  # noqa: E501
     package_data={"wodby": ["py.typed"]},
