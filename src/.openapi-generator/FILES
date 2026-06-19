@@ -5,6 +5,7 @@
 README.md
 docs/App.md
 docs/AppBuild.md
+docs/AppBuildConfig.md
 docs/AppBuildsApi.md
 docs/AppBuildsResponse.md
 docs/AppDeployment.md
@@ -16,6 +17,8 @@ docs/AppInstancesApi.md
 docs/AppRoute.md
 docs/AppRoutesApi.md
 docs/AppService.md
+docs/AppServiceBuildArg.md
+docs/AppServiceBuildConfig.md
 docs/AppServiceDatabaseInput.md
 docs/AppServiceDeploymentRequest.md
 docs/AppServiceInput.md
@@ -109,6 +112,9 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_app_build_config.py
+test/test_app_service_build_arg.py
+test/test_app_service_build_config.py
 tox.ini
 wodby/__init__.py
 wodby/api/__init__.py
@@ -140,6 +146,7 @@ wodby/exceptions.py
 wodby/models/__init__.py
 wodby/models/app.py
 wodby/models/app_build.py
+wodby/models/app_build_config.py
 wodby/models/app_builds_response.py
 wodby/models/app_deployment.py
 wodby/models/app_deployments_response.py
@@ -147,6 +154,8 @@ wodby/models/app_endpoint_option_input.py
 wodby/models/app_instance.py
 wodby/models/app_route.py
 wodby/models/app_service.py
+wodby/models/app_service_build_arg.py
+wodby/models/app_service_build_config.py
 wodby/models/app_service_database_input.py
 wodby/models/app_service_deployment_request.py
 wodby/models/app_service_input.py

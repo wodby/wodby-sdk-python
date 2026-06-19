@@ -16,6 +16,7 @@
 # import models into model package
 from wodby.models.app import App
 from wodby.models.app_build import AppBuild
+from wodby.models.app_build_config import AppBuildConfig
 from wodby.models.app_builds_response import AppBuildsResponse
 from wodby.models.app_deployment import AppDeployment
 from wodby.models.app_deployments_response import AppDeploymentsResponse
@@ -23,6 +24,8 @@ from wodby.models.app_endpoint_option_input import AppEndpointOptionInput
 from wodby.models.app_instance import AppInstance
 from wodby.models.app_route import AppRoute
 from wodby.models.app_service import AppService
+from wodby.models.app_service_build_arg import AppServiceBuildArg
+from wodby.models.app_service_build_config import AppServiceBuildConfig
 from wodby.models.app_service_database_input import AppServiceDatabaseInput
 from wodby.models.app_service_deployment_request import AppServiceDeploymentRequest
 from wodby.models.app_service_input import AppServiceInput

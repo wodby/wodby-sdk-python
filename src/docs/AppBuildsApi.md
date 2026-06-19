@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**create_app_build_from_ci**](AppBuildsApi.md#create_app_build_from_ci) | **POST** /app-builds/from-ci | Create build from CI
 [**deploy_app_build**](AppBuildsApi.md#deploy_app_build) | **POST** /app-builds/{id}/deploy | Deploy build
 [**get_app_build**](AppBuildsApi.md#get_app_build) | **GET** /app-builds/{id} | Get build
+[**get_app_build_config**](AppBuildsApi.md#get_app_build_config) | **GET** /app-builds/{id}/config | Get build config
 [**get_app_build_docker_registry_credentials**](AppBuildsApi.md#get_app_build_docker_registry_credentials) | **GET** /app-builds/{id}/docker-registry-credentials | Get Docker registry credentials for build
 [**list_app_builds**](AppBuildsApi.md#list_app_builds) | **GET** /app-builds | List app builds
 [**void_app_build**](AppBuildsApi.md#void_app_build) | **POST** /app-builds/{id}/void | Void build images
@@ -333,6 +334,92 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Build |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_app_build_config**
+> AppBuildConfig get_app_build_config(id)
+
+Get build config
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+* Api Key Authentication (ciAccessTokenHeader):
+
+```python
+import wodby
+from wodby.models.app_build_config import AppBuildConfig
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Configure API key authorization: ciAccessTokenHeader
+configuration.api_key['ciAccessTokenHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ciAccessTokenHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppBuildsApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # Get build config
+        api_response = api_instance.get_app_build_config(id)
+        print("The response of AppBuildsApi->get_app_build_config:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppBuildsApi->get_app_build_config: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**AppBuildConfig**](AppBuildConfig.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader), [ciAccessTokenHeader](../README.md#ciAccessTokenHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Build config |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 
