@@ -29,13 +29,13 @@ class NewAppInput(BaseModel):
     """ # noqa: E501
     org_id: Optional[StrictInt] = Field(default=None, description="Optional for API-key requests; defaults to the API key's organization.", alias="orgId")
     name: StrictStr
-    title: StrictStr
+    title: Optional[StrictStr] = Field(default=None, description="Defaults to name when omitted.")
     instance_name: StrictStr = Field(alias="instanceName")
-    instance_title: StrictStr = Field(alias="instanceTitle")
-    domain: StrictStr
+    instance_title: Optional[StrictStr] = Field(default=None, description="Defaults to instanceName when omitted.", alias="instanceTitle")
+    domain: Optional[StrictStr] = Field(default=None, description="Defaults to instanceName.name.orgDomain when omitted.")
     project_id: Optional[StrictInt] = Field(default=None, alias="projectId")
     stack_rev_id: StrictInt = Field(alias="stackRevId")
-    services: List[NewAppServiceInput]
+    services: Optional[List[NewAppServiceInput]] = Field(default=None, description="Defaults to the stack revision's service defaults when omitted.")
     cluster_id: Optional[StrictInt] = Field(default=None, alias="clusterId")
     env_id: StrictInt = Field(alias="envId")
     ci_integration_id: Optional[StrictInt] = Field(default=None, alias="ciIntegrationId")

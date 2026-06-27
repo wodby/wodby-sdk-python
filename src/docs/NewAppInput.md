@@ -7,13 +7,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **org_id** | **int** | Optional for API-key requests; defaults to the API key&#39;s organization. | [optional] 
 **name** | **str** |  | 
-**title** | **str** |  | 
+**title** | **str** | Defaults to name when omitted. | [optional] 
 **instance_name** | **str** |  | 
-**instance_title** | **str** |  | 
-**domain** | **str** |  | 
+**instance_title** | **str** | Defaults to instanceName when omitted. | [optional] 
+**domain** | **str** | Defaults to instanceName.name.orgDomain when omitted. | [optional] 
 **project_id** | **int** |  | [optional] 
 **stack_rev_id** | **int** |  | 
-**services** | [**List[NewAppServiceInput]**](NewAppServiceInput.md) |  | 
+**services** | [**List[NewAppServiceInput]**](NewAppServiceInput.md) | Defaults to the stack revision&#39;s service defaults when omitted. | [optional] 
 **cluster_id** | **int** |  | [optional] 
 **env_id** | **int** |  | 
 **ci_integration_id** | **int** |  | [optional] 

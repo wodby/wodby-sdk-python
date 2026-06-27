@@ -16,6 +16,9 @@ Name | Type | Description | Notes
 **single_node** | **bool** |  | 
 **version** | **str** |  | [optional] 
 **infra_version** | **str** |  | 
+**min_node_count** | **int** |  | [optional] 
+**max_node_count** | **int** |  | [optional] 
+**last_node_count** | **int** |  | [optional] 
 **region** | **str** |  | [optional] 
 **zone** | **str** |  | [optional] 
 **ips** | **List[str]** |  | [optional] 

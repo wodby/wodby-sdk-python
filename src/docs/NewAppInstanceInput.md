@@ -7,10 +7,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **app_id** | **int** |  | 
 **instance_name** | **str** |  | 
-**instance_title** | **str** |  | 
-**domain** | **str** |  | 
+**instance_title** | **str** | Defaults to instanceName when omitted. | [optional] 
+**domain** | **str** | Defaults to instanceName.appName.orgDomain when omitted. | [optional] 
 **stack_rev_id** | **int** |  | 
-**services** | [**List[NewAppServiceInput]**](NewAppServiceInput.md) |  | 
+**services** | [**List[NewAppServiceInput]**](NewAppServiceInput.md) | Defaults to the stack revision&#39;s service defaults when omitted. | [optional] 
 **cluster_id** | **int** |  | [optional] 
 **env_id** | **int** |  | 
 **ci_integration_id** | **int** |  | [optional] 

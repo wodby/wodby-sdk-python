@@ -38,6 +38,9 @@ class Cluster(BaseModel):
     single_node: StrictBool = Field(alias="singleNode")
     version: Optional[StrictStr] = None
     infra_version: StrictStr = Field(alias="infraVersion")
+    min_node_count: Optional[StrictInt] = Field(default=None, alias="minNodeCount")
+    max_node_count: Optional[StrictInt] = Field(default=None, alias="maxNodeCount")
+    last_node_count: Optional[StrictInt] = Field(default=None, alias="lastNodeCount")
     region: Optional[StrictStr] = None
     zone: Optional[StrictStr] = None
     ips: Optional[List[StrictStr]] = None
@@ -46,7 +49,7 @@ class Cluster(BaseModel):
     org_id: StrictInt = Field(alias="orgId")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "serverless", "demo", "wodby", "k3s", "singleNode", "version", "infraVersion", "region", "zone", "ips", "hostname", "integrationId", "orgId", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "serverless", "demo", "wodby", "k3s", "singleNode", "version", "infraVersion", "minNodeCount", "maxNodeCount", "lastNodeCount", "region", "zone", "ips", "hostname", "integrationId", "orgId", "createdAt", "updatedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -91,6 +94,21 @@ class Cluster(BaseModel):
         # and model_fields_set contains the field
         if self.version is None and "version" in self.model_fields_set:
             _dict['version'] = None
+
+        # set to None if min_node_count (nullable) is None
+        # and model_fields_set contains the field
+        if self.min_node_count is None and "min_node_count" in self.model_fields_set:
+            _dict['minNodeCount'] = None
+
+        # set to None if max_node_count (nullable) is None
+        # and model_fields_set contains the field
+        if self.max_node_count is None and "max_node_count" in self.model_fields_set:
+            _dict['maxNodeCount'] = None
+
+        # set to None if last_node_count (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_node_count is None and "last_node_count" in self.model_fields_set:
+            _dict['lastNodeCount'] = None
 
         # set to None if region (nullable) is None
         # and model_fields_set contains the field
@@ -140,6 +158,9 @@ class Cluster(BaseModel):
             "singleNode": obj.get("singleNode"),
             "version": obj.get("version"),
             "infraVersion": obj.get("infraVersion"),
+            "minNodeCount": obj.get("minNodeCount"),
+            "maxNodeCount": obj.get("maxNodeCount"),
+            "lastNodeCount": obj.get("lastNodeCount"),
             "region": obj.get("region"),
             "zone": obj.get("zone"),
             "ips": obj.get("ips"),
