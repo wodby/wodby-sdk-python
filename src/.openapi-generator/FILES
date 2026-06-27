@@ -121,15 +121,6 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_app_port.py
-test/test_app_ports_api.py
-test/test_new_stack_service_input.py
-test/test_org_membership.py
-test/test_org_memberships_api.py
-test/test_stack_service_input.py
-test/test_stack_services_api.py
-test/test_update_stack_from_git_request.py
-test/test_user.py
 tox.ini
 wodby/__init__.py
 wodby/api/__init__.py
