@@ -10,9 +10,16 @@ Name | Type | Description | Notes
 **title** | **str** |  | 
 **status** | **str** |  | 
 **serverless** | **bool** |  | 
+**demo** | **bool** |  | 
+**wodby** | **bool** |  | 
+**k3s** | **bool** |  | 
+**single_node** | **bool** |  | 
 **version** | **str** |  | [optional] 
+**infra_version** | **str** |  | 
 **region** | **str** |  | [optional] 
 **zone** | **str** |  | [optional] 
+**ips** | **List[str]** |  | [optional] 
+**hostname** | **str** |  | [optional] 
 **integration_id** | **int** |  | [optional] 
 **org_id** | **int** |  | 
 **created_at** | **datetime** |  | 

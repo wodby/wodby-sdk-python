@@ -32,14 +32,21 @@ class Cluster(BaseModel):
     title: StrictStr
     status: StrictStr
     serverless: StrictBool
+    demo: StrictBool
+    wodby: StrictBool
+    k3s: StrictBool
+    single_node: StrictBool = Field(alias="singleNode")
     version: Optional[StrictStr] = None
+    infra_version: StrictStr = Field(alias="infraVersion")
     region: Optional[StrictStr] = None
     zone: Optional[StrictStr] = None
+    ips: Optional[List[StrictStr]] = None
+    hostname: Optional[StrictStr] = None
     integration_id: Optional[StrictInt] = Field(default=None, alias="integrationId")
     org_id: StrictInt = Field(alias="orgId")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "serverless", "version", "region", "zone", "integrationId", "orgId", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "serverless", "demo", "wodby", "k3s", "singleNode", "version", "infraVersion", "region", "zone", "ips", "hostname", "integrationId", "orgId", "createdAt", "updatedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -95,6 +102,16 @@ class Cluster(BaseModel):
         if self.zone is None and "zone" in self.model_fields_set:
             _dict['zone'] = None
 
+        # set to None if ips (nullable) is None
+        # and model_fields_set contains the field
+        if self.ips is None and "ips" in self.model_fields_set:
+            _dict['ips'] = None
+
+        # set to None if hostname (nullable) is None
+        # and model_fields_set contains the field
+        if self.hostname is None and "hostname" in self.model_fields_set:
+            _dict['hostname'] = None
+
         # set to None if integration_id (nullable) is None
         # and model_fields_set contains the field
         if self.integration_id is None and "integration_id" in self.model_fields_set:
@@ -117,9 +134,16 @@ class Cluster(BaseModel):
             "title": obj.get("title"),
             "status": obj.get("status"),
             "serverless": obj.get("serverless"),
+            "demo": obj.get("demo"),
+            "wodby": obj.get("wodby"),
+            "k3s": obj.get("k3s"),
+            "singleNode": obj.get("singleNode"),
             "version": obj.get("version"),
+            "infraVersion": obj.get("infraVersion"),
             "region": obj.get("region"),
             "zone": obj.get("zone"),
+            "ips": obj.get("ips"),
+            "hostname": obj.get("hostname"),
             "integrationId": obj.get("integrationId"),
             "orgId": obj.get("orgId"),
             "createdAt": obj.get("createdAt"),
