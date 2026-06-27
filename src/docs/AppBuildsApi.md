@@ -11,7 +11,6 @@ Method | HTTP request | Description
 [**get_app_build_config**](AppBuildsApi.md#get_app_build_config) | **GET** /app-builds/{id}/config | Get build config
 [**get_app_build_docker_registry_credentials**](AppBuildsApi.md#get_app_build_docker_registry_credentials) | **GET** /app-builds/{id}/docker-registry-credentials | Get Docker registry credentials for build
 [**list_app_builds**](AppBuildsApi.md#list_app_builds) | **GET** /app-builds | List app builds
-[**void_app_build**](AppBuildsApi.md#void_app_build) | **POST** /app-builds/{id}/void | Void build images
 
 
 # **create_app_build**
@@ -589,85 +588,6 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of builds |  -  |
-**4XX** | Error response |  -  |
-**0** | Error response |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **void_app_build**
-> AppBuild void_app_build(id)
-
-Void build images
-
-### Example
-
-* Api Key Authentication (apiKeyHeader):
-
-```python
-import wodby
-from wodby.models.app_build import AppBuild
-from wodby.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to /v1
-# See configuration.py for a list of all supported configuration parameters.
-configuration = wodby.Configuration(
-    host = "/v1"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: apiKeyHeader
-configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with wodby.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = wodby.AppBuildsApi(api_client)
-    id = 56 # int | 
-
-    try:
-        # Void build images
-        api_response = api_instance.void_app_build(id)
-        print("The response of AppBuildsApi->void_app_build:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling AppBuildsApi->void_app_build: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **int**|  | 
-
-### Return type
-
-[**AppBuild**](AppBuild.md)
-
-### Authorization
-
-[apiKeyHeader](../README.md#apiKeyHeader)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Updated build |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 
