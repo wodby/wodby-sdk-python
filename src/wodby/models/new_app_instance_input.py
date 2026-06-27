@@ -20,7 +20,6 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.new_app_service_input import NewAppServiceInput
-from wodby.models.new_managed_cluster_input import NewManagedClusterInput
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -35,11 +34,10 @@ class NewAppInstanceInput(BaseModel):
     stack_rev_id: StrictInt = Field(alias="stackRevId")
     services: List[NewAppServiceInput]
     cluster_id: Optional[StrictInt] = Field(default=None, alias="clusterId")
-    new_cluster: Optional[NewManagedClusterInput] = Field(default=None, alias="newCluster")
     env_id: StrictInt = Field(alias="envId")
     ci_integration_id: Optional[StrictInt] = Field(default=None, alias="ciIntegrationId")
     registry_integration_id: Optional[StrictInt] = Field(default=None, alias="registryIntegrationId")
-    __properties: ClassVar[List[str]] = ["appId", "instanceName", "instanceTitle", "domain", "stackRevId", "services", "clusterId", "newCluster", "envId", "ciIntegrationId", "registryIntegrationId"]
+    __properties: ClassVar[List[str]] = ["appId", "instanceName", "instanceTitle", "domain", "stackRevId", "services", "clusterId", "envId", "ciIntegrationId", "registryIntegrationId"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -87,9 +85,6 @@ class NewAppInstanceInput(BaseModel):
                 if _item_services:
                     _items.append(_item_services.to_dict())
             _dict['services'] = _items
-        # override the default output from pydantic by calling `to_dict()` of new_cluster
-        if self.new_cluster:
-            _dict['newCluster'] = self.new_cluster.to_dict()
         # set to None if cluster_id (nullable) is None
         # and model_fields_set contains the field
         if self.cluster_id is None and "cluster_id" in self.model_fields_set:
@@ -124,7 +119,6 @@ class NewAppInstanceInput(BaseModel):
             "stackRevId": obj.get("stackRevId"),
             "services": [NewAppServiceInput.from_dict(_item) for _item in obj["services"]] if obj.get("services") is not None else None,
             "clusterId": obj.get("clusterId"),
-            "newCluster": NewManagedClusterInput.from_dict(obj["newCluster"]) if obj.get("newCluster") is not None else None,
             "envId": obj.get("envId"),
             "ciIntegrationId": obj.get("ciIntegrationId"),
             "registryIntegrationId": obj.get("registryIntegrationId")

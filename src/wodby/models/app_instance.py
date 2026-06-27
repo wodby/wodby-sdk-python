@@ -35,9 +35,16 @@ class AppInstance(BaseModel):
     app_id: StrictInt = Field(alias="appId")
     cluster_id: StrictInt = Field(alias="clusterId")
     env_id: StrictInt = Field(alias="envId")
+    stack_id: StrictInt = Field(alias="stackId")
+    stack_rev_id: StrictInt = Field(alias="stackRevId")
+    stack_name: StrictStr = Field(alias="stackName")
+    stack_title: StrictStr = Field(alias="stackTitle")
+    stack_icon: StrictStr = Field(alias="stackIcon")
+    stack_rev_number: StrictInt = Field(alias="stackRevNumber")
+    stack_version: StrictStr = Field(alias="stackVersion")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "mainDomain", "appId", "clusterId", "envId", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "mainDomain", "appId", "clusterId", "envId", "stackId", "stackRevId", "stackName", "stackTitle", "stackIcon", "stackRevNumber", "stackVersion", "createdAt", "updatedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -103,6 +110,13 @@ class AppInstance(BaseModel):
             "appId": obj.get("appId"),
             "clusterId": obj.get("clusterId"),
             "envId": obj.get("envId"),
+            "stackId": obj.get("stackId"),
+            "stackRevId": obj.get("stackRevId"),
+            "stackName": obj.get("stackName"),
+            "stackTitle": obj.get("stackTitle"),
+            "stackIcon": obj.get("stackIcon"),
+            "stackRevNumber": obj.get("stackRevNumber"),
+            "stackVersion": obj.get("stackVersion"),
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt")
         })

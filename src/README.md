@@ -115,6 +115,7 @@ Class | Method | HTTP request | Description
 *AppInstancesApi* | [**get_app_instance_by_name**](docs/AppInstancesApi.md#get_app_instance_by_name) | **GET** /app-instances/by-name/{appName}/{instanceName} | Get app instance by app and instance name
 *AppInstancesApi* | [**list_app_instances**](docs/AppInstancesApi.md#list_app_instances) | **GET** /app-instances | List app instances
 *AppInstancesApi* | [**update_app_instance**](docs/AppInstancesApi.md#update_app_instance) | **PUT** /app-instances/{id} | Update app instance
+*AppInstancesApi* | [**upgrade_app_instance_stack**](docs/AppInstancesApi.md#upgrade_app_instance_stack) | **POST** /app-instances/{id}/actions/upgrade-stack | Upgrade app instance stack
 *AppPortsApi* | [**get_app_port**](docs/AppPortsApi.md#get_app_port) | **GET** /app-ports/{id} | Get app port
 *AppPortsApi* | [**list_app_ports**](docs/AppPortsApi.md#list_app_ports) | **GET** /app-ports | List app ports
 *AppRoutesApi* | [**create_app_route**](docs/AppRoutesApi.md#create_app_route) | **POST** /app-routes | Create app route
@@ -122,10 +123,48 @@ Class | Method | HTTP request | Description
 *AppRoutesApi* | [**get_app_route**](docs/AppRoutesApi.md#get_app_route) | **GET** /app-routes/{id} | Get app route
 *AppRoutesApi* | [**list_app_routes**](docs/AppRoutesApi.md#list_app_routes) | **GET** /app-routes | List app routes
 *AppRoutesApi* | [**update_app_route**](docs/AppRoutesApi.md#update_app_route) | **PUT** /app-routes/{id} | Update app route
+*AppServicesApi* | [**create_app_service_annotation**](docs/AppServicesApi.md#create_app_service_annotation) | **POST** /app-services/{id}/annotations | Create app service annotation
+*AppServicesApi* | [**create_app_service_cron_schedule**](docs/AppServicesApi.md#create_app_service_cron_schedule) | **POST** /app-services/{id}/cron-schedules | Create app service cron schedule
+*AppServicesApi* | [**create_app_service_env_var**](docs/AppServicesApi.md#create_app_service_env_var) | **POST** /app-services/{id}/env-vars | Create app service env var
+*AppServicesApi* | [**create_app_service_helm_value**](docs/AppServicesApi.md#create_app_service_helm_value) | **POST** /app-services/{id}/helm-values | Create app service Helm value
+*AppServicesApi* | [**create_app_service_integration**](docs/AppServicesApi.md#create_app_service_integration) | **POST** /app-services/{id}/integrations | Create app service integration
+*AppServicesApi* | [**create_app_service_log_stream**](docs/AppServicesApi.md#create_app_service_log_stream) | **POST** /app-services/{id}/log-streams | Create app service log stream
+*AppServicesApi* | [**create_app_service_token**](docs/AppServicesApi.md#create_app_service_token) | **POST** /app-services/{id}/tokens | Create app service token
+*AppServicesApi* | [**delete_app_service_annotation**](docs/AppServicesApi.md#delete_app_service_annotation) | **DELETE** /app-service-annotations/{id} | Delete app service annotation
+*AppServicesApi* | [**delete_app_service_cron_schedule**](docs/AppServicesApi.md#delete_app_service_cron_schedule) | **DELETE** /app-service-cron-schedules/{id} | Delete app service cron schedule
+*AppServicesApi* | [**delete_app_service_env_var**](docs/AppServicesApi.md#delete_app_service_env_var) | **DELETE** /app-service-env-vars/{id} | Delete app service env var
+*AppServicesApi* | [**delete_app_service_helm_value**](docs/AppServicesApi.md#delete_app_service_helm_value) | **DELETE** /app-service-helm-values/{id} | Delete app service Helm value
+*AppServicesApi* | [**delete_app_service_integration**](docs/AppServicesApi.md#delete_app_service_integration) | **DELETE** /app-service-integrations/{id} | Delete app service integration
+*AppServicesApi* | [**delete_app_service_token**](docs/AppServicesApi.md#delete_app_service_token) | **DELETE** /app-service-tokens/{id} | Delete app service token
 *AppServicesApi* | [**get_app_service**](docs/AppServicesApi.md#get_app_service) | **GET** /app-services/{id} | Get app service
+*AppServicesApi* | [**get_app_service_cron_job**](docs/AppServicesApi.md#get_app_service_cron_job) | **GET** /app-service-cron-jobs/{id} | Get app service cron job
+*AppServicesApi* | [**keep_log_stream_alive**](docs/AppServicesApi.md#keep_log_stream_alive) | **POST** /log-streams/{id}/keep-alive | Keep log stream alive
+*AppServicesApi* | [**list_app_service_annotations**](docs/AppServicesApi.md#list_app_service_annotations) | **GET** /app-services/{id}/annotations | List app service annotations
+*AppServicesApi* | [**list_app_service_configs**](docs/AppServicesApi.md#list_app_service_configs) | **GET** /app-services/{id}/configs | List app service configs
+*AppServicesApi* | [**list_app_service_containers**](docs/AppServicesApi.md#list_app_service_containers) | **GET** /app-services/{id}/containers | List app service containers
+*AppServicesApi* | [**list_app_service_cron_jobs**](docs/AppServicesApi.md#list_app_service_cron_jobs) | **GET** /app-service-cron-jobs | List app service cron jobs
+*AppServicesApi* | [**list_app_service_cron_schedules**](docs/AppServicesApi.md#list_app_service_cron_schedules) | **GET** /app-services/{id}/cron-schedules | List app service cron schedules
+*AppServicesApi* | [**list_app_service_env_vars**](docs/AppServicesApi.md#list_app_service_env_vars) | **GET** /app-services/{id}/env-vars | List app service env vars
+*AppServicesApi* | [**list_app_service_helm_values**](docs/AppServicesApi.md#list_app_service_helm_values) | **GET** /app-services/{id}/helm-values | List app service Helm values
+*AppServicesApi* | [**list_app_service_integrations**](docs/AppServicesApi.md#list_app_service_integrations) | **GET** /app-services/{id}/integrations | List app service integrations
+*AppServicesApi* | [**list_app_service_links**](docs/AppServicesApi.md#list_app_service_links) | **GET** /app-services/{id}/links | List app service links
+*AppServicesApi* | [**list_app_service_settings**](docs/AppServicesApi.md#list_app_service_settings) | **GET** /app-services/{id}/settings | List app service settings
+*AppServicesApi* | [**list_app_service_tokens**](docs/AppServicesApi.md#list_app_service_tokens) | **GET** /app-services/{id}/tokens | List app service tokens
 *AppServicesApi* | [**list_app_services**](docs/AppServicesApi.md#list_app_services) | **GET** /app-services | List app services
 *AppServicesApi* | [**run_app_service_action**](docs/AppServicesApi.md#run_app_service_action) | **POST** /app-services/{id}/actions/{name} | Run app service action
+*AppServicesApi* | [**run_app_service_cron_schedule**](docs/AppServicesApi.md#run_app_service_cron_schedule) | **POST** /app-service-cron-schedules/{id}/run | Run app service cron schedule
+*AppServicesApi* | [**set_app_service_config**](docs/AppServicesApi.md#set_app_service_config) | **PUT** /app-services/{id}/configs/{name} | Set app service config
+*AppServicesApi* | [**set_app_service_link**](docs/AppServicesApi.md#set_app_service_link) | **PUT** /app-services/{id}/links/{name} | Set app service link
+*AppServicesApi* | [**set_app_service_resources**](docs/AppServicesApi.md#set_app_service_resources) | **PUT** /app-services/{id}/resources | Set app service resources
+*AppServicesApi* | [**set_app_service_setting**](docs/AppServicesApi.md#set_app_service_setting) | **PUT** /app-services/{id}/settings/{name} | Set app service setting
+*AppServicesApi* | [**start_log_stream**](docs/AppServicesApi.md#start_log_stream) | **POST** /log-streams/{id}/start | Start log stream
+*AppServicesApi* | [**stop_log_stream**](docs/AppServicesApi.md#stop_log_stream) | **POST** /log-streams/{id}/stop | Stop log stream
 *AppServicesApi* | [**update_app_service**](docs/AppServicesApi.md#update_app_service) | **PUT** /app-services/{id} | Update app service
+*AppServicesApi* | [**update_app_service_cron_schedule**](docs/AppServicesApi.md#update_app_service_cron_schedule) | **PUT** /app-service-cron-schedules/{id} | Update app service cron schedule
+*AppServicesApi* | [**update_app_service_database**](docs/AppServicesApi.md#update_app_service_database) | **PUT** /app-services/{id}/database | Update app service database references
+*AppServicesApi* | [**update_app_service_env_var**](docs/AppServicesApi.md#update_app_service_env_var) | **PUT** /app-service-env-vars/{id} | Update app service env var
+*AppServicesApi* | [**update_app_service_helm_value**](docs/AppServicesApi.md#update_app_service_helm_value) | **PUT** /app-service-helm-values/{id} | Update app service Helm value
+*AppServicesApi* | [**update_app_service_token**](docs/AppServicesApi.md#update_app_service_token) | **PUT** /app-service-tokens/{id} | Update app service token
 *AppsApi* | [**create_app**](docs/AppsApi.md#create_app) | **POST** /apps | Create app
 *AppsApi* | [**delete_app**](docs/AppsApi.md#delete_app) | **DELETE** /apps/{id} | Delete app
 *AppsApi* | [**get_app**](docs/AppsApi.md#get_app) | **GET** /apps/{id} | Get app
@@ -142,11 +181,20 @@ Class | Method | HTTP request | Description
 *ClustersApi* | [**list_clusters**](docs/ClustersApi.md#list_clusters) | **GET** /clusters | List clusters
 *ClustersApi* | [**update_cluster**](docs/ClustersApi.md#update_cluster) | **PUT** /clusters/{id} | Update cluster
 *DatabasesApi* | [**create_database**](docs/DatabasesApi.md#create_database) | **POST** /databases | Create database
+*DatabasesApi* | [**create_database_db**](docs/DatabasesApi.md#create_database_db) | **POST** /database-dbs | Create database DB
+*DatabasesApi* | [**create_database_user**](docs/DatabasesApi.md#create_database_user) | **POST** /database-users | Create database user
 *DatabasesApi* | [**delete_database**](docs/DatabasesApi.md#delete_database) | **DELETE** /databases/{id} | Delete database
+*DatabasesApi* | [**delete_database_db**](docs/DatabasesApi.md#delete_database_db) | **DELETE** /database-dbs/{id} | Delete database DB
+*DatabasesApi* | [**delete_database_user**](docs/DatabasesApi.md#delete_database_user) | **DELETE** /database-users/{id} | Delete database user
 *DatabasesApi* | [**get_database**](docs/DatabasesApi.md#get_database) | **GET** /databases/{id} | Get database
 *DatabasesApi* | [**get_database_by_name**](docs/DatabasesApi.md#get_database_by_name) | **GET** /databases/by-name/{name} | Get database by name
+*DatabasesApi* | [**get_database_db**](docs/DatabasesApi.md#get_database_db) | **GET** /database-dbs/{id} | Get database DB
+*DatabasesApi* | [**list_database_charsets**](docs/DatabasesApi.md#list_database_charsets) | **GET** /databases/{id}/options/charsets | List database charsets
+*DatabasesApi* | [**list_database_dbs**](docs/DatabasesApi.md#list_database_dbs) | **GET** /database-dbs | List database DBs
+*DatabasesApi* | [**list_database_users**](docs/DatabasesApi.md#list_database_users) | **GET** /database-users | List database users
 *DatabasesApi* | [**list_databases**](docs/DatabasesApi.md#list_databases) | **GET** /databases | List databases
 *DatabasesApi* | [**update_database**](docs/DatabasesApi.md#update_database) | **PUT** /databases/{id} | Update database
+*DatabasesApi* | [**update_database_user_dbs**](docs/DatabasesApi.md#update_database_user_dbs) | **PUT** /database-users/{id}/dbs | Update database user DB grants
 *DefaultApi* | [**get_open_api_json**](docs/DefaultApi.md#get_open_api_json) | **GET** /openapi.json | Get OpenAPI JSON
 *DefaultApi* | [**get_open_api_yaml**](docs/DefaultApi.md#get_open_api_yaml) | **GET** /openapi.yaml | Get OpenAPI YAML
 *EnvsApi* | [**create_env**](docs/EnvsApi.md#create_env) | **POST** /envs | Create env
@@ -202,9 +250,40 @@ Class | Method | HTTP request | Description
 *ServicesApi* | [**list_service_link_candidates**](docs/ServicesApi.md#list_service_link_candidates) | **GET** /services/{name}/options/link-candidates | List service link candidates
 *ServicesApi* | [**list_services**](docs/ServicesApi.md#list_services) | **GET** /services | List services
 *StackServicesApi* | [**create_stack_service**](docs/StackServicesApi.md#create_stack_service) | **POST** /stack-services | Create stack service
+*StackServicesApi* | [**create_stack_service_annotation**](docs/StackServicesApi.md#create_stack_service_annotation) | **POST** /stack-services/{id}/annotations | Create stack service annotation
+*StackServicesApi* | [**create_stack_service_cron_schedule**](docs/StackServicesApi.md#create_stack_service_cron_schedule) | **POST** /stack-services/{id}/cron-schedules | Create stack service cron schedule
+*StackServicesApi* | [**create_stack_service_env_var**](docs/StackServicesApi.md#create_stack_service_env_var) | **POST** /stack-services/{id}/env-vars | Create stack service env var
+*StackServicesApi* | [**create_stack_service_helm_value**](docs/StackServicesApi.md#create_stack_service_helm_value) | **POST** /stack-services/{id}/helm-values | Create stack service Helm value
+*StackServicesApi* | [**create_stack_service_integration**](docs/StackServicesApi.md#create_stack_service_integration) | **POST** /stack-services/{id}/integrations | Create stack service integration
+*StackServicesApi* | [**create_stack_service_token**](docs/StackServicesApi.md#create_stack_service_token) | **POST** /stack-services/{id}/tokens | Create stack service token
 *StackServicesApi* | [**delete_stack_service**](docs/StackServicesApi.md#delete_stack_service) | **DELETE** /stack-services/{id} | Delete stack service
+*StackServicesApi* | [**delete_stack_service_annotation**](docs/StackServicesApi.md#delete_stack_service_annotation) | **DELETE** /stack-service-annotations/{id} | Delete stack service annotation
+*StackServicesApi* | [**delete_stack_service_cron_schedule**](docs/StackServicesApi.md#delete_stack_service_cron_schedule) | **DELETE** /stack-service-cron-schedules/{id} | Delete stack service cron schedule
+*StackServicesApi* | [**delete_stack_service_env_var**](docs/StackServicesApi.md#delete_stack_service_env_var) | **DELETE** /stack-service-env-vars/{id} | Delete stack service env var
+*StackServicesApi* | [**delete_stack_service_helm_value**](docs/StackServicesApi.md#delete_stack_service_helm_value) | **DELETE** /stack-service-helm-values/{id} | Delete stack service Helm value
+*StackServicesApi* | [**delete_stack_service_integration**](docs/StackServicesApi.md#delete_stack_service_integration) | **DELETE** /stack-service-integrations/{id} | Delete stack service integration
+*StackServicesApi* | [**delete_stack_service_token**](docs/StackServicesApi.md#delete_stack_service_token) | **DELETE** /stack-service-tokens/{id} | Delete stack service token
+*StackServicesApi* | [**list_stack_service_annotations**](docs/StackServicesApi.md#list_stack_service_annotations) | **GET** /stack-services/{id}/annotations | List stack service annotations
+*StackServicesApi* | [**list_stack_service_configs**](docs/StackServicesApi.md#list_stack_service_configs) | **GET** /stack-services/{id}/configs | List stack service configs
+*StackServicesApi* | [**list_stack_service_cron_schedules**](docs/StackServicesApi.md#list_stack_service_cron_schedules) | **GET** /stack-services/{id}/cron-schedules | List stack service cron schedules
+*StackServicesApi* | [**list_stack_service_env_vars**](docs/StackServicesApi.md#list_stack_service_env_vars) | **GET** /stack-services/{id}/env-vars | List stack service env vars
+*StackServicesApi* | [**list_stack_service_helm_values**](docs/StackServicesApi.md#list_stack_service_helm_values) | **GET** /stack-services/{id}/helm-values | List stack service Helm values
+*StackServicesApi* | [**list_stack_service_integrations**](docs/StackServicesApi.md#list_stack_service_integrations) | **GET** /stack-services/{id}/integrations | List stack service integrations
+*StackServicesApi* | [**list_stack_service_links**](docs/StackServicesApi.md#list_stack_service_links) | **GET** /stack-services/{id}/links | List stack service links
+*StackServicesApi* | [**list_stack_service_tokens**](docs/StackServicesApi.md#list_stack_service_tokens) | **GET** /stack-services/{id}/tokens | List stack service tokens
+*StackServicesApi* | [**list_stack_service_volumes**](docs/StackServicesApi.md#list_stack_service_volumes) | **GET** /stack-services/{id}/volumes | List stack service volumes
 *StackServicesApi* | [**list_stack_services**](docs/StackServicesApi.md#list_stack_services) | **GET** /stack-services | List stack services
+*StackServicesApi* | [**set_stack_service_config**](docs/StackServicesApi.md#set_stack_service_config) | **PUT** /stack-services/{id}/configs/{name} | Set stack service config
+*StackServicesApi* | [**set_stack_service_link**](docs/StackServicesApi.md#set_stack_service_link) | **PUT** /stack-services/{id}/links/{name} | Set stack service link
+*StackServicesApi* | [**set_stack_service_options**](docs/StackServicesApi.md#set_stack_service_options) | **PUT** /stack-services/{id}/options | Update stack service options
+*StackServicesApi* | [**set_stack_service_resources**](docs/StackServicesApi.md#set_stack_service_resources) | **PUT** /stack-services/{id}/resources | Set stack service resources
+*StackServicesApi* | [**set_stack_service_setting**](docs/StackServicesApi.md#set_stack_service_setting) | **PUT** /stack-services/{id}/settings/{name} | Set stack service setting
+*StackServicesApi* | [**set_stack_service_volume**](docs/StackServicesApi.md#set_stack_service_volume) | **PUT** /stack-services/{id}/volumes/{name} | Set stack service volume
 *StackServicesApi* | [**update_stack_service**](docs/StackServicesApi.md#update_stack_service) | **PUT** /stack-services/{id} | Update stack service
+*StackServicesApi* | [**update_stack_service_cron_schedule**](docs/StackServicesApi.md#update_stack_service_cron_schedule) | **PUT** /stack-service-cron-schedules/{id} | Update stack service cron schedule
+*StackServicesApi* | [**update_stack_service_env_var**](docs/StackServicesApi.md#update_stack_service_env_var) | **PUT** /stack-service-env-vars/{id} | Update stack service env var
+*StackServicesApi* | [**update_stack_service_helm_value**](docs/StackServicesApi.md#update_stack_service_helm_value) | **PUT** /stack-service-helm-values/{id} | Update stack service Helm value
+*StackServicesApi* | [**update_stack_service_token**](docs/StackServicesApi.md#update_stack_service_token) | **PUT** /stack-service-tokens/{id} | Update stack service token
 *StacksApi* | [**get_stack**](docs/StacksApi.md#get_stack) | **GET** /stacks/{id} | Get stack
 *StacksApi* | [**get_stack_by_name**](docs/StacksApi.md#get_stack_by_name) | **GET** /stacks/by-name/{name} | Get stack by name
 *StacksApi* | [**get_stack_revision**](docs/StacksApi.md#get_stack_revision) | **GET** /stack-revisions/{id} | Get stack revision
@@ -230,24 +309,45 @@ Class | Method | HTTP request | Description
  - [AppDeploymentsResponse](docs/AppDeploymentsResponse.md)
  - [AppEndpointOptionInput](docs/AppEndpointOptionInput.md)
  - [AppInstance](docs/AppInstance.md)
+ - [AppInstanceStackUpgradeInput](docs/AppInstanceStackUpgradeInput.md)
  - [AppPort](docs/AppPort.md)
  - [AppRoute](docs/AppRoute.md)
  - [AppService](docs/AppService.md)
+ - [AppServiceAnnotation](docs/AppServiceAnnotation.md)
+ - [AppServiceAnnotationSource](docs/AppServiceAnnotationSource.md)
  - [AppServiceBuildArg](docs/AppServiceBuildArg.md)
  - [AppServiceBuildConfig](docs/AppServiceBuildConfig.md)
+ - [AppServiceConfig](docs/AppServiceConfig.md)
+ - [AppServiceContainer](docs/AppServiceContainer.md)
+ - [AppServiceCronJob](docs/AppServiceCronJob.md)
+ - [AppServiceCronJobsResponse](docs/AppServiceCronJobsResponse.md)
+ - [AppServiceCronSchedule](docs/AppServiceCronSchedule.md)
  - [AppServiceDatabaseInput](docs/AppServiceDatabaseInput.md)
  - [AppServiceDeploymentRequest](docs/AppServiceDeploymentRequest.md)
+ - [AppServiceEnvVar](docs/AppServiceEnvVar.md)
+ - [AppServiceEnvVarSource](docs/AppServiceEnvVarSource.md)
+ - [AppServiceHelmValue](docs/AppServiceHelmValue.md)
+ - [AppServiceHelmValueSource](docs/AppServiceHelmValueSource.md)
  - [AppServiceInput](docs/AppServiceInput.md)
+ - [AppServiceIntegration](docs/AppServiceIntegration.md)
  - [AppServiceIntegrationInput](docs/AppServiceIntegrationInput.md)
+ - [AppServiceLink](docs/AppServiceLink.md)
+ - [AppServiceLinkInput](docs/AppServiceLinkInput.md)
+ - [AppServiceSetting](docs/AppServiceSetting.md)
  - [AppServiceSettingInput](docs/AppServiceSettingInput.md)
+ - [AppServiceToken](docs/AppServiceToken.md)
  - [Backup](docs/Backup.md)
  - [BuildSourceInput](docs/BuildSourceInput.md)
  - [Cluster](docs/Cluster.md)
+ - [ConfigOverrideInput](docs/ConfigOverrideInput.md)
  - [CreateBuildRequest](docs/CreateBuildRequest.md)
  - [CreateDeploymentRequest](docs/CreateDeploymentRequest.md)
  - [CreateEnvRequest](docs/CreateEnvRequest.md)
  - [Database](docs/Database.md)
+ - [DatabaseCharset](docs/DatabaseCharset.md)
+ - [DatabaseDB](docs/DatabaseDB.md)
  - [DatabaseType](docs/DatabaseType.md)
+ - [DatabaseUser](docs/DatabaseUser.md)
  - [DatabaseVersion](docs/DatabaseVersion.md)
  - [DeploymentFromCIInput](docs/DeploymentFromCIInput.md)
  - [DockerRegistryCredentials](docs/DockerRegistryCredentials.md)
@@ -257,23 +357,36 @@ Class | Method | HTTP request | Description
  - [ImportFromInput](docs/ImportFromInput.md)
  - [ImportInput](docs/ImportInput.md)
  - [Integration](docs/Integration.md)
+ - [IntegrationLinkInput](docs/IntegrationLinkInput.md)
  - [IntegrationScope](docs/IntegrationScope.md)
  - [KubeVersion](docs/KubeVersion.md)
  - [LogLine](docs/LogLine.md)
+ - [LogStream](docs/LogStream.md)
  - [ModelImport](docs/ModelImport.md)
+ - [NamedSecretValueInput](docs/NamedSecretValueInput.md)
+ - [NewAnnotationInput](docs/NewAnnotationInput.md)
  - [NewAppInput](docs/NewAppInput.md)
  - [NewAppInstanceInput](docs/NewAppInstanceInput.md)
  - [NewAppRouteInput](docs/NewAppRouteInput.md)
+ - [NewAppServiceCronScheduleInput](docs/NewAppServiceCronScheduleInput.md)
+ - [NewAppServiceEnvVarInput](docs/NewAppServiceEnvVarInput.md)
  - [NewAppServiceInput](docs/NewAppServiceInput.md)
+ - [NewAppServiceLogStreamInput](docs/NewAppServiceLogStreamInput.md)
  - [NewBackupInput](docs/NewBackupInput.md)
  - [NewBuildFromCIInput](docs/NewBuildFromCIInput.md)
  - [NewClusterInput](docs/NewClusterInput.md)
+ - [NewDatabaseDBInput](docs/NewDatabaseDBInput.md)
  - [NewDatabaseInput](docs/NewDatabaseInput.md)
+ - [NewDatabaseUserInput](docs/NewDatabaseUserInput.md)
  - [NewImportInput](docs/NewImportInput.md)
  - [NewIntegrationInput](docs/NewIntegrationInput.md)
- - [NewManagedClusterInput](docs/NewManagedClusterInput.md)
  - [NewProjectInput](docs/NewProjectInput.md)
+ - [NewStackServiceAnnotationInput](docs/NewStackServiceAnnotationInput.md)
+ - [NewStackServiceCronScheduleInput](docs/NewStackServiceCronScheduleInput.md)
+ - [NewStackServiceEnvVarInput](docs/NewStackServiceEnvVarInput.md)
  - [NewStackServiceInput](docs/NewStackServiceInput.md)
+ - [NewStackServiceScopedValueInput](docs/NewStackServiceScopedValueInput.md)
+ - [NewStackServiceTokenInput](docs/NewStackServiceTokenInput.md)
  - [OperationResult](docs/OperationResult.md)
  - [Org](docs/Org.md)
  - [OrgMembership](docs/OrgMembership.md)
@@ -289,10 +402,26 @@ Class | Method | HTTP request | Description
  - [ServiceDeploymentInput](docs/ServiceDeploymentInput.md)
  - [ServiceRevision](docs/ServiceRevision.md)
  - [ServicesResponse](docs/ServicesResponse.md)
+ - [SetNullableStringValueInput](docs/SetNullableStringValueInput.md)
+ - [SetStringValueInput](docs/SetStringValueInput.md)
  - [Stack](docs/Stack.md)
  - [StackRevision](docs/StackRevision.md)
  - [StackService](docs/StackService.md)
+ - [StackServiceAnnotation](docs/StackServiceAnnotation.md)
+ - [StackServiceConfig](docs/StackServiceConfig.md)
+ - [StackServiceConfigInput](docs/StackServiceConfigInput.md)
+ - [StackServiceCronSchedule](docs/StackServiceCronSchedule.md)
+ - [StackServiceEnvVar](docs/StackServiceEnvVar.md)
+ - [StackServiceHelmValue](docs/StackServiceHelmValue.md)
  - [StackServiceInput](docs/StackServiceInput.md)
+ - [StackServiceIntegration](docs/StackServiceIntegration.md)
+ - [StackServiceLink](docs/StackServiceLink.md)
+ - [StackServiceLinkInput](docs/StackServiceLinkInput.md)
+ - [StackServiceOptionInput](docs/StackServiceOptionInput.md)
+ - [StackServiceOptionsInput](docs/StackServiceOptionsInput.md)
+ - [StackServiceToken](docs/StackServiceToken.md)
+ - [StackServiceVolume](docs/StackServiceVolume.md)
+ - [StackServiceVolumeInput](docs/StackServiceVolumeInput.md)
  - [StacksResponse](docs/StacksResponse.md)
  - [Task](docs/Task.md)
  - [TaskJob](docs/TaskJob.md)
@@ -301,11 +430,19 @@ Class | Method | HTTP request | Description
  - [TasksResponse](docs/TasksResponse.md)
  - [URLResponse](docs/URLResponse.md)
  - [UpdateAppRouteInput](docs/UpdateAppRouteInput.md)
+ - [UpdateAppServiceCronScheduleInput](docs/UpdateAppServiceCronScheduleInput.md)
+ - [UpdateAppServiceDatabaseInput](docs/UpdateAppServiceDatabaseInput.md)
+ - [UpdateAppServiceEnvVarInput](docs/UpdateAppServiceEnvVarInput.md)
+ - [UpdateDatabaseUserDBsInput](docs/UpdateDatabaseUserDBsInput.md)
  - [UpdateEnvRequest](docs/UpdateEnvRequest.md)
  - [UpdateIntegrationInput](docs/UpdateIntegrationInput.md)
  - [UpdateOrgRequest](docs/UpdateOrgRequest.md)
  - [UpdateProjectInput](docs/UpdateProjectInput.md)
+ - [UpdateSecretValueInput](docs/UpdateSecretValueInput.md)
  - [UpdateStackFromGitRequest](docs/UpdateStackFromGitRequest.md)
+ - [UpdateStackServiceCronScheduleInput](docs/UpdateStackServiceCronScheduleInput.md)
+ - [UpdateStackServiceEnvVarInput](docs/UpdateStackServiceEnvVarInput.md)
+ - [UpdateStackServiceTokenInput](docs/UpdateStackServiceTokenInput.md)
  - [UpdateTitleRequest](docs/UpdateTitleRequest.md)
  - [User](docs/User.md)
  - [VolumeSizeInput](docs/VolumeSizeInput.md)

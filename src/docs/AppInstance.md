@@ -13,6 +13,13 @@ Name | Type | Description | Notes
 **app_id** | **int** |  | 
 **cluster_id** | **int** |  | 
 **env_id** | **int** |  | 
+**stack_id** | **int** |  | 
+**stack_rev_id** | **int** |  | 
+**stack_name** | **str** |  | 
+**stack_title** | **str** |  | 
+**stack_icon** | **str** |  | 
+**stack_rev_number** | **int** |  | 
+**stack_version** | **str** |  | 
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 
 
