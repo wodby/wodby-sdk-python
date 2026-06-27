@@ -60,6 +60,7 @@ class ProvidersApi:
     ) -> Provider:
         """Get provider
 
+        Returns the provider identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -127,6 +128,7 @@ class ProvidersApi:
     ) -> ApiResponse[Provider]:
         """Get provider
 
+        Returns the provider identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -194,6 +196,7 @@ class ProvidersApi:
     ) -> RESTResponseType:
         """Get provider
 
+        Returns the provider identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -321,6 +324,7 @@ class ProvidersApi:
     ) -> Provider:
         """Get provider by name
 
+        Returns the provider identified by name.
 
         :param name: (required)
         :type name: str
@@ -388,6 +392,7 @@ class ProvidersApi:
     ) -> ApiResponse[Provider]:
         """Get provider by name
 
+        Returns the provider identified by name.
 
         :param name: (required)
         :type name: str
@@ -455,6 +460,7 @@ class ProvidersApi:
     ) -> RESTResponseType:
         """Get provider by name
 
+        Returns the provider identified by name.
 
         :param name: (required)
         :type name: str
@@ -582,6 +588,7 @@ class ProvidersApi:
     ) -> ProviderRevision:
         """Get provider revision
 
+        Returns the provider revision identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -649,6 +656,7 @@ class ProvidersApi:
     ) -> ApiResponse[ProviderRevision]:
         """Get provider revision
 
+        Returns the provider revision identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -716,6 +724,7 @@ class ProvidersApi:
     ) -> RESTResponseType:
         """Get provider revision
 
+        Returns the provider revision identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -848,6 +857,7 @@ class ProvidersApi:
     ) -> ProvidersResponse:
         """List providers
 
+        Returns providers matching the request filters.
 
         :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
@@ -935,6 +945,7 @@ class ProvidersApi:
     ) -> ApiResponse[ProvidersResponse]:
         """List providers
 
+        Returns providers matching the request filters.
 
         :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
@@ -1022,6 +1033,7 @@ class ProvidersApi:
     ) -> RESTResponseType:
         """List providers
 
+        Returns providers matching the request filters.
 
         :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int

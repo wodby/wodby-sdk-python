@@ -59,6 +59,7 @@ class AppServicesApi:
     ) -> AppService:
         """Get app service
 
+        Returns the app service identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -126,6 +127,7 @@ class AppServicesApi:
     ) -> ApiResponse[AppService]:
         """Get app service
 
+        Returns the app service identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -193,6 +195,7 @@ class AppServicesApi:
     ) -> RESTResponseType:
         """Get app service
 
+        Returns the app service identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -320,6 +323,7 @@ class AppServicesApi:
     ) -> List[AppService]:
         """List app services
 
+        Returns app services matching the request filters.
 
         :param app_instance_id: (required)
         :type app_instance_id: int
@@ -387,6 +391,7 @@ class AppServicesApi:
     ) -> ApiResponse[List[AppService]]:
         """List app services
 
+        Returns app services matching the request filters.
 
         :param app_instance_id: (required)
         :type app_instance_id: int
@@ -454,6 +459,7 @@ class AppServicesApi:
     ) -> RESTResponseType:
         """List app services
 
+        Returns app services matching the request filters.
 
         :param app_instance_id: (required)
         :type app_instance_id: int
@@ -584,6 +590,7 @@ class AppServicesApi:
     ) -> OperationResult:
         """Run app service action
 
+        Runs the named action for an app service.
 
         :param id: (required)
         :type id: int
@@ -655,6 +662,7 @@ class AppServicesApi:
     ) -> ApiResponse[OperationResult]:
         """Run app service action
 
+        Runs the named action for an app service.
 
         :param id: (required)
         :type id: int
@@ -726,6 +734,7 @@ class AppServicesApi:
     ) -> RESTResponseType:
         """Run app service action
 
+        Runs the named action for an app service.
 
         :param id: (required)
         :type id: int
@@ -860,6 +869,7 @@ class AppServicesApi:
     ) -> AppService:
         """Update app service
 
+        Updates the app service and returns the updated resource.
 
         :param id: (required)
         :type id: int
@@ -931,6 +941,7 @@ class AppServicesApi:
     ) -> ApiResponse[AppService]:
         """Update app service
 
+        Updates the app service and returns the updated resource.
 
         :param id: (required)
         :type id: int
@@ -1002,6 +1013,7 @@ class AppServicesApi:
     ) -> RESTResponseType:
         """Update app service
 
+        Updates the app service and returns the updated resource.
 
         :param id: (required)
         :type id: int

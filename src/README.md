@@ -115,6 +115,8 @@ Class | Method | HTTP request | Description
 *AppInstancesApi* | [**get_app_instance_by_name**](docs/AppInstancesApi.md#get_app_instance_by_name) | **GET** /app-instances/by-name/{appName}/{instanceName} | Get app instance by app and instance name
 *AppInstancesApi* | [**list_app_instances**](docs/AppInstancesApi.md#list_app_instances) | **GET** /app-instances | List app instances
 *AppInstancesApi* | [**update_app_instance**](docs/AppInstancesApi.md#update_app_instance) | **PUT** /app-instances/{id} | Update app instance
+*AppPortsApi* | [**get_app_port**](docs/AppPortsApi.md#get_app_port) | **GET** /app-ports/{id} | Get app port
+*AppPortsApi* | [**list_app_ports**](docs/AppPortsApi.md#list_app_ports) | **GET** /app-ports | List app ports
 *AppRoutesApi* | [**create_app_route**](docs/AppRoutesApi.md#create_app_route) | **POST** /app-routes | Create app route
 *AppRoutesApi* | [**delete_app_route**](docs/AppRoutesApi.md#delete_app_route) | **DELETE** /app-routes/{id} | Delete app route
 *AppRoutesApi* | [**get_app_route**](docs/AppRoutesApi.md#get_app_route) | **GET** /app-routes/{id} | Get app route
@@ -178,6 +180,8 @@ Class | Method | HTTP request | Description
 *IntegrationsApi* | [**list_integration_storage_classes**](docs/IntegrationsApi.md#list_integration_storage_classes) | **GET** /integrations/{id}/options/storage-classes | List storage classes
 *IntegrationsApi* | [**list_integrations**](docs/IntegrationsApi.md#list_integrations) | **GET** /integrations | List integrations
 *IntegrationsApi* | [**update_integration**](docs/IntegrationsApi.md#update_integration) | **PUT** /integrations/{id} | Update integration
+*OrgMembershipsApi* | [**get_org_membership**](docs/OrgMembershipsApi.md#get_org_membership) | **GET** /org-memberships/{id} | Get org membership
+*OrgMembershipsApi* | [**list_org_memberships**](docs/OrgMembershipsApi.md#list_org_memberships) | **GET** /org-memberships | List org memberships
 *OrgsApi* | [**delete_org**](docs/OrgsApi.md#delete_org) | **DELETE** /orgs/{id} | Delete org
 *OrgsApi* | [**get_org**](docs/OrgsApi.md#get_org) | **GET** /orgs/{id} | Get org
 *OrgsApi* | [**list_orgs**](docs/OrgsApi.md#list_orgs) | **GET** /orgs | List orgs
@@ -197,11 +201,17 @@ Class | Method | HTTP request | Description
 *ServicesApi* | [**get_service_revision**](docs/ServicesApi.md#get_service_revision) | **GET** /service-revisions/{id} | Get service revision
 *ServicesApi* | [**list_service_link_candidates**](docs/ServicesApi.md#list_service_link_candidates) | **GET** /services/{name}/options/link-candidates | List service link candidates
 *ServicesApi* | [**list_services**](docs/ServicesApi.md#list_services) | **GET** /services | List services
+*StackServicesApi* | [**create_stack_service**](docs/StackServicesApi.md#create_stack_service) | **POST** /stack-services | Create stack service
+*StackServicesApi* | [**delete_stack_service**](docs/StackServicesApi.md#delete_stack_service) | **DELETE** /stack-services/{id} | Delete stack service
+*StackServicesApi* | [**list_stack_services**](docs/StackServicesApi.md#list_stack_services) | **GET** /stack-services | List stack services
+*StackServicesApi* | [**update_stack_service**](docs/StackServicesApi.md#update_stack_service) | **PUT** /stack-services/{id} | Update stack service
 *StacksApi* | [**get_stack**](docs/StacksApi.md#get_stack) | **GET** /stacks/{id} | Get stack
 *StacksApi* | [**get_stack_by_name**](docs/StacksApi.md#get_stack_by_name) | **GET** /stacks/by-name/{name} | Get stack by name
 *StacksApi* | [**get_stack_revision**](docs/StacksApi.md#get_stack_revision) | **GET** /stack-revisions/{id} | Get stack revision
 *StacksApi* | [**list_stack_revision_services**](docs/StacksApi.md#list_stack_revision_services) | **GET** /stack-revisions/{id}/services | List stack services
 *StacksApi* | [**list_stacks**](docs/StacksApi.md#list_stacks) | **GET** /stacks | List stacks
+*StacksApi* | [**publish_stack_draft**](docs/StacksApi.md#publish_stack_draft) | **POST** /stacks/{id}/actions/publish-draft | Publish stack draft
+*StacksApi* | [**update_stack_from_git**](docs/StacksApi.md#update_stack_from_git) | **POST** /stacks/{id}/actions/update-from-git | Update stack from git
 *TaskStepsApi* | [**get_task_step_log_url**](docs/TaskStepsApi.md#get_task_step_log_url) | **GET** /task-steps/{id}/log-url | Get task step log URL
 *TaskStepsApi* | [**get_task_step_logs**](docs/TaskStepsApi.md#get_task_step_logs) | **GET** /task-steps/{id}/logs | Get task step logs
 *TasksApi* | [**cancel_task**](docs/TasksApi.md#cancel_task) | **POST** /tasks/{id}/cancel | Cancel task
@@ -220,6 +230,7 @@ Class | Method | HTTP request | Description
  - [AppDeploymentsResponse](docs/AppDeploymentsResponse.md)
  - [AppEndpointOptionInput](docs/AppEndpointOptionInput.md)
  - [AppInstance](docs/AppInstance.md)
+ - [AppPort](docs/AppPort.md)
  - [AppRoute](docs/AppRoute.md)
  - [AppService](docs/AppService.md)
  - [AppServiceBuildArg](docs/AppServiceBuildArg.md)
@@ -262,8 +273,10 @@ Class | Method | HTTP request | Description
  - [NewIntegrationInput](docs/NewIntegrationInput.md)
  - [NewManagedClusterInput](docs/NewManagedClusterInput.md)
  - [NewProjectInput](docs/NewProjectInput.md)
+ - [NewStackServiceInput](docs/NewStackServiceInput.md)
  - [OperationResult](docs/OperationResult.md)
  - [Org](docs/Org.md)
+ - [OrgMembership](docs/OrgMembership.md)
  - [Project](docs/Project.md)
  - [Provider](docs/Provider.md)
  - [ProviderRevision](docs/ProviderRevision.md)
@@ -279,6 +292,7 @@ Class | Method | HTTP request | Description
  - [Stack](docs/Stack.md)
  - [StackRevision](docs/StackRevision.md)
  - [StackService](docs/StackService.md)
+ - [StackServiceInput](docs/StackServiceInput.md)
  - [StacksResponse](docs/StacksResponse.md)
  - [Task](docs/Task.md)
  - [TaskJob](docs/TaskJob.md)
@@ -291,7 +305,9 @@ Class | Method | HTTP request | Description
  - [UpdateIntegrationInput](docs/UpdateIntegrationInput.md)
  - [UpdateOrgRequest](docs/UpdateOrgRequest.md)
  - [UpdateProjectInput](docs/UpdateProjectInput.md)
+ - [UpdateStackFromGitRequest](docs/UpdateStackFromGitRequest.md)
  - [UpdateTitleRequest](docs/UpdateTitleRequest.md)
+ - [User](docs/User.md)
  - [VolumeSizeInput](docs/VolumeSizeInput.md)
 
 

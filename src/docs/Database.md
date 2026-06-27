@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **region** | **str** |  | [optional] 
 **zone** | **str** |  | [optional] 
 **integration_id** | **int** |  | [optional] 
+**app_service_id** | **int** |  | [optional] 
 **env_id** | **int** |  | 
 **org_id** | **int** |  | 
 **created_at** | **datetime** |  | 

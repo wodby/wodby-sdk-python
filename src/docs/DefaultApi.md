@@ -13,6 +13,8 @@ Method | HTTP request | Description
 
 Get OpenAPI JSON
 
+Returns the public OpenAPI schema in JSON format.
+
 ### Example
 
 
@@ -75,6 +77,8 @@ No authorization required
 > str get_open_api_yaml()
 
 Get OpenAPI YAML
+
+Returns the public OpenAPI schema in YAML format.
 
 ### Example
 

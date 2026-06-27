@@ -59,6 +59,7 @@ class IntegrationKindsApi:
     ) -> Dict[str, object]:
         """Get database settings
 
+        Returns the database settings identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -130,6 +131,7 @@ class IntegrationKindsApi:
     ) -> ApiResponse[Dict[str, object]]:
         """Get database settings
 
+        Returns the database settings identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -201,6 +203,7 @@ class IntegrationKindsApi:
     ) -> RESTResponseType:
         """Get database settings
 
+        Returns the database settings identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -341,6 +344,7 @@ class IntegrationKindsApi:
     ) -> List[Dict[str, object]]:
         """List database machine types
 
+        Returns database machine types matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -428,6 +432,7 @@ class IntegrationKindsApi:
     ) -> ApiResponse[List[Dict[str, object]]]:
         """List database machine types
 
+        Returns database machine types matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -515,6 +520,7 @@ class IntegrationKindsApi:
     ) -> RESTResponseType:
         """List database machine types
 
+        Returns database machine types matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -685,6 +691,7 @@ class IntegrationKindsApi:
     ) -> List[Dict[str, object]]:
         """List database regions
 
+        Returns database regions matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -764,6 +771,7 @@ class IntegrationKindsApi:
     ) -> ApiResponse[List[Dict[str, object]]]:
         """List database regions
 
+        Returns database regions matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -843,6 +851,7 @@ class IntegrationKindsApi:
     ) -> RESTResponseType:
         """List database regions
 
+        Returns database regions matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -994,6 +1003,7 @@ class IntegrationKindsApi:
     ) -> List[DatabaseType]:
         """List database types
 
+        Returns database types matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -1061,6 +1071,7 @@ class IntegrationKindsApi:
     ) -> ApiResponse[List[DatabaseType]]:
         """List database types
 
+        Returns database types matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -1128,6 +1139,7 @@ class IntegrationKindsApi:
     ) -> RESTResponseType:
         """List database types
 
+        Returns database types matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -1256,6 +1268,7 @@ class IntegrationKindsApi:
     ) -> List[DatabaseVersion]:
         """List database versions
 
+        Returns database versions matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -1327,6 +1340,7 @@ class IntegrationKindsApi:
     ) -> ApiResponse[List[DatabaseVersion]]:
         """List database versions
 
+        Returns database versions matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -1398,6 +1412,7 @@ class IntegrationKindsApi:
     ) -> RESTResponseType:
         """List database versions
 
+        Returns database versions matching the request filters.
 
         :param id: (required)
         :type id: int

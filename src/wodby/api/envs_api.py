@@ -61,6 +61,7 @@ class EnvsApi:
     ) -> Env:
         """Create env
 
+        Creates an env and returns the created resource.
 
         :param create_env_request: (required)
         :type create_env_request: CreateEnvRequest
@@ -128,6 +129,7 @@ class EnvsApi:
     ) -> ApiResponse[Env]:
         """Create env
 
+        Creates an env and returns the created resource.
 
         :param create_env_request: (required)
         :type create_env_request: CreateEnvRequest
@@ -195,6 +197,7 @@ class EnvsApi:
     ) -> RESTResponseType:
         """Create env
 
+        Creates an env and returns the created resource.
 
         :param create_env_request: (required)
         :type create_env_request: CreateEnvRequest
@@ -335,6 +338,7 @@ class EnvsApi:
     ) -> OperationResult:
         """Delete env
 
+        Deletes the env and returns the operation result.
 
         :param id: (required)
         :type id: int
@@ -402,6 +406,7 @@ class EnvsApi:
     ) -> ApiResponse[OperationResult]:
         """Delete env
 
+        Deletes the env and returns the operation result.
 
         :param id: (required)
         :type id: int
@@ -469,6 +474,7 @@ class EnvsApi:
     ) -> RESTResponseType:
         """Delete env
 
+        Deletes the env and returns the operation result.
 
         :param id: (required)
         :type id: int
@@ -596,6 +602,7 @@ class EnvsApi:
     ) -> Env:
         """Get env
 
+        Returns the env identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -663,6 +670,7 @@ class EnvsApi:
     ) -> ApiResponse[Env]:
         """Get env
 
+        Returns the env identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -730,6 +738,7 @@ class EnvsApi:
     ) -> RESTResponseType:
         """Get env
 
+        Returns the env identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -858,6 +867,7 @@ class EnvsApi:
     ) -> Env:
         """Get env by name
 
+        Returns the env identified by name.
 
         :param name: (required)
         :type name: str
@@ -929,6 +939,7 @@ class EnvsApi:
     ) -> ApiResponse[Env]:
         """Get env by name
 
+        Returns the env identified by name.
 
         :param name: (required)
         :type name: str
@@ -1000,6 +1011,7 @@ class EnvsApi:
     ) -> RESTResponseType:
         """Get env by name
 
+        Returns the env identified by name.
 
         :param name: (required)
         :type name: str
@@ -1135,6 +1147,7 @@ class EnvsApi:
     ) -> List[Env]:
         """List envs
 
+        Returns envs matching the request filters.
 
         :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
@@ -1202,6 +1215,7 @@ class EnvsApi:
     ) -> ApiResponse[List[Env]]:
         """List envs
 
+        Returns envs matching the request filters.
 
         :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
@@ -1269,6 +1283,7 @@ class EnvsApi:
     ) -> RESTResponseType:
         """List envs
 
+        Returns envs matching the request filters.
 
         :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
@@ -1399,6 +1414,7 @@ class EnvsApi:
     ) -> Env:
         """Update env
 
+        Updates the env and returns the updated resource.
 
         :param id: (required)
         :type id: int
@@ -1470,6 +1486,7 @@ class EnvsApi:
     ) -> ApiResponse[Env]:
         """Update env
 
+        Updates the env and returns the updated resource.
 
         :param id: (required)
         :type id: int
@@ -1541,6 +1558,7 @@ class EnvsApi:
     ) -> RESTResponseType:
         """Update env
 
+        Updates the env and returns the updated resource.
 
         :param id: (required)
         :type id: int

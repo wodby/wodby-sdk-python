@@ -16,6 +16,8 @@ Method | HTTP request | Description
 
 Get database settings
 
+Returns the database settings identified by the request path.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -95,6 +97,8 @@ Name | Type | Description  | Notes
 > List[Dict[str, object]] list_integration_kind_database_machine_types(id, db_type, version, ha=ha, region=region, zone=zone)
 
 List database machine types
+
+Returns database machine types matching the request filters.
 
 ### Example
 
@@ -184,6 +188,8 @@ Name | Type | Description  | Notes
 
 List database regions
 
+Returns database regions matching the request filters.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -268,6 +274,8 @@ Name | Type | Description  | Notes
 
 List database types
 
+Returns database types matching the request filters.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -346,6 +354,8 @@ Name | Type | Description  | Notes
 > List[DatabaseVersion] list_integration_kind_database_versions(id, db_type)
 
 List database versions
+
+Returns database versions matching the request filters.
 
 ### Example
 

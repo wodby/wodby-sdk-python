@@ -17,6 +17,8 @@ Method | HTTP request | Description
 
 Create env
 
+Creates an env and returns the created resource.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -97,6 +99,8 @@ Name | Type | Description  | Notes
 
 Delete env
 
+Deletes the env and returns the operation result.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -176,6 +180,8 @@ Name | Type | Description  | Notes
 
 Get env
 
+Returns the env identified by the request path.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -254,6 +260,8 @@ Name | Type | Description  | Notes
 > Env get_env_by_name(name, org_id=org_id)
 
 Get env by name
+
+Returns the env identified by name.
 
 ### Example
 
@@ -336,6 +344,8 @@ Name | Type | Description  | Notes
 
 List envs
 
+Returns envs matching the request filters.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -414,6 +424,8 @@ Name | Type | Description  | Notes
 > Env update_env(id, update_env_request)
 
 Update env
+
+Updates the env and returns the updated resource.
 
 ### Example
 

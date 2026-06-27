@@ -60,6 +60,7 @@ class ServicesApi:
     ) -> Service:
         """Get service
 
+        Returns the service identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -127,6 +128,7 @@ class ServicesApi:
     ) -> ApiResponse[Service]:
         """Get service
 
+        Returns the service identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -194,6 +196,7 @@ class ServicesApi:
     ) -> RESTResponseType:
         """Get service
 
+        Returns the service identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -322,6 +325,7 @@ class ServicesApi:
     ) -> Service:
         """Get service by name
 
+        Returns the service identified by name.
 
         :param name: (required)
         :type name: str
@@ -393,6 +397,7 @@ class ServicesApi:
     ) -> ApiResponse[Service]:
         """Get service by name
 
+        Returns the service identified by name.
 
         :param name: (required)
         :type name: str
@@ -464,6 +469,7 @@ class ServicesApi:
     ) -> RESTResponseType:
         """Get service by name
 
+        Returns the service identified by name.
 
         :param name: (required)
         :type name: str
@@ -599,6 +605,7 @@ class ServicesApi:
     ) -> ServiceRevision:
         """Get service revision
 
+        Returns the service revision identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -666,6 +673,7 @@ class ServicesApi:
     ) -> ApiResponse[ServiceRevision]:
         """Get service revision
 
+        Returns the service revision identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -733,6 +741,7 @@ class ServicesApi:
     ) -> RESTResponseType:
         """Get service revision
 
+        Returns the service revision identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -860,6 +869,7 @@ class ServicesApi:
     ) -> List[Dict[str, object]]:
         """List service link candidates
 
+        Returns service link candidates matching the request filters.
 
         :param name: (required)
         :type name: str
@@ -927,6 +937,7 @@ class ServicesApi:
     ) -> ApiResponse[List[Dict[str, object]]]:
         """List service link candidates
 
+        Returns service link candidates matching the request filters.
 
         :param name: (required)
         :type name: str
@@ -994,6 +1005,7 @@ class ServicesApi:
     ) -> RESTResponseType:
         """List service link candidates
 
+        Returns service link candidates matching the request filters.
 
         :param name: (required)
         :type name: str
@@ -1125,6 +1137,7 @@ class ServicesApi:
     ) -> ServicesResponse:
         """List services
 
+        Returns services matching the request filters.
 
         :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
@@ -1208,6 +1221,7 @@ class ServicesApi:
     ) -> ApiResponse[ServicesResponse]:
         """List services
 
+        Returns services matching the request filters.
 
         :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
@@ -1291,6 +1305,7 @@ class ServicesApi:
     ) -> RESTResponseType:
         """List services
 
+        Returns services matching the request filters.
 
         :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int

@@ -19,10 +19,12 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictInt, StrictStr
 from typing import List, Optional
 from typing_extensions import Annotated
+from wodby.models.operation_result import OperationResult
 from wodby.models.stack import Stack
 from wodby.models.stack_revision import StackRevision
 from wodby.models.stack_service import StackService
 from wodby.models.stacks_response import StacksResponse
+from wodby.models.update_stack_from_git_request import UpdateStackFromGitRequest
 
 from wodby.api_client import ApiClient, RequestSerialized
 from wodby.api_response import ApiResponse
@@ -61,6 +63,7 @@ class StacksApi:
     ) -> Stack:
         """Get stack
 
+        Returns the stack identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -128,6 +131,7 @@ class StacksApi:
     ) -> ApiResponse[Stack]:
         """Get stack
 
+        Returns the stack identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -195,6 +199,7 @@ class StacksApi:
     ) -> RESTResponseType:
         """Get stack
 
+        Returns the stack identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -323,6 +328,7 @@ class StacksApi:
     ) -> Stack:
         """Get stack by name
 
+        Returns the stack identified by name.
 
         :param name: (required)
         :type name: str
@@ -394,6 +400,7 @@ class StacksApi:
     ) -> ApiResponse[Stack]:
         """Get stack by name
 
+        Returns the stack identified by name.
 
         :param name: (required)
         :type name: str
@@ -465,6 +472,7 @@ class StacksApi:
     ) -> RESTResponseType:
         """Get stack by name
 
+        Returns the stack identified by name.
 
         :param name: (required)
         :type name: str
@@ -600,6 +608,7 @@ class StacksApi:
     ) -> StackRevision:
         """Get stack revision
 
+        Returns the stack revision identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -667,6 +676,7 @@ class StacksApi:
     ) -> ApiResponse[StackRevision]:
         """Get stack revision
 
+        Returns the stack revision identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -734,6 +744,7 @@ class StacksApi:
     ) -> RESTResponseType:
         """Get stack revision
 
+        Returns the stack revision identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -861,6 +872,7 @@ class StacksApi:
     ) -> List[StackService]:
         """List stack services
 
+        Returns stack services matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -928,6 +940,7 @@ class StacksApi:
     ) -> ApiResponse[List[StackService]]:
         """List stack services
 
+        Returns stack services matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -995,6 +1008,7 @@ class StacksApi:
     ) -> RESTResponseType:
         """List stack services
 
+        Returns stack services matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -1126,6 +1140,7 @@ class StacksApi:
     ) -> StacksResponse:
         """List stacks
 
+        Returns stacks matching the request filters.
 
         :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
@@ -1209,6 +1224,7 @@ class StacksApi:
     ) -> ApiResponse[StacksResponse]:
         """List stacks
 
+        Returns stacks matching the request filters.
 
         :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
@@ -1292,6 +1308,7 @@ class StacksApi:
     ) -> RESTResponseType:
         """List stacks
 
+        Returns stacks matching the request filters.
 
         :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
@@ -1419,6 +1436,562 @@ class StacksApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/stacks',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def publish_stack_draft(
+        self,
+        id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Stack:
+        """Publish stack draft
+
+        Publishes the current stack draft as the active stack revision.
+
+        :param id: (required)
+        :type id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._publish_stack_draft_serialize(
+            id=id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Stack",
+            '4XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def publish_stack_draft_with_http_info(
+        self,
+        id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Stack]:
+        """Publish stack draft
+
+        Publishes the current stack draft as the active stack revision.
+
+        :param id: (required)
+        :type id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._publish_stack_draft_serialize(
+            id=id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Stack",
+            '4XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def publish_stack_draft_without_preload_content(
+        self,
+        id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Publish stack draft
+
+        Publishes the current stack draft as the active stack revision.
+
+        :param id: (required)
+        :type id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._publish_stack_draft_serialize(
+            id=id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Stack",
+            '4XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _publish_stack_draft_serialize(
+        self,
+        id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if id is not None:
+            _path_params['id'] = id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'apiKeyHeader'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/stacks/{id}/actions/publish-draft',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def update_stack_from_git(
+        self,
+        id: StrictInt,
+        update_stack_from_git_request: UpdateStackFromGitRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> OperationResult:
+        """Update stack from git
+
+        Starts a task that updates the stack from its configured Git source.
+
+        :param id: (required)
+        :type id: int
+        :param update_stack_from_git_request: (required)
+        :type update_stack_from_git_request: UpdateStackFromGitRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_stack_from_git_serialize(
+            id=id,
+            update_stack_from_git_request=update_stack_from_git_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "OperationResult",
+            '4XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def update_stack_from_git_with_http_info(
+        self,
+        id: StrictInt,
+        update_stack_from_git_request: UpdateStackFromGitRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[OperationResult]:
+        """Update stack from git
+
+        Starts a task that updates the stack from its configured Git source.
+
+        :param id: (required)
+        :type id: int
+        :param update_stack_from_git_request: (required)
+        :type update_stack_from_git_request: UpdateStackFromGitRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_stack_from_git_serialize(
+            id=id,
+            update_stack_from_git_request=update_stack_from_git_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "OperationResult",
+            '4XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def update_stack_from_git_without_preload_content(
+        self,
+        id: StrictInt,
+        update_stack_from_git_request: UpdateStackFromGitRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Update stack from git
+
+        Starts a task that updates the stack from its configured Git source.
+
+        :param id: (required)
+        :type id: int
+        :param update_stack_from_git_request: (required)
+        :type update_stack_from_git_request: UpdateStackFromGitRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_stack_from_git_serialize(
+            id=id,
+            update_stack_from_git_request=update_stack_from_git_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "OperationResult",
+            '4XX': "ErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _update_stack_from_git_serialize(
+        self,
+        id,
+        update_stack_from_git_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if id is not None:
+            _path_params['id'] = id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if update_stack_from_git_request is not None:
+            _body_params = update_stack_from_git_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'apiKeyHeader'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/stacks/{id}/actions/update-from-git',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

@@ -15,6 +15,8 @@ Method | HTTP request | Description
 
 Cancel task
 
+Requests cancellation for the task.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -94,6 +96,8 @@ Name | Type | Description  | Notes
 
 Get task
 
+Returns the task identified by the request path.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -172,6 +176,8 @@ Name | Type | Description  | Notes
 > TasksResponse list_tasks(scope=scope, org_id=org_id, project_ids=project_ids, without_origin=without_origin, statuses=statuses, search=search, app_id=app_id, app_instance_id=app_instance_id, stack_id=stack_id, database_id=database_id, cluster_id=cluster_id, service_id=service_id, integration_id=integration_id, provider_id=provider_id, page=page, page_size=page_size)
 
 List tasks
+
+Returns tasks matching the request filters.
 
 ### Example
 
@@ -281,6 +287,8 @@ Name | Type | Description  | Notes
 > OperationResult repeat_task(id, repeat_task_request)
 
 Repeat task
+
+Creates a repeated run for the task.
 
 ### Example
 

@@ -59,6 +59,7 @@ class OrgsApi:
     ) -> OperationResult:
         """Delete org
 
+        Deletes the org and returns the operation result.
 
         :param id: (required)
         :type id: int
@@ -126,6 +127,7 @@ class OrgsApi:
     ) -> ApiResponse[OperationResult]:
         """Delete org
 
+        Deletes the org and returns the operation result.
 
         :param id: (required)
         :type id: int
@@ -193,6 +195,7 @@ class OrgsApi:
     ) -> RESTResponseType:
         """Delete org
 
+        Deletes the org and returns the operation result.
 
         :param id: (required)
         :type id: int
@@ -320,6 +323,7 @@ class OrgsApi:
     ) -> Org:
         """Get org
 
+        Returns the org identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -387,6 +391,7 @@ class OrgsApi:
     ) -> ApiResponse[Org]:
         """Get org
 
+        Returns the org identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -454,6 +459,7 @@ class OrgsApi:
     ) -> RESTResponseType:
         """Get org
 
+        Returns the org identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -580,6 +586,7 @@ class OrgsApi:
     ) -> List[Org]:
         """List orgs
 
+        Returns orgs matching the request filters.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -643,6 +650,7 @@ class OrgsApi:
     ) -> ApiResponse[List[Org]]:
         """List orgs
 
+        Returns orgs matching the request filters.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -706,6 +714,7 @@ class OrgsApi:
     ) -> RESTResponseType:
         """List orgs
 
+        Returns orgs matching the request filters.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -828,6 +837,7 @@ class OrgsApi:
     ) -> Org:
         """Update org
 
+        Updates the org and returns the updated resource.
 
         :param id: (required)
         :type id: int
@@ -899,6 +909,7 @@ class OrgsApi:
     ) -> ApiResponse[Org]:
         """Update org
 
+        Updates the org and returns the updated resource.
 
         :param id: (required)
         :type id: int
@@ -970,6 +981,7 @@ class OrgsApi:
     ) -> RESTResponseType:
         """Update org
 
+        Updates the org and returns the updated resource.
 
         :param id: (required)
         :type id: int

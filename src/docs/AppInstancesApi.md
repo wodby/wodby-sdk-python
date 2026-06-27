@@ -17,6 +17,8 @@ Method | HTTP request | Description
 
 Create app instance
 
+Creates an app instance and returns the created resource.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -96,6 +98,8 @@ Name | Type | Description  | Notes
 > OperationResult delete_app_instance(id, force=force)
 
 Delete app instance
+
+Deletes the app instance and returns the operation result.
 
 ### Example
 
@@ -178,6 +182,8 @@ Name | Type | Description  | Notes
 
 Get app instance
 
+Returns the app instance identified by the request path.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -256,6 +262,8 @@ Name | Type | Description  | Notes
 > AppInstance get_app_instance_by_name(app_name, instance_name, org_id=org_id)
 
 Get app instance by app and instance name
+
+Returns the app instance identified by app and instance name.
 
 ### Example
 
@@ -339,6 +347,8 @@ Name | Type | Description  | Notes
 > List[AppInstance] list_app_instances(org_id=org_id, project_ids=project_ids, app_id=app_id, cluster_id=cluster_id, cluster_app=cluster_app)
 
 List app instances
+
+Returns app instances matching the request filters.
 
 ### Example
 
@@ -426,6 +436,8 @@ Name | Type | Description  | Notes
 > AppInstance update_app_instance(id, update_title_request)
 
 Update app instance
+
+Updates the app instance and returns the updated resource.
 
 ### Example
 

@@ -61,6 +61,7 @@ class ProjectsApi:
     ) -> Project:
         """Create project
 
+        Creates a project and returns the created resource.
 
         :param new_project_input: (required)
         :type new_project_input: NewProjectInput
@@ -128,6 +129,7 @@ class ProjectsApi:
     ) -> ApiResponse[Project]:
         """Create project
 
+        Creates a project and returns the created resource.
 
         :param new_project_input: (required)
         :type new_project_input: NewProjectInput
@@ -195,6 +197,7 @@ class ProjectsApi:
     ) -> RESTResponseType:
         """Create project
 
+        Creates a project and returns the created resource.
 
         :param new_project_input: (required)
         :type new_project_input: NewProjectInput
@@ -335,6 +338,7 @@ class ProjectsApi:
     ) -> OperationResult:
         """Delete project
 
+        Deletes the project and returns the operation result.
 
         :param id: (required)
         :type id: int
@@ -402,6 +406,7 @@ class ProjectsApi:
     ) -> ApiResponse[OperationResult]:
         """Delete project
 
+        Deletes the project and returns the operation result.
 
         :param id: (required)
         :type id: int
@@ -469,6 +474,7 @@ class ProjectsApi:
     ) -> RESTResponseType:
         """Delete project
 
+        Deletes the project and returns the operation result.
 
         :param id: (required)
         :type id: int
@@ -596,6 +602,7 @@ class ProjectsApi:
     ) -> Project:
         """Get project
 
+        Returns the project identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -663,6 +670,7 @@ class ProjectsApi:
     ) -> ApiResponse[Project]:
         """Get project
 
+        Returns the project identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -730,6 +738,7 @@ class ProjectsApi:
     ) -> RESTResponseType:
         """Get project
 
+        Returns the project identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -858,6 +867,7 @@ class ProjectsApi:
     ) -> Project:
         """Get project by name
 
+        Returns the project identified by name.
 
         :param name: (required)
         :type name: str
@@ -929,6 +939,7 @@ class ProjectsApi:
     ) -> ApiResponse[Project]:
         """Get project by name
 
+        Returns the project identified by name.
 
         :param name: (required)
         :type name: str
@@ -1000,6 +1011,7 @@ class ProjectsApi:
     ) -> RESTResponseType:
         """Get project by name
 
+        Returns the project identified by name.
 
         :param name: (required)
         :type name: str
@@ -1135,6 +1147,7 @@ class ProjectsApi:
     ) -> List[Project]:
         """List projects
 
+        Returns projects matching the request filters.
 
         :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
@@ -1202,6 +1215,7 @@ class ProjectsApi:
     ) -> ApiResponse[List[Project]]:
         """List projects
 
+        Returns projects matching the request filters.
 
         :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
@@ -1269,6 +1283,7 @@ class ProjectsApi:
     ) -> RESTResponseType:
         """List projects
 
+        Returns projects matching the request filters.
 
         :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
@@ -1399,6 +1414,7 @@ class ProjectsApi:
     ) -> Project:
         """Update project
 
+        Updates the project and returns the updated resource.
 
         :param id: (required)
         :type id: int
@@ -1470,6 +1486,7 @@ class ProjectsApi:
     ) -> ApiResponse[Project]:
         """Update project
 
+        Updates the project and returns the updated resource.
 
         :param id: (required)
         :type id: int
@@ -1541,6 +1558,7 @@ class ProjectsApi:
     ) -> RESTResponseType:
         """Update project
 
+        Updates the project and returns the updated resource.
 
         :param id: (required)
         :type id: int

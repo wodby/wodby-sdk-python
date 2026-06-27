@@ -17,6 +17,8 @@ Method | HTTP request | Description
 
 Create project
 
+Creates a project and returns the created resource.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -97,6 +99,8 @@ Name | Type | Description  | Notes
 
 Delete project
 
+Deletes the project and returns the operation result.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -176,6 +180,8 @@ Name | Type | Description  | Notes
 
 Get project
 
+Returns the project identified by the request path.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -254,6 +260,8 @@ Name | Type | Description  | Notes
 > Project get_project_by_name(name, org_id=org_id)
 
 Get project by name
+
+Returns the project identified by name.
 
 ### Example
 
@@ -336,6 +344,8 @@ Name | Type | Description  | Notes
 
 List projects
 
+Returns projects matching the request filters.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -414,6 +424,8 @@ Name | Type | Description  | Notes
 > Project update_project(id, update_project_input)
 
 Update project
+
+Updates the project and returns the updated resource.
 
 ### Example
 

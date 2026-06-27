@@ -16,6 +16,8 @@ Method | HTTP request | Description
 
 Create deployment
 
+Creates a deployment and returns the created resource.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -95,6 +97,8 @@ Name | Type | Description  | Notes
 > AppDeployment create_app_deployment_from_ci(deployment_from_ci_input)
 
 Create deployment from CI
+
+Creates a deployment from a CI workflow request.
 
 ### Example
 
@@ -183,6 +187,8 @@ Name | Type | Description  | Notes
 
 Get deployment
 
+Returns the deployment identified by the request path.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -261,6 +267,8 @@ Name | Type | Description  | Notes
 > AppDeploymentsResponse list_app_deployments(app_instance_id, page=page, page_size=page_size)
 
 List app deployments
+
+Returns app deployments matching the request filters.
 
 ### Example
 
@@ -344,6 +352,8 @@ Name | Type | Description  | Notes
 > AppDeployment redeploy_app_deployment(id)
 
 Redeploy deployment
+
+Creates a redeployment task for an existing deployment.
 
 ### Example
 

@@ -61,6 +61,7 @@ class TasksApi:
     ) -> OperationResult:
         """Cancel task
 
+        Requests cancellation for the task.
 
         :param id: (required)
         :type id: int
@@ -128,6 +129,7 @@ class TasksApi:
     ) -> ApiResponse[OperationResult]:
         """Cancel task
 
+        Requests cancellation for the task.
 
         :param id: (required)
         :type id: int
@@ -195,6 +197,7 @@ class TasksApi:
     ) -> RESTResponseType:
         """Cancel task
 
+        Requests cancellation for the task.
 
         :param id: (required)
         :type id: int
@@ -322,6 +325,7 @@ class TasksApi:
     ) -> Task:
         """Get task
 
+        Returns the task identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -389,6 +393,7 @@ class TasksApi:
     ) -> ApiResponse[Task]:
         """Get task
 
+        Returns the task identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -456,6 +461,7 @@ class TasksApi:
     ) -> RESTResponseType:
         """Get task
 
+        Returns the task identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -598,6 +604,7 @@ class TasksApi:
     ) -> TasksResponse:
         """List tasks
 
+        Returns tasks matching the request filters.
 
         :param scope:
         :type scope: str
@@ -725,6 +732,7 @@ class TasksApi:
     ) -> ApiResponse[TasksResponse]:
         """List tasks
 
+        Returns tasks matching the request filters.
 
         :param scope:
         :type scope: str
@@ -852,6 +860,7 @@ class TasksApi:
     ) -> RESTResponseType:
         """List tasks
 
+        Returns tasks matching the request filters.
 
         :param scope:
         :type scope: str
@@ -1102,6 +1111,7 @@ class TasksApi:
     ) -> OperationResult:
         """Repeat task
 
+        Creates a repeated run for the task.
 
         :param id: (required)
         :type id: int
@@ -1173,6 +1183,7 @@ class TasksApi:
     ) -> ApiResponse[OperationResult]:
         """Repeat task
 
+        Creates a repeated run for the task.
 
         :param id: (required)
         :type id: int
@@ -1244,6 +1255,7 @@ class TasksApi:
     ) -> RESTResponseType:
         """Repeat task
 
+        Creates a repeated run for the task.
 
         :param id: (required)
         :type id: int

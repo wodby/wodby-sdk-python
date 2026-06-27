@@ -64,6 +64,7 @@ class AppBuildsApi:
     ) -> List[AppBuild]:
         """Create build
 
+        Creates a build and returns the created resource.
 
         :param create_build_request: (required)
         :type create_build_request: CreateBuildRequest
@@ -131,6 +132,7 @@ class AppBuildsApi:
     ) -> ApiResponse[List[AppBuild]]:
         """Create build
 
+        Creates a build and returns the created resource.
 
         :param create_build_request: (required)
         :type create_build_request: CreateBuildRequest
@@ -198,6 +200,7 @@ class AppBuildsApi:
     ) -> RESTResponseType:
         """Create build
 
+        Creates a build and returns the created resource.
 
         :param create_build_request: (required)
         :type create_build_request: CreateBuildRequest
@@ -338,6 +341,7 @@ class AppBuildsApi:
     ) -> AppBuild:
         """Create build from CI
 
+        Creates a build from a CI workflow request.
 
         :param new_build_from_ci_input: (required)
         :type new_build_from_ci_input: NewBuildFromCIInput
@@ -405,6 +409,7 @@ class AppBuildsApi:
     ) -> ApiResponse[AppBuild]:
         """Create build from CI
 
+        Creates a build from a CI workflow request.
 
         :param new_build_from_ci_input: (required)
         :type new_build_from_ci_input: NewBuildFromCIInput
@@ -472,6 +477,7 @@ class AppBuildsApi:
     ) -> RESTResponseType:
         """Create build from CI
 
+        Creates a build from a CI workflow request.
 
         :param new_build_from_ci_input: (required)
         :type new_build_from_ci_input: NewBuildFromCIInput
@@ -612,6 +618,7 @@ class AppBuildsApi:
     ) -> AppDeployment:
         """Deploy build
 
+        Creates a deployment from the completed app build.
 
         :param id: (required)
         :type id: int
@@ -679,6 +686,7 @@ class AppBuildsApi:
     ) -> ApiResponse[AppDeployment]:
         """Deploy build
 
+        Creates a deployment from the completed app build.
 
         :param id: (required)
         :type id: int
@@ -746,6 +754,7 @@ class AppBuildsApi:
     ) -> RESTResponseType:
         """Deploy build
 
+        Creates a deployment from the completed app build.
 
         :param id: (required)
         :type id: int
@@ -873,6 +882,7 @@ class AppBuildsApi:
     ) -> AppBuild:
         """Get build
 
+        Returns the build identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -940,6 +950,7 @@ class AppBuildsApi:
     ) -> ApiResponse[AppBuild]:
         """Get build
 
+        Returns the build identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -1007,6 +1018,7 @@ class AppBuildsApi:
     ) -> RESTResponseType:
         """Get build
 
+        Returns the build identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -1135,6 +1147,7 @@ class AppBuildsApi:
     ) -> AppBuildConfig:
         """Get build config
 
+        Returns CI build configuration for the app build.
 
         :param id: (required)
         :type id: int
@@ -1202,6 +1215,7 @@ class AppBuildsApi:
     ) -> ApiResponse[AppBuildConfig]:
         """Get build config
 
+        Returns CI build configuration for the app build.
 
         :param id: (required)
         :type id: int
@@ -1269,6 +1283,7 @@ class AppBuildsApi:
     ) -> RESTResponseType:
         """Get build config
 
+        Returns CI build configuration for the app build.
 
         :param id: (required)
         :type id: int
@@ -1397,6 +1412,7 @@ class AppBuildsApi:
     ) -> DockerRegistryCredentials:
         """Get Docker registry credentials for build
 
+        Returns Docker registry credentials for the app build.
 
         :param id: (required)
         :type id: int
@@ -1464,6 +1480,7 @@ class AppBuildsApi:
     ) -> ApiResponse[DockerRegistryCredentials]:
         """Get Docker registry credentials for build
 
+        Returns Docker registry credentials for the app build.
 
         :param id: (required)
         :type id: int
@@ -1531,6 +1548,7 @@ class AppBuildsApi:
     ) -> RESTResponseType:
         """Get Docker registry credentials for build
 
+        Returns Docker registry credentials for the app build.
 
         :param id: (required)
         :type id: int
@@ -1661,6 +1679,7 @@ class AppBuildsApi:
     ) -> AppBuildsResponse:
         """List app builds
 
+        Returns app builds matching the request filters.
 
         :param app_instance_id: (required)
         :type app_instance_id: int
@@ -1736,6 +1755,7 @@ class AppBuildsApi:
     ) -> ApiResponse[AppBuildsResponse]:
         """List app builds
 
+        Returns app builds matching the request filters.
 
         :param app_instance_id: (required)
         :type app_instance_id: int
@@ -1811,6 +1831,7 @@ class AppBuildsApi:
     ) -> RESTResponseType:
         """List app builds
 
+        Returns app builds matching the request filters.
 
         :param app_instance_id: (required)
         :type app_instance_id: int

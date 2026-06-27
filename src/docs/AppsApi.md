@@ -17,6 +17,8 @@ Method | HTTP request | Description
 
 Create app
 
+Creates an app and returns the created resource.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -97,6 +99,8 @@ Name | Type | Description  | Notes
 
 Delete app
 
+Deletes the app and returns the operation result.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -176,6 +180,8 @@ Name | Type | Description  | Notes
 
 Get app
 
+Returns the app identified by the request path.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -254,6 +260,8 @@ Name | Type | Description  | Notes
 > App get_app_by_name(name, org_id=org_id)
 
 Get app by name
+
+Returns the app identified by name.
 
 ### Example
 
@@ -335,6 +343,8 @@ Name | Type | Description  | Notes
 > List[App] list_apps(org_id=org_id, project_ids=project_ids, cluster_app=cluster_app)
 
 List apps
+
+Returns apps matching the request filters.
 
 ### Example
 
@@ -418,6 +428,8 @@ Name | Type | Description  | Notes
 > App update_app(id, update_title_request)
 
 Update app
+
+Updates the app and returns the updated resource.
 
 ### Example
 

@@ -21,6 +21,7 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.task_job import TaskJob
+from wodby.models.user import User
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -36,6 +37,7 @@ class Task(BaseModel):
     silent: StrictBool
     system: StrictBool
     user_id: StrictInt = Field(alias="userId")
+    user: Optional[User] = None
     org_id: Optional[StrictInt] = Field(default=None, alias="orgId")
     project_ids: Optional[List[StrictInt]] = Field(default=None, alias="projectIds")
     app_id: Optional[StrictInt] = Field(default=None, alias="appId")
@@ -53,7 +55,7 @@ class Task(BaseModel):
     updated_at: datetime = Field(alias="updatedAt")
     started_at: Optional[datetime] = Field(default=None, alias="startedAt")
     ended_at: Optional[datetime] = Field(default=None, alias="endedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "progress", "silent", "system", "userId", "orgId", "projectIds", "appId", "appInstanceId", "clusterId", "integrationId", "serviceId", "stackId", "providerId", "originTaskId", "spawnedTaskIds", "repeatedTaskId", "jobs", "createdAt", "updatedAt", "startedAt", "endedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "progress", "silent", "system", "userId", "user", "orgId", "projectIds", "appId", "appInstanceId", "clusterId", "integrationId", "serviceId", "stackId", "providerId", "originTaskId", "spawnedTaskIds", "repeatedTaskId", "jobs", "createdAt", "updatedAt", "startedAt", "endedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -94,6 +96,9 @@ class Task(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of user
+        if self.user:
+            _dict['user'] = self.user.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in jobs (list)
         _items = []
         if self.jobs:
@@ -101,6 +106,11 @@ class Task(BaseModel):
                 if _item_jobs:
                     _items.append(_item_jobs.to_dict())
             _dict['jobs'] = _items
+        # set to None if user (nullable) is None
+        # and model_fields_set contains the field
+        if self.user is None and "user" in self.model_fields_set:
+            _dict['user'] = None
+
         # set to None if org_id (nullable) is None
         # and model_fields_set contains the field
         if self.org_id is None and "org_id" in self.model_fields_set:
@@ -181,6 +191,7 @@ class Task(BaseModel):
             "silent": obj.get("silent"),
             "system": obj.get("system"),
             "userId": obj.get("userId"),
+            "user": User.from_dict(obj["user"]) if obj.get("user") is not None else None,
             "orgId": obj.get("orgId"),
             "projectIds": obj.get("projectIds"),
             "appId": obj.get("appId"),

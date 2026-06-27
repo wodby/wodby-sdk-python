@@ -16,6 +16,8 @@ Method | HTTP request | Description
 
 Create app route
 
+Creates an app route and returns the created resource.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -96,6 +98,8 @@ Name | Type | Description  | Notes
 
 Delete app route
 
+Deletes the app route and returns the operation result.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -174,6 +178,8 @@ Name | Type | Description  | Notes
 > AppRoute get_app_route(id)
 
 Get app route
+
+Returns the app route identified by the request path.
 
 ### Example
 
@@ -254,6 +260,8 @@ Name | Type | Description  | Notes
 
 List app routes
 
+Returns app routes matching the request filters.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -332,6 +340,8 @@ Name | Type | Description  | Notes
 > AppRoute update_app_route(id, update_app_route_input)
 
 Update app route
+
+Updates the app route and returns the updated resource.
 
 ### Example
 

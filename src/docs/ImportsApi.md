@@ -14,6 +14,8 @@ Method | HTTP request | Description
 
 Create import
 
+Creates an import and returns the created resource.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -94,6 +96,8 @@ Name | Type | Description  | Notes
 
 Get import
 
+Returns the import identified by the request path.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -172,6 +176,8 @@ Name | Type | Description  | Notes
 > List[ModelImport] list_imports(app_instance_id=app_instance_id, app_service_id=app_service_id, database_id=database_id, database_db_id=database_db_id)
 
 List imports
+
+Returns imports matching the request filters.
 
 ### Example
 

@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **silent** | **bool** |  | 
 **system** | **bool** |  | 
 **user_id** | **int** |  | 
+**user** | [**User**](User.md) |  | [optional] 
 **org_id** | **int** |  | [optional] 
 **project_ids** | **List[int]** |  | [optional] 
 **app_id** | **int** |  | [optional] 

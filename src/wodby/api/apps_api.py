@@ -61,6 +61,7 @@ class AppsApi:
     ) -> App:
         """Create app
 
+        Creates an app and returns the created resource.
 
         :param new_app_input: (required)
         :type new_app_input: NewAppInput
@@ -128,6 +129,7 @@ class AppsApi:
     ) -> ApiResponse[App]:
         """Create app
 
+        Creates an app and returns the created resource.
 
         :param new_app_input: (required)
         :type new_app_input: NewAppInput
@@ -195,6 +197,7 @@ class AppsApi:
     ) -> RESTResponseType:
         """Create app
 
+        Creates an app and returns the created resource.
 
         :param new_app_input: (required)
         :type new_app_input: NewAppInput
@@ -335,6 +338,7 @@ class AppsApi:
     ) -> OperationResult:
         """Delete app
 
+        Deletes the app and returns the operation result.
 
         :param id: (required)
         :type id: int
@@ -402,6 +406,7 @@ class AppsApi:
     ) -> ApiResponse[OperationResult]:
         """Delete app
 
+        Deletes the app and returns the operation result.
 
         :param id: (required)
         :type id: int
@@ -469,6 +474,7 @@ class AppsApi:
     ) -> RESTResponseType:
         """Delete app
 
+        Deletes the app and returns the operation result.
 
         :param id: (required)
         :type id: int
@@ -596,6 +602,7 @@ class AppsApi:
     ) -> App:
         """Get app
 
+        Returns the app identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -663,6 +670,7 @@ class AppsApi:
     ) -> ApiResponse[App]:
         """Get app
 
+        Returns the app identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -730,6 +738,7 @@ class AppsApi:
     ) -> RESTResponseType:
         """Get app
 
+        Returns the app identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -858,6 +867,7 @@ class AppsApi:
     ) -> App:
         """Get app by name
 
+        Returns the app identified by name.
 
         :param name: (required)
         :type name: str
@@ -929,6 +939,7 @@ class AppsApi:
     ) -> ApiResponse[App]:
         """Get app by name
 
+        Returns the app identified by name.
 
         :param name: (required)
         :type name: str
@@ -1000,6 +1011,7 @@ class AppsApi:
     ) -> RESTResponseType:
         """Get app by name
 
+        Returns the app identified by name.
 
         :param name: (required)
         :type name: str
@@ -1137,6 +1149,7 @@ class AppsApi:
     ) -> List[App]:
         """List apps
 
+        Returns apps matching the request filters.
 
         :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
@@ -1212,6 +1225,7 @@ class AppsApi:
     ) -> ApiResponse[List[App]]:
         """List apps
 
+        Returns apps matching the request filters.
 
         :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
@@ -1287,6 +1301,7 @@ class AppsApi:
     ) -> RESTResponseType:
         """List apps
 
+        Returns apps matching the request filters.
 
         :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
@@ -1433,6 +1448,7 @@ class AppsApi:
     ) -> App:
         """Update app
 
+        Updates the app and returns the updated resource.
 
         :param id: (required)
         :type id: int
@@ -1504,6 +1520,7 @@ class AppsApi:
     ) -> ApiResponse[App]:
         """Update app
 
+        Updates the app and returns the updated resource.
 
         :param id: (required)
         :type id: int
@@ -1575,6 +1592,7 @@ class AppsApi:
     ) -> RESTResponseType:
         """Update app
 
+        Updates the app and returns the updated resource.
 
         :param id: (required)
         :type id: int

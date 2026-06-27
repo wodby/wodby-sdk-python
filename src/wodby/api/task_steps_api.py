@@ -57,6 +57,7 @@ class TaskStepsApi:
     ) -> URLResponse:
         """Get task step log URL
 
+        Returns a temporary log URL for the task step.
 
         :param id: (required)
         :type id: int
@@ -124,6 +125,7 @@ class TaskStepsApi:
     ) -> ApiResponse[URLResponse]:
         """Get task step log URL
 
+        Returns a temporary log URL for the task step.
 
         :param id: (required)
         :type id: int
@@ -191,6 +193,7 @@ class TaskStepsApi:
     ) -> RESTResponseType:
         """Get task step log URL
 
+        Returns a temporary log URL for the task step.
 
         :param id: (required)
         :type id: int
@@ -318,6 +321,7 @@ class TaskStepsApi:
     ) -> TaskStepLogs:
         """Get task step logs
 
+        Returns logs captured for the task step.
 
         :param id: (required)
         :type id: int
@@ -385,6 +389,7 @@ class TaskStepsApi:
     ) -> ApiResponse[TaskStepLogs]:
         """Get task step logs
 
+        Returns logs captured for the task step.
 
         :param id: (required)
         :type id: int
@@ -452,6 +457,7 @@ class TaskStepsApi:
     ) -> RESTResponseType:
         """Get task step logs
 
+        Returns logs captured for the task step.
 
         :param id: (required)
         :type id: int

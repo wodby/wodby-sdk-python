@@ -16,6 +16,8 @@ Method | HTTP request | Description
 
 Get service
 
+Returns the service identified by the request path.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -94,6 +96,8 @@ Name | Type | Description  | Notes
 > Service get_service_by_name(name, rev_number=rev_number)
 
 Get service by name
+
+Returns the service identified by name.
 
 ### Example
 
@@ -176,6 +180,8 @@ Name | Type | Description  | Notes
 
 Get service revision
 
+Returns the service revision identified by the request path.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -255,6 +261,8 @@ Name | Type | Description  | Notes
 
 List service link candidates
 
+Returns service link candidates matching the request filters.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -332,6 +340,8 @@ Name | Type | Description  | Notes
 > ServicesResponse list_services(org_id=org_id, project_ids=project_ids, search=search, page=page, page_size=page_size)
 
 List services
+
+Returns services matching the request filters.
 
 ### Example
 

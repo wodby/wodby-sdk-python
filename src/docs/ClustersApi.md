@@ -17,6 +17,8 @@ Method | HTTP request | Description
 
 Create cluster
 
+Creates a cluster and returns the created resource.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -96,6 +98,8 @@ Name | Type | Description  | Notes
 > OperationResult delete_cluster(id, force=force)
 
 Delete cluster
+
+Deletes the cluster and returns the operation result.
 
 ### Example
 
@@ -178,6 +182,8 @@ Name | Type | Description  | Notes
 
 Get cluster
 
+Returns the cluster identified by the request path.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -256,6 +262,8 @@ Name | Type | Description  | Notes
 > Cluster get_cluster_by_name(name, org_id=org_id)
 
 Get cluster by name
+
+Returns the cluster identified by name.
 
 ### Example
 
@@ -337,6 +345,8 @@ Name | Type | Description  | Notes
 > List[Cluster] list_clusters(org_id=org_id, project_ids=project_ids, integration_id=integration_id)
 
 List clusters
+
+Returns clusters matching the request filters.
 
 ### Example
 
@@ -420,6 +430,8 @@ Name | Type | Description  | Notes
 > Cluster update_cluster(id, update_title_request)
 
 Update cluster
+
+Updates the cluster and returns the updated resource.
 
 ### Example
 

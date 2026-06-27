@@ -22,6 +22,7 @@ from wodby.models.app_deployment import AppDeployment
 from wodby.models.app_deployments_response import AppDeploymentsResponse
 from wodby.models.app_endpoint_option_input import AppEndpointOptionInput
 from wodby.models.app_instance import AppInstance
+from wodby.models.app_port import AppPort
 from wodby.models.app_route import AppRoute
 from wodby.models.app_service import AppService
 from wodby.models.app_service_build_arg import AppServiceBuildArg
@@ -64,8 +65,10 @@ from wodby.models.new_import_input import NewImportInput
 from wodby.models.new_integration_input import NewIntegrationInput
 from wodby.models.new_managed_cluster_input import NewManagedClusterInput
 from wodby.models.new_project_input import NewProjectInput
+from wodby.models.new_stack_service_input import NewStackServiceInput
 from wodby.models.operation_result import OperationResult
 from wodby.models.org import Org
+from wodby.models.org_membership import OrgMembership
 from wodby.models.project import Project
 from wodby.models.provider import Provider
 from wodby.models.provider_revision import ProviderRevision
@@ -81,6 +84,7 @@ from wodby.models.services_response import ServicesResponse
 from wodby.models.stack import Stack
 from wodby.models.stack_revision import StackRevision
 from wodby.models.stack_service import StackService
+from wodby.models.stack_service_input import StackServiceInput
 from wodby.models.stacks_response import StacksResponse
 from wodby.models.task import Task
 from wodby.models.task_job import TaskJob
@@ -93,5 +97,7 @@ from wodby.models.update_env_request import UpdateEnvRequest
 from wodby.models.update_integration_input import UpdateIntegrationInput
 from wodby.models.update_org_request import UpdateOrgRequest
 from wodby.models.update_project_input import UpdateProjectInput
+from wodby.models.update_stack_from_git_request import UpdateStackFromGitRequest
 from wodby.models.update_title_request import UpdateTitleRequest
+from wodby.models.user import User
 from wodby.models.volume_size_input import VolumeSizeInput

@@ -28,6 +28,8 @@ Method | HTTP request | Description
 
 Create integration
 
+Creates an integration and returns the created resource.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -108,6 +110,8 @@ Name | Type | Description  | Notes
 
 Delete integration
 
+Deletes the integration and returns the operation result.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -187,6 +191,8 @@ Name | Type | Description  | Notes
 
 Get integration
 
+Returns the integration identified by the request path.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -265,6 +271,8 @@ Name | Type | Description  | Notes
 > Integration get_integration_by_name(name, org_id=org_id)
 
 Get integration by name
+
+Returns the integration identified by name.
 
 ### Example
 
@@ -347,6 +355,8 @@ Name | Type | Description  | Notes
 
 Get Kubernetes settings
 
+Returns the Kubernetes settings identified by the request path.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -424,6 +434,8 @@ Name | Type | Description  | Notes
 > List[Dict[str, object]] list_integration_kube_machine_types(id, location)
 
 List Kubernetes machine types
+
+Returns Kubernetes machine types matching the request filters.
 
 ### Example
 
@@ -505,6 +517,8 @@ Name | Type | Description  | Notes
 
 List Kubernetes regions
 
+Returns Kubernetes regions matching the request filters.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -582,6 +596,8 @@ Name | Type | Description  | Notes
 > List[KubeVersion] list_integration_kube_versions(id, location)
 
 List Kubernetes versions
+
+Returns Kubernetes versions matching the request filters.
 
 ### Example
 
@@ -664,6 +680,8 @@ Name | Type | Description  | Notes
 
 List Kubernetes zones
 
+Returns Kubernetes zones matching the request filters.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -741,6 +759,8 @@ Name | Type | Description  | Notes
 > List[str] list_integration_remote_git_repo_branches(id, remote_git_repo_id)
 
 List remote Git repository branches
+
+Returns remote Git repository branches matching the request filters.
 
 ### Example
 
@@ -822,6 +842,8 @@ Name | Type | Description  | Notes
 
 List remote Git repository tags
 
+Returns remote Git repository tags matching the request filters.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -902,6 +924,8 @@ Name | Type | Description  | Notes
 
 List remote Git repositories
 
+Returns remote Git repositories matching the request filters.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -980,6 +1004,8 @@ Name | Type | Description  | Notes
 > List[IntegrationScope] list_integration_scopes(id)
 
 List integration scopes
+
+Returns integration scopes matching the request filters.
 
 ### Example
 
@@ -1060,6 +1086,8 @@ Name | Type | Description  | Notes
 
 List storage buckets
 
+Returns storage buckets matching the request filters.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -1138,6 +1166,8 @@ Name | Type | Description  | Notes
 
 List storage classes
 
+Returns storage classes matching the request filters.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -1215,6 +1245,8 @@ Name | Type | Description  | Notes
 > List[Integration] list_integrations(org_id=org_id, project_ids=project_ids, labels=labels)
 
 List integrations
+
+Returns integrations matching the request filters.
 
 ### Example
 
@@ -1298,6 +1330,8 @@ Name | Type | Description  | Notes
 > Integration update_integration(id, update_integration_input)
 
 Update integration
+
+Updates the integration and returns the updated resource.
 
 ### Example
 

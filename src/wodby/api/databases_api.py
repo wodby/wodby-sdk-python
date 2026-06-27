@@ -61,6 +61,7 @@ class DatabasesApi:
     ) -> Database:
         """Create database
 
+        Creates a database and returns the created resource.
 
         :param new_database_input: (required)
         :type new_database_input: NewDatabaseInput
@@ -128,6 +129,7 @@ class DatabasesApi:
     ) -> ApiResponse[Database]:
         """Create database
 
+        Creates a database and returns the created resource.
 
         :param new_database_input: (required)
         :type new_database_input: NewDatabaseInput
@@ -195,6 +197,7 @@ class DatabasesApi:
     ) -> RESTResponseType:
         """Create database
 
+        Creates a database and returns the created resource.
 
         :param new_database_input: (required)
         :type new_database_input: NewDatabaseInput
@@ -335,6 +338,7 @@ class DatabasesApi:
     ) -> OperationResult:
         """Delete database
 
+        Deletes the database and returns the operation result.
 
         :param id: (required)
         :type id: int
@@ -402,6 +406,7 @@ class DatabasesApi:
     ) -> ApiResponse[OperationResult]:
         """Delete database
 
+        Deletes the database and returns the operation result.
 
         :param id: (required)
         :type id: int
@@ -469,6 +474,7 @@ class DatabasesApi:
     ) -> RESTResponseType:
         """Delete database
 
+        Deletes the database and returns the operation result.
 
         :param id: (required)
         :type id: int
@@ -596,6 +602,7 @@ class DatabasesApi:
     ) -> Database:
         """Get database
 
+        Returns the database identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -663,6 +670,7 @@ class DatabasesApi:
     ) -> ApiResponse[Database]:
         """Get database
 
+        Returns the database identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -730,6 +738,7 @@ class DatabasesApi:
     ) -> RESTResponseType:
         """Get database
 
+        Returns the database identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -858,6 +867,7 @@ class DatabasesApi:
     ) -> Database:
         """Get database by name
 
+        Returns the database identified by name.
 
         :param name: (required)
         :type name: str
@@ -929,6 +939,7 @@ class DatabasesApi:
     ) -> ApiResponse[Database]:
         """Get database by name
 
+        Returns the database identified by name.
 
         :param name: (required)
         :type name: str
@@ -1000,6 +1011,7 @@ class DatabasesApi:
     ) -> RESTResponseType:
         """Get database by name
 
+        Returns the database identified by name.
 
         :param name: (required)
         :type name: str
@@ -1137,6 +1149,7 @@ class DatabasesApi:
     ) -> List[Database]:
         """List databases
 
+        Returns databases matching the request filters.
 
         :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
@@ -1212,6 +1225,7 @@ class DatabasesApi:
     ) -> ApiResponse[List[Database]]:
         """List databases
 
+        Returns databases matching the request filters.
 
         :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
@@ -1287,6 +1301,7 @@ class DatabasesApi:
     ) -> RESTResponseType:
         """List databases
 
+        Returns databases matching the request filters.
 
         :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
@@ -1433,6 +1448,7 @@ class DatabasesApi:
     ) -> Database:
         """Update database
 
+        Updates the database and returns the updated resource.
 
         :param id: (required)
         :type id: int
@@ -1504,6 +1520,7 @@ class DatabasesApi:
     ) -> ApiResponse[Database]:
         """Update database
 
+        Updates the database and returns the updated resource.
 
         :param id: (required)
         :type id: int
@@ -1575,6 +1592,7 @@ class DatabasesApi:
     ) -> RESTResponseType:
         """Update database
 
+        Updates the database and returns the updated resource.
 
         :param id: (required)
         :type id: int

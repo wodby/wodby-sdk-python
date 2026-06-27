@@ -64,6 +64,7 @@ class IntegrationsApi:
     ) -> Integration:
         """Create integration
 
+        Creates an integration and returns the created resource.
 
         :param new_integration_input: (required)
         :type new_integration_input: NewIntegrationInput
@@ -131,6 +132,7 @@ class IntegrationsApi:
     ) -> ApiResponse[Integration]:
         """Create integration
 
+        Creates an integration and returns the created resource.
 
         :param new_integration_input: (required)
         :type new_integration_input: NewIntegrationInput
@@ -198,6 +200,7 @@ class IntegrationsApi:
     ) -> RESTResponseType:
         """Create integration
 
+        Creates an integration and returns the created resource.
 
         :param new_integration_input: (required)
         :type new_integration_input: NewIntegrationInput
@@ -338,6 +341,7 @@ class IntegrationsApi:
     ) -> OperationResult:
         """Delete integration
 
+        Deletes the integration and returns the operation result.
 
         :param id: (required)
         :type id: int
@@ -405,6 +409,7 @@ class IntegrationsApi:
     ) -> ApiResponse[OperationResult]:
         """Delete integration
 
+        Deletes the integration and returns the operation result.
 
         :param id: (required)
         :type id: int
@@ -472,6 +477,7 @@ class IntegrationsApi:
     ) -> RESTResponseType:
         """Delete integration
 
+        Deletes the integration and returns the operation result.
 
         :param id: (required)
         :type id: int
@@ -599,6 +605,7 @@ class IntegrationsApi:
     ) -> Integration:
         """Get integration
 
+        Returns the integration identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -666,6 +673,7 @@ class IntegrationsApi:
     ) -> ApiResponse[Integration]:
         """Get integration
 
+        Returns the integration identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -733,6 +741,7 @@ class IntegrationsApi:
     ) -> RESTResponseType:
         """Get integration
 
+        Returns the integration identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -861,6 +870,7 @@ class IntegrationsApi:
     ) -> Integration:
         """Get integration by name
 
+        Returns the integration identified by name.
 
         :param name: (required)
         :type name: str
@@ -932,6 +942,7 @@ class IntegrationsApi:
     ) -> ApiResponse[Integration]:
         """Get integration by name
 
+        Returns the integration identified by name.
 
         :param name: (required)
         :type name: str
@@ -1003,6 +1014,7 @@ class IntegrationsApi:
     ) -> RESTResponseType:
         """Get integration by name
 
+        Returns the integration identified by name.
 
         :param name: (required)
         :type name: str
@@ -1138,6 +1150,7 @@ class IntegrationsApi:
     ) -> Dict[str, object]:
         """Get Kubernetes settings
 
+        Returns the Kubernetes settings identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -1205,6 +1218,7 @@ class IntegrationsApi:
     ) -> ApiResponse[Dict[str, object]]:
         """Get Kubernetes settings
 
+        Returns the Kubernetes settings identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -1272,6 +1286,7 @@ class IntegrationsApi:
     ) -> RESTResponseType:
         """Get Kubernetes settings
 
+        Returns the Kubernetes settings identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -1400,6 +1415,7 @@ class IntegrationsApi:
     ) -> List[Dict[str, object]]:
         """List Kubernetes machine types
 
+        Returns Kubernetes machine types matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -1471,6 +1487,7 @@ class IntegrationsApi:
     ) -> ApiResponse[List[Dict[str, object]]]:
         """List Kubernetes machine types
 
+        Returns Kubernetes machine types matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -1542,6 +1559,7 @@ class IntegrationsApi:
     ) -> RESTResponseType:
         """List Kubernetes machine types
 
+        Returns Kubernetes machine types matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -1677,6 +1695,7 @@ class IntegrationsApi:
     ) -> List[Dict[str, object]]:
         """List Kubernetes regions
 
+        Returns Kubernetes regions matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -1744,6 +1763,7 @@ class IntegrationsApi:
     ) -> ApiResponse[List[Dict[str, object]]]:
         """List Kubernetes regions
 
+        Returns Kubernetes regions matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -1811,6 +1831,7 @@ class IntegrationsApi:
     ) -> RESTResponseType:
         """List Kubernetes regions
 
+        Returns Kubernetes regions matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -1939,6 +1960,7 @@ class IntegrationsApi:
     ) -> List[KubeVersion]:
         """List Kubernetes versions
 
+        Returns Kubernetes versions matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -2010,6 +2032,7 @@ class IntegrationsApi:
     ) -> ApiResponse[List[KubeVersion]]:
         """List Kubernetes versions
 
+        Returns Kubernetes versions matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -2081,6 +2104,7 @@ class IntegrationsApi:
     ) -> RESTResponseType:
         """List Kubernetes versions
 
+        Returns Kubernetes versions matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -2216,6 +2240,7 @@ class IntegrationsApi:
     ) -> List[Dict[str, object]]:
         """List Kubernetes zones
 
+        Returns Kubernetes zones matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -2283,6 +2308,7 @@ class IntegrationsApi:
     ) -> ApiResponse[List[Dict[str, object]]]:
         """List Kubernetes zones
 
+        Returns Kubernetes zones matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -2350,6 +2376,7 @@ class IntegrationsApi:
     ) -> RESTResponseType:
         """List Kubernetes zones
 
+        Returns Kubernetes zones matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -2478,6 +2505,7 @@ class IntegrationsApi:
     ) -> List[str]:
         """List remote Git repository branches
 
+        Returns remote Git repository branches matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -2549,6 +2577,7 @@ class IntegrationsApi:
     ) -> ApiResponse[List[str]]:
         """List remote Git repository branches
 
+        Returns remote Git repository branches matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -2620,6 +2649,7 @@ class IntegrationsApi:
     ) -> RESTResponseType:
         """List remote Git repository branches
 
+        Returns remote Git repository branches matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -2756,6 +2786,7 @@ class IntegrationsApi:
     ) -> List[str]:
         """List remote Git repository tags
 
+        Returns remote Git repository tags matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -2827,6 +2858,7 @@ class IntegrationsApi:
     ) -> ApiResponse[List[str]]:
         """List remote Git repository tags
 
+        Returns remote Git repository tags matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -2898,6 +2930,7 @@ class IntegrationsApi:
     ) -> RESTResponseType:
         """List remote Git repository tags
 
+        Returns remote Git repository tags matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -3033,6 +3066,7 @@ class IntegrationsApi:
     ) -> List[RemoteGitRepo]:
         """List remote Git repositories
 
+        Returns remote Git repositories matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -3100,6 +3134,7 @@ class IntegrationsApi:
     ) -> ApiResponse[List[RemoteGitRepo]]:
         """List remote Git repositories
 
+        Returns remote Git repositories matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -3167,6 +3202,7 @@ class IntegrationsApi:
     ) -> RESTResponseType:
         """List remote Git repositories
 
+        Returns remote Git repositories matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -3294,6 +3330,7 @@ class IntegrationsApi:
     ) -> List[IntegrationScope]:
         """List integration scopes
 
+        Returns integration scopes matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -3361,6 +3398,7 @@ class IntegrationsApi:
     ) -> ApiResponse[List[IntegrationScope]]:
         """List integration scopes
 
+        Returns integration scopes matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -3428,6 +3466,7 @@ class IntegrationsApi:
     ) -> RESTResponseType:
         """List integration scopes
 
+        Returns integration scopes matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -3555,6 +3594,7 @@ class IntegrationsApi:
     ) -> List[str]:
         """List storage buckets
 
+        Returns storage buckets matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -3622,6 +3662,7 @@ class IntegrationsApi:
     ) -> ApiResponse[List[str]]:
         """List storage buckets
 
+        Returns storage buckets matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -3689,6 +3730,7 @@ class IntegrationsApi:
     ) -> RESTResponseType:
         """List storage buckets
 
+        Returns storage buckets matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -3816,6 +3858,7 @@ class IntegrationsApi:
     ) -> List[str]:
         """List storage classes
 
+        Returns storage classes matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -3883,6 +3926,7 @@ class IntegrationsApi:
     ) -> ApiResponse[List[str]]:
         """List storage classes
 
+        Returns storage classes matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -3950,6 +3994,7 @@ class IntegrationsApi:
     ) -> RESTResponseType:
         """List storage classes
 
+        Returns storage classes matching the request filters.
 
         :param id: (required)
         :type id: int
@@ -4079,6 +4124,7 @@ class IntegrationsApi:
     ) -> List[Integration]:
         """List integrations
 
+        Returns integrations matching the request filters.
 
         :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
@@ -4154,6 +4200,7 @@ class IntegrationsApi:
     ) -> ApiResponse[List[Integration]]:
         """List integrations
 
+        Returns integrations matching the request filters.
 
         :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
@@ -4229,6 +4276,7 @@ class IntegrationsApi:
     ) -> RESTResponseType:
         """List integrations
 
+        Returns integrations matching the request filters.
 
         :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
@@ -4375,6 +4423,7 @@ class IntegrationsApi:
     ) -> Integration:
         """Update integration
 
+        Updates the integration and returns the updated resource.
 
         :param id: (required)
         :type id: int
@@ -4446,6 +4495,7 @@ class IntegrationsApi:
     ) -> ApiResponse[Integration]:
         """Update integration
 
+        Updates the integration and returns the updated resource.
 
         :param id: (required)
         :type id: int
@@ -4517,6 +4567,7 @@ class IntegrationsApi:
     ) -> RESTResponseType:
         """Update integration
 
+        Updates the integration and returns the updated resource.
 
         :param id: (required)
         :type id: int

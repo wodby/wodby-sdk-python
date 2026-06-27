@@ -17,6 +17,8 @@ Method | HTTP request | Description
 
 Create database
 
+Creates a database and returns the created resource.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -97,6 +99,8 @@ Name | Type | Description  | Notes
 
 Delete database
 
+Deletes the database and returns the operation result.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -176,6 +180,8 @@ Name | Type | Description  | Notes
 
 Get database
 
+Returns the database identified by the request path.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -254,6 +260,8 @@ Name | Type | Description  | Notes
 > Database get_database_by_name(name, org_id=org_id)
 
 Get database by name
+
+Returns the database identified by name.
 
 ### Example
 
@@ -335,6 +343,8 @@ Name | Type | Description  | Notes
 > List[Database] list_databases(org_id=org_id, project_ids=project_ids, kind=kind)
 
 List databases
+
+Returns databases matching the request filters.
 
 ### Example
 
@@ -418,6 +428,8 @@ Name | Type | Description  | Notes
 > Database update_database(id, update_title_request)
 
 Update database
+
+Updates the database and returns the updated resource.
 
 ### Example
 

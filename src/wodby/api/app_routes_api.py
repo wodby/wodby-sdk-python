@@ -60,6 +60,7 @@ class AppRoutesApi:
     ) -> AppRoute:
         """Create app route
 
+        Creates an app route and returns the created resource.
 
         :param new_app_route_input: (required)
         :type new_app_route_input: NewAppRouteInput
@@ -127,6 +128,7 @@ class AppRoutesApi:
     ) -> ApiResponse[AppRoute]:
         """Create app route
 
+        Creates an app route and returns the created resource.
 
         :param new_app_route_input: (required)
         :type new_app_route_input: NewAppRouteInput
@@ -194,6 +196,7 @@ class AppRoutesApi:
     ) -> RESTResponseType:
         """Create app route
 
+        Creates an app route and returns the created resource.
 
         :param new_app_route_input: (required)
         :type new_app_route_input: NewAppRouteInput
@@ -334,6 +337,7 @@ class AppRoutesApi:
     ) -> OperationResult:
         """Delete app route
 
+        Deletes the app route and returns the operation result.
 
         :param id: (required)
         :type id: int
@@ -401,6 +405,7 @@ class AppRoutesApi:
     ) -> ApiResponse[OperationResult]:
         """Delete app route
 
+        Deletes the app route and returns the operation result.
 
         :param id: (required)
         :type id: int
@@ -468,6 +473,7 @@ class AppRoutesApi:
     ) -> RESTResponseType:
         """Delete app route
 
+        Deletes the app route and returns the operation result.
 
         :param id: (required)
         :type id: int
@@ -595,6 +601,7 @@ class AppRoutesApi:
     ) -> AppRoute:
         """Get app route
 
+        Returns the app route identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -662,6 +669,7 @@ class AppRoutesApi:
     ) -> ApiResponse[AppRoute]:
         """Get app route
 
+        Returns the app route identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -729,6 +737,7 @@ class AppRoutesApi:
     ) -> RESTResponseType:
         """Get app route
 
+        Returns the app route identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -856,6 +865,7 @@ class AppRoutesApi:
     ) -> List[AppRoute]:
         """List app routes
 
+        Returns app routes matching the request filters.
 
         :param app_instance_id: (required)
         :type app_instance_id: int
@@ -923,6 +933,7 @@ class AppRoutesApi:
     ) -> ApiResponse[List[AppRoute]]:
         """List app routes
 
+        Returns app routes matching the request filters.
 
         :param app_instance_id: (required)
         :type app_instance_id: int
@@ -990,6 +1001,7 @@ class AppRoutesApi:
     ) -> RESTResponseType:
         """List app routes
 
+        Returns app routes matching the request filters.
 
         :param app_instance_id: (required)
         :type app_instance_id: int
@@ -1120,6 +1132,7 @@ class AppRoutesApi:
     ) -> AppRoute:
         """Update app route
 
+        Updates the app route and returns the updated resource.
 
         :param id: (required)
         :type id: int
@@ -1191,6 +1204,7 @@ class AppRoutesApi:
     ) -> ApiResponse[AppRoute]:
         """Update app route
 
+        Updates the app route and returns the updated resource.
 
         :param id: (required)
         :type id: int
@@ -1262,6 +1276,7 @@ class AppRoutesApi:
     ) -> RESTResponseType:
         """Update app route
 
+        Updates the app route and returns the updated resource.
 
         :param id: (required)
         :type id: int

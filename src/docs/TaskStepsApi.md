@@ -13,6 +13,8 @@ Method | HTTP request | Description
 
 Get task step log URL
 
+Returns a temporary log URL for the task step.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -91,6 +93,8 @@ Name | Type | Description  | Notes
 > TaskStepLogs get_task_step_logs(id)
 
 Get task step logs
+
+Returns logs captured for the task step.
 
 ### Example
 

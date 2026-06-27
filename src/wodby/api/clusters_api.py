@@ -61,6 +61,7 @@ class ClustersApi:
     ) -> Cluster:
         """Create cluster
 
+        Creates a cluster and returns the created resource.
 
         :param new_cluster_input: (required)
         :type new_cluster_input: NewClusterInput
@@ -128,6 +129,7 @@ class ClustersApi:
     ) -> ApiResponse[Cluster]:
         """Create cluster
 
+        Creates a cluster and returns the created resource.
 
         :param new_cluster_input: (required)
         :type new_cluster_input: NewClusterInput
@@ -195,6 +197,7 @@ class ClustersApi:
     ) -> RESTResponseType:
         """Create cluster
 
+        Creates a cluster and returns the created resource.
 
         :param new_cluster_input: (required)
         :type new_cluster_input: NewClusterInput
@@ -336,6 +339,7 @@ class ClustersApi:
     ) -> OperationResult:
         """Delete cluster
 
+        Deletes the cluster and returns the operation result.
 
         :param id: (required)
         :type id: int
@@ -407,6 +411,7 @@ class ClustersApi:
     ) -> ApiResponse[OperationResult]:
         """Delete cluster
 
+        Deletes the cluster and returns the operation result.
 
         :param id: (required)
         :type id: int
@@ -478,6 +483,7 @@ class ClustersApi:
     ) -> RESTResponseType:
         """Delete cluster
 
+        Deletes the cluster and returns the operation result.
 
         :param id: (required)
         :type id: int
@@ -613,6 +619,7 @@ class ClustersApi:
     ) -> Cluster:
         """Get cluster
 
+        Returns the cluster identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -680,6 +687,7 @@ class ClustersApi:
     ) -> ApiResponse[Cluster]:
         """Get cluster
 
+        Returns the cluster identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -747,6 +755,7 @@ class ClustersApi:
     ) -> RESTResponseType:
         """Get cluster
 
+        Returns the cluster identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -875,6 +884,7 @@ class ClustersApi:
     ) -> Cluster:
         """Get cluster by name
 
+        Returns the cluster identified by name.
 
         :param name: (required)
         :type name: str
@@ -946,6 +956,7 @@ class ClustersApi:
     ) -> ApiResponse[Cluster]:
         """Get cluster by name
 
+        Returns the cluster identified by name.
 
         :param name: (required)
         :type name: str
@@ -1017,6 +1028,7 @@ class ClustersApi:
     ) -> RESTResponseType:
         """Get cluster by name
 
+        Returns the cluster identified by name.
 
         :param name: (required)
         :type name: str
@@ -1154,6 +1166,7 @@ class ClustersApi:
     ) -> List[Cluster]:
         """List clusters
 
+        Returns clusters matching the request filters.
 
         :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
@@ -1229,6 +1242,7 @@ class ClustersApi:
     ) -> ApiResponse[List[Cluster]]:
         """List clusters
 
+        Returns clusters matching the request filters.
 
         :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
@@ -1304,6 +1318,7 @@ class ClustersApi:
     ) -> RESTResponseType:
         """List clusters
 
+        Returns clusters matching the request filters.
 
         :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
@@ -1450,6 +1465,7 @@ class ClustersApi:
     ) -> Cluster:
         """Update cluster
 
+        Updates the cluster and returns the updated resource.
 
         :param id: (required)
         :type id: int
@@ -1521,6 +1537,7 @@ class ClustersApi:
     ) -> ApiResponse[Cluster]:
         """Update cluster
 
+        Updates the cluster and returns the updated resource.
 
         :param id: (required)
         :type id: int
@@ -1592,6 +1609,7 @@ class ClustersApi:
     ) -> RESTResponseType:
         """Update cluster
 
+        Updates the cluster and returns the updated resource.
 
         :param id: (required)
         :type id: int

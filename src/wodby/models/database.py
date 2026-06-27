@@ -37,11 +37,12 @@ class Database(BaseModel):
     region: Optional[StrictStr] = None
     zone: Optional[StrictStr] = None
     integration_id: Optional[StrictInt] = Field(default=None, alias="integrationId")
+    app_service_id: Optional[StrictInt] = Field(default=None, alias="appServiceId")
     env_id: StrictInt = Field(alias="envId")
     org_id: StrictInt = Field(alias="orgId")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "type", "kind", "status", "version", "region", "zone", "integrationId", "envId", "orgId", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "type", "kind", "status", "version", "region", "zone", "integrationId", "appServiceId", "envId", "orgId", "createdAt", "updatedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -97,6 +98,11 @@ class Database(BaseModel):
         if self.integration_id is None and "integration_id" in self.model_fields_set:
             _dict['integrationId'] = None
 
+        # set to None if app_service_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.app_service_id is None and "app_service_id" in self.model_fields_set:
+            _dict['appServiceId'] = None
+
         return _dict
 
     @classmethod
@@ -119,6 +125,7 @@ class Database(BaseModel):
             "region": obj.get("region"),
             "zone": obj.get("zone"),
             "integrationId": obj.get("integrationId"),
+            "appServiceId": obj.get("appServiceId"),
             "envId": obj.get("envId"),
             "orgId": obj.get("orgId"),
             "createdAt": obj.get("createdAt"),

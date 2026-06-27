@@ -15,6 +15,8 @@ Method | HTTP request | Description
 
 Get provider
 
+Returns the provider identified by the request path.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -93,6 +95,8 @@ Name | Type | Description  | Notes
 > Provider get_provider_by_name(name)
 
 Get provider by name
+
+Returns the provider identified by name.
 
 ### Example
 
@@ -173,6 +177,8 @@ Name | Type | Description  | Notes
 
 Get provider revision
 
+Returns the provider revision identified by the request path.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -251,6 +257,8 @@ Name | Type | Description  | Notes
 > ProvidersResponse list_providers(org_id=org_id, project_ids=project_ids, exclude_public=exclude_public, search=search, page=page, page_size=page_size)
 
 List providers
+
+Returns providers matching the request filters.
 
 ### Example
 

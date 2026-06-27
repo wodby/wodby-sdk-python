@@ -18,6 +18,8 @@ Method | HTTP request | Description
 
 Create build
 
+Creates a build and returns the created resource.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -97,6 +99,8 @@ Name | Type | Description  | Notes
 > AppBuild create_app_build_from_ci(new_build_from_ci_input)
 
 Create build from CI
+
+Creates a build from a CI workflow request.
 
 ### Example
 
@@ -178,6 +182,8 @@ Name | Type | Description  | Notes
 
 Deploy build
 
+Creates a deployment from the completed app build.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -256,6 +262,8 @@ Name | Type | Description  | Notes
 > AppBuild get_app_build(id)
 
 Get build
+
+Returns the build identified by the request path.
 
 ### Example
 
@@ -343,6 +351,8 @@ Name | Type | Description  | Notes
 
 Get build config
 
+Returns CI build configuration for the app build.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -429,6 +439,8 @@ Name | Type | Description  | Notes
 
 Get Docker registry credentials for build
 
+Returns Docker registry credentials for the app build.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -514,6 +526,8 @@ Name | Type | Description  | Notes
 > AppBuildsResponse list_app_builds(app_instance_id, page=page, page_size=page_size)
 
 List app builds
+
+Returns app builds matching the request filters.
 
 ### Example
 

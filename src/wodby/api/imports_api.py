@@ -59,6 +59,7 @@ class ImportsApi:
     ) -> OperationResult:
         """Create import
 
+        Creates an import and returns the created resource.
 
         :param new_import_input: (required)
         :type new_import_input: NewImportInput
@@ -126,6 +127,7 @@ class ImportsApi:
     ) -> ApiResponse[OperationResult]:
         """Create import
 
+        Creates an import and returns the created resource.
 
         :param new_import_input: (required)
         :type new_import_input: NewImportInput
@@ -193,6 +195,7 @@ class ImportsApi:
     ) -> RESTResponseType:
         """Create import
 
+        Creates an import and returns the created resource.
 
         :param new_import_input: (required)
         :type new_import_input: NewImportInput
@@ -333,6 +336,7 @@ class ImportsApi:
     ) -> ModelImport:
         """Get import
 
+        Returns the import identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -400,6 +404,7 @@ class ImportsApi:
     ) -> ApiResponse[ModelImport]:
         """Get import
 
+        Returns the import identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -467,6 +472,7 @@ class ImportsApi:
     ) -> RESTResponseType:
         """Get import
 
+        Returns the import identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -597,6 +603,7 @@ class ImportsApi:
     ) -> List[ModelImport]:
         """List imports
 
+        Returns imports matching the request filters.
 
         :param app_instance_id:
         :type app_instance_id: int
@@ -676,6 +683,7 @@ class ImportsApi:
     ) -> ApiResponse[List[ModelImport]]:
         """List imports
 
+        Returns imports matching the request filters.
 
         :param app_instance_id:
         :type app_instance_id: int
@@ -755,6 +763,7 @@ class ImportsApi:
     ) -> RESTResponseType:
         """List imports
 
+        Returns imports matching the request filters.
 
         :param app_instance_id:
         :type app_instance_id: int

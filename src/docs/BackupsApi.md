@@ -14,6 +14,8 @@ Method | HTTP request | Description
 
 Create backup
 
+Creates a backup and returns the created resource.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -94,6 +96,8 @@ Name | Type | Description  | Notes
 
 Get backup
 
+Returns the backup identified by the request path.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -172,6 +176,8 @@ Name | Type | Description  | Notes
 > List[Backup] list_backups(app_instance_id=app_instance_id, app_service_id=app_service_id, database_id=database_id, database_db_id=database_db_id, backup_name=backup_name)
 
 List backups
+
+Returns backups matching the request filters.
 
 ### Example
 

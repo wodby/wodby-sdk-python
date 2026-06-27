@@ -55,6 +55,7 @@ class DefaultApi:
     ) -> object:
         """Get OpenAPI JSON
 
+        Returns the public OpenAPI schema in JSON format.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -118,6 +119,7 @@ class DefaultApi:
     ) -> ApiResponse[object]:
         """Get OpenAPI JSON
 
+        Returns the public OpenAPI schema in JSON format.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -181,6 +183,7 @@ class DefaultApi:
     ) -> RESTResponseType:
         """Get OpenAPI JSON
 
+        Returns the public OpenAPI schema in JSON format.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -300,6 +303,7 @@ class DefaultApi:
     ) -> str:
         """Get OpenAPI YAML
 
+        Returns the public OpenAPI schema in YAML format.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -363,6 +367,7 @@ class DefaultApi:
     ) -> ApiResponse[str]:
         """Get OpenAPI YAML
 
+        Returns the public OpenAPI schema in YAML format.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -426,6 +431,7 @@ class DefaultApi:
     ) -> RESTResponseType:
         """Get OpenAPI YAML
 
+        Returns the public OpenAPI schema in YAML format.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

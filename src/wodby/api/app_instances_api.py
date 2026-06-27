@@ -61,6 +61,7 @@ class AppInstancesApi:
     ) -> AppInstance:
         """Create app instance
 
+        Creates an app instance and returns the created resource.
 
         :param new_app_instance_input: (required)
         :type new_app_instance_input: NewAppInstanceInput
@@ -128,6 +129,7 @@ class AppInstancesApi:
     ) -> ApiResponse[AppInstance]:
         """Create app instance
 
+        Creates an app instance and returns the created resource.
 
         :param new_app_instance_input: (required)
         :type new_app_instance_input: NewAppInstanceInput
@@ -195,6 +197,7 @@ class AppInstancesApi:
     ) -> RESTResponseType:
         """Create app instance
 
+        Creates an app instance and returns the created resource.
 
         :param new_app_instance_input: (required)
         :type new_app_instance_input: NewAppInstanceInput
@@ -336,6 +339,7 @@ class AppInstancesApi:
     ) -> OperationResult:
         """Delete app instance
 
+        Deletes the app instance and returns the operation result.
 
         :param id: (required)
         :type id: int
@@ -407,6 +411,7 @@ class AppInstancesApi:
     ) -> ApiResponse[OperationResult]:
         """Delete app instance
 
+        Deletes the app instance and returns the operation result.
 
         :param id: (required)
         :type id: int
@@ -478,6 +483,7 @@ class AppInstancesApi:
     ) -> RESTResponseType:
         """Delete app instance
 
+        Deletes the app instance and returns the operation result.
 
         :param id: (required)
         :type id: int
@@ -613,6 +619,7 @@ class AppInstancesApi:
     ) -> AppInstance:
         """Get app instance
 
+        Returns the app instance identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -680,6 +687,7 @@ class AppInstancesApi:
     ) -> ApiResponse[AppInstance]:
         """Get app instance
 
+        Returns the app instance identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -747,6 +755,7 @@ class AppInstancesApi:
     ) -> RESTResponseType:
         """Get app instance
 
+        Returns the app instance identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -876,6 +885,7 @@ class AppInstancesApi:
     ) -> AppInstance:
         """Get app instance by app and instance name
 
+        Returns the app instance identified by app and instance name.
 
         :param app_name: (required)
         :type app_name: str
@@ -951,6 +961,7 @@ class AppInstancesApi:
     ) -> ApiResponse[AppInstance]:
         """Get app instance by app and instance name
 
+        Returns the app instance identified by app and instance name.
 
         :param app_name: (required)
         :type app_name: str
@@ -1026,6 +1037,7 @@ class AppInstancesApi:
     ) -> RESTResponseType:
         """Get app instance by app and instance name
 
+        Returns the app instance identified by app and instance name.
 
         :param app_name: (required)
         :type app_name: str
@@ -1171,6 +1183,7 @@ class AppInstancesApi:
     ) -> List[AppInstance]:
         """List app instances
 
+        Returns app instances matching the request filters.
 
         :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
@@ -1254,6 +1267,7 @@ class AppInstancesApi:
     ) -> ApiResponse[List[AppInstance]]:
         """List app instances
 
+        Returns app instances matching the request filters.
 
         :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
@@ -1337,6 +1351,7 @@ class AppInstancesApi:
     ) -> RESTResponseType:
         """List app instances
 
+        Returns app instances matching the request filters.
 
         :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
@@ -1499,6 +1514,7 @@ class AppInstancesApi:
     ) -> AppInstance:
         """Update app instance
 
+        Updates the app instance and returns the updated resource.
 
         :param id: (required)
         :type id: int
@@ -1570,6 +1586,7 @@ class AppInstancesApi:
     ) -> ApiResponse[AppInstance]:
         """Update app instance
 
+        Updates the app instance and returns the updated resource.
 
         :param id: (required)
         :type id: int
@@ -1641,6 +1658,7 @@ class AppInstancesApi:
     ) -> RESTResponseType:
         """Update app instance
 
+        Updates the app instance and returns the updated resource.
 
         :param id: (required)
         :type id: int

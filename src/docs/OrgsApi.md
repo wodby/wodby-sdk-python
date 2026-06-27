@@ -15,6 +15,8 @@ Method | HTTP request | Description
 
 Delete org
 
+Deletes the org and returns the operation result.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -93,6 +95,8 @@ Name | Type | Description  | Notes
 > Org get_org(id)
 
 Get org
+
+Returns the org identified by the request path.
 
 ### Example
 
@@ -173,6 +177,8 @@ Name | Type | Description  | Notes
 
 List orgs
 
+Returns orgs matching the request filters.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -247,6 +253,8 @@ This endpoint does not need any parameter.
 > Org update_org(id, update_org_request)
 
 Update org
+
+Updates the org and returns the updated resource.
 
 ### Example
 

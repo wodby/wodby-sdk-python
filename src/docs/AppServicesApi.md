@@ -15,6 +15,8 @@ Method | HTTP request | Description
 
 Get app service
 
+Returns the app service identified by the request path.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -94,6 +96,8 @@ Name | Type | Description  | Notes
 
 List app services
 
+Returns app services matching the request filters.
+
 ### Example
 
 * Api Key Authentication (apiKeyHeader):
@@ -172,6 +176,8 @@ Name | Type | Description  | Notes
 > OperationResult run_app_service_action(id, name)
 
 Run app service action
+
+Runs the named action for an app service.
 
 ### Example
 
@@ -253,6 +259,8 @@ Name | Type | Description  | Notes
 > AppService update_app_service(id, app_service_input)
 
 Update app service
+
+Updates the app service and returns the updated resource.
 
 ### Example
 

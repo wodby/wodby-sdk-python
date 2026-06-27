@@ -59,6 +59,7 @@ class BackupsApi:
     ) -> OperationResult:
         """Create backup
 
+        Creates a backup and returns the created resource.
 
         :param new_backup_input: (required)
         :type new_backup_input: NewBackupInput
@@ -126,6 +127,7 @@ class BackupsApi:
     ) -> ApiResponse[OperationResult]:
         """Create backup
 
+        Creates a backup and returns the created resource.
 
         :param new_backup_input: (required)
         :type new_backup_input: NewBackupInput
@@ -193,6 +195,7 @@ class BackupsApi:
     ) -> RESTResponseType:
         """Create backup
 
+        Creates a backup and returns the created resource.
 
         :param new_backup_input: (required)
         :type new_backup_input: NewBackupInput
@@ -333,6 +336,7 @@ class BackupsApi:
     ) -> Backup:
         """Get backup
 
+        Returns the backup identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -400,6 +404,7 @@ class BackupsApi:
     ) -> ApiResponse[Backup]:
         """Get backup
 
+        Returns the backup identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -467,6 +472,7 @@ class BackupsApi:
     ) -> RESTResponseType:
         """Get backup
 
+        Returns the backup identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -598,6 +604,7 @@ class BackupsApi:
     ) -> List[Backup]:
         """List backups
 
+        Returns backups matching the request filters.
 
         :param app_instance_id:
         :type app_instance_id: int
@@ -681,6 +688,7 @@ class BackupsApi:
     ) -> ApiResponse[List[Backup]]:
         """List backups
 
+        Returns backups matching the request filters.
 
         :param app_instance_id:
         :type app_instance_id: int
@@ -764,6 +772,7 @@ class BackupsApi:
     ) -> RESTResponseType:
         """List backups
 
+        Returns backups matching the request filters.
 
         :param app_instance_id:
         :type app_instance_id: int

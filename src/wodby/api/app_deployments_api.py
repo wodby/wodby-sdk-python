@@ -61,6 +61,7 @@ class AppDeploymentsApi:
     ) -> AppDeployment:
         """Create deployment
 
+        Creates a deployment and returns the created resource.
 
         :param create_deployment_request: (required)
         :type create_deployment_request: CreateDeploymentRequest
@@ -128,6 +129,7 @@ class AppDeploymentsApi:
     ) -> ApiResponse[AppDeployment]:
         """Create deployment
 
+        Creates a deployment and returns the created resource.
 
         :param create_deployment_request: (required)
         :type create_deployment_request: CreateDeploymentRequest
@@ -195,6 +197,7 @@ class AppDeploymentsApi:
     ) -> RESTResponseType:
         """Create deployment
 
+        Creates a deployment and returns the created resource.
 
         :param create_deployment_request: (required)
         :type create_deployment_request: CreateDeploymentRequest
@@ -335,6 +338,7 @@ class AppDeploymentsApi:
     ) -> AppDeployment:
         """Create deployment from CI
 
+        Creates a deployment from a CI workflow request.
 
         :param deployment_from_ci_input: (required)
         :type deployment_from_ci_input: DeploymentFromCIInput
@@ -402,6 +406,7 @@ class AppDeploymentsApi:
     ) -> ApiResponse[AppDeployment]:
         """Create deployment from CI
 
+        Creates a deployment from a CI workflow request.
 
         :param deployment_from_ci_input: (required)
         :type deployment_from_ci_input: DeploymentFromCIInput
@@ -469,6 +474,7 @@ class AppDeploymentsApi:
     ) -> RESTResponseType:
         """Create deployment from CI
 
+        Creates a deployment from a CI workflow request.
 
         :param deployment_from_ci_input: (required)
         :type deployment_from_ci_input: DeploymentFromCIInput
@@ -610,6 +616,7 @@ class AppDeploymentsApi:
     ) -> AppDeployment:
         """Get deployment
 
+        Returns the deployment identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -677,6 +684,7 @@ class AppDeploymentsApi:
     ) -> ApiResponse[AppDeployment]:
         """Get deployment
 
+        Returns the deployment identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -744,6 +752,7 @@ class AppDeploymentsApi:
     ) -> RESTResponseType:
         """Get deployment
 
+        Returns the deployment identified by the request path.
 
         :param id: (required)
         :type id: int
@@ -873,6 +882,7 @@ class AppDeploymentsApi:
     ) -> AppDeploymentsResponse:
         """List app deployments
 
+        Returns app deployments matching the request filters.
 
         :param app_instance_id: (required)
         :type app_instance_id: int
@@ -948,6 +958,7 @@ class AppDeploymentsApi:
     ) -> ApiResponse[AppDeploymentsResponse]:
         """List app deployments
 
+        Returns app deployments matching the request filters.
 
         :param app_instance_id: (required)
         :type app_instance_id: int
@@ -1023,6 +1034,7 @@ class AppDeploymentsApi:
     ) -> RESTResponseType:
         """List app deployments
 
+        Returns app deployments matching the request filters.
 
         :param app_instance_id: (required)
         :type app_instance_id: int
@@ -1168,6 +1180,7 @@ class AppDeploymentsApi:
     ) -> AppDeployment:
         """Redeploy deployment
 
+        Creates a redeployment task for an existing deployment.
 
         :param id: (required)
         :type id: int
@@ -1235,6 +1248,7 @@ class AppDeploymentsApi:
     ) -> ApiResponse[AppDeployment]:
         """Redeploy deployment
 
+        Creates a redeployment task for an existing deployment.
 
         :param id: (required)
         :type id: int
@@ -1302,6 +1316,7 @@ class AppDeploymentsApi:
     ) -> RESTResponseType:
         """Redeploy deployment
 
+        Creates a redeployment task for an existing deployment.
 
         :param id: (required)
         :type id: int
