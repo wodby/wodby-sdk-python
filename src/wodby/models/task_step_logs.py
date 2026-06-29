@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.log_line import LogLine
 from typing import Optional, Set
@@ -27,9 +27,18 @@ class TaskStepLogs(BaseModel):
     """
     TaskStepLogs
     """ # noqa: E501
+    status: StrictStr
     stream_id: Optional[StrictInt] = Field(default=None, alias="streamId")
+    url: Optional[StrictStr] = Field(default=None, description="Temporary URL for persisted logs when URL delivery is selected or auto-selected.")
     lines: List[LogLine]
-    __properties: ClassVar[List[str]] = ["streamId", "lines"]
+    __properties: ClassVar[List[str]] = ["status", "streamId", "url", "lines"]
+
+    @field_validator('status')
+    def status_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(['persisted', 'empty', 'pending']):
+            raise ValueError("must be one of enum values ('persisted', 'empty', 'pending')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,6 +91,11 @@ class TaskStepLogs(BaseModel):
         if self.stream_id is None and "stream_id" in self.model_fields_set:
             _dict['streamId'] = None
 
+        # set to None if url (nullable) is None
+        # and model_fields_set contains the field
+        if self.url is None and "url" in self.model_fields_set:
+            _dict['url'] = None
+
         return _dict
 
     @classmethod
@@ -94,7 +108,9 @@ class TaskStepLogs(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "status": obj.get("status"),
             "streamId": obj.get("streamId"),
+            "url": obj.get("url"),
             "lines": [LogLine.from_dict(_item) for _item in obj["lines"]] if obj.get("lines") is not None else None
         })
         return _obj

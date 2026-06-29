@@ -5,7 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**status** | **str** |  | 
 **stream_id** | **int** |  | [optional] 
+**url** | **str** | Temporary URL for persisted logs when URL delivery is selected or auto-selected. | [optional] 
 **lines** | [**List[LogLine]**](LogLine.md) |  | 
 
 ## Example

@@ -16,7 +16,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import StrictInt
+from pydantic import Field, StrictInt, StrictStr, field_validator
+from typing import Optional
+from typing_extensions import Annotated
 from wodby.models.task_step_logs import TaskStepLogs
 from wodby.models.url_response import URLResponse
 
@@ -306,6 +308,7 @@ class TaskStepsApi:
     def get_task_step_logs(
         self,
         id: StrictInt,
+        delivery: Annotated[Optional[StrictStr], Field(description="Delivery mode. Auto returns a URL for persisted logs and inline lines for pending or empty logs.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -321,10 +324,12 @@ class TaskStepsApi:
     ) -> TaskStepLogs:
         """Get task step logs
 
-        Returns logs captured for the task step.
+        Returns current inline logs for pending task steps and a temporary log URL for persisted task steps.
 
         :param id: (required)
         :type id: int
+        :param delivery: Delivery mode. Auto returns a URL for persisted logs and inline lines for pending or empty logs.
+        :type delivery: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -349,6 +354,7 @@ class TaskStepsApi:
 
         _param = self._get_task_step_logs_serialize(
             id=id,
+            delivery=delivery,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -374,6 +380,7 @@ class TaskStepsApi:
     def get_task_step_logs_with_http_info(
         self,
         id: StrictInt,
+        delivery: Annotated[Optional[StrictStr], Field(description="Delivery mode. Auto returns a URL for persisted logs and inline lines for pending or empty logs.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -389,10 +396,12 @@ class TaskStepsApi:
     ) -> ApiResponse[TaskStepLogs]:
         """Get task step logs
 
-        Returns logs captured for the task step.
+        Returns current inline logs for pending task steps and a temporary log URL for persisted task steps.
 
         :param id: (required)
         :type id: int
+        :param delivery: Delivery mode. Auto returns a URL for persisted logs and inline lines for pending or empty logs.
+        :type delivery: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -417,6 +426,7 @@ class TaskStepsApi:
 
         _param = self._get_task_step_logs_serialize(
             id=id,
+            delivery=delivery,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -442,6 +452,7 @@ class TaskStepsApi:
     def get_task_step_logs_without_preload_content(
         self,
         id: StrictInt,
+        delivery: Annotated[Optional[StrictStr], Field(description="Delivery mode. Auto returns a URL for persisted logs and inline lines for pending or empty logs.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -457,10 +468,12 @@ class TaskStepsApi:
     ) -> RESTResponseType:
         """Get task step logs
 
-        Returns logs captured for the task step.
+        Returns current inline logs for pending task steps and a temporary log URL for persisted task steps.
 
         :param id: (required)
         :type id: int
+        :param delivery: Delivery mode. Auto returns a URL for persisted logs and inline lines for pending or empty logs.
+        :type delivery: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -485,6 +498,7 @@ class TaskStepsApi:
 
         _param = self._get_task_step_logs_serialize(
             id=id,
+            delivery=delivery,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -505,6 +519,7 @@ class TaskStepsApi:
     def _get_task_step_logs_serialize(
         self,
         id,
+        delivery,
         _request_auth,
         _content_type,
         _headers,
@@ -529,6 +544,10 @@ class TaskStepsApi:
         if id is not None:
             _path_params['id'] = id
         # process the query parameters
+        if delivery is not None:
+            
+            _query_params.append(('delivery', delivery))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter

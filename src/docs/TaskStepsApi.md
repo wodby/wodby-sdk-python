@@ -90,11 +90,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_task_step_logs**
-> TaskStepLogs get_task_step_logs(id)
+> TaskStepLogs get_task_step_logs(id, delivery=delivery)
 
 Get task step logs
 
-Returns logs captured for the task step.
+Returns current inline logs for pending task steps and a temporary log URL for persisted task steps.
 
 ### Example
 
@@ -128,10 +128,11 @@ with wodby.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = wodby.TaskStepsApi(api_client)
     id = 56 # int | 
+    delivery = auto # str | Delivery mode. Auto returns a URL for persisted logs and inline lines for pending or empty logs. (optional) (default to auto)
 
     try:
         # Get task step logs
-        api_response = api_instance.get_task_step_logs(id)
+        api_response = api_instance.get_task_step_logs(id, delivery=delivery)
         print("The response of TaskStepsApi->get_task_step_logs:\n")
         pprint(api_response)
     except Exception as e:
@@ -146,6 +147,7 @@ with wodby.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **int**|  | 
+ **delivery** | **str**| Delivery mode. Auto returns a URL for persisted logs and inline lines for pending or empty logs. | [optional] [default to auto]
 
 ### Return type
 
