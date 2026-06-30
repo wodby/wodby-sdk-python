@@ -22,6 +22,7 @@ docs/AppRoutesApi.md
 docs/AppService.md
 docs/AppServiceAnnotation.md
 docs/AppServiceAnnotationSource.md
+docs/AppServiceBuild.md
 docs/AppServiceBuildArg.md
 docs/AppServiceBuildConfig.md
 docs/AppServiceConfig.md
@@ -30,6 +31,7 @@ docs/AppServiceCronJob.md
 docs/AppServiceCronJobsResponse.md
 docs/AppServiceCronSchedule.md
 docs/AppServiceDatabaseInput.md
+docs/AppServiceDeployment.md
 docs/AppServiceDeploymentRequest.md
 docs/AppServiceEnvVar.md
 docs/AppServiceEnvVarSource.md
@@ -48,6 +50,8 @@ docs/AppsApi.md
 docs/Backup.md
 docs/BackupsApi.md
 docs/BuildSourceInput.md
+docs/Cert.md
+docs/CertsApi.md
 docs/Cluster.md
 docs/ClustersApi.md
 docs/ConfigOverrideInput.md
@@ -179,6 +183,10 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_app_service_build.py
+test/test_app_service_deployment.py
+test/test_cert.py
+test/test_certs_api.py
 tox.ini
 wodby/__init__.py
 wodby/api/__init__.py
@@ -190,6 +198,7 @@ wodby/api/app_routes_api.py
 wodby/api/app_services_api.py
 wodby/api/apps_api.py
 wodby/api/backups_api.py
+wodby/api/certs_api.py
 wodby/api/clusters_api.py
 wodby/api/databases_api.py
 wodby/api/default_api.py
@@ -225,6 +234,7 @@ wodby/models/app_route.py
 wodby/models/app_service.py
 wodby/models/app_service_annotation.py
 wodby/models/app_service_annotation_source.py
+wodby/models/app_service_build.py
 wodby/models/app_service_build_arg.py
 wodby/models/app_service_build_config.py
 wodby/models/app_service_config.py
@@ -233,6 +243,7 @@ wodby/models/app_service_cron_job.py
 wodby/models/app_service_cron_jobs_response.py
 wodby/models/app_service_cron_schedule.py
 wodby/models/app_service_database_input.py
+wodby/models/app_service_deployment.py
 wodby/models/app_service_deployment_request.py
 wodby/models/app_service_env_var.py
 wodby/models/app_service_env_var_source.py
@@ -248,6 +259,7 @@ wodby/models/app_service_setting_input.py
 wodby/models/app_service_token.py
 wodby/models/backup.py
 wodby/models/build_source_input.py
+wodby/models/cert.py
 wodby/models/cluster.py
 wodby/models/config_override_input.py
 wodby/models/create_build_request.py

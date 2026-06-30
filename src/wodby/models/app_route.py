@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from wodby.models.cert import Cert
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -44,10 +45,11 @@ class AppRoute(BaseModel):
     app_instance_id: StrictInt = Field(alias="appInstanceId")
     app_service_id: StrictInt = Field(alias="appServiceId")
     port_id: StrictInt = Field(alias="portId")
+    cert: Optional[Cert] = None
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
     last_synced_at: Optional[datetime] = Field(default=None, alias="lastSyncedAt")
-    __properties: ClassVar[List[str]] = ["id", "host", "path", "pathType", "action", "redirectScheme", "redirectHost", "redirectPath", "redirectStatusCode", "status", "disabled", "main", "primary", "private", "appInstanceId", "appServiceId", "portId", "createdAt", "updatedAt", "lastSyncedAt"]
+    __properties: ClassVar[List[str]] = ["id", "host", "path", "pathType", "action", "redirectScheme", "redirectHost", "redirectPath", "redirectStatusCode", "status", "disabled", "main", "primary", "private", "appInstanceId", "appServiceId", "portId", "cert", "createdAt", "updatedAt", "lastSyncedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -88,6 +90,9 @@ class AppRoute(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of cert
+        if self.cert:
+            _dict['cert'] = self.cert.to_dict()
         # set to None if redirect_scheme (nullable) is None
         # and model_fields_set contains the field
         if self.redirect_scheme is None and "redirect_scheme" in self.model_fields_set:
@@ -107,6 +112,11 @@ class AppRoute(BaseModel):
         # and model_fields_set contains the field
         if self.redirect_status_code is None and "redirect_status_code" in self.model_fields_set:
             _dict['redirectStatusCode'] = None
+
+        # set to None if cert (nullable) is None
+        # and model_fields_set contains the field
+        if self.cert is None and "cert" in self.model_fields_set:
+            _dict['cert'] = None
 
         # set to None if last_synced_at (nullable) is None
         # and model_fields_set contains the field
@@ -142,6 +152,7 @@ class AppRoute(BaseModel):
             "appInstanceId": obj.get("appInstanceId"),
             "appServiceId": obj.get("appServiceId"),
             "portId": obj.get("portId"),
+            "cert": Cert.from_dict(obj["cert"]) if obj.get("cert") is not None else None,
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt"),
             "lastSyncedAt": obj.get("lastSyncedAt")

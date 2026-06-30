@@ -18,33 +18,27 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from wodby.models.app_service_build import AppServiceBuild
-from wodby.models.task import Task
 from typing import Optional, Set
 from typing_extensions import Self
 
-class AppBuild(BaseModel):
+class AppServiceDeployment(BaseModel):
     """
-    AppBuild
+    AppServiceDeployment
     """ # noqa: E501
     id: StrictInt
-    number: StrictInt
+    job_name: StrictStr = Field(alias="jobName")
     status: StrictStr
-    app_instance_id: StrictInt = Field(alias="appInstanceId")
     app_service_id: StrictInt = Field(alias="appServiceId")
-    task: Optional[Task] = None
-    app_service_builds: List[AppServiceBuild] = Field(alias="appServiceBuilds")
-    git_ref_type: StrictStr = Field(alias="gitRefType")
-    git_ref: StrictStr = Field(alias="gitRef")
-    commit_hash: StrictStr = Field(alias="commitHash")
-    commit_message: StrictStr = Field(alias="commitMessage")
+    app_service_build_id: Optional[StrictInt] = Field(default=None, alias="appServiceBuildId")
+    skip_post_deployment: StrictBool = Field(alias="skipPostDeployment")
+    force: StrictBool
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
     started_at: Optional[datetime] = Field(default=None, alias="startedAt")
     ended_at: Optional[datetime] = Field(default=None, alias="endedAt")
-    __properties: ClassVar[List[str]] = ["id", "number", "status", "appInstanceId", "appServiceId", "task", "appServiceBuilds", "gitRefType", "gitRef", "commitHash", "commitMessage", "createdAt", "updatedAt", "startedAt", "endedAt"]
+    __properties: ClassVar[List[str]] = ["id", "jobName", "status", "appServiceId", "appServiceBuildId", "skipPostDeployment", "force", "createdAt", "updatedAt", "startedAt", "endedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -64,7 +58,7 @@ class AppBuild(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of AppBuild from a JSON string"""
+        """Create an instance of AppServiceDeployment from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -85,20 +79,10 @@ class AppBuild(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of task
-        if self.task:
-            _dict['task'] = self.task.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each item in app_service_builds (list)
-        _items = []
-        if self.app_service_builds:
-            for _item_app_service_builds in self.app_service_builds:
-                if _item_app_service_builds:
-                    _items.append(_item_app_service_builds.to_dict())
-            _dict['appServiceBuilds'] = _items
-        # set to None if task (nullable) is None
+        # set to None if app_service_build_id (nullable) is None
         # and model_fields_set contains the field
-        if self.task is None and "task" in self.model_fields_set:
-            _dict['task'] = None
+        if self.app_service_build_id is None and "app_service_build_id" in self.model_fields_set:
+            _dict['appServiceBuildId'] = None
 
         # set to None if started_at (nullable) is None
         # and model_fields_set contains the field
@@ -114,7 +98,7 @@ class AppBuild(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of AppBuild from a dict"""
+        """Create an instance of AppServiceDeployment from a dict"""
         if obj is None:
             return None
 
@@ -123,16 +107,12 @@ class AppBuild(BaseModel):
 
         _obj = cls.model_validate({
             "id": obj.get("id"),
-            "number": obj.get("number"),
+            "jobName": obj.get("jobName"),
             "status": obj.get("status"),
-            "appInstanceId": obj.get("appInstanceId"),
             "appServiceId": obj.get("appServiceId"),
-            "task": Task.from_dict(obj["task"]) if obj.get("task") is not None else None,
-            "appServiceBuilds": [AppServiceBuild.from_dict(_item) for _item in obj["appServiceBuilds"]] if obj.get("appServiceBuilds") is not None else None,
-            "gitRefType": obj.get("gitRefType"),
-            "gitRef": obj.get("gitRef"),
-            "commitHash": obj.get("commitHash"),
-            "commitMessage": obj.get("commitMessage"),
+            "appServiceBuildId": obj.get("appServiceBuildId"),
+            "skipPostDeployment": obj.get("skipPostDeployment"),
+            "force": obj.get("force"),
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt"),
             "startedAt": obj.get("startedAt"),

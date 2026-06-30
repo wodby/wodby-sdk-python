@@ -174,6 +174,8 @@ Class | Method | HTTP request | Description
 *BackupsApi* | [**create_backup**](docs/BackupsApi.md#create_backup) | **POST** /backups | Create backup
 *BackupsApi* | [**get_backup**](docs/BackupsApi.md#get_backup) | **GET** /backups/{id} | Get backup
 *BackupsApi* | [**list_backups**](docs/BackupsApi.md#list_backups) | **GET** /backups | List backups
+*CertsApi* | [**get_cert**](docs/CertsApi.md#get_cert) | **GET** /certs/{id} | Get cert
+*CertsApi* | [**list_certs**](docs/CertsApi.md#list_certs) | **GET** /certs | List certs
 *ClustersApi* | [**create_cluster**](docs/ClustersApi.md#create_cluster) | **POST** /clusters | Create cluster
 *ClustersApi* | [**delete_cluster**](docs/ClustersApi.md#delete_cluster) | **DELETE** /clusters/{id} | Delete cluster
 *ClustersApi* | [**get_cluster**](docs/ClustersApi.md#get_cluster) | **GET** /clusters/{id} | Get cluster
@@ -315,6 +317,7 @@ Class | Method | HTTP request | Description
  - [AppService](docs/AppService.md)
  - [AppServiceAnnotation](docs/AppServiceAnnotation.md)
  - [AppServiceAnnotationSource](docs/AppServiceAnnotationSource.md)
+ - [AppServiceBuild](docs/AppServiceBuild.md)
  - [AppServiceBuildArg](docs/AppServiceBuildArg.md)
  - [AppServiceBuildConfig](docs/AppServiceBuildConfig.md)
  - [AppServiceConfig](docs/AppServiceConfig.md)
@@ -323,6 +326,7 @@ Class | Method | HTTP request | Description
  - [AppServiceCronJobsResponse](docs/AppServiceCronJobsResponse.md)
  - [AppServiceCronSchedule](docs/AppServiceCronSchedule.md)
  - [AppServiceDatabaseInput](docs/AppServiceDatabaseInput.md)
+ - [AppServiceDeployment](docs/AppServiceDeployment.md)
  - [AppServiceDeploymentRequest](docs/AppServiceDeploymentRequest.md)
  - [AppServiceEnvVar](docs/AppServiceEnvVar.md)
  - [AppServiceEnvVarSource](docs/AppServiceEnvVarSource.md)
@@ -338,6 +342,7 @@ Class | Method | HTTP request | Description
  - [AppServiceToken](docs/AppServiceToken.md)
  - [Backup](docs/Backup.md)
  - [BuildSourceInput](docs/BuildSourceInput.md)
+ - [Cert](docs/Cert.md)
  - [Cluster](docs/Cluster.md)
  - [ConfigOverrideInput](docs/ConfigOverrideInput.md)
  - [CreateBuildRequest](docs/CreateBuildRequest.md)

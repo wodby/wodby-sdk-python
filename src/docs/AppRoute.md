@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **app_instance_id** | **int** |  | 
 **app_service_id** | **int** |  | 
 **port_id** | **int** |  | 
+**cert** | [**Cert**](Cert.md) |  | [optional] 
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 
 **last_synced_at** | **datetime** |  | [optional] 

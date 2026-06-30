@@ -20,6 +20,9 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from wodby.models.app_build import AppBuild
+from wodby.models.app_service_deployment import AppServiceDeployment
+from wodby.models.task import Task
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -32,11 +35,14 @@ class AppDeployment(BaseModel):
     status: StrictStr
     skip_rollback: StrictBool = Field(alias="skipRollback")
     app_instance_id: StrictInt = Field(alias="appInstanceId")
+    builds: List[AppBuild]
+    task: Optional[Task] = None
+    app_service_deployments: List[AppServiceDeployment] = Field(alias="appServiceDeployments")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
     started_at: Optional[datetime] = Field(default=None, alias="startedAt")
     ended_at: Optional[datetime] = Field(default=None, alias="endedAt")
-    __properties: ClassVar[List[str]] = ["id", "number", "status", "skipRollback", "appInstanceId", "createdAt", "updatedAt", "startedAt", "endedAt"]
+    __properties: ClassVar[List[str]] = ["id", "number", "status", "skipRollback", "appInstanceId", "builds", "task", "appServiceDeployments", "createdAt", "updatedAt", "startedAt", "endedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -77,6 +83,28 @@ class AppDeployment(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in builds (list)
+        _items = []
+        if self.builds:
+            for _item_builds in self.builds:
+                if _item_builds:
+                    _items.append(_item_builds.to_dict())
+            _dict['builds'] = _items
+        # override the default output from pydantic by calling `to_dict()` of task
+        if self.task:
+            _dict['task'] = self.task.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in app_service_deployments (list)
+        _items = []
+        if self.app_service_deployments:
+            for _item_app_service_deployments in self.app_service_deployments:
+                if _item_app_service_deployments:
+                    _items.append(_item_app_service_deployments.to_dict())
+            _dict['appServiceDeployments'] = _items
+        # set to None if task (nullable) is None
+        # and model_fields_set contains the field
+        if self.task is None and "task" in self.model_fields_set:
+            _dict['task'] = None
+
         # set to None if started_at (nullable) is None
         # and model_fields_set contains the field
         if self.started_at is None and "started_at" in self.model_fields_set:
@@ -104,6 +132,9 @@ class AppDeployment(BaseModel):
             "status": obj.get("status"),
             "skipRollback": obj.get("skipRollback"),
             "appInstanceId": obj.get("appInstanceId"),
+            "builds": [AppBuild.from_dict(_item) for _item in obj["builds"]] if obj.get("builds") is not None else None,
+            "task": Task.from_dict(obj["task"]) if obj.get("task") is not None else None,
+            "appServiceDeployments": [AppServiceDeployment.from_dict(_item) for _item in obj["appServiceDeployments"]] if obj.get("appServiceDeployments") is not None else None,
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt"),
             "startedAt": obj.get("startedAt"),

@@ -25,6 +25,7 @@ from wodby.api.app_routes_api import AppRoutesApi
 from wodby.api.app_services_api import AppServicesApi
 from wodby.api.apps_api import AppsApi
 from wodby.api.backups_api import BackupsApi
+from wodby.api.certs_api import CertsApi
 from wodby.api.clusters_api import ClustersApi
 from wodby.api.databases_api import DatabasesApi
 from wodby.api.default_api import DefaultApi
@@ -68,6 +69,7 @@ from wodby.models.app_route import AppRoute
 from wodby.models.app_service import AppService
 from wodby.models.app_service_annotation import AppServiceAnnotation
 from wodby.models.app_service_annotation_source import AppServiceAnnotationSource
+from wodby.models.app_service_build import AppServiceBuild
 from wodby.models.app_service_build_arg import AppServiceBuildArg
 from wodby.models.app_service_build_config import AppServiceBuildConfig
 from wodby.models.app_service_config import AppServiceConfig
@@ -76,6 +78,7 @@ from wodby.models.app_service_cron_job import AppServiceCronJob
 from wodby.models.app_service_cron_jobs_response import AppServiceCronJobsResponse
 from wodby.models.app_service_cron_schedule import AppServiceCronSchedule
 from wodby.models.app_service_database_input import AppServiceDatabaseInput
+from wodby.models.app_service_deployment import AppServiceDeployment
 from wodby.models.app_service_deployment_request import AppServiceDeploymentRequest
 from wodby.models.app_service_env_var import AppServiceEnvVar
 from wodby.models.app_service_env_var_source import AppServiceEnvVarSource
@@ -91,6 +94,7 @@ from wodby.models.app_service_setting_input import AppServiceSettingInput
 from wodby.models.app_service_token import AppServiceToken
 from wodby.models.backup import Backup
 from wodby.models.build_source_input import BuildSourceInput
+from wodby.models.cert import Cert
 from wodby.models.cluster import Cluster
 from wodby.models.config_override_input import ConfigOverrideInput
 from wodby.models.create_build_request import CreateBuildRequest

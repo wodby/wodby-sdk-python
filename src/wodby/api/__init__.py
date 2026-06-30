@@ -9,6 +9,7 @@ from wodby.api.app_routes_api import AppRoutesApi
 from wodby.api.app_services_api import AppServicesApi
 from wodby.api.apps_api import AppsApi
 from wodby.api.backups_api import BackupsApi
+from wodby.api.certs_api import CertsApi
 from wodby.api.clusters_api import ClustersApi
 from wodby.api.databases_api import DatabasesApi
 from wodby.api.default_api import DefaultApi
