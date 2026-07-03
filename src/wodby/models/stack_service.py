@@ -35,6 +35,7 @@ class StackService(BaseModel):
     disabled: StrictBool
     required: StrictBool
     replicas: StrictInt
+    outdated: StrictBool
     service_rev_id: StrictInt = Field(alias="serviceRevId")
     service_rev_name: StrictStr = Field(alias="serviceRevName")
     service_rev_title: StrictStr = Field(alias="serviceRevTitle")
@@ -43,7 +44,7 @@ class StackService(BaseModel):
     build_source_remote_repo_id: Optional[StrictStr] = Field(default=None, alias="buildSourceRemoteRepoId")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "type", "main", "disabled", "required", "replicas", "serviceRevId", "serviceRevName", "serviceRevTitle", "serviceRevVersion", "buildSourceIntegrationId", "buildSourceRemoteRepoId", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "type", "main", "disabled", "required", "replicas", "outdated", "serviceRevId", "serviceRevName", "serviceRevTitle", "serviceRevVersion", "buildSourceIntegrationId", "buildSourceRemoteRepoId", "createdAt", "updatedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -114,6 +115,7 @@ class StackService(BaseModel):
             "disabled": obj.get("disabled"),
             "required": obj.get("required"),
             "replicas": obj.get("replicas"),
+            "outdated": obj.get("outdated"),
             "serviceRevId": obj.get("serviceRevId"),
             "serviceRevName": obj.get("serviceRevName"),
             "serviceRevTitle": obj.get("serviceRevTitle"),
