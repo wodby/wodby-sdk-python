@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from wodby.models.cluster_settings import ClusterSettings
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -47,9 +48,10 @@ class Cluster(BaseModel):
     hostname: Optional[StrictStr] = None
     integration_id: Optional[StrictInt] = Field(default=None, alias="integrationId")
     org_id: StrictInt = Field(alias="orgId")
+    settings: Optional[ClusterSettings] = None
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "serverless", "demo", "wodby", "k3s", "singleNode", "version", "infraVersion", "minNodeCount", "maxNodeCount", "lastNodeCount", "region", "zone", "ips", "hostname", "integrationId", "orgId", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "serverless", "demo", "wodby", "k3s", "singleNode", "version", "infraVersion", "minNodeCount", "maxNodeCount", "lastNodeCount", "region", "zone", "ips", "hostname", "integrationId", "orgId", "settings", "createdAt", "updatedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -90,6 +92,9 @@ class Cluster(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of settings
+        if self.settings:
+            _dict['settings'] = self.settings.to_dict()
         # set to None if version (nullable) is None
         # and model_fields_set contains the field
         if self.version is None and "version" in self.model_fields_set:
@@ -167,6 +172,7 @@ class Cluster(BaseModel):
             "hostname": obj.get("hostname"),
             "integrationId": obj.get("integrationId"),
             "orgId": obj.get("orgId"),
+            "settings": ClusterSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None,
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt")
         })

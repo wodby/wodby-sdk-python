@@ -19,7 +19,8 @@ import json
 
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
+from wodby.models.stack_settings import StackSettings
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -36,9 +37,10 @@ class Stack(BaseModel):
     rev_id: StrictInt = Field(alias="revId")
     latest_rev_number: StrictInt = Field(alias="latestRevNumber")
     org_id: StrictInt = Field(alias="orgId")
+    settings: Optional[StackSettings] = None
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "icon", "status", "public", "revId", "latestRevNumber", "orgId", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "icon", "status", "public", "revId", "latestRevNumber", "orgId", "settings", "createdAt", "updatedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -79,6 +81,9 @@ class Stack(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of settings
+        if self.settings:
+            _dict['settings'] = self.settings.to_dict()
         return _dict
 
     @classmethod
@@ -100,6 +105,7 @@ class Stack(BaseModel):
             "revId": obj.get("revId"),
             "latestRevNumber": obj.get("latestRevNumber"),
             "orgId": obj.get("orgId"),
+            "settings": StackSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None,
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt")
         })

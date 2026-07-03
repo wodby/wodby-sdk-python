@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **stack_icon** | **str** |  | 
 **stack_rev_number** | **int** |  | 
 **stack_version** | **str** |  | 
+**settings** | [**AppInstanceSettings**](AppInstanceSettings.md) |  | [optional] 
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 
 

@@ -26,6 +26,7 @@ Name | Type | Description | Notes
 **origin_stack_rev_version** | **str** |  | [optional] 
 **origin_stack_rev_created_at** | **datetime** |  | [optional] 
 **org_id** | **int** |  | 
+**settings** | [**ServiceSettings**](ServiceSettings.md) |  | [optional] 
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 
 

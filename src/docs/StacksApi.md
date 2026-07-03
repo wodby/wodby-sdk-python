@@ -7,10 +7,12 @@ Method | HTTP request | Description
 [**get_stack**](StacksApi.md#get_stack) | **GET** /stacks/{id} | Get stack
 [**get_stack_by_name**](StacksApi.md#get_stack_by_name) | **GET** /stacks/by-name/{name} | Get stack by name
 [**get_stack_revision**](StacksApi.md#get_stack_revision) | **GET** /stack-revisions/{id} | Get stack revision
+[**import_stacks**](StacksApi.md#import_stacks) | **POST** /stacks/actions/import | Import stacks from Git
 [**list_stack_revision_services**](StacksApi.md#list_stack_revision_services) | **GET** /stack-revisions/{id}/services | List stack services
 [**list_stacks**](StacksApi.md#list_stacks) | **GET** /stacks | List stacks
 [**publish_stack_draft**](StacksApi.md#publish_stack_draft) | **POST** /stacks/{id}/actions/publish-draft | Publish stack draft
 [**update_stack_from_git**](StacksApi.md#update_stack_from_git) | **POST** /stacks/{id}/actions/update-from-git | Update stack from git
+[**update_stack_settings**](StacksApi.md#update_stack_settings) | **PUT** /stacks/settings/{id} | Update stack settings
 
 
 # **get_stack**
@@ -253,6 +255,88 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Stack revision |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **import_stacks**
+> OperationResult import_stacks(import_catalog_from_git_input)
+
+Import stacks from Git
+
+Starts a task that imports stacks from a Git repository.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.import_catalog_from_git_input import ImportCatalogFromGitInput
+from wodby.models.operation_result import OperationResult
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.StacksApi(api_client)
+    import_catalog_from_git_input = wodby.ImportCatalogFromGitInput() # ImportCatalogFromGitInput | 
+
+    try:
+        # Import stacks from Git
+        api_response = api_instance.import_stacks(import_catalog_from_git_input)
+        print("The response of StacksApi->import_stacks:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling StacksApi->import_stacks: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **import_catalog_from_git_input** | [**ImportCatalogFromGitInput**](ImportCatalogFromGitInput.md)|  | 
+
+### Return type
+
+[**OperationResult**](OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Import task |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 
@@ -588,6 +672,90 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **201** | Update task |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_stack_settings**
+> Stack update_stack_settings(id, stack_settings_input)
+
+Update stack settings
+
+Updates stack settings and returns the updated stack.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.stack import Stack
+from wodby.models.stack_settings_input import StackSettingsInput
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.StacksApi(api_client)
+    id = 56 # int | 
+    stack_settings_input = wodby.StackSettingsInput() # StackSettingsInput | 
+
+    try:
+        # Update stack settings
+        api_response = api_instance.update_stack_settings(id, stack_settings_input)
+        print("The response of StacksApi->update_stack_settings:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling StacksApi->update_stack_settings: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **stack_settings_input** | [**StackSettingsInput**](StackSettingsInput.md)|  | 
+
+### Return type
+
+[**Stack**](Stack.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Updated stack |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 

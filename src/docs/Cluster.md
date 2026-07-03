@@ -25,6 +25,7 @@ Name | Type | Description | Notes
 **hostname** | **str** |  | [optional] 
 **integration_id** | **int** |  | [optional] 
 **org_id** | **int** |  | 
+**settings** | [**ClusterSettings**](ClusterSettings.md) |  | [optional] 
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 
 

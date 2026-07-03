@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from wodby.models.app_instance_settings import AppInstanceSettings
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -42,9 +43,10 @@ class AppInstance(BaseModel):
     stack_icon: StrictStr = Field(alias="stackIcon")
     stack_rev_number: StrictInt = Field(alias="stackRevNumber")
     stack_version: StrictStr = Field(alias="stackVersion")
+    settings: Optional[AppInstanceSettings] = None
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "mainDomain", "appId", "clusterId", "envId", "stackId", "stackRevId", "stackName", "stackTitle", "stackIcon", "stackRevNumber", "stackVersion", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "mainDomain", "appId", "clusterId", "envId", "stackId", "stackRevId", "stackName", "stackTitle", "stackIcon", "stackRevNumber", "stackVersion", "settings", "createdAt", "updatedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,6 +87,9 @@ class AppInstance(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of settings
+        if self.settings:
+            _dict['settings'] = self.settings.to_dict()
         # set to None if main_domain (nullable) is None
         # and model_fields_set contains the field
         if self.main_domain is None and "main_domain" in self.model_fields_set:
@@ -117,6 +122,7 @@ class AppInstance(BaseModel):
             "stackIcon": obj.get("stackIcon"),
             "stackRevNumber": obj.get("stackRevNumber"),
             "stackVersion": obj.get("stackVersion"),
+            "settings": AppInstanceSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None,
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt")
         })

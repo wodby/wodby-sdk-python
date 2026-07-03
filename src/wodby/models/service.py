@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from wodby.models.service_settings import ServiceSettings
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -48,9 +49,10 @@ class Service(BaseModel):
     origin_stack_rev_version: Optional[StrictStr] = Field(default=None, alias="originStackRevVersion")
     origin_stack_rev_created_at: Optional[datetime] = Field(default=None, alias="originStackRevCreatedAt")
     org_id: StrictInt = Field(alias="orgId")
+    settings: Optional[ServiceSettings] = None
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "type", "status", "external", "public", "revId", "draftRevId", "latestRevNumber", "gitRepoId", "gitRepoRemoteId", "gitRepoRef", "gitRepoRefType", "originStackRevId", "originStackRevStackId", "originStackRevName", "originStackRevNumber", "originStackRevVersion", "originStackRevCreatedAt", "orgId", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "type", "status", "external", "public", "revId", "draftRevId", "latestRevNumber", "gitRepoId", "gitRepoRemoteId", "gitRepoRef", "gitRepoRefType", "originStackRevId", "originStackRevStackId", "originStackRevName", "originStackRevNumber", "originStackRevVersion", "originStackRevCreatedAt", "orgId", "settings", "createdAt", "updatedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -91,6 +93,9 @@ class Service(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of settings
+        if self.settings:
+            _dict['settings'] = self.settings.to_dict()
         # set to None if draft_rev_id (nullable) is None
         # and model_fields_set contains the field
         if self.draft_rev_id is None and "draft_rev_id" in self.model_fields_set:
@@ -179,6 +184,7 @@ class Service(BaseModel):
             "originStackRevVersion": obj.get("originStackRevVersion"),
             "originStackRevCreatedAt": obj.get("originStackRevCreatedAt"),
             "orgId": obj.get("orgId"),
+            "settings": ServiceSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None,
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt")
         })

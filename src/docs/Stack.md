@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **rev_id** | **int** |  | 
 **latest_rev_number** | **int** |  | 
 **org_id** | **int** |  | 
+**settings** | [**StackSettings**](StackSettings.md) |  | [optional] 
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 
 
