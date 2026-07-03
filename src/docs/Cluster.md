@@ -18,7 +18,8 @@ Name | Type | Description | Notes
 **infra_version** | **str** |  | 
 **min_node_count** | **int** |  | [optional] 
 **max_node_count** | **int** |  | [optional] 
-**last_node_count** | **int** |  | [optional] 
+**last_nodes_ready** | **int** |  | [optional] 
+**last_nodes_total** | **int** |  | [optional] 
 **region** | **str** |  | [optional] 
 **zone** | **str** |  | [optional] 
 **ips** | **List[str]** |  | [optional] 

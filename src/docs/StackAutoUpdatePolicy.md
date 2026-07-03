@@ -6,7 +6,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **scope** | **str** |  | 
-**include_disabled** | **bool** |  | 
 **version_policy** | [**StackAutoUpdateVersionPolicy**](StackAutoUpdateVersionPolicy.md) |  | [optional] 
 
 ## Example

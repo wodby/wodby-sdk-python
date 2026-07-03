@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.stack_auto_update_version_policy import StackAutoUpdateVersionPolicy
 from typing import Optional, Set
@@ -28,9 +28,8 @@ class StackAutoUpdatePolicy(BaseModel):
     StackAutoUpdatePolicy
     """ # noqa: E501
     scope: StrictStr
-    include_disabled: StrictBool = Field(alias="includeDisabled")
     version_policy: Optional[StackAutoUpdateVersionPolicy] = Field(default=None, alias="versionPolicy")
-    __properties: ClassVar[List[str]] = ["scope", "includeDisabled", "versionPolicy"]
+    __properties: ClassVar[List[str]] = ["scope", "versionPolicy"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -87,7 +86,6 @@ class StackAutoUpdatePolicy(BaseModel):
 
         _obj = cls.model_validate({
             "scope": obj.get("scope"),
-            "includeDisabled": obj.get("includeDisabled"),
             "versionPolicy": StackAutoUpdateVersionPolicy.from_dict(obj["versionPolicy"]) if obj.get("versionPolicy") is not None else None
         })
         return _obj

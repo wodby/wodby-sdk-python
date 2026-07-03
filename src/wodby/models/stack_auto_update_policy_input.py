@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.stack_auto_update_version_policy_input import StackAutoUpdateVersionPolicyInput
 from typing import Optional, Set
@@ -28,9 +28,8 @@ class StackAutoUpdatePolicyInput(BaseModel):
     StackAutoUpdatePolicyInput
     """ # noqa: E501
     scope: Optional[StrictStr] = None
-    include_disabled: Optional[StrictBool] = Field(default=None, alias="includeDisabled")
     version_policy: Optional[StackAutoUpdateVersionPolicyInput] = Field(default=None, alias="versionPolicy")
-    __properties: ClassVar[List[str]] = ["scope", "includeDisabled", "versionPolicy"]
+    __properties: ClassVar[List[str]] = ["scope", "versionPolicy"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -79,11 +78,6 @@ class StackAutoUpdatePolicyInput(BaseModel):
         if self.scope is None and "scope" in self.model_fields_set:
             _dict['scope'] = None
 
-        # set to None if include_disabled (nullable) is None
-        # and model_fields_set contains the field
-        if self.include_disabled is None and "include_disabled" in self.model_fields_set:
-            _dict['includeDisabled'] = None
-
         return _dict
 
     @classmethod
@@ -97,7 +91,6 @@ class StackAutoUpdatePolicyInput(BaseModel):
 
         _obj = cls.model_validate({
             "scope": obj.get("scope"),
-            "includeDisabled": obj.get("includeDisabled"),
             "versionPolicy": StackAutoUpdateVersionPolicyInput.from_dict(obj["versionPolicy"]) if obj.get("versionPolicy") is not None else None
         })
         return _obj

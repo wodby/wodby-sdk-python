@@ -41,7 +41,8 @@ class Cluster(BaseModel):
     infra_version: StrictStr = Field(alias="infraVersion")
     min_node_count: Optional[StrictInt] = Field(default=None, alias="minNodeCount")
     max_node_count: Optional[StrictInt] = Field(default=None, alias="maxNodeCount")
-    last_node_count: Optional[StrictInt] = Field(default=None, alias="lastNodeCount")
+    last_nodes_ready: Optional[StrictInt] = Field(default=None, alias="lastNodesReady")
+    last_nodes_total: Optional[StrictInt] = Field(default=None, alias="lastNodesTotal")
     region: Optional[StrictStr] = None
     zone: Optional[StrictStr] = None
     ips: Optional[List[StrictStr]] = None
@@ -51,7 +52,7 @@ class Cluster(BaseModel):
     settings: Optional[ClusterSettings] = None
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "serverless", "demo", "wodby", "k3s", "singleNode", "version", "infraVersion", "minNodeCount", "maxNodeCount", "lastNodeCount", "region", "zone", "ips", "hostname", "integrationId", "orgId", "settings", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "serverless", "demo", "wodby", "k3s", "singleNode", "version", "infraVersion", "minNodeCount", "maxNodeCount", "lastNodesReady", "lastNodesTotal", "region", "zone", "ips", "hostname", "integrationId", "orgId", "settings", "createdAt", "updatedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -110,10 +111,15 @@ class Cluster(BaseModel):
         if self.max_node_count is None and "max_node_count" in self.model_fields_set:
             _dict['maxNodeCount'] = None
 
-        # set to None if last_node_count (nullable) is None
+        # set to None if last_nodes_ready (nullable) is None
         # and model_fields_set contains the field
-        if self.last_node_count is None and "last_node_count" in self.model_fields_set:
-            _dict['lastNodeCount'] = None
+        if self.last_nodes_ready is None and "last_nodes_ready" in self.model_fields_set:
+            _dict['lastNodesReady'] = None
+
+        # set to None if last_nodes_total (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_nodes_total is None and "last_nodes_total" in self.model_fields_set:
+            _dict['lastNodesTotal'] = None
 
         # set to None if region (nullable) is None
         # and model_fields_set contains the field
@@ -165,7 +171,8 @@ class Cluster(BaseModel):
             "infraVersion": obj.get("infraVersion"),
             "minNodeCount": obj.get("minNodeCount"),
             "maxNodeCount": obj.get("maxNodeCount"),
-            "lastNodeCount": obj.get("lastNodeCount"),
+            "lastNodesReady": obj.get("lastNodesReady"),
+            "lastNodesTotal": obj.get("lastNodesTotal"),
             "region": obj.get("region"),
             "zone": obj.get("zone"),
             "ips": obj.get("ips"),
