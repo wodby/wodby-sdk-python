@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.app_build import AppBuild
 from wodby.models.app_service_deployment import AppServiceDeployment
@@ -33,6 +33,7 @@ class AppDeployment(BaseModel):
     id: StrictInt
     number: StrictInt
     status: StrictStr
+    rollback_status: StrictStr = Field(alias="rollbackStatus")
     skip_rollback: StrictBool = Field(alias="skipRollback")
     app_instance_id: StrictInt = Field(alias="appInstanceId")
     builds: List[AppBuild]
@@ -42,7 +43,14 @@ class AppDeployment(BaseModel):
     updated_at: datetime = Field(alias="updatedAt")
     started_at: Optional[datetime] = Field(default=None, alias="startedAt")
     ended_at: Optional[datetime] = Field(default=None, alias="endedAt")
-    __properties: ClassVar[List[str]] = ["id", "number", "status", "skipRollback", "appInstanceId", "builds", "task", "appServiceDeployments", "createdAt", "updatedAt", "startedAt", "endedAt"]
+    __properties: ClassVar[List[str]] = ["id", "number", "status", "rollbackStatus", "skipRollback", "appInstanceId", "builds", "task", "appServiceDeployments", "createdAt", "updatedAt", "startedAt", "endedAt"]
+
+    @field_validator('rollback_status')
+    def rollback_status_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(['not_attempted', 'rolled_back', 'failed']):
+            raise ValueError("must be one of enum values ('not_attempted', 'rolled_back', 'failed')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -130,6 +138,7 @@ class AppDeployment(BaseModel):
             "id": obj.get("id"),
             "number": obj.get("number"),
             "status": obj.get("status"),
+            "rollbackStatus": obj.get("rollbackStatus"),
             "skipRollback": obj.get("skipRollback"),
             "appInstanceId": obj.get("appInstanceId"),
             "builds": [AppBuild.from_dict(_item) for _item in obj["builds"]] if obj.get("builds") is not None else None,

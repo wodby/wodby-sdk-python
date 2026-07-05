@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **id** | **int** |  | 
 **number** | **int** |  | 
 **status** | **str** |  | 
+**rollback_status** | **str** |  | 
 **skip_rollback** | **bool** |  | 
 **app_instance_id** | **int** |  | 
 **builds** | [**List[AppBuild]**](AppBuild.md) |  | 
