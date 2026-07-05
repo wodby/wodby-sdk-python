@@ -17,6 +17,7 @@
 from wodby.models.app import App
 from wodby.models.app_build import AppBuild
 from wodby.models.app_build_config import AppBuildConfig
+from wodby.models.app_builds_create_response import AppBuildsCreateResponse
 from wodby.models.app_builds_response import AppBuildsResponse
 from wodby.models.app_deployment import AppDeployment
 from wodby.models.app_deployments_response import AppDeploymentsResponse
@@ -70,9 +71,11 @@ from wodby.models.cluster_auto_upgrade_version_policy_input import ClusterAutoUp
 from wodby.models.cluster_settings import ClusterSettings
 from wodby.models.cluster_settings_input import ClusterSettingsInput
 from wodby.models.config_override_input import ConfigOverrideInput
+from wodby.models.copy_stack_settings_input import CopyStackSettingsInput
 from wodby.models.create_build_request import CreateBuildRequest
 from wodby.models.create_deployment_request import CreateDeploymentRequest
 from wodby.models.create_env_request import CreateEnvRequest
+from wodby.models.current_user import CurrentUser
 from wodby.models.database import Database
 from wodby.models.database_charset import DatabaseCharset
 from wodby.models.database_db import DatabaseDB
@@ -81,8 +84,8 @@ from wodby.models.database_user import DatabaseUser
 from wodby.models.database_version import DatabaseVersion
 from wodby.models.deployment_from_ci_input import DeploymentFromCIInput
 from wodby.models.docker_registry_credentials import DockerRegistryCredentials
+from wodby.models.duplicate_stack_request import DuplicateStackRequest
 from wodby.models.env import Env
-from wodby.models.error_response import ErrorResponse
 from wodby.models.field_input import FieldInput
 from wodby.models.git_auto_update_settings import GitAutoUpdateSettings
 from wodby.models.git_auto_update_settings_input import GitAutoUpdateSettingsInput
@@ -123,6 +126,8 @@ from wodby.models.new_stack_service_token_input import NewStackServiceTokenInput
 from wodby.models.operation_result import OperationResult
 from wodby.models.org import Org
 from wodby.models.org_membership import OrgMembership
+from wodby.models.problem_details import ProblemDetails
+from wodby.models.problem_field_error import ProblemFieldError
 from wodby.models.project import Project
 from wodby.models.provider import Provider
 from wodby.models.provider_revision import ProviderRevision
@@ -182,6 +187,7 @@ from wodby.models.update_app_route_input import UpdateAppRouteInput
 from wodby.models.update_app_service_cron_schedule_input import UpdateAppServiceCronScheduleInput
 from wodby.models.update_app_service_database_input import UpdateAppServiceDatabaseInput
 from wodby.models.update_app_service_env_var_input import UpdateAppServiceEnvVarInput
+from wodby.models.update_current_user_request import UpdateCurrentUserRequest
 from wodby.models.update_database_user_dbs_input import UpdateDatabaseUserDBsInput
 from wodby.models.update_env_request import UpdateEnvRequest
 from wodby.models.update_integration_input import UpdateIntegrationInput

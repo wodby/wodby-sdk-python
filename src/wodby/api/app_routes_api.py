@@ -96,7 +96,7 @@ class AppRoutesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "AppRoute",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -164,7 +164,7 @@ class AppRoutesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "AppRoute",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -232,7 +232,7 @@ class AppRoutesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "AppRoute",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -277,7 +277,8 @@ class AppRoutesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -373,7 +374,7 @@ class AppRoutesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -441,7 +442,7 @@ class AppRoutesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -509,7 +510,7 @@ class AppRoutesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -554,7 +555,8 @@ class AppRoutesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -637,7 +639,7 @@ class AppRoutesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppRoute",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -705,7 +707,7 @@ class AppRoutesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppRoute",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -773,7 +775,7 @@ class AppRoutesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppRoute",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -818,7 +820,8 @@ class AppRoutesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -901,7 +904,7 @@ class AppRoutesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AppRoute]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -969,7 +972,7 @@ class AppRoutesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AppRoute]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1037,7 +1040,7 @@ class AppRoutesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AppRoute]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1084,7 +1087,8 @@ class AppRoutesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -1171,7 +1175,7 @@ class AppRoutesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppRoute",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1243,7 +1247,7 @@ class AppRoutesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppRoute",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1315,7 +1319,7 @@ class AppRoutesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppRoute",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1363,7 +1367,8 @@ class AppRoutesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 

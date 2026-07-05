@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **skip_rollback** | **bool** |  | 
 **app_instance_id** | **int** |  | 
 **builds** | [**List[AppBuild]**](AppBuild.md) |  | 
+**task_id** | **int** |  | [optional] 
 **task** | [**Task**](Task.md) |  | [optional] 
 **app_service_deployments** | [**List[AppServiceDeployment]**](AppServiceDeployment.md) |  | 
 **created_at** | **datetime** |  | 

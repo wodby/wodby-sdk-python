@@ -37,13 +37,14 @@ class AppDeployment(BaseModel):
     skip_rollback: StrictBool = Field(alias="skipRollback")
     app_instance_id: StrictInt = Field(alias="appInstanceId")
     builds: List[AppBuild]
+    task_id: Optional[StrictInt] = Field(default=None, alias="taskId")
     task: Optional[Task] = None
     app_service_deployments: List[AppServiceDeployment] = Field(alias="appServiceDeployments")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
     started_at: Optional[datetime] = Field(default=None, alias="startedAt")
     ended_at: Optional[datetime] = Field(default=None, alias="endedAt")
-    __properties: ClassVar[List[str]] = ["id", "number", "status", "rollbackStatus", "skipRollback", "appInstanceId", "builds", "task", "appServiceDeployments", "createdAt", "updatedAt", "startedAt", "endedAt"]
+    __properties: ClassVar[List[str]] = ["id", "number", "status", "rollbackStatus", "skipRollback", "appInstanceId", "builds", "taskId", "task", "appServiceDeployments", "createdAt", "updatedAt", "startedAt", "endedAt"]
 
     @field_validator('rollback_status')
     def rollback_status_validate_enum(cls, value):
@@ -108,6 +109,11 @@ class AppDeployment(BaseModel):
                 if _item_app_service_deployments:
                     _items.append(_item_app_service_deployments.to_dict())
             _dict['appServiceDeployments'] = _items
+        # set to None if task_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.task_id is None and "task_id" in self.model_fields_set:
+            _dict['taskId'] = None
+
         # set to None if task (nullable) is None
         # and model_fields_set contains the field
         if self.task is None and "task" in self.model_fields_set:
@@ -142,6 +148,7 @@ class AppDeployment(BaseModel):
             "skipRollback": obj.get("skipRollback"),
             "appInstanceId": obj.get("appInstanceId"),
             "builds": [AppBuild.from_dict(_item) for _item in obj["builds"]] if obj.get("builds") is not None else None,
+            "taskId": obj.get("taskId"),
             "task": Task.from_dict(obj["task"]) if obj.get("task") is not None else None,
             "appServiceDeployments": [AppServiceDeployment.from_dict(_item) for _item in obj["appServiceDeployments"]] if obj.get("appServiceDeployments") is not None else None,
             "createdAt": obj.get("createdAt"),

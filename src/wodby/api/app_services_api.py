@@ -128,7 +128,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "AppServiceAnnotation",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -200,7 +200,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "AppServiceAnnotation",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -272,7 +272,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "AppServiceAnnotation",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -320,7 +320,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -420,7 +421,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "AppServiceCronSchedule",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -492,7 +493,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "AppServiceCronSchedule",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -564,7 +565,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "AppServiceCronSchedule",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -612,7 +613,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -712,7 +714,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "AppServiceEnvVar",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -784,7 +786,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "AppServiceEnvVar",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -856,7 +858,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "AppServiceEnvVar",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -904,7 +906,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -1004,7 +1007,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "AppServiceHelmValue",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1076,7 +1079,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "AppServiceHelmValue",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1148,7 +1151,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "AppServiceHelmValue",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1196,7 +1199,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -1296,7 +1300,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "AppServiceIntegration",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1368,7 +1372,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "AppServiceIntegration",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1440,7 +1444,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "AppServiceIntegration",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1488,7 +1492,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -1588,7 +1593,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "LogStream",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1660,7 +1665,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "LogStream",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1732,7 +1737,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "LogStream",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1780,7 +1785,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -1880,7 +1886,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "AppServiceToken",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1952,7 +1958,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "AppServiceToken",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2024,7 +2030,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "AppServiceToken",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2072,7 +2078,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -2168,7 +2175,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2236,7 +2243,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2304,7 +2311,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2349,7 +2356,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -2432,7 +2440,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2500,7 +2508,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2568,7 +2576,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2613,7 +2621,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -2696,7 +2705,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2764,7 +2773,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2832,7 +2841,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2877,7 +2886,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -2960,7 +2970,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3028,7 +3038,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3096,7 +3106,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3141,7 +3151,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -3224,7 +3235,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3292,7 +3303,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3360,7 +3371,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3405,7 +3416,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -3488,7 +3500,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3556,7 +3568,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3624,7 +3636,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3669,7 +3681,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -3752,7 +3765,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppService",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3820,7 +3833,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppService",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3888,7 +3901,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppService",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3933,7 +3946,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -4016,7 +4030,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppServiceCronJob",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4084,7 +4098,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppServiceCronJob",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4152,7 +4166,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppServiceCronJob",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4197,7 +4211,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -4280,7 +4295,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4348,7 +4363,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4416,7 +4431,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4461,7 +4476,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -4544,7 +4560,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AppServiceAnnotation]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4612,7 +4628,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AppServiceAnnotation]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4680,7 +4696,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AppServiceAnnotation]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4725,7 +4741,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -4808,7 +4825,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AppServiceConfig]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4876,7 +4893,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AppServiceConfig]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4944,7 +4961,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AppServiceConfig]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4989,7 +5006,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -5072,7 +5090,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AppServiceContainer]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5140,7 +5158,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AppServiceContainer]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5208,7 +5226,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AppServiceContainer]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5253,7 +5271,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -5352,7 +5371,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppServiceCronJobsResponse",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5436,7 +5455,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppServiceCronJobsResponse",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5520,7 +5539,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppServiceCronJobsResponse",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5587,7 +5606,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -5670,7 +5690,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AppServiceCronSchedule]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5738,7 +5758,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AppServiceCronSchedule]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5806,7 +5826,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AppServiceCronSchedule]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -5851,7 +5871,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -5934,7 +5955,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AppServiceEnvVar]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6002,7 +6023,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AppServiceEnvVar]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6070,7 +6091,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AppServiceEnvVar]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6115,7 +6136,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -6198,7 +6220,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AppServiceHelmValue]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6266,7 +6288,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AppServiceHelmValue]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6334,7 +6356,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AppServiceHelmValue]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6379,7 +6401,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -6462,7 +6485,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AppServiceIntegration]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6530,7 +6553,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AppServiceIntegration]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6598,7 +6621,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AppServiceIntegration]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6643,7 +6666,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -6726,7 +6750,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AppServiceLink]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6794,7 +6818,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AppServiceLink]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6862,7 +6886,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AppServiceLink]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6907,7 +6931,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -6990,7 +7015,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AppServiceSetting]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7058,7 +7083,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AppServiceSetting]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7126,7 +7151,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AppServiceSetting]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7171,7 +7196,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -7254,7 +7280,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AppServiceToken]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7322,7 +7348,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AppServiceToken]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7390,7 +7416,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AppServiceToken]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7435,7 +7461,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -7518,7 +7545,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AppService]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7586,7 +7613,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AppService]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7654,7 +7681,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AppService]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7701,7 +7728,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -7788,7 +7816,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7860,7 +7888,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7932,7 +7960,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7980,7 +8008,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -8063,7 +8092,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "Task",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8131,7 +8160,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "Task",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8199,7 +8228,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "Task",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8244,7 +8273,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -8335,7 +8365,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8411,7 +8441,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8487,7 +8517,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8538,7 +8568,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -8642,7 +8673,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8718,7 +8749,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8794,7 +8825,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8845,7 +8876,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -8945,7 +8977,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -9017,7 +9049,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -9089,7 +9121,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -9137,7 +9169,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -9241,7 +9274,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppServiceSetting",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -9317,7 +9350,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppServiceSetting",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -9393,7 +9426,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppServiceSetting",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -9444,7 +9477,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -9540,7 +9574,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -9608,7 +9642,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -9676,7 +9710,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -9721,7 +9755,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -9804,7 +9839,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -9872,7 +9907,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -9940,7 +9975,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -9985,7 +10020,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -10072,7 +10108,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppService",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -10144,7 +10180,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppService",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -10216,7 +10252,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppService",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -10264,7 +10300,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -10364,7 +10401,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppServiceCronSchedule",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -10436,7 +10473,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppServiceCronSchedule",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -10508,7 +10545,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppServiceCronSchedule",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -10556,7 +10593,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -10656,7 +10694,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppService",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -10728,7 +10766,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppService",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -10800,7 +10838,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppService",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -10848,7 +10886,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -10948,7 +10987,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppServiceEnvVar",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -11020,7 +11059,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppServiceEnvVar",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -11092,7 +11131,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppServiceEnvVar",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -11140,7 +11179,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -11240,7 +11280,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppServiceHelmValue",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -11312,7 +11352,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppServiceHelmValue",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -11384,7 +11424,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppServiceHelmValue",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -11432,7 +11472,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -11532,7 +11573,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppServiceToken",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -11604,7 +11645,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppServiceToken",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -11676,7 +11717,7 @@ class AppServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppServiceToken",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -11724,7 +11765,8 @@ class AppServicesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 

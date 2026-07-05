@@ -103,7 +103,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "Database",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -171,7 +171,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "Database",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -239,7 +239,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "Database",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -284,7 +284,8 @@ class DatabasesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -380,7 +381,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "DatabaseDB",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -448,7 +449,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "DatabaseDB",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -516,7 +517,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "DatabaseDB",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -561,7 +562,8 @@ class DatabasesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -657,7 +659,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "DatabaseUser",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -725,7 +727,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "DatabaseUser",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -793,7 +795,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "DatabaseUser",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -838,7 +840,8 @@ class DatabasesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -934,7 +937,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1002,7 +1005,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1070,7 +1073,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1115,7 +1118,8 @@ class DatabasesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -1198,7 +1202,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1266,7 +1270,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1334,7 +1338,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1379,7 +1383,8 @@ class DatabasesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -1462,7 +1467,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1530,7 +1535,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1598,7 +1603,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "OperationResult",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1643,7 +1648,8 @@ class DatabasesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -1726,7 +1732,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Database",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1794,7 +1800,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Database",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1862,7 +1868,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Database",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1907,7 +1913,8 @@ class DatabasesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -1994,7 +2001,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Database",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2066,7 +2073,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Database",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2138,7 +2145,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Database",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2188,7 +2195,8 @@ class DatabasesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -2271,7 +2279,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DatabaseDB",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2339,7 +2347,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DatabaseDB",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2407,7 +2415,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DatabaseDB",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2452,7 +2460,8 @@ class DatabasesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -2535,7 +2544,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[DatabaseCharset]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2603,7 +2612,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[DatabaseCharset]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2671,7 +2680,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[DatabaseCharset]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2716,7 +2725,8 @@ class DatabasesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -2799,7 +2809,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[DatabaseDB]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2867,7 +2877,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[DatabaseDB]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2935,7 +2945,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[DatabaseDB]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2982,7 +2992,8 @@ class DatabasesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -3065,7 +3076,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[DatabaseUser]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3133,7 +3144,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[DatabaseUser]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3201,7 +3212,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[DatabaseUser]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3248,7 +3259,8 @@ class DatabasesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -3339,7 +3351,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[Database]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3415,7 +3427,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[Database]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3491,7 +3503,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[Database]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3548,7 +3560,8 @@ class DatabasesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -3635,7 +3648,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Database",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3707,7 +3720,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Database",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3779,7 +3792,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Database",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3827,7 +3840,8 @@ class DatabasesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -3927,7 +3941,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DatabaseUser",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3999,7 +4013,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DatabaseUser",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4071,7 +4085,7 @@ class DatabasesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DatabaseUser",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4119,7 +4133,8 @@ class DatabasesApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 

@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -32,7 +32,8 @@ class NewStackServiceInput(BaseModel):
     title: StrictStr
     required: StrictBool
     replicas: StrictInt
-    __properties: ClassVar[List[str]] = ["stackId", "serviceId", "name", "title", "required", "replicas"]
+    service_rev_pinned: Optional[StrictBool] = Field(default=None, alias="serviceRevPinned")
+    __properties: ClassVar[List[str]] = ["stackId", "serviceId", "name", "title", "required", "replicas", "serviceRevPinned"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -73,6 +74,11 @@ class NewStackServiceInput(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if service_rev_pinned (nullable) is None
+        # and model_fields_set contains the field
+        if self.service_rev_pinned is None and "service_rev_pinned" in self.model_fields_set:
+            _dict['serviceRevPinned'] = None
+
         return _dict
 
     @classmethod
@@ -90,7 +96,8 @@ class NewStackServiceInput(BaseModel):
             "name": obj.get("name"),
             "title": obj.get("title"),
             "required": obj.get("required"),
-            "replicas": obj.get("replicas")
+            "replicas": obj.get("replicas"),
+            "serviceRevPinned": obj.get("serviceRevPinned")
         })
         return _obj
 

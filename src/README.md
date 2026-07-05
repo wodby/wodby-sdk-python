@@ -184,6 +184,8 @@ Class | Method | HTTP request | Description
 *ClustersApi* | [**list_clusters**](docs/ClustersApi.md#list_clusters) | **GET** /clusters | List clusters
 *ClustersApi* | [**update_cluster**](docs/ClustersApi.md#update_cluster) | **PUT** /clusters/{id} | Update cluster
 *ClustersApi* | [**update_cluster_settings**](docs/ClustersApi.md#update_cluster_settings) | **PUT** /clusters/settings/{id} | Update cluster settings
+*ClustersApi* | [**upgrade_cluster_infra**](docs/ClustersApi.md#upgrade_cluster_infra) | **POST** /clusters/{id}/actions/upgrade-infra | Upgrade cluster infrastructure
+*ClustersApi* | [**upgrade_cluster_infra_apps**](docs/ClustersApi.md#upgrade_cluster_infra_apps) | **POST** /clusters/{id}/actions/upgrade-infra-apps | Upgrade cluster infrastructure app stacks
 *DatabasesApi* | [**create_database**](docs/DatabasesApi.md#create_database) | **POST** /databases | Create database
 *DatabasesApi* | [**create_database_db**](docs/DatabasesApi.md#create_database_db) | **POST** /database-dbs | Create database DB
 *DatabasesApi* | [**create_database_user**](docs/DatabasesApi.md#create_database_user) | **POST** /database-users | Create database user
@@ -234,7 +236,6 @@ Class | Method | HTTP request | Description
 *IntegrationsApi* | [**update_integration**](docs/IntegrationsApi.md#update_integration) | **PUT** /integrations/{id} | Update integration
 *OrgMembershipsApi* | [**get_org_membership**](docs/OrgMembershipsApi.md#get_org_membership) | **GET** /org-memberships/{id} | Get org membership
 *OrgMembershipsApi* | [**list_org_memberships**](docs/OrgMembershipsApi.md#list_org_memberships) | **GET** /org-memberships | List org memberships
-*OrgsApi* | [**delete_org**](docs/OrgsApi.md#delete_org) | **DELETE** /orgs/{id} | Delete org
 *OrgsApi* | [**get_org**](docs/OrgsApi.md#get_org) | **GET** /orgs/{id} | Get org
 *OrgsApi* | [**list_orgs**](docs/OrgsApi.md#list_orgs) | **GET** /orgs | List orgs
 *OrgsApi* | [**update_org**](docs/OrgsApi.md#update_org) | **PUT** /orgs/{id} | Update org
@@ -290,6 +291,7 @@ Class | Method | HTTP request | Description
 *StackServicesApi* | [**update_stack_service_env_var**](docs/StackServicesApi.md#update_stack_service_env_var) | **PUT** /stack-service-env-vars/{id} | Update stack service env var
 *StackServicesApi* | [**update_stack_service_helm_value**](docs/StackServicesApi.md#update_stack_service_helm_value) | **PUT** /stack-service-helm-values/{id} | Update stack service Helm value
 *StackServicesApi* | [**update_stack_service_token**](docs/StackServicesApi.md#update_stack_service_token) | **PUT** /stack-service-tokens/{id} | Update stack service token
+*StacksApi* | [**duplicate_stack**](docs/StacksApi.md#duplicate_stack) | **POST** /stacks/{id}/actions/duplicate | Duplicate stack
 *StacksApi* | [**get_stack**](docs/StacksApi.md#get_stack) | **GET** /stacks/{id} | Get stack
 *StacksApi* | [**get_stack_by_name**](docs/StacksApi.md#get_stack_by_name) | **GET** /stacks/by-name/{name} | Get stack by name
 *StacksApi* | [**get_stack_revision**](docs/StacksApi.md#get_stack_revision) | **GET** /stack-revisions/{id} | Get stack revision
@@ -297,6 +299,7 @@ Class | Method | HTTP request | Description
 *StacksApi* | [**list_stack_revision_services**](docs/StacksApi.md#list_stack_revision_services) | **GET** /stack-revisions/{id}/services | List stack services
 *StacksApi* | [**list_stacks**](docs/StacksApi.md#list_stacks) | **GET** /stacks | List stacks
 *StacksApi* | [**publish_stack_draft**](docs/StacksApi.md#publish_stack_draft) | **POST** /stacks/{id}/actions/publish-draft | Publish stack draft
+*StacksApi* | [**sync_stack_with_origin**](docs/StacksApi.md#sync_stack_with_origin) | **POST** /stacks/{id}/actions/sync-origin | Sync stack with origin
 *StacksApi* | [**update_stack_from_git**](docs/StacksApi.md#update_stack_from_git) | **POST** /stacks/{id}/actions/update-from-git | Update stack from git
 *StacksApi* | [**update_stack_settings**](docs/StacksApi.md#update_stack_settings) | **PUT** /stacks/settings/{id} | Update stack settings
 *TaskStepsApi* | [**get_task_step_log_url**](docs/TaskStepsApi.md#get_task_step_log_url) | **GET** /task-steps/{id}/log-url | Get task step log URL
@@ -305,6 +308,8 @@ Class | Method | HTTP request | Description
 *TasksApi* | [**get_task**](docs/TasksApi.md#get_task) | **GET** /tasks/{id} | Get task
 *TasksApi* | [**list_tasks**](docs/TasksApi.md#list_tasks) | **GET** /tasks | List tasks
 *TasksApi* | [**repeat_task**](docs/TasksApi.md#repeat_task) | **POST** /tasks/{id}/repeat | Repeat task
+*UserApi* | [**get_current_user**](docs/UserApi.md#get_current_user) | **GET** /user | Get current user
+*UserApi* | [**update_current_user**](docs/UserApi.md#update_current_user) | **PUT** /user | Update current user
 
 
 ## Documentation For Models
@@ -312,6 +317,7 @@ Class | Method | HTTP request | Description
  - [App](docs/App.md)
  - [AppBuild](docs/AppBuild.md)
  - [AppBuildConfig](docs/AppBuildConfig.md)
+ - [AppBuildsCreateResponse](docs/AppBuildsCreateResponse.md)
  - [AppBuildsResponse](docs/AppBuildsResponse.md)
  - [AppDeployment](docs/AppDeployment.md)
  - [AppDeploymentsResponse](docs/AppDeploymentsResponse.md)
@@ -365,9 +371,11 @@ Class | Method | HTTP request | Description
  - [ClusterSettings](docs/ClusterSettings.md)
  - [ClusterSettingsInput](docs/ClusterSettingsInput.md)
  - [ConfigOverrideInput](docs/ConfigOverrideInput.md)
+ - [CopyStackSettingsInput](docs/CopyStackSettingsInput.md)
  - [CreateBuildRequest](docs/CreateBuildRequest.md)
  - [CreateDeploymentRequest](docs/CreateDeploymentRequest.md)
  - [CreateEnvRequest](docs/CreateEnvRequest.md)
+ - [CurrentUser](docs/CurrentUser.md)
  - [Database](docs/Database.md)
  - [DatabaseCharset](docs/DatabaseCharset.md)
  - [DatabaseDB](docs/DatabaseDB.md)
@@ -376,8 +384,8 @@ Class | Method | HTTP request | Description
  - [DatabaseVersion](docs/DatabaseVersion.md)
  - [DeploymentFromCIInput](docs/DeploymentFromCIInput.md)
  - [DockerRegistryCredentials](docs/DockerRegistryCredentials.md)
+ - [DuplicateStackRequest](docs/DuplicateStackRequest.md)
  - [Env](docs/Env.md)
- - [ErrorResponse](docs/ErrorResponse.md)
  - [FieldInput](docs/FieldInput.md)
  - [GitAutoUpdateSettings](docs/GitAutoUpdateSettings.md)
  - [GitAutoUpdateSettingsInput](docs/GitAutoUpdateSettingsInput.md)
@@ -418,6 +426,8 @@ Class | Method | HTTP request | Description
  - [OperationResult](docs/OperationResult.md)
  - [Org](docs/Org.md)
  - [OrgMembership](docs/OrgMembership.md)
+ - [ProblemDetails](docs/ProblemDetails.md)
+ - [ProblemFieldError](docs/ProblemFieldError.md)
  - [Project](docs/Project.md)
  - [Provider](docs/Provider.md)
  - [ProviderRevision](docs/ProviderRevision.md)
@@ -477,6 +487,7 @@ Class | Method | HTTP request | Description
  - [UpdateAppServiceCronScheduleInput](docs/UpdateAppServiceCronScheduleInput.md)
  - [UpdateAppServiceDatabaseInput](docs/UpdateAppServiceDatabaseInput.md)
  - [UpdateAppServiceEnvVarInput](docs/UpdateAppServiceEnvVarInput.md)
+ - [UpdateCurrentUserRequest](docs/UpdateCurrentUserRequest.md)
  - [UpdateDatabaseUserDBsInput](docs/UpdateDatabaseUserDBsInput.md)
  - [UpdateEnvRequest](docs/UpdateEnvRequest.md)
  - [UpdateIntegrationInput](docs/UpdateIntegrationInput.md)

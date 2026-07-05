@@ -17,10 +17,11 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictInt
-from typing import List, Optional
+from typing import Optional
 from typing_extensions import Annotated
 from wodby.models.app_build import AppBuild
 from wodby.models.app_build_config import AppBuildConfig
+from wodby.models.app_builds_create_response import AppBuildsCreateResponse
 from wodby.models.app_builds_response import AppBuildsResponse
 from wodby.models.app_deployment import AppDeployment
 from wodby.models.create_build_request import CreateBuildRequest
@@ -61,7 +62,7 @@ class AppBuildsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[AppBuild]:
+    ) -> AppBuildsCreateResponse:
         """Create build
 
         Creates a build and returns the created resource.
@@ -99,8 +100,8 @@ class AppBuildsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "List[AppBuild]",
-            '4XX': "ErrorResponse",
+            '201': "AppBuildsCreateResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -129,7 +130,7 @@ class AppBuildsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[AppBuild]]:
+    ) -> ApiResponse[AppBuildsCreateResponse]:
         """Create build
 
         Creates a build and returns the created resource.
@@ -167,8 +168,8 @@ class AppBuildsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "List[AppBuild]",
-            '4XX': "ErrorResponse",
+            '201': "AppBuildsCreateResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -235,8 +236,8 @@ class AppBuildsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "List[AppBuild]",
-            '4XX': "ErrorResponse",
+            '201': "AppBuildsCreateResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -281,7 +282,8 @@ class AppBuildsApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -377,7 +379,7 @@ class AppBuildsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "AppBuild",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -445,7 +447,7 @@ class AppBuildsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "AppBuild",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -513,7 +515,7 @@ class AppBuildsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "AppBuild",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -558,7 +560,8 @@ class AppBuildsApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -654,7 +657,7 @@ class AppBuildsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "AppDeployment",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -722,7 +725,7 @@ class AppBuildsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "AppDeployment",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -790,7 +793,7 @@ class AppBuildsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "AppDeployment",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -835,7 +838,8 @@ class AppBuildsApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -918,7 +922,7 @@ class AppBuildsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppBuild",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -986,7 +990,7 @@ class AppBuildsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppBuild",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1054,7 +1058,7 @@ class AppBuildsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppBuild",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1099,7 +1103,8 @@ class AppBuildsApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -1183,7 +1188,7 @@ class AppBuildsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppBuildConfig",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1251,7 +1256,7 @@ class AppBuildsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppBuildConfig",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1319,7 +1324,7 @@ class AppBuildsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppBuildConfig",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1364,7 +1369,8 @@ class AppBuildsApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -1448,7 +1454,7 @@ class AppBuildsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DockerRegistryCredentials",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1516,7 +1522,7 @@ class AppBuildsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DockerRegistryCredentials",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1584,7 +1590,7 @@ class AppBuildsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DockerRegistryCredentials",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1629,7 +1635,8 @@ class AppBuildsApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -1721,7 +1728,7 @@ class AppBuildsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppBuildsResponse",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1797,7 +1804,7 @@ class AppBuildsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppBuildsResponse",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1873,7 +1880,7 @@ class AppBuildsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppBuildsResponse",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1930,7 +1937,8 @@ class AppBuildsApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 

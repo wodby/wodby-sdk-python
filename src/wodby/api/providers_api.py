@@ -96,7 +96,7 @@ class ProvidersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Provider",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -164,7 +164,7 @@ class ProvidersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Provider",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -232,7 +232,7 @@ class ProvidersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Provider",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -277,7 +277,8 @@ class ProvidersApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -360,7 +361,7 @@ class ProvidersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Provider",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -428,7 +429,7 @@ class ProvidersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Provider",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -496,7 +497,7 @@ class ProvidersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Provider",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -541,7 +542,8 @@ class ProvidersApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -624,7 +626,7 @@ class ProvidersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProviderRevision",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -692,7 +694,7 @@ class ProvidersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProviderRevision",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -760,7 +762,7 @@ class ProvidersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProviderRevision",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -805,7 +807,8 @@ class ProvidersApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -908,7 +911,7 @@ class ProvidersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProvidersResponse",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -996,7 +999,7 @@ class ProvidersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProvidersResponse",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1084,7 +1087,7 @@ class ProvidersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProvidersResponse",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1156,7 +1159,8 @@ class ProvidersApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 

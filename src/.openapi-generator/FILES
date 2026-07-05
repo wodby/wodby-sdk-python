@@ -7,6 +7,7 @@ docs/App.md
 docs/AppBuild.md
 docs/AppBuildConfig.md
 docs/AppBuildsApi.md
+docs/AppBuildsCreateResponse.md
 docs/AppBuildsResponse.md
 docs/AppDeployment.md
 docs/AppDeploymentsApi.md
@@ -69,9 +70,11 @@ docs/ClusterSettings.md
 docs/ClusterSettingsInput.md
 docs/ClustersApi.md
 docs/ConfigOverrideInput.md
+docs/CopyStackSettingsInput.md
 docs/CreateBuildRequest.md
 docs/CreateDeploymentRequest.md
 docs/CreateEnvRequest.md
+docs/CurrentUser.md
 docs/Database.md
 docs/DatabaseCharset.md
 docs/DatabaseDB.md
@@ -82,9 +85,9 @@ docs/DatabasesApi.md
 docs/DefaultApi.md
 docs/DeploymentFromCIInput.md
 docs/DockerRegistryCredentials.md
+docs/DuplicateStackRequest.md
 docs/Env.md
 docs/EnvsApi.md
-docs/ErrorResponse.md
 docs/FieldInput.md
 docs/GitAutoUpdateSettings.md
 docs/GitAutoUpdateSettingsInput.md
@@ -130,6 +133,8 @@ docs/Org.md
 docs/OrgMembership.md
 docs/OrgMembershipsApi.md
 docs/OrgsApi.md
+docs/ProblemDetails.md
+docs/ProblemFieldError.md
 docs/Project.md
 docs/ProjectsApi.md
 docs/Provider.md
@@ -196,6 +201,7 @@ docs/UpdateAppRouteInput.md
 docs/UpdateAppServiceCronScheduleInput.md
 docs/UpdateAppServiceDatabaseInput.md
 docs/UpdateAppServiceEnvVarInput.md
+docs/UpdateCurrentUserRequest.md
 docs/UpdateDatabaseUserDBsInput.md
 docs/UpdateEnvRequest.md
 docs/UpdateIntegrationInput.md
@@ -208,6 +214,7 @@ docs/UpdateStackServiceEnvVarInput.md
 docs/UpdateStackServiceTokenInput.md
 docs/UpdateTitleRequest.md
 docs/User.md
+docs/UserApi.md
 docs/VolumeSizeInput.md
 git_push.sh
 pyproject.toml
@@ -216,6 +223,14 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_app_builds_create_response.py
+test/test_copy_stack_settings_input.py
+test/test_current_user.py
+test/test_duplicate_stack_request.py
+test/test_problem_details.py
+test/test_problem_field_error.py
+test/test_update_current_user_request.py
+test/test_user_api.py
 tox.ini
 wodby/__init__.py
 wodby/api/__init__.py
@@ -244,6 +259,7 @@ wodby/api/stack_services_api.py
 wodby/api/stacks_api.py
 wodby/api/task_steps_api.py
 wodby/api/tasks_api.py
+wodby/api/user_api.py
 wodby/api_client.py
 wodby/api_response.py
 wodby/configuration.py
@@ -252,6 +268,7 @@ wodby/models/__init__.py
 wodby/models/app.py
 wodby/models/app_build.py
 wodby/models/app_build_config.py
+wodby/models/app_builds_create_response.py
 wodby/models/app_builds_response.py
 wodby/models/app_deployment.py
 wodby/models/app_deployments_response.py
@@ -305,9 +322,11 @@ wodby/models/cluster_auto_upgrade_version_policy_input.py
 wodby/models/cluster_settings.py
 wodby/models/cluster_settings_input.py
 wodby/models/config_override_input.py
+wodby/models/copy_stack_settings_input.py
 wodby/models/create_build_request.py
 wodby/models/create_deployment_request.py
 wodby/models/create_env_request.py
+wodby/models/current_user.py
 wodby/models/database.py
 wodby/models/database_charset.py
 wodby/models/database_db.py
@@ -316,8 +335,8 @@ wodby/models/database_user.py
 wodby/models/database_version.py
 wodby/models/deployment_from_ci_input.py
 wodby/models/docker_registry_credentials.py
+wodby/models/duplicate_stack_request.py
 wodby/models/env.py
-wodby/models/error_response.py
 wodby/models/field_input.py
 wodby/models/git_auto_update_settings.py
 wodby/models/git_auto_update_settings_input.py
@@ -358,6 +377,8 @@ wodby/models/new_stack_service_token_input.py
 wodby/models/operation_result.py
 wodby/models/org.py
 wodby/models/org_membership.py
+wodby/models/problem_details.py
+wodby/models/problem_field_error.py
 wodby/models/project.py
 wodby/models/provider.py
 wodby/models/provider_revision.py
@@ -416,6 +437,7 @@ wodby/models/update_app_route_input.py
 wodby/models/update_app_service_cron_schedule_input.py
 wodby/models/update_app_service_database_input.py
 wodby/models/update_app_service_env_var_input.py
+wodby/models/update_current_user_request.py
 wodby/models/update_database_user_dbs_input.py
 wodby/models/update_env_request.py
 wodby/models/update_integration_input.py

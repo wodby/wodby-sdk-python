@@ -97,7 +97,7 @@ class AppDeploymentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "AppDeployment",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -165,7 +165,7 @@ class AppDeploymentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "AppDeployment",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -233,7 +233,7 @@ class AppDeploymentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "AppDeployment",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -278,7 +278,8 @@ class AppDeploymentsApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -374,7 +375,7 @@ class AppDeploymentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "AppDeployment",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -442,7 +443,7 @@ class AppDeploymentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "AppDeployment",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -510,7 +511,7 @@ class AppDeploymentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "AppDeployment",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -555,7 +556,8 @@ class AppDeploymentsApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -652,7 +654,7 @@ class AppDeploymentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppDeployment",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -720,7 +722,7 @@ class AppDeploymentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppDeployment",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -788,7 +790,7 @@ class AppDeploymentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppDeployment",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -833,7 +835,8 @@ class AppDeploymentsApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -924,7 +927,7 @@ class AppDeploymentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppDeploymentsResponse",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1000,7 +1003,7 @@ class AppDeploymentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppDeploymentsResponse",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1076,7 +1079,7 @@ class AppDeploymentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppDeploymentsResponse",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1133,7 +1136,8 @@ class AppDeploymentsApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -1216,7 +1220,7 @@ class AppDeploymentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "AppDeployment",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1284,7 +1288,7 @@ class AppDeploymentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "AppDeployment",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1352,7 +1356,7 @@ class AppDeploymentsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "AppDeployment",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1397,7 +1401,8 @@ class AppDeploymentsApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 

@@ -26,4 +26,5 @@ from wodby.api.stack_services_api import StackServicesApi
 from wodby.api.stacks_api import StacksApi
 from wodby.api.task_steps_api import TaskStepsApi
 from wodby.api.tasks_api import TasksApi
+from wodby.api.user_api import UserApi
 

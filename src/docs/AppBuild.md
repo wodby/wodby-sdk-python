@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **status** | **str** |  | 
 **app_instance_id** | **int** |  | 
 **app_service_id** | **int** |  | 
+**task_id** | **int** |  | [optional] 
 **task** | [**Task**](Task.md) |  | [optional] 
 **app_service_builds** | [**List[AppServiceBuild]**](AppServiceBuild.md) |  | 
 **git_ref_type** | **str** |  | 

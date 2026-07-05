@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **title** | **str** |  | 
 **required** | **bool** |  | 
 **replicas** | **int** |  | 
+**service_rev_pinned** | **bool** |  | [optional] 
 
 ## Example
 

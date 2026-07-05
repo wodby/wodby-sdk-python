@@ -98,7 +98,7 @@ class CertsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Cert",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -170,7 +170,7 @@ class CertsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Cert",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -242,7 +242,7 @@ class CertsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Cert",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -292,7 +292,8 @@ class CertsApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 
@@ -375,7 +376,7 @@ class CertsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[Cert]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -443,7 +444,7 @@ class CertsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[Cert]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -511,7 +512,7 @@ class CertsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[Cert]",
-            '4XX': "ErrorResponse",
+            '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -558,7 +559,8 @@ class CertsApi:
         if 'Accept' not in _header_params:
             _header_params['Accept'] = self.api_client.select_header_accept(
                 [
-                    'application/json'
+                    'application/json', 
+                    'application/problem+json'
                 ]
             )
 

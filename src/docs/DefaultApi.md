@@ -61,7 +61,7 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/json, application/problem+json
 
 ### HTTP response details
 
@@ -126,7 +126,7 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/yaml, application/json
+ - **Accept**: application/yaml, application/problem+json
 
 ### HTTP response details
 

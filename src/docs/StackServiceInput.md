@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **required** | **bool** |  | [optional] 
 **disabled** | **bool** |  | [optional] 
 **main** | **bool** |  | [optional] 
+**service_rev_pinned** | **bool** |  | [optional] 
 **title** | **str** |  | [optional] 
 **build_source** | [**BuildSourceInput**](BuildSourceInput.md) |  | [optional] 
 

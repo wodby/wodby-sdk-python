@@ -31,9 +31,10 @@ class StackServiceInput(BaseModel):
     required: Optional[StrictBool] = None
     disabled: Optional[StrictBool] = None
     main: Optional[StrictBool] = None
+    service_rev_pinned: Optional[StrictBool] = Field(default=None, alias="serviceRevPinned")
     title: Optional[StrictStr] = None
     build_source: Optional[BuildSourceInput] = Field(default=None, alias="buildSource")
-    __properties: ClassVar[List[str]] = ["replicas", "required", "disabled", "main", "title", "buildSource"]
+    __properties: ClassVar[List[str]] = ["replicas", "required", "disabled", "main", "serviceRevPinned", "title", "buildSource"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -97,6 +98,11 @@ class StackServiceInput(BaseModel):
         if self.main is None and "main" in self.model_fields_set:
             _dict['main'] = None
 
+        # set to None if service_rev_pinned (nullable) is None
+        # and model_fields_set contains the field
+        if self.service_rev_pinned is None and "service_rev_pinned" in self.model_fields_set:
+            _dict['serviceRevPinned'] = None
+
         # set to None if title (nullable) is None
         # and model_fields_set contains the field
         if self.title is None and "title" in self.model_fields_set:
@@ -118,6 +124,7 @@ class StackServiceInput(BaseModel):
             "required": obj.get("required"),
             "disabled": obj.get("disabled"),
             "main": obj.get("main"),
+            "serviceRevPinned": obj.get("serviceRevPinned"),
             "title": obj.get("title"),
             "buildSource": BuildSourceInput.from_dict(obj["buildSource"]) if obj.get("buildSource") is not None else None
         })

@@ -34,6 +34,7 @@ class AppBuild(BaseModel):
     status: StrictStr
     app_instance_id: StrictInt = Field(alias="appInstanceId")
     app_service_id: StrictInt = Field(alias="appServiceId")
+    task_id: Optional[StrictInt] = Field(default=None, alias="taskId")
     task: Optional[Task] = None
     app_service_builds: List[AppServiceBuild] = Field(alias="appServiceBuilds")
     git_ref_type: StrictStr = Field(alias="gitRefType")
@@ -44,7 +45,7 @@ class AppBuild(BaseModel):
     updated_at: datetime = Field(alias="updatedAt")
     started_at: Optional[datetime] = Field(default=None, alias="startedAt")
     ended_at: Optional[datetime] = Field(default=None, alias="endedAt")
-    __properties: ClassVar[List[str]] = ["id", "number", "status", "appInstanceId", "appServiceId", "task", "appServiceBuilds", "gitRefType", "gitRef", "commitHash", "commitMessage", "createdAt", "updatedAt", "startedAt", "endedAt"]
+    __properties: ClassVar[List[str]] = ["id", "number", "status", "appInstanceId", "appServiceId", "taskId", "task", "appServiceBuilds", "gitRefType", "gitRef", "commitHash", "commitMessage", "createdAt", "updatedAt", "startedAt", "endedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -95,6 +96,11 @@ class AppBuild(BaseModel):
                 if _item_app_service_builds:
                     _items.append(_item_app_service_builds.to_dict())
             _dict['appServiceBuilds'] = _items
+        # set to None if task_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.task_id is None and "task_id" in self.model_fields_set:
+            _dict['taskId'] = None
+
         # set to None if task (nullable) is None
         # and model_fields_set contains the field
         if self.task is None and "task" in self.model_fields_set:
@@ -127,6 +133,7 @@ class AppBuild(BaseModel):
             "status": obj.get("status"),
             "appInstanceId": obj.get("appInstanceId"),
             "appServiceId": obj.get("appServiceId"),
+            "taskId": obj.get("taskId"),
             "task": Task.from_dict(obj["task"]) if obj.get("task") is not None else None,
             "appServiceBuilds": [AppServiceBuild.from_dict(_item) for _item in obj["appServiceBuilds"]] if obj.get("appServiceBuilds") is not None else None,
             "gitRefType": obj.get("gitRefType"),
