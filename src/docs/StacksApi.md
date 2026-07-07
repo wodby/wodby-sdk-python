@@ -4,6 +4,7 @@ All URIs are relative to */v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**create_stack_from_manifest**](StacksApi.md#create_stack_from_manifest) | **POST** /stacks/actions/create-from-manifest | Create stack from manifest
 [**duplicate_stack**](StacksApi.md#duplicate_stack) | **POST** /stacks/{id}/actions/duplicate | Duplicate stack
 [**get_stack**](StacksApi.md#get_stack) | **GET** /stacks/{id} | Get stack
 [**get_stack_by_name**](StacksApi.md#get_stack_by_name) | **GET** /stacks/by-name/{name} | Get stack by name
@@ -12,10 +13,94 @@ Method | HTTP request | Description
 [**list_stack_revision_services**](StacksApi.md#list_stack_revision_services) | **GET** /stack-revisions/{id}/services | List stack services
 [**list_stacks**](StacksApi.md#list_stacks) | **GET** /stacks | List stacks
 [**publish_stack_draft**](StacksApi.md#publish_stack_draft) | **POST** /stacks/{id}/actions/publish-draft | Publish stack draft
+[**scaffold_stack_from_helm_chart**](StacksApi.md#scaffold_stack_from_helm_chart) | **POST** /stacks/actions/scaffold-from-helm-chart | Scaffold stack from Helm chart
 [**sync_stack_with_origin**](StacksApi.md#sync_stack_with_origin) | **POST** /stacks/{id}/actions/sync-origin | Sync stack with origin
 [**update_stack_from_git**](StacksApi.md#update_stack_from_git) | **POST** /stacks/{id}/actions/update-from-git | Update stack from git
 [**update_stack_settings**](StacksApi.md#update_stack_settings) | **PUT** /stacks/settings/{id} | Update stack settings
+[**validate_stack_manifest**](StacksApi.md#validate_stack_manifest) | **POST** /stacks/actions/validate-manifest | Validate stack manifest
 
+
+# **create_stack_from_manifest**
+> Stack create_stack_from_manifest(manifest_from_yaml_input)
+
+Create stack from manifest
+
+Creates a non-Git Wodby stack from a stack manifest.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.manifest_from_yaml_input import ManifestFromYAMLInput
+from wodby.models.stack import Stack
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.StacksApi(api_client)
+    manifest_from_yaml_input = wodby.ManifestFromYAMLInput() # ManifestFromYAMLInput | 
+
+    try:
+        # Create stack from manifest
+        api_response = api_instance.create_stack_from_manifest(manifest_from_yaml_input)
+        print("The response of StacksApi->create_stack_from_manifest:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling StacksApi->create_stack_from_manifest: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **manifest_from_yaml_input** | [**ManifestFromYAMLInput**](ManifestFromYAMLInput.md)|  | 
+
+### Return type
+
+[**Stack**](Stack.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Created stack |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **duplicate_stack**
 > Stack duplicate_stack(id, duplicate_stack_request)
@@ -679,6 +764,88 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **scaffold_stack_from_helm_chart**
+> HelmChartStackScaffoldResponse scaffold_stack_from_helm_chart(helm_chart_stack_scaffold_input)
+
+Scaffold stack from Helm chart
+
+Renders a Helm chart and returns best-effort Wodby service and stack manifests for review and validation.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.helm_chart_stack_scaffold_input import HelmChartStackScaffoldInput
+from wodby.models.helm_chart_stack_scaffold_response import HelmChartStackScaffoldResponse
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.StacksApi(api_client)
+    helm_chart_stack_scaffold_input = wodby.HelmChartStackScaffoldInput() # HelmChartStackScaffoldInput | 
+
+    try:
+        # Scaffold stack from Helm chart
+        api_response = api_instance.scaffold_stack_from_helm_chart(helm_chart_stack_scaffold_input)
+        print("The response of StacksApi->scaffold_stack_from_helm_chart:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling StacksApi->scaffold_stack_from_helm_chart: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **helm_chart_stack_scaffold_input** | [**HelmChartStackScaffoldInput**](HelmChartStackScaffoldInput.md)|  | 
+
+### Return type
+
+[**HelmChartStackScaffoldResponse**](HelmChartStackScaffoldResponse.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Generated service and stack manifests |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **sync_stack_with_origin**
 > Stack sync_stack_with_origin(id, stack_sync_options_input=stack_sync_options_input)
 
@@ -926,6 +1093,88 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Updated stack |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **validate_stack_manifest**
+> ManifestValidationResponse validate_stack_manifest(manifest_from_yaml_input)
+
+Validate stack manifest
+
+Validates a Wodby stack manifest without creating a stack.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.manifest_from_yaml_input import ManifestFromYAMLInput
+from wodby.models.manifest_validation_response import ManifestValidationResponse
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.StacksApi(api_client)
+    manifest_from_yaml_input = wodby.ManifestFromYAMLInput() # ManifestFromYAMLInput | 
+
+    try:
+        # Validate stack manifest
+        api_response = api_instance.validate_stack_manifest(manifest_from_yaml_input)
+        print("The response of StacksApi->validate_stack_manifest:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling StacksApi->validate_stack_manifest: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **manifest_from_yaml_input** | [**ManifestFromYAMLInput**](ManifestFromYAMLInput.md)|  | 
+
+### Return type
+
+[**ManifestValidationResponse**](ManifestValidationResponse.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Stack manifest validation result |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 

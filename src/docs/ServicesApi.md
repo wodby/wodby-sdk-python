@@ -4,14 +4,99 @@ All URIs are relative to */v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**create_service_from_manifest**](ServicesApi.md#create_service_from_manifest) | **POST** /services/actions/create-from-manifest | Create service from manifest
 [**get_service**](ServicesApi.md#get_service) | **GET** /services/{id} | Get service
 [**get_service_by_name**](ServicesApi.md#get_service_by_name) | **GET** /services/by-name/{name} | Get service by name
 [**get_service_revision**](ServicesApi.md#get_service_revision) | **GET** /service-revisions/{id} | Get service revision
 [**import_services**](ServicesApi.md#import_services) | **POST** /services/actions/import | Import services from Git
 [**list_service_link_candidates**](ServicesApi.md#list_service_link_candidates) | **GET** /services/{name}/options/link-candidates | List service link candidates
 [**list_services**](ServicesApi.md#list_services) | **GET** /services | List services
+[**scaffold_service_from_helm_chart**](ServicesApi.md#scaffold_service_from_helm_chart) | **POST** /services/actions/scaffold-from-helm-chart | Scaffold service from Helm chart
 [**update_service_settings**](ServicesApi.md#update_service_settings) | **PUT** /services/settings/{id} | Update service settings
+[**validate_service_manifest**](ServicesApi.md#validate_service_manifest) | **POST** /services/actions/validate-manifest | Validate service manifest
 
+
+# **create_service_from_manifest**
+> Service create_service_from_manifest(manifest_from_yaml_input)
+
+Create service from manifest
+
+Creates a non-Git Wodby service from a service manifest.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.manifest_from_yaml_input import ManifestFromYAMLInput
+from wodby.models.service import Service
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.ServicesApi(api_client)
+    manifest_from_yaml_input = wodby.ManifestFromYAMLInput() # ManifestFromYAMLInput | 
+
+    try:
+        # Create service from manifest
+        api_response = api_instance.create_service_from_manifest(manifest_from_yaml_input)
+        print("The response of ServicesApi->create_service_from_manifest:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ServicesApi->create_service_from_manifest: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **manifest_from_yaml_input** | [**ManifestFromYAMLInput**](ManifestFromYAMLInput.md)|  | 
+
+### Return type
+
+[**Service**](Service.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Created service |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_service**
 > Service get_service(id)
@@ -509,6 +594,88 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **scaffold_service_from_helm_chart**
+> HelmChartServiceScaffoldResponse scaffold_service_from_helm_chart(helm_chart_service_scaffold_input)
+
+Scaffold service from Helm chart
+
+Renders a Helm chart and returns a best-effort Wodby service manifest for review and validation.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.helm_chart_service_scaffold_input import HelmChartServiceScaffoldInput
+from wodby.models.helm_chart_service_scaffold_response import HelmChartServiceScaffoldResponse
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.ServicesApi(api_client)
+    helm_chart_service_scaffold_input = wodby.HelmChartServiceScaffoldInput() # HelmChartServiceScaffoldInput | 
+
+    try:
+        # Scaffold service from Helm chart
+        api_response = api_instance.scaffold_service_from_helm_chart(helm_chart_service_scaffold_input)
+        print("The response of ServicesApi->scaffold_service_from_helm_chart:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ServicesApi->scaffold_service_from_helm_chart: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **helm_chart_service_scaffold_input** | [**HelmChartServiceScaffoldInput**](HelmChartServiceScaffoldInput.md)|  | 
+
+### Return type
+
+[**HelmChartServiceScaffoldResponse**](HelmChartServiceScaffoldResponse.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Generated service manifest |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **update_service_settings**
 > Service update_service_settings(id, service_settings_input)
 
@@ -588,6 +755,88 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Updated service |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **validate_service_manifest**
+> ManifestValidationResponse validate_service_manifest(manifest_from_yaml_input)
+
+Validate service manifest
+
+Validates a Wodby service manifest without creating a service.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.manifest_from_yaml_input import ManifestFromYAMLInput
+from wodby.models.manifest_validation_response import ManifestValidationResponse
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.ServicesApi(api_client)
+    manifest_from_yaml_input = wodby.ManifestFromYAMLInput() # ManifestFromYAMLInput | 
+
+    try:
+        # Validate service manifest
+        api_response = api_instance.validate_service_manifest(manifest_from_yaml_input)
+        print("The response of ServicesApi->validate_service_manifest:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ServicesApi->validate_service_manifest: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **manifest_from_yaml_input** | [**ManifestFromYAMLInput**](ManifestFromYAMLInput.md)|  | 
+
+### Return type
+
+[**ManifestValidationResponse**](ManifestValidationResponse.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Service manifest validation result |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 

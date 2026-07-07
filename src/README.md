@@ -209,6 +209,7 @@ Class | Method | HTTP request | Description
 *EnvsApi* | [**get_env_by_name**](docs/EnvsApi.md#get_env_by_name) | **GET** /envs/by-name/{name} | Get env by name
 *EnvsApi* | [**list_envs**](docs/EnvsApi.md#list_envs) | **GET** /envs | List envs
 *EnvsApi* | [**update_env**](docs/EnvsApi.md#update_env) | **PUT** /envs/{id} | Update env
+*HelmChartsApi* | [**inspect_helm_chart**](docs/HelmChartsApi.md#inspect_helm_chart) | **POST** /helm-charts/actions/inspect | Inspect Helm chart
 *ImportsApi* | [**create_import**](docs/ImportsApi.md#create_import) | **POST** /imports | Create import
 *ImportsApi* | [**get_import**](docs/ImportsApi.md#get_import) | **GET** /imports/{id} | Get import
 *ImportsApi* | [**list_imports**](docs/ImportsApi.md#list_imports) | **GET** /imports | List imports
@@ -249,13 +250,16 @@ Class | Method | HTTP request | Description
 *ProvidersApi* | [**get_provider_by_name**](docs/ProvidersApi.md#get_provider_by_name) | **GET** /providers/by-name/{name} | Get provider by name
 *ProvidersApi* | [**get_provider_revision**](docs/ProvidersApi.md#get_provider_revision) | **GET** /provider-revisions/{id} | Get provider revision
 *ProvidersApi* | [**list_providers**](docs/ProvidersApi.md#list_providers) | **GET** /providers | List providers
+*ServicesApi* | [**create_service_from_manifest**](docs/ServicesApi.md#create_service_from_manifest) | **POST** /services/actions/create-from-manifest | Create service from manifest
 *ServicesApi* | [**get_service**](docs/ServicesApi.md#get_service) | **GET** /services/{id} | Get service
 *ServicesApi* | [**get_service_by_name**](docs/ServicesApi.md#get_service_by_name) | **GET** /services/by-name/{name} | Get service by name
 *ServicesApi* | [**get_service_revision**](docs/ServicesApi.md#get_service_revision) | **GET** /service-revisions/{id} | Get service revision
 *ServicesApi* | [**import_services**](docs/ServicesApi.md#import_services) | **POST** /services/actions/import | Import services from Git
 *ServicesApi* | [**list_service_link_candidates**](docs/ServicesApi.md#list_service_link_candidates) | **GET** /services/{name}/options/link-candidates | List service link candidates
 *ServicesApi* | [**list_services**](docs/ServicesApi.md#list_services) | **GET** /services | List services
+*ServicesApi* | [**scaffold_service_from_helm_chart**](docs/ServicesApi.md#scaffold_service_from_helm_chart) | **POST** /services/actions/scaffold-from-helm-chart | Scaffold service from Helm chart
 *ServicesApi* | [**update_service_settings**](docs/ServicesApi.md#update_service_settings) | **PUT** /services/settings/{id} | Update service settings
+*ServicesApi* | [**validate_service_manifest**](docs/ServicesApi.md#validate_service_manifest) | **POST** /services/actions/validate-manifest | Validate service manifest
 *StackServicesApi* | [**create_stack_service**](docs/StackServicesApi.md#create_stack_service) | **POST** /stack-services | Create stack service
 *StackServicesApi* | [**create_stack_service_annotation**](docs/StackServicesApi.md#create_stack_service_annotation) | **POST** /stack-services/{id}/annotations | Create stack service annotation
 *StackServicesApi* | [**create_stack_service_cron_schedule**](docs/StackServicesApi.md#create_stack_service_cron_schedule) | **POST** /stack-services/{id}/cron-schedules | Create stack service cron schedule
@@ -291,6 +295,7 @@ Class | Method | HTTP request | Description
 *StackServicesApi* | [**update_stack_service_env_var**](docs/StackServicesApi.md#update_stack_service_env_var) | **PUT** /stack-service-env-vars/{id} | Update stack service env var
 *StackServicesApi* | [**update_stack_service_helm_value**](docs/StackServicesApi.md#update_stack_service_helm_value) | **PUT** /stack-service-helm-values/{id} | Update stack service Helm value
 *StackServicesApi* | [**update_stack_service_token**](docs/StackServicesApi.md#update_stack_service_token) | **PUT** /stack-service-tokens/{id} | Update stack service token
+*StacksApi* | [**create_stack_from_manifest**](docs/StacksApi.md#create_stack_from_manifest) | **POST** /stacks/actions/create-from-manifest | Create stack from manifest
 *StacksApi* | [**duplicate_stack**](docs/StacksApi.md#duplicate_stack) | **POST** /stacks/{id}/actions/duplicate | Duplicate stack
 *StacksApi* | [**get_stack**](docs/StacksApi.md#get_stack) | **GET** /stacks/{id} | Get stack
 *StacksApi* | [**get_stack_by_name**](docs/StacksApi.md#get_stack_by_name) | **GET** /stacks/by-name/{name} | Get stack by name
@@ -299,9 +304,11 @@ Class | Method | HTTP request | Description
 *StacksApi* | [**list_stack_revision_services**](docs/StacksApi.md#list_stack_revision_services) | **GET** /stack-revisions/{id}/services | List stack services
 *StacksApi* | [**list_stacks**](docs/StacksApi.md#list_stacks) | **GET** /stacks | List stacks
 *StacksApi* | [**publish_stack_draft**](docs/StacksApi.md#publish_stack_draft) | **POST** /stacks/{id}/actions/publish-draft | Publish stack draft
+*StacksApi* | [**scaffold_stack_from_helm_chart**](docs/StacksApi.md#scaffold_stack_from_helm_chart) | **POST** /stacks/actions/scaffold-from-helm-chart | Scaffold stack from Helm chart
 *StacksApi* | [**sync_stack_with_origin**](docs/StacksApi.md#sync_stack_with_origin) | **POST** /stacks/{id}/actions/sync-origin | Sync stack with origin
 *StacksApi* | [**update_stack_from_git**](docs/StacksApi.md#update_stack_from_git) | **POST** /stacks/{id}/actions/update-from-git | Update stack from git
 *StacksApi* | [**update_stack_settings**](docs/StacksApi.md#update_stack_settings) | **PUT** /stacks/settings/{id} | Update stack settings
+*StacksApi* | [**validate_stack_manifest**](docs/StacksApi.md#validate_stack_manifest) | **POST** /stacks/actions/validate-manifest | Validate stack manifest
 *TaskStepsApi* | [**get_task_step_log_url**](docs/TaskStepsApi.md#get_task_step_log_url) | **GET** /task-steps/{id}/log-url | Get task step log URL
 *TaskStepsApi* | [**get_task_step_logs**](docs/TaskStepsApi.md#get_task_step_logs) | **GET** /task-steps/{id}/logs | Get task step logs
 *TasksApi* | [**cancel_task**](docs/TasksApi.md#cancel_task) | **POST** /tasks/{id}/cancel | Cancel task
@@ -389,6 +396,21 @@ Class | Method | HTTP request | Description
  - [FieldInput](docs/FieldInput.md)
  - [GitAutoUpdateSettings](docs/GitAutoUpdateSettings.md)
  - [GitAutoUpdateSettingsInput](docs/GitAutoUpdateSettingsInput.md)
+ - [HelmChartAnalysis](docs/HelmChartAnalysis.md)
+ - [HelmChartContainer](docs/HelmChartContainer.md)
+ - [HelmChartContainerPort](docs/HelmChartContainerPort.md)
+ - [HelmChartInput](docs/HelmChartInput.md)
+ - [HelmChartMetadata](docs/HelmChartMetadata.md)
+ - [HelmChartResource](docs/HelmChartResource.md)
+ - [HelmChartService](docs/HelmChartService.md)
+ - [HelmChartServicePort](docs/HelmChartServicePort.md)
+ - [HelmChartServicePortTargetPort](docs/HelmChartServicePortTargetPort.md)
+ - [HelmChartServiceScaffoldInput](docs/HelmChartServiceScaffoldInput.md)
+ - [HelmChartServiceScaffoldResponse](docs/HelmChartServiceScaffoldResponse.md)
+ - [HelmChartStackScaffoldInput](docs/HelmChartStackScaffoldInput.md)
+ - [HelmChartStackScaffoldResponse](docs/HelmChartStackScaffoldResponse.md)
+ - [HelmChartVolumeClaim](docs/HelmChartVolumeClaim.md)
+ - [HelmChartWorkload](docs/HelmChartWorkload.md)
  - [ImportCatalogFromGitInput](docs/ImportCatalogFromGitInput.md)
  - [ImportFromInput](docs/ImportFromInput.md)
  - [ImportInput](docs/ImportInput.md)
@@ -398,6 +420,8 @@ Class | Method | HTTP request | Description
  - [KubeVersion](docs/KubeVersion.md)
  - [LogLine](docs/LogLine.md)
  - [LogStream](docs/LogStream.md)
+ - [ManifestFromYAMLInput](docs/ManifestFromYAMLInput.md)
+ - [ManifestValidationResponse](docs/ManifestValidationResponse.md)
  - [ModelImport](docs/ModelImport.md)
  - [NamedSecretValueInput](docs/NamedSecretValueInput.md)
  - [NewAnnotationInput](docs/NewAnnotationInput.md)
