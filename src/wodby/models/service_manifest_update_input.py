@@ -17,20 +17,19 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-class ClusterAutoUpgradeVersionPolicyInput(BaseModel):
+class ServiceManifestUpdateInput(BaseModel):
     """
-    ClusterAutoUpgradeVersionPolicyInput
+    ServiceManifestUpdateInput
     """ # noqa: E501
-    allow_same_version: Optional[StrictBool] = Field(default=None, description="Allow newer infrastructure app stack revisions that keep the same stable semantic version. Ignored for cluster-level infrastructure versions.", alias="allowSameVersion")
-    allow_patch: Optional[StrictBool] = Field(default=None, alias="allowPatch")
-    allow_minor: Optional[StrictBool] = Field(default=None, alias="allowMinor")
-    allow_major: Optional[StrictBool] = Field(default=None, alias="allowMajor")
-    __properties: ClassVar[List[str]] = ["allowSameVersion", "allowPatch", "allowMinor", "allowMajor"]
+    version: Optional[StrictStr] = Field(default=None, description="Optional service revision version; defaults to the current service version.")
+    manifest_yaml: StrictStr = Field(description="Complete Wodby service.yml manifest content.", alias="manifestYaml")
+    files: Optional[Dict[str, StrictStr]] = Field(default=None, description="Optional referenced file contents keyed by manifest-relative path, for example Dockerfile or configs/app.conf.")
+    __properties: ClassVar[List[str]] = ["version", "manifestYaml", "files"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -50,7 +49,7 @@ class ClusterAutoUpgradeVersionPolicyInput(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of ClusterAutoUpgradeVersionPolicyInput from a JSON string"""
+        """Create an instance of ServiceManifestUpdateInput from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -71,31 +70,11 @@ class ClusterAutoUpgradeVersionPolicyInput(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if allow_same_version (nullable) is None
-        # and model_fields_set contains the field
-        if self.allow_same_version is None and "allow_same_version" in self.model_fields_set:
-            _dict['allowSameVersion'] = None
-
-        # set to None if allow_patch (nullable) is None
-        # and model_fields_set contains the field
-        if self.allow_patch is None and "allow_patch" in self.model_fields_set:
-            _dict['allowPatch'] = None
-
-        # set to None if allow_minor (nullable) is None
-        # and model_fields_set contains the field
-        if self.allow_minor is None and "allow_minor" in self.model_fields_set:
-            _dict['allowMinor'] = None
-
-        # set to None if allow_major (nullable) is None
-        # and model_fields_set contains the field
-        if self.allow_major is None and "allow_major" in self.model_fields_set:
-            _dict['allowMajor'] = None
-
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of ClusterAutoUpgradeVersionPolicyInput from a dict"""
+        """Create an instance of ServiceManifestUpdateInput from a dict"""
         if obj is None:
             return None
 
@@ -103,10 +82,9 @@ class ClusterAutoUpgradeVersionPolicyInput(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "allowSameVersion": obj.get("allowSameVersion"),
-            "allowPatch": obj.get("allowPatch"),
-            "allowMinor": obj.get("allowMinor"),
-            "allowMajor": obj.get("allowMajor")
+            "version": obj.get("version"),
+            "manifestYaml": obj.get("manifestYaml"),
+            "files": obj.get("files")
         })
         return _obj
 

@@ -9,11 +9,14 @@ Name | Type | Description | Notes
 **number** | **int** |  | 
 **status** | **str** |  | 
 **rollback_status** | **str** |  | 
+**post_deployment_status** | **str** |  | 
 **skip_rollback** | **bool** |  | 
 **app_instance_id** | **int** |  | 
 **builds** | [**List[AppBuild]**](AppBuild.md) |  | 
 **task_id** | **int** |  | [optional] 
 **task** | [**Task**](Task.md) |  | [optional] 
+**post_deployment_task_id** | **int** |  | [optional] 
+**post_deployment_task** | [**Task**](Task.md) |  | [optional] 
 **app_service_deployments** | [**List[AppServiceDeployment]**](AppServiceDeployment.md) |  | 
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 

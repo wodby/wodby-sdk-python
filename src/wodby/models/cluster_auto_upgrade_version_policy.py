@@ -26,10 +26,11 @@ class ClusterAutoUpgradeVersionPolicy(BaseModel):
     """
     ClusterAutoUpgradeVersionPolicy
     """ # noqa: E501
+    allow_same_version: StrictBool = Field(description="Allow newer infrastructure app stack revisions that keep the same stable semantic version. Ignored for cluster-level infrastructure versions.", alias="allowSameVersion")
     allow_patch: StrictBool = Field(alias="allowPatch")
     allow_minor: StrictBool = Field(alias="allowMinor")
     allow_major: StrictBool = Field(alias="allowMajor")
-    __properties: ClassVar[List[str]] = ["allowPatch", "allowMinor", "allowMajor"]
+    __properties: ClassVar[List[str]] = ["allowSameVersion", "allowPatch", "allowMinor", "allowMajor"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,6 +83,7 @@ class ClusterAutoUpgradeVersionPolicy(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "allowSameVersion": obj.get("allowSameVersion"),
             "allowPatch": obj.get("allowPatch"),
             "allowMinor": obj.get("allowMinor"),
             "allowMajor": obj.get("allowMajor")

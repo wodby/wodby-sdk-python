@@ -258,6 +258,7 @@ Class | Method | HTTP request | Description
 *ServicesApi* | [**list_service_link_candidates**](docs/ServicesApi.md#list_service_link_candidates) | **GET** /services/{name}/options/link-candidates | List service link candidates
 *ServicesApi* | [**list_services**](docs/ServicesApi.md#list_services) | **GET** /services | List services
 *ServicesApi* | [**scaffold_service_from_helm_chart**](docs/ServicesApi.md#scaffold_service_from_helm_chart) | **POST** /services/actions/scaffold-from-helm-chart | Scaffold service from Helm chart
+*ServicesApi* | [**update_service_from_manifest**](docs/ServicesApi.md#update_service_from_manifest) | **POST** /services/{id}/actions/update-from-manifest | Update service from manifest
 *ServicesApi* | [**update_service_settings**](docs/ServicesApi.md#update_service_settings) | **PUT** /services/settings/{id} | Update service settings
 *ServicesApi* | [**validate_service_manifest**](docs/ServicesApi.md#validate_service_manifest) | **POST** /services/actions/validate-manifest | Validate service manifest
 *StackServicesApi* | [**create_stack_service**](docs/StackServicesApi.md#create_stack_service) | **POST** /stack-services | Create stack service
@@ -462,6 +463,7 @@ Class | Method | HTTP request | Description
  - [ScalabilityInput](docs/ScalabilityInput.md)
  - [Service](docs/Service.md)
  - [ServiceDeploymentInput](docs/ServiceDeploymentInput.md)
+ - [ServiceManifestUpdateInput](docs/ServiceManifestUpdateInput.md)
  - [ServiceRevision](docs/ServiceRevision.md)
  - [ServiceSettings](docs/ServiceSettings.md)
  - [ServiceSettingsInput](docs/ServiceSettingsInput.md)
