@@ -102,6 +102,7 @@ from wodby.models.app_service_setting import AppServiceSetting
 from wodby.models.app_service_setting_input import AppServiceSettingInput
 from wodby.models.app_service_token import AppServiceToken
 from wodby.models.backup import Backup
+from wodby.models.backup_preset import BackupPreset
 from wodby.models.build_source_input import BuildSourceInput
 from wodby.models.cert import Cert
 from wodby.models.cluster import Cluster
@@ -169,6 +170,7 @@ from wodby.models.new_app_service_env_var_input import NewAppServiceEnvVarInput
 from wodby.models.new_app_service_input import NewAppServiceInput
 from wodby.models.new_app_service_log_stream_input import NewAppServiceLogStreamInput
 from wodby.models.new_backup_input import NewBackupInput
+from wodby.models.new_backup_preset_input import NewBackupPresetInput
 from wodby.models.new_build_from_ci_input import NewBuildFromCIInput
 from wodby.models.new_cluster_input import NewClusterInput
 from wodby.models.new_database_db_input import NewDatabaseDBInput
@@ -248,6 +250,7 @@ from wodby.models.update_app_route_input import UpdateAppRouteInput
 from wodby.models.update_app_service_cron_schedule_input import UpdateAppServiceCronScheduleInput
 from wodby.models.update_app_service_database_input import UpdateAppServiceDatabaseInput
 from wodby.models.update_app_service_env_var_input import UpdateAppServiceEnvVarInput
+from wodby.models.update_backup_preset_input import UpdateBackupPresetInput
 from wodby.models.update_current_user_request import UpdateCurrentUserRequest
 from wodby.models.update_database_user_dbs_input import UpdateDatabaseUserDBsInput
 from wodby.models.update_env_request import UpdateEnvRequest

@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **region** | **str** |  | [optional] 
 **billing_option** | **str** |  | [optional] 
 **disable_monitoring** | **bool** |  | 
+**auto_infrastructure_upgrade** | **bool** |  | [optional] 
 
 ## Example
 

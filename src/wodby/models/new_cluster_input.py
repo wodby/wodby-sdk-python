@@ -42,7 +42,8 @@ class NewClusterInput(BaseModel):
     region: Optional[StrictStr] = None
     billing_option: Optional[StrictStr] = Field(default=None, alias="billingOption")
     disable_monitoring: StrictBool = Field(alias="disableMonitoring")
-    __properties: ClassVar[List[str]] = ["orgId", "projectId", "integrationId", "name", "title", "serverless", "singleNode", "version", "machineType", "minNodeCount", "maxNodeCount", "nodeDiskSize", "zone", "region", "billingOption", "disableMonitoring"]
+    auto_infrastructure_upgrade: Optional[StrictBool] = Field(default=None, alias="autoInfrastructureUpgrade")
+    __properties: ClassVar[List[str]] = ["orgId", "projectId", "integrationId", "name", "title", "serverless", "singleNode", "version", "machineType", "minNodeCount", "maxNodeCount", "nodeDiskSize", "zone", "region", "billingOption", "disableMonitoring", "autoInfrastructureUpgrade"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -133,6 +134,11 @@ class NewClusterInput(BaseModel):
         if self.billing_option is None and "billing_option" in self.model_fields_set:
             _dict['billingOption'] = None
 
+        # set to None if auto_infrastructure_upgrade (nullable) is None
+        # and model_fields_set contains the field
+        if self.auto_infrastructure_upgrade is None and "auto_infrastructure_upgrade" in self.model_fields_set:
+            _dict['autoInfrastructureUpgrade'] = None
+
         return _dict
 
     @classmethod
@@ -160,7 +166,8 @@ class NewClusterInput(BaseModel):
             "zone": obj.get("zone"),
             "region": obj.get("region"),
             "billingOption": obj.get("billingOption"),
-            "disableMonitoring": obj.get("disableMonitoring")
+            "disableMonitoring": obj.get("disableMonitoring"),
+            "autoInfrastructureUpgrade": obj.get("autoInfrastructureUpgrade")
         })
         return _obj
 

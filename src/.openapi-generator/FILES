@@ -55,6 +55,7 @@ docs/AppServiceToken.md
 docs/AppServicesApi.md
 docs/AppsApi.md
 docs/Backup.md
+docs/BackupPreset.md
 docs/BackupsApi.md
 docs/BuildSourceInput.md
 docs/Cert.md
@@ -132,6 +133,7 @@ docs/NewAppServiceEnvVarInput.md
 docs/NewAppServiceInput.md
 docs/NewAppServiceLogStreamInput.md
 docs/NewBackupInput.md
+docs/NewBackupPresetInput.md
 docs/NewBuildFromCIInput.md
 docs/NewClusterInput.md
 docs/NewDatabaseDBInput.md
@@ -220,6 +222,7 @@ docs/UpdateAppRouteInput.md
 docs/UpdateAppServiceCronScheduleInput.md
 docs/UpdateAppServiceDatabaseInput.md
 docs/UpdateAppServiceEnvVarInput.md
+docs/UpdateBackupPresetInput.md
 docs/UpdateCurrentUserRequest.md
 docs/UpdateDatabaseUserDBsInput.md
 docs/UpdateEnvRequest.md
@@ -242,7 +245,9 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_service_manifest_update_input.py
+test/test_backup_preset.py
+test/test_new_backup_preset_input.py
+test/test_update_backup_preset_input.py
 tox.ini
 wodby/__init__.py
 wodby/api/__init__.py
@@ -323,6 +328,7 @@ wodby/models/app_service_setting.py
 wodby/models/app_service_setting_input.py
 wodby/models/app_service_token.py
 wodby/models/backup.py
+wodby/models/backup_preset.py
 wodby/models/build_source_input.py
 wodby/models/cert.py
 wodby/models/cluster.py
@@ -390,6 +396,7 @@ wodby/models/new_app_service_env_var_input.py
 wodby/models/new_app_service_input.py
 wodby/models/new_app_service_log_stream_input.py
 wodby/models/new_backup_input.py
+wodby/models/new_backup_preset_input.py
 wodby/models/new_build_from_ci_input.py
 wodby/models/new_cluster_input.py
 wodby/models/new_database_db_input.py
@@ -468,6 +475,7 @@ wodby/models/update_app_route_input.py
 wodby/models/update_app_service_cron_schedule_input.py
 wodby/models/update_app_service_database_input.py
 wodby/models/update_app_service_env_var_input.py
+wodby/models/update_backup_preset_input.py
 wodby/models/update_current_user_request.py
 wodby/models/update_database_user_dbs_input.py
 wodby/models/update_env_request.py

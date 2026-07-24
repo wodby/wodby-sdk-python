@@ -35,12 +35,23 @@ class Stack(BaseModel):
     status: StrictStr
     public: StrictBool
     rev_id: StrictInt = Field(alias="revId")
+    draft_rev_id: Optional[StrictInt] = Field(default=None, alias="draftRevId")
     latest_rev_number: StrictInt = Field(alias="latestRevNumber")
+    git_repo_id: Optional[StrictInt] = Field(default=None, alias="gitRepoId")
+    git_repo_remote_id: Optional[StrictStr] = Field(default=None, alias="gitRepoRemoteId")
+    git_repo_ref: Optional[StrictStr] = Field(default=None, alias="gitRepoRef")
+    git_repo_ref_type: Optional[StrictStr] = Field(default=None, alias="gitRepoRefType")
+    origin_stack_rev_id: Optional[StrictInt] = Field(default=None, alias="originStackRevId")
+    origin_stack_rev_stack_id: Optional[StrictInt] = Field(default=None, alias="originStackRevStackId")
+    origin_stack_rev_name: Optional[StrictStr] = Field(default=None, alias="originStackRevName")
+    origin_stack_rev_number: Optional[StrictInt] = Field(default=None, alias="originStackRevNumber")
+    origin_stack_rev_version: Optional[StrictStr] = Field(default=None, alias="originStackRevVersion")
+    origin_stack_rev_created_at: Optional[datetime] = Field(default=None, alias="originStackRevCreatedAt")
     org_id: StrictInt = Field(alias="orgId")
     settings: Optional[StackSettings] = None
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "icon", "status", "public", "revId", "latestRevNumber", "orgId", "settings", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "icon", "status", "public", "revId", "draftRevId", "latestRevNumber", "gitRepoId", "gitRepoRemoteId", "gitRepoRef", "gitRepoRefType", "originStackRevId", "originStackRevStackId", "originStackRevName", "originStackRevNumber", "originStackRevVersion", "originStackRevCreatedAt", "orgId", "settings", "createdAt", "updatedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -84,6 +95,61 @@ class Stack(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of settings
         if self.settings:
             _dict['settings'] = self.settings.to_dict()
+        # set to None if draft_rev_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.draft_rev_id is None and "draft_rev_id" in self.model_fields_set:
+            _dict['draftRevId'] = None
+
+        # set to None if git_repo_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.git_repo_id is None and "git_repo_id" in self.model_fields_set:
+            _dict['gitRepoId'] = None
+
+        # set to None if git_repo_remote_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.git_repo_remote_id is None and "git_repo_remote_id" in self.model_fields_set:
+            _dict['gitRepoRemoteId'] = None
+
+        # set to None if git_repo_ref (nullable) is None
+        # and model_fields_set contains the field
+        if self.git_repo_ref is None and "git_repo_ref" in self.model_fields_set:
+            _dict['gitRepoRef'] = None
+
+        # set to None if git_repo_ref_type (nullable) is None
+        # and model_fields_set contains the field
+        if self.git_repo_ref_type is None and "git_repo_ref_type" in self.model_fields_set:
+            _dict['gitRepoRefType'] = None
+
+        # set to None if origin_stack_rev_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.origin_stack_rev_id is None and "origin_stack_rev_id" in self.model_fields_set:
+            _dict['originStackRevId'] = None
+
+        # set to None if origin_stack_rev_stack_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.origin_stack_rev_stack_id is None and "origin_stack_rev_stack_id" in self.model_fields_set:
+            _dict['originStackRevStackId'] = None
+
+        # set to None if origin_stack_rev_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.origin_stack_rev_name is None and "origin_stack_rev_name" in self.model_fields_set:
+            _dict['originStackRevName'] = None
+
+        # set to None if origin_stack_rev_number (nullable) is None
+        # and model_fields_set contains the field
+        if self.origin_stack_rev_number is None and "origin_stack_rev_number" in self.model_fields_set:
+            _dict['originStackRevNumber'] = None
+
+        # set to None if origin_stack_rev_version (nullable) is None
+        # and model_fields_set contains the field
+        if self.origin_stack_rev_version is None and "origin_stack_rev_version" in self.model_fields_set:
+            _dict['originStackRevVersion'] = None
+
+        # set to None if origin_stack_rev_created_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.origin_stack_rev_created_at is None and "origin_stack_rev_created_at" in self.model_fields_set:
+            _dict['originStackRevCreatedAt'] = None
+
         return _dict
 
     @classmethod
@@ -103,7 +169,18 @@ class Stack(BaseModel):
             "status": obj.get("status"),
             "public": obj.get("public"),
             "revId": obj.get("revId"),
+            "draftRevId": obj.get("draftRevId"),
             "latestRevNumber": obj.get("latestRevNumber"),
+            "gitRepoId": obj.get("gitRepoId"),
+            "gitRepoRemoteId": obj.get("gitRepoRemoteId"),
+            "gitRepoRef": obj.get("gitRepoRef"),
+            "gitRepoRefType": obj.get("gitRepoRefType"),
+            "originStackRevId": obj.get("originStackRevId"),
+            "originStackRevStackId": obj.get("originStackRevStackId"),
+            "originStackRevName": obj.get("originStackRevName"),
+            "originStackRevNumber": obj.get("originStackRevNumber"),
+            "originStackRevVersion": obj.get("originStackRevVersion"),
+            "originStackRevCreatedAt": obj.get("originStackRevCreatedAt"),
             "orgId": obj.get("orgId"),
             "settings": StackSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None,
             "createdAt": obj.get("createdAt"),

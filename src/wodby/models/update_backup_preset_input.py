@@ -17,31 +17,25 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from wodby.models.service_settings import ServiceSettings
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
-class Service(BaseModel):
+class UpdateBackupPresetInput(BaseModel):
     """
-    Service
+    UpdateBackupPresetInput
     """ # noqa: E501
-    id: StrictInt
-    name: StrictStr
-    title: StrictStr
-    type: StrictStr
-    status: StrictStr
-    external: StrictBool
-    public: StrictBool
-    rev_id: StrictInt = Field(alias="revId")
-    latest_rev_number: StrictInt = Field(alias="latestRevNumber")
-    org_id: StrictInt = Field(alias="orgId")
-    settings: Optional[ServiceSettings] = None
-    created_at: datetime = Field(alias="createdAt")
-    updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "type", "status", "external", "public", "revId", "latestRevNumber", "orgId", "settings", "createdAt", "updatedAt"]
+    integration_id: StrictInt = Field(alias="integrationId")
+    bucket: StrictStr
+    storage_class: Optional[StrictStr] = Field(default=None, alias="storageClass")
+    disabled: StrictBool
+    override: StrictBool
+    auto: StrictBool
+    crontab: Optional[StrictStr] = None
+    duration: Optional[Annotated[int, Field(le=180, strict=True, ge=30)]] = None
+    __properties: ClassVar[List[str]] = ["integrationId", "bucket", "storageClass", "disabled", "override", "auto", "crontab", "duration"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -61,7 +55,7 @@ class Service(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of Service from a JSON string"""
+        """Create an instance of UpdateBackupPresetInput from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -82,14 +76,26 @@ class Service(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of settings
-        if self.settings:
-            _dict['settings'] = self.settings.to_dict()
+        # set to None if storage_class (nullable) is None
+        # and model_fields_set contains the field
+        if self.storage_class is None and "storage_class" in self.model_fields_set:
+            _dict['storageClass'] = None
+
+        # set to None if crontab (nullable) is None
+        # and model_fields_set contains the field
+        if self.crontab is None and "crontab" in self.model_fields_set:
+            _dict['crontab'] = None
+
+        # set to None if duration (nullable) is None
+        # and model_fields_set contains the field
+        if self.duration is None and "duration" in self.model_fields_set:
+            _dict['duration'] = None
+
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of Service from a dict"""
+        """Create an instance of UpdateBackupPresetInput from a dict"""
         if obj is None:
             return None
 
@@ -97,19 +103,14 @@ class Service(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "name": obj.get("name"),
-            "title": obj.get("title"),
-            "type": obj.get("type"),
-            "status": obj.get("status"),
-            "external": obj.get("external"),
-            "public": obj.get("public"),
-            "revId": obj.get("revId"),
-            "latestRevNumber": obj.get("latestRevNumber"),
-            "orgId": obj.get("orgId"),
-            "settings": ServiceSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None,
-            "createdAt": obj.get("createdAt"),
-            "updatedAt": obj.get("updatedAt")
+            "integrationId": obj.get("integrationId"),
+            "bucket": obj.get("bucket"),
+            "storageClass": obj.get("storageClass"),
+            "disabled": obj.get("disabled"),
+            "override": obj.get("override"),
+            "auto": obj.get("auto"),
+            "crontab": obj.get("crontab"),
+            "duration": obj.get("duration")
         })
         return _obj
 

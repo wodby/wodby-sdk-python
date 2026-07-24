@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **env_id** | **int** |  | 
 **ci_integration_id** | **int** |  | [optional] 
 **registry_integration_id** | **int** |  | [optional] 
+**settings** | [**AppInstanceSettingsInput**](AppInstanceSettingsInput.md) |  | [optional] 
 
 ## Example
 

@@ -27,13 +27,13 @@ class BuildSourceInput(BaseModel):
     BuildSourceInput
     """ # noqa: E501
     build_source_type: StrictStr = Field(alias="buildSourceType")
-    template: Optional[StrictStr] = None
+    boilerplate: Optional[StrictStr] = None
     new_repo_name: Optional[StrictStr] = Field(default=None, alias="newRepoName")
     integration_id: Optional[StrictInt] = Field(default=None, alias="integrationId")
     remote_git_repo_id: Optional[StrictStr] = Field(default=None, alias="remoteGitRepoId")
     git_ref: Optional[StrictStr] = Field(default=None, alias="gitRef")
     git_ref_type: Optional[StrictStr] = Field(default=None, alias="gitRefType")
-    __properties: ClassVar[List[str]] = ["buildSourceType", "template", "newRepoName", "integrationId", "remoteGitRepoId", "gitRef", "gitRefType"]
+    __properties: ClassVar[List[str]] = ["buildSourceType", "boilerplate", "newRepoName", "integrationId", "remoteGitRepoId", "gitRef", "gitRefType"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -74,10 +74,10 @@ class BuildSourceInput(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if template (nullable) is None
+        # set to None if boilerplate (nullable) is None
         # and model_fields_set contains the field
-        if self.template is None and "template" in self.model_fields_set:
-            _dict['template'] = None
+        if self.boilerplate is None and "boilerplate" in self.model_fields_set:
+            _dict['boilerplate'] = None
 
         # set to None if new_repo_name (nullable) is None
         # and model_fields_set contains the field
@@ -117,7 +117,7 @@ class BuildSourceInput(BaseModel):
 
         _obj = cls.model_validate({
             "buildSourceType": obj.get("buildSourceType"),
-            "template": obj.get("template"),
+            "boilerplate": obj.get("boilerplate"),
             "newRepoName": obj.get("newRepoName"),
             "integrationId": obj.get("integrationId"),
             "remoteGitRepoId": obj.get("remoteGitRepoId"),
