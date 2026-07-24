@@ -245,9 +245,6 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_backup_preset.py
-test/test_new_backup_preset_input.py
-test/test_update_backup_preset_input.py
 tox.ini
 wodby/__init__.py
 wodby/api/__init__.py
