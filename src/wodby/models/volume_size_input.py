@@ -17,8 +17,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,7 +28,8 @@ class VolumeSizeInput(BaseModel):
     """ # noqa: E501
     name: StrictStr
     size: StrictInt
-    __properties: ClassVar[List[str]] = ["name", "size"]
+    storage_class_name: Optional[StrictStr] = Field(default=None, alias="storageClassName")
+    __properties: ClassVar[List[str]] = ["name", "size", "storageClassName"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -69,6 +70,11 @@ class VolumeSizeInput(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if storage_class_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.storage_class_name is None and "storage_class_name" in self.model_fields_set:
+            _dict['storageClassName'] = None
+
         return _dict
 
     @classmethod
@@ -82,7 +88,8 @@ class VolumeSizeInput(BaseModel):
 
         _obj = cls.model_validate({
             "name": obj.get("name"),
-            "size": obj.get("size")
+            "size": obj.get("size"),
+            "storageClassName": obj.get("storageClassName")
         })
         return _obj
 

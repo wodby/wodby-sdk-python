@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,11 +26,12 @@ class NewAppServiceCronScheduleInput(BaseModel):
     """
     NewAppServiceCronScheduleInput
     """ # noqa: E501
+    name: Optional[StrictStr] = Field(default=None, description="Stable cron schedule identity. When omitted or blank, the server generates a unique name.")
     title: StrictStr
     crontab: StrictStr
     command: StrictStr
     workload: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["title", "crontab", "command", "workload"]
+    __properties: ClassVar[List[str]] = ["name", "title", "crontab", "command", "workload"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -71,6 +72,11 @@ class NewAppServiceCronScheduleInput(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if name (nullable) is None
+        # and model_fields_set contains the field
+        if self.name is None and "name" in self.model_fields_set:
+            _dict['name'] = None
+
         # set to None if workload (nullable) is None
         # and model_fields_set contains the field
         if self.workload is None and "workload" in self.model_fields_set:
@@ -88,6 +94,7 @@ class NewAppServiceCronScheduleInput(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "name": obj.get("name"),
             "title": obj.get("title"),
             "crontab": obj.get("crontab"),
             "command": obj.get("command"),

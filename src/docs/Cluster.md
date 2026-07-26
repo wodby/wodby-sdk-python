@@ -26,7 +26,10 @@ Name | Type | Description | Notes
 **hostname** | **str** |  | [optional] 
 **integration_id** | **int** |  | [optional] 
 **org_id** | **int** |  | 
+**capabilities** | [**ClusterCapabilities**](ClusterCapabilities.md) |  | 
 **settings** | [**ClusterSettings**](ClusterSettings.md) |  | [optional] 
+**storage_classes** | [**List[StorageClass]**](StorageClass.md) |  | [optional] 
+**storage_classes_observed_at** | **datetime** |  | [optional] 
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 
 

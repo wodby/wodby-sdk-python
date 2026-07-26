@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** |  | 
 **app_service_id** | **int** |  | 
+**name** | **str** |  | 
 **title** | **str** |  | 
 **crontab** | **str** |  | 
 **command** | **str** |  | 

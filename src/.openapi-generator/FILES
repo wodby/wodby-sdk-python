@@ -4,6 +4,8 @@
 .travis.yml
 README.md
 docs/App.md
+docs/AppAuth.md
+docs/AppAuthsApi.md
 docs/AppBuild.md
 docs/AppBuildConfig.md
 docs/AppBuildsApi.md
@@ -12,7 +14,6 @@ docs/AppBuildsResponse.md
 docs/AppDeployment.md
 docs/AppDeploymentsApi.md
 docs/AppDeploymentsResponse.md
-docs/AppEndpointOptionInput.md
 docs/AppInstance.md
 docs/AppInstanceAutoStackUpgradeSettings.md
 docs/AppInstanceAutoStackUpgradeSettingsInput.md
@@ -25,6 +26,8 @@ docs/AppInstancesApi.md
 docs/AppPort.md
 docs/AppPortsApi.md
 docs/AppRoute.md
+docs/AppRouteSetting.md
+docs/AppRouteSettingName.md
 docs/AppRoutesApi.md
 docs/AppService.md
 docs/AppServiceAnnotation.md
@@ -52,6 +55,7 @@ docs/AppServiceLinkInput.md
 docs/AppServiceSetting.md
 docs/AppServiceSettingInput.md
 docs/AppServiceToken.md
+docs/AppServiceVolume.md
 docs/AppServicesApi.md
 docs/AppsApi.md
 docs/Backup.md
@@ -67,6 +71,7 @@ docs/ClusterAutoInfrastructureUpgradeSettings.md
 docs/ClusterAutoInfrastructureUpgradeSettingsInput.md
 docs/ClusterAutoUpgradeVersionPolicy.md
 docs/ClusterAutoUpgradeVersionPolicyInput.md
+docs/ClusterCapabilities.md
 docs/ClusterSettings.md
 docs/ClusterSettingsInput.md
 docs/ClustersApi.md
@@ -125,6 +130,7 @@ docs/ManifestValidationResponse.md
 docs/ModelImport.md
 docs/NamedSecretValueInput.md
 docs/NewAnnotationInput.md
+docs/NewAppAuthInput.md
 docs/NewAppInput.md
 docs/NewAppInstanceInput.md
 docs/NewAppRouteInput.md
@@ -210,6 +216,7 @@ docs/StackSyncOptions.md
 docs/StackSyncOptionsInput.md
 docs/StacksApi.md
 docs/StacksResponse.md
+docs/StorageClass.md
 docs/Task.md
 docs/TaskJob.md
 docs/TaskStep.md
@@ -218,6 +225,7 @@ docs/TaskStepsApi.md
 docs/TasksApi.md
 docs/TasksResponse.md
 docs/URLResponse.md
+docs/UpdateAppAuthInput.md
 docs/UpdateAppRouteInput.md
 docs/UpdateAppServiceCronScheduleInput.md
 docs/UpdateAppServiceDatabaseInput.md
@@ -245,9 +253,19 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_app_auth.py
+test/test_app_auths_api.py
+test/test_app_route_setting.py
+test/test_app_route_setting_name.py
+test/test_app_service_volume.py
+test/test_cluster_capabilities.py
+test/test_new_app_auth_input.py
+test/test_storage_class.py
+test/test_update_app_auth_input.py
 tox.ini
 wodby/__init__.py
 wodby/api/__init__.py
+wodby/api/app_auths_api.py
 wodby/api/app_builds_api.py
 wodby/api/app_deployments_api.py
 wodby/api/app_instances_api.py
@@ -281,13 +299,13 @@ wodby/configuration.py
 wodby/exceptions.py
 wodby/models/__init__.py
 wodby/models/app.py
+wodby/models/app_auth.py
 wodby/models/app_build.py
 wodby/models/app_build_config.py
 wodby/models/app_builds_create_response.py
 wodby/models/app_builds_response.py
 wodby/models/app_deployment.py
 wodby/models/app_deployments_response.py
-wodby/models/app_endpoint_option_input.py
 wodby/models/app_instance.py
 wodby/models/app_instance_auto_stack_upgrade_settings.py
 wodby/models/app_instance_auto_stack_upgrade_settings_input.py
@@ -298,6 +316,8 @@ wodby/models/app_instance_stack_upgrade_settings.py
 wodby/models/app_instance_stack_upgrade_settings_input.py
 wodby/models/app_port.py
 wodby/models/app_route.py
+wodby/models/app_route_setting.py
+wodby/models/app_route_setting_name.py
 wodby/models/app_service.py
 wodby/models/app_service_annotation.py
 wodby/models/app_service_annotation_source.py
@@ -324,6 +344,7 @@ wodby/models/app_service_link_input.py
 wodby/models/app_service_setting.py
 wodby/models/app_service_setting_input.py
 wodby/models/app_service_token.py
+wodby/models/app_service_volume.py
 wodby/models/backup.py
 wodby/models/backup_preset.py
 wodby/models/build_source_input.py
@@ -335,6 +356,7 @@ wodby/models/cluster_auto_infrastructure_upgrade_settings.py
 wodby/models/cluster_auto_infrastructure_upgrade_settings_input.py
 wodby/models/cluster_auto_upgrade_version_policy.py
 wodby/models/cluster_auto_upgrade_version_policy_input.py
+wodby/models/cluster_capabilities.py
 wodby/models/cluster_settings.py
 wodby/models/cluster_settings_input.py
 wodby/models/config_override_input.py
@@ -385,6 +407,7 @@ wodby/models/manifest_validation_response.py
 wodby/models/model_import.py
 wodby/models/named_secret_value_input.py
 wodby/models/new_annotation_input.py
+wodby/models/new_app_auth_input.py
 wodby/models/new_app_input.py
 wodby/models/new_app_instance_input.py
 wodby/models/new_app_route_input.py
@@ -463,11 +486,13 @@ wodby/models/stack_settings_input.py
 wodby/models/stack_sync_options.py
 wodby/models/stack_sync_options_input.py
 wodby/models/stacks_response.py
+wodby/models/storage_class.py
 wodby/models/task.py
 wodby/models/task_job.py
 wodby/models/task_step.py
 wodby/models/task_step_logs.py
 wodby/models/tasks_response.py
+wodby/models/update_app_auth_input.py
 wodby/models/update_app_route_input.py
 wodby/models/update_app_service_cron_schedule_input.py
 wodby/models/update_app_service_database_input.py

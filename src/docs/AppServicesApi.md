@@ -31,6 +31,7 @@ Method | HTTP request | Description
 [**list_app_service_links**](AppServicesApi.md#list_app_service_links) | **GET** /app-services/{id}/links | List app service links
 [**list_app_service_settings**](AppServicesApi.md#list_app_service_settings) | **GET** /app-services/{id}/settings | List app service settings
 [**list_app_service_tokens**](AppServicesApi.md#list_app_service_tokens) | **GET** /app-services/{id}/tokens | List app service tokens
+[**list_app_service_volumes**](AppServicesApi.md#list_app_service_volumes) | **GET** /app-services/{id}/volumes | List app service volumes
 [**list_app_services**](AppServicesApi.md#list_app_services) | **GET** /app-services | List app services
 [**run_app_service_action**](AppServicesApi.md#run_app_service_action) | **POST** /app-services/{id}/actions/{name} | Run app service action
 [**run_app_service_cron_schedule**](AppServicesApi.md#run_app_service_cron_schedule) | **POST** /app-service-cron-schedules/{id}/run | Run app service cron schedule
@@ -2259,6 +2260,87 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of app service tokens |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **list_app_service_volumes**
+> List[AppServiceVolume] list_app_service_volumes(id)
+
+List app service volumes
+
+Returns configured volume metadata together with effective Kubernetes storage-class state.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.app_service_volume import AppServiceVolume
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppServicesApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # List app service volumes
+        api_response = api_instance.list_app_service_volumes(id)
+        print("The response of AppServicesApi->list_app_service_volumes:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppServicesApi->list_app_service_volumes: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**List[AppServiceVolume]**](AppServiceVolume.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | List of app service volumes |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 

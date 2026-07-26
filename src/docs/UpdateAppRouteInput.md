@@ -15,7 +15,6 @@ Name | Type | Description | Notes
 **redirect_host** | **str** |  | [optional] 
 **redirect_path** | **str** |  | [optional] 
 **redirect_status_code** | **int** |  | [optional] 
-**options** | [**List[AppEndpointOptionInput]**](AppEndpointOptionInput.md) |  | [optional] 
 
 ## Example
 

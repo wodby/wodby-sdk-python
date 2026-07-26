@@ -19,26 +19,24 @@ import json
 
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
+from wodby.models.app_route_setting_name import AppRouteSettingName
 from typing import Optional, Set
 from typing_extensions import Self
 
-class AppServiceCronSchedule(BaseModel):
+class AppRouteSetting(BaseModel):
     """
-    AppServiceCronSchedule
+    AppRouteSetting
     """ # noqa: E501
     id: StrictInt
-    app_service_id: StrictInt = Field(alias="appServiceId")
-    name: StrictStr
-    title: StrictStr
-    crontab: StrictStr
-    command: StrictStr
-    workload: Optional[StrictStr] = None
-    disabled: StrictBool
-    env_type: Optional[StrictStr] = Field(default=None, alias="envType")
+    app_instance_id: StrictInt = Field(alias="appInstanceId")
+    route_id: StrictInt = Field(alias="routeId")
+    default: StrictBool
+    name: AppRouteSettingName
+    value: StrictStr
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "appServiceId", "name", "title", "crontab", "command", "workload", "disabled", "envType", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "appInstanceId", "routeId", "default", "name", "value", "createdAt", "updatedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -58,7 +56,7 @@ class AppServiceCronSchedule(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of AppServiceCronSchedule from a JSON string"""
+        """Create an instance of AppRouteSetting from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -79,21 +77,11 @@ class AppServiceCronSchedule(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if workload (nullable) is None
-        # and model_fields_set contains the field
-        if self.workload is None and "workload" in self.model_fields_set:
-            _dict['workload'] = None
-
-        # set to None if env_type (nullable) is None
-        # and model_fields_set contains the field
-        if self.env_type is None and "env_type" in self.model_fields_set:
-            _dict['envType'] = None
-
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of AppServiceCronSchedule from a dict"""
+        """Create an instance of AppRouteSetting from a dict"""
         if obj is None:
             return None
 
@@ -102,14 +90,11 @@ class AppServiceCronSchedule(BaseModel):
 
         _obj = cls.model_validate({
             "id": obj.get("id"),
-            "appServiceId": obj.get("appServiceId"),
+            "appInstanceId": obj.get("appInstanceId"),
+            "routeId": obj.get("routeId"),
+            "default": obj.get("default"),
             "name": obj.get("name"),
-            "title": obj.get("title"),
-            "crontab": obj.get("crontab"),
-            "command": obj.get("command"),
-            "workload": obj.get("workload"),
-            "disabled": obj.get("disabled"),
-            "envType": obj.get("envType"),
+            "value": obj.get("value"),
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt")
         })

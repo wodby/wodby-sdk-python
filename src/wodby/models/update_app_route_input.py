@@ -19,7 +19,6 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from wodby.models.app_endpoint_option_input import AppEndpointOptionInput
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -37,8 +36,7 @@ class UpdateAppRouteInput(BaseModel):
     redirect_host: Optional[StrictStr] = Field(default=None, alias="redirectHost")
     redirect_path: Optional[StrictStr] = Field(default=None, alias="redirectPath")
     redirect_status_code: Optional[StrictInt] = Field(default=None, alias="redirectStatusCode")
-    options: Optional[List[AppEndpointOptionInput]] = None
-    __properties: ClassVar[List[str]] = ["disabled", "main", "primary", "path", "pathType", "action", "redirectScheme", "redirectHost", "redirectPath", "redirectStatusCode", "options"]
+    __properties: ClassVar[List[str]] = ["disabled", "main", "primary", "path", "pathType", "action", "redirectScheme", "redirectHost", "redirectPath", "redirectStatusCode"]
 
     @field_validator('path_type')
     def path_type_validate_enum(cls, value):
@@ -99,13 +97,6 @@ class UpdateAppRouteInput(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in options (list)
-        _items = []
-        if self.options:
-            for _item_options in self.options:
-                if _item_options:
-                    _items.append(_item_options.to_dict())
-            _dict['options'] = _items
         # set to None if disabled (nullable) is None
         # and model_fields_set contains the field
         if self.disabled is None and "disabled" in self.model_fields_set:
@@ -177,8 +168,7 @@ class UpdateAppRouteInput(BaseModel):
             "redirectScheme": obj.get("redirectScheme"),
             "redirectHost": obj.get("redirectHost"),
             "redirectPath": obj.get("redirectPath"),
-            "redirectStatusCode": obj.get("redirectStatusCode"),
-            "options": [AppEndpointOptionInput.from_dict(_item) for _item in obj["options"]] if obj.get("options") is not None else None
+            "redirectStatusCode": obj.get("redirectStatusCode")
         })
         return _obj
 

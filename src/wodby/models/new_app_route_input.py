@@ -19,7 +19,6 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from wodby.models.app_endpoint_option_input import AppEndpointOptionInput
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -40,11 +39,7 @@ class NewAppRouteInput(BaseModel):
     redirect_path: Optional[StrictStr] = Field(default=None, alias="redirectPath")
     redirect_status_code: Optional[StrictInt] = Field(default=None, alias="redirectStatusCode")
     letsencrypt: Optional[StrictBool] = None
-    auth_login: Optional[StrictStr] = Field(default=None, alias="authLogin")
-    auth_password: Optional[StrictStr] = Field(default=None, alias="authPassword")
-    auth_id: Optional[StrictInt] = Field(default=None, alias="authId")
-    options: Optional[List[AppEndpointOptionInput]] = None
-    __properties: ClassVar[List[str]] = ["appServiceId", "main", "primary", "port", "host", "path", "pathType", "action", "redirectScheme", "redirectHost", "redirectPath", "redirectStatusCode", "letsencrypt", "authLogin", "authPassword", "authId", "options"]
+    __properties: ClassVar[List[str]] = ["appServiceId", "main", "primary", "port", "host", "path", "pathType", "action", "redirectScheme", "redirectHost", "redirectPath", "redirectStatusCode", "letsencrypt"]
 
     @field_validator('path_type')
     def path_type_validate_enum(cls, value):
@@ -105,13 +100,6 @@ class NewAppRouteInput(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in options (list)
-        _items = []
-        if self.options:
-            for _item_options in self.options:
-                if _item_options:
-                    _items.append(_item_options.to_dict())
-            _dict['options'] = _items
         # set to None if path (nullable) is None
         # and model_fields_set contains the field
         if self.path is None and "path" in self.model_fields_set:
@@ -152,21 +140,6 @@ class NewAppRouteInput(BaseModel):
         if self.letsencrypt is None and "letsencrypt" in self.model_fields_set:
             _dict['letsencrypt'] = None
 
-        # set to None if auth_login (nullable) is None
-        # and model_fields_set contains the field
-        if self.auth_login is None and "auth_login" in self.model_fields_set:
-            _dict['authLogin'] = None
-
-        # set to None if auth_password (nullable) is None
-        # and model_fields_set contains the field
-        if self.auth_password is None and "auth_password" in self.model_fields_set:
-            _dict['authPassword'] = None
-
-        # set to None if auth_id (nullable) is None
-        # and model_fields_set contains the field
-        if self.auth_id is None and "auth_id" in self.model_fields_set:
-            _dict['authId'] = None
-
         return _dict
 
     @classmethod
@@ -191,11 +164,7 @@ class NewAppRouteInput(BaseModel):
             "redirectHost": obj.get("redirectHost"),
             "redirectPath": obj.get("redirectPath"),
             "redirectStatusCode": obj.get("redirectStatusCode"),
-            "letsencrypt": obj.get("letsencrypt"),
-            "authLogin": obj.get("authLogin"),
-            "authPassword": obj.get("authPassword"),
-            "authId": obj.get("authId"),
-            "options": [AppEndpointOptionInput.from_dict(_item) for _item in obj["options"]] if obj.get("options") is not None else None
+            "letsencrypt": obj.get("letsencrypt")
         })
         return _obj
 

@@ -20,7 +20,9 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from wodby.models.cluster_capabilities import ClusterCapabilities
 from wodby.models.cluster_settings import ClusterSettings
+from wodby.models.storage_class import StorageClass
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -49,10 +51,13 @@ class Cluster(BaseModel):
     hostname: Optional[StrictStr] = None
     integration_id: Optional[StrictInt] = Field(default=None, alias="integrationId")
     org_id: StrictInt = Field(alias="orgId")
+    capabilities: ClusterCapabilities
     settings: Optional[ClusterSettings] = None
+    storage_classes: Optional[List[StorageClass]] = Field(default=None, alias="storageClasses")
+    storage_classes_observed_at: Optional[datetime] = Field(default=None, alias="storageClassesObservedAt")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "serverless", "demo", "wodby", "k3s", "singleNode", "version", "infraVersion", "minNodeCount", "maxNodeCount", "lastNodesReady", "lastNodesTotal", "region", "zone", "ips", "hostname", "integrationId", "orgId", "settings", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "serverless", "demo", "wodby", "k3s", "singleNode", "version", "infraVersion", "minNodeCount", "maxNodeCount", "lastNodesReady", "lastNodesTotal", "region", "zone", "ips", "hostname", "integrationId", "orgId", "capabilities", "settings", "storageClasses", "storageClassesObservedAt", "createdAt", "updatedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -93,9 +98,19 @@ class Cluster(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of capabilities
+        if self.capabilities:
+            _dict['capabilities'] = self.capabilities.to_dict()
         # override the default output from pydantic by calling `to_dict()` of settings
         if self.settings:
             _dict['settings'] = self.settings.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in storage_classes (list)
+        _items = []
+        if self.storage_classes:
+            for _item_storage_classes in self.storage_classes:
+                if _item_storage_classes:
+                    _items.append(_item_storage_classes.to_dict())
+            _dict['storageClasses'] = _items
         # set to None if version (nullable) is None
         # and model_fields_set contains the field
         if self.version is None and "version" in self.model_fields_set:
@@ -146,6 +161,16 @@ class Cluster(BaseModel):
         if self.integration_id is None and "integration_id" in self.model_fields_set:
             _dict['integrationId'] = None
 
+        # set to None if storage_classes (nullable) is None
+        # and model_fields_set contains the field
+        if self.storage_classes is None and "storage_classes" in self.model_fields_set:
+            _dict['storageClasses'] = None
+
+        # set to None if storage_classes_observed_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.storage_classes_observed_at is None and "storage_classes_observed_at" in self.model_fields_set:
+            _dict['storageClassesObservedAt'] = None
+
         return _dict
 
     @classmethod
@@ -179,7 +204,10 @@ class Cluster(BaseModel):
             "hostname": obj.get("hostname"),
             "integrationId": obj.get("integrationId"),
             "orgId": obj.get("orgId"),
+            "capabilities": ClusterCapabilities.from_dict(obj["capabilities"]) if obj.get("capabilities") is not None else None,
             "settings": ClusterSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None,
+            "storageClasses": [StorageClass.from_dict(_item) for _item in obj["storageClasses"]] if obj.get("storageClasses") is not None else None,
+            "storageClassesObservedAt": obj.get("storageClassesObservedAt"),
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt")
         })

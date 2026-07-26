@@ -32,13 +32,14 @@ class CurrentUser(BaseModel):
     id: StrictInt
     email: StrictStr
     name: StrictStr
+    is_admin: StrictBool = Field(alias="isAdmin")
     orgs: Optional[List[Org]] = None
     twofa: StrictBool
     default_org: Optional[Org] = Field(default=None, alias="defaultOrg")
     default_projects: Optional[List[Project]] = Field(default=None, alias="defaultProjects")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "email", "name", "orgs", "twofa", "defaultOrg", "defaultProjects", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "email", "name", "isAdmin", "orgs", "twofa", "defaultOrg", "defaultProjects", "createdAt", "updatedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -116,6 +117,7 @@ class CurrentUser(BaseModel):
             "id": obj.get("id"),
             "email": obj.get("email"),
             "name": obj.get("name"),
+            "isAdmin": obj.get("isAdmin"),
             "orgs": [Org.from_dict(_item) for _item in obj["orgs"]] if obj.get("orgs") is not None else None,
             "twofa": obj.get("twofa"),
             "defaultOrg": Org.from_dict(obj["defaultOrg"]) if obj.get("defaultOrg") is not None else None,

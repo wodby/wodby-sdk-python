@@ -18,10 +18,6 @@ Name | Type | Description | Notes
 **redirect_path** | **str** |  | [optional] 
 **redirect_status_code** | **int** |  | [optional] 
 **letsencrypt** | **bool** |  | [optional] 
-**auth_login** | **str** |  | [optional] 
-**auth_password** | **str** |  | [optional] 
-**auth_id** | **int** |  | [optional] 
-**options** | [**List[AppEndpointOptionInput]**](AppEndpointOptionInput.md) |  | [optional] 
 
 ## Example
 

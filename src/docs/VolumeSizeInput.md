@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** |  | 
 **size** | **int** |  | 
+**storage_class_name** | **str** |  | [optional] 
 
 ## Example
 

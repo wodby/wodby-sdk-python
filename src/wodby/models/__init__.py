@@ -15,13 +15,13 @@
 
 # import models into model package
 from wodby.models.app import App
+from wodby.models.app_auth import AppAuth
 from wodby.models.app_build import AppBuild
 from wodby.models.app_build_config import AppBuildConfig
 from wodby.models.app_builds_create_response import AppBuildsCreateResponse
 from wodby.models.app_builds_response import AppBuildsResponse
 from wodby.models.app_deployment import AppDeployment
 from wodby.models.app_deployments_response import AppDeploymentsResponse
-from wodby.models.app_endpoint_option_input import AppEndpointOptionInput
 from wodby.models.app_instance import AppInstance
 from wodby.models.app_instance_auto_stack_upgrade_settings import AppInstanceAutoStackUpgradeSettings
 from wodby.models.app_instance_auto_stack_upgrade_settings_input import AppInstanceAutoStackUpgradeSettingsInput
@@ -32,6 +32,8 @@ from wodby.models.app_instance_stack_upgrade_settings import AppInstanceStackUpg
 from wodby.models.app_instance_stack_upgrade_settings_input import AppInstanceStackUpgradeSettingsInput
 from wodby.models.app_port import AppPort
 from wodby.models.app_route import AppRoute
+from wodby.models.app_route_setting import AppRouteSetting
+from wodby.models.app_route_setting_name import AppRouteSettingName
 from wodby.models.app_service import AppService
 from wodby.models.app_service_annotation import AppServiceAnnotation
 from wodby.models.app_service_annotation_source import AppServiceAnnotationSource
@@ -58,6 +60,7 @@ from wodby.models.app_service_link_input import AppServiceLinkInput
 from wodby.models.app_service_setting import AppServiceSetting
 from wodby.models.app_service_setting_input import AppServiceSettingInput
 from wodby.models.app_service_token import AppServiceToken
+from wodby.models.app_service_volume import AppServiceVolume
 from wodby.models.backup import Backup
 from wodby.models.backup_preset import BackupPreset
 from wodby.models.build_source_input import BuildSourceInput
@@ -69,6 +72,7 @@ from wodby.models.cluster_auto_infrastructure_upgrade_settings import ClusterAut
 from wodby.models.cluster_auto_infrastructure_upgrade_settings_input import ClusterAutoInfrastructureUpgradeSettingsInput
 from wodby.models.cluster_auto_upgrade_version_policy import ClusterAutoUpgradeVersionPolicy
 from wodby.models.cluster_auto_upgrade_version_policy_input import ClusterAutoUpgradeVersionPolicyInput
+from wodby.models.cluster_capabilities import ClusterCapabilities
 from wodby.models.cluster_settings import ClusterSettings
 from wodby.models.cluster_settings_input import ClusterSettingsInput
 from wodby.models.config_override_input import ConfigOverrideInput
@@ -119,6 +123,7 @@ from wodby.models.manifest_validation_response import ManifestValidationResponse
 from wodby.models.model_import import ModelImport
 from wodby.models.named_secret_value_input import NamedSecretValueInput
 from wodby.models.new_annotation_input import NewAnnotationInput
+from wodby.models.new_app_auth_input import NewAppAuthInput
 from wodby.models.new_app_input import NewAppInput
 from wodby.models.new_app_instance_input import NewAppInstanceInput
 from wodby.models.new_app_route_input import NewAppRouteInput
@@ -197,12 +202,14 @@ from wodby.models.stack_settings_input import StackSettingsInput
 from wodby.models.stack_sync_options import StackSyncOptions
 from wodby.models.stack_sync_options_input import StackSyncOptionsInput
 from wodby.models.stacks_response import StacksResponse
+from wodby.models.storage_class import StorageClass
 from wodby.models.task import Task
 from wodby.models.task_job import TaskJob
 from wodby.models.task_step import TaskStep
 from wodby.models.task_step_logs import TaskStepLogs
 from wodby.models.tasks_response import TasksResponse
 from wodby.models.url_response import URLResponse
+from wodby.models.update_app_auth_input import UpdateAppAuthInput
 from wodby.models.update_app_route_input import UpdateAppRouteInput
 from wodby.models.update_app_service_cron_schedule_input import UpdateAppServiceCronScheduleInput
 from wodby.models.update_app_service_database_input import UpdateAppServiceDatabaseInput

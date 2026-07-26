@@ -17,28 +17,24 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-class AppServiceCronSchedule(BaseModel):
+class StorageClass(BaseModel):
     """
-    AppServiceCronSchedule
+    StorageClass
     """ # noqa: E501
-    id: StrictInt
-    app_service_id: StrictInt = Field(alias="appServiceId")
     name: StrictStr
-    title: StrictStr
-    crontab: StrictStr
-    command: StrictStr
-    workload: Optional[StrictStr] = None
-    disabled: StrictBool
-    env_type: Optional[StrictStr] = Field(default=None, alias="envType")
-    created_at: datetime = Field(alias="createdAt")
-    updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "appServiceId", "name", "title", "crontab", "command", "workload", "disabled", "envType", "createdAt", "updatedAt"]
+    provisioner: StrictStr
+    reclaim_policy: Optional[StrictStr] = Field(default=None, alias="reclaimPolicy")
+    allow_volume_expansion: StrictBool = Field(alias="allowVolumeExpansion")
+    mount_options: List[StrictStr] = Field(alias="mountOptions")
+    volume_binding_mode: Optional[StrictStr] = Field(default=None, alias="volumeBindingMode")
+    is_default: StrictBool = Field(alias="isDefault")
+    selectable: StrictBool
+    __properties: ClassVar[List[str]] = ["name", "provisioner", "reclaimPolicy", "allowVolumeExpansion", "mountOptions", "volumeBindingMode", "isDefault", "selectable"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -58,7 +54,7 @@ class AppServiceCronSchedule(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of AppServiceCronSchedule from a JSON string"""
+        """Create an instance of StorageClass from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -79,21 +75,21 @@ class AppServiceCronSchedule(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if workload (nullable) is None
+        # set to None if reclaim_policy (nullable) is None
         # and model_fields_set contains the field
-        if self.workload is None and "workload" in self.model_fields_set:
-            _dict['workload'] = None
+        if self.reclaim_policy is None and "reclaim_policy" in self.model_fields_set:
+            _dict['reclaimPolicy'] = None
 
-        # set to None if env_type (nullable) is None
+        # set to None if volume_binding_mode (nullable) is None
         # and model_fields_set contains the field
-        if self.env_type is None and "env_type" in self.model_fields_set:
-            _dict['envType'] = None
+        if self.volume_binding_mode is None and "volume_binding_mode" in self.model_fields_set:
+            _dict['volumeBindingMode'] = None
 
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of AppServiceCronSchedule from a dict"""
+        """Create an instance of StorageClass from a dict"""
         if obj is None:
             return None
 
@@ -101,17 +97,14 @@ class AppServiceCronSchedule(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "appServiceId": obj.get("appServiceId"),
             "name": obj.get("name"),
-            "title": obj.get("title"),
-            "crontab": obj.get("crontab"),
-            "command": obj.get("command"),
-            "workload": obj.get("workload"),
-            "disabled": obj.get("disabled"),
-            "envType": obj.get("envType"),
-            "createdAt": obj.get("createdAt"),
-            "updatedAt": obj.get("updatedAt")
+            "provisioner": obj.get("provisioner"),
+            "reclaimPolicy": obj.get("reclaimPolicy"),
+            "allowVolumeExpansion": obj.get("allowVolumeExpansion"),
+            "mountOptions": obj.get("mountOptions"),
+            "volumeBindingMode": obj.get("volumeBindingMode"),
+            "isDefault": obj.get("isDefault"),
+            "selectable": obj.get("selectable")
         })
         return _obj
 
