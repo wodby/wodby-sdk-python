@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **id** | **int** |  | 
 **email** | **str** |  | 
 **name** | **str** |  | 
-**is_admin** | **bool** |  | 
 **orgs** | [**List[Org]**](Org.md) |  | [optional] 
 **twofa** | **bool** |  | 
 **default_org** | [**Org**](Org.md) |  | [optional] 

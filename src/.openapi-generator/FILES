@@ -253,15 +253,6 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_app_auth.py
-test/test_app_auths_api.py
-test/test_app_route_setting.py
-test/test_app_route_setting_name.py
-test/test_app_service_volume.py
-test/test_cluster_capabilities.py
-test/test_new_app_auth_input.py
-test/test_storage_class.py
-test/test_update_app_auth_input.py
 tox.ini
 wodby/__init__.py
 wodby/api/__init__.py
