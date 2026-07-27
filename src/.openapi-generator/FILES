@@ -17,6 +17,9 @@ docs/AppDeploymentsResponse.md
 docs/AppInstance.md
 docs/AppInstanceAutoStackUpgradeSettings.md
 docs/AppInstanceAutoStackUpgradeSettingsInput.md
+docs/AppInstanceBackupHealth.md
+docs/AppInstanceCronHealth.md
+docs/AppInstanceHealth.md
 docs/AppInstanceSettings.md
 docs/AppInstanceSettingsInput.md
 docs/AppInstanceStackUpgradeInput.md
@@ -62,6 +65,8 @@ docs/Backup.md
 docs/BackupPreset.md
 docs/BackupsApi.md
 docs/BuildSourceInput.md
+docs/CapacityMetrics.md
+docs/CapacityMetricsFloat.md
 docs/Cert.md
 docs/CertsApi.md
 docs/Cluster.md
@@ -72,6 +77,7 @@ docs/ClusterAutoInfrastructureUpgradeSettingsInput.md
 docs/ClusterAutoUpgradeVersionPolicy.md
 docs/ClusterAutoUpgradeVersionPolicyInput.md
 docs/ClusterCapabilities.md
+docs/ClusterMetrics.md
 docs/ClusterSettings.md
 docs/ClusterSettingsInput.md
 docs/ClustersApi.md
@@ -122,6 +128,8 @@ docs/IntegrationKindsApi.md
 docs/IntegrationLinkInput.md
 docs/IntegrationScope.md
 docs/IntegrationsApi.md
+docs/KubeCPUMetrics.md
+docs/KubeMemoryMetrics.md
 docs/KubeVersion.md
 docs/LogLine.md
 docs/LogStream.md
@@ -154,6 +162,7 @@ docs/NewStackServiceEnvVarInput.md
 docs/NewStackServiceInput.md
 docs/NewStackServiceScopedValueInput.md
 docs/NewStackServiceTokenInput.md
+docs/NodeDiskMetrics.md
 docs/OperationResult.md
 docs/Org.md
 docs/OrgMembership.md
@@ -253,6 +262,15 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_app_instance_backup_health.py
+test/test_app_instance_cron_health.py
+test/test_app_instance_health.py
+test/test_capacity_metrics.py
+test/test_capacity_metrics_float.py
+test/test_cluster_metrics.py
+test/test_kube_cpu_metrics.py
+test/test_kube_memory_metrics.py
+test/test_node_disk_metrics.py
 tox.ini
 wodby/__init__.py
 wodby/api/__init__.py
@@ -300,6 +318,9 @@ wodby/models/app_deployments_response.py
 wodby/models/app_instance.py
 wodby/models/app_instance_auto_stack_upgrade_settings.py
 wodby/models/app_instance_auto_stack_upgrade_settings_input.py
+wodby/models/app_instance_backup_health.py
+wodby/models/app_instance_cron_health.py
+wodby/models/app_instance_health.py
 wodby/models/app_instance_settings.py
 wodby/models/app_instance_settings_input.py
 wodby/models/app_instance_stack_upgrade_input.py
@@ -339,6 +360,8 @@ wodby/models/app_service_volume.py
 wodby/models/backup.py
 wodby/models/backup_preset.py
 wodby/models/build_source_input.py
+wodby/models/capacity_metrics.py
+wodby/models/capacity_metrics_float.py
 wodby/models/cert.py
 wodby/models/cluster.py
 wodby/models/cluster_auto_infrastructure_component_settings.py
@@ -348,6 +371,7 @@ wodby/models/cluster_auto_infrastructure_upgrade_settings_input.py
 wodby/models/cluster_auto_upgrade_version_policy.py
 wodby/models/cluster_auto_upgrade_version_policy_input.py
 wodby/models/cluster_capabilities.py
+wodby/models/cluster_metrics.py
 wodby/models/cluster_settings.py
 wodby/models/cluster_settings_input.py
 wodby/models/config_override_input.py
@@ -390,6 +414,8 @@ wodby/models/import_input.py
 wodby/models/integration.py
 wodby/models/integration_link_input.py
 wodby/models/integration_scope.py
+wodby/models/kube_cpu_metrics.py
+wodby/models/kube_memory_metrics.py
 wodby/models/kube_version.py
 wodby/models/log_line.py
 wodby/models/log_stream.py
@@ -422,6 +448,7 @@ wodby/models/new_stack_service_env_var_input.py
 wodby/models/new_stack_service_input.py
 wodby/models/new_stack_service_scoped_value_input.py
 wodby/models/new_stack_service_token_input.py
+wodby/models/node_disk_metrics.py
 wodby/models/operation_result.py
 wodby/models/org.py
 wodby/models/org_membership.py

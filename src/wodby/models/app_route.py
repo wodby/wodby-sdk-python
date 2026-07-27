@@ -42,6 +42,7 @@ class AppRoute(BaseModel):
     main: StrictBool
     primary: StrictBool
     private: StrictBool
+    technical: StrictBool = Field(description="Whether Wodby generates and manages the route.")
     app_instance_id: StrictInt = Field(alias="appInstanceId")
     app_service_id: StrictInt = Field(alias="appServiceId")
     port_id: StrictInt = Field(alias="portId")
@@ -49,7 +50,7 @@ class AppRoute(BaseModel):
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
     last_synced_at: Optional[datetime] = Field(default=None, alias="lastSyncedAt")
-    __properties: ClassVar[List[str]] = ["id", "host", "path", "pathType", "action", "redirectScheme", "redirectHost", "redirectPath", "redirectStatusCode", "status", "disabled", "main", "primary", "private", "appInstanceId", "appServiceId", "portId", "cert", "createdAt", "updatedAt", "lastSyncedAt"]
+    __properties: ClassVar[List[str]] = ["id", "host", "path", "pathType", "action", "redirectScheme", "redirectHost", "redirectPath", "redirectStatusCode", "status", "disabled", "main", "primary", "private", "technical", "appInstanceId", "appServiceId", "portId", "cert", "createdAt", "updatedAt", "lastSyncedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -81,8 +82,10 @@ class AppRoute(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
+            "technical",
         ])
 
         _dict = self.model_dump(
@@ -149,6 +152,7 @@ class AppRoute(BaseModel):
             "main": obj.get("main"),
             "primary": obj.get("primary"),
             "private": obj.get("private"),
+            "technical": obj.get("technical"),
             "appInstanceId": obj.get("appInstanceId"),
             "appServiceId": obj.get("appServiceId"),
             "portId": obj.get("portId"),

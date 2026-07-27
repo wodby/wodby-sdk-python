@@ -101,7 +101,7 @@ Name | Type | Description  | Notes
 
 Delete app route
 
-Deletes the app route and returns the operation result.
+Deletes a customer route and returns the operation result. Wodby-managed technical routes cannot be deleted; disable them instead.
 
 ### Example
 

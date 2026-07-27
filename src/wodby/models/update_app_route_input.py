@@ -26,6 +26,8 @@ class UpdateAppRouteInput(BaseModel):
     """
     UpdateAppRouteInput
     """ # noqa: E501
+    app_service_id: Optional[StrictInt] = Field(default=None, description="Target app service for retargeting. Must be supplied together with port.", alias="appServiceId")
+    port: Optional[StrictInt] = Field(default=None, description="Target public HTTP port for retargeting. Must be supplied together with appServiceId.")
     disabled: Optional[StrictBool] = None
     main: Optional[StrictBool] = None
     primary: Optional[StrictBool] = None
@@ -36,7 +38,7 @@ class UpdateAppRouteInput(BaseModel):
     redirect_host: Optional[StrictStr] = Field(default=None, alias="redirectHost")
     redirect_path: Optional[StrictStr] = Field(default=None, alias="redirectPath")
     redirect_status_code: Optional[StrictInt] = Field(default=None, alias="redirectStatusCode")
-    __properties: ClassVar[List[str]] = ["disabled", "main", "primary", "path", "pathType", "action", "redirectScheme", "redirectHost", "redirectPath", "redirectStatusCode"]
+    __properties: ClassVar[List[str]] = ["appServiceId", "port", "disabled", "main", "primary", "path", "pathType", "action", "redirectScheme", "redirectHost", "redirectPath", "redirectStatusCode"]
 
     @field_validator('path_type')
     def path_type_validate_enum(cls, value):
@@ -97,6 +99,16 @@ class UpdateAppRouteInput(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if app_service_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.app_service_id is None and "app_service_id" in self.model_fields_set:
+            _dict['appServiceId'] = None
+
+        # set to None if port (nullable) is None
+        # and model_fields_set contains the field
+        if self.port is None and "port" in self.model_fields_set:
+            _dict['port'] = None
+
         # set to None if disabled (nullable) is None
         # and model_fields_set contains the field
         if self.disabled is None and "disabled" in self.model_fields_set:
@@ -159,6 +171,8 @@ class UpdateAppRouteInput(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "appServiceId": obj.get("appServiceId"),
+            "port": obj.get("port"),
             "disabled": obj.get("disabled"),
             "main": obj.get("main"),
             "primary": obj.get("primary"),

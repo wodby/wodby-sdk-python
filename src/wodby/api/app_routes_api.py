@@ -341,7 +341,7 @@ class AppRoutesApi:
     ) -> OperationResult:
         """Delete app route
 
-        Deletes the app route and returns the operation result.
+        Deletes a customer route and returns the operation result. Wodby-managed technical routes cannot be deleted; disable them instead.
 
         :param id: (required)
         :type id: int
@@ -409,7 +409,7 @@ class AppRoutesApi:
     ) -> ApiResponse[OperationResult]:
         """Delete app route
 
-        Deletes the app route and returns the operation result.
+        Deletes a customer route and returns the operation result. Wodby-managed technical routes cannot be deleted; disable them instead.
 
         :param id: (required)
         :type id: int
@@ -477,7 +477,7 @@ class AppRoutesApi:
     ) -> RESTResponseType:
         """Delete app route
 
-        Deletes the app route and returns the operation result.
+        Deletes a customer route and returns the operation result. Wodby-managed technical routes cannot be deleted; disable them instead.
 
         :param id: (required)
         :type id: int

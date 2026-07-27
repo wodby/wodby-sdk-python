@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **name** | **str** |  | 
 **title** | **str** |  | 
 **status** | **str** |  | 
+**paused_at** | **datetime** |  | [optional] 
 **main_domain** | **str** |  | [optional] 
 **app_id** | **int** |  | 
 **cluster_id** | **int** |  | 
@@ -21,6 +22,7 @@ Name | Type | Description | Notes
 **stack_rev_number** | **int** |  | 
 **stack_version** | **str** |  | 
 **settings** | [**AppInstanceSettings**](AppInstanceSettings.md) |  | [optional] 
+**health** | [**AppInstanceHealth**](AppInstanceHealth.md) |  | 
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 
 
