@@ -262,15 +262,6 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_app_instance_backup_health.py
-test/test_app_instance_cron_health.py
-test/test_app_instance_health.py
-test/test_capacity_metrics.py
-test/test_capacity_metrics_float.py
-test/test_cluster_metrics.py
-test/test_kube_cpu_metrics.py
-test/test_kube_memory_metrics.py
-test/test_node_disk_metrics.py
 tox.ini
 wodby/__init__.py
 wodby/api/__init__.py

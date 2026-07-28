@@ -9,7 +9,6 @@ Name | Type | Description | Notes
 **name** | **str** |  | 
 **title** | **str** |  | 
 **status** | **str** |  | 
-**paused_at** | **datetime** |  | [optional] 
 **main_domain** | **str** |  | [optional] 
 **app_id** | **int** |  | 
 **cluster_id** | **int** |  | 

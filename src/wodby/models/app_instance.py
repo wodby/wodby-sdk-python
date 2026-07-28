@@ -33,7 +33,6 @@ class AppInstance(BaseModel):
     name: StrictStr
     title: StrictStr
     status: StrictStr
-    paused_at: Optional[datetime] = Field(default=None, alias="pausedAt")
     main_domain: Optional[StrictStr] = Field(default=None, alias="mainDomain")
     app_id: StrictInt = Field(alias="appId")
     cluster_id: StrictInt = Field(alias="clusterId")
@@ -49,7 +48,7 @@ class AppInstance(BaseModel):
     health: AppInstanceHealth
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "pausedAt", "mainDomain", "appId", "clusterId", "envId", "stackId", "stackRevId", "stackName", "stackTitle", "stackIcon", "stackRevNumber", "stackVersion", "settings", "health", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "mainDomain", "appId", "clusterId", "envId", "stackId", "stackRevId", "stackName", "stackTitle", "stackIcon", "stackRevNumber", "stackVersion", "settings", "health", "createdAt", "updatedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -96,11 +95,6 @@ class AppInstance(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of health
         if self.health:
             _dict['health'] = self.health.to_dict()
-        # set to None if paused_at (nullable) is None
-        # and model_fields_set contains the field
-        if self.paused_at is None and "paused_at" in self.model_fields_set:
-            _dict['pausedAt'] = None
-
         # set to None if main_domain (nullable) is None
         # and model_fields_set contains the field
         if self.main_domain is None and "main_domain" in self.model_fields_set:
@@ -122,7 +116,6 @@ class AppInstance(BaseModel):
             "name": obj.get("name"),
             "title": obj.get("title"),
             "status": obj.get("status"),
-            "pausedAt": obj.get("pausedAt"),
             "mainDomain": obj.get("mainDomain"),
             "appId": obj.get("appId"),
             "clusterId": obj.get("clusterId"),
