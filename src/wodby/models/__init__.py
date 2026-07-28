@@ -67,8 +67,6 @@ from wodby.models.app_service_volume import AppServiceVolume
 from wodby.models.backup import Backup
 from wodby.models.backup_preset import BackupPreset
 from wodby.models.build_source_input import BuildSourceInput
-from wodby.models.capacity_metrics import CapacityMetrics
-from wodby.models.capacity_metrics_float import CapacityMetricsFloat
 from wodby.models.cert import Cert
 from wodby.models.cluster import Cluster
 from wodby.models.cluster_auto_infrastructure_component_settings import ClusterAutoInfrastructureComponentSettings
@@ -78,7 +76,6 @@ from wodby.models.cluster_auto_infrastructure_upgrade_settings_input import Clus
 from wodby.models.cluster_auto_upgrade_version_policy import ClusterAutoUpgradeVersionPolicy
 from wodby.models.cluster_auto_upgrade_version_policy_input import ClusterAutoUpgradeVersionPolicyInput
 from wodby.models.cluster_capabilities import ClusterCapabilities
-from wodby.models.cluster_metrics import ClusterMetrics
 from wodby.models.cluster_settings import ClusterSettings
 from wodby.models.cluster_settings_input import ClusterSettingsInput
 from wodby.models.config_override_input import ConfigOverrideInput
@@ -121,8 +118,6 @@ from wodby.models.import_input import ImportInput
 from wodby.models.integration import Integration
 from wodby.models.integration_link_input import IntegrationLinkInput
 from wodby.models.integration_scope import IntegrationScope
-from wodby.models.kube_cpu_metrics import KubeCPUMetrics
-from wodby.models.kube_memory_metrics import KubeMemoryMetrics
 from wodby.models.kube_version import KubeVersion
 from wodby.models.log_line import LogLine
 from wodby.models.log_stream import LogStream
@@ -155,7 +150,6 @@ from wodby.models.new_stack_service_env_var_input import NewStackServiceEnvVarIn
 from wodby.models.new_stack_service_input import NewStackServiceInput
 from wodby.models.new_stack_service_scoped_value_input import NewStackServiceScopedValueInput
 from wodby.models.new_stack_service_token_input import NewStackServiceTokenInput
-from wodby.models.node_disk_metrics import NodeDiskMetrics
 from wodby.models.operation_result import OperationResult
 from wodby.models.org import Org
 from wodby.models.org_membership import OrgMembership

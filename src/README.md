@@ -194,8 +194,6 @@ Class | Method | HTTP request | Description
 *ClustersApi* | [**delete_cluster**](docs/ClustersApi.md#delete_cluster) | **DELETE** /clusters/{id} | Delete cluster
 *ClustersApi* | [**get_cluster**](docs/ClustersApi.md#get_cluster) | **GET** /clusters/{id} | Get cluster
 *ClustersApi* | [**get_cluster_by_name**](docs/ClustersApi.md#get_cluster_by_name) | **GET** /clusters/by-name/{name} | Get cluster by name
-*ClustersApi* | [**get_cluster_metrics**](docs/ClustersApi.md#get_cluster_metrics) | **GET** /clusters/metrics/{id} | Get cluster metrics
-*ClustersApi* | [**list_cluster_metrics**](docs/ClustersApi.md#list_cluster_metrics) | **GET** /cluster-metrics | Get metrics for multiple clusters
 *ClustersApi* | [**list_clusters**](docs/ClustersApi.md#list_clusters) | **GET** /clusters | List clusters
 *ClustersApi* | [**update_cluster**](docs/ClustersApi.md#update_cluster) | **PUT** /clusters/{id} | Update cluster
 *ClustersApi* | [**update_cluster_settings**](docs/ClustersApi.md#update_cluster_settings) | **PUT** /clusters/settings/{id} | Update cluster settings
@@ -390,8 +388,6 @@ Class | Method | HTTP request | Description
  - [Backup](docs/Backup.md)
  - [BackupPreset](docs/BackupPreset.md)
  - [BuildSourceInput](docs/BuildSourceInput.md)
- - [CapacityMetrics](docs/CapacityMetrics.md)
- - [CapacityMetricsFloat](docs/CapacityMetricsFloat.md)
  - [Cert](docs/Cert.md)
  - [Cluster](docs/Cluster.md)
  - [ClusterAutoInfrastructureComponentSettings](docs/ClusterAutoInfrastructureComponentSettings.md)
@@ -401,7 +397,6 @@ Class | Method | HTTP request | Description
  - [ClusterAutoUpgradeVersionPolicy](docs/ClusterAutoUpgradeVersionPolicy.md)
  - [ClusterAutoUpgradeVersionPolicyInput](docs/ClusterAutoUpgradeVersionPolicyInput.md)
  - [ClusterCapabilities](docs/ClusterCapabilities.md)
- - [ClusterMetrics](docs/ClusterMetrics.md)
  - [ClusterSettings](docs/ClusterSettings.md)
  - [ClusterSettingsInput](docs/ClusterSettingsInput.md)
  - [ConfigOverrideInput](docs/ConfigOverrideInput.md)
@@ -444,8 +439,6 @@ Class | Method | HTTP request | Description
  - [Integration](docs/Integration.md)
  - [IntegrationLinkInput](docs/IntegrationLinkInput.md)
  - [IntegrationScope](docs/IntegrationScope.md)
- - [KubeCPUMetrics](docs/KubeCPUMetrics.md)
- - [KubeMemoryMetrics](docs/KubeMemoryMetrics.md)
  - [KubeVersion](docs/KubeVersion.md)
  - [LogLine](docs/LogLine.md)
  - [LogStream](docs/LogStream.md)
@@ -478,7 +471,6 @@ Class | Method | HTTP request | Description
  - [NewStackServiceInput](docs/NewStackServiceInput.md)
  - [NewStackServiceScopedValueInput](docs/NewStackServiceScopedValueInput.md)
  - [NewStackServiceTokenInput](docs/NewStackServiceTokenInput.md)
- - [NodeDiskMetrics](docs/NodeDiskMetrics.md)
  - [OperationResult](docs/OperationResult.md)
  - [Org](docs/Org.md)
  - [OrgMembership](docs/OrgMembership.md)
