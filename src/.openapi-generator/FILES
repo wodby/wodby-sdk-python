@@ -176,6 +176,7 @@ docs/ResourcesInput.md
 docs/ScalabilityInput.md
 docs/Service.md
 docs/ServiceDeploymentInput.md
+docs/ServiceManifest.md
 docs/ServiceManifestUpdateInput.md
 docs/ServiceRevision.md
 docs/ServiceSettings.md
@@ -256,6 +257,7 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_service_manifest.py
 tox.ini
 wodby/__init__.py
 wodby/api/__init__.py
@@ -443,6 +445,7 @@ wodby/models/resources_input.py
 wodby/models/scalability_input.py
 wodby/models/service.py
 wodby/models/service_deployment_input.py
+wodby/models/service_manifest.py
 wodby/models/service_manifest_update_input.py
 wodby/models/service_revision.py
 wodby/models/service_settings.py

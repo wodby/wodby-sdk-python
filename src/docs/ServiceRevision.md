@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **number** | **int** |  | 
 **version** | **str** |  | 
 **service_id** | **int** |  | 
-**manifest** | **Dict[str, object]** |  | [optional] 
+**manifest** | [**ServiceManifest**](ServiceManifest.md) |  | [optional] 
 **created_at** | **datetime** |  | 
 
 ## Example

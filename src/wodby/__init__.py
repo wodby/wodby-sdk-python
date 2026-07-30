@@ -209,6 +209,7 @@ from wodby.models.resources_input import ResourcesInput
 from wodby.models.scalability_input import ScalabilityInput
 from wodby.models.service import Service
 from wodby.models.service_deployment_input import ServiceDeploymentInput
+from wodby.models.service_manifest import ServiceManifest
 from wodby.models.service_manifest_update_input import ServiceManifestUpdateInput
 from wodby.models.service_revision import ServiceRevision
 from wodby.models.service_settings import ServiceSettings
