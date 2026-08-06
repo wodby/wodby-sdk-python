@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **workload** | **str** |  | [optional] 
 **container** | **str** |  | [optional] 
+**pod** | **str** |  | [optional] 
 
 ## Example
 

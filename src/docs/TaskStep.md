@@ -6,6 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** |  | 
+**position** | **int** |  | 
 **name** | **str** |  | 
 **status** | **str** |  | 
 **log_status** | **str** |  | 

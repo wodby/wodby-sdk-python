@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from wodby.models.app_service_scalability_update_input import AppServiceScalabilityUpdateInput
 from wodby.models.build_source_input import BuildSourceInput
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,11 +29,12 @@ class AppServiceInput(BaseModel):
     AppServiceInput
     """ # noqa: E501
     replicas: Optional[StrictInt] = None
+    scalability: Optional[AppServiceScalabilityUpdateInput] = None
     version: Optional[StrictStr] = None
     disabled: Optional[StrictBool] = None
     main: Optional[StrictBool] = None
     build_source: Optional[BuildSourceInput] = Field(default=None, alias="buildSource")
-    __properties: ClassVar[List[str]] = ["replicas", "version", "disabled", "main", "buildSource"]
+    __properties: ClassVar[List[str]] = ["replicas", "scalability", "version", "disabled", "main", "buildSource"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -73,6 +75,9 @@ class AppServiceInput(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of scalability
+        if self.scalability:
+            _dict['scalability'] = self.scalability.to_dict()
         # override the default output from pydantic by calling `to_dict()` of build_source
         if self.build_source:
             _dict['buildSource'] = self.build_source.to_dict()
@@ -109,6 +114,7 @@ class AppServiceInput(BaseModel):
 
         _obj = cls.model_validate({
             "replicas": obj.get("replicas"),
+            "scalability": AppServiceScalabilityUpdateInput.from_dict(obj["scalability"]) if obj.get("scalability") is not None else None,
             "version": obj.get("version"),
             "disabled": obj.get("disabled"),
             "main": obj.get("main"),

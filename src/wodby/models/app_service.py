@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from wodby.models.app_service_scalability import AppServiceScalability
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -33,6 +34,7 @@ class AppService(BaseModel):
     type: StrictStr
     status: StrictStr
     replicas: StrictInt
+    scalability: Optional[AppServiceScalability] = None
     version: StrictStr
     main: StrictBool
     disabled: StrictBool
@@ -46,7 +48,7 @@ class AppService(BaseModel):
     parent_app_service_id: Optional[StrictInt] = Field(default=None, alias="parentAppServiceId")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "type", "status", "replicas", "version", "main", "disabled", "external", "required", "needsRebuild", "needsRedeploy", "configurationReady", "appInstanceId", "serviceRevId", "parentAppServiceId", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "type", "status", "replicas", "scalability", "version", "main", "disabled", "external", "required", "needsRebuild", "needsRedeploy", "configurationReady", "appInstanceId", "serviceRevId", "parentAppServiceId", "createdAt", "updatedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -87,6 +89,14 @@ class AppService(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of scalability
+        if self.scalability:
+            _dict['scalability'] = self.scalability.to_dict()
+        # set to None if scalability (nullable) is None
+        # and model_fields_set contains the field
+        if self.scalability is None and "scalability" in self.model_fields_set:
+            _dict['scalability'] = None
+
         # set to None if parent_app_service_id (nullable) is None
         # and model_fields_set contains the field
         if self.parent_app_service_id is None and "parent_app_service_id" in self.model_fields_set:
@@ -110,6 +120,7 @@ class AppService(BaseModel):
             "type": obj.get("type"),
             "status": obj.get("status"),
             "replicas": obj.get("replicas"),
+            "scalability": AppServiceScalability.from_dict(obj["scalability"]) if obj.get("scalability") is not None else None,
             "version": obj.get("version"),
             "main": obj.get("main"),
             "disabled": obj.get("disabled"),

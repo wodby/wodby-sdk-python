@@ -17,21 +17,19 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool
-from typing import Any, ClassVar, Dict, List, Optional
-from wodby.models.automation_time_window import AutomationTimeWindow
-from wodby.models.cluster_auto_upgrade_version_policy import ClusterAutoUpgradeVersionPolicy
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
-class ClusterAutoInfrastructureComponentSettings(BaseModel):
+class AppServiceScalability(BaseModel):
     """
-    ClusterAutoInfrastructureComponentSettings
+    AppServiceScalability
     """ # noqa: E501
-    enabled: StrictBool
-    version_policy: Optional[ClusterAutoUpgradeVersionPolicy] = Field(default=None, alias="versionPolicy")
-    time_window: Optional[AutomationTimeWindow] = Field(default=None, alias="timeWindow")
-    __properties: ClassVar[List[str]] = ["enabled", "versionPolicy", "timeWindow"]
+    average_cpu: StrictInt = Field(alias="averageCPU")
+    min_replicas: StrictInt = Field(alias="minReplicas")
+    max_replicas: StrictInt = Field(alias="maxReplicas")
+    __properties: ClassVar[List[str]] = ["averageCPU", "minReplicas", "maxReplicas"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -51,7 +49,7 @@ class ClusterAutoInfrastructureComponentSettings(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of ClusterAutoInfrastructureComponentSettings from a JSON string"""
+        """Create an instance of AppServiceScalability from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -72,17 +70,11 @@ class ClusterAutoInfrastructureComponentSettings(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of version_policy
-        if self.version_policy:
-            _dict['versionPolicy'] = self.version_policy.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of time_window
-        if self.time_window:
-            _dict['timeWindow'] = self.time_window.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of ClusterAutoInfrastructureComponentSettings from a dict"""
+        """Create an instance of AppServiceScalability from a dict"""
         if obj is None:
             return None
 
@@ -90,9 +82,9 @@ class ClusterAutoInfrastructureComponentSettings(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "enabled": obj.get("enabled"),
-            "versionPolicy": ClusterAutoUpgradeVersionPolicy.from_dict(obj["versionPolicy"]) if obj.get("versionPolicy") is not None else None,
-            "timeWindow": AutomationTimeWindow.from_dict(obj["timeWindow"]) if obj.get("timeWindow") is not None else None
+            "averageCPU": obj.get("averageCPU"),
+            "minReplicas": obj.get("minReplicas"),
+            "maxReplicas": obj.get("maxReplicas")
         })
         return _obj
 

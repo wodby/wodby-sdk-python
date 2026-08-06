@@ -28,7 +28,8 @@ class NewAppServiceLogStreamInput(BaseModel):
     """ # noqa: E501
     workload: Optional[StrictStr] = None
     container: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["workload", "container"]
+    pod: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["workload", "container", "pod"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -79,6 +80,11 @@ class NewAppServiceLogStreamInput(BaseModel):
         if self.container is None and "container" in self.model_fields_set:
             _dict['container'] = None
 
+        # set to None if pod (nullable) is None
+        # and model_fields_set contains the field
+        if self.pod is None and "pod" in self.model_fields_set:
+            _dict['pod'] = None
+
         return _dict
 
     @classmethod
@@ -92,7 +98,8 @@ class NewAppServiceLogStreamInput(BaseModel):
 
         _obj = cls.model_validate({
             "workload": obj.get("workload"),
-            "container": obj.get("container")
+            "container": obj.get("container"),
+            "pod": obj.get("pod")
         })
         return _obj
 

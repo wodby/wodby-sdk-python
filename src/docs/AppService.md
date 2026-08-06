@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **type** | **str** |  | 
 **status** | **str** |  | 
 **replicas** | **int** |  | 
+**scalability** | [**AppServiceScalability**](AppServiceScalability.md) |  | [optional] 
 **version** | **str** |  | 
 **main** | **bool** |  | 
 **disabled** | **bool** |  | 

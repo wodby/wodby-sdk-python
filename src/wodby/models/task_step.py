@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,13 +29,14 @@ class TaskStep(BaseModel):
     TaskStep
     """ # noqa: E501
     id: StrictInt
+    position: Annotated[int, Field(strict=True, ge=1)]
     name: StrictStr
     status: StrictStr
     log_status: StrictStr = Field(alias="logStatus")
     is_system: StrictBool = Field(alias="isSystem")
     started_at: Optional[datetime] = Field(default=None, alias="startedAt")
     ended_at: Optional[datetime] = Field(default=None, alias="endedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "status", "logStatus", "isSystem", "startedAt", "endedAt"]
+    __properties: ClassVar[List[str]] = ["id", "position", "name", "status", "logStatus", "isSystem", "startedAt", "endedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -98,6 +100,7 @@ class TaskStep(BaseModel):
 
         _obj = cls.model_validate({
             "id": obj.get("id"),
+            "position": obj.get("position"),
             "name": obj.get("name"),
             "status": obj.get("status"),
             "logStatus": obj.get("logStatus"),

@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **override** | **bool** |  | 
 **auto** | **bool** |  | [optional] 
 **crontab** | **str** |  | [optional] 
+**time_window** | [**AutomationTimeWindowInput**](AutomationTimeWindowInput.md) |  | [optional] 
 **duration** | **int** |  | [optional] 
 
 ## Example

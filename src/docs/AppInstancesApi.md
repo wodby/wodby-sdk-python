@@ -8,8 +8,10 @@ Method | HTTP request | Description
 [**delete_app_instance**](AppInstancesApi.md#delete_app_instance) | **DELETE** /app-instances/{id} | Delete app instance
 [**get_app_instance**](AppInstancesApi.md#get_app_instance) | **GET** /app-instances/{id} | Get app instance
 [**get_app_instance_by_name**](AppInstancesApi.md#get_app_instance_by_name) | **GET** /app-instances/by-name/{appName}/{instanceName} | Get app instance by app and instance name
+[**get_app_instance_cicd_settings**](AppInstancesApi.md#get_app_instance_cicd_settings) | **GET** /app-instances/cicd-settings/{id} | Get app instance CI/CD settings
 [**list_app_instances**](AppInstancesApi.md#list_app_instances) | **GET** /app-instances | List app instances
 [**update_app_instance**](AppInstancesApi.md#update_app_instance) | **PUT** /app-instances/{id} | Update app instance
+[**update_app_instance_cicd_settings**](AppInstancesApi.md#update_app_instance_cicd_settings) | **PUT** /app-instances/cicd-settings/{id} | Update app instance CI/CD settings
 [**update_app_instance_settings**](AppInstancesApi.md#update_app_instance_settings) | **PUT** /app-instances/settings/{id} | Update app instance settings
 [**upgrade_app_instance_stack**](AppInstancesApi.md#upgrade_app_instance_stack) | **POST** /app-instances/{id}/actions/upgrade-stack | Upgrade app instance stack
 
@@ -345,6 +347,87 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_app_instance_cicd_settings**
+> AppInstanceCICDSettings get_app_instance_cicd_settings(id)
+
+Get app instance CI/CD settings
+
+Returns the CI and registry integrations used by future app instance builds. Integration ID 0 identifies the built-in Wodby service.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.app_instance_cicd_settings import AppInstanceCICDSettings
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppInstancesApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # Get app instance CI/CD settings
+        api_response = api_instance.get_app_instance_cicd_settings(id)
+        print("The response of AppInstancesApi->get_app_instance_cicd_settings:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppInstancesApi->get_app_instance_cicd_settings: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**AppInstanceCICDSettings**](AppInstanceCICDSettings.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | App instance CI/CD settings |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **list_app_instances**
 > List[AppInstance] list_app_instances(org_id=org_id, project_ids=project_ids, app_id=app_id, cluster_id=cluster_id, cluster_app=cluster_app)
 
@@ -513,6 +596,90 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Updated app instance |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_app_instance_cicd_settings**
+> AppInstanceCICDSettings update_app_instance_cicd_settings(id, app_instance_cicd_settings_input)
+
+Update app instance CI/CD settings
+
+Updates the CI and registry integrations used by future app instance builds. Integration ID 0 selects the built-in Wodby service.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.app_instance_cicd_settings import AppInstanceCICDSettings
+from wodby.models.app_instance_cicd_settings_input import AppInstanceCICDSettingsInput
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppInstancesApi(api_client)
+    id = 56 # int | 
+    app_instance_cicd_settings_input = wodby.AppInstanceCICDSettingsInput() # AppInstanceCICDSettingsInput | 
+
+    try:
+        # Update app instance CI/CD settings
+        api_response = api_instance.update_app_instance_cicd_settings(id, app_instance_cicd_settings_input)
+        print("The response of AppInstancesApi->update_app_instance_cicd_settings:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppInstancesApi->update_app_instance_cicd_settings: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **app_instance_cicd_settings_input** | [**AppInstanceCICDSettingsInput**](AppInstanceCICDSettingsInput.md)|  | 
+
+### Return type
+
+[**AppInstanceCICDSettings**](AppInstanceCICDSettings.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Updated app instance CI/CD settings |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 

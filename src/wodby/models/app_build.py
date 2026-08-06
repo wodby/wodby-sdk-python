@@ -30,7 +30,7 @@ class AppBuild(BaseModel):
     AppBuild
     """ # noqa: E501
     id: StrictInt
-    number: StrictInt
+    number: StrictInt = Field(description="App-instance build-launch number. Build records created by the same Wodby CI launch share this number.")
     status: StrictStr
     app_instance_id: StrictInt = Field(alias="appInstanceId")
     app_service_id: StrictInt = Field(alias="appServiceId")

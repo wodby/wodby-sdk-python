@@ -6,6 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **replicas** | **int** |  | [optional] 
+**scalability** | [**AppServiceScalabilityUpdateInput**](AppServiceScalabilityUpdateInput.md) |  | [optional] 
 **version** | **str** |  | [optional] 
 **disabled** | **bool** |  | [optional] 
 **main** | **bool** |  | [optional] 

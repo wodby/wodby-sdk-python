@@ -17,27 +17,20 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
-from typing_extensions import Annotated
-from wodby.models.automation_time_window_input import AutomationTimeWindowInput
 from typing import Optional, Set
 from typing_extensions import Self
 
-class UpdateBackupPresetInput(BaseModel):
+class AppServiceScalabilityUpdateInput(BaseModel):
     """
-    UpdateBackupPresetInput
+    AppServiceScalabilityUpdateInput
     """ # noqa: E501
-    integration_id: StrictInt = Field(alias="integrationId")
-    bucket: StrictStr
-    storage_class: Optional[StrictStr] = Field(default=None, alias="storageClass")
-    disabled: StrictBool
-    override: StrictBool
-    auto: StrictBool
-    crontab: Optional[StrictStr] = None
-    time_window: Optional[AutomationTimeWindowInput] = Field(default=None, alias="timeWindow")
-    duration: Optional[Annotated[int, Field(le=180, strict=True, ge=30)]] = None
-    __properties: ClassVar[List[str]] = ["integrationId", "bucket", "storageClass", "disabled", "override", "auto", "crontab", "timeWindow", "duration"]
+    enabled: StrictBool
+    average_cpu: Optional[StrictInt] = Field(default=None, alias="averageCPU")
+    min_replicas: Optional[StrictInt] = Field(default=None, alias="minReplicas")
+    max_replicas: Optional[StrictInt] = Field(default=None, alias="maxReplicas")
+    __properties: ClassVar[List[str]] = ["enabled", "averageCPU", "minReplicas", "maxReplicas"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -57,7 +50,7 @@ class UpdateBackupPresetInput(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of UpdateBackupPresetInput from a JSON string"""
+        """Create an instance of AppServiceScalabilityUpdateInput from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -78,29 +71,26 @@ class UpdateBackupPresetInput(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of time_window
-        if self.time_window:
-            _dict['timeWindow'] = self.time_window.to_dict()
-        # set to None if storage_class (nullable) is None
+        # set to None if average_cpu (nullable) is None
         # and model_fields_set contains the field
-        if self.storage_class is None and "storage_class" in self.model_fields_set:
-            _dict['storageClass'] = None
+        if self.average_cpu is None and "average_cpu" in self.model_fields_set:
+            _dict['averageCPU'] = None
 
-        # set to None if crontab (nullable) is None
+        # set to None if min_replicas (nullable) is None
         # and model_fields_set contains the field
-        if self.crontab is None and "crontab" in self.model_fields_set:
-            _dict['crontab'] = None
+        if self.min_replicas is None and "min_replicas" in self.model_fields_set:
+            _dict['minReplicas'] = None
 
-        # set to None if duration (nullable) is None
+        # set to None if max_replicas (nullable) is None
         # and model_fields_set contains the field
-        if self.duration is None and "duration" in self.model_fields_set:
-            _dict['duration'] = None
+        if self.max_replicas is None and "max_replicas" in self.model_fields_set:
+            _dict['maxReplicas'] = None
 
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of UpdateBackupPresetInput from a dict"""
+        """Create an instance of AppServiceScalabilityUpdateInput from a dict"""
         if obj is None:
             return None
 
@@ -108,15 +98,10 @@ class UpdateBackupPresetInput(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "integrationId": obj.get("integrationId"),
-            "bucket": obj.get("bucket"),
-            "storageClass": obj.get("storageClass"),
-            "disabled": obj.get("disabled"),
-            "override": obj.get("override"),
-            "auto": obj.get("auto"),
-            "crontab": obj.get("crontab"),
-            "timeWindow": AutomationTimeWindowInput.from_dict(obj["timeWindow"]) if obj.get("timeWindow") is not None else None,
-            "duration": obj.get("duration")
+            "enabled": obj.get("enabled"),
+            "averageCPU": obj.get("averageCPU"),
+            "minReplicas": obj.get("minReplicas"),
+            "maxReplicas": obj.get("maxReplicas")
         })
         return _obj
 

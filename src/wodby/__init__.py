@@ -70,6 +70,8 @@ from wodby.models.app_instance import AppInstance
 from wodby.models.app_instance_auto_stack_upgrade_settings import AppInstanceAutoStackUpgradeSettings
 from wodby.models.app_instance_auto_stack_upgrade_settings_input import AppInstanceAutoStackUpgradeSettingsInput
 from wodby.models.app_instance_backup_health import AppInstanceBackupHealth
+from wodby.models.app_instance_cicd_settings import AppInstanceCICDSettings
+from wodby.models.app_instance_cicd_settings_input import AppInstanceCICDSettingsInput
 from wodby.models.app_instance_cron_health import AppInstanceCronHealth
 from wodby.models.app_instance_health import AppInstanceHealth
 from wodby.models.app_instance_settings import AppInstanceSettings
@@ -104,10 +106,14 @@ from wodby.models.app_service_integration import AppServiceIntegration
 from wodby.models.app_service_integration_input import AppServiceIntegrationInput
 from wodby.models.app_service_link import AppServiceLink
 from wodby.models.app_service_link_input import AppServiceLinkInput
+from wodby.models.app_service_scalability import AppServiceScalability
+from wodby.models.app_service_scalability_update_input import AppServiceScalabilityUpdateInput
 from wodby.models.app_service_setting import AppServiceSetting
 from wodby.models.app_service_setting_input import AppServiceSettingInput
 from wodby.models.app_service_token import AppServiceToken
 from wodby.models.app_service_volume import AppServiceVolume
+from wodby.models.automation_time_window import AutomationTimeWindow
+from wodby.models.automation_time_window_input import AutomationTimeWindowInput
 from wodby.models.backup import Backup
 from wodby.models.backup_preset import BackupPreset
 from wodby.models.build_source_input import BuildSourceInput
@@ -255,6 +261,7 @@ from wodby.models.task import Task
 from wodby.models.task_job import TaskJob
 from wodby.models.task_step import TaskStep
 from wodby.models.task_step_logs import TaskStepLogs
+from wodby.models.task_tree_item import TaskTreeItem
 from wodby.models.tasks_response import TasksResponse
 from wodby.models.url_response import URLResponse
 from wodby.models.update_app_auth_input import UpdateAppAuthInput

@@ -1555,7 +1555,7 @@ class AppServicesApi:
     ) -> LogStream:
         """Create app service log stream
 
-        Creates a log stream for an app service container and returns the stream id.
+        Creates a log stream for an app service container across all replicas or for one selected pod and returns the stream id. Log streams are available while the app instance status is ok or deploying.
 
         :param id: (required)
         :type id: int
@@ -1627,7 +1627,7 @@ class AppServicesApi:
     ) -> ApiResponse[LogStream]:
         """Create app service log stream
 
-        Creates a log stream for an app service container and returns the stream id.
+        Creates a log stream for an app service container across all replicas or for one selected pod and returns the stream id. Log streams are available while the app instance status is ok or deploying.
 
         :param id: (required)
         :type id: int
@@ -1699,7 +1699,7 @@ class AppServicesApi:
     ) -> RESTResponseType:
         """Create app service log stream
 
-        Creates a log stream for an app service container and returns the stream id.
+        Creates a log stream for an app service container across all replicas or for one selected pod and returns the stream id. Log streams are available while the app instance status is ok or deploying.
 
         :param id: (required)
         :type id: int

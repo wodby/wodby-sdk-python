@@ -17,21 +17,43 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool
-from typing import Any, ClassVar, Dict, List, Optional
-from wodby.models.automation_time_window import AutomationTimeWindow
-from wodby.models.cluster_auto_upgrade_version_policy import ClusterAutoUpgradeVersionPolicy
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from typing import Any, ClassVar, Dict, List
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
-class ClusterAutoInfrastructureComponentSettings(BaseModel):
+class AutomationTimeWindow(BaseModel):
     """
-    ClusterAutoInfrastructureComponentSettings
+    AutomationTimeWindow
     """ # noqa: E501
-    enabled: StrictBool
-    version_policy: Optional[ClusterAutoUpgradeVersionPolicy] = Field(default=None, alias="versionPolicy")
-    time_window: Optional[AutomationTimeWindow] = Field(default=None, alias="timeWindow")
-    __properties: ClassVar[List[str]] = ["enabled", "versionPolicy", "timeWindow"]
+    start: Annotated[str, Field(strict=True)]
+    end: Annotated[str, Field(strict=True)]
+    time_zone: StrictStr = Field(alias="timeZone")
+    days: Annotated[List[StrictStr], Field(min_length=1)]
+    __properties: ClassVar[List[str]] = ["start", "end", "timeZone", "days"]
+
+    @field_validator('start')
+    def start_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if not re.match(r"^([01][0-9]|2[0-3]):[0-5][0-9]$", value):
+            raise ValueError(r"must validate the regular expression /^([01][0-9]|2[0-3]):[0-5][0-9]$/")
+        return value
+
+    @field_validator('end')
+    def end_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if not re.match(r"^([01][0-9]|2[0-3]):[0-5][0-9]$", value):
+            raise ValueError(r"must validate the regular expression /^([01][0-9]|2[0-3]):[0-5][0-9]$/")
+        return value
+
+    @field_validator('days')
+    def days_validate_enum(cls, value):
+        """Validates the enum"""
+        for i in value:
+            if i not in set(['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY']):
+                raise ValueError("each list item must be one of ('MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -51,7 +73,7 @@ class ClusterAutoInfrastructureComponentSettings(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of ClusterAutoInfrastructureComponentSettings from a JSON string"""
+        """Create an instance of AutomationTimeWindow from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -72,17 +94,11 @@ class ClusterAutoInfrastructureComponentSettings(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of version_policy
-        if self.version_policy:
-            _dict['versionPolicy'] = self.version_policy.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of time_window
-        if self.time_window:
-            _dict['timeWindow'] = self.time_window.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of ClusterAutoInfrastructureComponentSettings from a dict"""
+        """Create an instance of AutomationTimeWindow from a dict"""
         if obj is None:
             return None
 
@@ -90,9 +106,10 @@ class ClusterAutoInfrastructureComponentSettings(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "enabled": obj.get("enabled"),
-            "versionPolicy": ClusterAutoUpgradeVersionPolicy.from_dict(obj["versionPolicy"]) if obj.get("versionPolicy") is not None else None,
-            "timeWindow": AutomationTimeWindow.from_dict(obj["timeWindow"]) if obj.get("timeWindow") is not None else None
+            "start": obj.get("start"),
+            "end": obj.get("end"),
+            "timeZone": obj.get("timeZone"),
+            "days": obj.get("days")
         })
         return _obj
 

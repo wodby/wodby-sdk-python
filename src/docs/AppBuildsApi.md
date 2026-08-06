@@ -351,7 +351,7 @@ Name | Type | Description  | Notes
 
 Get build config
 
-Returns CI build configuration for the app build.
+Returns CI build configuration for the build source owner and image targets linked to that owner. Services with independent build sources are omitted.
 
 ### Example
 

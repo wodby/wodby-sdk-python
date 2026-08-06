@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
+from wodby.models.automation_time_window_input import AutomationTimeWindowInput
 from wodby.models.cluster_auto_upgrade_version_policy_input import ClusterAutoUpgradeVersionPolicyInput
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,7 +30,8 @@ class ClusterAutoInfrastructureComponentSettingsInput(BaseModel):
     """ # noqa: E501
     enabled: Optional[StrictBool] = None
     version_policy: Optional[ClusterAutoUpgradeVersionPolicyInput] = Field(default=None, alias="versionPolicy")
-    __properties: ClassVar[List[str]] = ["enabled", "versionPolicy"]
+    time_window: Optional[AutomationTimeWindowInput] = Field(default=None, alias="timeWindow")
+    __properties: ClassVar[List[str]] = ["enabled", "versionPolicy", "timeWindow"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -73,6 +75,9 @@ class ClusterAutoInfrastructureComponentSettingsInput(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of version_policy
         if self.version_policy:
             _dict['versionPolicy'] = self.version_policy.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of time_window
+        if self.time_window:
+            _dict['timeWindow'] = self.time_window.to_dict()
         # set to None if enabled (nullable) is None
         # and model_fields_set contains the field
         if self.enabled is None and "enabled" in self.model_fields_set:
@@ -91,7 +96,8 @@ class ClusterAutoInfrastructureComponentSettingsInput(BaseModel):
 
         _obj = cls.model_validate({
             "enabled": obj.get("enabled"),
-            "versionPolicy": ClusterAutoUpgradeVersionPolicyInput.from_dict(obj["versionPolicy"]) if obj.get("versionPolicy") is not None else None
+            "versionPolicy": ClusterAutoUpgradeVersionPolicyInput.from_dict(obj["versionPolicy"]) if obj.get("versionPolicy") is not None else None,
+            "timeWindow": AutomationTimeWindowInput.from_dict(obj["timeWindow"]) if obj.get("timeWindow") is not None else None
         })
         return _obj
 

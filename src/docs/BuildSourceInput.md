@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **remote_git_repo_id** | **str** |  | [optional] 
 **git_ref** | **str** |  | [optional] 
 **git_ref_type** | **str** |  | [optional] 
+**ci_workflow** | **str** |  | [optional] 
 
 ## Example
 

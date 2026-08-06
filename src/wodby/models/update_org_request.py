@@ -27,9 +27,10 @@ class UpdateOrgRequest(BaseModel):
     UpdateOrgRequest
     """ # noqa: E501
     title: StrictStr
+    default_time_zone: Optional[StrictStr] = Field(default=None, alias="defaultTimeZone")
     registry_integration_id: Optional[StrictInt] = Field(default=None, alias="registryIntegrationId")
     ci_integration_id: Optional[StrictInt] = Field(default=None, alias="ciIntegrationId")
-    __properties: ClassVar[List[str]] = ["title", "registryIntegrationId", "ciIntegrationId"]
+    __properties: ClassVar[List[str]] = ["title", "defaultTimeZone", "registryIntegrationId", "ciIntegrationId"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -93,6 +94,7 @@ class UpdateOrgRequest(BaseModel):
 
         _obj = cls.model_validate({
             "title": obj.get("title"),
+            "defaultTimeZone": obj.get("defaultTimeZone"),
             "registryIntegrationId": obj.get("registryIntegrationId"),
             "ciIntegrationId": obj.get("ciIntegrationId")
         })

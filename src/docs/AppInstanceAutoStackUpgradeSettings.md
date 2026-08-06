@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **enabled** | **bool** |  | 
 **upgrade_settings** | [**AppInstanceStackUpgradeSettings**](AppInstanceStackUpgradeSettings.md) |  | [optional] 
+**time_window** | [**AutomationTimeWindow**](AutomationTimeWindow.md) |  | [optional] 
 
 ## Example
 

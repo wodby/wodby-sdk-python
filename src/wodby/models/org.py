@@ -31,9 +31,12 @@ class Org(BaseModel):
     name: StrictStr
     title: StrictStr
     domain: StrictStr
+    default_time_zone: StrictStr = Field(alias="defaultTimeZone")
+    ci_integration_id: StrictInt = Field(description="Effective default CI integration ID. Zero selects the built-in Wodby CI service.", alias="ciIntegrationId")
+    registry_integration_id: StrictInt = Field(description="Effective default registry integration ID. Zero selects the built-in Wodby registry service.", alias="registryIntegrationId")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "domain", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "domain", "defaultTimeZone", "ciIntegrationId", "registryIntegrationId", "createdAt", "updatedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -90,6 +93,9 @@ class Org(BaseModel):
             "name": obj.get("name"),
             "title": obj.get("title"),
             "domain": obj.get("domain"),
+            "defaultTimeZone": obj.get("defaultTimeZone"),
+            "ciIntegrationId": obj.get("ciIntegrationId"),
+            "registryIntegrationId": obj.get("registryIntegrationId"),
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt")
         })

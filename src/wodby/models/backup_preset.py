@@ -21,6 +21,7 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from wodby.models.automation_time_window import AutomationTimeWindow
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -43,11 +44,12 @@ class BackupPreset(BaseModel):
     auto: StrictBool
     disabled: StrictBool
     crontab: Optional[StrictStr] = None
+    time_window: Optional[AutomationTimeWindow] = Field(default=None, alias="timeWindow")
     duration: Optional[Annotated[int, Field(le=180, strict=True, ge=30)]] = None
     next_run_at: Optional[datetime] = Field(default=None, alias="nextRunAt")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "appInstanceId", "appServiceId", "databaseId", "databaseDbId", "orgId", "envId", "backupName", "integrationId", "bucket", "storageClass", "override", "auto", "disabled", "crontab", "duration", "nextRunAt", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "appInstanceId", "appServiceId", "databaseId", "databaseDbId", "orgId", "envId", "backupName", "integrationId", "bucket", "storageClass", "override", "auto", "disabled", "crontab", "timeWindow", "duration", "nextRunAt", "createdAt", "updatedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -88,6 +90,9 @@ class BackupPreset(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of time_window
+        if self.time_window:
+            _dict['timeWindow'] = self.time_window.to_dict()
         # set to None if app_instance_id (nullable) is None
         # and model_fields_set contains the field
         if self.app_instance_id is None and "app_instance_id" in self.model_fields_set:
@@ -170,6 +175,7 @@ class BackupPreset(BaseModel):
             "auto": obj.get("auto"),
             "disabled": obj.get("disabled"),
             "crontab": obj.get("crontab"),
+            "timeWindow": AutomationTimeWindow.from_dict(obj["timeWindow"]) if obj.get("timeWindow") is not None else None,
             "duration": obj.get("duration"),
             "nextRunAt": obj.get("nextRunAt"),
             "createdAt": obj.get("createdAt"),

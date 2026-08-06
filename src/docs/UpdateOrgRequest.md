@@ -6,6 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **title** | **str** |  | 
+**default_time_zone** | **str** |  | [optional] 
 **registry_integration_id** | **int** |  | [optional] 
 **ci_integration_id** | **int** |  | [optional] 
 

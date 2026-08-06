@@ -20,6 +20,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.task import Task
+from wodby.models.task_tree_item import TaskTreeItem
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,9 +29,10 @@ class TasksResponse(BaseModel):
     TasksResponse
     """ # noqa: E501
     items: List[Task]
+    tree_items: Optional[List[TaskTreeItem]] = Field(default=None, description="Flat current-page roots and descendants for tree view, linked by parentId.", alias="treeItems")
     total_count: StrictInt = Field(alias="totalCount")
     next_page: Optional[StrictInt] = Field(default=None, alias="nextPage")
-    __properties: ClassVar[List[str]] = ["items", "totalCount", "nextPage"]
+    __properties: ClassVar[List[str]] = ["items", "treeItems", "totalCount", "nextPage"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -78,6 +80,18 @@ class TasksResponse(BaseModel):
                 if _item_items:
                     _items.append(_item_items.to_dict())
             _dict['items'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in tree_items (list)
+        _items = []
+        if self.tree_items:
+            for _item_tree_items in self.tree_items:
+                if _item_tree_items:
+                    _items.append(_item_tree_items.to_dict())
+            _dict['treeItems'] = _items
+        # set to None if tree_items (nullable) is None
+        # and model_fields_set contains the field
+        if self.tree_items is None and "tree_items" in self.model_fields_set:
+            _dict['treeItems'] = None
+
         # set to None if next_page (nullable) is None
         # and model_fields_set contains the field
         if self.next_page is None and "next_page" in self.model_fields_set:
@@ -96,6 +110,7 @@ class TasksResponse(BaseModel):
 
         _obj = cls.model_validate({
             "items": [Task.from_dict(_item) for _item in obj["items"]] if obj.get("items") is not None else None,
+            "treeItems": [TaskTreeItem.from_dict(_item) for _item in obj["treeItems"]] if obj.get("treeItems") is not None else None,
             "totalCount": obj.get("totalCount"),
             "nextPage": obj.get("nextPage")
         })

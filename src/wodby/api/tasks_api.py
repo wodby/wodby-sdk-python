@@ -578,7 +578,7 @@ class TasksApi:
         scope: Optional[StrictStr] = None,
         org_id: Annotated[Optional[StrictInt], Field(description="Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.")] = None,
         project_ids: Annotated[Optional[StrictStr], Field(description="Comma-separated project ids")] = None,
-        view: Annotated[Optional[StrictStr], Field(description="Return matching tasks as a flat page or as entity-scoped task trees")] = None,
+        view: Annotated[Optional[StrictStr], Field(description="Return matching tasks as a flat page or as filter-scoped task trees. Tree responses support user, organization, project, and resource filters, keep paginated roots in items, and include all current-page tree nodes in treeItems.")] = None,
         without_origin: Annotated[Optional[StrictBool], Field(description="Deprecated compatibility alias for view=tree")] = None,
         statuses: Annotated[Optional[StrictStr], Field(description="Comma-separated task statuses")] = None,
         names: Annotated[Optional[StrictStr], Field(description="Comma-separated exact task names")] = None,
@@ -616,7 +616,7 @@ class TasksApi:
         :type org_id: int
         :param project_ids: Comma-separated project ids
         :type project_ids: str
-        :param view: Return matching tasks as a flat page or as entity-scoped task trees
+        :param view: Return matching tasks as a flat page or as filter-scoped task trees. Tree responses support user, organization, project, and resource filters, keep paginated roots in items, and include all current-page tree nodes in treeItems.
         :type view: str
         :param without_origin: Deprecated compatibility alias for view=tree
         :type without_origin: bool
@@ -714,7 +714,7 @@ class TasksApi:
         scope: Optional[StrictStr] = None,
         org_id: Annotated[Optional[StrictInt], Field(description="Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.")] = None,
         project_ids: Annotated[Optional[StrictStr], Field(description="Comma-separated project ids")] = None,
-        view: Annotated[Optional[StrictStr], Field(description="Return matching tasks as a flat page or as entity-scoped task trees")] = None,
+        view: Annotated[Optional[StrictStr], Field(description="Return matching tasks as a flat page or as filter-scoped task trees. Tree responses support user, organization, project, and resource filters, keep paginated roots in items, and include all current-page tree nodes in treeItems.")] = None,
         without_origin: Annotated[Optional[StrictBool], Field(description="Deprecated compatibility alias for view=tree")] = None,
         statuses: Annotated[Optional[StrictStr], Field(description="Comma-separated task statuses")] = None,
         names: Annotated[Optional[StrictStr], Field(description="Comma-separated exact task names")] = None,
@@ -752,7 +752,7 @@ class TasksApi:
         :type org_id: int
         :param project_ids: Comma-separated project ids
         :type project_ids: str
-        :param view: Return matching tasks as a flat page or as entity-scoped task trees
+        :param view: Return matching tasks as a flat page or as filter-scoped task trees. Tree responses support user, organization, project, and resource filters, keep paginated roots in items, and include all current-page tree nodes in treeItems.
         :type view: str
         :param without_origin: Deprecated compatibility alias for view=tree
         :type without_origin: bool
@@ -850,7 +850,7 @@ class TasksApi:
         scope: Optional[StrictStr] = None,
         org_id: Annotated[Optional[StrictInt], Field(description="Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.")] = None,
         project_ids: Annotated[Optional[StrictStr], Field(description="Comma-separated project ids")] = None,
-        view: Annotated[Optional[StrictStr], Field(description="Return matching tasks as a flat page or as entity-scoped task trees")] = None,
+        view: Annotated[Optional[StrictStr], Field(description="Return matching tasks as a flat page or as filter-scoped task trees. Tree responses support user, organization, project, and resource filters, keep paginated roots in items, and include all current-page tree nodes in treeItems.")] = None,
         without_origin: Annotated[Optional[StrictBool], Field(description="Deprecated compatibility alias for view=tree")] = None,
         statuses: Annotated[Optional[StrictStr], Field(description="Comma-separated task statuses")] = None,
         names: Annotated[Optional[StrictStr], Field(description="Comma-separated exact task names")] = None,
@@ -888,7 +888,7 @@ class TasksApi:
         :type org_id: int
         :param project_ids: Comma-separated project ids
         :type project_ids: str
-        :param view: Return matching tasks as a flat page or as entity-scoped task trees
+        :param view: Return matching tasks as a flat page or as filter-scoped task trees. Tree responses support user, organization, project, and resource filters, keep paginated roots in items, and include all current-page tree nodes in treeItems.
         :type view: str
         :param without_origin: Deprecated compatibility alias for view=tree
         :type without_origin: bool

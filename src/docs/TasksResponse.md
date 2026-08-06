@@ -6,6 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **items** | [**List[Task]**](Task.md) |  | 
+**tree_items** | [**List[TaskTreeItem]**](TaskTreeItem.md) | Flat current-page roots and descendants for tree view, linked by parentId. | [optional] 
 **total_count** | **int** |  | 
 **next_page** | **int** |  | [optional] 
 

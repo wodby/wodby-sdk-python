@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **auto** | **bool** |  | 
 **disabled** | **bool** |  | 
 **crontab** | **str** |  | [optional] 
+**time_window** | [**AutomationTimeWindow**](AutomationTimeWindow.md) |  | [optional] 
 **duration** | **int** |  | [optional] 
 **next_run_at** | **datetime** |  | [optional] 
 **created_at** | **datetime** |  | 

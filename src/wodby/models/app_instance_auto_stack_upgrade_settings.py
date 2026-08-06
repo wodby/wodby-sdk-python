@@ -20,6 +20,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.app_instance_stack_upgrade_settings import AppInstanceStackUpgradeSettings
+from wodby.models.automation_time_window import AutomationTimeWindow
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -29,7 +30,8 @@ class AppInstanceAutoStackUpgradeSettings(BaseModel):
     """ # noqa: E501
     enabled: StrictBool
     upgrade_settings: Optional[AppInstanceStackUpgradeSettings] = Field(default=None, alias="upgradeSettings")
-    __properties: ClassVar[List[str]] = ["enabled", "upgradeSettings"]
+    time_window: Optional[AutomationTimeWindow] = Field(default=None, alias="timeWindow")
+    __properties: ClassVar[List[str]] = ["enabled", "upgradeSettings", "timeWindow"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -73,6 +75,9 @@ class AppInstanceAutoStackUpgradeSettings(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of upgrade_settings
         if self.upgrade_settings:
             _dict['upgradeSettings'] = self.upgrade_settings.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of time_window
+        if self.time_window:
+            _dict['timeWindow'] = self.time_window.to_dict()
         return _dict
 
     @classmethod
@@ -86,7 +91,8 @@ class AppInstanceAutoStackUpgradeSettings(BaseModel):
 
         _obj = cls.model_validate({
             "enabled": obj.get("enabled"),
-            "upgradeSettings": AppInstanceStackUpgradeSettings.from_dict(obj["upgradeSettings"]) if obj.get("upgradeSettings") is not None else None
+            "upgradeSettings": AppInstanceStackUpgradeSettings.from_dict(obj["upgradeSettings"]) if obj.get("upgradeSettings") is not None else None,
+            "timeWindow": AutomationTimeWindow.from_dict(obj["timeWindow"]) if obj.get("timeWindow") is not None else None
         })
         return _obj
 

@@ -20,6 +20,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from wodby.models.automation_time_window_input import AutomationTimeWindowInput
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -41,8 +42,9 @@ class NewBackupPresetInput(BaseModel):
     override: StrictBool
     auto: Optional[StrictBool] = None
     crontab: Optional[StrictStr] = None
+    time_window: Optional[AutomationTimeWindowInput] = Field(default=None, alias="timeWindow")
     duration: Optional[Annotated[int, Field(le=180, strict=True, ge=30)]] = None
-    __properties: ClassVar[List[str]] = ["appInstanceId", "appServiceId", "databaseId", "databaseDbId", "orgId", "envId", "backupName", "integrationId", "bucket", "storageClass", "disabled", "override", "auto", "crontab", "duration"]
+    __properties: ClassVar[List[str]] = ["appInstanceId", "appServiceId", "databaseId", "databaseDbId", "orgId", "envId", "backupName", "integrationId", "bucket", "storageClass", "disabled", "override", "auto", "crontab", "timeWindow", "duration"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -83,6 +85,9 @@ class NewBackupPresetInput(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of time_window
+        if self.time_window:
+            _dict['timeWindow'] = self.time_window.to_dict()
         # set to None if app_instance_id (nullable) is None
         # and model_fields_set contains the field
         if self.app_instance_id is None and "app_instance_id" in self.model_fields_set:
@@ -164,6 +169,7 @@ class NewBackupPresetInput(BaseModel):
             "override": obj.get("override"),
             "auto": obj.get("auto"),
             "crontab": obj.get("crontab"),
+            "timeWindow": AutomationTimeWindowInput.from_dict(obj["timeWindow"]) if obj.get("timeWindow") is not None else None,
             "duration": obj.get("duration")
         })
         return _obj

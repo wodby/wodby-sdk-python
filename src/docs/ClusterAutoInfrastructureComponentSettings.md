@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **enabled** | **bool** |  | 
 **version_policy** | [**ClusterAutoUpgradeVersionPolicy**](ClusterAutoUpgradeVersionPolicy.md) |  | [optional] 
+**time_window** | [**AutomationTimeWindow**](AutomationTimeWindow.md) |  | [optional] 
 
 ## Example
 
