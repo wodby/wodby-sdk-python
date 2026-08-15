@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
@@ -30,7 +30,9 @@ class StackServiceSetting(BaseModel):
     stack_service_id: StrictInt = Field(alias="stackServiceId")
     name: StrictStr
     value: StrictStr
-    __properties: ClassVar[List[str]] = ["id", "stackServiceId", "name", "value"]
+    secret: StrictBool
+    has_value: StrictBool = Field(alias="hasValue")
+    __properties: ClassVar[List[str]] = ["id", "stackServiceId", "name", "value", "secret", "hasValue"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -86,7 +88,9 @@ class StackServiceSetting(BaseModel):
             "id": obj.get("id"),
             "stackServiceId": obj.get("stackServiceId"),
             "name": obj.get("name"),
-            "value": obj.get("value")
+            "value": obj.get("value"),
+            "secret": obj.get("secret"),
+            "hasValue": obj.get("hasValue")
         })
         return _obj
 

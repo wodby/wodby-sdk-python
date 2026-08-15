@@ -11,6 +11,8 @@ Name | Type | Description | Notes
 **status** | **str** |  | 
 **cluster_app** | **bool** |  | 
 **org_id** | **int** |  | 
+**ownership_scope** | **str** |  | 
+**owner_project_id** | **int** |  | [optional] 
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 
 

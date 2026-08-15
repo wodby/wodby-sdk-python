@@ -28,7 +28,6 @@ class Cert(BaseModel):
     Cert
     """ # noqa: E501
     id: StrictInt
-    title: StrictStr
     custom: StrictBool
     issuer: StrictStr = Field(description="Human-readable certificate authority name parsed from uploaded certificates, or the managed issuer identifier.")
     domain: StrictStr
@@ -46,7 +45,7 @@ class Cert(BaseModel):
     issued_at: Optional[datetime] = Field(default=None, alias="issuedAt")
     renews_at: Optional[datetime] = Field(default=None, alias="renewsAt")
     expires_at: Optional[datetime] = Field(default=None, alias="expiresAt")
-    __properties: ClassVar[List[str]] = ["id", "title", "custom", "issuer", "domain", "dnsNames", "routeIds", "fingerprint", "keyType", "keyLength", "status", "appInstanceId", "appServiceId", "databaseId", "createdAt", "updatedAt", "issuedAt", "renewsAt", "expiresAt"]
+    __properties: ClassVar[List[str]] = ["id", "custom", "issuer", "domain", "dnsNames", "routeIds", "fingerprint", "keyType", "keyLength", "status", "appInstanceId", "appServiceId", "databaseId", "createdAt", "updatedAt", "issuedAt", "renewsAt", "expiresAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -135,7 +134,6 @@ class Cert(BaseModel):
 
         _obj = cls.model_validate({
             "id": obj.get("id"),
-            "title": obj.get("title"),
             "custom": obj.get("custom"),
             "issuer": obj.get("issuer"),
             "domain": obj.get("domain"),

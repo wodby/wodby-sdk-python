@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **stack_service_id** | **int** |  | 
 **name** | **str** |  | 
 **value** | **str** |  | 
+**secret** | **bool** |  | 
+**has_value** | **bool** |  | 
 
 ## Example
 

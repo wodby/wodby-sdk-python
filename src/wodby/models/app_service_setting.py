@@ -30,11 +30,13 @@ class AppServiceSetting(BaseModel):
     app_service_id: StrictInt = Field(alias="appServiceId")
     name: StrictStr
     value: StrictStr
+    secret: StrictBool
+    has_value: StrictBool = Field(alias="hasValue")
     var: StrictStr
     runtime: StrictBool
     build: StrictBool
     from_setting_id: Optional[StrictInt] = Field(default=None, alias="fromSettingId")
-    __properties: ClassVar[List[str]] = ["id", "appServiceId", "name", "value", "var", "runtime", "build", "fromSettingId"]
+    __properties: ClassVar[List[str]] = ["id", "appServiceId", "name", "value", "secret", "hasValue", "var", "runtime", "build", "fromSettingId"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -96,6 +98,8 @@ class AppServiceSetting(BaseModel):
             "appServiceId": obj.get("appServiceId"),
             "name": obj.get("name"),
             "value": obj.get("value"),
+            "secret": obj.get("secret"),
+            "hasValue": obj.get("hasValue"),
             "var": obj.get("var"),
             "runtime": obj.get("runtime"),
             "build": obj.get("build"),

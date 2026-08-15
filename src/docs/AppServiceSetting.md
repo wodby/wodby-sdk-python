@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **app_service_id** | **int** |  | 
 **name** | **str** |  | 
 **value** | **str** |  | 
+**secret** | **bool** |  | 
+**has_value** | **bool** |  | 
 **var** | **str** |  | 
 **runtime** | **bool** |  | 
 **build** | **bool** |  | 
