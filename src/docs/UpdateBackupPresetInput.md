@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**integration_id** | **int** |  | 
-**bucket** | **str** |  | 
+**integration_id** | **int** | Use 0 for Wodby Blob Storage. Enabling the preset requires a paid subscription. | 
+**bucket** | **str** | Must be empty for Wodby Blob Storage. | 
 **storage_class** | **str** |  | [optional] 
 **disabled** | **bool** |  | 
 **override** | **bool** |  | 

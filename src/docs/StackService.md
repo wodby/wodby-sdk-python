@@ -21,6 +21,9 @@ Name | Type | Description | Notes
 **service_rev_version** | **str** |  | 
 **build_source_integration_id** | **int** |  | [optional] 
 **build_source_remote_repo_id** | **str** |  | [optional] 
+**options** | [**List[StackServiceOption]**](StackServiceOption.md) |  | [optional] 
+**settings** | [**List[StackServiceSetting]**](StackServiceSetting.md) |  | [optional] 
+**containers** | [**List[StackServiceContainer]**](StackServiceContainer.md) |  | [optional] 
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 
 

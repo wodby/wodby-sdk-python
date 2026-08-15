@@ -12,8 +12,8 @@ Name | Type | Description | Notes
 **org_id** | **int** | Optional for API-key requests; defaults to the API key&#39;s organization when no more specific target is provided. | [optional] 
 **env_id** | **int** |  | [optional] 
 **backup_name** | **str** |  | [optional] 
-**integration_id** | **int** |  | 
-**bucket** | **str** |  | 
+**integration_id** | **int** | Use 0 for Wodby Blob Storage. Free subscriptions may create only an automatic preset that is disabled. | 
+**bucket** | **str** | Must be empty for Wodby Blob Storage. | 
 **storage_class** | **str** |  | [optional] 
 **disabled** | **bool** |  | 
 **override** | **bool** |  | 

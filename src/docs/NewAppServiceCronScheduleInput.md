@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **crontab** | **str** |  | 
 **command** | **str** |  | 
 **workload** | **str** |  | [optional] 
+**disabled** | **bool** | Creates the schedule disabled. Disabled schedules do not require cron feature access. | [optional] 
 
 ## Example
 

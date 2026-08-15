@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from wodby.models.app_route_tls_input import AppRouteTLSInput
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -33,12 +34,13 @@ class UpdateAppRouteInput(BaseModel):
     primary: Optional[StrictBool] = None
     path: Optional[StrictStr] = None
     path_type: Optional[StrictStr] = Field(default=None, alias="pathType")
-    action: Optional[StrictStr] = None
+    action: Optional[StrictStr] = Field(default=None, description="SERVE sends requests to the selected app service. BACKEND is accepted for backwards compatibility.")
     redirect_scheme: Optional[StrictStr] = Field(default=None, alias="redirectScheme")
     redirect_host: Optional[StrictStr] = Field(default=None, alias="redirectHost")
     redirect_path: Optional[StrictStr] = Field(default=None, alias="redirectPath")
     redirect_status_code: Optional[StrictInt] = Field(default=None, alias="redirectStatusCode")
-    __properties: ClassVar[List[str]] = ["appServiceId", "port", "disabled", "main", "primary", "path", "pathType", "action", "redirectScheme", "redirectHost", "redirectPath", "redirectStatusCode"]
+    tls: Optional[AppRouteTLSInput] = None
+    __properties: ClassVar[List[str]] = ["appServiceId", "port", "disabled", "main", "primary", "path", "pathType", "action", "redirectScheme", "redirectHost", "redirectPath", "redirectStatusCode", "tls"]
 
     @field_validator('path_type')
     def path_type_validate_enum(cls, value):
@@ -56,8 +58,8 @@ class UpdateAppRouteInput(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['BACKEND', 'REDIRECT']):
-            raise ValueError("must be one of enum values ('BACKEND', 'REDIRECT')")
+        if value not in set(['SERVE', 'BACKEND', 'REDIRECT']):
+            raise ValueError("must be one of enum values ('SERVE', 'BACKEND', 'REDIRECT')")
         return value
 
     model_config = ConfigDict(
@@ -99,6 +101,9 @@ class UpdateAppRouteInput(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of tls
+        if self.tls:
+            _dict['tls'] = self.tls.to_dict()
         # set to None if app_service_id (nullable) is None
         # and model_fields_set contains the field
         if self.app_service_id is None and "app_service_id" in self.model_fields_set:
@@ -182,7 +187,8 @@ class UpdateAppRouteInput(BaseModel):
             "redirectScheme": obj.get("redirectScheme"),
             "redirectHost": obj.get("redirectHost"),
             "redirectPath": obj.get("redirectPath"),
-            "redirectStatusCode": obj.get("redirectStatusCode")
+            "redirectStatusCode": obj.get("redirectStatusCode"),
+            "tls": AppRouteTLSInput.from_dict(obj["tls"]) if obj.get("tls") is not None else None
         })
         return _obj
 

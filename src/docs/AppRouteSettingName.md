@@ -13,6 +13,8 @@
 
 * `PATH_REWRITE` (value: `'PATH_REWRITE'`)
 
+* `HSTS` (value: `'HSTS'`)
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

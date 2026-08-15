@@ -32,13 +32,15 @@ class AppServiceDeployment(BaseModel):
     status: StrictStr
     app_service_id: StrictInt = Field(alias="appServiceId")
     app_service_build_id: Optional[StrictInt] = Field(default=None, alias="appServiceBuildId")
+    previous_app_service_build_id: Optional[StrictInt] = Field(default=None, alias="previousAppServiceBuildId")
+    build_selection_kind: StrictStr = Field(alias="buildSelectionKind")
     skip_post_deployment: StrictBool = Field(alias="skipPostDeployment")
     force: StrictBool
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
     started_at: Optional[datetime] = Field(default=None, alias="startedAt")
     ended_at: Optional[datetime] = Field(default=None, alias="endedAt")
-    __properties: ClassVar[List[str]] = ["id", "jobName", "status", "appServiceId", "appServiceBuildId", "skipPostDeployment", "force", "createdAt", "updatedAt", "startedAt", "endedAt"]
+    __properties: ClassVar[List[str]] = ["id", "jobName", "status", "appServiceId", "appServiceBuildId", "previousAppServiceBuildId", "buildSelectionKind", "skipPostDeployment", "force", "createdAt", "updatedAt", "startedAt", "endedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -84,6 +86,11 @@ class AppServiceDeployment(BaseModel):
         if self.app_service_build_id is None and "app_service_build_id" in self.model_fields_set:
             _dict['appServiceBuildId'] = None
 
+        # set to None if previous_app_service_build_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.previous_app_service_build_id is None and "previous_app_service_build_id" in self.model_fields_set:
+            _dict['previousAppServiceBuildId'] = None
+
         # set to None if started_at (nullable) is None
         # and model_fields_set contains the field
         if self.started_at is None and "started_at" in self.model_fields_set:
@@ -111,6 +118,8 @@ class AppServiceDeployment(BaseModel):
             "status": obj.get("status"),
             "appServiceId": obj.get("appServiceId"),
             "appServiceBuildId": obj.get("appServiceBuildId"),
+            "previousAppServiceBuildId": obj.get("previousAppServiceBuildId"),
+            "buildSelectionKind": obj.get("buildSelectionKind"),
             "skipPostDeployment": obj.get("skipPostDeployment"),
             "force": obj.get("force"),
             "createdAt": obj.get("createdAt"),

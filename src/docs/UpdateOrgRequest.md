@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **title** | **str** |  | 
 **default_time_zone** | **str** |  | [optional] 
-**registry_integration_id** | **int** |  | [optional] 
-**ci_integration_id** | **int** |  | [optional] 
+**registry_integration_id** | **int** | Omit or use null to preserve the current default, use 0 for the built-in registry, or use an organization-owned registry integration ID. | [optional] 
+**ci_integration_id** | **int** | Omit or use null to preserve the current default, use 0 for the built-in CI service, or use an organization-owned CI integration ID. | [optional] 
 
 ## Example
 

@@ -31,6 +31,7 @@ class AppRouteSettingName(str, Enum):
     REQUEST_BODY_SIZE = 'REQUEST_BODY_SIZE'
     SESSION_AFFINITY = 'SESSION_AFFINITY'
     PATH_REWRITE = 'PATH_REWRITE'
+    HSTS = 'HSTS'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

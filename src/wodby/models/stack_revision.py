@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List
+from wodby.models.stack_revision_link_issue import StackRevisionLinkIssue
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -36,8 +37,9 @@ class StackRevision(BaseModel):
     version: StrictStr
     stack_id: StrictInt = Field(alias="stackId")
     manifest: StrictStr
+    link_issues: List[StackRevisionLinkIssue] = Field(alias="linkIssues")
     created_at: datetime = Field(alias="createdAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "icon", "number", "draft", "version", "stackId", "manifest", "createdAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "icon", "number", "draft", "version", "stackId", "manifest", "linkIssues", "createdAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -78,6 +80,13 @@ class StackRevision(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in link_issues (list)
+        _items = []
+        if self.link_issues:
+            for _item_link_issues in self.link_issues:
+                if _item_link_issues:
+                    _items.append(_item_link_issues.to_dict())
+            _dict['linkIssues'] = _items
         return _dict
 
     @classmethod
@@ -99,6 +108,7 @@ class StackRevision(BaseModel):
             "version": obj.get("version"),
             "stackId": obj.get("stackId"),
             "manifest": obj.get("manifest"),
+            "linkIssues": [StackRevisionLinkIssue.from_dict(_item) for _item in obj["linkIssues"]] if obj.get("linkIssues") is not None else None,
             "createdAt": obj.get("createdAt")
         })
         return _obj

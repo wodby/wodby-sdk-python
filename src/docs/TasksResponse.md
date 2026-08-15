@@ -6,7 +6,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **items** | [**List[Task]**](Task.md) |  | 
-**tree_items** | [**List[TaskTreeItem]**](TaskTreeItem.md) | Flat current-page roots and descendants for tree view, linked by parentId. | [optional] 
+**tree_items** | [**List[TaskTreeItem]**](TaskTreeItem.md) | Bounded current-page roots and authorized descendants for tree view, linked by parentId. | [optional] 
+**tree_truncated** | **bool** | True when treeItems omitted visible descendants after reaching the 250-item response limit. Always false for flat view. | 
 **total_count** | **int** |  | 
 **next_page** | **int** |  | [optional] 
 

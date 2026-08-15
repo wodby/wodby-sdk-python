@@ -4,6 +4,7 @@ All URIs are relative to */v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**add_app_service_volume**](AppServicesApi.md#add_app_service_volume) | **POST** /app-services/{id}/volumes | Add an optional app service volume
 [**create_app_service_annotation**](AppServicesApi.md#create_app_service_annotation) | **POST** /app-services/{id}/annotations | Create app service annotation
 [**create_app_service_cron_schedule**](AppServicesApi.md#create_app_service_cron_schedule) | **POST** /app-services/{id}/cron-schedules | Create app service cron schedule
 [**create_app_service_env_var**](AppServicesApi.md#create_app_service_env_var) | **POST** /app-services/{id}/env-vars | Create app service env var
@@ -31,6 +32,7 @@ Method | HTTP request | Description
 [**list_app_service_links**](AppServicesApi.md#list_app_service_links) | **GET** /app-services/{id}/links | List app service links
 [**list_app_service_settings**](AppServicesApi.md#list_app_service_settings) | **GET** /app-services/{id}/settings | List app service settings
 [**list_app_service_tokens**](AppServicesApi.md#list_app_service_tokens) | **GET** /app-services/{id}/tokens | List app service tokens
+[**list_app_service_volume_storage_classes**](AppServicesApi.md#list_app_service_volume_storage_classes) | **GET** /app-services/{id}/options/volume-storage-classes | List app service volume storage-class state
 [**list_app_service_volumes**](AppServicesApi.md#list_app_service_volumes) | **GET** /app-services/{id}/volumes | List app service volumes
 [**list_app_services**](AppServicesApi.md#list_app_services) | **GET** /app-services | List app services
 [**run_app_service_action**](AppServicesApi.md#run_app_service_action) | **POST** /app-services/{id}/actions/{name} | Run app service action
@@ -48,6 +50,90 @@ Method | HTTP request | Description
 [**update_app_service_helm_value**](AppServicesApi.md#update_app_service_helm_value) | **PUT** /app-service-helm-values/{id} | Update app service Helm value
 [**update_app_service_token**](AppServicesApi.md#update_app_service_token) | **PUT** /app-service-tokens/{id} | Update app service token
 
+
+# **add_app_service_volume**
+> OperationResult add_app_service_volume(id, add_app_service_volume_input)
+
+Add an optional app service volume
+
+Adds a volume that is optional in the service manifest and returns the reconciliation task identifier.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.add_app_service_volume_input import AddAppServiceVolumeInput
+from wodby.models.operation_result import OperationResult
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppServicesApi(api_client)
+    id = 56 # int | 
+    add_app_service_volume_input = wodby.AddAppServiceVolumeInput() # AddAppServiceVolumeInput | 
+
+    try:
+        # Add an optional app service volume
+        api_response = api_instance.add_app_service_volume(id, add_app_service_volume_input)
+        print("The response of AppServicesApi->add_app_service_volume:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppServicesApi->add_app_service_volume: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **add_app_service_volume_input** | [**AddAppServiceVolumeInput**](AddAppServiceVolumeInput.md)|  | 
+
+### Return type
+
+[**OperationResult**](OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Volume reconciliation task result |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_app_service_annotation**
 > AppServiceAnnotation create_app_service_annotation(id, new_annotation_input)
@@ -2260,6 +2346,87 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of app service tokens |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **list_app_service_volume_storage_classes**
+> List[AppServiceVolumeStorageClassState] list_app_service_volume_storage_classes(id)
+
+List app service volume storage-class state
+
+Returns configured and effective storage-class choices for each app service volume.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.app_service_volume_storage_class_state import AppServiceVolumeStorageClassState
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppServicesApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # List app service volume storage-class state
+        api_response = api_instance.list_app_service_volume_storage_classes(id)
+        print("The response of AppServicesApi->list_app_service_volume_storage_classes:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppServicesApi->list_app_service_volume_storage_classes: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**List[AppServiceVolumeStorageClassState]**](AppServiceVolumeStorageClassState.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Volume storage-class state |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 

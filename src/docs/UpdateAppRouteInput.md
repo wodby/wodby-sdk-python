@@ -12,11 +12,12 @@ Name | Type | Description | Notes
 **primary** | **bool** |  | [optional] 
 **path** | **str** |  | [optional] 
 **path_type** | **str** |  | [optional] 
-**action** | **str** |  | [optional] 
+**action** | **str** | SERVE sends requests to the selected app service. BACKEND is accepted for backwards compatibility. | [optional] 
 **redirect_scheme** | **str** |  | [optional] 
 **redirect_host** | **str** |  | [optional] 
 **redirect_path** | **str** |  | [optional] 
 **redirect_status_code** | **int** |  | [optional] 
+**tls** | [**AppRouteTLSInput**](AppRouteTLSInput.md) |  | [optional] 
 
 ## Example
 

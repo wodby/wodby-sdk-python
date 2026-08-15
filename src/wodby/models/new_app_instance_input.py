@@ -17,9 +17,10 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.app_instance_settings_input import AppInstanceSettingsInput
+from wodby.models.new_app_instance_access_input import NewAppInstanceAccessInput
 from wodby.models.new_app_service_input import NewAppServiceInput
 from typing import Optional, Set
 from typing_extensions import Self
@@ -36,10 +37,12 @@ class NewAppInstanceInput(BaseModel):
     services: Optional[List[NewAppServiceInput]] = Field(default=None, description="Defaults to the stack revision's service defaults when omitted.")
     cluster_id: Optional[StrictInt] = Field(default=None, alias="clusterId")
     env_id: StrictInt = Field(alias="envId")
-    ci_integration_id: Optional[StrictInt] = Field(default=None, alias="ciIntegrationId")
-    registry_integration_id: Optional[StrictInt] = Field(default=None, alias="registryIntegrationId")
+    ci_integration_id: Optional[StrictInt] = Field(default=None, description="Omit or use null to inherit the organization default, use 0 for the built-in CI service, or use an accessible CI integration ID. A project-owned integration must be shared with the app's project.", alias="ciIntegrationId")
+    registry_integration_id: Optional[StrictInt] = Field(default=None, description="Omit or use null to inherit the organization default, use 0 for the built-in registry, or use an accessible registry integration ID. A project-owned integration must be shared with the app's project.", alias="registryIntegrationId")
+    defer_initial_deployment: Optional[StrictBool] = Field(default=False, description="Defers the automatic initial build and deployment while preserving app instance initialization. Intended for automation that configures the instance before explicitly starting its first build.", alias="deferInitialDeployment")
     settings: Optional[AppInstanceSettingsInput] = None
-    __properties: ClassVar[List[str]] = ["appId", "instanceName", "instanceTitle", "domain", "stackRevId", "services", "clusterId", "envId", "ciIntegrationId", "registryIntegrationId", "settings"]
+    access: Optional[NewAppInstanceAccessInput] = None
+    __properties: ClassVar[List[str]] = ["appId", "instanceName", "instanceTitle", "domain", "stackRevId", "services", "clusterId", "envId", "ciIntegrationId", "registryIntegrationId", "deferInitialDeployment", "settings", "access"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -90,6 +93,9 @@ class NewAppInstanceInput(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of settings
         if self.settings:
             _dict['settings'] = self.settings.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of access
+        if self.access:
+            _dict['access'] = self.access.to_dict()
         # set to None if cluster_id (nullable) is None
         # and model_fields_set contains the field
         if self.cluster_id is None and "cluster_id" in self.model_fields_set:
@@ -127,7 +133,9 @@ class NewAppInstanceInput(BaseModel):
             "envId": obj.get("envId"),
             "ciIntegrationId": obj.get("ciIntegrationId"),
             "registryIntegrationId": obj.get("registryIntegrationId"),
-            "settings": AppInstanceSettingsInput.from_dict(obj["settings"]) if obj.get("settings") is not None else None
+            "deferInitialDeployment": obj.get("deferInitialDeployment") if obj.get("deferInitialDeployment") is not None else False,
+            "settings": AppInstanceSettingsInput.from_dict(obj["settings"]) if obj.get("settings") is not None else None,
+            "access": NewAppInstanceAccessInput.from_dict(obj["access"]) if obj.get("access") is not None else None
         })
         return _obj
 

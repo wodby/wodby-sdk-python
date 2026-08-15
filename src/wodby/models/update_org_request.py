@@ -28,8 +28,8 @@ class UpdateOrgRequest(BaseModel):
     """ # noqa: E501
     title: StrictStr
     default_time_zone: Optional[StrictStr] = Field(default=None, alias="defaultTimeZone")
-    registry_integration_id: Optional[StrictInt] = Field(default=None, alias="registryIntegrationId")
-    ci_integration_id: Optional[StrictInt] = Field(default=None, alias="ciIntegrationId")
+    registry_integration_id: Optional[StrictInt] = Field(default=None, description="Omit or use null to preserve the current default, use 0 for the built-in registry, or use an organization-owned registry integration ID.", alias="registryIntegrationId")
+    ci_integration_id: Optional[StrictInt] = Field(default=None, description="Omit or use null to preserve the current default, use 0 for the built-in CI service, or use an organization-owned CI integration ID.", alias="ciIntegrationId")
     __properties: ClassVar[List[str]] = ["title", "defaultTimeZone", "registryIntegrationId", "ciIntegrationId"]
 
     model_config = ConfigDict(

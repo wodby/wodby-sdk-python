@@ -19,7 +19,9 @@ import json
 
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
+from wodby.models.org_capabilities import OrgCapabilities
+from wodby.models.org_subscription import OrgSubscription
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -34,9 +36,11 @@ class Org(BaseModel):
     default_time_zone: StrictStr = Field(alias="defaultTimeZone")
     ci_integration_id: StrictInt = Field(description="Effective default CI integration ID. Zero selects the built-in Wodby CI service.", alias="ciIntegrationId")
     registry_integration_id: StrictInt = Field(description="Effective default registry integration ID. Zero selects the built-in Wodby registry service.", alias="registryIntegrationId")
+    capabilities: Optional[OrgCapabilities] = None
+    subscription: Optional[OrgSubscription] = None
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "domain", "defaultTimeZone", "ciIntegrationId", "registryIntegrationId", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "domain", "defaultTimeZone", "ciIntegrationId", "registryIntegrationId", "capabilities", "subscription", "createdAt", "updatedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -77,6 +81,12 @@ class Org(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of capabilities
+        if self.capabilities:
+            _dict['capabilities'] = self.capabilities.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of subscription
+        if self.subscription:
+            _dict['subscription'] = self.subscription.to_dict()
         return _dict
 
     @classmethod
@@ -96,6 +106,8 @@ class Org(BaseModel):
             "defaultTimeZone": obj.get("defaultTimeZone"),
             "ciIntegrationId": obj.get("ciIntegrationId"),
             "registryIntegrationId": obj.get("registryIntegrationId"),
+            "capabilities": OrgCapabilities.from_dict(obj["capabilities"]) if obj.get("capabilities") is not None else None,
+            "subscription": OrgSubscription.from_dict(obj["subscription"]) if obj.get("subscription") is not None else None,
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt")
         })

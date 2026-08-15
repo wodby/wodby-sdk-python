@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,7 +28,13 @@ class Cert(BaseModel):
     Cert
     """ # noqa: E501
     id: StrictInt
-    issuer: StrictStr
+    title: StrictStr
+    custom: StrictBool
+    issuer: StrictStr = Field(description="Human-readable certificate authority name parsed from uploaded certificates, or the managed issuer identifier.")
+    domain: StrictStr
+    dns_names: List[StrictStr] = Field(alias="dnsNames")
+    route_ids: List[StrictInt] = Field(alias="routeIds")
+    fingerprint: Optional[StrictStr] = None
     key_type: StrictStr = Field(alias="keyType")
     key_length: StrictInt = Field(alias="keyLength")
     status: StrictStr
@@ -40,7 +46,7 @@ class Cert(BaseModel):
     issued_at: Optional[datetime] = Field(default=None, alias="issuedAt")
     renews_at: Optional[datetime] = Field(default=None, alias="renewsAt")
     expires_at: Optional[datetime] = Field(default=None, alias="expiresAt")
-    __properties: ClassVar[List[str]] = ["id", "issuer", "keyType", "keyLength", "status", "appInstanceId", "appServiceId", "databaseId", "createdAt", "updatedAt", "issuedAt", "renewsAt", "expiresAt"]
+    __properties: ClassVar[List[str]] = ["id", "title", "custom", "issuer", "domain", "dnsNames", "routeIds", "fingerprint", "keyType", "keyLength", "status", "appInstanceId", "appServiceId", "databaseId", "createdAt", "updatedAt", "issuedAt", "renewsAt", "expiresAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -81,6 +87,11 @@ class Cert(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if fingerprint (nullable) is None
+        # and model_fields_set contains the field
+        if self.fingerprint is None and "fingerprint" in self.model_fields_set:
+            _dict['fingerprint'] = None
+
         # set to None if app_instance_id (nullable) is None
         # and model_fields_set contains the field
         if self.app_instance_id is None and "app_instance_id" in self.model_fields_set:
@@ -124,7 +135,13 @@ class Cert(BaseModel):
 
         _obj = cls.model_validate({
             "id": obj.get("id"),
+            "title": obj.get("title"),
+            "custom": obj.get("custom"),
             "issuer": obj.get("issuer"),
+            "domain": obj.get("domain"),
+            "dnsNames": obj.get("dnsNames"),
+            "routeIds": obj.get("routeIds"),
+            "fingerprint": obj.get("fingerprint"),
             "keyType": obj.get("keyType"),
             "keyLength": obj.get("keyLength"),
             "status": obj.get("status"),

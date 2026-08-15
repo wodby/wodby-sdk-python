@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -34,8 +34,9 @@ class ProviderRevision(BaseModel):
     version: StrictStr
     provider_id: StrictInt = Field(alias="providerId")
     manifest: Optional[Dict[str, Any]] = None
+    permission_audit: StrictBool = Field(alias="permissionAudit")
     created_at: datetime = Field(alias="createdAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "number", "version", "providerId", "manifest", "createdAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "number", "version", "providerId", "manifest", "permissionAudit", "createdAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -95,6 +96,7 @@ class ProviderRevision(BaseModel):
             "version": obj.get("version"),
             "providerId": obj.get("providerId"),
             "manifest": obj.get("manifest"),
+            "permissionAudit": obj.get("permissionAudit"),
             "createdAt": obj.get("createdAt")
         })
         return _obj

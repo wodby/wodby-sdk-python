@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **version** | **str** |  | 
 **provider_id** | **int** |  | 
 **manifest** | **Dict[str, object]** |  | [optional] 
+**permission_audit** | **bool** |  | 
 **created_at** | **datetime** |  | 
 
 ## Example

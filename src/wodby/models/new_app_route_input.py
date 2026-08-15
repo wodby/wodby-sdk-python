@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from wodby.models.app_route_tls_input import AppRouteTLSInput
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,19 +28,22 @@ class NewAppRouteInput(BaseModel):
     NewAppRouteInput
     """ # noqa: E501
     app_service_id: StrictInt = Field(alias="appServiceId")
+    disabled: Optional[StrictBool] = Field(default=None, description="Creates the custom domain disabled. Disabled domains do not require custom-domain feature access until enabled.")
     main: StrictBool
     primary: StrictBool
     port: StrictInt
     host: StrictStr
     path: Optional[StrictStr] = None
     path_type: Optional[StrictStr] = Field(default=None, alias="pathType")
-    action: Optional[StrictStr] = None
+    action: Optional[StrictStr] = Field(default=None, description="SERVE sends requests to the selected app service. BACKEND is accepted for backwards compatibility.")
     redirect_scheme: Optional[StrictStr] = Field(default=None, alias="redirectScheme")
     redirect_host: Optional[StrictStr] = Field(default=None, alias="redirectHost")
     redirect_path: Optional[StrictStr] = Field(default=None, alias="redirectPath")
     redirect_status_code: Optional[StrictInt] = Field(default=None, alias="redirectStatusCode")
+    hsts: Optional[StrictBool] = Field(default=None, description="Enables HTTP Strict Transport Security for a serve route when TLS is active.")
     letsencrypt: Optional[StrictBool] = None
-    __properties: ClassVar[List[str]] = ["appServiceId", "main", "primary", "port", "host", "path", "pathType", "action", "redirectScheme", "redirectHost", "redirectPath", "redirectStatusCode", "letsencrypt"]
+    tls: Optional[AppRouteTLSInput] = None
+    __properties: ClassVar[List[str]] = ["appServiceId", "disabled", "main", "primary", "port", "host", "path", "pathType", "action", "redirectScheme", "redirectHost", "redirectPath", "redirectStatusCode", "hsts", "letsencrypt", "tls"]
 
     @field_validator('path_type')
     def path_type_validate_enum(cls, value):
@@ -57,8 +61,8 @@ class NewAppRouteInput(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['BACKEND', 'REDIRECT']):
-            raise ValueError("must be one of enum values ('BACKEND', 'REDIRECT')")
+        if value not in set(['SERVE', 'BACKEND', 'REDIRECT']):
+            raise ValueError("must be one of enum values ('SERVE', 'BACKEND', 'REDIRECT')")
         return value
 
     model_config = ConfigDict(
@@ -100,6 +104,14 @@ class NewAppRouteInput(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of tls
+        if self.tls:
+            _dict['tls'] = self.tls.to_dict()
+        # set to None if disabled (nullable) is None
+        # and model_fields_set contains the field
+        if self.disabled is None and "disabled" in self.model_fields_set:
+            _dict['disabled'] = None
+
         # set to None if path (nullable) is None
         # and model_fields_set contains the field
         if self.path is None and "path" in self.model_fields_set:
@@ -135,6 +147,11 @@ class NewAppRouteInput(BaseModel):
         if self.redirect_status_code is None and "redirect_status_code" in self.model_fields_set:
             _dict['redirectStatusCode'] = None
 
+        # set to None if hsts (nullable) is None
+        # and model_fields_set contains the field
+        if self.hsts is None and "hsts" in self.model_fields_set:
+            _dict['hsts'] = None
+
         # set to None if letsencrypt (nullable) is None
         # and model_fields_set contains the field
         if self.letsencrypt is None and "letsencrypt" in self.model_fields_set:
@@ -153,6 +170,7 @@ class NewAppRouteInput(BaseModel):
 
         _obj = cls.model_validate({
             "appServiceId": obj.get("appServiceId"),
+            "disabled": obj.get("disabled"),
             "main": obj.get("main"),
             "primary": obj.get("primary"),
             "port": obj.get("port"),
@@ -164,7 +182,9 @@ class NewAppRouteInput(BaseModel):
             "redirectHost": obj.get("redirectHost"),
             "redirectPath": obj.get("redirectPath"),
             "redirectStatusCode": obj.get("redirectStatusCode"),
-            "letsencrypt": obj.get("letsencrypt")
+            "hsts": obj.get("hsts"),
+            "letsencrypt": obj.get("letsencrypt"),
+            "tls": AppRouteTLSInput.from_dict(obj["tls"]) if obj.get("tls") is not None else None
         })
         return _obj
 

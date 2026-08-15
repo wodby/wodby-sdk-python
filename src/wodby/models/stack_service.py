@@ -20,6 +20,9 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from wodby.models.stack_service_container import StackServiceContainer
+from wodby.models.stack_service_option import StackServiceOption
+from wodby.models.stack_service_setting import StackServiceSetting
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -43,9 +46,12 @@ class StackService(BaseModel):
     service_rev_version: StrictStr = Field(alias="serviceRevVersion")
     build_source_integration_id: Optional[StrictInt] = Field(default=None, alias="buildSourceIntegrationId")
     build_source_remote_repo_id: Optional[StrictStr] = Field(default=None, alias="buildSourceRemoteRepoId")
+    options: Optional[List[StackServiceOption]] = None
+    settings: Optional[List[StackServiceSetting]] = None
+    containers: Optional[List[StackServiceContainer]] = None
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "type", "main", "disabled", "required", "replicas", "serviceRevPinned", "outdated", "serviceRevId", "serviceRevName", "serviceRevTitle", "serviceRevVersion", "buildSourceIntegrationId", "buildSourceRemoteRepoId", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "type", "main", "disabled", "required", "replicas", "serviceRevPinned", "outdated", "serviceRevId", "serviceRevName", "serviceRevTitle", "serviceRevVersion", "buildSourceIntegrationId", "buildSourceRemoteRepoId", "options", "settings", "containers", "createdAt", "updatedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -86,6 +92,27 @@ class StackService(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in options (list)
+        _items = []
+        if self.options:
+            for _item_options in self.options:
+                if _item_options:
+                    _items.append(_item_options.to_dict())
+            _dict['options'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in settings (list)
+        _items = []
+        if self.settings:
+            for _item_settings in self.settings:
+                if _item_settings:
+                    _items.append(_item_settings.to_dict())
+            _dict['settings'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in containers (list)
+        _items = []
+        if self.containers:
+            for _item_containers in self.containers:
+                if _item_containers:
+                    _items.append(_item_containers.to_dict())
+            _dict['containers'] = _items
         # set to None if build_source_integration_id (nullable) is None
         # and model_fields_set contains the field
         if self.build_source_integration_id is None and "build_source_integration_id" in self.model_fields_set:
@@ -124,6 +151,9 @@ class StackService(BaseModel):
             "serviceRevVersion": obj.get("serviceRevVersion"),
             "buildSourceIntegrationId": obj.get("buildSourceIntegrationId"),
             "buildSourceRemoteRepoId": obj.get("buildSourceRemoteRepoId"),
+            "options": [StackServiceOption.from_dict(_item) for _item in obj["options"]] if obj.get("options") is not None else None,
+            "settings": [StackServiceSetting.from_dict(_item) for _item in obj["settings"]] if obj.get("settings") is not None else None,
+            "containers": [StackServiceContainer.from_dict(_item) for _item in obj["containers"]] if obj.get("containers") is not None else None,
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt")
         })

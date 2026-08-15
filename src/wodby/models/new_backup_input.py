@@ -29,8 +29,8 @@ class NewBackupInput(BaseModel):
     app_service_id: Optional[StrictInt] = Field(default=None, alias="appServiceId")
     database_db_id: Optional[StrictInt] = Field(default=None, alias="databaseDbId")
     backup_name: Optional[StrictStr] = Field(default=None, alias="backupName")
-    integration_id: StrictInt = Field(alias="integrationId")
-    bucket: StrictStr
+    integration_id: StrictInt = Field(description="Use 0 for Wodby Blob Storage.", alias="integrationId")
+    bucket: StrictStr = Field(description="Must be empty for Wodby Blob Storage.")
     storage_class: Optional[StrictStr] = Field(default=None, alias="storageClass")
     __properties: ClassVar[List[str]] = ["appServiceId", "databaseDbId", "backupName", "integrationId", "bucket", "storageClass"]
 

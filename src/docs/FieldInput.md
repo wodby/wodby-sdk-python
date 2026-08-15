@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** |  | 
 **value** | **str** |  | 
+**env_type** | **str** |  | [optional] 
 
 ## Example
 

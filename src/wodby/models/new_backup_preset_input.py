@@ -35,8 +35,8 @@ class NewBackupPresetInput(BaseModel):
     org_id: Optional[StrictInt] = Field(default=None, description="Optional for API-key requests; defaults to the API key's organization when no more specific target is provided.", alias="orgId")
     env_id: Optional[StrictInt] = Field(default=None, alias="envId")
     backup_name: Optional[StrictStr] = Field(default=None, alias="backupName")
-    integration_id: StrictInt = Field(alias="integrationId")
-    bucket: StrictStr
+    integration_id: StrictInt = Field(description="Use 0 for Wodby Blob Storage. Free subscriptions may create only an automatic preset that is disabled.", alias="integrationId")
+    bucket: StrictStr = Field(description="Must be empty for Wodby Blob Storage.")
     storage_class: Optional[StrictStr] = Field(default=None, alias="storageClass")
     disabled: StrictBool
     override: StrictBool

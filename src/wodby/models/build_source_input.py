@@ -33,8 +33,7 @@ class BuildSourceInput(BaseModel):
     remote_git_repo_id: Optional[StrictStr] = Field(default=None, alias="remoteGitRepoId")
     git_ref: Optional[StrictStr] = Field(default=None, alias="gitRef")
     git_ref_type: Optional[StrictStr] = Field(default=None, alias="gitRefType")
-    ci_workflow: Optional[StrictStr] = Field(default=None, alias="ciWorkflow")
-    __properties: ClassVar[List[str]] = ["buildSourceType", "boilerplate", "newRepoName", "integrationId", "remoteGitRepoId", "gitRef", "gitRefType", "ciWorkflow"]
+    __properties: ClassVar[List[str]] = ["buildSourceType", "boilerplate", "newRepoName", "integrationId", "remoteGitRepoId", "gitRef", "gitRefType"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -105,11 +104,6 @@ class BuildSourceInput(BaseModel):
         if self.git_ref_type is None and "git_ref_type" in self.model_fields_set:
             _dict['gitRefType'] = None
 
-        # set to None if ci_workflow (nullable) is None
-        # and model_fields_set contains the field
-        if self.ci_workflow is None and "ci_workflow" in self.model_fields_set:
-            _dict['ciWorkflow'] = None
-
         return _dict
 
     @classmethod
@@ -128,8 +122,7 @@ class BuildSourceInput(BaseModel):
             "integrationId": obj.get("integrationId"),
             "remoteGitRepoId": obj.get("remoteGitRepoId"),
             "gitRef": obj.get("gitRef"),
-            "gitRefType": obj.get("gitRefType"),
-            "ciWorkflow": obj.get("ciWorkflow")
+            "gitRefType": obj.get("gitRefType")
         })
         return _obj
 

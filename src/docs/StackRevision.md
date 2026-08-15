@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **version** | **str** |  | 
 **stack_id** | **int** |  | 
 **manifest** | **str** |  | 
+**link_issues** | [**List[StackRevisionLinkIssue]**](StackRevisionLinkIssue.md) |  | 
 **created_at** | **datetime** |  | 
 
 ## Example

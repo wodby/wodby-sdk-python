@@ -18,8 +18,9 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from wodby.models.app_service_configuration_issue import AppServiceConfigurationIssue
 from wodby.models.app_service_scalability import AppServiceScalability
 from typing import Optional, Set
 from typing_extensions import Self
@@ -43,12 +44,23 @@ class AppService(BaseModel):
     needs_rebuild: StrictBool = Field(alias="needsRebuild")
     needs_redeploy: StrictBool = Field(alias="needsRedeploy")
     configuration_ready: StrictBool = Field(alias="configurationReady")
+    build_source_boilerplate: Optional[StrictStr] = Field(default=None, alias="buildSourceBoilerplate")
+    ci_policy: StrictStr = Field(alias="ciPolicy")
+    effective_ci_integration_id: Optional[StrictInt] = Field(default=None, alias="effectiveCiIntegrationId")
+    configuration_issues: List[AppServiceConfigurationIssue] = Field(alias="configurationIssues")
     app_instance_id: StrictInt = Field(alias="appInstanceId")
     service_rev_id: StrictInt = Field(alias="serviceRevId")
     parent_app_service_id: Optional[StrictInt] = Field(default=None, alias="parentAppServiceId")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "type", "status", "replicas", "scalability", "version", "main", "disabled", "external", "required", "needsRebuild", "needsRedeploy", "configurationReady", "appInstanceId", "serviceRevId", "parentAppServiceId", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "type", "status", "replicas", "scalability", "version", "main", "disabled", "external", "required", "needsRebuild", "needsRedeploy", "configurationReady", "buildSourceBoilerplate", "ciPolicy", "effectiveCiIntegrationId", "configurationIssues", "appInstanceId", "serviceRevId", "parentAppServiceId", "createdAt", "updatedAt"]
+
+    @field_validator('ci_policy')
+    def ci_policy_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(['INHERIT', 'WODBY', 'INTEGRATION']):
+            raise ValueError("must be one of enum values ('INHERIT', 'WODBY', 'INTEGRATION')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -92,10 +104,27 @@ class AppService(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of scalability
         if self.scalability:
             _dict['scalability'] = self.scalability.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in configuration_issues (list)
+        _items = []
+        if self.configuration_issues:
+            for _item_configuration_issues in self.configuration_issues:
+                if _item_configuration_issues:
+                    _items.append(_item_configuration_issues.to_dict())
+            _dict['configurationIssues'] = _items
         # set to None if scalability (nullable) is None
         # and model_fields_set contains the field
         if self.scalability is None and "scalability" in self.model_fields_set:
             _dict['scalability'] = None
+
+        # set to None if build_source_boilerplate (nullable) is None
+        # and model_fields_set contains the field
+        if self.build_source_boilerplate is None and "build_source_boilerplate" in self.model_fields_set:
+            _dict['buildSourceBoilerplate'] = None
+
+        # set to None if effective_ci_integration_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.effective_ci_integration_id is None and "effective_ci_integration_id" in self.model_fields_set:
+            _dict['effectiveCiIntegrationId'] = None
 
         # set to None if parent_app_service_id (nullable) is None
         # and model_fields_set contains the field
@@ -129,6 +158,10 @@ class AppService(BaseModel):
             "needsRebuild": obj.get("needsRebuild"),
             "needsRedeploy": obj.get("needsRedeploy"),
             "configurationReady": obj.get("configurationReady"),
+            "buildSourceBoilerplate": obj.get("buildSourceBoilerplate"),
+            "ciPolicy": obj.get("ciPolicy"),
+            "effectiveCiIntegrationId": obj.get("effectiveCiIntegrationId"),
+            "configurationIssues": [AppServiceConfigurationIssue.from_dict(_item) for _item in obj["configurationIssues"]] if obj.get("configurationIssues") is not None else None,
             "appInstanceId": obj.get("appInstanceId"),
             "serviceRevId": obj.get("serviceRevId"),
             "parentAppServiceId": obj.get("parentAppServiceId"),

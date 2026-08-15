@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **id** | **int** |  | 
 **name** | **str** |  | 
 **title** | **str** |  | 
+**execution_scope** | **str** |  | 
 **status** | **str** |  | 
 **progress** | **int** |  | 
 **silent** | **bool** |  | 

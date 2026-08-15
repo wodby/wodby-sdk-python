@@ -28,8 +28,8 @@ class UpdateBackupPresetInput(BaseModel):
     """
     UpdateBackupPresetInput
     """ # noqa: E501
-    integration_id: StrictInt = Field(alias="integrationId")
-    bucket: StrictStr
+    integration_id: StrictInt = Field(description="Use 0 for Wodby Blob Storage. Enabling the preset requires a paid subscription.", alias="integrationId")
+    bucket: StrictStr = Field(description="Must be empty for Wodby Blob Storage.")
     storage_class: Optional[StrictStr] = Field(default=None, alias="storageClass")
     disabled: StrictBool
     override: StrictBool

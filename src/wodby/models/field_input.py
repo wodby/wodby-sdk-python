@@ -17,8 +17,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,7 +28,18 @@ class FieldInput(BaseModel):
     """ # noqa: E501
     name: StrictStr
     value: StrictStr
-    __properties: ClassVar[List[str]] = ["name", "value"]
+    env_type: Optional[StrictStr] = Field(default=None, alias="envType")
+    __properties: ClassVar[List[str]] = ["name", "value", "envType"]
+
+    @field_validator('env_type')
+    def env_type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['dev', 'feature', 'test', 'staging', 'prod']):
+            raise ValueError("must be one of enum values ('dev', 'feature', 'test', 'staging', 'prod')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -69,6 +80,11 @@ class FieldInput(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if env_type (nullable) is None
+        # and model_fields_set contains the field
+        if self.env_type is None and "env_type" in self.model_fields_set:
+            _dict['envType'] = None
+
         return _dict
 
     @classmethod
@@ -82,7 +98,8 @@ class FieldInput(BaseModel):
 
         _obj = cls.model_validate({
             "name": obj.get("name"),
-            "value": obj.get("value")
+            "value": obj.get("value"),
+            "envType": obj.get("envType")
         })
         return _obj
 

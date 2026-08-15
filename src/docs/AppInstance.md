@@ -20,6 +20,11 @@ Name | Type | Description | Notes
 **stack_icon** | **str** |  | 
 **stack_rev_number** | **int** |  | 
 **stack_version** | **str** |  | 
+**access** | [**AppAccess**](AppAccess.md) |  | [optional] 
+**routing_mode** | **str** |  | 
+**routing_pending** | **bool** |  | 
+**configuration_ready** | **bool** |  | 
+**configuration_issues** | [**List[AppServiceConfigurationIssue]**](AppServiceConfigurationIssue.md) |  | 
 **settings** | [**AppInstanceSettings**](AppInstanceSettings.md) |  | [optional] 
 **health** | [**AppInstanceHealth**](AppInstanceHealth.md) |  | 
 **created_at** | **datetime** |  | 

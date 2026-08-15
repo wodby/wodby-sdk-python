@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.task_job import TaskJob
 from wodby.models.user import User
@@ -32,6 +32,7 @@ class Task(BaseModel):
     id: StrictInt
     name: StrictStr
     title: StrictStr
+    execution_scope: StrictStr = Field(alias="executionScope")
     status: StrictStr
     progress: StrictInt
     silent: StrictBool
@@ -55,7 +56,14 @@ class Task(BaseModel):
     updated_at: datetime = Field(alias="updatedAt")
     started_at: Optional[datetime] = Field(default=None, alias="startedAt")
     ended_at: Optional[datetime] = Field(default=None, alias="endedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "progress", "silent", "system", "userId", "user", "orgId", "projectIds", "appId", "appInstanceId", "clusterId", "integrationId", "serviceId", "stackId", "providerId", "originTaskId", "spawnedTaskIds", "repeatedTaskId", "jobs", "createdAt", "updatedAt", "startedAt", "endedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "executionScope", "status", "progress", "silent", "system", "userId", "user", "orgId", "projectIds", "appId", "appInstanceId", "clusterId", "integrationId", "serviceId", "stackId", "providerId", "originTaskId", "spawnedTaskIds", "repeatedTaskId", "jobs", "createdAt", "updatedAt", "startedAt", "endedAt"]
+
+    @field_validator('execution_scope')
+    def execution_scope_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(['user', 'org', 'project', 'legacy_unknown']):
+            raise ValueError("must be one of enum values ('user', 'org', 'project', 'legacy_unknown')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -186,6 +194,7 @@ class Task(BaseModel):
             "id": obj.get("id"),
             "name": obj.get("name"),
             "title": obj.get("title"),
+            "executionScope": obj.get("executionScope"),
             "status": obj.get("status"),
             "progress": obj.get("progress"),
             "silent": obj.get("silent"),

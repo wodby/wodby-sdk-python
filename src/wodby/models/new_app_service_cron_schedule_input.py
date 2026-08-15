@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -31,7 +31,8 @@ class NewAppServiceCronScheduleInput(BaseModel):
     crontab: StrictStr
     command: StrictStr
     workload: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["name", "title", "crontab", "command", "workload"]
+    disabled: Optional[StrictBool] = Field(default=None, description="Creates the schedule disabled. Disabled schedules do not require cron feature access.")
+    __properties: ClassVar[List[str]] = ["name", "title", "crontab", "command", "workload", "disabled"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,6 +83,11 @@ class NewAppServiceCronScheduleInput(BaseModel):
         if self.workload is None and "workload" in self.model_fields_set:
             _dict['workload'] = None
 
+        # set to None if disabled (nullable) is None
+        # and model_fields_set contains the field
+        if self.disabled is None and "disabled" in self.model_fields_set:
+            _dict['disabled'] = None
+
         return _dict
 
     @classmethod
@@ -98,7 +104,8 @@ class NewAppServiceCronScheduleInput(BaseModel):
             "title": obj.get("title"),
             "crontab": obj.get("crontab"),
             "command": obj.get("command"),
-            "workload": obj.get("workload")
+            "workload": obj.get("workload"),
+            "disabled": obj.get("disabled")
         })
         return _obj
 

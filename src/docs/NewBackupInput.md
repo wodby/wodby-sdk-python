@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 **app_service_id** | **int** |  | [optional] 
 **database_db_id** | **int** |  | [optional] 
 **backup_name** | **str** |  | [optional] 
-**integration_id** | **int** |  | 
-**bucket** | **str** |  | 
+**integration_id** | **int** | Use 0 for Wodby Blob Storage. | 
+**bucket** | **str** | Must be empty for Wodby Blob Storage. | 
 **storage_class** | **str** |  | [optional] 
 
 ## Example

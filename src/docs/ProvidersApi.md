@@ -4,11 +4,94 @@ All URIs are relative to */v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**create_variable_provider**](ProvidersApi.md#create_variable_provider) | **POST** /providers/actions/create-variable | Create variable provider
 [**get_provider**](ProvidersApi.md#get_provider) | **GET** /providers/{id} | Get provider
 [**get_provider_by_name**](ProvidersApi.md#get_provider_by_name) | **GET** /providers/by-name/{name} | Get provider by name
 [**get_provider_revision**](ProvidersApi.md#get_provider_revision) | **GET** /provider-revisions/{id} | Get provider revision
 [**list_providers**](ProvidersApi.md#list_providers) | **GET** /providers | List providers
 
+
+# **create_variable_provider**
+> Provider create_variable_provider(new_variable_provider_input)
+
+Create variable provider
+
+Creates a private provider whose integration fields are exposed as service environment variables.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.new_variable_provider_input import NewVariableProviderInput
+from wodby.models.provider import Provider
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.ProvidersApi(api_client)
+    new_variable_provider_input = wodby.NewVariableProviderInput() # NewVariableProviderInput | 
+
+    try:
+        # Create variable provider
+        api_response = api_instance.create_variable_provider(new_variable_provider_input)
+        print("The response of ProvidersApi->create_variable_provider:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProvidersApi->create_variable_provider: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **new_variable_provider_input** | [**NewVariableProviderInput**](NewVariableProviderInput.md)|  | 
+
+### Return type
+
+[**Provider**](Provider.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Variable provider created |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_provider**
 > Provider get_provider(id)

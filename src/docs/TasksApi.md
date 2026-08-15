@@ -213,7 +213,7 @@ with wodby.ApiClient(configuration) as api_client:
     scope = 'scope_example' # str |  (optional)
     org_id = 56 # int | Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization. (optional)
     project_ids = 'project_ids_example' # str | Comma-separated project ids (optional)
-    view = 'view_example' # str | Return matching tasks as a flat page or as filter-scoped task trees. Tree responses support user, organization, project, and resource filters, keep paginated roots in items, and include all current-page tree nodes in treeItems. (optional)
+    view = 'view_example' # str | Return matching tasks as a flat page or as filter-scoped task trees. Tree responses support user, organization, project, and resource filters, keep paginated roots in items, and include current-page tree nodes in treeItems. Root pages are capped at 100 tasks. Tree responses include up to 250 authorized tasks and set treeTruncated when additional visible descendants exist; exceeding the 10-level depth limit still returns 422. (optional)
     without_origin = True # bool | Deprecated compatibility alias for view=tree (optional)
     statuses = 'statuses_example' # str | Comma-separated task statuses (optional)
     names = 'names_example' # str | Comma-separated exact task names (optional)
@@ -248,7 +248,7 @@ Name | Type | Description  | Notes
  **scope** | **str**|  | [optional] 
  **org_id** | **int**| Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. | [optional] 
  **project_ids** | **str**| Comma-separated project ids | [optional] 
- **view** | **str**| Return matching tasks as a flat page or as filter-scoped task trees. Tree responses support user, organization, project, and resource filters, keep paginated roots in items, and include all current-page tree nodes in treeItems. | [optional] 
+ **view** | **str**| Return matching tasks as a flat page or as filter-scoped task trees. Tree responses support user, organization, project, and resource filters, keep paginated roots in items, and include current-page tree nodes in treeItems. Root pages are capped at 100 tasks. Tree responses include up to 250 authorized tasks and set treeTruncated when additional visible descendants exist; exceeding the 10-level depth limit still returns 422. | [optional] 
  **without_origin** | **bool**| Deprecated compatibility alias for view&#x3D;tree | [optional] 
  **statuses** | **str**| Comma-separated task statuses | [optional] 
  **names** | **str**| Comma-separated exact task names | [optional] 

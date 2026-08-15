@@ -18,10 +18,12 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from wodby.models.app_access import AppAccess
 from wodby.models.app_instance_health import AppInstanceHealth
 from wodby.models.app_instance_settings import AppInstanceSettings
+from wodby.models.app_service_configuration_issue import AppServiceConfigurationIssue
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -44,11 +46,16 @@ class AppInstance(BaseModel):
     stack_icon: StrictStr = Field(alias="stackIcon")
     stack_rev_number: StrictInt = Field(alias="stackRevNumber")
     stack_version: StrictStr = Field(alias="stackVersion")
+    access: Optional[AppAccess] = None
+    routing_mode: StrictStr = Field(alias="routingMode")
+    routing_pending: StrictBool = Field(alias="routingPending")
+    configuration_ready: StrictBool = Field(alias="configurationReady")
+    configuration_issues: List[AppServiceConfigurationIssue] = Field(alias="configurationIssues")
     settings: Optional[AppInstanceSettings] = None
     health: AppInstanceHealth
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "mainDomain", "appId", "clusterId", "envId", "stackId", "stackRevId", "stackName", "stackTitle", "stackIcon", "stackRevNumber", "stackVersion", "settings", "health", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "mainDomain", "appId", "clusterId", "envId", "stackId", "stackRevId", "stackName", "stackTitle", "stackIcon", "stackRevNumber", "stackVersion", "access", "routingMode", "routingPending", "configurationReady", "configurationIssues", "settings", "health", "createdAt", "updatedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -89,6 +96,16 @@ class AppInstance(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of access
+        if self.access:
+            _dict['access'] = self.access.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in configuration_issues (list)
+        _items = []
+        if self.configuration_issues:
+            for _item_configuration_issues in self.configuration_issues:
+                if _item_configuration_issues:
+                    _items.append(_item_configuration_issues.to_dict())
+            _dict['configurationIssues'] = _items
         # override the default output from pydantic by calling `to_dict()` of settings
         if self.settings:
             _dict['settings'] = self.settings.to_dict()
@@ -99,6 +116,11 @@ class AppInstance(BaseModel):
         # and model_fields_set contains the field
         if self.main_domain is None and "main_domain" in self.model_fields_set:
             _dict['mainDomain'] = None
+
+        # set to None if access (nullable) is None
+        # and model_fields_set contains the field
+        if self.access is None and "access" in self.model_fields_set:
+            _dict['access'] = None
 
         return _dict
 
@@ -127,6 +149,11 @@ class AppInstance(BaseModel):
             "stackIcon": obj.get("stackIcon"),
             "stackRevNumber": obj.get("stackRevNumber"),
             "stackVersion": obj.get("stackVersion"),
+            "access": AppAccess.from_dict(obj["access"]) if obj.get("access") is not None else None,
+            "routingMode": obj.get("routingMode"),
+            "routingPending": obj.get("routingPending"),
+            "configurationReady": obj.get("configurationReady"),
+            "configurationIssues": [AppServiceConfigurationIssue.from_dict(_item) for _item in obj["configurationIssues"]] if obj.get("configurationIssues") is not None else None,
             "settings": AppInstanceSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None,
             "health": AppInstanceHealth.from_dict(obj["health"]) if obj.get("health") is not None else None,
             "createdAt": obj.get("createdAt"),

@@ -20,6 +20,10 @@ Name | Type | Description | Notes
 **needs_rebuild** | **bool** |  | 
 **needs_redeploy** | **bool** |  | 
 **configuration_ready** | **bool** |  | 
+**build_source_boilerplate** | **str** |  | [optional] 
+**ci_policy** | **str** |  | 
+**effective_ci_integration_id** | **int** |  | [optional] 
+**configuration_issues** | [**List[AppServiceConfigurationIssue]**](AppServiceConfigurationIssue.md) |  | 
 **app_instance_id** | **int** |  | 
 **service_rev_id** | **int** |  | 
 **parent_app_service_id** | **int** |  | [optional] 

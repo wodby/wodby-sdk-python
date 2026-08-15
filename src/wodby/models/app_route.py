@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.cert import Cert
 from typing import Optional, Set
@@ -38,6 +38,9 @@ class AppRoute(BaseModel):
     redirect_path: Optional[StrictStr] = Field(default=None, alias="redirectPath")
     redirect_status_code: Optional[StrictInt] = Field(default=None, alias="redirectStatusCode")
     status: StrictStr
+    attachment_status: StrictStr = Field(alias="attachmentStatus")
+    attachment_checked_at: Optional[datetime] = Field(default=None, alias="attachmentCheckedAt")
+    attachment_error: Optional[StrictStr] = Field(default=None, alias="attachmentError")
     disabled: StrictBool
     main: StrictBool
     primary: StrictBool
@@ -50,7 +53,14 @@ class AppRoute(BaseModel):
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
     last_synced_at: Optional[datetime] = Field(default=None, alias="lastSyncedAt")
-    __properties: ClassVar[List[str]] = ["id", "host", "path", "pathType", "action", "redirectScheme", "redirectHost", "redirectPath", "redirectStatusCode", "status", "disabled", "main", "primary", "private", "technical", "appInstanceId", "appServiceId", "portId", "cert", "createdAt", "updatedAt", "lastSyncedAt"]
+    __properties: ClassVar[List[str]] = ["id", "host", "path", "pathType", "action", "redirectScheme", "redirectHost", "redirectPath", "redirectStatusCode", "status", "attachmentStatus", "attachmentCheckedAt", "attachmentError", "disabled", "main", "primary", "private", "technical", "appInstanceId", "appServiceId", "portId", "cert", "createdAt", "updatedAt", "lastSyncedAt"]
+
+    @field_validator('attachment_status')
+    def attachment_status_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(['UNKNOWN', 'CHECKING', 'AWAITING_DNS', 'NOT_CONNECTED', 'CONNECTED', 'ERROR']):
+            raise ValueError("must be one of enum values ('UNKNOWN', 'CHECKING', 'AWAITING_DNS', 'NOT_CONNECTED', 'CONNECTED', 'ERROR')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -116,6 +126,16 @@ class AppRoute(BaseModel):
         if self.redirect_status_code is None and "redirect_status_code" in self.model_fields_set:
             _dict['redirectStatusCode'] = None
 
+        # set to None if attachment_checked_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.attachment_checked_at is None and "attachment_checked_at" in self.model_fields_set:
+            _dict['attachmentCheckedAt'] = None
+
+        # set to None if attachment_error (nullable) is None
+        # and model_fields_set contains the field
+        if self.attachment_error is None and "attachment_error" in self.model_fields_set:
+            _dict['attachmentError'] = None
+
         # set to None if cert (nullable) is None
         # and model_fields_set contains the field
         if self.cert is None and "cert" in self.model_fields_set:
@@ -148,6 +168,9 @@ class AppRoute(BaseModel):
             "redirectPath": obj.get("redirectPath"),
             "redirectStatusCode": obj.get("redirectStatusCode"),
             "status": obj.get("status"),
+            "attachmentStatus": obj.get("attachmentStatus"),
+            "attachmentCheckedAt": obj.get("attachmentCheckedAt"),
+            "attachmentError": obj.get("attachmentError"),
             "disabled": obj.get("disabled"),
             "main": obj.get("main"),
             "primary": obj.get("primary"),

@@ -6,18 +6,21 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **app_service_id** | **int** |  | 
+**disabled** | **bool** | Creates the custom domain disabled. Disabled domains do not require custom-domain feature access until enabled. | [optional] 
 **main** | **bool** |  | 
 **primary** | **bool** |  | 
 **port** | **int** |  | 
 **host** | **str** |  | 
 **path** | **str** |  | [optional] 
 **path_type** | **str** |  | [optional] 
-**action** | **str** |  | [optional] 
+**action** | **str** | SERVE sends requests to the selected app service. BACKEND is accepted for backwards compatibility. | [optional] 
 **redirect_scheme** | **str** |  | [optional] 
 **redirect_host** | **str** |  | [optional] 
 **redirect_path** | **str** |  | [optional] 
 **redirect_status_code** | **int** |  | [optional] 
+**hsts** | **bool** | Enables HTTP Strict Transport Security for a serve route when TLS is active. | [optional] 
 **letsencrypt** | **bool** |  | [optional] 
+**tls** | [**AppRouteTLSInput**](AppRouteTLSInput.md) |  | [optional] 
 
 ## Example
 

@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.task import Task
 from wodby.models.task_tree_item import TaskTreeItem
@@ -29,10 +29,11 @@ class TasksResponse(BaseModel):
     TasksResponse
     """ # noqa: E501
     items: List[Task]
-    tree_items: Optional[List[TaskTreeItem]] = Field(default=None, description="Flat current-page roots and descendants for tree view, linked by parentId.", alias="treeItems")
+    tree_items: Optional[List[TaskTreeItem]] = Field(default=None, description="Bounded current-page roots and authorized descendants for tree view, linked by parentId.", alias="treeItems")
+    tree_truncated: StrictBool = Field(description="True when treeItems omitted visible descendants after reaching the 250-item response limit. Always false for flat view.", alias="treeTruncated")
     total_count: StrictInt = Field(alias="totalCount")
     next_page: Optional[StrictInt] = Field(default=None, alias="nextPage")
-    __properties: ClassVar[List[str]] = ["items", "treeItems", "totalCount", "nextPage"]
+    __properties: ClassVar[List[str]] = ["items", "treeItems", "treeTruncated", "totalCount", "nextPage"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -111,6 +112,7 @@ class TasksResponse(BaseModel):
         _obj = cls.model_validate({
             "items": [Task.from_dict(_item) for _item in obj["items"]] if obj.get("items") is not None else None,
             "treeItems": [TaskTreeItem.from_dict(_item) for _item in obj["treeItems"]] if obj.get("treeItems") is not None else None,
+            "treeTruncated": obj.get("treeTruncated"),
             "totalCount": obj.get("totalCount"),
             "nextPage": obj.get("nextPage")
         })

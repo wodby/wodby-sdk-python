@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.cluster_capabilities import ClusterCapabilities
 from wodby.models.cluster_settings import ClusterSettings
@@ -51,13 +51,22 @@ class Cluster(BaseModel):
     hostname: Optional[StrictStr] = None
     integration_id: Optional[StrictInt] = Field(default=None, alias="integrationId")
     org_id: StrictInt = Field(alias="orgId")
+    ownership_scope: StrictStr = Field(alias="ownershipScope")
+    owner_project_id: Optional[StrictInt] = Field(default=None, alias="ownerProjectId")
     capabilities: ClusterCapabilities
     settings: Optional[ClusterSettings] = None
     storage_classes: Optional[List[StorageClass]] = Field(default=None, alias="storageClasses")
     storage_classes_observed_at: Optional[datetime] = Field(default=None, alias="storageClassesObservedAt")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "serverless", "demo", "wodby", "k3s", "singleNode", "version", "infraVersion", "minNodeCount", "maxNodeCount", "lastNodesReady", "lastNodesTotal", "region", "zone", "ips", "hostname", "integrationId", "orgId", "capabilities", "settings", "storageClasses", "storageClassesObservedAt", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "serverless", "demo", "wodby", "k3s", "singleNode", "version", "infraVersion", "minNodeCount", "maxNodeCount", "lastNodesReady", "lastNodesTotal", "region", "zone", "ips", "hostname", "integrationId", "orgId", "ownershipScope", "ownerProjectId", "capabilities", "settings", "storageClasses", "storageClassesObservedAt", "createdAt", "updatedAt"]
+
+    @field_validator('ownership_scope')
+    def ownership_scope_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(['org', 'project']):
+            raise ValueError("must be one of enum values ('org', 'project')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -161,6 +170,11 @@ class Cluster(BaseModel):
         if self.integration_id is None and "integration_id" in self.model_fields_set:
             _dict['integrationId'] = None
 
+        # set to None if owner_project_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.owner_project_id is None and "owner_project_id" in self.model_fields_set:
+            _dict['ownerProjectId'] = None
+
         # set to None if storage_classes (nullable) is None
         # and model_fields_set contains the field
         if self.storage_classes is None and "storage_classes" in self.model_fields_set:
@@ -204,6 +218,8 @@ class Cluster(BaseModel):
             "hostname": obj.get("hostname"),
             "integrationId": obj.get("integrationId"),
             "orgId": obj.get("orgId"),
+            "ownershipScope": obj.get("ownershipScope"),
+            "ownerProjectId": obj.get("ownerProjectId"),
             "capabilities": ClusterCapabilities.from_dict(obj["capabilities"]) if obj.get("capabilities") is not None else None,
             "settings": ClusterSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None,
             "storageClasses": [StorageClass.from_dict(_item) for _item in obj["storageClasses"]] if obj.get("storageClasses") is not None else None,

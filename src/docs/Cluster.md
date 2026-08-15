@@ -26,6 +26,8 @@ Name | Type | Description | Notes
 **hostname** | **str** |  | [optional] 
 **integration_id** | **int** |  | [optional] 
 **org_id** | **int** |  | 
+**ownership_scope** | **str** |  | 
+**owner_project_id** | **int** |  | [optional] 
 **capabilities** | [**ClusterCapabilities**](ClusterCapabilities.md) |  | 
 **settings** | [**ClusterSettings**](ClusterSettings.md) |  | [optional] 
 **storage_classes** | [**List[StorageClass]**](StorageClass.md) |  | [optional] 

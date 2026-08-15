@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**delete_cluster**](ClustersApi.md#delete_cluster) | **DELETE** /clusters/{id} | Delete cluster
 [**get_cluster**](ClustersApi.md#get_cluster) | **GET** /clusters/{id} | Get cluster
 [**get_cluster_by_name**](ClustersApi.md#get_cluster_by_name) | **GET** /clusters/by-name/{name} | Get cluster by name
+[**get_cluster_infra_app_upgrade_changelog**](ClustersApi.md#get_cluster_infra_app_upgrade_changelog) | **GET** /cluster-infra-app-upgrade-changelogs/{id} | Preview cluster infrastructure app upgrades
 [**list_clusters**](ClustersApi.md#list_clusters) | **GET** /clusters | List clusters
 [**update_cluster**](ClustersApi.md#update_cluster) | **PUT** /clusters/{id} | Update cluster
 [**update_cluster_settings**](ClustersApi.md#update_cluster_settings) | **PUT** /clusters/settings/{id} | Update cluster settings
@@ -339,6 +340,89 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Cluster |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_cluster_infra_app_upgrade_changelog**
+> List[ClusterInfraAppUpgradeChangelog] get_cluster_infra_app_upgrade_changelog(id, app_instance_id=app_instance_id)
+
+Preview cluster infrastructure app upgrades
+
+Returns stack and service revision changes for infrastructure apps on the cluster.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.cluster_infra_app_upgrade_changelog import ClusterInfraAppUpgradeChangelog
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.ClustersApi(api_client)
+    id = 56 # int | 
+    app_instance_id = 56 # int |  (optional)
+
+    try:
+        # Preview cluster infrastructure app upgrades
+        api_response = api_instance.get_cluster_infra_app_upgrade_changelog(id, app_instance_id=app_instance_id)
+        print("The response of ClustersApi->get_cluster_infra_app_upgrade_changelog:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ClustersApi->get_cluster_infra_app_upgrade_changelog: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **app_instance_id** | **int**|  | [optional] 
+
+### Return type
+
+[**List[ClusterInfraAppUpgradeChangelog]**](ClusterInfraAppUpgradeChangelog.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Infrastructure app upgrade changelogs |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 
