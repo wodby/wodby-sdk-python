@@ -20,6 +20,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.field_input import FieldInput
+from wodby.models.integration_environment_policy_input import IntegrationEnvironmentPolicyInput
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -29,14 +30,14 @@ class NewIntegrationInput(BaseModel):
     """ # noqa: E501
     org_id: Optional[StrictInt] = Field(default=None, description="Optional for API-key requests; defaults to the API key's organization.", alias="orgId")
     provider_id: StrictInt = Field(alias="providerId")
-    name: StrictStr
     title: StrictStr
     kinds: List[StrictStr]
     auth: Optional[StrictStr] = None
     project_id: Optional[StrictInt] = Field(default=None, alias="projectId")
     fields_input: Optional[List[FieldInput]] = Field(default=None, alias="fieldsInput")
     scope: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["orgId", "providerId", "name", "title", "kinds", "auth", "projectId", "fieldsInput", "scope"]
+    environment_policy: Optional[IntegrationEnvironmentPolicyInput] = Field(default=None, alias="environmentPolicy")
+    __properties: ClassVar[List[str]] = ["orgId", "providerId", "title", "kinds", "auth", "projectId", "fieldsInput", "scope", "environmentPolicy"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -84,6 +85,9 @@ class NewIntegrationInput(BaseModel):
                 if _item_fields_input:
                     _items.append(_item_fields_input.to_dict())
             _dict['fieldsInput'] = _items
+        # override the default output from pydantic by calling `to_dict()` of environment_policy
+        if self.environment_policy:
+            _dict['environmentPolicy'] = self.environment_policy.to_dict()
         # set to None if auth (nullable) is None
         # and model_fields_set contains the field
         if self.auth is None and "auth" in self.model_fields_set:
@@ -113,13 +117,13 @@ class NewIntegrationInput(BaseModel):
         _obj = cls.model_validate({
             "orgId": obj.get("orgId"),
             "providerId": obj.get("providerId"),
-            "name": obj.get("name"),
             "title": obj.get("title"),
             "kinds": obj.get("kinds"),
             "auth": obj.get("auth"),
             "projectId": obj.get("projectId"),
             "fieldsInput": [FieldInput.from_dict(_item) for _item in obj["fieldsInput"]] if obj.get("fieldsInput") is not None else None,
-            "scope": obj.get("scope")
+            "scope": obj.get("scope"),
+            "environmentPolicy": IntegrationEnvironmentPolicyInput.from_dict(obj["environmentPolicy"]) if obj.get("environmentPolicy") is not None else None
         })
         return _obj
 

@@ -28,11 +28,10 @@ class UpdateIntegrationInput(BaseModel):
     UpdateIntegrationInput
     """ # noqa: E501
     title: StrictStr
-    name: StrictStr
     kinds: List[StrictStr]
     scope: Optional[StrictStr] = None
     fields_input: Optional[List[FieldInput]] = Field(default=None, alias="fieldsInput")
-    __properties: ClassVar[List[str]] = ["title", "name", "kinds", "scope", "fieldsInput"]
+    __properties: ClassVar[List[str]] = ["title", "kinds", "scope", "fieldsInput"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -98,7 +97,6 @@ class UpdateIntegrationInput(BaseModel):
 
         _obj = cls.model_validate({
             "title": obj.get("title"),
-            "name": obj.get("name"),
             "kinds": obj.get("kinds"),
             "scope": obj.get("scope"),
             "fieldsInput": [FieldInput.from_dict(_item) for _item in obj["fieldsInput"]] if obj.get("fieldsInput") is not None else None

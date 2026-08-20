@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **title** | **str** |  | 
 **icon** | **str** |  | 
 **status** | **str** |  | 
+**outdated** | **bool** |  | 
 **public** | **bool** |  | 
 **rev_id** | **int** |  | 
 **draft_rev_id** | **int** |  | [optional] 

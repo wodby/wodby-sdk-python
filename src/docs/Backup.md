@@ -12,8 +12,12 @@ Name | Type | Description | Notes
 **app_service_id** | **int** |  | [optional] 
 **database_id** | **int** |  | [optional] 
 **database_db_id** | **int** |  | [optional] 
+**integration_id** | **int** | Storage integration that owns the backup. Null identifies Wodby&#39;s built-in blob storage. | 
+**task_id** | **int** |  | [optional] 
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 
+**started_at** | **datetime** |  | [optional] 
+**ended_at** | **datetime** |  | [optional] 
 
 ## Example
 

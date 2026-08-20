@@ -20,6 +20,7 @@ Method | HTTP request | Description
 [**update_app_access**](AppInstancesApi.md#update_app_access) | **PUT** /app-accesses/{id} | Update app access
 [**update_app_instance**](AppInstancesApi.md#update_app_instance) | **PUT** /app-instances/{id} | Update app instance
 [**update_app_instance_cicd_settings**](AppInstancesApi.md#update_app_instance_cicd_settings) | **PUT** /app-instances/cicd-settings/{id} | Update app instance CI/CD settings
+[**update_app_instance_maintenance_mode**](AppInstancesApi.md#update_app_instance_maintenance_mode) | **PUT** /app-instances/{id}/actions/maintenance-mode | Update app instance maintenance mode
 [**update_app_instance_settings**](AppInstancesApi.md#update_app_instance_settings) | **PUT** /app-instances/settings/{id} | Update app instance settings
 [**upgrade_app_instance_stack**](AppInstancesApi.md#upgrade_app_instance_stack) | **POST** /app-instances/{id}/actions/upgrade-stack | Upgrade app instance stack
 
@@ -1345,6 +1346,90 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Updated app instance CI/CD settings |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_app_instance_maintenance_mode**
+> OperationResult update_app_instance_maintenance_mode(id, app_instance_maintenance_mode_input)
+
+Update app instance maintenance mode
+
+Enables or disables the fixed maintenance response on all public HTTP routes while application workloads continue running.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.app_instance_maintenance_mode_input import AppInstanceMaintenanceModeInput
+from wodby.models.operation_result import OperationResult
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppInstancesApi(api_client)
+    id = 56 # int | 
+    app_instance_maintenance_mode_input = wodby.AppInstanceMaintenanceModeInput() # AppInstanceMaintenanceModeInput | 
+
+    try:
+        # Update app instance maintenance mode
+        api_response = api_instance.update_app_instance_maintenance_mode(id, app_instance_maintenance_mode_input)
+        print("The response of AppInstancesApi->update_app_instance_maintenance_mode:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppInstancesApi->update_app_instance_maintenance_mode: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **app_instance_maintenance_mode_input** | [**AppInstanceMaintenanceModeInput**](AppInstanceMaintenanceModeInput.md)|  | 
+
+### Return type
+
+[**OperationResult**](OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Maintenance mode update result |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 

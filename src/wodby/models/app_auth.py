@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from wodby.models.app_auth_scope import AppAuthScope
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -29,13 +30,15 @@ class AppAuth(BaseModel):
     """ # noqa: E501
     id: StrictInt
     app_instance_id: StrictInt = Field(alias="appInstanceId")
-    app_service_id: Optional[StrictInt] = Field(default=None, alias="appServiceId")
+    scope: AppAuthScope
+    app_service_ids: List[StrictInt] = Field(description="App services protected by this entry. Empty unless scope is SERVICE.", alias="appServiceIds")
+    app_service_id: Optional[StrictInt] = Field(default=None, description="Single protected app service. Null when the entry protects several services or the whole app instance.", alias="appServiceId")
     app_route_id: Optional[StrictInt] = Field(default=None, alias="appRouteId")
     login: StrictStr
     realm: StrictStr
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "appInstanceId", "appServiceId", "appRouteId", "login", "realm", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "appInstanceId", "scope", "appServiceIds", "appServiceId", "appRouteId", "login", "realm", "createdAt", "updatedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -100,6 +103,8 @@ class AppAuth(BaseModel):
         _obj = cls.model_validate({
             "id": obj.get("id"),
             "appInstanceId": obj.get("appInstanceId"),
+            "scope": obj.get("scope"),
+            "appServiceIds": obj.get("appServiceIds"),
             "appServiceId": obj.get("appServiceId"),
             "appRouteId": obj.get("appRouteId"),
             "login": obj.get("login"),

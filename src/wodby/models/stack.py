@@ -33,6 +33,7 @@ class Stack(BaseModel):
     title: StrictStr
     icon: StrictStr
     status: StrictStr
+    outdated: StrictBool
     public: StrictBool
     rev_id: StrictInt = Field(alias="revId")
     draft_rev_id: Optional[StrictInt] = Field(default=None, alias="draftRevId")
@@ -51,7 +52,7 @@ class Stack(BaseModel):
     settings: Optional[StackSettings] = None
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "icon", "status", "public", "revId", "draftRevId", "latestRevNumber", "gitRepoId", "gitRepoRemoteId", "gitRepoRef", "gitRepoRefType", "originStackRevId", "originStackRevStackId", "originStackRevName", "originStackRevNumber", "originStackRevVersion", "originStackRevCreatedAt", "orgId", "settings", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "icon", "status", "outdated", "public", "revId", "draftRevId", "latestRevNumber", "gitRepoId", "gitRepoRemoteId", "gitRepoRef", "gitRepoRefType", "originStackRevId", "originStackRevStackId", "originStackRevName", "originStackRevNumber", "originStackRevVersion", "originStackRevCreatedAt", "orgId", "settings", "createdAt", "updatedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -167,6 +168,7 @@ class Stack(BaseModel):
             "title": obj.get("title"),
             "icon": obj.get("icon"),
             "status": obj.get("status"),
+            "outdated": obj.get("outdated"),
             "public": obj.get("public"),
             "revId": obj.get("revId"),
             "draftRevId": obj.get("draftRevId"),

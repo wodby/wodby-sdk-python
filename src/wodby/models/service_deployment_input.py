@@ -17,8 +17,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,7 +28,10 @@ class ServiceDeploymentInput(BaseModel):
     """ # noqa: E501
     name: StrictStr
     image: StrictStr
-    __properties: ClassVar[List[str]] = ["name", "image"]
+    unmanaged_image: Optional[StrictBool] = Field(default=None, description="Set by the CI build when the image was produced from a Dockerfile that does not derive from the service image.", alias="unmanagedImage")
+    dockerfile_path: Optional[StrictStr] = Field(default=None, description="Repository path of an author-provided Dockerfile, reported by the CI build.", alias="dockerfilePath")
+    dockerfile_hash: Optional[StrictStr] = Field(default=None, description="SHA-256 of the Dockerfile that produced the image, reported by the CI build.", alias="dockerfileHash")
+    __properties: ClassVar[List[str]] = ["name", "image", "unmanagedImage", "dockerfilePath", "dockerfileHash"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -69,6 +72,21 @@ class ServiceDeploymentInput(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if unmanaged_image (nullable) is None
+        # and model_fields_set contains the field
+        if self.unmanaged_image is None and "unmanaged_image" in self.model_fields_set:
+            _dict['unmanagedImage'] = None
+
+        # set to None if dockerfile_path (nullable) is None
+        # and model_fields_set contains the field
+        if self.dockerfile_path is None and "dockerfile_path" in self.model_fields_set:
+            _dict['dockerfilePath'] = None
+
+        # set to None if dockerfile_hash (nullable) is None
+        # and model_fields_set contains the field
+        if self.dockerfile_hash is None and "dockerfile_hash" in self.model_fields_set:
+            _dict['dockerfileHash'] = None
+
         return _dict
 
     @classmethod
@@ -82,7 +100,10 @@ class ServiceDeploymentInput(BaseModel):
 
         _obj = cls.model_validate({
             "name": obj.get("name"),
-            "image": obj.get("image")
+            "image": obj.get("image"),
+            "unmanagedImage": obj.get("unmanagedImage"),
+            "dockerfilePath": obj.get("dockerfilePath"),
+            "dockerfileHash": obj.get("dockerfileHash")
         })
         return _obj
 

@@ -22,6 +22,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, Strict
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.app_access import AppAccess
 from wodby.models.app_instance_health import AppInstanceHealth
+from wodby.models.app_instance_main_route_cert import AppInstanceMainRouteCert
 from wodby.models.app_instance_settings import AppInstanceSettings
 from wodby.models.app_service_configuration_issue import AppServiceConfigurationIssue
 from typing import Optional, Set
@@ -35,7 +36,9 @@ class AppInstance(BaseModel):
     name: StrictStr
     title: StrictStr
     status: StrictStr
+    outdated: StrictBool
     main_domain: Optional[StrictStr] = Field(default=None, alias="mainDomain")
+    main_route_cert: Optional[AppInstanceMainRouteCert] = Field(alias="mainRouteCert")
     app_id: StrictInt = Field(alias="appId")
     cluster_id: StrictInt = Field(alias="clusterId")
     env_id: StrictInt = Field(alias="envId")
@@ -49,13 +52,15 @@ class AppInstance(BaseModel):
     access: Optional[AppAccess] = None
     routing_mode: StrictStr = Field(alias="routingMode")
     routing_pending: StrictBool = Field(alias="routingPending")
+    maintenance_mode: StrictBool = Field(alias="maintenanceMode")
+    maintenance_mode_active: StrictBool = Field(alias="maintenanceModeActive")
     configuration_ready: StrictBool = Field(alias="configurationReady")
     configuration_issues: List[AppServiceConfigurationIssue] = Field(alias="configurationIssues")
     settings: Optional[AppInstanceSettings] = None
     health: AppInstanceHealth
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "mainDomain", "appId", "clusterId", "envId", "stackId", "stackRevId", "stackName", "stackTitle", "stackIcon", "stackRevNumber", "stackVersion", "access", "routingMode", "routingPending", "configurationReady", "configurationIssues", "settings", "health", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "outdated", "mainDomain", "mainRouteCert", "appId", "clusterId", "envId", "stackId", "stackRevId", "stackName", "stackTitle", "stackIcon", "stackRevNumber", "stackVersion", "access", "routingMode", "routingPending", "maintenanceMode", "maintenanceModeActive", "configurationReady", "configurationIssues", "settings", "health", "createdAt", "updatedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -96,6 +101,9 @@ class AppInstance(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of main_route_cert
+        if self.main_route_cert:
+            _dict['mainRouteCert'] = self.main_route_cert.to_dict()
         # override the default output from pydantic by calling `to_dict()` of access
         if self.access:
             _dict['access'] = self.access.to_dict()
@@ -116,6 +124,11 @@ class AppInstance(BaseModel):
         # and model_fields_set contains the field
         if self.main_domain is None and "main_domain" in self.model_fields_set:
             _dict['mainDomain'] = None
+
+        # set to None if main_route_cert (nullable) is None
+        # and model_fields_set contains the field
+        if self.main_route_cert is None and "main_route_cert" in self.model_fields_set:
+            _dict['mainRouteCert'] = None
 
         # set to None if access (nullable) is None
         # and model_fields_set contains the field
@@ -138,7 +151,9 @@ class AppInstance(BaseModel):
             "name": obj.get("name"),
             "title": obj.get("title"),
             "status": obj.get("status"),
+            "outdated": obj.get("outdated"),
             "mainDomain": obj.get("mainDomain"),
+            "mainRouteCert": AppInstanceMainRouteCert.from_dict(obj["mainRouteCert"]) if obj.get("mainRouteCert") is not None else None,
             "appId": obj.get("appId"),
             "clusterId": obj.get("clusterId"),
             "envId": obj.get("envId"),
@@ -152,6 +167,8 @@ class AppInstance(BaseModel):
             "access": AppAccess.from_dict(obj["access"]) if obj.get("access") is not None else None,
             "routingMode": obj.get("routingMode"),
             "routingPending": obj.get("routingPending"),
+            "maintenanceMode": obj.get("maintenanceMode"),
+            "maintenanceModeActive": obj.get("maintenanceModeActive"),
             "configurationReady": obj.get("configurationReady"),
             "configurationIssues": [AppServiceConfigurationIssue.from_dict(_item) for _item in obj["configurationIssues"]] if obj.get("configurationIssues") is not None else None,
             "settings": AppInstanceSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None,

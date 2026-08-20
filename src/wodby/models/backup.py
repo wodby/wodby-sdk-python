@@ -34,9 +34,13 @@ class Backup(BaseModel):
     app_service_id: Optional[StrictInt] = Field(default=None, alias="appServiceId")
     database_id: Optional[StrictInt] = Field(default=None, alias="databaseId")
     database_db_id: Optional[StrictInt] = Field(default=None, alias="databaseDbId")
+    integration_id: Optional[StrictInt] = Field(description="Storage integration that owns the backup. Null identifies Wodby's built-in blob storage.", alias="integrationId")
+    task_id: Optional[StrictInt] = Field(default=None, alias="taskId")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "status", "appInstanceId", "appServiceId", "databaseId", "databaseDbId", "createdAt", "updatedAt"]
+    started_at: Optional[datetime] = Field(default=None, alias="startedAt")
+    ended_at: Optional[datetime] = Field(default=None, alias="endedAt")
+    __properties: ClassVar[List[str]] = ["id", "name", "status", "appInstanceId", "appServiceId", "databaseId", "databaseDbId", "integrationId", "taskId", "createdAt", "updatedAt", "startedAt", "endedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -97,6 +101,26 @@ class Backup(BaseModel):
         if self.database_db_id is None and "database_db_id" in self.model_fields_set:
             _dict['databaseDbId'] = None
 
+        # set to None if integration_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.integration_id is None and "integration_id" in self.model_fields_set:
+            _dict['integrationId'] = None
+
+        # set to None if task_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.task_id is None and "task_id" in self.model_fields_set:
+            _dict['taskId'] = None
+
+        # set to None if started_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.started_at is None and "started_at" in self.model_fields_set:
+            _dict['startedAt'] = None
+
+        # set to None if ended_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.ended_at is None and "ended_at" in self.model_fields_set:
+            _dict['endedAt'] = None
+
         return _dict
 
     @classmethod
@@ -116,8 +140,12 @@ class Backup(BaseModel):
             "appServiceId": obj.get("appServiceId"),
             "databaseId": obj.get("databaseId"),
             "databaseDbId": obj.get("databaseDbId"),
+            "integrationId": obj.get("integrationId"),
+            "taskId": obj.get("taskId"),
             "createdAt": obj.get("createdAt"),
-            "updatedAt": obj.get("updatedAt")
+            "updatedAt": obj.get("updatedAt"),
+            "startedAt": obj.get("startedAt"),
+            "endedAt": obj.get("endedAt")
         })
         return _obj
 

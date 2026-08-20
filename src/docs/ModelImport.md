@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **name** | **str** |  | 
 **source** | **str** |  | 
 **status** | **str** |  | 
+**filename** | **str** |  | [optional] 
+**size** | **int** |  | [optional] 
 **app_instance_id** | **int** |  | [optional] 
 **app_service_id** | **int** |  | [optional] 
 **database_id** | **int** |  | [optional] 

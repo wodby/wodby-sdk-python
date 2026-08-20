@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **raw** | **str** |  | 
 **scalable** | **bool** |  | 
+**integrations** | [**List[ServiceIntegrationRequirement]**](ServiceIntegrationRequirement.md) |  | [optional] 
 
 ## Example
 

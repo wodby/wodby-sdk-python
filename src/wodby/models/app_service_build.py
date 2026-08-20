@@ -31,6 +31,9 @@ class AppServiceBuild(BaseModel):
     status: StrictStr
     image: StrictStr
     image_deleted: StrictBool = Field(alias="imageDeleted")
+    unmanaged_image: StrictBool = Field(description="True when the image was built from a Dockerfile that does not derive from the service image, so it no longer tracks service image updates.", alias="unmanagedImage")
+    dockerfile_path: StrictStr = Field(description="Repository path of an author-provided Dockerfile. Empty when the build used a service-provided or generated Dockerfile.", alias="dockerfilePath")
+    dockerfile_hash: StrictStr = Field(description="SHA-256 of the Dockerfile that produced the image. Empty when the build did not report it.", alias="dockerfileHash")
     size: StrictInt
     app_service_id: StrictInt = Field(alias="appServiceId")
     previously_deployed: StrictBool = Field(alias="previouslyDeployed")
@@ -38,7 +41,7 @@ class AppServiceBuild(BaseModel):
     current_build_number: Optional[StrictInt] = Field(default=None, alias="currentBuildNumber")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "status", "image", "imageDeleted", "size", "appServiceId", "previouslyDeployed", "currentlyDeployed", "currentBuildNumber", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "status", "image", "imageDeleted", "unmanagedImage", "dockerfilePath", "dockerfileHash", "size", "appServiceId", "previouslyDeployed", "currentlyDeployed", "currentBuildNumber", "createdAt", "updatedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -100,6 +103,9 @@ class AppServiceBuild(BaseModel):
             "status": obj.get("status"),
             "image": obj.get("image"),
             "imageDeleted": obj.get("imageDeleted"),
+            "unmanagedImage": obj.get("unmanagedImage"),
+            "dockerfilePath": obj.get("dockerfilePath"),
+            "dockerfileHash": obj.get("dockerfileHash"),
             "size": obj.get("size"),
             "appServiceId": obj.get("appServiceId"),
             "previouslyDeployed": obj.get("previouslyDeployed"),

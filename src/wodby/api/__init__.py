@@ -15,6 +15,7 @@ from wodby.api.clusters_api import ClustersApi
 from wodby.api.databases_api import DatabasesApi
 from wodby.api.default_api import DefaultApi
 from wodby.api.envs_api import EnvsApi
+from wodby.api.git_repos_api import GitReposApi
 from wodby.api.helm_charts_api import HelmChartsApi
 from wodby.api.imports_api import ImportsApi
 from wodby.api.integration_kinds_api import IntegrationKindsApi

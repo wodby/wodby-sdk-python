@@ -7,13 +7,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **org_id** | **int** | Optional for API-key requests; defaults to the API key&#39;s organization. | [optional] 
 **provider_id** | **int** |  | 
-**name** | **str** |  | 
 **title** | **str** |  | 
 **kinds** | **List[str]** |  | 
 **auth** | **str** |  | [optional] 
 **project_id** | **int** |  | [optional] 
 **fields_input** | [**List[FieldInput]**](FieldInput.md) |  | [optional] 
 **scope** | **str** |  | [optional] 
+**environment_policy** | [**IntegrationEnvironmentPolicyInput**](IntegrationEnvironmentPolicyInput.md) |  | [optional] 
 
 ## Example
 

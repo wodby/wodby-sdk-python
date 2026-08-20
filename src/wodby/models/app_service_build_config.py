@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.app_service_build_arg import AppServiceBuildArg
 from typing import Optional, Set
@@ -34,8 +34,10 @@ class AppServiceBuildConfig(BaseModel):
     image: StrictStr
     dockerfile: Optional[StrictStr] = None
     dockerignore: Optional[StrictStr] = None
+    copy_from: StrictStr = Field(description="Build context subdirectory to copy, relative to the CI --from path. Empty means the whole context.", alias="copyFrom")
+    copy_to: StrictStr = Field(description="Image subdirectory to copy into, relative to the CI --to path. Empty means the image working directory.", alias="copyTo")
     args: Optional[List[AppServiceBuildArg]] = None
-    __properties: ClassVar[List[str]] = ["name", "title", "managed", "main", "image", "dockerfile", "dockerignore", "args"]
+    __properties: ClassVar[List[str]] = ["name", "title", "managed", "main", "image", "dockerfile", "dockerignore", "copyFrom", "copyTo", "args"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -117,6 +119,8 @@ class AppServiceBuildConfig(BaseModel):
             "image": obj.get("image"),
             "dockerfile": obj.get("dockerfile"),
             "dockerignore": obj.get("dockerignore"),
+            "copyFrom": obj.get("copyFrom"),
+            "copyTo": obj.get("copyTo"),
             "args": [AppServiceBuildArg.from_dict(_item) for _item in obj["args"]] if obj.get("args") is not None else None
         })
         return _obj

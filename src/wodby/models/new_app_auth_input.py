@@ -27,12 +27,13 @@ class NewAppAuthInput(BaseModel):
     NewAppAuthInput
     """ # noqa: E501
     app_instance_id: StrictInt = Field(alias="appInstanceId")
-    app_service_id: Optional[StrictInt] = Field(default=None, description="Optional service scope. Required together with appRouteId for route scope.", alias="appServiceId")
-    app_route_id: Optional[StrictInt] = Field(default=None, description="Optional route scope. Requires appServiceId and must belong to that service.", alias="appRouteId")
+    app_service_ids: Optional[List[StrictInt]] = Field(default=None, description="App services to protect. Omit or pass an empty list to protect the whole app instance.", alias="appServiceIds")
+    app_service_id: Optional[StrictInt] = Field(default=None, description="Single-service scope. Ignored when appServiceIds is supplied.", alias="appServiceId")
+    app_route_id: Optional[StrictInt] = Field(default=None, description="Route scope. The owning app service is derived from the route.", alias="appRouteId")
     login: StrictStr
     password: SecretStr
     realm: StrictStr
-    __properties: ClassVar[List[str]] = ["appInstanceId", "appServiceId", "appRouteId", "login", "password", "realm"]
+    __properties: ClassVar[List[str]] = ["appInstanceId", "appServiceIds", "appServiceId", "appRouteId", "login", "password", "realm"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -73,6 +74,11 @@ class NewAppAuthInput(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if app_service_ids (nullable) is None
+        # and model_fields_set contains the field
+        if self.app_service_ids is None and "app_service_ids" in self.model_fields_set:
+            _dict['appServiceIds'] = None
+
         # set to None if app_service_id (nullable) is None
         # and model_fields_set contains the field
         if self.app_service_id is None and "app_service_id" in self.model_fields_set:
@@ -96,6 +102,7 @@ class NewAppAuthInput(BaseModel):
 
         _obj = cls.model_validate({
             "appInstanceId": obj.get("appInstanceId"),
+            "appServiceIds": obj.get("appServiceIds"),
             "appServiceId": obj.get("appServiceId"),
             "appRouteId": obj.get("appRouteId"),
             "login": obj.get("login"),

@@ -9,7 +9,6 @@ Method | HTTP request | Description
 [**delete_integration**](IntegrationsApi.md#delete_integration) | **DELETE** /integrations/{id} | Delete integration
 [**get_app_access_provider_options**](IntegrationsApi.md#get_app_access_provider_options) | **GET** /integrations/{id}/options/app-access | Get app-access provider options
 [**get_integration**](IntegrationsApi.md#get_integration) | **GET** /integrations/{id} | Get integration
-[**get_integration_by_name**](IntegrationsApi.md#get_integration_by_name) | **GET** /integrations/by-name/{name} | Get integration by name
 [**get_integration_kube_settings**](IntegrationsApi.md#get_integration_kube_settings) | **GET** /integrations/{id}/options/kube-settings | Get Kubernetes settings
 [**get_integration_remote_git_repo_file_presence**](IntegrationsApi.md#get_integration_remote_git_repo_file_presence) | **GET** /integrations/{id}/options/remote-git-repo-file | Check a remote Git repository file
 [**list_integration_kube_machine_types**](IntegrationsApi.md#list_integration_kube_machine_types) | **GET** /integrations/{id}/options/kube-machine-types | List Kubernetes machine types
@@ -24,8 +23,10 @@ Method | HTTP request | Description
 [**list_integration_storage_classes**](IntegrationsApi.md#list_integration_storage_classes) | **GET** /integrations/{id}/options/storage-classes | List storage classes
 [**list_integrations**](IntegrationsApi.md#list_integrations) | **GET** /integrations | List integrations
 [**resolve_integration**](IntegrationsApi.md#resolve_integration) | **POST** /integrations/actions/resolve | Resolve or create integration
+[**search_integrations**](IntegrationsApi.md#search_integrations) | **POST** /integrations/actions/search | Search integrations
 [**test_integration_permissions**](IntegrationsApi.md#test_integration_permissions) | **POST** /integrations/{id}/actions/test-permissions | Test integration permissions
 [**update_integration**](IntegrationsApi.md#update_integration) | **PUT** /integrations/{id} | Update integration
+[**update_integration_environment_policy**](IntegrationsApi.md#update_integration_environment_policy) | **PUT** /integrations/environment-policy/{id} | Update integration environment policy
 [**validate_app_access_hostname**](IntegrationsApi.md#validate_app_access_hostname) | **POST** /integrations/{id}/actions/validate-app-access-hostname | Validate an app-access hostname
 
 
@@ -414,89 +415,6 @@ with wodby.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **int**|  | 
-
-### Return type
-
-[**Integration**](Integration.md)
-
-### Authorization
-
-[apiKeyHeader](../README.md#apiKeyHeader)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json, application/problem+json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Integration |  -  |
-**4XX** | Error response |  -  |
-**0** | Error response |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_integration_by_name**
-> Integration get_integration_by_name(name, org_id=org_id)
-
-Get integration by name
-
-Returns the integration identified by name.
-
-### Example
-
-* Api Key Authentication (apiKeyHeader):
-
-```python
-import wodby
-from wodby.models.integration import Integration
-from wodby.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to /v1
-# See configuration.py for a list of all supported configuration parameters.
-configuration = wodby.Configuration(
-    host = "/v1"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: apiKeyHeader
-configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with wodby.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = wodby.IntegrationsApi(api_client)
-    name = 'name_example' # str | 
-    org_id = 56 # int | Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization. (optional)
-
-    try:
-        # Get integration by name
-        api_response = api_instance.get_integration_by_name(name, org_id=org_id)
-        print("The response of IntegrationsApi->get_integration_by_name:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling IntegrationsApi->get_integration_by_name: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **name** | **str**|  | 
- **org_id** | **int**| Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. | [optional] 
 
 ### Return type
 
@@ -1500,7 +1418,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_integrations**
-> List[Integration] list_integrations(org_id=org_id, project_ids=project_ids, labels=labels)
+> List[Integration] list_integrations(org_id=org_id, project_ids=project_ids, labels=labels, env_id=env_id)
 
 List integrations
 
@@ -1540,10 +1458,11 @@ with wodby.ApiClient(configuration) as api_client:
     org_id = 56 # int | Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization. (optional)
     project_ids = 'project_ids_example' # str | Comma-separated project ids (optional)
     labels = 'labels_example' # str | Comma-separated labels (optional)
+    env_id = 56 # int | Return only integrations allowed in this environment (optional)
 
     try:
         # List integrations
-        api_response = api_instance.list_integrations(org_id=org_id, project_ids=project_ids, labels=labels)
+        api_response = api_instance.list_integrations(org_id=org_id, project_ids=project_ids, labels=labels, env_id=env_id)
         print("The response of IntegrationsApi->list_integrations:\n")
         pprint(api_response)
     except Exception as e:
@@ -1560,6 +1479,7 @@ Name | Type | Description  | Notes
  **org_id** | **int**| Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. | [optional] 
  **project_ids** | **str**| Comma-separated project ids | [optional] 
  **labels** | **str**| Comma-separated labels | [optional] 
+ **env_id** | **int**| Return only integrations allowed in this environment | [optional] 
 
 ### Return type
 
@@ -1661,6 +1581,88 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Resolved integration |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **search_integrations**
+> List[Integration] search_integrations(search_integrations_input)
+
+Search integrations
+
+Returns accessible integrations matching structured type, status, label, variable, project, and environment requirements.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.integration import Integration
+from wodby.models.search_integrations_input import SearchIntegrationsInput
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.IntegrationsApi(api_client)
+    search_integrations_input = wodby.SearchIntegrationsInput() # SearchIntegrationsInput | 
+
+    try:
+        # Search integrations
+        api_response = api_instance.search_integrations(search_integrations_input)
+        print("The response of IntegrationsApi->search_integrations:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling IntegrationsApi->search_integrations: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **search_integrations_input** | [**SearchIntegrationsInput**](SearchIntegrationsInput.md)|  | 
+
+### Return type
+
+[**List[Integration]**](Integration.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Matching integrations |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 
@@ -1807,6 +1809,90 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **int**|  | 
  **update_integration_input** | [**UpdateIntegrationInput**](UpdateIntegrationInput.md)|  | 
+
+### Return type
+
+[**Integration**](Integration.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Updated integration |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_integration_environment_policy**
+> Integration update_integration_environment_policy(id, integration_environment_policy_input)
+
+Update integration environment policy
+
+Updates the associated environment and exact allowed environment scope. Scope reductions that conflict with existing references are rejected.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.integration import Integration
+from wodby.models.integration_environment_policy_input import IntegrationEnvironmentPolicyInput
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.IntegrationsApi(api_client)
+    id = 56 # int | 
+    integration_environment_policy_input = wodby.IntegrationEnvironmentPolicyInput() # IntegrationEnvironmentPolicyInput | 
+
+    try:
+        # Update integration environment policy
+        api_response = api_instance.update_integration_environment_policy(id, integration_environment_policy_input)
+        print("The response of IntegrationsApi->update_integration_environment_policy:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling IntegrationsApi->update_integration_environment_policy: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **integration_environment_policy_input** | [**IntegrationEnvironmentPolicyInput**](IntegrationEnvironmentPolicyInput.md)|  | 
 
 ### Return type
 

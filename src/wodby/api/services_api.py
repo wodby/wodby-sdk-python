@@ -21,7 +21,7 @@ from typing import Any, Dict, List, Optional
 from typing_extensions import Annotated
 from wodby.models.helm_chart_service_scaffold_input import HelmChartServiceScaffoldInput
 from wodby.models.helm_chart_service_scaffold_response import HelmChartServiceScaffoldResponse
-from wodby.models.import_catalog_from_git_input import ImportCatalogFromGitInput
+from wodby.models.import_services_from_git_input import ImportServicesFromGitInput
 from wodby.models.manifest_from_yaml_input import ManifestFromYAMLInput
 from wodby.models.manifest_validation_response import ManifestValidationResponse
 from wodby.models.operation_result import OperationResult
@@ -1142,7 +1142,7 @@ class ServicesApi:
     @validate_call
     def import_services(
         self,
-        import_catalog_from_git_input: ImportCatalogFromGitInput,
+        import_services_from_git_input: ImportServicesFromGitInput,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1160,8 +1160,8 @@ class ServicesApi:
 
         Starts a task that imports services from a Git repository.
 
-        :param import_catalog_from_git_input: (required)
-        :type import_catalog_from_git_input: ImportCatalogFromGitInput
+        :param import_services_from_git_input: (required)
+        :type import_services_from_git_input: ImportServicesFromGitInput
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1185,7 +1185,7 @@ class ServicesApi:
         """ # noqa: E501
 
         _param = self._import_services_serialize(
-            import_catalog_from_git_input=import_catalog_from_git_input,
+            import_services_from_git_input=import_services_from_git_input,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1210,7 +1210,7 @@ class ServicesApi:
     @validate_call
     def import_services_with_http_info(
         self,
-        import_catalog_from_git_input: ImportCatalogFromGitInput,
+        import_services_from_git_input: ImportServicesFromGitInput,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1228,8 +1228,8 @@ class ServicesApi:
 
         Starts a task that imports services from a Git repository.
 
-        :param import_catalog_from_git_input: (required)
-        :type import_catalog_from_git_input: ImportCatalogFromGitInput
+        :param import_services_from_git_input: (required)
+        :type import_services_from_git_input: ImportServicesFromGitInput
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1253,7 +1253,7 @@ class ServicesApi:
         """ # noqa: E501
 
         _param = self._import_services_serialize(
-            import_catalog_from_git_input=import_catalog_from_git_input,
+            import_services_from_git_input=import_services_from_git_input,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1278,7 +1278,7 @@ class ServicesApi:
     @validate_call
     def import_services_without_preload_content(
         self,
-        import_catalog_from_git_input: ImportCatalogFromGitInput,
+        import_services_from_git_input: ImportServicesFromGitInput,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1296,8 +1296,8 @@ class ServicesApi:
 
         Starts a task that imports services from a Git repository.
 
-        :param import_catalog_from_git_input: (required)
-        :type import_catalog_from_git_input: ImportCatalogFromGitInput
+        :param import_services_from_git_input: (required)
+        :type import_services_from_git_input: ImportServicesFromGitInput
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1321,7 +1321,7 @@ class ServicesApi:
         """ # noqa: E501
 
         _param = self._import_services_serialize(
-            import_catalog_from_git_input=import_catalog_from_git_input,
+            import_services_from_git_input=import_services_from_git_input,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1341,7 +1341,7 @@ class ServicesApi:
 
     def _import_services_serialize(
         self,
-        import_catalog_from_git_input,
+        import_services_from_git_input,
         _request_auth,
         _content_type,
         _headers,
@@ -1367,8 +1367,8 @@ class ServicesApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if import_catalog_from_git_input is not None:
-            _body_params = import_catalog_from_git_input
+        if import_services_from_git_input is not None:
+            _body_params = import_services_from_git_input
 
 
         # set the HTTP header `Accept`

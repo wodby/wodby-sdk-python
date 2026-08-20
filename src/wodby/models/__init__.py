@@ -29,6 +29,7 @@ from wodby.models.app_access_resource import AppAccessResource
 from wodby.models.app_access_setting import AppAccessSetting
 from wodby.models.app_access_setting_input import AppAccessSettingInput
 from wodby.models.app_auth import AppAuth
+from wodby.models.app_auth_scope import AppAuthScope
 from wodby.models.app_build import AppBuild
 from wodby.models.app_build_config import AppBuildConfig
 from wodby.models.app_builds_create_response import AppBuildsCreateResponse
@@ -43,6 +44,8 @@ from wodby.models.app_instance_cicd_settings import AppInstanceCICDSettings
 from wodby.models.app_instance_cicd_settings_input import AppInstanceCICDSettingsInput
 from wodby.models.app_instance_cron_health import AppInstanceCronHealth
 from wodby.models.app_instance_health import AppInstanceHealth
+from wodby.models.app_instance_main_route_cert import AppInstanceMainRouteCert
+from wodby.models.app_instance_maintenance_mode_input import AppInstanceMaintenanceModeInput
 from wodby.models.app_instance_settings import AppInstanceSettings
 from wodby.models.app_instance_settings_input import AppInstanceSettingsInput
 from wodby.models.app_instance_stack_upgrade_changelog import AppInstanceStackUpgradeChangelog
@@ -121,6 +124,8 @@ from wodby.models.env import Env
 from wodby.models.field_input import FieldInput
 from wodby.models.git_auto_update_settings import GitAutoUpdateSettings
 from wodby.models.git_auto_update_settings_input import GitAutoUpdateSettingsInput
+from wodby.models.git_repo_usage import GitRepoUsage
+from wodby.models.git_repo_usages import GitRepoUsages
 from wodby.models.helm_chart_analysis import HelmChartAnalysis
 from wodby.models.helm_chart_container import HelmChartContainer
 from wodby.models.helm_chart_container_port import HelmChartContainerPort
@@ -139,10 +144,14 @@ from wodby.models.helm_chart_workload import HelmChartWorkload
 from wodby.models.import_catalog_from_git_input import ImportCatalogFromGitInput
 from wodby.models.import_from_input import ImportFromInput
 from wodby.models.import_input import ImportInput
+from wodby.models.import_services_from_git_input import ImportServicesFromGitInput
 from wodby.models.integration import Integration
 from wodby.models.integration_configuration_result import IntegrationConfigurationResult
+from wodby.models.integration_environment_policy_input import IntegrationEnvironmentPolicyInput
 from wodby.models.integration_link_input import IntegrationLinkInput
 from wodby.models.integration_scope import IntegrationScope
+from wodby.models.integration_variable_requirement import IntegrationVariableRequirement
+from wodby.models.integration_variable_requirement_input import IntegrationVariableRequirementInput
 from wodby.models.kube_version import KubeVersion
 from wodby.models.log_line import LogLine
 from wodby.models.log_stream import LogStream
@@ -172,6 +181,7 @@ from wodby.models.new_database_user_input import NewDatabaseUserInput
 from wodby.models.new_import_input import NewImportInput
 from wodby.models.new_integration_input import NewIntegrationInput
 from wodby.models.new_project_input import NewProjectInput
+from wodby.models.new_stack_env_var_input import NewStackEnvVarInput
 from wodby.models.new_stack_service_annotation_input import NewStackServiceAnnotationInput
 from wodby.models.new_stack_service_cron_schedule_input import NewStackServiceCronScheduleInput
 from wodby.models.new_stack_service_env_var_input import NewStackServiceEnvVarInput
@@ -190,7 +200,10 @@ from wodby.models.problem_details import ProblemDetails
 from wodby.models.problem_field_error import ProblemFieldError
 from wodby.models.project import Project
 from wodby.models.provider import Provider
+from wodby.models.provider_manifest_input import ProviderManifestInput
+from wodby.models.provider_manifest_update_input import ProviderManifestUpdateInput
 from wodby.models.provider_revision import ProviderRevision
+from wodby.models.provider_settings_input import ProviderSettingsInput
 from wodby.models.providers_response import ProvidersResponse
 from wodby.models.remote_git_repo import RemoteGitRepo
 from wodby.models.remote_git_repo_file_presence import RemoteGitRepoFilePresence
@@ -198,8 +211,10 @@ from wodby.models.repeat_task_request import RepeatTaskRequest
 from wodby.models.resolve_integration_result import ResolveIntegrationResult
 from wodby.models.resources_input import ResourcesInput
 from wodby.models.scalability_input import ScalabilityInput
+from wodby.models.search_integrations_input import SearchIntegrationsInput
 from wodby.models.service import Service
 from wodby.models.service_deployment_input import ServiceDeploymentInput
+from wodby.models.service_integration_requirement import ServiceIntegrationRequirement
 from wodby.models.service_manifest import ServiceManifest
 from wodby.models.service_manifest_update_input import ServiceManifestUpdateInput
 from wodby.models.service_revision import ServiceRevision
@@ -220,6 +235,7 @@ from wodby.models.stack_auto_update_policy import StackAutoUpdatePolicy
 from wodby.models.stack_auto_update_policy_input import StackAutoUpdatePolicyInput
 from wodby.models.stack_auto_update_version_policy import StackAutoUpdateVersionPolicy
 from wodby.models.stack_auto_update_version_policy_input import StackAutoUpdateVersionPolicyInput
+from wodby.models.stack_env_var import StackEnvVar
 from wodby.models.stack_origin_sync_changelog import StackOriginSyncChangelog
 from wodby.models.stack_revision import StackRevision
 from wodby.models.stack_revision_link_issue import StackRevisionLinkIssue
@@ -271,7 +287,9 @@ from wodby.models.update_integration_input import UpdateIntegrationInput
 from wodby.models.update_org_request import UpdateOrgRequest
 from wodby.models.update_project_input import UpdateProjectInput
 from wodby.models.update_secret_value_input import UpdateSecretValueInput
+from wodby.models.update_stack_env_var_input import UpdateStackEnvVarInput
 from wodby.models.update_stack_from_git_request import UpdateStackFromGitRequest
+from wodby.models.update_stack_request import UpdateStackRequest
 from wodby.models.update_stack_service_cron_schedule_input import UpdateStackServiceCronScheduleInput
 from wodby.models.update_stack_service_env_var_input import UpdateStackServiceEnvVarInput
 from wodby.models.update_stack_service_token_input import UpdateStackServiceTokenInput

@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,16 +28,25 @@ class Integration(BaseModel):
     Integration
     """ # noqa: E501
     id: StrictInt
-    name: StrictStr
     title: StrictStr
     status: StrictStr
     scope: Optional[StrictStr] = None
     auth: Optional[StrictStr] = None
     provider_rev_id: StrictInt = Field(alias="providerRevId")
     org_id: StrictInt = Field(alias="orgId")
+    primary_env_id: Optional[StrictInt] = Field(default=None, alias="primaryEnvId")
+    env_scope: StrictStr = Field(alias="envScope")
+    allowed_env_ids: List[StrictInt] = Field(alias="allowedEnvIds")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "scope", "auth", "providerRevId", "orgId", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "title", "status", "scope", "auth", "providerRevId", "orgId", "primaryEnvId", "envScope", "allowedEnvIds", "createdAt", "updatedAt"]
+
+    @field_validator('env_scope')
+    def env_scope_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(['all', 'selected']):
+            raise ValueError("must be one of enum values ('all', 'selected')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -88,6 +97,11 @@ class Integration(BaseModel):
         if self.auth is None and "auth" in self.model_fields_set:
             _dict['auth'] = None
 
+        # set to None if primary_env_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.primary_env_id is None and "primary_env_id" in self.model_fields_set:
+            _dict['primaryEnvId'] = None
+
         return _dict
 
     @classmethod
@@ -101,13 +115,15 @@ class Integration(BaseModel):
 
         _obj = cls.model_validate({
             "id": obj.get("id"),
-            "name": obj.get("name"),
             "title": obj.get("title"),
             "status": obj.get("status"),
             "scope": obj.get("scope"),
             "auth": obj.get("auth"),
             "providerRevId": obj.get("providerRevId"),
             "orgId": obj.get("orgId"),
+            "primaryEnvId": obj.get("primaryEnvId"),
+            "envScope": obj.get("envScope"),
+            "allowedEnvIds": obj.get("allowedEnvIds"),
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt")
         })

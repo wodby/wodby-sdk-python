@@ -31,6 +31,8 @@ class ModelImport(BaseModel):
     name: StrictStr
     source: StrictStr
     status: StrictStr
+    filename: Optional[StrictStr] = None
+    size: Optional[StrictInt] = None
     app_instance_id: Optional[StrictInt] = Field(default=None, alias="appInstanceId")
     app_service_id: Optional[StrictInt] = Field(default=None, alias="appServiceId")
     database_id: Optional[StrictInt] = Field(default=None, alias="databaseId")
@@ -42,7 +44,7 @@ class ModelImport(BaseModel):
     updated_at: datetime = Field(alias="updatedAt")
     started_at: Optional[datetime] = Field(default=None, alias="startedAt")
     ended_at: Optional[datetime] = Field(default=None, alias="endedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "source", "status", "appInstanceId", "appServiceId", "databaseId", "databaseDbId", "appServiceDeploymentId", "taskId", "backupId", "createdAt", "updatedAt", "startedAt", "endedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "source", "status", "filename", "size", "appInstanceId", "appServiceId", "databaseId", "databaseDbId", "appServiceDeploymentId", "taskId", "backupId", "createdAt", "updatedAt", "startedAt", "endedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -83,6 +85,16 @@ class ModelImport(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if filename (nullable) is None
+        # and model_fields_set contains the field
+        if self.filename is None and "filename" in self.model_fields_set:
+            _dict['filename'] = None
+
+        # set to None if size (nullable) is None
+        # and model_fields_set contains the field
+        if self.size is None and "size" in self.model_fields_set:
+            _dict['size'] = None
+
         # set to None if app_instance_id (nullable) is None
         # and model_fields_set contains the field
         if self.app_instance_id is None and "app_instance_id" in self.model_fields_set:
@@ -144,6 +156,8 @@ class ModelImport(BaseModel):
             "name": obj.get("name"),
             "source": obj.get("source"),
             "status": obj.get("status"),
+            "filename": obj.get("filename"),
+            "size": obj.get("size"),
             "appInstanceId": obj.get("appInstanceId"),
             "appServiceId": obj.get("appServiceId"),
             "databaseId": obj.get("databaseId"),

@@ -9,7 +9,9 @@ Name | Type | Description | Notes
 **name** | **str** |  | 
 **title** | **str** |  | 
 **status** | **str** |  | 
+**outdated** | **bool** |  | 
 **main_domain** | **str** |  | [optional] 
+**main_route_cert** | [**AppInstanceMainRouteCert**](AppInstanceMainRouteCert.md) |  | 
 **app_id** | **int** |  | 
 **cluster_id** | **int** |  | 
 **env_id** | **int** |  | 
@@ -23,6 +25,8 @@ Name | Type | Description | Notes
 **access** | [**AppAccess**](AppAccess.md) |  | [optional] 
 **routing_mode** | **str** |  | 
 **routing_pending** | **bool** |  | 
+**maintenance_mode** | **bool** |  | 
+**maintenance_mode_active** | **bool** |  | 
 **configuration_ready** | **bool** |  | 
 **configuration_issues** | [**List[AppServiceConfigurationIssue]**](AppServiceConfigurationIssue.md) |  | 
 **settings** | [**AppInstanceSettings**](AppInstanceSettings.md) |  | [optional] 

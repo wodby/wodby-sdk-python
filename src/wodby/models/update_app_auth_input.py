@@ -26,12 +26,13 @@ class UpdateAppAuthInput(BaseModel):
     """
     UpdateAppAuthInput
     """ # noqa: E501
-    app_service_id: Optional[StrictInt] = Field(default=None, description="Omit with appRouteId to preserve the current scope. When supplied alone, moves the entry to service scope and clears any route scope.", alias="appServiceId")
-    app_route_id: Optional[StrictInt] = Field(default=None, description="Moves the entry to route scope and must be accompanied by appServiceId.", alias="appRouteId")
+    app_service_ids: Optional[List[StrictInt]] = Field(default=None, description="App services to protect. Omit every scope field to preserve the current scope, or pass an empty list to protect the whole app instance.", alias="appServiceIds")
+    app_service_id: Optional[StrictInt] = Field(default=None, description="Single-service scope. Ignored when appServiceIds is supplied.", alias="appServiceId")
+    app_route_id: Optional[StrictInt] = Field(default=None, description="Moves the entry to route scope. The owning app service is derived from the route.", alias="appRouteId")
     login: StrictStr
     password: Optional[SecretStr] = Field(default=None, description="Replaces the existing secret when supplied; omit to keep the current password.")
     realm: StrictStr
-    __properties: ClassVar[List[str]] = ["appServiceId", "appRouteId", "login", "password", "realm"]
+    __properties: ClassVar[List[str]] = ["appServiceIds", "appServiceId", "appRouteId", "login", "password", "realm"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -72,6 +73,11 @@ class UpdateAppAuthInput(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if app_service_ids (nullable) is None
+        # and model_fields_set contains the field
+        if self.app_service_ids is None and "app_service_ids" in self.model_fields_set:
+            _dict['appServiceIds'] = None
+
         # set to None if app_service_id (nullable) is None
         # and model_fields_set contains the field
         if self.app_service_id is None and "app_service_id" in self.model_fields_set:
@@ -99,6 +105,7 @@ class UpdateAppAuthInput(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "appServiceIds": obj.get("appServiceIds"),
             "appServiceId": obj.get("appServiceId"),
             "appRouteId": obj.get("appRouteId"),
             "login": obj.get("login"),

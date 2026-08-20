@@ -7,6 +7,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** |  | 
 **image** | **str** |  | 
+**unmanaged_image** | **bool** | Set by the CI build when the image was produced from a Dockerfile that does not derive from the service image. | [optional] 
+**dockerfile_path** | **str** | Repository path of an author-provided Dockerfile, reported by the CI build. | [optional] 
+**dockerfile_hash** | **str** | SHA-256 of the Dockerfile that produced the image, reported by the CI build. | [optional] 
 
 ## Example
 

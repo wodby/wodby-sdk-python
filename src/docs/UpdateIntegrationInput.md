@@ -6,7 +6,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **title** | **str** |  | 
-**name** | **str** |  | 
 **kinds** | **List[str]** |  | 
 **scope** | **str** |  | [optional] 
 **fields_input** | [**List[FieldInput]**](FieldInput.md) |  | [optional] 

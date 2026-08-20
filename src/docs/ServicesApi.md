@@ -345,7 +345,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **import_services**
-> OperationResult import_services(import_catalog_from_git_input)
+> OperationResult import_services(import_services_from_git_input)
 
 Import services from Git
 
@@ -357,7 +357,7 @@ Starts a task that imports services from a Git repository.
 
 ```python
 import wodby
-from wodby.models.import_catalog_from_git_input import ImportCatalogFromGitInput
+from wodby.models.import_services_from_git_input import ImportServicesFromGitInput
 from wodby.models.operation_result import OperationResult
 from wodby.rest import ApiException
 from pprint import pprint
@@ -383,11 +383,11 @@ configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
 with wodby.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = wodby.ServicesApi(api_client)
-    import_catalog_from_git_input = wodby.ImportCatalogFromGitInput() # ImportCatalogFromGitInput | 
+    import_services_from_git_input = wodby.ImportServicesFromGitInput() # ImportServicesFromGitInput | 
 
     try:
         # Import services from Git
-        api_response = api_instance.import_services(import_catalog_from_git_input)
+        api_response = api_instance.import_services(import_services_from_git_input)
         print("The response of ServicesApi->import_services:\n")
         pprint(api_response)
     except Exception as e:
@@ -401,7 +401,7 @@ with wodby.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **import_catalog_from_git_input** | [**ImportCatalogFromGitInput**](ImportCatalogFromGitInput.md)|  | 
+ **import_services_from_git_input** | [**ImportServicesFromGitInput**](ImportServicesFromGitInput.md)|  | 
 
 ### Return type
 

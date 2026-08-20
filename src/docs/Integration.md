@@ -6,13 +6,15 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** |  | 
-**name** | **str** |  | 
 **title** | **str** |  | 
 **status** | **str** |  | 
 **scope** | **str** |  | [optional] 
 **auth** | **str** |  | [optional] 
 **provider_rev_id** | **int** |  | 
 **org_id** | **int** |  | 
+**primary_env_id** | **int** |  | [optional] 
+**env_scope** | **str** |  | 
+**allowed_env_ids** | **List[int]** |  | 
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 
 
