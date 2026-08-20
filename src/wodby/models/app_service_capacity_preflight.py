@@ -17,18 +17,21 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt
+from typing import Any, ClassVar, Dict, List, Union
 from typing import Optional, Set
 from typing_extensions import Self
 
-class OrgSubscriptionPlan(BaseModel):
+class AppServiceCapacityPreflight(BaseModel):
     """
-    OrgSubscriptionPlan
+    AppServiceCapacityPreflight
     """ # noqa: E501
-    name: StrictStr
-    title: StrictStr
-    __properties: ClassVar[List[str]] = ["name", "title"]
+    allowed: StrictBool = Field(description="Whether the proposed usage increase is permitted by the effective backend policy.")
+    enforced: StrictBool = Field(description="Whether subscription capacity limits apply to this organization.")
+    usage: Union[StrictFloat, StrictInt]
+    usage_included: Union[StrictFloat, StrictInt] = Field(alias="usageIncluded")
+    projected_usage: Union[StrictFloat, StrictInt] = Field(alias="projectedUsage")
+    __properties: ClassVar[List[str]] = ["allowed", "enforced", "usage", "usageIncluded", "projectedUsage"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -48,7 +51,7 @@ class OrgSubscriptionPlan(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of OrgSubscriptionPlan from a JSON string"""
+        """Create an instance of AppServiceCapacityPreflight from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -73,7 +76,7 @@ class OrgSubscriptionPlan(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of OrgSubscriptionPlan from a dict"""
+        """Create an instance of AppServiceCapacityPreflight from a dict"""
         if obj is None:
             return None
 
@@ -81,8 +84,11 @@ class OrgSubscriptionPlan(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "name": obj.get("name"),
-            "title": obj.get("title")
+            "allowed": obj.get("allowed"),
+            "enforced": obj.get("enforced"),
+            "usage": obj.get("usage"),
+            "usageIncluded": obj.get("usageIncluded"),
+            "projectedUsage": obj.get("projectedUsage")
         })
         return _obj
 

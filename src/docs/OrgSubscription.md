@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**status** | **str** |  | 
+**status** | [**BillingSubscriptionStatus**](BillingSubscriptionStatus.md) |  | 
 **plan** | [**OrgSubscriptionPlan**](OrgSubscriptionPlan.md) |  | [optional] 
 
 ## Example

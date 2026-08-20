@@ -17,8 +17,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
+from wodby.models.billing_subscription_status import BillingSubscriptionStatus
 from wodby.models.org_subscription_plan import OrgSubscriptionPlan
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,7 +28,7 @@ class OrgSubscription(BaseModel):
     """
     OrgSubscription
     """ # noqa: E501
-    status: StrictStr
+    status: BillingSubscriptionStatus
     plan: Optional[OrgSubscriptionPlan] = None
     __properties: ClassVar[List[str]] = ["status", "plan"]
 

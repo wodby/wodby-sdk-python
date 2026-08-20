@@ -17,18 +17,20 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List
+from wodby.models.billing_subscription_status import BillingSubscriptionStatus
+from wodby.models.org_subscription_plan_details import OrgSubscriptionPlanDetails
 from typing import Optional, Set
 from typing_extensions import Self
 
-class OrgSubscriptionPlan(BaseModel):
+class OrgSubscriptionDetails(BaseModel):
     """
-    OrgSubscriptionPlan
+    OrgSubscriptionDetails
     """ # noqa: E501
-    name: StrictStr
-    title: StrictStr
-    __properties: ClassVar[List[str]] = ["name", "title"]
+    status: BillingSubscriptionStatus
+    plan: OrgSubscriptionPlanDetails
+    __properties: ClassVar[List[str]] = ["status", "plan"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -48,7 +50,7 @@ class OrgSubscriptionPlan(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of OrgSubscriptionPlan from a JSON string"""
+        """Create an instance of OrgSubscriptionDetails from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -69,11 +71,14 @@ class OrgSubscriptionPlan(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of plan
+        if self.plan:
+            _dict['plan'] = self.plan.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of OrgSubscriptionPlan from a dict"""
+        """Create an instance of OrgSubscriptionDetails from a dict"""
         if obj is None:
             return None
 
@@ -81,8 +86,8 @@ class OrgSubscriptionPlan(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "name": obj.get("name"),
-            "title": obj.get("title")
+            "status": obj.get("status"),
+            "plan": OrgSubscriptionPlanDetails.from_dict(obj["plan"]) if obj.get("plan") is not None else None
         })
         return _obj
 

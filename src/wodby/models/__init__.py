@@ -63,6 +63,8 @@ from wodby.models.app_service_annotation_source import AppServiceAnnotationSourc
 from wodby.models.app_service_build import AppServiceBuild
 from wodby.models.app_service_build_arg import AppServiceBuildArg
 from wodby.models.app_service_build_config import AppServiceBuildConfig
+from wodby.models.app_service_capacity_preflight import AppServiceCapacityPreflight
+from wodby.models.app_service_capacity_preflight_request import AppServiceCapacityPreflightRequest
 from wodby.models.app_service_config import AppServiceConfig
 from wodby.models.app_service_configuration_issue import AppServiceConfigurationIssue
 from wodby.models.app_service_container import AppServiceContainer
@@ -92,6 +94,7 @@ from wodby.models.automation_time_window import AutomationTimeWindow
 from wodby.models.automation_time_window_input import AutomationTimeWindowInput
 from wodby.models.backup import Backup
 from wodby.models.backup_preset import BackupPreset
+from wodby.models.billing_subscription_status import BillingSubscriptionStatus
 from wodby.models.build_source_input import BuildSourceInput
 from wodby.models.cert import Cert
 from wodby.models.cluster import Cluster
@@ -195,7 +198,9 @@ from wodby.models.org import Org
 from wodby.models.org_capabilities import OrgCapabilities
 from wodby.models.org_membership import OrgMembership
 from wodby.models.org_subscription import OrgSubscription
+from wodby.models.org_subscription_details import OrgSubscriptionDetails
 from wodby.models.org_subscription_plan import OrgSubscriptionPlan
+from wodby.models.org_subscription_plan_details import OrgSubscriptionPlanDetails
 from wodby.models.problem_details import ProblemDetails
 from wodby.models.problem_field_error import ProblemFieldError
 from wodby.models.project import Project

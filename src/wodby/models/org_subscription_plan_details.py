@@ -17,18 +17,23 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Union
 from typing import Optional, Set
 from typing_extensions import Self
 
-class OrgSubscriptionPlan(BaseModel):
+class OrgSubscriptionPlanDetails(BaseModel):
     """
-    OrgSubscriptionPlan
+    OrgSubscriptionPlanDetails
     """ # noqa: E501
     name: StrictStr
     title: StrictStr
-    __properties: ClassVar[List[str]] = ["name", "title"]
+    usage: Union[StrictFloat, StrictInt]
+    usage_included: Union[StrictFloat, StrictInt] = Field(alias="usageIncluded")
+    spending_limit: Union[StrictFloat, StrictInt] = Field(alias="spendingLimit")
+    price_per_unit: Union[StrictFloat, StrictInt] = Field(alias="pricePerUnit")
+    unit: StrictStr
+    __properties: ClassVar[List[str]] = ["name", "title", "usage", "usageIncluded", "spendingLimit", "pricePerUnit", "unit"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -48,7 +53,7 @@ class OrgSubscriptionPlan(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of OrgSubscriptionPlan from a JSON string"""
+        """Create an instance of OrgSubscriptionPlanDetails from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -73,7 +78,7 @@ class OrgSubscriptionPlan(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of OrgSubscriptionPlan from a dict"""
+        """Create an instance of OrgSubscriptionPlanDetails from a dict"""
         if obj is None:
             return None
 
@@ -82,7 +87,12 @@ class OrgSubscriptionPlan(BaseModel):
 
         _obj = cls.model_validate({
             "name": obj.get("name"),
-            "title": obj.get("title")
+            "title": obj.get("title"),
+            "usage": obj.get("usage"),
+            "usageIncluded": obj.get("usageIncluded"),
+            "spendingLimit": obj.get("spendingLimit"),
+            "pricePerUnit": obj.get("pricePerUnit"),
+            "unit": obj.get("unit")
         })
         return _obj
 

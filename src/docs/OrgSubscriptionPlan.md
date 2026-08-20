@@ -7,10 +7,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** |  | 
 **title** | **str** |  | 
-**usage** | **float** |  | 
-**usage_included** | **float** |  | 
-**spending_limit** | **float** |  | 
-**price_per_unit** | **float** |  | 
 
 ## Example
 

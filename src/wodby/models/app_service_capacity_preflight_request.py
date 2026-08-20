@@ -17,18 +17,18 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
-class OrgSubscriptionPlan(BaseModel):
+class AppServiceCapacityPreflightRequest(BaseModel):
     """
-    OrgSubscriptionPlan
+    AppServiceCapacityPreflightRequest
     """ # noqa: E501
-    name: StrictStr
-    title: StrictStr
-    __properties: ClassVar[List[str]] = ["name", "title"]
+    additional_usage: Annotated[int, Field(strict=True, ge=0)] = Field(description="Number of enabled app services the operation would add.", alias="additionalUsage")
+    __properties: ClassVar[List[str]] = ["additionalUsage"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -48,7 +48,7 @@ class OrgSubscriptionPlan(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of OrgSubscriptionPlan from a JSON string"""
+        """Create an instance of AppServiceCapacityPreflightRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -73,7 +73,7 @@ class OrgSubscriptionPlan(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of OrgSubscriptionPlan from a dict"""
+        """Create an instance of AppServiceCapacityPreflightRequest from a dict"""
         if obj is None:
             return None
 
@@ -81,8 +81,7 @@ class OrgSubscriptionPlan(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "name": obj.get("name"),
-            "title": obj.get("title")
+            "additionalUsage": obj.get("additionalUsage")
         })
         return _obj
 

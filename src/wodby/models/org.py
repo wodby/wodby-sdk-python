@@ -37,7 +37,7 @@ class Org(BaseModel):
     ci_integration_id: StrictInt = Field(description="Effective default CI integration ID. Zero selects the built-in Wodby CI service.", alias="ciIntegrationId")
     registry_integration_id: StrictInt = Field(description="Effective default registry integration ID. Zero selects the built-in Wodby registry service.", alias="registryIntegrationId")
     capabilities: Optional[OrgCapabilities] = None
-    subscription: Optional[OrgSubscription] = None
+    subscription: Optional[OrgSubscription] = Field(default=None, description="Billing summary. Omitted when the caller does not have billing-view access.")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
     __properties: ClassVar[List[str]] = ["id", "name", "title", "domain", "defaultTimeZone", "ciIntegrationId", "registryIntegrationId", "capabilities", "subscription", "createdAt", "updatedAt"]
