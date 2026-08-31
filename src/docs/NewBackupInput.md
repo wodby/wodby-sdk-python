@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **integration_id** | **int** | Use 0 for Wodby Blob Storage. | 
 **bucket** | **str** | Must be empty for Wodby Blob Storage. | 
 **storage_class** | **str** |  | [optional] 
+**options** | [**List[BackupOption]**](BackupOption.md) |  | [optional] 
 
 ## Example
 

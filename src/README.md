@@ -457,6 +457,7 @@ Class | Method | HTTP request | Description
  - [AutomationTimeWindow](docs/AutomationTimeWindow.md)
  - [AutomationTimeWindowInput](docs/AutomationTimeWindowInput.md)
  - [Backup](docs/Backup.md)
+ - [BackupOption](docs/BackupOption.md)
  - [BackupPreset](docs/BackupPreset.md)
  - [BillingSubscriptionStatus](docs/BillingSubscriptionStatus.md)
  - [BuildSourceInput](docs/BuildSourceInput.md)

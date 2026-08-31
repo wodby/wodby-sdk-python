@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from wodby.models.backup_option import BackupOption
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -32,7 +33,8 @@ class NewBackupInput(BaseModel):
     integration_id: StrictInt = Field(description="Use 0 for Wodby Blob Storage.", alias="integrationId")
     bucket: StrictStr = Field(description="Must be empty for Wodby Blob Storage.")
     storage_class: Optional[StrictStr] = Field(default=None, alias="storageClass")
-    __properties: ClassVar[List[str]] = ["appServiceId", "databaseDbId", "backupName", "integrationId", "bucket", "storageClass"]
+    options: Optional[List[BackupOption]] = None
+    __properties: ClassVar[List[str]] = ["appServiceId", "databaseDbId", "backupName", "integrationId", "bucket", "storageClass", "options"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -73,6 +75,13 @@ class NewBackupInput(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in options (list)
+        _items = []
+        if self.options:
+            for _item_options in self.options:
+                if _item_options:
+                    _items.append(_item_options.to_dict())
+            _dict['options'] = _items
         # set to None if app_service_id (nullable) is None
         # and model_fields_set contains the field
         if self.app_service_id is None and "app_service_id" in self.model_fields_set:
@@ -93,6 +102,11 @@ class NewBackupInput(BaseModel):
         if self.storage_class is None and "storage_class" in self.model_fields_set:
             _dict['storageClass'] = None
 
+        # set to None if options (nullable) is None
+        # and model_fields_set contains the field
+        if self.options is None and "options" in self.model_fields_set:
+            _dict['options'] = None
+
         return _dict
 
     @classmethod
@@ -110,7 +124,8 @@ class NewBackupInput(BaseModel):
             "backupName": obj.get("backupName"),
             "integrationId": obj.get("integrationId"),
             "bucket": obj.get("bucket"),
-            "storageClass": obj.get("storageClass")
+            "storageClass": obj.get("storageClass"),
+            "options": [BackupOption.from_dict(_item) for _item in obj["options"]] if obj.get("options") is not None else None
         })
         return _obj
 

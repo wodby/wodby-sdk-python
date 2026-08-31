@@ -21,6 +21,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, Strict
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from wodby.models.automation_time_window_input import AutomationTimeWindowInput
+from wodby.models.backup_option import BackupOption
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -31,13 +32,14 @@ class UpdateBackupPresetInput(BaseModel):
     integration_id: StrictInt = Field(description="Use 0 for Wodby Blob Storage. Enabling the preset requires a paid subscription.", alias="integrationId")
     bucket: StrictStr = Field(description="Must be empty for Wodby Blob Storage.")
     storage_class: Optional[StrictStr] = Field(default=None, alias="storageClass")
+    options: Optional[List[BackupOption]] = None
     disabled: StrictBool
     override: StrictBool
     auto: StrictBool
     crontab: Optional[StrictStr] = None
     time_window: Optional[AutomationTimeWindowInput] = Field(default=None, alias="timeWindow")
     duration: Optional[Annotated[int, Field(le=180, strict=True, ge=30)]] = None
-    __properties: ClassVar[List[str]] = ["integrationId", "bucket", "storageClass", "disabled", "override", "auto", "crontab", "timeWindow", "duration"]
+    __properties: ClassVar[List[str]] = ["integrationId", "bucket", "storageClass", "options", "disabled", "override", "auto", "crontab", "timeWindow", "duration"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -78,6 +80,13 @@ class UpdateBackupPresetInput(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in options (list)
+        _items = []
+        if self.options:
+            for _item_options in self.options:
+                if _item_options:
+                    _items.append(_item_options.to_dict())
+            _dict['options'] = _items
         # override the default output from pydantic by calling `to_dict()` of time_window
         if self.time_window:
             _dict['timeWindow'] = self.time_window.to_dict()
@@ -85,6 +94,11 @@ class UpdateBackupPresetInput(BaseModel):
         # and model_fields_set contains the field
         if self.storage_class is None and "storage_class" in self.model_fields_set:
             _dict['storageClass'] = None
+
+        # set to None if options (nullable) is None
+        # and model_fields_set contains the field
+        if self.options is None and "options" in self.model_fields_set:
+            _dict['options'] = None
 
         # set to None if crontab (nullable) is None
         # and model_fields_set contains the field
@@ -111,6 +125,7 @@ class UpdateBackupPresetInput(BaseModel):
             "integrationId": obj.get("integrationId"),
             "bucket": obj.get("bucket"),
             "storageClass": obj.get("storageClass"),
+            "options": [BackupOption.from_dict(_item) for _item in obj["options"]] if obj.get("options") is not None else None,
             "disabled": obj.get("disabled"),
             "override": obj.get("override"),
             "auto": obj.get("auto"),

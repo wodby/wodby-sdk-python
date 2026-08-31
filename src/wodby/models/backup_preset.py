@@ -22,6 +22,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, Strict
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from wodby.models.automation_time_window import AutomationTimeWindow
+from wodby.models.backup_option import BackupOption
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -40,6 +41,7 @@ class BackupPreset(BaseModel):
     integration_id: StrictInt = Field(alias="integrationId")
     bucket: StrictStr
     storage_class: Optional[StrictStr] = Field(default=None, alias="storageClass")
+    options: List[BackupOption]
     override: StrictBool
     auto: StrictBool
     disabled: StrictBool
@@ -49,7 +51,7 @@ class BackupPreset(BaseModel):
     next_run_at: Optional[datetime] = Field(default=None, alias="nextRunAt")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "appInstanceId", "appServiceId", "databaseId", "databaseDbId", "orgId", "envId", "backupName", "integrationId", "bucket", "storageClass", "override", "auto", "disabled", "crontab", "timeWindow", "duration", "nextRunAt", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "appInstanceId", "appServiceId", "databaseId", "databaseDbId", "orgId", "envId", "backupName", "integrationId", "bucket", "storageClass", "options", "override", "auto", "disabled", "crontab", "timeWindow", "duration", "nextRunAt", "createdAt", "updatedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -90,6 +92,13 @@ class BackupPreset(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in options (list)
+        _items = []
+        if self.options:
+            for _item_options in self.options:
+                if _item_options:
+                    _items.append(_item_options.to_dict())
+            _dict['options'] = _items
         # override the default output from pydantic by calling `to_dict()` of time_window
         if self.time_window:
             _dict['timeWindow'] = self.time_window.to_dict()
@@ -171,6 +180,7 @@ class BackupPreset(BaseModel):
             "integrationId": obj.get("integrationId"),
             "bucket": obj.get("bucket"),
             "storageClass": obj.get("storageClass"),
+            "options": [BackupOption.from_dict(_item) for _item in obj["options"]] if obj.get("options") is not None else None,
             "override": obj.get("override"),
             "auto": obj.get("auto"),
             "disabled": obj.get("disabled"),

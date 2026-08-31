@@ -90,6 +90,7 @@ docs/AppsApi.md
 docs/AutomationTimeWindow.md
 docs/AutomationTimeWindowInput.md
 docs/Backup.md
+docs/BackupOption.md
 docs/BackupPreset.md
 docs/BackupsApi.md
 docs/BillingSubscriptionStatus.md
@@ -328,6 +329,7 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_backup_option.py
 tox.ini
 wodby/__init__.py
 wodby/api/__init__.py
@@ -444,6 +446,7 @@ wodby/models/app_service_volume_storage_class_state.py
 wodby/models/automation_time_window.py
 wodby/models/automation_time_window_input.py
 wodby/models/backup.py
+wodby/models/backup_option.py
 wodby/models/backup_preset.py
 wodby/models/billing_subscription_status.py
 wodby/models/build_source_input.py

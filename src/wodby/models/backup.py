@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from wodby.models.backup_option import BackupOption
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -36,11 +37,12 @@ class Backup(BaseModel):
     database_db_id: Optional[StrictInt] = Field(default=None, alias="databaseDbId")
     integration_id: Optional[StrictInt] = Field(description="Storage integration that owns the backup. Null identifies Wodby's built-in blob storage.", alias="integrationId")
     task_id: Optional[StrictInt] = Field(default=None, alias="taskId")
+    options: List[BackupOption]
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
     started_at: Optional[datetime] = Field(default=None, alias="startedAt")
     ended_at: Optional[datetime] = Field(default=None, alias="endedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "status", "appInstanceId", "appServiceId", "databaseId", "databaseDbId", "integrationId", "taskId", "createdAt", "updatedAt", "startedAt", "endedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "status", "appInstanceId", "appServiceId", "databaseId", "databaseDbId", "integrationId", "taskId", "options", "createdAt", "updatedAt", "startedAt", "endedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -81,6 +83,13 @@ class Backup(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in options (list)
+        _items = []
+        if self.options:
+            for _item_options in self.options:
+                if _item_options:
+                    _items.append(_item_options.to_dict())
+            _dict['options'] = _items
         # set to None if app_instance_id (nullable) is None
         # and model_fields_set contains the field
         if self.app_instance_id is None and "app_instance_id" in self.model_fields_set:
@@ -142,6 +151,7 @@ class Backup(BaseModel):
             "databaseDbId": obj.get("databaseDbId"),
             "integrationId": obj.get("integrationId"),
             "taskId": obj.get("taskId"),
+            "options": [BackupOption.from_dict(_item) for _item in obj["options"]] if obj.get("options") is not None else None,
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt"),
             "startedAt": obj.get("startedAt"),

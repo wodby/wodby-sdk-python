@@ -93,6 +93,7 @@ from wodby.models.app_service_volume_storage_class_state import AppServiceVolume
 from wodby.models.automation_time_window import AutomationTimeWindow
 from wodby.models.automation_time_window_input import AutomationTimeWindowInput
 from wodby.models.backup import Backup
+from wodby.models.backup_option import BackupOption
 from wodby.models.backup_preset import BackupPreset
 from wodby.models.billing_subscription_status import BillingSubscriptionStatus
 from wodby.models.build_source_input import BuildSourceInput
