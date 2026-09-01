@@ -343,14 +343,6 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_app_environment_auto_stack_upgrade_settings.py
-test/test_app_environment_auto_stack_upgrade_settings_input.py
-test/test_app_environment_backup_health.py
-test/test_app_environment_cron_health.py
-test/test_app_environment_stack_upgrade_changelog.py
-test/test_app_environment_stack_upgrade_settings.py
-test/test_app_environment_stack_upgrade_settings_input.py
-test/test_new_app_environment_access_endpoint_input.py
 tox.ini
 wodby/__init__.py
 wodby/api/__init__.py
