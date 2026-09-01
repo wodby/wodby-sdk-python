@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **scope** | **str** |  | 
 **settings** | [**List[AppAccessSettingInput]**](AppAccessSettingInput.md) |  | [optional] 
 **host** | **str** | Required only when the selected provider uses a customer-assigned hostname. | [optional] 
-**endpoints** | [**List[NewAppInstanceAccessEndpointInput]**](NewAppInstanceAccessEndpointInput.md) | HTTP endpoints selected during creation. Used only with SELECTED_ENDPOINTS scope; older clients may omit it to select the main endpoint. | [optional] 
+**endpoints** | [**List[NewAppEnvironmentAccessEndpointInput]**](NewAppEnvironmentAccessEndpointInput.md) | HTTP endpoints selected during creation. Used only with SELECTED_ENDPOINTS scope; older clients may omit it to select the main endpoint. | [optional] 
 
 ## Example
 

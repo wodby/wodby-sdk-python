@@ -17,18 +17,19 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
-from wodby.models.app_environment_auto_stack_upgrade_settings import AppEnvironmentAutoStackUpgradeSettings
 from typing import Optional, Set
 from typing_extensions import Self
 
-class AppEnvironmentSettings(BaseModel):
+class AppEnvironmentCronHealth(BaseModel):
     """
-    AppEnvironmentSettings
+    AppEnvironmentCronHealth
     """ # noqa: E501
-    auto_stack_upgrade: Optional[AppEnvironmentAutoStackUpgradeSettings] = Field(default=None, alias="autoStackUpgrade")
-    __properties: ClassVar[List[str]] = ["autoStackUpgrade"]
+    failing_schedules_count: StrictInt = Field(alias="failingSchedulesCount")
+    latest_failure_at: Optional[datetime] = Field(default=None, alias="latestFailureAt")
+    __properties: ClassVar[List[str]] = ["failingSchedulesCount", "latestFailureAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -48,7 +49,7 @@ class AppEnvironmentSettings(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of AppEnvironmentSettings from a JSON string"""
+        """Create an instance of AppEnvironmentCronHealth from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -69,14 +70,16 @@ class AppEnvironmentSettings(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of auto_stack_upgrade
-        if self.auto_stack_upgrade:
-            _dict['autoStackUpgrade'] = self.auto_stack_upgrade.to_dict()
+        # set to None if latest_failure_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.latest_failure_at is None and "latest_failure_at" in self.model_fields_set:
+            _dict['latestFailureAt'] = None
+
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of AppEnvironmentSettings from a dict"""
+        """Create an instance of AppEnvironmentCronHealth from a dict"""
         if obj is None:
             return None
 
@@ -84,7 +87,8 @@ class AppEnvironmentSettings(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "autoStackUpgrade": AppEnvironmentAutoStackUpgradeSettings.from_dict(obj["autoStackUpgrade"]) if obj.get("autoStackUpgrade") is not None else None
+            "failingSchedulesCount": obj.get("failingSchedulesCount"),
+            "latestFailureAt": obj.get("latestFailureAt")
         })
         return _obj
 

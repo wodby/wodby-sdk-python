@@ -19,8 +19,8 @@ import json
 
 from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List
-from wodby.models.app_instance_backup_health import AppInstanceBackupHealth
-from wodby.models.app_instance_cron_health import AppInstanceCronHealth
+from wodby.models.app_environment_backup_health import AppEnvironmentBackupHealth
+from wodby.models.app_environment_cron_health import AppEnvironmentCronHealth
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,8 +28,8 @@ class AppEnvironmentHealth(BaseModel):
     """
     AppEnvironmentHealth
     """ # noqa: E501
-    cron: AppInstanceCronHealth
-    backups: AppInstanceBackupHealth
+    cron: AppEnvironmentCronHealth
+    backups: AppEnvironmentBackupHealth
     __properties: ClassVar[List[str]] = ["cron", "backups"]
 
     model_config = ConfigDict(
@@ -89,8 +89,8 @@ class AppEnvironmentHealth(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "cron": AppInstanceCronHealth.from_dict(obj["cron"]) if obj.get("cron") is not None else None,
-            "backups": AppInstanceBackupHealth.from_dict(obj["backups"]) if obj.get("backups") is not None else None
+            "cron": AppEnvironmentCronHealth.from_dict(obj["cron"]) if obj.get("cron") is not None else None,
+            "backups": AppEnvironmentBackupHealth.from_dict(obj["backups"]) if obj.get("backups") is not None else None
         })
         return _obj
 

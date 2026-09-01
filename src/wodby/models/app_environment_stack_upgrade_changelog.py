@@ -17,18 +17,22 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
-from wodby.models.app_environment_auto_stack_upgrade_settings import AppEnvironmentAutoStackUpgradeSettings
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List
+from wodby.models.service_revision_change import ServiceRevisionChange
 from typing import Optional, Set
 from typing_extensions import Self
 
-class AppEnvironmentSettings(BaseModel):
+class AppEnvironmentStackUpgradeChangelog(BaseModel):
     """
-    AppEnvironmentSettings
+    AppEnvironmentStackUpgradeChangelog
     """ # noqa: E501
-    auto_stack_upgrade: Optional[AppEnvironmentAutoStackUpgradeSettings] = Field(default=None, alias="autoStackUpgrade")
-    __properties: ClassVar[List[str]] = ["autoStackUpgrade"]
+    previous_stack_version: StrictStr = Field(alias="previousStackVersion")
+    stack_version: StrictStr = Field(alias="stackVersion")
+    previous_stack_rev_number: StrictInt = Field(alias="previousStackRevNumber")
+    stack_rev_number: StrictInt = Field(alias="stackRevNumber")
+    service_changes: List[ServiceRevisionChange] = Field(alias="serviceChanges")
+    __properties: ClassVar[List[str]] = ["previousStackVersion", "stackVersion", "previousStackRevNumber", "stackRevNumber", "serviceChanges"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -48,7 +52,7 @@ class AppEnvironmentSettings(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of AppEnvironmentSettings from a JSON string"""
+        """Create an instance of AppEnvironmentStackUpgradeChangelog from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -69,14 +73,18 @@ class AppEnvironmentSettings(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of auto_stack_upgrade
-        if self.auto_stack_upgrade:
-            _dict['autoStackUpgrade'] = self.auto_stack_upgrade.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in service_changes (list)
+        _items = []
+        if self.service_changes:
+            for _item_service_changes in self.service_changes:
+                if _item_service_changes:
+                    _items.append(_item_service_changes.to_dict())
+            _dict['serviceChanges'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of AppEnvironmentSettings from a dict"""
+        """Create an instance of AppEnvironmentStackUpgradeChangelog from a dict"""
         if obj is None:
             return None
 
@@ -84,7 +92,11 @@ class AppEnvironmentSettings(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "autoStackUpgrade": AppEnvironmentAutoStackUpgradeSettings.from_dict(obj["autoStackUpgrade"]) if obj.get("autoStackUpgrade") is not None else None
+            "previousStackVersion": obj.get("previousStackVersion"),
+            "stackVersion": obj.get("stackVersion"),
+            "previousStackRevNumber": obj.get("previousStackRevNumber"),
+            "stackRevNumber": obj.get("stackRevNumber"),
+            "serviceChanges": [ServiceRevisionChange.from_dict(_item) for _item in obj["serviceChanges"]] if obj.get("serviceChanges") is not None else None
         })
         return _obj
 

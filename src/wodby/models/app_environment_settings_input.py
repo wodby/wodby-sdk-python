@@ -19,7 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
-from wodby.models.app_instance_auto_stack_upgrade_settings_input import AppInstanceAutoStackUpgradeSettingsInput
+from wodby.models.app_environment_auto_stack_upgrade_settings_input import AppEnvironmentAutoStackUpgradeSettingsInput
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +27,7 @@ class AppEnvironmentSettingsInput(BaseModel):
     """
     AppEnvironmentSettingsInput
     """ # noqa: E501
-    auto_stack_upgrade: Optional[AppInstanceAutoStackUpgradeSettingsInput] = Field(default=None, alias="autoStackUpgrade")
+    auto_stack_upgrade: Optional[AppEnvironmentAutoStackUpgradeSettingsInput] = Field(default=None, alias="autoStackUpgrade")
     __properties: ClassVar[List[str]] = ["autoStackUpgrade"]
 
     model_config = ConfigDict(
@@ -84,7 +84,7 @@ class AppEnvironmentSettingsInput(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "autoStackUpgrade": AppInstanceAutoStackUpgradeSettingsInput.from_dict(obj["autoStackUpgrade"]) if obj.get("autoStackUpgrade") is not None else None
+            "autoStackUpgrade": AppEnvironmentAutoStackUpgradeSettingsInput.from_dict(obj["autoStackUpgrade"]) if obj.get("autoStackUpgrade") is not None else None
         })
         return _obj
 

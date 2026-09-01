@@ -114,38 +114,26 @@ Class | Method | HTTP request | Description
 *AppDeploymentsApi* | [**get_app_deployment**](docs/AppDeploymentsApi.md#get_app_deployment) | **GET** /app-deployments/{id} | Get deployment
 *AppDeploymentsApi* | [**list_app_deployments**](docs/AppDeploymentsApi.md#list_app_deployments) | **GET** /app-deployments | List app deployments
 *AppDeploymentsApi* | [**redeploy_app_deployment**](docs/AppDeploymentsApi.md#redeploy_app_deployment) | **POST** /app-deployments/{id}/redeploy | Redeploy deployment
+*AppEnvironmentsApi* | [**create_app_access**](docs/AppEnvironmentsApi.md#create_app_access) | **POST** /app-environment-accesses/{id} | Create app environment access
 *AppEnvironmentsApi* | [**create_app_environment**](docs/AppEnvironmentsApi.md#create_app_environment) | **POST** /app-environments | Create app environment
+*AppEnvironmentsApi* | [**delete_app_access**](docs/AppEnvironmentsApi.md#delete_app_access) | **DELETE** /app-accesses/{id} | Delete app access
 *AppEnvironmentsApi* | [**delete_app_environment**](docs/AppEnvironmentsApi.md#delete_app_environment) | **DELETE** /app-environments/{id} | Delete app environment
 *AppEnvironmentsApi* | [**get_app_environment**](docs/AppEnvironmentsApi.md#get_app_environment) | **GET** /app-environments/{id} | Get app environment
+*AppEnvironmentsApi* | [**get_app_environment_access**](docs/AppEnvironmentsApi.md#get_app_environment_access) | **GET** /app-environment-accesses/{id} | Get app environment access
 *AppEnvironmentsApi* | [**get_app_environment_by_name**](docs/AppEnvironmentsApi.md#get_app_environment_by_name) | **GET** /app-environments/by-name/{appName}/{environmentName} | Get app environment by name
 *AppEnvironmentsApi* | [**get_app_environment_cicd_settings**](docs/AppEnvironmentsApi.md#get_app_environment_cicd_settings) | **GET** /app-environments/cicd-settings/{id} | Get app environment CI/CD settings
+*AppEnvironmentsApi* | [**get_app_environment_stack_upgrade_changelog**](docs/AppEnvironmentsApi.md#get_app_environment_stack_upgrade_changelog) | **GET** /app-environment-stack-upgrade-changelogs/{id} | Preview app environment stack upgrade
+*AppEnvironmentsApi* | [**list_app_access_cleanups**](docs/AppEnvironmentsApi.md#list_app_access_cleanups) | **GET** /app-access-cleanups | List app-access cleanups
 *AppEnvironmentsApi* | [**list_app_environments**](docs/AppEnvironmentsApi.md#list_app_environments) | **GET** /app-environments | List app environments
+*AppEnvironmentsApi* | [**preflight_app_access**](docs/AppEnvironmentsApi.md#preflight_app_access) | **POST** /app-accesses/actions/preflight | Preflight app environment access
 *AppEnvironmentsApi* | [**reconcile_app_environment_stack**](docs/AppEnvironmentsApi.md#reconcile_app_environment_stack) | **POST** /app-environments/{id}/actions/reconcile-stack | Reconcile app environment stack
+*AppEnvironmentsApi* | [**retry_app_access_cleanup**](docs/AppEnvironmentsApi.md#retry_app_access_cleanup) | **POST** /app-access-cleanups/{id}/actions/retry | Retry app-access cleanup
+*AppEnvironmentsApi* | [**update_app_access**](docs/AppEnvironmentsApi.md#update_app_access) | **PUT** /app-accesses/{id} | Update app access
 *AppEnvironmentsApi* | [**update_app_environment**](docs/AppEnvironmentsApi.md#update_app_environment) | **PUT** /app-environments/{id} | Update app environment
 *AppEnvironmentsApi* | [**update_app_environment_cicd_settings**](docs/AppEnvironmentsApi.md#update_app_environment_cicd_settings) | **PUT** /app-environments/cicd-settings/{id} | Update app environment CI/CD settings
 *AppEnvironmentsApi* | [**update_app_environment_maintenance_mode**](docs/AppEnvironmentsApi.md#update_app_environment_maintenance_mode) | **PUT** /app-environments/{id}/actions/maintenance-mode | Update app environment maintenance mode
 *AppEnvironmentsApi* | [**update_app_environment_settings**](docs/AppEnvironmentsApi.md#update_app_environment_settings) | **PUT** /app-environments/settings/{id} | Update app environment settings
 *AppEnvironmentsApi* | [**upgrade_app_environment_stack**](docs/AppEnvironmentsApi.md#upgrade_app_environment_stack) | **POST** /app-environments/{id}/actions/upgrade-stack | Upgrade app environment stack
-*AppInstancesApi* | [**create_app_access**](docs/AppInstancesApi.md#create_app_access) | **POST** /app-instance-accesses/{id} | Create app instance access
-*AppInstancesApi* | [**create_app_instance**](docs/AppInstancesApi.md#create_app_instance) | **POST** /app-instances | Create app instance
-*AppInstancesApi* | [**delete_app_access**](docs/AppInstancesApi.md#delete_app_access) | **DELETE** /app-accesses/{id} | Delete app access
-*AppInstancesApi* | [**delete_app_instance**](docs/AppInstancesApi.md#delete_app_instance) | **DELETE** /app-instances/{id} | Delete app instance
-*AppInstancesApi* | [**get_app_instance**](docs/AppInstancesApi.md#get_app_instance) | **GET** /app-instances/{id} | Get app instance
-*AppInstancesApi* | [**get_app_instance_access**](docs/AppInstancesApi.md#get_app_instance_access) | **GET** /app-instance-accesses/{id} | Get app instance access
-*AppInstancesApi* | [**get_app_instance_by_name**](docs/AppInstancesApi.md#get_app_instance_by_name) | **GET** /app-instances/by-name/{appName}/{instanceName} | Get app instance by app and instance name
-*AppInstancesApi* | [**get_app_instance_cicd_settings**](docs/AppInstancesApi.md#get_app_instance_cicd_settings) | **GET** /app-instances/cicd-settings/{id} | Get app instance CI/CD settings
-*AppInstancesApi* | [**get_app_instance_stack_upgrade_changelog**](docs/AppInstancesApi.md#get_app_instance_stack_upgrade_changelog) | **GET** /app-instance-stack-upgrade-changelogs/{id} | Preview app instance stack upgrade
-*AppInstancesApi* | [**list_app_access_cleanups**](docs/AppInstancesApi.md#list_app_access_cleanups) | **GET** /app-access-cleanups | List app-access cleanups
-*AppInstancesApi* | [**list_app_instances**](docs/AppInstancesApi.md#list_app_instances) | **GET** /app-instances | List app instances
-*AppInstancesApi* | [**preflight_app_access**](docs/AppInstancesApi.md#preflight_app_access) | **POST** /app-accesses/actions/preflight | Preflight app instance access
-*AppInstancesApi* | [**reconcile_app_instance_stack**](docs/AppInstancesApi.md#reconcile_app_instance_stack) | **POST** /app-instances/{id}/actions/reconcile-stack | Reconcile app instance stack
-*AppInstancesApi* | [**retry_app_access_cleanup**](docs/AppInstancesApi.md#retry_app_access_cleanup) | **POST** /app-access-cleanups/{id}/actions/retry | Retry app-access cleanup
-*AppInstancesApi* | [**update_app_access**](docs/AppInstancesApi.md#update_app_access) | **PUT** /app-accesses/{id} | Update app access
-*AppInstancesApi* | [**update_app_instance**](docs/AppInstancesApi.md#update_app_instance) | **PUT** /app-instances/{id} | Update app instance
-*AppInstancesApi* | [**update_app_instance_cicd_settings**](docs/AppInstancesApi.md#update_app_instance_cicd_settings) | **PUT** /app-instances/cicd-settings/{id} | Update app instance CI/CD settings
-*AppInstancesApi* | [**update_app_instance_maintenance_mode**](docs/AppInstancesApi.md#update_app_instance_maintenance_mode) | **PUT** /app-instances/{id}/actions/maintenance-mode | Update app instance maintenance mode
-*AppInstancesApi* | [**update_app_instance_settings**](docs/AppInstancesApi.md#update_app_instance_settings) | **PUT** /app-instances/settings/{id} | Update app instance settings
-*AppInstancesApi* | [**upgrade_app_instance_stack**](docs/AppInstancesApi.md#upgrade_app_instance_stack) | **POST** /app-instances/{id}/actions/upgrade-stack | Upgrade app instance stack
 *AppPortsApi* | [**get_app_port**](docs/AppPortsApi.md#get_app_port) | **GET** /app-ports/{id} | Get app port
 *AppPortsApi* | [**list_app_ports**](docs/AppPortsApi.md#list_app_ports) | **GET** /app-ports | List app ports
 *AppRoutesApi* | [**create_app_route**](docs/AppRoutesApi.md#create_app_route) | **POST** /app-routes | Create app route
@@ -251,12 +239,6 @@ Class | Method | HTTP request | Description
 *DatabasesApi* | [**update_database_user_dbs**](docs/DatabasesApi.md#update_database_user_dbs) | **PUT** /database-users/{id}/dbs | Update database user DB grants
 *DefaultApi* | [**get_open_api_json**](docs/DefaultApi.md#get_open_api_json) | **GET** /openapi.json | Get OpenAPI JSON
 *DefaultApi* | [**get_open_api_yaml**](docs/DefaultApi.md#get_open_api_yaml) | **GET** /openapi.yaml | Get OpenAPI YAML
-*EnvsApi* | [**create_env**](docs/EnvsApi.md#create_env) | **POST** /envs | Create env
-*EnvsApi* | [**delete_env**](docs/EnvsApi.md#delete_env) | **DELETE** /envs/{id} | Delete env
-*EnvsApi* | [**get_env**](docs/EnvsApi.md#get_env) | **GET** /envs/{id} | Get env
-*EnvsApi* | [**get_env_by_name**](docs/EnvsApi.md#get_env_by_name) | **GET** /envs/by-name/{name} | Get env by name
-*EnvsApi* | [**list_envs**](docs/EnvsApi.md#list_envs) | **GET** /envs | List envs
-*EnvsApi* | [**update_env**](docs/EnvsApi.md#update_env) | **PUT** /envs/{id} | Update env
 *GitReposApi* | [**get_git_repo_usages**](docs/GitReposApi.md#get_git_repo_usages) | **GET** /git-repos/{id}/usages | Get Git repository usages
 *GitReposApi* | [**update_git_repo_from_git**](docs/GitReposApi.md#update_git_repo_from_git) | **POST** /git-repos/{id}/actions/update-from-git | Update all Git repository usages
 *HelmChartsApi* | [**inspect_helm_chart**](docs/HelmChartsApi.md#inspect_helm_chart) | **POST** /helm-charts/actions/inspect | Inspect Helm chart
@@ -422,32 +404,22 @@ Class | Method | HTTP request | Description
  - [AppDeployment](docs/AppDeployment.md)
  - [AppDeploymentsResponse](docs/AppDeploymentsResponse.md)
  - [AppEnvironment](docs/AppEnvironment.md)
+ - [AppEnvironmentAutoStackUpgradeSettings](docs/AppEnvironmentAutoStackUpgradeSettings.md)
+ - [AppEnvironmentAutoStackUpgradeSettingsInput](docs/AppEnvironmentAutoStackUpgradeSettingsInput.md)
+ - [AppEnvironmentBackupHealth](docs/AppEnvironmentBackupHealth.md)
  - [AppEnvironmentCICDSettings](docs/AppEnvironmentCICDSettings.md)
  - [AppEnvironmentCICDSettingsInput](docs/AppEnvironmentCICDSettingsInput.md)
+ - [AppEnvironmentCronHealth](docs/AppEnvironmentCronHealth.md)
  - [AppEnvironmentHealth](docs/AppEnvironmentHealth.md)
  - [AppEnvironmentMainRouteCert](docs/AppEnvironmentMainRouteCert.md)
  - [AppEnvironmentMaintenanceModeInput](docs/AppEnvironmentMaintenanceModeInput.md)
  - [AppEnvironmentSettings](docs/AppEnvironmentSettings.md)
  - [AppEnvironmentSettingsInput](docs/AppEnvironmentSettingsInput.md)
  - [AppEnvironmentStackReconciliationInput](docs/AppEnvironmentStackReconciliationInput.md)
+ - [AppEnvironmentStackUpgradeChangelog](docs/AppEnvironmentStackUpgradeChangelog.md)
  - [AppEnvironmentStackUpgradeInput](docs/AppEnvironmentStackUpgradeInput.md)
- - [AppInstance](docs/AppInstance.md)
- - [AppInstanceAutoStackUpgradeSettings](docs/AppInstanceAutoStackUpgradeSettings.md)
- - [AppInstanceAutoStackUpgradeSettingsInput](docs/AppInstanceAutoStackUpgradeSettingsInput.md)
- - [AppInstanceBackupHealth](docs/AppInstanceBackupHealth.md)
- - [AppInstanceCICDSettings](docs/AppInstanceCICDSettings.md)
- - [AppInstanceCICDSettingsInput](docs/AppInstanceCICDSettingsInput.md)
- - [AppInstanceCronHealth](docs/AppInstanceCronHealth.md)
- - [AppInstanceHealth](docs/AppInstanceHealth.md)
- - [AppInstanceMainRouteCert](docs/AppInstanceMainRouteCert.md)
- - [AppInstanceMaintenanceModeInput](docs/AppInstanceMaintenanceModeInput.md)
- - [AppInstanceSettings](docs/AppInstanceSettings.md)
- - [AppInstanceSettingsInput](docs/AppInstanceSettingsInput.md)
- - [AppInstanceStackReconciliationInput](docs/AppInstanceStackReconciliationInput.md)
- - [AppInstanceStackUpgradeChangelog](docs/AppInstanceStackUpgradeChangelog.md)
- - [AppInstanceStackUpgradeInput](docs/AppInstanceStackUpgradeInput.md)
- - [AppInstanceStackUpgradeSettings](docs/AppInstanceStackUpgradeSettings.md)
- - [AppInstanceStackUpgradeSettingsInput](docs/AppInstanceStackUpgradeSettingsInput.md)
+ - [AppEnvironmentStackUpgradeSettings](docs/AppEnvironmentStackUpgradeSettings.md)
+ - [AppEnvironmentStackUpgradeSettingsInput](docs/AppEnvironmentStackUpgradeSettingsInput.md)
  - [AppPort](docs/AppPort.md)
  - [AppRoute](docs/AppRoute.md)
  - [AppRouteSetting](docs/AppRouteSetting.md)
@@ -512,7 +484,6 @@ Class | Method | HTTP request | Description
  - [CopyStackSettingsInput](docs/CopyStackSettingsInput.md)
  - [CreateBuildRequest](docs/CreateBuildRequest.md)
  - [CreateDeploymentRequest](docs/CreateDeploymentRequest.md)
- - [CreateEnvRequest](docs/CreateEnvRequest.md)
  - [CurrentUser](docs/CurrentUser.md)
  - [Database](docs/Database.md)
  - [DatabaseCharset](docs/DatabaseCharset.md)
@@ -524,7 +495,6 @@ Class | Method | HTTP request | Description
  - [DockerRegistryCredentials](docs/DockerRegistryCredentials.md)
  - [DuplicateStackRequest](docs/DuplicateStackRequest.md)
  - [EffectiveAppRouteSetting](docs/EffectiveAppRouteSetting.md)
- - [Env](docs/Env.md)
  - [FieldInput](docs/FieldInput.md)
  - [GitAutoUpdateSettings](docs/GitAutoUpdateSettings.md)
  - [GitAutoUpdateSettingsInput](docs/GitAutoUpdateSettingsInput.md)
@@ -569,12 +539,10 @@ Class | Method | HTTP request | Description
  - [NewAnnotationInput](docs/NewAnnotationInput.md)
  - [NewAppAccessInput](docs/NewAppAccessInput.md)
  - [NewAppAuthInput](docs/NewAppAuthInput.md)
+ - [NewAppEnvironmentAccessEndpointInput](docs/NewAppEnvironmentAccessEndpointInput.md)
  - [NewAppEnvironmentAccessInput](docs/NewAppEnvironmentAccessInput.md)
  - [NewAppEnvironmentInput](docs/NewAppEnvironmentInput.md)
  - [NewAppInput](docs/NewAppInput.md)
- - [NewAppInstanceAccessEndpointInput](docs/NewAppInstanceAccessEndpointInput.md)
- - [NewAppInstanceAccessInput](docs/NewAppInstanceAccessInput.md)
- - [NewAppInstanceInput](docs/NewAppInstanceInput.md)
  - [NewAppRouteInput](docs/NewAppRouteInput.md)
  - [NewAppServiceCronScheduleInput](docs/NewAppServiceCronScheduleInput.md)
  - [NewAppServiceEnvVarInput](docs/NewAppServiceEnvVarInput.md)
@@ -702,7 +670,6 @@ Class | Method | HTTP request | Description
  - [UpdateBackupPresetInput](docs/UpdateBackupPresetInput.md)
  - [UpdateCurrentUserRequest](docs/UpdateCurrentUserRequest.md)
  - [UpdateDatabaseUserDBsInput](docs/UpdateDatabaseUserDBsInput.md)
- - [UpdateEnvRequest](docs/UpdateEnvRequest.md)
  - [UpdateIntegrationInput](docs/UpdateIntegrationInput.md)
  - [UpdateOrgRequest](docs/UpdateOrgRequest.md)
  - [UpdateProjectInput](docs/UpdateProjectInput.md)

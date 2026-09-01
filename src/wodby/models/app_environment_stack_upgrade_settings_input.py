@@ -17,18 +17,28 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
-from wodby.models.app_environment_auto_stack_upgrade_settings import AppEnvironmentAutoStackUpgradeSettings
 from typing import Optional, Set
 from typing_extensions import Self
 
-class AppEnvironmentSettings(BaseModel):
+class AppEnvironmentStackUpgradeSettingsInput(BaseModel):
     """
-    AppEnvironmentSettings
+    AppEnvironmentStackUpgradeSettingsInput
     """ # noqa: E501
-    auto_stack_upgrade: Optional[AppEnvironmentAutoStackUpgradeSettings] = Field(default=None, alias="autoStackUpgrade")
-    __properties: ClassVar[List[str]] = ["autoStackUpgrade"]
+    versions: Optional[StrictBool] = None
+    replicas: Optional[StrictBool] = None
+    resources: Optional[StrictBool] = None
+    integrations: Optional[StrictBool] = None
+    services: Optional[StrictBool] = None
+    settings: Optional[StrictBool] = None
+    links: Optional[StrictBool] = None
+    tokens: Optional[StrictBool] = None
+    configs: Optional[StrictBool] = None
+    cron: Optional[StrictBool] = None
+    volumes: Optional[StrictBool] = None
+    main: Optional[StrictBool] = None
+    __properties: ClassVar[List[str]] = ["versions", "replicas", "resources", "integrations", "services", "settings", "links", "tokens", "configs", "cron", "volumes", "main"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -48,7 +58,7 @@ class AppEnvironmentSettings(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of AppEnvironmentSettings from a JSON string"""
+        """Create an instance of AppEnvironmentStackUpgradeSettingsInput from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -69,14 +79,11 @@ class AppEnvironmentSettings(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of auto_stack_upgrade
-        if self.auto_stack_upgrade:
-            _dict['autoStackUpgrade'] = self.auto_stack_upgrade.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of AppEnvironmentSettings from a dict"""
+        """Create an instance of AppEnvironmentStackUpgradeSettingsInput from a dict"""
         if obj is None:
             return None
 
@@ -84,7 +91,18 @@ class AppEnvironmentSettings(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "autoStackUpgrade": AppEnvironmentAutoStackUpgradeSettings.from_dict(obj["autoStackUpgrade"]) if obj.get("autoStackUpgrade") is not None else None
+            "versions": obj.get("versions"),
+            "replicas": obj.get("replicas"),
+            "resources": obj.get("resources"),
+            "integrations": obj.get("integrations"),
+            "services": obj.get("services"),
+            "settings": obj.get("settings"),
+            "links": obj.get("links"),
+            "tokens": obj.get("tokens"),
+            "configs": obj.get("configs"),
+            "cron": obj.get("cron"),
+            "volumes": obj.get("volumes"),
+            "main": obj.get("main")
         })
         return _obj
 

@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**auto_stack_upgrade** | [**AppInstanceAutoStackUpgradeSettings**](AppInstanceAutoStackUpgradeSettings.md) |  | [optional] 
+**auto_stack_upgrade** | [**AppEnvironmentAutoStackUpgradeSettings**](AppEnvironmentAutoStackUpgradeSettings.md) |  | [optional] 
 
 ## Example
 

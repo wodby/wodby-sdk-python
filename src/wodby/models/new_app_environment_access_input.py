@@ -20,7 +20,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.app_access_setting_input import AppAccessSettingInput
-from wodby.models.new_app_instance_access_endpoint_input import NewAppInstanceAccessEndpointInput
+from wodby.models.new_app_environment_access_endpoint_input import NewAppEnvironmentAccessEndpointInput
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -33,7 +33,7 @@ class NewAppEnvironmentAccessInput(BaseModel):
     scope: StrictStr
     settings: Optional[List[AppAccessSettingInput]] = None
     host: Optional[StrictStr] = Field(default=None, description="Required only when the selected provider uses a customer-assigned hostname.")
-    endpoints: Optional[List[NewAppInstanceAccessEndpointInput]] = Field(default=None, description="HTTP endpoints selected during creation. Used only with SELECTED_ENDPOINTS scope; older clients may omit it to select the main endpoint.")
+    endpoints: Optional[List[NewAppEnvironmentAccessEndpointInput]] = Field(default=None, description="HTTP endpoints selected during creation. Used only with SELECTED_ENDPOINTS scope; older clients may omit it to select the main endpoint.")
     __properties: ClassVar[List[str]] = ["integrationId", "mode", "scope", "settings", "host", "endpoints"]
 
     @field_validator('mode')
@@ -125,7 +125,7 @@ class NewAppEnvironmentAccessInput(BaseModel):
             "scope": obj.get("scope"),
             "settings": [AppAccessSettingInput.from_dict(_item) for _item in obj["settings"]] if obj.get("settings") is not None else None,
             "host": obj.get("host"),
-            "endpoints": [NewAppInstanceAccessEndpointInput.from_dict(_item) for _item in obj["endpoints"]] if obj.get("endpoints") is not None else None
+            "endpoints": [NewAppEnvironmentAccessEndpointInput.from_dict(_item) for _item in obj["endpoints"]] if obj.get("endpoints") is not None else None
         })
         return _obj
 

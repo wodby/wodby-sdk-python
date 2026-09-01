@@ -5,7 +5,6 @@ from wodby.api.app_auths_api import AppAuthsApi
 from wodby.api.app_builds_api import AppBuildsApi
 from wodby.api.app_deployments_api import AppDeploymentsApi
 from wodby.api.app_environments_api import AppEnvironmentsApi
-from wodby.api.app_instances_api import AppInstancesApi
 from wodby.api.app_ports_api import AppPortsApi
 from wodby.api.app_routes_api import AppRoutesApi
 from wodby.api.app_services_api import AppServicesApi
@@ -15,7 +14,6 @@ from wodby.api.certs_api import CertsApi
 from wodby.api.clusters_api import ClustersApi
 from wodby.api.databases_api import DatabasesApi
 from wodby.api.default_api import DefaultApi
-from wodby.api.envs_api import EnvsApi
 from wodby.api.git_repos_api import GitReposApi
 from wodby.api.helm_charts_api import HelmChartsApi
 from wodby.api.imports_api import ImportsApi

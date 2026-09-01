@@ -32,30 +32,24 @@ class NewAppInput(BaseModel):
     org_id: Optional[StrictInt] = Field(default=None, description="Optional for API-key requests; defaults to the API key's organization.", alias="orgId")
     name: StrictStr
     title: Optional[StrictStr] = Field(default=None, description="Defaults to name when omitted.")
-    environment_name: Optional[StrictStr] = Field(default=None, description="Required for the canonical app environment contract.", alias="environmentName")
+    environment_name: StrictStr = Field(description="Required for the canonical app environment contract.", alias="environmentName")
     environment_title: Optional[StrictStr] = Field(default=None, description="Defaults to environmentName when omitted.", alias="environmentTitle")
-    environment_type: Optional[StrictStr] = Field(default=None, description="Required for the canonical app environment contract.", alias="environmentType")
-    instance_name: Optional[StrictStr] = Field(default=None, description="Legacy alternative to environmentName. Requires envId and cannot be combined with canonical app environment fields.", alias="instanceName")
-    instance_title: Optional[StrictStr] = Field(default=None, description="Legacy alternative to environmentTitle. Defaults to instanceName when omitted.", alias="instanceTitle")
-    domain: Optional[StrictStr] = Field(default=None, description="Defaults to environmentName.name.orgDomain for the canonical contract, or instanceName.name.orgDomain for the legacy contract.")
+    environment_type: StrictStr = Field(description="Required for the canonical app environment contract.", alias="environmentType")
+    domain: Optional[StrictStr] = Field(default=None, description="Defaults to environmentName.name.orgDomain.")
     project_id: Optional[StrictInt] = Field(default=None, alias="projectId")
     stack_rev_id: StrictInt = Field(alias="stackRevId")
     services: Optional[List[NewAppServiceInput]] = Field(default=None, description="Defaults to the stack revision's service defaults when omitted.")
     cluster_id: Optional[StrictInt] = Field(default=None, alias="clusterId")
-    env_id: Optional[StrictInt] = Field(default=None, description="Legacy environment entity ID. Required with instanceName and cannot be combined with canonical app environment fields.", alias="envId")
     ci_integration_id: Optional[StrictInt] = Field(default=None, description="Omit or use null to inherit the organization default, use 0 for the built-in CI service, or use an accessible CI integration ID. A project-owned integration must be shared with the app's project.", alias="ciIntegrationId")
     registry_integration_id: Optional[StrictInt] = Field(default=None, description="Omit or use null to inherit the organization default, use 0 for the built-in registry, or use an accessible registry integration ID. A project-owned integration must be shared with the app's project.", alias="registryIntegrationId")
     defer_initial_deployment: Optional[StrictBool] = Field(default=False, description="Defers the automatic initial build and deployment while preserving app environment initialization. Intended for automation that configures the environment before explicitly starting its first build.", alias="deferInitialDeployment")
     settings: Optional[AppEnvironmentSettingsInput] = None
     access: Optional[NewAppEnvironmentAccessInput] = None
-    __properties: ClassVar[List[str]] = ["orgId", "name", "title", "environmentName", "environmentTitle", "environmentType", "instanceName", "instanceTitle", "domain", "projectId", "stackRevId", "services", "clusterId", "envId", "ciIntegrationId", "registryIntegrationId", "deferInitialDeployment", "settings", "access"]
+    __properties: ClassVar[List[str]] = ["orgId", "name", "title", "environmentName", "environmentTitle", "environmentType", "domain", "projectId", "stackRevId", "services", "clusterId", "ciIntegrationId", "registryIntegrationId", "deferInitialDeployment", "settings", "access"]
 
     @field_validator('environment_type')
     def environment_type_validate_enum(cls, value):
         """Validates the enum"""
-        if value is None:
-            return value
-
         if value not in set(['prod', 'test', 'staging', 'dev', 'feature']):
             raise ValueError("must be one of enum values ('prod', 'test', 'staging', 'dev', 'feature')")
         return value
@@ -150,14 +144,11 @@ class NewAppInput(BaseModel):
             "environmentName": obj.get("environmentName"),
             "environmentTitle": obj.get("environmentTitle"),
             "environmentType": obj.get("environmentType"),
-            "instanceName": obj.get("instanceName"),
-            "instanceTitle": obj.get("instanceTitle"),
             "domain": obj.get("domain"),
             "projectId": obj.get("projectId"),
             "stackRevId": obj.get("stackRevId"),
             "services": [NewAppServiceInput.from_dict(_item) for _item in obj["services"]] if obj.get("services") is not None else None,
             "clusterId": obj.get("clusterId"),
-            "envId": obj.get("envId"),
             "ciIntegrationId": obj.get("ciIntegrationId"),
             "registryIntegrationId": obj.get("registryIntegrationId"),
             "deferInitialDeployment": obj.get("deferInitialDeployment") if obj.get("deferInitialDeployment") is not None else False,

@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**cron** | [**AppInstanceCronHealth**](AppInstanceCronHealth.md) |  | 
-**backups** | [**AppInstanceBackupHealth**](AppInstanceBackupHealth.md) |  | 
+**cron** | [**AppEnvironmentCronHealth**](AppEnvironmentCronHealth.md) |  | 
+**backups** | [**AppEnvironmentBackupHealth**](AppEnvironmentBackupHealth.md) |  | 
 
 ## Example
 

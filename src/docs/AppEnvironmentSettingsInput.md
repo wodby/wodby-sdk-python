@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**auto_stack_upgrade** | [**AppInstanceAutoStackUpgradeSettingsInput**](AppInstanceAutoStackUpgradeSettingsInput.md) |  | [optional] 
+**auto_stack_upgrade** | [**AppEnvironmentAutoStackUpgradeSettingsInput**](AppEnvironmentAutoStackUpgradeSettingsInput.md) |  | [optional] 
 
 ## Example
 
