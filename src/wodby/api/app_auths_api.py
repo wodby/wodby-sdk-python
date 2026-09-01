@@ -603,7 +603,7 @@ class AppAuthsApi:
     ) -> List[AppAuth]:
         """List app auths
 
-        Returns HTTP basic authentication entries for an app instance without exposing passwords or secret identifiers.
+        Returns HTTP basic authentication entries for an app environment without exposing passwords or secret identifiers.
 
         :param app_instance_id: (required)
         :type app_instance_id: int
@@ -671,7 +671,7 @@ class AppAuthsApi:
     ) -> ApiResponse[List[AppAuth]]:
         """List app auths
 
-        Returns HTTP basic authentication entries for an app instance without exposing passwords or secret identifiers.
+        Returns HTTP basic authentication entries for an app environment without exposing passwords or secret identifiers.
 
         :param app_instance_id: (required)
         :type app_instance_id: int
@@ -739,7 +739,7 @@ class AppAuthsApi:
     ) -> RESTResponseType:
         """List app auths
 
-        Returns HTTP basic authentication entries for an app instance without exposing passwords or secret identifiers.
+        Returns HTTP basic authentication entries for an app environment without exposing passwords or secret identifiers.
 
         :param app_instance_id: (required)
         :type app_instance_id: int

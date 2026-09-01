@@ -10,6 +10,7 @@ Method | HTTP request | Description
 [**get_app_access_provider_options**](IntegrationsApi.md#get_app_access_provider_options) | **GET** /integrations/{id}/options/app-access | Get app-access provider options
 [**get_integration**](IntegrationsApi.md#get_integration) | **GET** /integrations/{id} | Get integration
 [**get_integration_kube_settings**](IntegrationsApi.md#get_integration_kube_settings) | **GET** /integrations/{id}/options/kube-settings | Get Kubernetes settings
+[**get_integration_provider_revision_upgrade**](IntegrationsApi.md#get_integration_provider_revision_upgrade) | **GET** /integration-provider-revision-upgrades/{id} | Preview provider revision upgrade
 [**get_integration_remote_git_repo_file_presence**](IntegrationsApi.md#get_integration_remote_git_repo_file_presence) | **GET** /integrations/{id}/options/remote-git-repo-file | Check a remote Git repository file
 [**list_integration_kube_machine_types**](IntegrationsApi.md#list_integration_kube_machine_types) | **GET** /integrations/{id}/options/kube-machine-types | List Kubernetes machine types
 [**list_integration_kube_regions**](IntegrationsApi.md#list_integration_kube_regions) | **GET** /integrations/{id}/options/kube-regions | List Kubernetes regions
@@ -27,6 +28,7 @@ Method | HTTP request | Description
 [**test_integration_permissions**](IntegrationsApi.md#test_integration_permissions) | **POST** /integrations/{id}/actions/test-permissions | Test integration permissions
 [**update_integration**](IntegrationsApi.md#update_integration) | **PUT** /integrations/{id} | Update integration
 [**update_integration_environment_policy**](IntegrationsApi.md#update_integration_environment_policy) | **PUT** /integrations/environment-policy/{id} | Update integration environment policy
+[**upgrade_integration_provider_revision**](IntegrationsApi.md#upgrade_integration_provider_revision) | **POST** /integrations/{id}/actions/upgrade-provider-revision | Upgrade integration provider revision
 [**validate_app_access_hostname**](IntegrationsApi.md#validate_app_access_hostname) | **POST** /integrations/{id}/actions/validate-app-access-hostname | Validate an app-access hostname
 
 
@@ -514,6 +516,87 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Kubernetes settings |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_integration_provider_revision_upgrade**
+> IntegrationProviderRevisionUpgrade get_integration_provider_revision_upgrade(id)
+
+Preview provider revision upgrade
+
+Returns the compatibility decision and revision details for upgrading an integration.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.integration_provider_revision_upgrade import IntegrationProviderRevisionUpgrade
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.IntegrationsApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # Preview provider revision upgrade
+        api_response = api_instance.get_integration_provider_revision_upgrade(id)
+        print("The response of IntegrationsApi->get_integration_provider_revision_upgrade:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling IntegrationsApi->get_integration_provider_revision_upgrade: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**IntegrationProviderRevisionUpgrade**](IntegrationProviderRevisionUpgrade.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Provider revision upgrade preview |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 
@@ -1418,7 +1501,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_integrations**
-> List[Integration] list_integrations(org_id=org_id, project_ids=project_ids, labels=labels, env_id=env_id)
+> List[Integration] list_integrations(org_id=org_id, project_ids=project_ids, labels=labels, env_id=env_id, env_type=env_type)
 
 List integrations
 
@@ -1458,11 +1541,12 @@ with wodby.ApiClient(configuration) as api_client:
     org_id = 56 # int | Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization. (optional)
     project_ids = 'project_ids_example' # str | Comma-separated project ids (optional)
     labels = 'labels_example' # str | Comma-separated labels (optional)
-    env_id = 56 # int | Return only integrations allowed in this environment (optional)
+    env_id = 56 # int | Legacy environment entity filter. Use envType. (optional)
+    env_type = 'env_type_example' # str | Return only integrations allowed for this fixed environment type. (optional)
 
     try:
         # List integrations
-        api_response = api_instance.list_integrations(org_id=org_id, project_ids=project_ids, labels=labels, env_id=env_id)
+        api_response = api_instance.list_integrations(org_id=org_id, project_ids=project_ids, labels=labels, env_id=env_id, env_type=env_type)
         print("The response of IntegrationsApi->list_integrations:\n")
         pprint(api_response)
     except Exception as e:
@@ -1479,7 +1563,8 @@ Name | Type | Description  | Notes
  **org_id** | **int**| Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. | [optional] 
  **project_ids** | **str**| Comma-separated project ids | [optional] 
  **labels** | **str**| Comma-separated labels | [optional] 
- **env_id** | **int**| Return only integrations allowed in this environment | [optional] 
+ **env_id** | **int**| Legacy environment entity filter. Use envType. | [optional] 
+ **env_type** | **str**| Return only integrations allowed for this fixed environment type. | [optional] 
 
 ### Return type
 
@@ -1912,6 +1997,90 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Updated integration |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **upgrade_integration_provider_revision**
+> OperationResult upgrade_integration_provider_revision(id, upgrade_integration_provider_revision_input)
+
+Upgrade integration provider revision
+
+Upgrades an integration to its eligible provider revision and optionally drops fields removed by the target contract.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.operation_result import OperationResult
+from wodby.models.upgrade_integration_provider_revision_input import UpgradeIntegrationProviderRevisionInput
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.IntegrationsApi(api_client)
+    id = 56 # int | 
+    upgrade_integration_provider_revision_input = wodby.UpgradeIntegrationProviderRevisionInput() # UpgradeIntegrationProviderRevisionInput | 
+
+    try:
+        # Upgrade integration provider revision
+        api_response = api_instance.upgrade_integration_provider_revision(id, upgrade_integration_provider_revision_input)
+        print("The response of IntegrationsApi->upgrade_integration_provider_revision:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling IntegrationsApi->upgrade_integration_provider_revision: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **upgrade_integration_provider_revision_input** | [**UpgradeIntegrationProviderRevisionInput**](UpgradeIntegrationProviderRevisionInput.md)|  | 
+
+### Return type
+
+[**OperationResult**](OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Upgrade task result |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 

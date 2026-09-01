@@ -16,7 +16,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt, StrictStr
+from pydantic import Field, StrictInt, StrictStr, field_validator
 from typing import List, Optional
 from typing_extensions import Annotated
 from wodby.models.duplicate_stack_request import DuplicateStackRequest
@@ -5923,6 +5923,7 @@ class StacksApi:
     def update_stack_service_revisions(
         self,
         id: StrictInt,
+        scope: Annotated[Optional[StrictStr], Field(description="Limits the update to all services or stateless services. Defaults to all.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5942,6 +5943,8 @@ class StacksApi:
 
         :param id: (required)
         :type id: int
+        :param scope: Limits the update to all services or stateless services. Defaults to all.
+        :type scope: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5966,6 +5969,7 @@ class StacksApi:
 
         _param = self._update_stack_service_revisions_serialize(
             id=id,
+            scope=scope,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5991,6 +5995,7 @@ class StacksApi:
     def update_stack_service_revisions_with_http_info(
         self,
         id: StrictInt,
+        scope: Annotated[Optional[StrictStr], Field(description="Limits the update to all services or stateless services. Defaults to all.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6010,6 +6015,8 @@ class StacksApi:
 
         :param id: (required)
         :type id: int
+        :param scope: Limits the update to all services or stateless services. Defaults to all.
+        :type scope: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6034,6 +6041,7 @@ class StacksApi:
 
         _param = self._update_stack_service_revisions_serialize(
             id=id,
+            scope=scope,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6059,6 +6067,7 @@ class StacksApi:
     def update_stack_service_revisions_without_preload_content(
         self,
         id: StrictInt,
+        scope: Annotated[Optional[StrictStr], Field(description="Limits the update to all services or stateless services. Defaults to all.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6078,6 +6087,8 @@ class StacksApi:
 
         :param id: (required)
         :type id: int
+        :param scope: Limits the update to all services or stateless services. Defaults to all.
+        :type scope: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6102,6 +6113,7 @@ class StacksApi:
 
         _param = self._update_stack_service_revisions_serialize(
             id=id,
+            scope=scope,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6122,6 +6134,7 @@ class StacksApi:
     def _update_stack_service_revisions_serialize(
         self,
         id,
+        scope,
         _request_auth,
         _content_type,
         _headers,
@@ -6146,6 +6159,10 @@ class StacksApi:
         if id is not None:
             _path_params['id'] = id
         # process the query parameters
+        if scope is not None:
+            
+            _query_params.append(('scope', scope))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter

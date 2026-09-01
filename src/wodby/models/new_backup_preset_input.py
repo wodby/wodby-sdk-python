@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from wodby.models.automation_time_window_input import AutomationTimeWindowInput
@@ -35,6 +35,8 @@ class NewBackupPresetInput(BaseModel):
     database_db_id: Optional[StrictInt] = Field(default=None, alias="databaseDbId")
     org_id: Optional[StrictInt] = Field(default=None, description="Optional for API-key requests; defaults to the API key's organization when no more specific target is provided.", alias="orgId")
     env_id: Optional[StrictInt] = Field(default=None, alias="envId")
+    env_types: Optional[List[StrictStr]] = Field(default=None, alias="envTypes")
+    backup_category: Optional[StrictStr] = Field(default='any', alias="backupCategory")
     backup_name: Optional[StrictStr] = Field(default=None, alias="backupName")
     integration_id: StrictInt = Field(description="Use 0 for Wodby Blob Storage. Free subscriptions may create only an automatic preset that is disabled.", alias="integrationId")
     bucket: StrictStr = Field(description="Must be empty for Wodby Blob Storage.")
@@ -46,7 +48,28 @@ class NewBackupPresetInput(BaseModel):
     crontab: Optional[StrictStr] = None
     time_window: Optional[AutomationTimeWindowInput] = Field(default=None, alias="timeWindow")
     duration: Optional[Annotated[int, Field(le=180, strict=True, ge=30)]] = None
-    __properties: ClassVar[List[str]] = ["appInstanceId", "appServiceId", "databaseId", "databaseDbId", "orgId", "envId", "backupName", "integrationId", "bucket", "storageClass", "options", "disabled", "override", "auto", "crontab", "timeWindow", "duration"]
+    __properties: ClassVar[List[str]] = ["appInstanceId", "appServiceId", "databaseId", "databaseDbId", "orgId", "envId", "envTypes", "backupCategory", "backupName", "integrationId", "bucket", "storageClass", "options", "disabled", "override", "auto", "crontab", "timeWindow", "duration"]
+
+    @field_validator('env_types')
+    def env_types_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        for i in value:
+            if i not in set(['dev', 'feature', 'test', 'staging', 'prod']):
+                raise ValueError("each list item must be one of ('dev', 'feature', 'test', 'staging', 'prod')")
+        return value
+
+    @field_validator('backup_category')
+    def backup_category_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['any', 'files', 'database']):
+            raise ValueError("must be one of enum values ('any', 'files', 'database')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -127,6 +150,16 @@ class NewBackupPresetInput(BaseModel):
         if self.env_id is None and "env_id" in self.model_fields_set:
             _dict['envId'] = None
 
+        # set to None if env_types (nullable) is None
+        # and model_fields_set contains the field
+        if self.env_types is None and "env_types" in self.model_fields_set:
+            _dict['envTypes'] = None
+
+        # set to None if backup_category (nullable) is None
+        # and model_fields_set contains the field
+        if self.backup_category is None and "backup_category" in self.model_fields_set:
+            _dict['backupCategory'] = None
+
         # set to None if backup_name (nullable) is None
         # and model_fields_set contains the field
         if self.backup_name is None and "backup_name" in self.model_fields_set:
@@ -175,6 +208,8 @@ class NewBackupPresetInput(BaseModel):
             "databaseDbId": obj.get("databaseDbId"),
             "orgId": obj.get("orgId"),
             "envId": obj.get("envId"),
+            "envTypes": obj.get("envTypes"),
+            "backupCategory": obj.get("backupCategory") if obj.get("backupCategory") is not None else 'any',
             "backupName": obj.get("backupName"),
             "integrationId": obj.get("integrationId"),
             "bucket": obj.get("bucket"),

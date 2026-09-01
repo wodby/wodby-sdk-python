@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -32,20 +32,41 @@ class Integration(BaseModel):
     status: StrictStr
     scope: Optional[StrictStr] = None
     auth: Optional[StrictStr] = None
+    outdated: StrictBool
     provider_rev_id: StrictInt = Field(alias="providerRevId")
     org_id: StrictInt = Field(alias="orgId")
-    primary_env_id: Optional[StrictInt] = Field(default=None, alias="primaryEnvId")
+    primary_env_id: Optional[StrictInt] = Field(default=None, description="Legacy internal environment entity ID. Use primaryEnvType.", alias="primaryEnvId")
+    primary_env_type: Optional[StrictStr] = Field(default=None, alias="primaryEnvType")
     env_scope: StrictStr = Field(alias="envScope")
-    allowed_env_ids: List[StrictInt] = Field(alias="allowedEnvIds")
+    allowed_env_ids: List[StrictInt] = Field(description="Legacy internal environment entity IDs. Use allowedEnvTypes.", alias="allowedEnvIds")
+    allowed_env_types: List[StrictStr] = Field(alias="allowedEnvTypes")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "title", "status", "scope", "auth", "providerRevId", "orgId", "primaryEnvId", "envScope", "allowedEnvIds", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "title", "status", "scope", "auth", "outdated", "providerRevId", "orgId", "primaryEnvId", "primaryEnvType", "envScope", "allowedEnvIds", "allowedEnvTypes", "createdAt", "updatedAt"]
+
+    @field_validator('primary_env_type')
+    def primary_env_type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['prod', 'test', 'staging', 'dev', 'feature']):
+            raise ValueError("must be one of enum values ('prod', 'test', 'staging', 'dev', 'feature')")
+        return value
 
     @field_validator('env_scope')
     def env_scope_validate_enum(cls, value):
         """Validates the enum"""
         if value not in set(['all', 'selected']):
             raise ValueError("must be one of enum values ('all', 'selected')")
+        return value
+
+    @field_validator('allowed_env_types')
+    def allowed_env_types_validate_enum(cls, value):
+        """Validates the enum"""
+        for i in value:
+            if i not in set(['prod', 'test', 'staging', 'dev', 'feature']):
+                raise ValueError("each list item must be one of ('prod', 'test', 'staging', 'dev', 'feature')")
         return value
 
     model_config = ConfigDict(
@@ -102,6 +123,11 @@ class Integration(BaseModel):
         if self.primary_env_id is None and "primary_env_id" in self.model_fields_set:
             _dict['primaryEnvId'] = None
 
+        # set to None if primary_env_type (nullable) is None
+        # and model_fields_set contains the field
+        if self.primary_env_type is None and "primary_env_type" in self.model_fields_set:
+            _dict['primaryEnvType'] = None
+
         return _dict
 
     @classmethod
@@ -119,11 +145,14 @@ class Integration(BaseModel):
             "status": obj.get("status"),
             "scope": obj.get("scope"),
             "auth": obj.get("auth"),
+            "outdated": obj.get("outdated"),
             "providerRevId": obj.get("providerRevId"),
             "orgId": obj.get("orgId"),
             "primaryEnvId": obj.get("primaryEnvId"),
+            "primaryEnvType": obj.get("primaryEnvType"),
             "envScope": obj.get("envScope"),
             "allowedEnvIds": obj.get("allowedEnvIds"),
+            "allowedEnvTypes": obj.get("allowedEnvTypes"),
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt")
         })

@@ -16,7 +16,8 @@ Name | Type | Description | Notes
 **zone** | **str** |  | [optional] 
 **integration_id** | **int** |  | [optional] 
 **app_service_id** | **int** |  | [optional] 
-**env_id** | **int** |  | 
+**env_id** | **int** | Legacy internal environment entity ID. Use envType. | 
+**env_type** | **str** |  | 
 **org_id** | **int** |  | 
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 

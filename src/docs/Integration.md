@@ -10,11 +10,14 @@ Name | Type | Description | Notes
 **status** | **str** |  | 
 **scope** | **str** |  | [optional] 
 **auth** | **str** |  | [optional] 
+**outdated** | **bool** |  | 
 **provider_rev_id** | **int** |  | 
 **org_id** | **int** |  | 
-**primary_env_id** | **int** |  | [optional] 
+**primary_env_id** | **int** | Legacy internal environment entity ID. Use primaryEnvType. | [optional] 
+**primary_env_type** | **str** |  | [optional] 
 **env_scope** | **str** |  | 
-**allowed_env_ids** | **List[int]** |  | 
+**allowed_env_ids** | **List[int]** | Legacy internal environment entity IDs. Use allowedEnvTypes. | 
+**allowed_env_types** | **List[str]** |  | 
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 
 

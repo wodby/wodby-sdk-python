@@ -11,8 +11,11 @@ Name | Type | Description | Notes
 **rollback_status** | **str** |  | 
 **post_deployment_status** | **str** |  | 
 **skip_rollback** | **bool** |  | 
+**can_cancel** | **bool** |  | 
 **app_instance_id** | **int** |  | 
 **builds** | [**List[AppBuild]**](AppBuild.md) |  | 
+**preparation_task_id** | **int** |  | [optional] 
+**preparation_task** | [**Task**](Task.md) |  | [optional] 
 **task_id** | **int** |  | [optional] 
 **task** | [**Task**](Task.md) |  | [optional] 
 **post_deployment_task_id** | **int** |  | [optional] 

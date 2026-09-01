@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** |  | 
 **name** | **str** |  | 
+**icon** | **str** |  | 
 **title** | **str** |  | 
 **number** | **int** |  | 
 **version** | **str** |  | 

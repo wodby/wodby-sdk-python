@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **options** | [**List[StackServiceOption]**](StackServiceOption.md) |  | [optional] 
 **settings** | [**List[StackServiceSetting]**](StackServiceSetting.md) |  | [optional] 
 **containers** | [**List[StackServiceContainer]**](StackServiceContainer.md) |  | [optional] 
+**deployment_configuration** | [**ServiceDeploymentConfiguration**](ServiceDeploymentConfiguration.md) |  | 
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 
 

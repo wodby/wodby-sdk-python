@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **id** | **int** |  | 
 **name** | **str** |  | 
 **title** | **str** |  | 
+**compact_title** | **str** |  | 
 **execution_scope** | **str** |  | 
 **status** | **str** |  | 
 **progress** | **int** |  | 
@@ -19,7 +20,9 @@ Name | Type | Description | Notes
 **project_ids** | **List[int]** |  | [optional] 
 **app_id** | **int** |  | [optional] 
 **app_instance_id** | **int** |  | [optional] 
+**app_service_id** | **int** |  | [optional] 
 **cluster_id** | **int** |  | [optional] 
+**database_id** | **int** |  | [optional] 
 **integration_id** | **int** |  | [optional] 
 **service_id** | **int** |  | [optional] 
 **stack_id** | **int** |  | [optional] 

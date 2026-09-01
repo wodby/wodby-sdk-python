@@ -34,10 +34,9 @@ class AppServiceBuildConfig(BaseModel):
     image: StrictStr
     dockerfile: Optional[StrictStr] = None
     dockerignore: Optional[StrictStr] = None
-    copy_from: StrictStr = Field(description="Build context subdirectory to copy, relative to the CI --from path. Empty means the whole context.", alias="copyFrom")
-    copy_to: StrictStr = Field(description="Image subdirectory to copy into, relative to the CI --to path. Empty means the image working directory.", alias="copyTo")
+    copy_subdir: StrictStr = Field(description="Resolved subdirectory this build copies, applied under both the CI --from and --to paths. Empty means the whole context.", alias="copySubdir")
     args: Optional[List[AppServiceBuildArg]] = None
-    __properties: ClassVar[List[str]] = ["name", "title", "managed", "main", "image", "dockerfile", "dockerignore", "copyFrom", "copyTo", "args"]
+    __properties: ClassVar[List[str]] = ["name", "title", "managed", "main", "image", "dockerfile", "dockerignore", "copySubdir", "args"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -119,8 +118,7 @@ class AppServiceBuildConfig(BaseModel):
             "image": obj.get("image"),
             "dockerfile": obj.get("dockerfile"),
             "dockerignore": obj.get("dockerignore"),
-            "copyFrom": obj.get("copyFrom"),
-            "copyTo": obj.get("copyTo"),
+            "copySubdir": obj.get("copySubdir"),
             "args": [AppServiceBuildArg.from_dict(_item) for _item in obj["args"]] if obj.get("args") is not None else None
         })
         return _obj

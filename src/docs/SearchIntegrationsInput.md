@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **labels** | **List[str]** |  | [optional] 
 **variables** | [**List[IntegrationVariableRequirementInput]**](IntegrationVariableRequirementInput.md) |  | [optional] 
 **env_id** | **int** |  | [optional] 
+**env_type** | **str** |  | [optional] 
 
 ## Example
 

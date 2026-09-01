@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **type** | **str** |  | 
 **labels** | **List[str]** |  | [optional] 
 **variables** | [**List[IntegrationVariableRequirement]**](IntegrationVariableRequirement.md) |  | 
+**env** | [**List[ServiceManifestEnvVar]**](ServiceManifestEnvVar.md) |  | 
 **required** | **bool** |  | 
 **multiple** | **bool** |  | 
 

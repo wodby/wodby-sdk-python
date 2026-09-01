@@ -17,18 +17,19 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
 class NewDatabaseInput(BaseModel):
     """
-    NewDatabaseInput
+    envType is required for the canonical contract. The legacy envId alternative remains accepted, but the two fields cannot be combined.
     """ # noqa: E501
     org_id: Optional[StrictInt] = Field(default=None, description="Optional for API-key requests; defaults to the API key's organization.", alias="orgId")
     project_id: Optional[StrictInt] = Field(default=None, alias="projectId")
-    env_id: StrictInt = Field(alias="envId")
+    env_id: Optional[StrictInt] = Field(default=None, alias="envId")
+    env_type: Optional[StrictStr] = Field(default=None, alias="envType")
     name: StrictStr
     title: StrictStr
     integration_kind_id: StrictInt = Field(alias="integrationKindId")
@@ -43,7 +44,17 @@ class NewDatabaseInput(BaseModel):
     zone: Optional[StrictStr] = None
     resided_cluster_id: Optional[StrictInt] = Field(default=None, alias="residedClusterId")
     iops: Optional[StrictInt] = None
-    __properties: ClassVar[List[str]] = ["orgId", "projectId", "envId", "name", "title", "integrationKindId", "type", "version", "machineType", "storageSize", "password", "storageAutoscaling", "highAvailability", "region", "zone", "residedClusterId", "iops"]
+    __properties: ClassVar[List[str]] = ["orgId", "projectId", "envId", "envType", "name", "title", "integrationKindId", "type", "version", "machineType", "storageSize", "password", "storageAutoscaling", "highAvailability", "region", "zone", "residedClusterId", "iops"]
+
+    @field_validator('env_type')
+    def env_type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['prod', 'test', 'staging', 'dev', 'feature']):
+            raise ValueError("must be one of enum values ('prod', 'test', 'staging', 'dev', 'feature')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -144,6 +155,7 @@ class NewDatabaseInput(BaseModel):
             "orgId": obj.get("orgId"),
             "projectId": obj.get("projectId"),
             "envId": obj.get("envId"),
+            "envType": obj.get("envType"),
             "name": obj.get("name"),
             "title": obj.get("title"),
             "integrationKindId": obj.get("integrationKindId"),

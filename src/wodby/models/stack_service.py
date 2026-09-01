@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from wodby.models.service_deployment_configuration import ServiceDeploymentConfiguration
 from wodby.models.stack_service_container import StackServiceContainer
 from wodby.models.stack_service_option import StackServiceOption
 from wodby.models.stack_service_setting import StackServiceSetting
@@ -49,9 +50,10 @@ class StackService(BaseModel):
     options: Optional[List[StackServiceOption]] = None
     settings: Optional[List[StackServiceSetting]] = None
     containers: Optional[List[StackServiceContainer]] = None
+    deployment_configuration: ServiceDeploymentConfiguration = Field(alias="deploymentConfiguration")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "type", "main", "disabled", "required", "replicas", "serviceRevPinned", "outdated", "serviceRevId", "serviceRevName", "serviceRevTitle", "serviceRevVersion", "buildSourceIntegrationId", "buildSourceRemoteRepoId", "options", "settings", "containers", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "type", "main", "disabled", "required", "replicas", "serviceRevPinned", "outdated", "serviceRevId", "serviceRevName", "serviceRevTitle", "serviceRevVersion", "buildSourceIntegrationId", "buildSourceRemoteRepoId", "options", "settings", "containers", "deploymentConfiguration", "createdAt", "updatedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -113,6 +115,9 @@ class StackService(BaseModel):
                 if _item_containers:
                     _items.append(_item_containers.to_dict())
             _dict['containers'] = _items
+        # override the default output from pydantic by calling `to_dict()` of deployment_configuration
+        if self.deployment_configuration:
+            _dict['deploymentConfiguration'] = self.deployment_configuration.to_dict()
         # set to None if build_source_integration_id (nullable) is None
         # and model_fields_set contains the field
         if self.build_source_integration_id is None and "build_source_integration_id" in self.model_fields_set:
@@ -154,6 +159,7 @@ class StackService(BaseModel):
             "options": [StackServiceOption.from_dict(_item) for _item in obj["options"]] if obj.get("options") is not None else None,
             "settings": [StackServiceSetting.from_dict(_item) for _item in obj["settings"]] if obj.get("settings") is not None else None,
             "containers": [StackServiceContainer.from_dict(_item) for _item in obj["containers"]] if obj.get("containers") is not None else None,
+            "deploymentConfiguration": ServiceDeploymentConfiguration.from_dict(obj["deploymentConfiguration"]) if obj.get("deploymentConfiguration") is not None else None,
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt")
         })

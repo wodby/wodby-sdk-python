@@ -50,6 +50,11 @@ class Cluster(BaseModel):
     ips: Optional[List[StrictStr]] = None
     hostname: Optional[StrictStr] = None
     integration_id: Optional[StrictInt] = Field(default=None, alias="integrationId")
+    env_id: StrictInt = Field(description="Legacy internal environment entity ID. Use envType.", alias="envId")
+    env_type: StrictStr = Field(alias="envType")
+    env_scope: StrictStr = Field(alias="envScope")
+    allowed_env_ids: List[StrictInt] = Field(description="Legacy internal environment entity IDs. Use allowedEnvTypes.", alias="allowedEnvIds")
+    allowed_env_types: List[StrictStr] = Field(alias="allowedEnvTypes")
     org_id: StrictInt = Field(alias="orgId")
     ownership_scope: StrictStr = Field(alias="ownershipScope")
     owner_project_id: Optional[StrictInt] = Field(default=None, alias="ownerProjectId")
@@ -59,7 +64,29 @@ class Cluster(BaseModel):
     storage_classes_observed_at: Optional[datetime] = Field(default=None, alias="storageClassesObservedAt")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "serverless", "demo", "wodby", "k3s", "singleNode", "version", "infraVersion", "minNodeCount", "maxNodeCount", "lastNodesReady", "lastNodesTotal", "region", "zone", "ips", "hostname", "integrationId", "orgId", "ownershipScope", "ownerProjectId", "capabilities", "settings", "storageClasses", "storageClassesObservedAt", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "serverless", "demo", "wodby", "k3s", "singleNode", "version", "infraVersion", "minNodeCount", "maxNodeCount", "lastNodesReady", "lastNodesTotal", "region", "zone", "ips", "hostname", "integrationId", "envId", "envType", "envScope", "allowedEnvIds", "allowedEnvTypes", "orgId", "ownershipScope", "ownerProjectId", "capabilities", "settings", "storageClasses", "storageClassesObservedAt", "createdAt", "updatedAt"]
+
+    @field_validator('env_type')
+    def env_type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(['prod', 'test', 'staging', 'dev', 'feature']):
+            raise ValueError("must be one of enum values ('prod', 'test', 'staging', 'dev', 'feature')")
+        return value
+
+    @field_validator('env_scope')
+    def env_scope_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(['all', 'selected']):
+            raise ValueError("must be one of enum values ('all', 'selected')")
+        return value
+
+    @field_validator('allowed_env_types')
+    def allowed_env_types_validate_enum(cls, value):
+        """Validates the enum"""
+        for i in value:
+            if i not in set(['prod', 'test', 'staging', 'dev', 'feature']):
+                raise ValueError("each list item must be one of ('prod', 'test', 'staging', 'dev', 'feature')")
+        return value
 
     @field_validator('ownership_scope')
     def ownership_scope_validate_enum(cls, value):
@@ -217,6 +244,11 @@ class Cluster(BaseModel):
             "ips": obj.get("ips"),
             "hostname": obj.get("hostname"),
             "integrationId": obj.get("integrationId"),
+            "envId": obj.get("envId"),
+            "envType": obj.get("envType"),
+            "envScope": obj.get("envScope"),
+            "allowedEnvIds": obj.get("allowedEnvIds"),
+            "allowedEnvTypes": obj.get("allowedEnvTypes"),
             "orgId": obj.get("orgId"),
             "ownershipScope": obj.get("ownershipScope"),
             "ownerProjectId": obj.get("ownerProjectId"),

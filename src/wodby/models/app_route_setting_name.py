@@ -32,6 +32,8 @@ class AppRouteSettingName(str, Enum):
     SESSION_AFFINITY = 'SESSION_AFFINITY'
     PATH_REWRITE = 'PATH_REWRITE'
     HSTS = 'HSTS'
+    REQUEST_TIMEOUT = 'REQUEST_TIMEOUT'
+    BACKEND_REQUEST_TIMEOUT = 'BACKEND_REQUEST_TIMEOUT'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

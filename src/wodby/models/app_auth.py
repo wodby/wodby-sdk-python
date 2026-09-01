@@ -32,7 +32,7 @@ class AppAuth(BaseModel):
     app_instance_id: StrictInt = Field(alias="appInstanceId")
     scope: AppAuthScope
     app_service_ids: List[StrictInt] = Field(description="App services protected by this entry. Empty unless scope is SERVICE.", alias="appServiceIds")
-    app_service_id: Optional[StrictInt] = Field(default=None, description="Single protected app service. Null when the entry protects several services or the whole app instance.", alias="appServiceId")
+    app_service_id: Optional[StrictInt] = Field(default=None, description="Single protected app service. Null when the entry protects several services or the whole app environment.", alias="appServiceId")
     app_route_id: Optional[StrictInt] = Field(default=None, alias="appRouteId")
     login: StrictStr
     realm: StrictStr

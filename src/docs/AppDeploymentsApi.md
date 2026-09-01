@@ -4,12 +4,94 @@ All URIs are relative to */v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**cancel_app_deployment**](AppDeploymentsApi.md#cancel_app_deployment) | **POST** /app-deployments/{id}/actions/cancel | Cancel deployment
 [**create_app_deployment**](AppDeploymentsApi.md#create_app_deployment) | **POST** /app-deployments | Create deployment
 [**create_app_deployment_from_ci**](AppDeploymentsApi.md#create_app_deployment_from_ci) | **POST** /app-deployments/from-ci | Create deployment from CI
 [**get_app_deployment**](AppDeploymentsApi.md#get_app_deployment) | **GET** /app-deployments/{id} | Get deployment
 [**list_app_deployments**](AppDeploymentsApi.md#list_app_deployments) | **GET** /app-deployments | List app deployments
 [**redeploy_app_deployment**](AppDeploymentsApi.md#redeploy_app_deployment) | **POST** /app-deployments/{id}/redeploy | Redeploy deployment
 
+
+# **cancel_app_deployment**
+> AppDeployment cancel_app_deployment(id)
+
+Cancel deployment
+
+Cancels an active deployment and returns its updated state.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.app_deployment import AppDeployment
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppDeploymentsApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # Cancel deployment
+        api_response = api_instance.cancel_app_deployment(id)
+        print("The response of AppDeploymentsApi->cancel_app_deployment:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppDeploymentsApi->cancel_app_deployment: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**AppDeployment**](AppDeployment.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Canceled deployment |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_app_deployment**
 > AppDeployment create_app_deployment(create_deployment_request)

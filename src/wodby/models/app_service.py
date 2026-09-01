@@ -22,6 +22,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, Strict
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.app_service_configuration_issue import AppServiceConfigurationIssue
 from wodby.models.app_service_scalability import AppServiceScalability
+from wodby.models.service_deployment_configuration import ServiceDeploymentConfiguration
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -43,6 +44,7 @@ class AppService(BaseModel):
     required: StrictBool
     needs_rebuild: StrictBool = Field(alias="needsRebuild")
     needs_redeploy: StrictBool = Field(alias="needsRedeploy")
+    stack_state: StrictStr = Field(alias="stackState")
     configuration_ready: StrictBool = Field(alias="configurationReady")
     build_source_boilerplate: Optional[StrictStr] = Field(default=None, alias="buildSourceBoilerplate")
     ci_policy: StrictStr = Field(alias="ciPolicy")
@@ -51,9 +53,17 @@ class AppService(BaseModel):
     app_instance_id: StrictInt = Field(alias="appInstanceId")
     service_rev_id: StrictInt = Field(alias="serviceRevId")
     parent_app_service_id: Optional[StrictInt] = Field(default=None, alias="parentAppServiceId")
+    deployment_configuration: ServiceDeploymentConfiguration = Field(alias="deploymentConfiguration")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "type", "status", "replicas", "scalability", "version", "main", "disabled", "external", "required", "needsRebuild", "needsRedeploy", "configurationReady", "buildSourceBoilerplate", "ciPolicy", "effectiveCiIntegrationId", "configurationIssues", "appInstanceId", "serviceRevId", "parentAppServiceId", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "type", "status", "replicas", "scalability", "version", "main", "disabled", "external", "required", "needsRebuild", "needsRedeploy", "stackState", "configurationReady", "buildSourceBoilerplate", "ciPolicy", "effectiveCiIntegrationId", "configurationIssues", "appInstanceId", "serviceRevId", "parentAppServiceId", "deploymentConfiguration", "createdAt", "updatedAt"]
+
+    @field_validator('stack_state')
+    def stack_state_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(['current', 'needs_rebuild', 'needs_redeploy']):
+            raise ValueError("must be one of enum values ('current', 'needs_rebuild', 'needs_redeploy')")
+        return value
 
     @field_validator('ci_policy')
     def ci_policy_validate_enum(cls, value):
@@ -111,6 +121,9 @@ class AppService(BaseModel):
                 if _item_configuration_issues:
                     _items.append(_item_configuration_issues.to_dict())
             _dict['configurationIssues'] = _items
+        # override the default output from pydantic by calling `to_dict()` of deployment_configuration
+        if self.deployment_configuration:
+            _dict['deploymentConfiguration'] = self.deployment_configuration.to_dict()
         # set to None if scalability (nullable) is None
         # and model_fields_set contains the field
         if self.scalability is None and "scalability" in self.model_fields_set:
@@ -157,6 +170,7 @@ class AppService(BaseModel):
             "required": obj.get("required"),
             "needsRebuild": obj.get("needsRebuild"),
             "needsRedeploy": obj.get("needsRedeploy"),
+            "stackState": obj.get("stackState"),
             "configurationReady": obj.get("configurationReady"),
             "buildSourceBoilerplate": obj.get("buildSourceBoilerplate"),
             "ciPolicy": obj.get("ciPolicy"),
@@ -165,6 +179,7 @@ class AppService(BaseModel):
             "appInstanceId": obj.get("appInstanceId"),
             "serviceRevId": obj.get("serviceRevId"),
             "parentAppServiceId": obj.get("parentAppServiceId"),
+            "deploymentConfiguration": ServiceDeploymentConfiguration.from_dict(obj["deploymentConfiguration"]) if obj.get("deploymentConfiguration") is not None else None,
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt")
         })

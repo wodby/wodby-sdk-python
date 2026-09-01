@@ -20,6 +20,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.git_auto_update_settings_input import GitAutoUpdateSettingsInput
+from wodby.models.service_auto_base_revision_update_settings_input import ServiceAutoBaseRevisionUpdateSettingsInput
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,7 +29,8 @@ class ServiceSettingsInput(BaseModel):
     ServiceSettingsInput
     """ # noqa: E501
     git_auto_update: Optional[GitAutoUpdateSettingsInput] = Field(default=None, alias="gitAutoUpdate")
-    __properties: ClassVar[List[str]] = ["gitAutoUpdate"]
+    auto_base_revision_update: Optional[ServiceAutoBaseRevisionUpdateSettingsInput] = Field(default=None, alias="autoBaseRevisionUpdate")
+    __properties: ClassVar[List[str]] = ["gitAutoUpdate", "autoBaseRevisionUpdate"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -72,6 +74,9 @@ class ServiceSettingsInput(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of git_auto_update
         if self.git_auto_update:
             _dict['gitAutoUpdate'] = self.git_auto_update.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of auto_base_revision_update
+        if self.auto_base_revision_update:
+            _dict['autoBaseRevisionUpdate'] = self.auto_base_revision_update.to_dict()
         return _dict
 
     @classmethod
@@ -84,7 +89,8 @@ class ServiceSettingsInput(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "gitAutoUpdate": GitAutoUpdateSettingsInput.from_dict(obj["gitAutoUpdate"]) if obj.get("gitAutoUpdate") is not None else None
+            "gitAutoUpdate": GitAutoUpdateSettingsInput.from_dict(obj["gitAutoUpdate"]) if obj.get("gitAutoUpdate") is not None else None,
+            "autoBaseRevisionUpdate": ServiceAutoBaseRevisionUpdateSettingsInput.from_dict(obj["autoBaseRevisionUpdate"]) if obj.get("autoBaseRevisionUpdate") is not None else None
         })
         return _obj
 

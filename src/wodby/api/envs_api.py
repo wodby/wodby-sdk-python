@@ -59,7 +59,7 @@ class EnvsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Env:
-        """Create env
+        """(Deprecated) Create env
 
         Creates an env and returns the created resource.
 
@@ -86,6 +86,7 @@ class EnvsApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("POST /envs is deprecated.", DeprecationWarning)
 
         _param = self._create_env_serialize(
             create_env_request=create_env_request,
@@ -127,7 +128,7 @@ class EnvsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[Env]:
-        """Create env
+        """(Deprecated) Create env
 
         Creates an env and returns the created resource.
 
@@ -154,6 +155,7 @@ class EnvsApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("POST /envs is deprecated.", DeprecationWarning)
 
         _param = self._create_env_serialize(
             create_env_request=create_env_request,
@@ -195,7 +197,7 @@ class EnvsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Create env
+        """(Deprecated) Create env
 
         Creates an env and returns the created resource.
 
@@ -222,6 +224,7 @@ class EnvsApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("POST /envs is deprecated.", DeprecationWarning)
 
         _param = self._create_env_serialize(
             create_env_request=create_env_request,
@@ -337,7 +340,7 @@ class EnvsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> OperationResult:
-        """Delete env
+        """(Deprecated) Delete env
 
         Deletes the env and returns the operation result.
 
@@ -364,6 +367,7 @@ class EnvsApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("DELETE /envs/{id} is deprecated.", DeprecationWarning)
 
         _param = self._delete_env_serialize(
             id=id,
@@ -405,7 +409,7 @@ class EnvsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[OperationResult]:
-        """Delete env
+        """(Deprecated) Delete env
 
         Deletes the env and returns the operation result.
 
@@ -432,6 +436,7 @@ class EnvsApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("DELETE /envs/{id} is deprecated.", DeprecationWarning)
 
         _param = self._delete_env_serialize(
             id=id,
@@ -473,7 +478,7 @@ class EnvsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Delete env
+        """(Deprecated) Delete env
 
         Deletes the env and returns the operation result.
 
@@ -500,6 +505,7 @@ class EnvsApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("DELETE /envs/{id} is deprecated.", DeprecationWarning)
 
         _param = self._delete_env_serialize(
             id=id,
@@ -602,7 +608,7 @@ class EnvsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Env:
-        """Get env
+        """(Deprecated) Get env
 
         Returns the env identified by the request path.
 
@@ -629,6 +635,7 @@ class EnvsApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /envs/{id} is deprecated.", DeprecationWarning)
 
         _param = self._get_env_serialize(
             id=id,
@@ -670,7 +677,7 @@ class EnvsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[Env]:
-        """Get env
+        """(Deprecated) Get env
 
         Returns the env identified by the request path.
 
@@ -697,6 +704,7 @@ class EnvsApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /envs/{id} is deprecated.", DeprecationWarning)
 
         _param = self._get_env_serialize(
             id=id,
@@ -738,7 +746,7 @@ class EnvsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get env
+        """(Deprecated) Get env
 
         Returns the env identified by the request path.
 
@@ -765,6 +773,7 @@ class EnvsApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /envs/{id} is deprecated.", DeprecationWarning)
 
         _param = self._get_env_serialize(
             id=id,
@@ -868,7 +877,7 @@ class EnvsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Env:
-        """Get env by name
+        """(Deprecated) Get env by name
 
         Returns the env identified by name.
 
@@ -897,6 +906,7 @@ class EnvsApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /envs/by-name/{name} is deprecated.", DeprecationWarning)
 
         _param = self._get_env_by_name_serialize(
             name=name,
@@ -940,7 +950,7 @@ class EnvsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[Env]:
-        """Get env by name
+        """(Deprecated) Get env by name
 
         Returns the env identified by name.
 
@@ -969,6 +979,7 @@ class EnvsApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /envs/by-name/{name} is deprecated.", DeprecationWarning)
 
         _param = self._get_env_by_name_serialize(
             name=name,
@@ -1012,7 +1023,7 @@ class EnvsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get env by name
+        """(Deprecated) Get env by name
 
         Returns the env identified by name.
 
@@ -1041,6 +1052,7 @@ class EnvsApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /envs/by-name/{name} is deprecated.", DeprecationWarning)
 
         _param = self._get_env_by_name_serialize(
             name=name,
@@ -1149,7 +1161,7 @@ class EnvsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[Env]:
-        """List envs
+        """(Deprecated) List envs
 
         Returns envs matching the request filters.
 
@@ -1176,6 +1188,7 @@ class EnvsApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /envs is deprecated.", DeprecationWarning)
 
         _param = self._list_envs_serialize(
             org_id=org_id,
@@ -1217,7 +1230,7 @@ class EnvsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[List[Env]]:
-        """List envs
+        """(Deprecated) List envs
 
         Returns envs matching the request filters.
 
@@ -1244,6 +1257,7 @@ class EnvsApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /envs is deprecated.", DeprecationWarning)
 
         _param = self._list_envs_serialize(
             org_id=org_id,
@@ -1285,7 +1299,7 @@ class EnvsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """List envs
+        """(Deprecated) List envs
 
         Returns envs matching the request filters.
 
@@ -1312,6 +1326,7 @@ class EnvsApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /envs is deprecated.", DeprecationWarning)
 
         _param = self._list_envs_serialize(
             org_id=org_id,
@@ -1417,7 +1432,7 @@ class EnvsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Env:
-        """Update env
+        """(Deprecated) Update env
 
         Updates the env and returns the updated resource.
 
@@ -1446,6 +1461,7 @@ class EnvsApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("PUT /envs/{id} is deprecated.", DeprecationWarning)
 
         _param = self._update_env_serialize(
             id=id,
@@ -1489,7 +1505,7 @@ class EnvsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[Env]:
-        """Update env
+        """(Deprecated) Update env
 
         Updates the env and returns the updated resource.
 
@@ -1518,6 +1534,7 @@ class EnvsApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("PUT /envs/{id} is deprecated.", DeprecationWarning)
 
         _param = self._update_env_serialize(
             id=id,
@@ -1561,7 +1578,7 @@ class EnvsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Update env
+        """(Deprecated) Update env
 
         Updates the env and returns the updated resource.
 
@@ -1590,6 +1607,7 @@ class EnvsApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("PUT /envs/{id} is deprecated.", DeprecationWarning)
 
         _param = self._update_env_serialize(
             id=id,

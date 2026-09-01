@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **disabled** | **bool** |  | [optional] 
 **main** | **bool** |  | [optional] 
 **build_source** | [**BuildSourceInput**](BuildSourceInput.md) |  | [optional] 
+**deployment** | [**ServiceDeploymentConfigurationInput**](ServiceDeploymentConfigurationInput.md) |  | [optional] 
 
 ## Example
 

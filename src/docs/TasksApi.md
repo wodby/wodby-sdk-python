@@ -173,7 +173,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_tasks**
-> TasksResponse list_tasks(scope=scope, org_id=org_id, project_ids=project_ids, view=view, without_origin=without_origin, statuses=statuses, names=names, search=search, app_id=app_id, app_instance_id=app_instance_id, stack_id=stack_id, database_id=database_id, cluster_id=cluster_id, service_id=service_id, integration_id=integration_id, provider_id=provider_id, page=page, page_size=page_size)
+> TasksResponse list_tasks(scope=scope, org_id=org_id, project_ids=project_ids, view=view, without_origin=without_origin, include_system=include_system, statuses=statuses, names=names, search=search, app_id=app_id, app_instance_id=app_instance_id, stack_id=stack_id, database_id=database_id, cluster_id=cluster_id, service_id=service_id, integration_id=integration_id, provider_id=provider_id, page=page, page_size=page_size)
 
 List tasks
 
@@ -215,6 +215,7 @@ with wodby.ApiClient(configuration) as api_client:
     project_ids = 'project_ids_example' # str | Comma-separated project ids (optional)
     view = 'view_example' # str | Return matching tasks as a flat page or as filter-scoped task trees. Tree responses support user, organization, project, and resource filters, keep paginated roots in items, and include current-page tree nodes in treeItems. Root pages are capped at 100 tasks. Tree responses include up to 250 authorized tasks and set treeTruncated when additional visible descendants exist; exceeding the 10-level depth limit still returns 422. (optional)
     without_origin = True # bool | Deprecated compatibility alias for view=tree (optional)
+    include_system = False # bool | Include operator-only system tasks when authorized (optional) (default to False)
     statuses = 'statuses_example' # str | Comma-separated task statuses (optional)
     names = 'names_example' # str | Comma-separated exact task names (optional)
     search = 'search_example' # str |  (optional)
@@ -231,7 +232,7 @@ with wodby.ApiClient(configuration) as api_client:
 
     try:
         # List tasks
-        api_response = api_instance.list_tasks(scope=scope, org_id=org_id, project_ids=project_ids, view=view, without_origin=without_origin, statuses=statuses, names=names, search=search, app_id=app_id, app_instance_id=app_instance_id, stack_id=stack_id, database_id=database_id, cluster_id=cluster_id, service_id=service_id, integration_id=integration_id, provider_id=provider_id, page=page, page_size=page_size)
+        api_response = api_instance.list_tasks(scope=scope, org_id=org_id, project_ids=project_ids, view=view, without_origin=without_origin, include_system=include_system, statuses=statuses, names=names, search=search, app_id=app_id, app_instance_id=app_instance_id, stack_id=stack_id, database_id=database_id, cluster_id=cluster_id, service_id=service_id, integration_id=integration_id, provider_id=provider_id, page=page, page_size=page_size)
         print("The response of TasksApi->list_tasks:\n")
         pprint(api_response)
     except Exception as e:
@@ -250,6 +251,7 @@ Name | Type | Description  | Notes
  **project_ids** | **str**| Comma-separated project ids | [optional] 
  **view** | **str**| Return matching tasks as a flat page or as filter-scoped task trees. Tree responses support user, organization, project, and resource filters, keep paginated roots in items, and include current-page tree nodes in treeItems. Root pages are capped at 100 tasks. Tree responses include up to 250 authorized tasks and set treeTruncated when additional visible descendants exist; exceeding the 10-level depth limit still returns 422. | [optional] 
  **without_origin** | **bool**| Deprecated compatibility alias for view&#x3D;tree | [optional] 
+ **include_system** | **bool**| Include operator-only system tasks when authorized | [optional] [default to False]
  **statuses** | **str**| Comma-separated task statuses | [optional] 
  **names** | **str**| Comma-separated exact task names | [optional] 
  **search** | **str**|  | [optional] 

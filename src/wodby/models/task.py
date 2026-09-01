@@ -32,6 +32,7 @@ class Task(BaseModel):
     id: StrictInt
     name: StrictStr
     title: StrictStr
+    compact_title: StrictStr = Field(alias="compactTitle")
     execution_scope: StrictStr = Field(alias="executionScope")
     status: StrictStr
     progress: StrictInt
@@ -43,7 +44,9 @@ class Task(BaseModel):
     project_ids: Optional[List[StrictInt]] = Field(default=None, alias="projectIds")
     app_id: Optional[StrictInt] = Field(default=None, alias="appId")
     app_instance_id: Optional[StrictInt] = Field(default=None, alias="appInstanceId")
+    app_service_id: Optional[StrictInt] = Field(default=None, alias="appServiceId")
     cluster_id: Optional[StrictInt] = Field(default=None, alias="clusterId")
+    database_id: Optional[StrictInt] = Field(default=None, alias="databaseId")
     integration_id: Optional[StrictInt] = Field(default=None, alias="integrationId")
     service_id: Optional[StrictInt] = Field(default=None, alias="serviceId")
     stack_id: Optional[StrictInt] = Field(default=None, alias="stackId")
@@ -56,7 +59,7 @@ class Task(BaseModel):
     updated_at: datetime = Field(alias="updatedAt")
     started_at: Optional[datetime] = Field(default=None, alias="startedAt")
     ended_at: Optional[datetime] = Field(default=None, alias="endedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "executionScope", "status", "progress", "silent", "system", "userId", "user", "orgId", "projectIds", "appId", "appInstanceId", "clusterId", "integrationId", "serviceId", "stackId", "providerId", "originTaskId", "spawnedTaskIds", "repeatedTaskId", "jobs", "createdAt", "updatedAt", "startedAt", "endedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "compactTitle", "executionScope", "status", "progress", "silent", "system", "userId", "user", "orgId", "projectIds", "appId", "appInstanceId", "appServiceId", "clusterId", "databaseId", "integrationId", "serviceId", "stackId", "providerId", "originTaskId", "spawnedTaskIds", "repeatedTaskId", "jobs", "createdAt", "updatedAt", "startedAt", "endedAt"]
 
     @field_validator('execution_scope')
     def execution_scope_validate_enum(cls, value):
@@ -134,10 +137,20 @@ class Task(BaseModel):
         if self.app_instance_id is None and "app_instance_id" in self.model_fields_set:
             _dict['appInstanceId'] = None
 
+        # set to None if app_service_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.app_service_id is None and "app_service_id" in self.model_fields_set:
+            _dict['appServiceId'] = None
+
         # set to None if cluster_id (nullable) is None
         # and model_fields_set contains the field
         if self.cluster_id is None and "cluster_id" in self.model_fields_set:
             _dict['clusterId'] = None
+
+        # set to None if database_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.database_id is None and "database_id" in self.model_fields_set:
+            _dict['databaseId'] = None
 
         # set to None if integration_id (nullable) is None
         # and model_fields_set contains the field
@@ -194,6 +207,7 @@ class Task(BaseModel):
             "id": obj.get("id"),
             "name": obj.get("name"),
             "title": obj.get("title"),
+            "compactTitle": obj.get("compactTitle"),
             "executionScope": obj.get("executionScope"),
             "status": obj.get("status"),
             "progress": obj.get("progress"),
@@ -205,7 +219,9 @@ class Task(BaseModel):
             "projectIds": obj.get("projectIds"),
             "appId": obj.get("appId"),
             "appInstanceId": obj.get("appInstanceId"),
+            "appServiceId": obj.get("appServiceId"),
             "clusterId": obj.get("clusterId"),
+            "databaseId": obj.get("databaseId"),
             "integrationId": obj.get("integrationId"),
             "serviceId": obj.get("serviceId"),
             "stackId": obj.get("stackId"),

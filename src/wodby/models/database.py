@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -38,11 +38,19 @@ class Database(BaseModel):
     zone: Optional[StrictStr] = None
     integration_id: Optional[StrictInt] = Field(default=None, alias="integrationId")
     app_service_id: Optional[StrictInt] = Field(default=None, alias="appServiceId")
-    env_id: StrictInt = Field(alias="envId")
+    env_id: StrictInt = Field(description="Legacy internal environment entity ID. Use envType.", alias="envId")
+    env_type: StrictStr = Field(alias="envType")
     org_id: StrictInt = Field(alias="orgId")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "type", "kind", "status", "version", "region", "zone", "integrationId", "appServiceId", "envId", "orgId", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "type", "kind", "status", "version", "region", "zone", "integrationId", "appServiceId", "envId", "envType", "orgId", "createdAt", "updatedAt"]
+
+    @field_validator('env_type')
+    def env_type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(['prod', 'test', 'staging', 'dev', 'feature']):
+            raise ValueError("must be one of enum values ('prod', 'test', 'staging', 'dev', 'feature')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -127,6 +135,7 @@ class Database(BaseModel):
             "integrationId": obj.get("integrationId"),
             "appServiceId": obj.get("appServiceId"),
             "envId": obj.get("envId"),
+            "envType": obj.get("envType"),
             "orgId": obj.get("orgId"),
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt")

@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **required** | **bool** |  | 
 **needs_rebuild** | **bool** |  | 
 **needs_redeploy** | **bool** |  | 
+**stack_state** | **str** |  | 
 **configuration_ready** | **bool** |  | 
 **build_source_boilerplate** | **str** |  | [optional] 
 **ci_policy** | **str** |  | 
@@ -27,6 +28,7 @@ Name | Type | Description | Notes
 **app_instance_id** | **int** |  | 
 **service_rev_id** | **int** |  | 
 **parent_app_service_id** | **int** |  | [optional] 
+**deployment_configuration** | [**ServiceDeploymentConfiguration**](ServiceDeploymentConfiguration.md) |  | 
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 
 

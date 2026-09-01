@@ -29,6 +29,7 @@ class ProviderRevision(BaseModel):
     """ # noqa: E501
     id: StrictInt
     name: StrictStr
+    icon: StrictStr
     title: StrictStr
     number: StrictInt
     version: StrictStr
@@ -36,7 +37,7 @@ class ProviderRevision(BaseModel):
     manifest: Optional[Dict[str, Any]] = None
     permission_audit: StrictBool = Field(alias="permissionAudit")
     created_at: datetime = Field(alias="createdAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "number", "version", "providerId", "manifest", "permissionAudit", "createdAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "icon", "title", "number", "version", "providerId", "manifest", "permissionAudit", "createdAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -91,6 +92,7 @@ class ProviderRevision(BaseModel):
         _obj = cls.model_validate({
             "id": obj.get("id"),
             "name": obj.get("name"),
+            "icon": obj.get("icon"),
             "title": obj.get("title"),
             "number": obj.get("number"),
             "version": obj.get("version"),

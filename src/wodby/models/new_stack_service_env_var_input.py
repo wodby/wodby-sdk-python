@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -29,7 +30,7 @@ class NewStackServiceEnvVarInput(BaseModel):
     workload: Optional[StrictStr] = None
     container: Optional[StrictStr] = None
     name: StrictStr
-    value: StrictStr
+    value: Annotated[str, Field(min_length=1, strict=True)]
     secret: StrictBool
     env_type: Optional[StrictStr] = Field(default=None, alias="envType")
     __properties: ClassVar[List[str]] = ["workload", "container", "name", "value", "secret", "envType"]

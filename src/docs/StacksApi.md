@@ -1761,7 +1761,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_stack_service_revisions**
-> OperationResult update_stack_service_revisions(id)
+> OperationResult update_stack_service_revisions(id, scope=scope)
 
 Update stack service revisions
 
@@ -1799,10 +1799,11 @@ with wodby.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = wodby.StacksApi(api_client)
     id = 56 # int | 
+    scope = all # str | Limits the update to all services or stateless services. Defaults to all. (optional) (default to all)
 
     try:
         # Update stack service revisions
-        api_response = api_instance.update_stack_service_revisions(id)
+        api_response = api_instance.update_stack_service_revisions(id, scope=scope)
         print("The response of StacksApi->update_stack_service_revisions:\n")
         pprint(api_response)
     except Exception as e:
@@ -1817,6 +1818,7 @@ with wodby.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **int**|  | 
+ **scope** | **str**| Limits the update to all services or stateless services. Defaults to all. | [optional] [default to all]
 
 ### Return type
 

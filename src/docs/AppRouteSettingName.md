@@ -15,6 +15,10 @@
 
 * `HSTS` (value: `'HSTS'`)
 
+* `REQUEST_TIMEOUT` (value: `'REQUEST_TIMEOUT'`)
+
+* `BACKEND_REQUEST_TIMEOUT` (value: `'BACKEND_REQUEST_TIMEOUT'`)
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

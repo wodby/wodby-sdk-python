@@ -18,8 +18,9 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from wodby.models.backup_option import BackupOption
 from typing import Optional, Set
 from typing_extensions import Self
@@ -35,14 +36,17 @@ class Backup(BaseModel):
     app_service_id: Optional[StrictInt] = Field(default=None, alias="appServiceId")
     database_id: Optional[StrictInt] = Field(default=None, alias="databaseId")
     database_db_id: Optional[StrictInt] = Field(default=None, alias="databaseDbId")
+    backup_preset_id: Optional[StrictInt] = Field(default=None, alias="backupPresetId")
+    manual: StrictBool
     integration_id: Optional[StrictInt] = Field(description="Storage integration that owns the backup. Null identifies Wodby's built-in blob storage.", alias="integrationId")
     task_id: Optional[StrictInt] = Field(default=None, alias="taskId")
+    size: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(default=None, description="Final stored archive size in bytes. Null when the size has not been recorded.")
     options: List[BackupOption]
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
     started_at: Optional[datetime] = Field(default=None, alias="startedAt")
     ended_at: Optional[datetime] = Field(default=None, alias="endedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "status", "appInstanceId", "appServiceId", "databaseId", "databaseDbId", "integrationId", "taskId", "options", "createdAt", "updatedAt", "startedAt", "endedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "status", "appInstanceId", "appServiceId", "databaseId", "databaseDbId", "backupPresetId", "manual", "integrationId", "taskId", "size", "options", "createdAt", "updatedAt", "startedAt", "endedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -110,6 +114,11 @@ class Backup(BaseModel):
         if self.database_db_id is None and "database_db_id" in self.model_fields_set:
             _dict['databaseDbId'] = None
 
+        # set to None if backup_preset_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.backup_preset_id is None and "backup_preset_id" in self.model_fields_set:
+            _dict['backupPresetId'] = None
+
         # set to None if integration_id (nullable) is None
         # and model_fields_set contains the field
         if self.integration_id is None and "integration_id" in self.model_fields_set:
@@ -119,6 +128,11 @@ class Backup(BaseModel):
         # and model_fields_set contains the field
         if self.task_id is None and "task_id" in self.model_fields_set:
             _dict['taskId'] = None
+
+        # set to None if size (nullable) is None
+        # and model_fields_set contains the field
+        if self.size is None and "size" in self.model_fields_set:
+            _dict['size'] = None
 
         # set to None if started_at (nullable) is None
         # and model_fields_set contains the field
@@ -149,8 +163,11 @@ class Backup(BaseModel):
             "appServiceId": obj.get("appServiceId"),
             "databaseId": obj.get("databaseId"),
             "databaseDbId": obj.get("databaseDbId"),
+            "backupPresetId": obj.get("backupPresetId"),
+            "manual": obj.get("manual"),
             "integrationId": obj.get("integrationId"),
             "taskId": obj.get("taskId"),
+            "size": obj.get("size"),
             "options": [BackupOption.from_dict(_item) for _item in obj["options"]] if obj.get("options") is not None else None,
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt"),

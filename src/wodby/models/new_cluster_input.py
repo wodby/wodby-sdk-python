@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from wodby.models.cluster_environment_policy_input import ClusterEnvironmentPolicyInput
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -43,7 +44,8 @@ class NewClusterInput(BaseModel):
     billing_option: Optional[StrictStr] = Field(default=None, alias="billingOption")
     disable_monitoring: StrictBool = Field(alias="disableMonitoring")
     auto_infrastructure_upgrade: Optional[StrictBool] = Field(default=None, alias="autoInfrastructureUpgrade")
-    __properties: ClassVar[List[str]] = ["orgId", "projectId", "integrationId", "name", "title", "serverless", "singleNode", "version", "machineType", "minNodeCount", "maxNodeCount", "nodeDiskSize", "zone", "region", "billingOption", "disableMonitoring", "autoInfrastructureUpgrade"]
+    environment_policy: Optional[ClusterEnvironmentPolicyInput] = Field(default=None, alias="environmentPolicy")
+    __properties: ClassVar[List[str]] = ["orgId", "projectId", "integrationId", "name", "title", "serverless", "singleNode", "version", "machineType", "minNodeCount", "maxNodeCount", "nodeDiskSize", "zone", "region", "billingOption", "disableMonitoring", "autoInfrastructureUpgrade", "environmentPolicy"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -84,6 +86,9 @@ class NewClusterInput(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of environment_policy
+        if self.environment_policy:
+            _dict['environmentPolicy'] = self.environment_policy.to_dict()
         # set to None if project_id (nullable) is None
         # and model_fields_set contains the field
         if self.project_id is None and "project_id" in self.model_fields_set:
@@ -167,7 +172,8 @@ class NewClusterInput(BaseModel):
             "region": obj.get("region"),
             "billingOption": obj.get("billingOption"),
             "disableMonitoring": obj.get("disableMonitoring"),
-            "autoInfrastructureUpgrade": obj.get("autoInfrastructureUpgrade")
+            "autoInfrastructureUpgrade": obj.get("autoInfrastructureUpgrade"),
+            "environmentPolicy": ClusterEnvironmentPolicyInput.from_dict(obj["environmentPolicy"]) if obj.get("environmentPolicy") is not None else None
         })
         return _obj
 

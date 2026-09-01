@@ -16,6 +16,7 @@ Method | HTTP request | Description
 [**list_app_access_cleanups**](AppInstancesApi.md#list_app_access_cleanups) | **GET** /app-access-cleanups | List app-access cleanups
 [**list_app_instances**](AppInstancesApi.md#list_app_instances) | **GET** /app-instances | List app instances
 [**preflight_app_access**](AppInstancesApi.md#preflight_app_access) | **POST** /app-accesses/actions/preflight | Preflight app instance access
+[**reconcile_app_instance_stack**](AppInstancesApi.md#reconcile_app_instance_stack) | **POST** /app-instances/{id}/actions/reconcile-stack | Reconcile app instance stack
 [**retry_app_access_cleanup**](AppInstancesApi.md#retry_app_access_cleanup) | **POST** /app-access-cleanups/{id}/actions/retry | Retry app-access cleanup
 [**update_app_access**](AppInstancesApi.md#update_app_access) | **PUT** /app-accesses/{id} | Update app access
 [**update_app_instance**](AppInstancesApi.md#update_app_instance) | **PUT** /app-instances/{id} | Update app instance
@@ -30,7 +31,7 @@ Method | HTTP request | Description
 
 Create app instance access
 
-Creates external access for the app instance identified by the path.
+Creates external access for the app instance identified by the path. An active paid subscription is required.
 
 ### Example
 
@@ -941,7 +942,7 @@ Name | Type | Description  | Notes
 
 Preflight app instance access
 
-Validates a proposed app-access configuration before an app instance or access resource is created.
+Validates a proposed app-access configuration before an app instance or access resource is created. An active paid subscription is required.
 
 ### Example
 
@@ -1013,6 +1014,90 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Preflight result |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **reconcile_app_instance_stack**
+> OperationResult reconcile_app_instance_stack(id, app_instance_stack_reconciliation_input)
+
+Reconcile app instance stack
+
+Reapplies the app instance's assigned stack revision using the selected override sections without changing its stack revision.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.app_instance_stack_reconciliation_input import AppInstanceStackReconciliationInput
+from wodby.models.operation_result import OperationResult
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppInstancesApi(api_client)
+    id = 56 # int | 
+    app_instance_stack_reconciliation_input = wodby.AppInstanceStackReconciliationInput() # AppInstanceStackReconciliationInput | 
+
+    try:
+        # Reconcile app instance stack
+        api_response = api_instance.reconcile_app_instance_stack(id, app_instance_stack_reconciliation_input)
+        print("The response of AppInstancesApi->reconcile_app_instance_stack:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppInstancesApi->reconcile_app_instance_stack: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **app_instance_stack_reconciliation_input** | [**AppInstanceStackReconciliationInput**](AppInstanceStackReconciliationInput.md)|  | 
+
+### Return type
+
+[**OperationResult**](OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Reconciliation result |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 
@@ -1104,7 +1189,7 @@ Name | Type | Description  | Notes
 
 Update app access
 
-Updates an existing app-access configuration and starts its reconciliation task.
+Updates an existing app-access configuration and starts its reconciliation task. An active paid subscription is required.
 
 ### Example
 

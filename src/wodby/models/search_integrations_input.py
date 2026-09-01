@@ -35,7 +35,8 @@ class SearchIntegrationsInput(BaseModel):
     labels: Optional[List[StrictStr]] = None
     variables: Optional[List[IntegrationVariableRequirementInput]] = None
     env_id: Optional[Annotated[int, Field(strict=True, ge=1)]] = Field(default=None, alias="envId")
-    __properties: ClassVar[List[str]] = ["orgId", "projectIds", "types", "statuses", "labels", "variables", "envId"]
+    env_type: Optional[StrictStr] = Field(default=None, alias="envType")
+    __properties: ClassVar[List[str]] = ["orgId", "projectIds", "types", "statuses", "labels", "variables", "envId", "envType"]
 
     @field_validator('types')
     def types_validate_enum(cls, value):
@@ -57,6 +58,16 @@ class SearchIntegrationsInput(BaseModel):
         for i in value:
             if i not in set(['OK', 'CREATING', 'DELETING', 'DELETED', 'DISABLED', 'DEPRECATED', 'EOL', 'ABANDONED', 'ERRORED', 'UPDATING', 'EXPIRED']):
                 raise ValueError("each list item must be one of ('OK', 'CREATING', 'DELETING', 'DELETED', 'DISABLED', 'DEPRECATED', 'EOL', 'ABANDONED', 'ERRORED', 'UPDATING', 'EXPIRED')")
+        return value
+
+    @field_validator('env_type')
+    def env_type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['prod', 'test', 'staging', 'dev', 'feature']):
+            raise ValueError("must be one of enum values ('prod', 'test', 'staging', 'dev', 'feature')")
         return value
 
     model_config = ConfigDict(
@@ -110,6 +121,11 @@ class SearchIntegrationsInput(BaseModel):
         if self.env_id is None and "env_id" in self.model_fields_set:
             _dict['envId'] = None
 
+        # set to None if env_type (nullable) is None
+        # and model_fields_set contains the field
+        if self.env_type is None and "env_type" in self.model_fields_set:
+            _dict['envType'] = None
+
         return _dict
 
     @classmethod
@@ -128,7 +144,8 @@ class SearchIntegrationsInput(BaseModel):
             "statuses": obj.get("statuses"),
             "labels": obj.get("labels"),
             "variables": [IntegrationVariableRequirementInput.from_dict(_item) for _item in obj["variables"]] if obj.get("variables") is not None else None,
-            "envId": obj.get("envId")
+            "envId": obj.get("envId"),
+            "envType": obj.get("envType")
         })
         return _obj
 

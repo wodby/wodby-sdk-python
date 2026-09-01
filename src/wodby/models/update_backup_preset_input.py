@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from wodby.models.automation_time_window_input import AutomationTimeWindowInput
@@ -29,6 +29,8 @@ class UpdateBackupPresetInput(BaseModel):
     """
     UpdateBackupPresetInput
     """ # noqa: E501
+    env_types: Optional[List[StrictStr]] = Field(default=None, description="Omit to preserve the current filter; use an empty array to clear it.", alias="envTypes")
+    backup_category: Optional[StrictStr] = Field(default=None, description="Omit to preserve the current category.", alias="backupCategory")
     integration_id: StrictInt = Field(description="Use 0 for Wodby Blob Storage. Enabling the preset requires a paid subscription.", alias="integrationId")
     bucket: StrictStr = Field(description="Must be empty for Wodby Blob Storage.")
     storage_class: Optional[StrictStr] = Field(default=None, alias="storageClass")
@@ -39,7 +41,28 @@ class UpdateBackupPresetInput(BaseModel):
     crontab: Optional[StrictStr] = None
     time_window: Optional[AutomationTimeWindowInput] = Field(default=None, alias="timeWindow")
     duration: Optional[Annotated[int, Field(le=180, strict=True, ge=30)]] = None
-    __properties: ClassVar[List[str]] = ["integrationId", "bucket", "storageClass", "options", "disabled", "override", "auto", "crontab", "timeWindow", "duration"]
+    __properties: ClassVar[List[str]] = ["envTypes", "backupCategory", "integrationId", "bucket", "storageClass", "options", "disabled", "override", "auto", "crontab", "timeWindow", "duration"]
+
+    @field_validator('env_types')
+    def env_types_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        for i in value:
+            if i not in set(['dev', 'feature', 'test', 'staging', 'prod']):
+                raise ValueError("each list item must be one of ('dev', 'feature', 'test', 'staging', 'prod')")
+        return value
+
+    @field_validator('backup_category')
+    def backup_category_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['any', 'files', 'database']):
+            raise ValueError("must be one of enum values ('any', 'files', 'database')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -90,6 +113,16 @@ class UpdateBackupPresetInput(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of time_window
         if self.time_window:
             _dict['timeWindow'] = self.time_window.to_dict()
+        # set to None if env_types (nullable) is None
+        # and model_fields_set contains the field
+        if self.env_types is None and "env_types" in self.model_fields_set:
+            _dict['envTypes'] = None
+
+        # set to None if backup_category (nullable) is None
+        # and model_fields_set contains the field
+        if self.backup_category is None and "backup_category" in self.model_fields_set:
+            _dict['backupCategory'] = None
+
         # set to None if storage_class (nullable) is None
         # and model_fields_set contains the field
         if self.storage_class is None and "storage_class" in self.model_fields_set:
@@ -122,6 +155,8 @@ class UpdateBackupPresetInput(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "envTypes": obj.get("envTypes"),
+            "backupCategory": obj.get("backupCategory"),
             "integrationId": obj.get("integrationId"),
             "bucket": obj.get("bucket"),
             "storageClass": obj.get("storageClass"),

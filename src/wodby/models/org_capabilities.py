@@ -34,8 +34,10 @@ class OrgCapabilities(BaseModel):
     autoscale: StrictBool
     app_instance_pause: StrictBool = Field(alias="appInstancePause")
     web_shell: StrictBool = Field(alias="webShell")
+    app_access: StrictBool = Field(alias="appAccess")
+    org_sso: StrictBool = Field(alias="orgSSO")
     wodby_cloud: StrictBool = Field(alias="wodbyCloud")
-    __properties: ClassVar[List[str]] = ["customDomains", "autoBackups", "users", "projects", "cronSchedules", "autoscale", "appInstancePause", "webShell", "wodbyCloud"]
+    __properties: ClassVar[List[str]] = ["customDomains", "autoBackups", "users", "projects", "cronSchedules", "autoscale", "appInstancePause", "webShell", "appAccess", "orgSSO", "wodbyCloud"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -96,6 +98,8 @@ class OrgCapabilities(BaseModel):
             "autoscale": obj.get("autoscale"),
             "appInstancePause": obj.get("appInstancePause"),
             "webShell": obj.get("webShell"),
+            "appAccess": obj.get("appAccess"),
+            "orgSSO": obj.get("orgSSO"),
             "wodbyCloud": obj.get("wodbyCloud")
         })
         return _obj

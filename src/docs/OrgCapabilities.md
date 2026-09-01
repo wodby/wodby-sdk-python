@@ -13,6 +13,8 @@ Name | Type | Description | Notes
 **autoscale** | **bool** |  | 
 **app_instance_pause** | **bool** |  | 
 **web_shell** | **bool** |  | 
+**app_access** | **bool** |  | 
+**org_sso** | **bool** |  | 
 **wodby_cloud** | **bool** |  | 
 
 ## Example

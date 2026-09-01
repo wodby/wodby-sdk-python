@@ -22,6 +22,7 @@ Method | HTTP request | Description
 [**get_app_service_cron_job**](AppServicesApi.md#get_app_service_cron_job) | **GET** /app-service-cron-jobs/{id} | Get app service cron job
 [**keep_log_stream_alive**](AppServicesApi.md#keep_log_stream_alive) | **POST** /log-streams/{id}/keep-alive | Keep log stream alive
 [**list_app_service_annotations**](AppServicesApi.md#list_app_service_annotations) | **GET** /app-services/{id}/annotations | List app service annotations
+[**list_app_service_backup_option_defaults**](AppServicesApi.md#list_app_service_backup_option_defaults) | **GET** /app-services/{id}/options/backup-option-defaults | List effective backup option defaults
 [**list_app_service_configs**](AppServicesApi.md#list_app_service_configs) | **GET** /app-services/{id}/configs | List app service configs
 [**list_app_service_containers**](AppServicesApi.md#list_app_service_containers) | **GET** /app-services/{id}/containers | List app service containers
 [**list_app_service_cron_jobs**](AppServicesApi.md#list_app_service_cron_jobs) | **GET** /app-service-cron-jobs | List app service cron jobs
@@ -560,7 +561,7 @@ Name | Type | Description  | Notes
 
 Create app service log stream
 
-Creates a log stream for an app service container across all replicas or for one selected pod and returns the stream id. Log streams are available while the app instance status is ok or deploying.
+Creates a log stream for an app service container across all replicas or for one selected pod and returns the stream id. Log streams are available while the app environment status is ok or deploying.
 
 ### Example
 
@@ -1528,6 +1529,89 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of app service annotations |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **list_app_service_backup_option_defaults**
+> List[BackupOption] list_app_service_backup_option_defaults(id, backup_name)
+
+List effective backup option defaults
+
+Returns the effective default option values for an app service backup definition.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.backup_option import BackupOption
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppServicesApi(api_client)
+    id = 56 # int | 
+    backup_name = 'backup_name_example' # str | 
+
+    try:
+        # List effective backup option defaults
+        api_response = api_instance.list_app_service_backup_option_defaults(id, backup_name)
+        print("The response of AppServicesApi->list_app_service_backup_option_defaults:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppServicesApi->list_app_service_backup_option_defaults: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **backup_name** | **str**|  | 
+
+### Return type
+
+[**List[BackupOption]**](BackupOption.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Effective backup options |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 

@@ -4,6 +4,7 @@
 from wodby.api.app_auths_api import AppAuthsApi
 from wodby.api.app_builds_api import AppBuildsApi
 from wodby.api.app_deployments_api import AppDeploymentsApi
+from wodby.api.app_environments_api import AppEnvironmentsApi
 from wodby.api.app_instances_api import AppInstancesApi
 from wodby.api.app_ports_api import AppPortsApi
 from wodby.api.app_routes_api import AppRoutesApi

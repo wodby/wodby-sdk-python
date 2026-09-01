@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**delete_backup_preset**](BackupsApi.md#delete_backup_preset) | **DELETE** /backup-presets/{id} | Delete backup preset
 [**get_backup**](BackupsApi.md#get_backup) | **GET** /backups/{id} | Get backup
 [**get_backup_preset**](BackupsApi.md#get_backup_preset) | **GET** /backup-presets/{id} | Get backup preset
+[**list_backup_preset_backups**](BackupsApi.md#list_backup_preset_backups) | **GET** /backup-presets/{id}/backups | List backup preset backups
 [**list_backup_presets**](BackupsApi.md#list_backup_presets) | **GET** /backup-presets | List backup presets
 [**list_backups**](BackupsApi.md#list_backups) | **GET** /backups | List backups
 [**update_backup_preset**](BackupsApi.md#update_backup_preset) | **PUT** /backup-presets/{id} | Update backup preset
@@ -421,8 +422,93 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **list_backup_preset_backups**
+> BackupsResponse list_backup_preset_backups(id, page=page, page_size=page_size)
+
+List backup preset backups
+
+Returns a paginated list of backups created from the preset.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.backups_response import BackupsResponse
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.BackupsApi(api_client)
+    id = 56 # int | 
+    page = 56 # int | Page number, defaults to 1 (optional)
+    page_size = 56 # int | Page size, defaults to 30 (optional)
+
+    try:
+        # List backup preset backups
+        api_response = api_instance.list_backup_preset_backups(id, page=page, page_size=page_size)
+        print("The response of BackupsApi->list_backup_preset_backups:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling BackupsApi->list_backup_preset_backups: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **page** | **int**| Page number, defaults to 1 | [optional] 
+ **page_size** | **int**| Page size, defaults to 30 | [optional] 
+
+### Return type
+
+[**BackupsResponse**](BackupsResponse.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Paginated backups |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **list_backup_presets**
-> List[BackupPreset] list_backup_presets(app_instance_id=app_instance_id, app_service_id=app_service_id, database_id=database_id, database_db_id=database_db_id, org_id=org_id, backup_name=backup_name)
+> List[BackupPreset] list_backup_presets(app_instance_id=app_instance_id, app_service_id=app_service_id, database_id=database_id, database_db_id=database_db_id, org_id=org_id, backup_name=backup_name, applicable_env_id=applicable_env_id, applicable_backup_category=applicable_backup_category)
 
 List backup presets
 
@@ -465,10 +551,12 @@ with wodby.ApiClient(configuration) as api_client:
     database_db_id = 56 # int |  (optional)
     org_id = 56 # int | Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization. (optional)
     backup_name = 'backup_name_example' # str |  (optional)
+    applicable_env_id = 56 # int | Return only presets that apply to this environment. (optional)
+    applicable_backup_category = 'applicable_backup_category_example' # str | Return only presets that apply to this backup category. (optional)
 
     try:
         # List backup presets
-        api_response = api_instance.list_backup_presets(app_instance_id=app_instance_id, app_service_id=app_service_id, database_id=database_id, database_db_id=database_db_id, org_id=org_id, backup_name=backup_name)
+        api_response = api_instance.list_backup_presets(app_instance_id=app_instance_id, app_service_id=app_service_id, database_id=database_id, database_db_id=database_db_id, org_id=org_id, backup_name=backup_name, applicable_env_id=applicable_env_id, applicable_backup_category=applicable_backup_category)
         print("The response of BackupsApi->list_backup_presets:\n")
         pprint(api_response)
     except Exception as e:
@@ -488,6 +576,8 @@ Name | Type | Description  | Notes
  **database_db_id** | **int**|  | [optional] 
  **org_id** | **int**| Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. | [optional] 
  **backup_name** | **str**|  | [optional] 
+ **applicable_env_id** | **int**| Return only presets that apply to this environment. | [optional] 
+ **applicable_backup_category** | **str**| Return only presets that apply to this backup category. | [optional] 
 
 ### Return type
 

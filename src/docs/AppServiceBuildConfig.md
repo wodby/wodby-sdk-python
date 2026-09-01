@@ -12,8 +12,7 @@ Name | Type | Description | Notes
 **image** | **str** |  | 
 **dockerfile** | **str** |  | [optional] 
 **dockerignore** | **str** |  | [optional] 
-**copy_from** | **str** | Build context subdirectory to copy, relative to the CI --from path. Empty means the whole context. | 
-**copy_to** | **str** | Image subdirectory to copy into, relative to the CI --to path. Empty means the image working directory. | 
+**copy_subdir** | **str** | Resolved subdirectory this build copies, applied under both the CI --from and --to paths. Empty means the whole context. | 
 **args** | [**List[AppServiceBuildArg]**](AppServiceBuildArg.md) |  | [optional] 
 
 ## Example

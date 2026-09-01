@@ -17,8 +17,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -26,7 +27,7 @@ class UpdateAppServiceEnvVarInput(BaseModel):
     """
     UpdateAppServiceEnvVarInput
     """ # noqa: E501
-    value: Optional[StrictStr] = None
+    value: Optional[Annotated[str, Field(min_length=1, strict=True)]] = None
     secret: StrictBool
     runtime: Optional[StrictBool] = None
     build: Optional[StrictBool] = None

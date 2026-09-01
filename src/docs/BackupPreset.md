@@ -12,6 +12,8 @@ Name | Type | Description | Notes
 **database_db_id** | **int** |  | [optional] 
 **org_id** | **int** |  | [optional] 
 **env_id** | **int** |  | [optional] 
+**env_types** | **List[str]** |  | 
+**backup_category** | **str** |  | 
 **backup_name** | **str** |  | [optional] 
 **integration_id** | **int** |  | 
 **bucket** | **str** |  | 

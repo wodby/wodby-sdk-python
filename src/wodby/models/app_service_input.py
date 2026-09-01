@@ -21,6 +21,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, Strict
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.app_service_scalability_update_input import AppServiceScalabilityUpdateInput
 from wodby.models.build_source_input import BuildSourceInput
+from wodby.models.service_deployment_configuration_input import ServiceDeploymentConfigurationInput
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -34,7 +35,8 @@ class AppServiceInput(BaseModel):
     disabled: Optional[StrictBool] = None
     main: Optional[StrictBool] = None
     build_source: Optional[BuildSourceInput] = Field(default=None, alias="buildSource")
-    __properties: ClassVar[List[str]] = ["replicas", "scalability", "version", "disabled", "main", "buildSource"]
+    deployment: Optional[ServiceDeploymentConfigurationInput] = None
+    __properties: ClassVar[List[str]] = ["replicas", "scalability", "version", "disabled", "main", "buildSource", "deployment"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -81,6 +83,9 @@ class AppServiceInput(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of build_source
         if self.build_source:
             _dict['buildSource'] = self.build_source.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of deployment
+        if self.deployment:
+            _dict['deployment'] = self.deployment.to_dict()
         # set to None if replicas (nullable) is None
         # and model_fields_set contains the field
         if self.replicas is None and "replicas" in self.model_fields_set:
@@ -118,7 +123,8 @@ class AppServiceInput(BaseModel):
             "version": obj.get("version"),
             "disabled": obj.get("disabled"),
             "main": obj.get("main"),
-            "buildSource": BuildSourceInput.from_dict(obj["buildSource"]) if obj.get("buildSource") is not None else None
+            "buildSource": BuildSourceInput.from_dict(obj["buildSource"]) if obj.get("buildSource") is not None else None,
+            "deployment": ServiceDeploymentConfigurationInput.from_dict(obj["deployment"]) if obj.get("deployment") is not None else None
         })
         return _obj
 

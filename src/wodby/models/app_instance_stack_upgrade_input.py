@@ -17,8 +17,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -26,6 +26,7 @@ class AppInstanceStackUpgradeInput(BaseModel):
     """
     AppInstanceStackUpgradeInput
     """ # noqa: E501
+    deployment: Optional[StrictBool] = Field(default=True, description="Build affected services when required and deploy the upgraded stack configuration.")
     versions: StrictBool
     replicas: StrictBool
     resources: StrictBool
@@ -38,7 +39,7 @@ class AppInstanceStackUpgradeInput(BaseModel):
     cron: StrictBool
     volumes: StrictBool
     main: StrictBool
-    __properties: ClassVar[List[str]] = ["versions", "replicas", "resources", "integrations", "services", "settings", "links", "tokens", "configs", "cron", "volumes", "main"]
+    __properties: ClassVar[List[str]] = ["deployment", "versions", "replicas", "resources", "integrations", "services", "settings", "links", "tokens", "configs", "cron", "volumes", "main"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -91,6 +92,7 @@ class AppInstanceStackUpgradeInput(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "deployment": obj.get("deployment") if obj.get("deployment") is not None else True,
             "versions": obj.get("versions"),
             "replicas": obj.get("replicas"),
             "resources": obj.get("resources"),

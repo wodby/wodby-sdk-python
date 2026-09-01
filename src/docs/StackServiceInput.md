@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **service_rev_pinned** | **bool** |  | [optional] 
 **title** | **str** |  | [optional] 
 **build_source** | [**BuildSourceInput**](BuildSourceInput.md) |  | [optional] 
+**deployment** | [**ServiceDeploymentConfigurationInput**](ServiceDeploymentConfigurationInput.md) |  | [optional] 
 
 ## Example
 

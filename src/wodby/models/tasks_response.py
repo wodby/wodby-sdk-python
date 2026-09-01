@@ -31,9 +31,10 @@ class TasksResponse(BaseModel):
     items: List[Task]
     tree_items: Optional[List[TaskTreeItem]] = Field(default=None, description="Bounded current-page roots and authorized descendants for tree view, linked by parentId.", alias="treeItems")
     tree_truncated: StrictBool = Field(description="True when treeItems omitted visible descendants after reaching the 250-item response limit. Always false for flat view.", alias="treeTruncated")
+    can_include_system: StrictBool = Field(description="True when the current user may request operator-only system tasks.", alias="canIncludeSystem")
     total_count: StrictInt = Field(alias="totalCount")
     next_page: Optional[StrictInt] = Field(default=None, alias="nextPage")
-    __properties: ClassVar[List[str]] = ["items", "treeItems", "treeTruncated", "totalCount", "nextPage"]
+    __properties: ClassVar[List[str]] = ["items", "treeItems", "treeTruncated", "canIncludeSystem", "totalCount", "nextPage"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -113,6 +114,7 @@ class TasksResponse(BaseModel):
             "items": [Task.from_dict(_item) for _item in obj["items"]] if obj.get("items") is not None else None,
             "treeItems": [TaskTreeItem.from_dict(_item) for _item in obj["treeItems"]] if obj.get("treeItems") is not None else None,
             "treeTruncated": obj.get("treeTruncated"),
+            "canIncludeSystem": obj.get("canIncludeSystem"),
             "totalCount": obj.get("totalCount"),
             "nextPage": obj.get("nextPage")
         })

@@ -17,10 +17,10 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from wodby.models.app_instance_settings_input import AppInstanceSettingsInput
-from wodby.models.new_app_instance_access_input import NewAppInstanceAccessInput
+from wodby.models.app_environment_settings_input import AppEnvironmentSettingsInput
+from wodby.models.new_app_environment_access_input import NewAppEnvironmentAccessInput
 from wodby.models.new_app_service_input import NewAppServiceInput
 from typing import Optional, Set
 from typing_extensions import Self
@@ -32,20 +32,33 @@ class NewAppInput(BaseModel):
     org_id: Optional[StrictInt] = Field(default=None, description="Optional for API-key requests; defaults to the API key's organization.", alias="orgId")
     name: StrictStr
     title: Optional[StrictStr] = Field(default=None, description="Defaults to name when omitted.")
-    instance_name: StrictStr = Field(alias="instanceName")
-    instance_title: Optional[StrictStr] = Field(default=None, description="Defaults to instanceName when omitted.", alias="instanceTitle")
-    domain: Optional[StrictStr] = Field(default=None, description="Defaults to instanceName.name.orgDomain when omitted.")
+    environment_name: Optional[StrictStr] = Field(default=None, description="Required for the canonical app environment contract.", alias="environmentName")
+    environment_title: Optional[StrictStr] = Field(default=None, description="Defaults to environmentName when omitted.", alias="environmentTitle")
+    environment_type: Optional[StrictStr] = Field(default=None, description="Required for the canonical app environment contract.", alias="environmentType")
+    instance_name: Optional[StrictStr] = Field(default=None, description="Legacy alternative to environmentName. Requires envId and cannot be combined with canonical app environment fields.", alias="instanceName")
+    instance_title: Optional[StrictStr] = Field(default=None, description="Legacy alternative to environmentTitle. Defaults to instanceName when omitted.", alias="instanceTitle")
+    domain: Optional[StrictStr] = Field(default=None, description="Defaults to environmentName.name.orgDomain for the canonical contract, or instanceName.name.orgDomain for the legacy contract.")
     project_id: Optional[StrictInt] = Field(default=None, alias="projectId")
     stack_rev_id: StrictInt = Field(alias="stackRevId")
     services: Optional[List[NewAppServiceInput]] = Field(default=None, description="Defaults to the stack revision's service defaults when omitted.")
     cluster_id: Optional[StrictInt] = Field(default=None, alias="clusterId")
-    env_id: StrictInt = Field(alias="envId")
+    env_id: Optional[StrictInt] = Field(default=None, description="Legacy environment entity ID. Required with instanceName and cannot be combined with canonical app environment fields.", alias="envId")
     ci_integration_id: Optional[StrictInt] = Field(default=None, description="Omit or use null to inherit the organization default, use 0 for the built-in CI service, or use an accessible CI integration ID. A project-owned integration must be shared with the app's project.", alias="ciIntegrationId")
     registry_integration_id: Optional[StrictInt] = Field(default=None, description="Omit or use null to inherit the organization default, use 0 for the built-in registry, or use an accessible registry integration ID. A project-owned integration must be shared with the app's project.", alias="registryIntegrationId")
-    defer_initial_deployment: Optional[StrictBool] = Field(default=False, description="Defers the automatic initial build and deployment while preserving app instance initialization. Intended for automation that configures the instance before explicitly starting its first build.", alias="deferInitialDeployment")
-    settings: Optional[AppInstanceSettingsInput] = None
-    access: Optional[NewAppInstanceAccessInput] = None
-    __properties: ClassVar[List[str]] = ["orgId", "name", "title", "instanceName", "instanceTitle", "domain", "projectId", "stackRevId", "services", "clusterId", "envId", "ciIntegrationId", "registryIntegrationId", "deferInitialDeployment", "settings", "access"]
+    defer_initial_deployment: Optional[StrictBool] = Field(default=False, description="Defers the automatic initial build and deployment while preserving app environment initialization. Intended for automation that configures the environment before explicitly starting its first build.", alias="deferInitialDeployment")
+    settings: Optional[AppEnvironmentSettingsInput] = None
+    access: Optional[NewAppEnvironmentAccessInput] = None
+    __properties: ClassVar[List[str]] = ["orgId", "name", "title", "environmentName", "environmentTitle", "environmentType", "instanceName", "instanceTitle", "domain", "projectId", "stackRevId", "services", "clusterId", "envId", "ciIntegrationId", "registryIntegrationId", "deferInitialDeployment", "settings", "access"]
+
+    @field_validator('environment_type')
+    def environment_type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['prod', 'test', 'staging', 'dev', 'feature']):
+            raise ValueError("must be one of enum values ('prod', 'test', 'staging', 'dev', 'feature')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -134,6 +147,9 @@ class NewAppInput(BaseModel):
             "orgId": obj.get("orgId"),
             "name": obj.get("name"),
             "title": obj.get("title"),
+            "environmentName": obj.get("environmentName"),
+            "environmentTitle": obj.get("environmentTitle"),
+            "environmentType": obj.get("environmentType"),
             "instanceName": obj.get("instanceName"),
             "instanceTitle": obj.get("instanceTitle"),
             "domain": obj.get("domain"),
@@ -145,8 +161,8 @@ class NewAppInput(BaseModel):
             "ciIntegrationId": obj.get("ciIntegrationId"),
             "registryIntegrationId": obj.get("registryIntegrationId"),
             "deferInitialDeployment": obj.get("deferInitialDeployment") if obj.get("deferInitialDeployment") is not None else False,
-            "settings": AppInstanceSettingsInput.from_dict(obj["settings"]) if obj.get("settings") is not None else None,
-            "access": NewAppInstanceAccessInput.from_dict(obj["access"]) if obj.get("access") is not None else None
+            "settings": AppEnvironmentSettingsInput.from_dict(obj["settings"]) if obj.get("settings") is not None else None,
+            "access": NewAppEnvironmentAccessInput.from_dict(obj["access"]) if obj.get("access") is not None else None
         })
         return _obj
 

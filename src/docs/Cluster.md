@@ -25,6 +25,11 @@ Name | Type | Description | Notes
 **ips** | **List[str]** |  | [optional] 
 **hostname** | **str** |  | [optional] 
 **integration_id** | **int** |  | [optional] 
+**env_id** | **int** | Legacy internal environment entity ID. Use envType. | 
+**env_type** | **str** |  | 
+**env_scope** | **str** |  | 
+**allowed_env_ids** | **List[int]** | Legacy internal environment entity IDs. Use allowedEnvTypes. | 
+**allowed_env_types** | **List[str]** |  | 
 **org_id** | **int** |  | 
 **ownership_scope** | **str** |  | 
 **owner_project_id** | **int** |  | [optional] 

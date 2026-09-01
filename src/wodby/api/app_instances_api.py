@@ -27,6 +27,7 @@ from wodby.models.app_instance_cicd_settings import AppInstanceCICDSettings
 from wodby.models.app_instance_cicd_settings_input import AppInstanceCICDSettingsInput
 from wodby.models.app_instance_maintenance_mode_input import AppInstanceMaintenanceModeInput
 from wodby.models.app_instance_settings_input import AppInstanceSettingsInput
+from wodby.models.app_instance_stack_reconciliation_input import AppInstanceStackReconciliationInput
 from wodby.models.app_instance_stack_upgrade_changelog import AppInstanceStackUpgradeChangelog
 from wodby.models.app_instance_stack_upgrade_input import AppInstanceStackUpgradeInput
 from wodby.models.new_app_access_input import NewAppAccessInput
@@ -75,7 +76,7 @@ class AppInstancesApi:
     ) -> AppAccessOperationResult:
         """Create app instance access
 
-        Creates external access for the app instance identified by the path.
+        Creates external access for the app instance identified by the path. An active paid subscription is required.
 
         :param id: (required)
         :type id: int
@@ -147,7 +148,7 @@ class AppInstancesApi:
     ) -> ApiResponse[AppAccessOperationResult]:
         """Create app instance access
 
-        Creates external access for the app instance identified by the path.
+        Creates external access for the app instance identified by the path. An active paid subscription is required.
 
         :param id: (required)
         :type id: int
@@ -219,7 +220,7 @@ class AppInstancesApi:
     ) -> RESTResponseType:
         """Create app instance access
 
-        Creates external access for the app instance identified by the path.
+        Creates external access for the app instance identified by the path. An active paid subscription is required.
 
         :param id: (required)
         :type id: int
@@ -365,7 +366,7 @@ class AppInstancesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AppInstance:
-        """Create app instance
+        """(Deprecated) Create app instance
 
         Creates an app instance and returns the created resource.
 
@@ -392,6 +393,7 @@ class AppInstancesApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("POST /app-instances is deprecated.", DeprecationWarning)
 
         _param = self._create_app_instance_serialize(
             new_app_instance_input=new_app_instance_input,
@@ -433,7 +435,7 @@ class AppInstancesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[AppInstance]:
-        """Create app instance
+        """(Deprecated) Create app instance
 
         Creates an app instance and returns the created resource.
 
@@ -460,6 +462,7 @@ class AppInstancesApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("POST /app-instances is deprecated.", DeprecationWarning)
 
         _param = self._create_app_instance_serialize(
             new_app_instance_input=new_app_instance_input,
@@ -501,7 +504,7 @@ class AppInstancesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Create app instance
+        """(Deprecated) Create app instance
 
         Creates an app instance and returns the created resource.
 
@@ -528,6 +531,7 @@ class AppInstancesApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("POST /app-instances is deprecated.", DeprecationWarning)
 
         _param = self._create_app_instance_serialize(
             new_app_instance_input=new_app_instance_input,
@@ -909,7 +913,7 @@ class AppInstancesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> OperationResult:
-        """Delete app instance
+        """(Deprecated) Delete app instance
 
         Deletes the app instance and returns the operation result.
 
@@ -938,6 +942,7 @@ class AppInstancesApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("DELETE /app-instances/{id} is deprecated.", DeprecationWarning)
 
         _param = self._delete_app_instance_serialize(
             id=id,
@@ -981,7 +986,7 @@ class AppInstancesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[OperationResult]:
-        """Delete app instance
+        """(Deprecated) Delete app instance
 
         Deletes the app instance and returns the operation result.
 
@@ -1010,6 +1015,7 @@ class AppInstancesApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("DELETE /app-instances/{id} is deprecated.", DeprecationWarning)
 
         _param = self._delete_app_instance_serialize(
             id=id,
@@ -1053,7 +1059,7 @@ class AppInstancesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Delete app instance
+        """(Deprecated) Delete app instance
 
         Deletes the app instance and returns the operation result.
 
@@ -1082,6 +1088,7 @@ class AppInstancesApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("DELETE /app-instances/{id} is deprecated.", DeprecationWarning)
 
         _param = self._delete_app_instance_serialize(
             id=id,
@@ -1190,7 +1197,7 @@ class AppInstancesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AppInstance:
-        """Get app instance
+        """(Deprecated) Get app instance
 
         Returns the app instance identified by the request path.
 
@@ -1217,6 +1224,7 @@ class AppInstancesApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /app-instances/{id} is deprecated.", DeprecationWarning)
 
         _param = self._get_app_instance_serialize(
             id=id,
@@ -1258,7 +1266,7 @@ class AppInstancesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[AppInstance]:
-        """Get app instance
+        """(Deprecated) Get app instance
 
         Returns the app instance identified by the request path.
 
@@ -1285,6 +1293,7 @@ class AppInstancesApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /app-instances/{id} is deprecated.", DeprecationWarning)
 
         _param = self._get_app_instance_serialize(
             id=id,
@@ -1326,7 +1335,7 @@ class AppInstancesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get app instance
+        """(Deprecated) Get app instance
 
         Returns the app instance identified by the request path.
 
@@ -1353,6 +1362,7 @@ class AppInstancesApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /app-instances/{id} is deprecated.", DeprecationWarning)
 
         _param = self._get_app_instance_serialize(
             id=id,
@@ -1722,7 +1732,7 @@ class AppInstancesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AppInstance:
-        """Get app instance by app and instance name
+        """(Deprecated) Get app instance by app and instance name
 
         Returns the app instance identified by app and instance name.
 
@@ -1753,6 +1763,7 @@ class AppInstancesApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /app-instances/by-name/{appName}/{instanceName} is deprecated.", DeprecationWarning)
 
         _param = self._get_app_instance_by_name_serialize(
             app_name=app_name,
@@ -1798,7 +1809,7 @@ class AppInstancesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[AppInstance]:
-        """Get app instance by app and instance name
+        """(Deprecated) Get app instance by app and instance name
 
         Returns the app instance identified by app and instance name.
 
@@ -1829,6 +1840,7 @@ class AppInstancesApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /app-instances/by-name/{appName}/{instanceName} is deprecated.", DeprecationWarning)
 
         _param = self._get_app_instance_by_name_serialize(
             app_name=app_name,
@@ -1874,7 +1886,7 @@ class AppInstancesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get app instance by app and instance name
+        """(Deprecated) Get app instance by app and instance name
 
         Returns the app instance identified by app and instance name.
 
@@ -1905,6 +1917,7 @@ class AppInstancesApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /app-instances/by-name/{appName}/{instanceName} is deprecated.", DeprecationWarning)
 
         _param = self._get_app_instance_by_name_serialize(
             app_name=app_name,
@@ -2017,7 +2030,7 @@ class AppInstancesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AppInstanceCICDSettings:
-        """Get app instance CI/CD settings
+        """(Deprecated) Get app instance CI/CD settings
 
         Returns the CI and registry integrations used by future app instance builds. Integration ID 0 identifies the built-in Wodby service.
 
@@ -2044,6 +2057,7 @@ class AppInstancesApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /app-instances/cicd-settings/{id} is deprecated.", DeprecationWarning)
 
         _param = self._get_app_instance_cicd_settings_serialize(
             id=id,
@@ -2085,7 +2099,7 @@ class AppInstancesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[AppInstanceCICDSettings]:
-        """Get app instance CI/CD settings
+        """(Deprecated) Get app instance CI/CD settings
 
         Returns the CI and registry integrations used by future app instance builds. Integration ID 0 identifies the built-in Wodby service.
 
@@ -2112,6 +2126,7 @@ class AppInstancesApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /app-instances/cicd-settings/{id} is deprecated.", DeprecationWarning)
 
         _param = self._get_app_instance_cicd_settings_serialize(
             id=id,
@@ -2153,7 +2168,7 @@ class AppInstancesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get app instance CI/CD settings
+        """(Deprecated) Get app instance CI/CD settings
 
         Returns the CI and registry integrations used by future app instance builds. Integration ID 0 identifies the built-in Wodby service.
 
@@ -2180,6 +2195,7 @@ class AppInstancesApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /app-instances/cicd-settings/{id} is deprecated.", DeprecationWarning)
 
         _param = self._get_app_instance_cicd_settings_serialize(
             id=id,
@@ -2835,7 +2851,7 @@ class AppInstancesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[AppInstance]:
-        """List app instances
+        """(Deprecated) List app instances
 
         Returns app instances matching the request filters.
 
@@ -2870,6 +2886,7 @@ class AppInstancesApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /app-instances is deprecated.", DeprecationWarning)
 
         _param = self._list_app_instances_serialize(
             org_id=org_id,
@@ -2919,7 +2936,7 @@ class AppInstancesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[List[AppInstance]]:
-        """List app instances
+        """(Deprecated) List app instances
 
         Returns app instances matching the request filters.
 
@@ -2954,6 +2971,7 @@ class AppInstancesApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /app-instances is deprecated.", DeprecationWarning)
 
         _param = self._list_app_instances_serialize(
             org_id=org_id,
@@ -3003,7 +3021,7 @@ class AppInstancesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """List app instances
+        """(Deprecated) List app instances
 
         Returns app instances matching the request filters.
 
@@ -3038,6 +3056,7 @@ class AppInstancesApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /app-instances is deprecated.", DeprecationWarning)
 
         _param = self._list_app_instances_serialize(
             org_id=org_id,
@@ -3168,7 +3187,7 @@ class AppInstancesApi:
     ) -> ValidationResult:
         """Preflight app instance access
 
-        Validates a proposed app-access configuration before an app instance or access resource is created.
+        Validates a proposed app-access configuration before an app instance or access resource is created. An active paid subscription is required.
 
         :param new_app_instance_access_input: (required)
         :type new_app_instance_access_input: NewAppInstanceAccessInput
@@ -3236,7 +3255,7 @@ class AppInstancesApi:
     ) -> ApiResponse[ValidationResult]:
         """Preflight app instance access
 
-        Validates a proposed app-access configuration before an app instance or access resource is created.
+        Validates a proposed app-access configuration before an app instance or access resource is created. An active paid subscription is required.
 
         :param new_app_instance_access_input: (required)
         :type new_app_instance_access_input: NewAppInstanceAccessInput
@@ -3304,7 +3323,7 @@ class AppInstancesApi:
     ) -> RESTResponseType:
         """Preflight app instance access
 
-        Validates a proposed app-access configuration before an app instance or access resource is created.
+        Validates a proposed app-access configuration before an app instance or access resource is created. An active paid subscription is required.
 
         :param new_app_instance_access_input: (required)
         :type new_app_instance_access_input: NewAppInstanceAccessInput
@@ -3412,6 +3431,302 @@ class AppInstancesApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/app-accesses/actions/preflight',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def reconcile_app_instance_stack(
+        self,
+        id: StrictInt,
+        app_instance_stack_reconciliation_input: AppInstanceStackReconciliationInput,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> OperationResult:
+        """(Deprecated) Reconcile app instance stack
+
+        Reapplies the app instance's assigned stack revision using the selected override sections without changing its stack revision.
+
+        :param id: (required)
+        :type id: int
+        :param app_instance_stack_reconciliation_input: (required)
+        :type app_instance_stack_reconciliation_input: AppInstanceStackReconciliationInput
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+        warnings.warn("POST /app-instances/{id}/actions/reconcile-stack is deprecated.", DeprecationWarning)
+
+        _param = self._reconcile_app_instance_stack_serialize(
+            id=id,
+            app_instance_stack_reconciliation_input=app_instance_stack_reconciliation_input,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "OperationResult",
+            '4XX': "ProblemDetails",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def reconcile_app_instance_stack_with_http_info(
+        self,
+        id: StrictInt,
+        app_instance_stack_reconciliation_input: AppInstanceStackReconciliationInput,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[OperationResult]:
+        """(Deprecated) Reconcile app instance stack
+
+        Reapplies the app instance's assigned stack revision using the selected override sections without changing its stack revision.
+
+        :param id: (required)
+        :type id: int
+        :param app_instance_stack_reconciliation_input: (required)
+        :type app_instance_stack_reconciliation_input: AppInstanceStackReconciliationInput
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+        warnings.warn("POST /app-instances/{id}/actions/reconcile-stack is deprecated.", DeprecationWarning)
+
+        _param = self._reconcile_app_instance_stack_serialize(
+            id=id,
+            app_instance_stack_reconciliation_input=app_instance_stack_reconciliation_input,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "OperationResult",
+            '4XX': "ProblemDetails",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def reconcile_app_instance_stack_without_preload_content(
+        self,
+        id: StrictInt,
+        app_instance_stack_reconciliation_input: AppInstanceStackReconciliationInput,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """(Deprecated) Reconcile app instance stack
+
+        Reapplies the app instance's assigned stack revision using the selected override sections without changing its stack revision.
+
+        :param id: (required)
+        :type id: int
+        :param app_instance_stack_reconciliation_input: (required)
+        :type app_instance_stack_reconciliation_input: AppInstanceStackReconciliationInput
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+        warnings.warn("POST /app-instances/{id}/actions/reconcile-stack is deprecated.", DeprecationWarning)
+
+        _param = self._reconcile_app_instance_stack_serialize(
+            id=id,
+            app_instance_stack_reconciliation_input=app_instance_stack_reconciliation_input,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "OperationResult",
+            '4XX': "ProblemDetails",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _reconcile_app_instance_stack_serialize(
+        self,
+        id,
+        app_instance_stack_reconciliation_input,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if id is not None:
+            _path_params['id'] = id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if app_instance_stack_reconciliation_input is not None:
+            _body_params = app_instance_stack_reconciliation_input
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json', 
+                    'application/problem+json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'apiKeyHeader'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/app-instances/{id}/actions/reconcile-stack',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3712,7 +4027,7 @@ class AppInstancesApi:
     ) -> AppAccessOperationResult:
         """Update app access
 
-        Updates an existing app-access configuration and starts its reconciliation task.
+        Updates an existing app-access configuration and starts its reconciliation task. An active paid subscription is required.
 
         :param id: (required)
         :type id: int
@@ -3784,7 +4099,7 @@ class AppInstancesApi:
     ) -> ApiResponse[AppAccessOperationResult]:
         """Update app access
 
-        Updates an existing app-access configuration and starts its reconciliation task.
+        Updates an existing app-access configuration and starts its reconciliation task. An active paid subscription is required.
 
         :param id: (required)
         :type id: int
@@ -3856,7 +4171,7 @@ class AppInstancesApi:
     ) -> RESTResponseType:
         """Update app access
 
-        Updates an existing app-access configuration and starts its reconciliation task.
+        Updates an existing app-access configuration and starts its reconciliation task. An active paid subscription is required.
 
         :param id: (required)
         :type id: int
@@ -4003,7 +4318,7 @@ class AppInstancesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AppInstance:
-        """Update app instance
+        """(Deprecated) Update app instance
 
         Updates the app instance and returns the updated resource.
 
@@ -4032,6 +4347,7 @@ class AppInstancesApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("PUT /app-instances/{id} is deprecated.", DeprecationWarning)
 
         _param = self._update_app_instance_serialize(
             id=id,
@@ -4075,7 +4391,7 @@ class AppInstancesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[AppInstance]:
-        """Update app instance
+        """(Deprecated) Update app instance
 
         Updates the app instance and returns the updated resource.
 
@@ -4104,6 +4420,7 @@ class AppInstancesApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("PUT /app-instances/{id} is deprecated.", DeprecationWarning)
 
         _param = self._update_app_instance_serialize(
             id=id,
@@ -4147,7 +4464,7 @@ class AppInstancesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Update app instance
+        """(Deprecated) Update app instance
 
         Updates the app instance and returns the updated resource.
 
@@ -4176,6 +4493,7 @@ class AppInstancesApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("PUT /app-instances/{id} is deprecated.", DeprecationWarning)
 
         _param = self._update_app_instance_serialize(
             id=id,
@@ -4296,7 +4614,7 @@ class AppInstancesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AppInstanceCICDSettings:
-        """Update app instance CI/CD settings
+        """(Deprecated) Update app instance CI/CD settings
 
         Updates the CI and registry integrations used by future app instance builds. Integration ID 0 selects the built-in Wodby service.
 
@@ -4325,6 +4643,7 @@ class AppInstancesApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("PUT /app-instances/cicd-settings/{id} is deprecated.", DeprecationWarning)
 
         _param = self._update_app_instance_cicd_settings_serialize(
             id=id,
@@ -4368,7 +4687,7 @@ class AppInstancesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[AppInstanceCICDSettings]:
-        """Update app instance CI/CD settings
+        """(Deprecated) Update app instance CI/CD settings
 
         Updates the CI and registry integrations used by future app instance builds. Integration ID 0 selects the built-in Wodby service.
 
@@ -4397,6 +4716,7 @@ class AppInstancesApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("PUT /app-instances/cicd-settings/{id} is deprecated.", DeprecationWarning)
 
         _param = self._update_app_instance_cicd_settings_serialize(
             id=id,
@@ -4440,7 +4760,7 @@ class AppInstancesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Update app instance CI/CD settings
+        """(Deprecated) Update app instance CI/CD settings
 
         Updates the CI and registry integrations used by future app instance builds. Integration ID 0 selects the built-in Wodby service.
 
@@ -4469,6 +4789,7 @@ class AppInstancesApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("PUT /app-instances/cicd-settings/{id} is deprecated.", DeprecationWarning)
 
         _param = self._update_app_instance_cicd_settings_serialize(
             id=id,
@@ -4589,7 +4910,7 @@ class AppInstancesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> OperationResult:
-        """Update app instance maintenance mode
+        """(Deprecated) Update app instance maintenance mode
 
         Enables or disables the fixed maintenance response on all public HTTP routes while application workloads continue running.
 
@@ -4618,6 +4939,7 @@ class AppInstancesApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("PUT /app-instances/{id}/actions/maintenance-mode is deprecated.", DeprecationWarning)
 
         _param = self._update_app_instance_maintenance_mode_serialize(
             id=id,
@@ -4661,7 +4983,7 @@ class AppInstancesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[OperationResult]:
-        """Update app instance maintenance mode
+        """(Deprecated) Update app instance maintenance mode
 
         Enables or disables the fixed maintenance response on all public HTTP routes while application workloads continue running.
 
@@ -4690,6 +5012,7 @@ class AppInstancesApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("PUT /app-instances/{id}/actions/maintenance-mode is deprecated.", DeprecationWarning)
 
         _param = self._update_app_instance_maintenance_mode_serialize(
             id=id,
@@ -4733,7 +5056,7 @@ class AppInstancesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Update app instance maintenance mode
+        """(Deprecated) Update app instance maintenance mode
 
         Enables or disables the fixed maintenance response on all public HTTP routes while application workloads continue running.
 
@@ -4762,6 +5085,7 @@ class AppInstancesApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("PUT /app-instances/{id}/actions/maintenance-mode is deprecated.", DeprecationWarning)
 
         _param = self._update_app_instance_maintenance_mode_serialize(
             id=id,
@@ -4882,7 +5206,7 @@ class AppInstancesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AppInstance:
-        """Update app instance settings
+        """(Deprecated) Update app instance settings
 
         Updates app instance settings and returns the updated app instance.
 
@@ -4911,6 +5235,7 @@ class AppInstancesApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("PUT /app-instances/settings/{id} is deprecated.", DeprecationWarning)
 
         _param = self._update_app_instance_settings_serialize(
             id=id,
@@ -4954,7 +5279,7 @@ class AppInstancesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[AppInstance]:
-        """Update app instance settings
+        """(Deprecated) Update app instance settings
 
         Updates app instance settings and returns the updated app instance.
 
@@ -4983,6 +5308,7 @@ class AppInstancesApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("PUT /app-instances/settings/{id} is deprecated.", DeprecationWarning)
 
         _param = self._update_app_instance_settings_serialize(
             id=id,
@@ -5026,7 +5352,7 @@ class AppInstancesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Update app instance settings
+        """(Deprecated) Update app instance settings
 
         Updates app instance settings and returns the updated app instance.
 
@@ -5055,6 +5381,7 @@ class AppInstancesApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("PUT /app-instances/settings/{id} is deprecated.", DeprecationWarning)
 
         _param = self._update_app_instance_settings_serialize(
             id=id,
@@ -5175,7 +5502,7 @@ class AppInstancesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> OperationResult:
-        """Upgrade app instance stack
+        """(Deprecated) Upgrade app instance stack
 
         Upgrades an app instance stack using the selected upgrade sections.
 
@@ -5204,6 +5531,7 @@ class AppInstancesApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("POST /app-instances/{id}/actions/upgrade-stack is deprecated.", DeprecationWarning)
 
         _param = self._upgrade_app_instance_stack_serialize(
             id=id,
@@ -5247,7 +5575,7 @@ class AppInstancesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[OperationResult]:
-        """Upgrade app instance stack
+        """(Deprecated) Upgrade app instance stack
 
         Upgrades an app instance stack using the selected upgrade sections.
 
@@ -5276,6 +5604,7 @@ class AppInstancesApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("POST /app-instances/{id}/actions/upgrade-stack is deprecated.", DeprecationWarning)
 
         _param = self._upgrade_app_instance_stack_serialize(
             id=id,
@@ -5319,7 +5648,7 @@ class AppInstancesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Upgrade app instance stack
+        """(Deprecated) Upgrade app instance stack
 
         Upgrades an app instance stack using the selected upgrade sections.
 
@@ -5348,6 +5677,7 @@ class AppInstancesApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("POST /app-instances/{id}/actions/upgrade-stack is deprecated.", DeprecationWarning)
 
         _param = self._upgrade_app_instance_stack_serialize(
             id=id,

@@ -6,6 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **git_auto_update** | [**GitAutoUpdateSettingsInput**](GitAutoUpdateSettingsInput.md) |  | [optional] 
+**auto_base_revision_update** | [**ServiceAutoBaseRevisionUpdateSettingsInput**](ServiceAutoBaseRevisionUpdateSettingsInput.md) |  | [optional] 
 
 ## Example
 

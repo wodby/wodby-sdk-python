@@ -1,13 +1,16 @@
 # IntegrationEnvironmentPolicyInput
 
+Use primaryEnvType and allowedEnvTypes. Legacy ID fields remain accepted but cannot be mixed with their type equivalents.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **primary_env_id** | **int** |  | [optional] 
+**primary_env_type** | **str** |  | [optional] 
 **scope** | **str** |  | 
-**allowed_env_ids** | **List[int]** |  | 
+**allowed_env_ids** | **List[int]** |  | [optional] 
+**allowed_env_types** | **List[str]** |  | [optional] 
 
 ## Example
 

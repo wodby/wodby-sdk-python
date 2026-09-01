@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **billing_option** | **str** |  | [optional] 
 **disable_monitoring** | **bool** |  | 
 **auto_infrastructure_upgrade** | **bool** |  | [optional] 
+**environment_policy** | [**ClusterEnvironmentPolicyInput**](ClusterEnvironmentPolicyInput.md) |  | [optional] 
 
 ## Example
 

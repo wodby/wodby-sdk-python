@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from wodby.models.automation_time_window import AutomationTimeWindow
@@ -37,6 +37,8 @@ class BackupPreset(BaseModel):
     database_db_id: Optional[StrictInt] = Field(default=None, alias="databaseDbId")
     org_id: Optional[StrictInt] = Field(default=None, alias="orgId")
     env_id: Optional[StrictInt] = Field(default=None, alias="envId")
+    env_types: List[StrictStr] = Field(alias="envTypes")
+    backup_category: StrictStr = Field(alias="backupCategory")
     backup_name: Optional[StrictStr] = Field(default=None, alias="backupName")
     integration_id: StrictInt = Field(alias="integrationId")
     bucket: StrictStr
@@ -51,7 +53,22 @@ class BackupPreset(BaseModel):
     next_run_at: Optional[datetime] = Field(default=None, alias="nextRunAt")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "appInstanceId", "appServiceId", "databaseId", "databaseDbId", "orgId", "envId", "backupName", "integrationId", "bucket", "storageClass", "options", "override", "auto", "disabled", "crontab", "timeWindow", "duration", "nextRunAt", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "appInstanceId", "appServiceId", "databaseId", "databaseDbId", "orgId", "envId", "envTypes", "backupCategory", "backupName", "integrationId", "bucket", "storageClass", "options", "override", "auto", "disabled", "crontab", "timeWindow", "duration", "nextRunAt", "createdAt", "updatedAt"]
+
+    @field_validator('env_types')
+    def env_types_validate_enum(cls, value):
+        """Validates the enum"""
+        for i in value:
+            if i not in set(['dev', 'feature', 'test', 'staging', 'prod']):
+                raise ValueError("each list item must be one of ('dev', 'feature', 'test', 'staging', 'prod')")
+        return value
+
+    @field_validator('backup_category')
+    def backup_category_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(['any', 'files', 'database']):
+            raise ValueError("must be one of enum values ('any', 'files', 'database')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -176,6 +193,8 @@ class BackupPreset(BaseModel):
             "databaseDbId": obj.get("databaseDbId"),
             "orgId": obj.get("orgId"),
             "envId": obj.get("envId"),
+            "envTypes": obj.get("envTypes"),
+            "backupCategory": obj.get("backupCategory"),
             "backupName": obj.get("backupName"),
             "integrationId": obj.get("integrationId"),
             "bucket": obj.get("bucket"),

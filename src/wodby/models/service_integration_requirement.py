@@ -20,6 +20,7 @@ import json
 from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.integration_variable_requirement import IntegrationVariableRequirement
+from wodby.models.service_manifest_env_var import ServiceManifestEnvVar
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -32,9 +33,10 @@ class ServiceIntegrationRequirement(BaseModel):
     type: StrictStr
     labels: Optional[List[StrictStr]] = None
     variables: List[IntegrationVariableRequirement]
+    env: List[ServiceManifestEnvVar]
     required: StrictBool
     multiple: StrictBool
-    __properties: ClassVar[List[str]] = ["name", "title", "type", "labels", "variables", "required", "multiple"]
+    __properties: ClassVar[List[str]] = ["name", "title", "type", "labels", "variables", "env", "required", "multiple"]
 
     @field_validator('type')
     def type_validate_enum(cls, value):
@@ -89,6 +91,13 @@ class ServiceIntegrationRequirement(BaseModel):
                 if _item_variables:
                     _items.append(_item_variables.to_dict())
             _dict['variables'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in env (list)
+        _items = []
+        if self.env:
+            for _item_env in self.env:
+                if _item_env:
+                    _items.append(_item_env.to_dict())
+            _dict['env'] = _items
         return _dict
 
     @classmethod
@@ -106,6 +115,7 @@ class ServiceIntegrationRequirement(BaseModel):
             "type": obj.get("type"),
             "labels": obj.get("labels"),
             "variables": [IntegrationVariableRequirement.from_dict(_item) for _item in obj["variables"]] if obj.get("variables") is not None else None,
+            "env": [ServiceManifestEnvVar.from_dict(_item) for _item in obj["env"]] if obj.get("env") is not None else None,
             "required": obj.get("required"),
             "multiple": obj.get("multiple")
         })

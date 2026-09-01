@@ -24,18 +24,41 @@ from typing_extensions import Self
 
 class IntegrationEnvironmentPolicyInput(BaseModel):
     """
-    IntegrationEnvironmentPolicyInput
+    Use primaryEnvType and allowedEnvTypes. Legacy ID fields remain accepted but cannot be mixed with their type equivalents.
     """ # noqa: E501
     primary_env_id: Optional[StrictInt] = Field(default=None, alias="primaryEnvId")
+    primary_env_type: Optional[StrictStr] = Field(default=None, alias="primaryEnvType")
     scope: StrictStr
-    allowed_env_ids: List[StrictInt] = Field(alias="allowedEnvIds")
-    __properties: ClassVar[List[str]] = ["primaryEnvId", "scope", "allowedEnvIds"]
+    allowed_env_ids: Optional[List[StrictInt]] = Field(default=None, alias="allowedEnvIds")
+    allowed_env_types: Optional[List[StrictStr]] = Field(default=None, alias="allowedEnvTypes")
+    __properties: ClassVar[List[str]] = ["primaryEnvId", "primaryEnvType", "scope", "allowedEnvIds", "allowedEnvTypes"]
+
+    @field_validator('primary_env_type')
+    def primary_env_type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['prod', 'test', 'staging', 'dev', 'feature']):
+            raise ValueError("must be one of enum values ('prod', 'test', 'staging', 'dev', 'feature')")
+        return value
 
     @field_validator('scope')
     def scope_validate_enum(cls, value):
         """Validates the enum"""
         if value not in set(['all', 'selected']):
             raise ValueError("must be one of enum values ('all', 'selected')")
+        return value
+
+    @field_validator('allowed_env_types')
+    def allowed_env_types_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        for i in value:
+            if i not in set(['prod', 'test', 'staging', 'dev', 'feature']):
+                raise ValueError("each list item must be one of ('prod', 'test', 'staging', 'dev', 'feature')")
         return value
 
     model_config = ConfigDict(
@@ -82,6 +105,11 @@ class IntegrationEnvironmentPolicyInput(BaseModel):
         if self.primary_env_id is None and "primary_env_id" in self.model_fields_set:
             _dict['primaryEnvId'] = None
 
+        # set to None if primary_env_type (nullable) is None
+        # and model_fields_set contains the field
+        if self.primary_env_type is None and "primary_env_type" in self.model_fields_set:
+            _dict['primaryEnvType'] = None
+
         return _dict
 
     @classmethod
@@ -95,8 +123,10 @@ class IntegrationEnvironmentPolicyInput(BaseModel):
 
         _obj = cls.model_validate({
             "primaryEnvId": obj.get("primaryEnvId"),
+            "primaryEnvType": obj.get("primaryEnvType"),
             "scope": obj.get("scope"),
-            "allowedEnvIds": obj.get("allowedEnvIds")
+            "allowedEnvIds": obj.get("allowedEnvIds"),
+            "allowedEnvTypes": obj.get("allowedEnvTypes")
         })
         return _obj
 

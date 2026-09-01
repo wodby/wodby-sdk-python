@@ -16,13 +16,14 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt, StrictStr
+from pydantic import Field, StrictInt, StrictStr, field_validator
 from typing import Any, Dict, List, Optional
 from typing_extensions import Annotated
 from wodby.models.app_access_provider_options import AppAccessProviderOptions
 from wodby.models.integration import Integration
 from wodby.models.integration_configuration_result import IntegrationConfigurationResult
 from wodby.models.integration_environment_policy_input import IntegrationEnvironmentPolicyInput
+from wodby.models.integration_provider_revision_upgrade import IntegrationProviderRevisionUpgrade
 from wodby.models.integration_scope import IntegrationScope
 from wodby.models.kube_version import KubeVersion
 from wodby.models.new_integration_input import NewIntegrationInput
@@ -32,6 +33,7 @@ from wodby.models.remote_git_repo_file_presence import RemoteGitRepoFilePresence
 from wodby.models.resolve_integration_result import ResolveIntegrationResult
 from wodby.models.search_integrations_input import SearchIntegrationsInput
 from wodby.models.update_integration_input import UpdateIntegrationInput
+from wodby.models.upgrade_integration_provider_revision_input import UpgradeIntegrationProviderRevisionInput
 from wodby.models.validate_app_access_hostname_input import ValidateAppAccessHostnameInput
 from wodby.models.validation_result import ValidationResult
 
@@ -1669,6 +1671,271 @@ class IntegrationsApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/integrations/{id}/options/kube-settings',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_integration_provider_revision_upgrade(
+        self,
+        id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> IntegrationProviderRevisionUpgrade:
+        """Preview provider revision upgrade
+
+        Returns the compatibility decision and revision details for upgrading an integration.
+
+        :param id: (required)
+        :type id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_integration_provider_revision_upgrade_serialize(
+            id=id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "IntegrationProviderRevisionUpgrade",
+            '4XX': "ProblemDetails",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_integration_provider_revision_upgrade_with_http_info(
+        self,
+        id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[IntegrationProviderRevisionUpgrade]:
+        """Preview provider revision upgrade
+
+        Returns the compatibility decision and revision details for upgrading an integration.
+
+        :param id: (required)
+        :type id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_integration_provider_revision_upgrade_serialize(
+            id=id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "IntegrationProviderRevisionUpgrade",
+            '4XX': "ProblemDetails",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_integration_provider_revision_upgrade_without_preload_content(
+        self,
+        id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Preview provider revision upgrade
+
+        Returns the compatibility decision and revision details for upgrading an integration.
+
+        :param id: (required)
+        :type id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_integration_provider_revision_upgrade_serialize(
+            id=id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "IntegrationProviderRevisionUpgrade",
+            '4XX': "ProblemDetails",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_integration_provider_revision_upgrade_serialize(
+        self,
+        id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if id is not None:
+            _path_params['id'] = id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json', 
+                    'application/problem+json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'apiKeyHeader'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/integration-provider-revision-upgrades/{id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4724,7 +4991,8 @@ class IntegrationsApi:
         org_id: Annotated[Optional[StrictInt], Field(description="Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.")] = None,
         project_ids: Annotated[Optional[StrictStr], Field(description="Comma-separated project ids")] = None,
         labels: Annotated[Optional[StrictStr], Field(description="Comma-separated labels")] = None,
-        env_id: Annotated[Optional[Annotated[int, Field(strict=True, ge=1)]], Field(description="Return only integrations allowed in this environment")] = None,
+        env_id: Annotated[Optional[Annotated[int, Field(strict=True, ge=1)]], Field(description="Legacy environment entity filter. Use envType.")] = None,
+        env_type: Annotated[Optional[StrictStr], Field(description="Return only integrations allowed for this fixed environment type.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4748,8 +5016,10 @@ class IntegrationsApi:
         :type project_ids: str
         :param labels: Comma-separated labels
         :type labels: str
-        :param env_id: Return only integrations allowed in this environment
+        :param env_id: Legacy environment entity filter. Use envType.
         :type env_id: int
+        :param env_type: Return only integrations allowed for this fixed environment type.
+        :type env_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4777,6 +5047,7 @@ class IntegrationsApi:
             project_ids=project_ids,
             labels=labels,
             env_id=env_id,
+            env_type=env_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4804,7 +5075,8 @@ class IntegrationsApi:
         org_id: Annotated[Optional[StrictInt], Field(description="Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.")] = None,
         project_ids: Annotated[Optional[StrictStr], Field(description="Comma-separated project ids")] = None,
         labels: Annotated[Optional[StrictStr], Field(description="Comma-separated labels")] = None,
-        env_id: Annotated[Optional[Annotated[int, Field(strict=True, ge=1)]], Field(description="Return only integrations allowed in this environment")] = None,
+        env_id: Annotated[Optional[Annotated[int, Field(strict=True, ge=1)]], Field(description="Legacy environment entity filter. Use envType.")] = None,
+        env_type: Annotated[Optional[StrictStr], Field(description="Return only integrations allowed for this fixed environment type.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4828,8 +5100,10 @@ class IntegrationsApi:
         :type project_ids: str
         :param labels: Comma-separated labels
         :type labels: str
-        :param env_id: Return only integrations allowed in this environment
+        :param env_id: Legacy environment entity filter. Use envType.
         :type env_id: int
+        :param env_type: Return only integrations allowed for this fixed environment type.
+        :type env_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4857,6 +5131,7 @@ class IntegrationsApi:
             project_ids=project_ids,
             labels=labels,
             env_id=env_id,
+            env_type=env_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4884,7 +5159,8 @@ class IntegrationsApi:
         org_id: Annotated[Optional[StrictInt], Field(description="Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.")] = None,
         project_ids: Annotated[Optional[StrictStr], Field(description="Comma-separated project ids")] = None,
         labels: Annotated[Optional[StrictStr], Field(description="Comma-separated labels")] = None,
-        env_id: Annotated[Optional[Annotated[int, Field(strict=True, ge=1)]], Field(description="Return only integrations allowed in this environment")] = None,
+        env_id: Annotated[Optional[Annotated[int, Field(strict=True, ge=1)]], Field(description="Legacy environment entity filter. Use envType.")] = None,
+        env_type: Annotated[Optional[StrictStr], Field(description="Return only integrations allowed for this fixed environment type.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4908,8 +5184,10 @@ class IntegrationsApi:
         :type project_ids: str
         :param labels: Comma-separated labels
         :type labels: str
-        :param env_id: Return only integrations allowed in this environment
+        :param env_id: Legacy environment entity filter. Use envType.
         :type env_id: int
+        :param env_type: Return only integrations allowed for this fixed environment type.
+        :type env_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4937,6 +5215,7 @@ class IntegrationsApi:
             project_ids=project_ids,
             labels=labels,
             env_id=env_id,
+            env_type=env_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4960,6 +5239,7 @@ class IntegrationsApi:
         project_ids,
         labels,
         env_id,
+        env_type,
         _request_auth,
         _content_type,
         _headers,
@@ -4997,6 +5277,10 @@ class IntegrationsApi:
         if env_id is not None:
             
             _query_params.append(('envId', env_id))
+            
+        if env_type is not None:
+            
+            _query_params.append(('envType', env_type))
             
         # process the header parameters
         # process the form parameters
@@ -6428,6 +6712,299 @@ class IntegrationsApi:
         return self.api_client.param_serialize(
             method='PUT',
             resource_path='/integrations/environment-policy/{id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def upgrade_integration_provider_revision(
+        self,
+        id: StrictInt,
+        upgrade_integration_provider_revision_input: UpgradeIntegrationProviderRevisionInput,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> OperationResult:
+        """Upgrade integration provider revision
+
+        Upgrades an integration to its eligible provider revision and optionally drops fields removed by the target contract.
+
+        :param id: (required)
+        :type id: int
+        :param upgrade_integration_provider_revision_input: (required)
+        :type upgrade_integration_provider_revision_input: UpgradeIntegrationProviderRevisionInput
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._upgrade_integration_provider_revision_serialize(
+            id=id,
+            upgrade_integration_provider_revision_input=upgrade_integration_provider_revision_input,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "OperationResult",
+            '4XX': "ProblemDetails",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def upgrade_integration_provider_revision_with_http_info(
+        self,
+        id: StrictInt,
+        upgrade_integration_provider_revision_input: UpgradeIntegrationProviderRevisionInput,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[OperationResult]:
+        """Upgrade integration provider revision
+
+        Upgrades an integration to its eligible provider revision and optionally drops fields removed by the target contract.
+
+        :param id: (required)
+        :type id: int
+        :param upgrade_integration_provider_revision_input: (required)
+        :type upgrade_integration_provider_revision_input: UpgradeIntegrationProviderRevisionInput
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._upgrade_integration_provider_revision_serialize(
+            id=id,
+            upgrade_integration_provider_revision_input=upgrade_integration_provider_revision_input,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "OperationResult",
+            '4XX': "ProblemDetails",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def upgrade_integration_provider_revision_without_preload_content(
+        self,
+        id: StrictInt,
+        upgrade_integration_provider_revision_input: UpgradeIntegrationProviderRevisionInput,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Upgrade integration provider revision
+
+        Upgrades an integration to its eligible provider revision and optionally drops fields removed by the target contract.
+
+        :param id: (required)
+        :type id: int
+        :param upgrade_integration_provider_revision_input: (required)
+        :type upgrade_integration_provider_revision_input: UpgradeIntegrationProviderRevisionInput
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._upgrade_integration_provider_revision_serialize(
+            id=id,
+            upgrade_integration_provider_revision_input=upgrade_integration_provider_revision_input,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "OperationResult",
+            '4XX': "ProblemDetails",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _upgrade_integration_provider_revision_serialize(
+        self,
+        id,
+        upgrade_integration_provider_revision_input,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if id is not None:
+            _path_params['id'] = id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if upgrade_integration_provider_revision_input is not None:
+            _body_params = upgrade_integration_provider_revision_input
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json', 
+                    'application/problem+json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'apiKeyHeader'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/integrations/{id}/actions/upgrade-provider-revision',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

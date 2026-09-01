@@ -27,7 +27,7 @@ class NewAppAuthInput(BaseModel):
     NewAppAuthInput
     """ # noqa: E501
     app_instance_id: StrictInt = Field(alias="appInstanceId")
-    app_service_ids: Optional[List[StrictInt]] = Field(default=None, description="App services to protect. Omit or pass an empty list to protect the whole app instance.", alias="appServiceIds")
+    app_service_ids: Optional[List[StrictInt]] = Field(default=None, description="App services to protect. Omit or pass an empty list to protect the whole app environment.", alias="appServiceIds")
     app_service_id: Optional[StrictInt] = Field(default=None, description="Single-service scope. Ignored when appServiceIds is supplied.", alias="appServiceId")
     app_route_id: Optional[StrictInt] = Field(default=None, description="Route scope. The owning app service is derived from the route.", alias="appRouteId")
     login: StrictStr
