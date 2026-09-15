@@ -4,17 +4,17 @@ All URIs are relative to *https://api.wodby.com/api/v3*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_app**](ApplicationApi.md#create_app) | **POST** /apps | 
-[**delete_app**](ApplicationApi.md#delete_app) | **DELETE** /apps/{id} | 
-[**get_app**](ApplicationApi.md#get_app) | **GET** /apps/{id} | 
-[**get_app_drush_aliases**](ApplicationApi.md#get_app_drush_aliases) | **GET** /apps/{id}/drush-aliases | 
-[**get_apps**](ApplicationApi.md#get_apps) | **GET** /apps | 
+[**create_app**](ApplicationApi.md#create_app) | **POST** /apps | Create application
+[**delete_app**](ApplicationApi.md#delete_app) | **DELETE** /apps/{id} | Delete application
+[**get_app**](ApplicationApi.md#get_app) | **GET** /apps/{id} | Retrieve application
+[**get_app_drush_aliases**](ApplicationApi.md#get_app_drush_aliases) | **GET** /apps/{id}/drush-aliases | Retrieve Drupal application&#x60;s instances Drush aliases
+[**get_apps**](ApplicationApi.md#get_apps) | **GET** /apps | Retrieve applications
 
 
 # **create_app**
 > ResponseTaskApp create_app(data)
 
-
+Create application
 
 Create application
 
@@ -37,6 +37,7 @@ api_instance = wodby.ApplicationApi(wodby.ApiClient(configuration))
 data = wodby.RequestAppCreate() # RequestAppCreate | 
 
 try:
+    # Create application
     api_response = api_instance.create_app(data)
     pprint(api_response)
 except ApiException as e:
@@ -67,7 +68,7 @@ Name | Type | Description  | Notes
 # **delete_app**
 > ResponseTask delete_app(id)
 
-
+Delete application
 
 Delete application
 
@@ -90,6 +91,7 @@ api_instance = wodby.ApplicationApi(wodby.ApiClient(configuration))
 id = 'id_example' # str | Application ID
 
 try:
+    # Delete application
     api_response = api_instance.delete_app(id)
     pprint(api_response)
 except ApiException as e:
@@ -120,7 +122,7 @@ Name | Type | Description  | Notes
 # **get_app**
 > App get_app(id)
 
-
+Retrieve application
 
 Retrieve application
 
@@ -143,6 +145,7 @@ api_instance = wodby.ApplicationApi(wodby.ApiClient(configuration))
 id = 'id_example' # str | Application ID
 
 try:
+    # Retrieve application
     api_response = api_instance.get_app(id)
     pprint(api_response)
 except ApiException as e:
@@ -173,7 +176,7 @@ Name | Type | Description  | Notes
 # **get_app_drush_aliases**
 > str get_app_drush_aliases(id)
 
-
+Retrieve Drupal application`s instances Drush aliases
 
 Retrieve Drupal application`s instances Drush aliases
 
@@ -196,6 +199,7 @@ api_instance = wodby.ApplicationApi(wodby.ApiClient(configuration))
 id = 'id_example' # str | Application ID
 
 try:
+    # Retrieve Drupal application`s instances Drush aliases
     api_response = api_instance.get_app_drush_aliases(id)
     pprint(api_response)
 except ApiException as e:
@@ -226,7 +230,7 @@ Name | Type | Description  | Notes
 # **get_apps**
 > list[App] get_apps(org_id=org_id, name=name)
 
-
+Retrieve applications
 
 Retrieve applications
 
@@ -250,6 +254,7 @@ org_id = 'org_id_example' # str | Organization ID (optional)
 name = 'name_example' # str | Application name (optional)
 
 try:
+    # Retrieve applications
     api_response = api_instance.get_apps(org_id=org_id, name=name)
     pprint(api_response)
 except ApiException as e:

@@ -4,16 +4,16 @@ All URIs are relative to *https://api.wodby.com/api/v3*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_stack**](StackApi.md#get_stack) | **GET** /stacks/{id} | 
-[**get_stacks**](StackApi.md#get_stacks) | **GET** /stacks | 
-[**update_stack_from_upstream**](StackApi.md#update_stack_from_upstream) | **POST** /stacks/{id}/update | 
-[**update_stacks_from_upstream**](StackApi.md#update_stacks_from_upstream) | **POST** /stacks/update | 
+[**get_stack**](StackApi.md#get_stack) | **GET** /stacks/{id} | Retrieve stack
+[**get_stacks**](StackApi.md#get_stacks) | **GET** /stacks | Retrieve stacks
+[**update_stack_from_upstream**](StackApi.md#update_stack_from_upstream) | **POST** /stacks/{id}/update | Update official stack from upstream
+[**update_stacks_from_upstream**](StackApi.md#update_stacks_from_upstream) | **POST** /stacks/update | Update official stacks from upstream
 
 
 # **get_stack**
 > Stack get_stack(id)
 
-
+Retrieve stack
 
 Retrieve stack
 
@@ -36,6 +36,7 @@ api_instance = wodby.StackApi(wodby.ApiClient(configuration))
 id = 'id_example' # str | Stack ID
 
 try:
+    # Retrieve stack
     api_response = api_instance.get_stack(id)
     pprint(api_response)
 except ApiException as e:
@@ -66,7 +67,7 @@ Name | Type | Description  | Notes
 # **get_stacks**
 > list[Stack] get_stacks(org_id=org_id)
 
-
+Retrieve stacks
 
 Retrieve stacks
 
@@ -89,6 +90,7 @@ api_instance = wodby.StackApi(wodby.ApiClient(configuration))
 org_id = 'org_id_example' # str | Organization ID (optional)
 
 try:
+    # Retrieve stacks
     api_response = api_instance.get_stacks(org_id=org_id)
     pprint(api_response)
 except ApiException as e:
@@ -119,7 +121,7 @@ Name | Type | Description  | Notes
 # **update_stack_from_upstream**
 > ResponseTask update_stack_from_upstream(id)
 
-
+Update official stack from upstream
 
 Update official stack from upstream
 
@@ -142,6 +144,7 @@ api_instance = wodby.StackApi(wodby.ApiClient(configuration))
 id = 'id_example' # str | Stack ID
 
 try:
+    # Update official stack from upstream
     api_response = api_instance.update_stack_from_upstream(id)
     pprint(api_response)
 except ApiException as e:
@@ -172,7 +175,7 @@ Name | Type | Description  | Notes
 # **update_stacks_from_upstream**
 > ResponseTask update_stacks_from_upstream(data)
 
-
+Update official stacks from upstream
 
 Update official stacks from upstream
 
@@ -195,6 +198,7 @@ api_instance = wodby.StackApi(wodby.ApiClient(configuration))
 data = wodby.RequestStacksUpdate() # RequestStacksUpdate | 
 
 try:
+    # Update official stacks from upstream
     api_response = api_instance.update_stacks_from_upstream(data)
     pprint(api_response)
 except ApiException as e:

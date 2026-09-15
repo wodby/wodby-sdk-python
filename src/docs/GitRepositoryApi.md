@@ -4,14 +4,14 @@ All URIs are relative to *https://api.wodby.com/api/v3*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_git_repo**](GitRepositoryApi.md#get_git_repo) | **GET** /git-repo/{id} | 
-[**get_git_repos**](GitRepositoryApi.md#get_git_repos) | **GET** /git-repo | 
+[**get_git_repo**](GitRepositoryApi.md#get_git_repo) | **GET** /git-repo/{id} | Retrieve git repository
+[**get_git_repos**](GitRepositoryApi.md#get_git_repos) | **GET** /git-repo | Retrieve git repositories
 
 
 # **get_git_repo**
 > GitRepo get_git_repo(id)
 
-
+Retrieve git repository
 
 Retrieve git repository
 
@@ -34,6 +34,7 @@ api_instance = wodby.GitRepositoryApi(wodby.ApiClient(configuration))
 id = 'id_example' # str | Git repository ID
 
 try:
+    # Retrieve git repository
     api_response = api_instance.get_git_repo(id)
     pprint(api_response)
 except ApiException as e:
@@ -64,7 +65,7 @@ Name | Type | Description  | Notes
 # **get_git_repos**
 > list[GitRepo] get_git_repos(org_id=org_id, name=name)
 
-
+Retrieve git repositories
 
 Retrieve git repositories
 
@@ -88,6 +89,7 @@ org_id = 'org_id_example' # str | Organization ID (optional)
 name = 'name_example' # str | Git repository name (optional)
 
 try:
+    # Retrieve git repositories
     api_response = api_instance.get_git_repos(org_id=org_id, name=name)
     pprint(api_response)
 except ApiException as e:

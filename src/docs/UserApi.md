@@ -4,13 +4,13 @@ All URIs are relative to *https://api.wodby.com/api/v3*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_authenticated_user**](UserApi.md#get_authenticated_user) | **GET** /user | 
+[**get_authenticated_user**](UserApi.md#get_authenticated_user) | **GET** /user | Retrieve authenticated user
 
 
 # **get_authenticated_user**
 > User get_authenticated_user()
 
-
+Retrieve authenticated user
 
 Retrieve authenticated user
 
@@ -32,6 +32,7 @@ configuration.api_key['X-API-KEY'] = 'YOUR_API_KEY'
 api_instance = wodby.UserApi(wodby.ApiClient(configuration))
 
 try:
+    # Retrieve authenticated user
     api_response = api_instance.get_authenticated_user()
     pprint(api_response)
 except ApiException as e:

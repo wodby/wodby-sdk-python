@@ -4,14 +4,14 @@ All URIs are relative to *https://api.wodby.com/api/v3*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_domain**](DomainApi.md#get_domain) | **GET** /domains/{id} | 
-[**get_domains**](DomainApi.md#get_domains) | **GET** /domains | 
+[**get_domain**](DomainApi.md#get_domain) | **GET** /domains/{id} | Retrieve domain
+[**get_domains**](DomainApi.md#get_domains) | **GET** /domains | Retrieve domains
 
 
 # **get_domain**
 > Domain get_domain(id)
 
-
+Retrieve domain
 
 Retrieve domain
 
@@ -34,6 +34,7 @@ api_instance = wodby.DomainApi(wodby.ApiClient(configuration))
 id = 'id_example' # str | Domain ID
 
 try:
+    # Retrieve domain
     api_response = api_instance.get_domain(id)
     pprint(api_response)
 except ApiException as e:
@@ -64,7 +65,7 @@ Name | Type | Description  | Notes
 # **get_domains**
 > list[Domain] get_domains(org_id=org_id, instance_id=instance_id, server_id=server_id, status=status, type=type, name=name)
 
-
+Retrieve domains
 
 Retrieve domains
 
@@ -92,6 +93,7 @@ type = 'type_example' # str | Domain type (optional)
 name = 'name_example' # str | Domain name (optional)
 
 try:
+    # Retrieve domains
     api_response = api_instance.get_domains(org_id=org_id, instance_id=instance_id, server_id=server_id, status=status, type=type, name=name)
     pprint(api_response)
 except ApiException as e:

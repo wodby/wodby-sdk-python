@@ -4,14 +4,14 @@ All URIs are relative to *https://api.wodby.com/api/v3*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_server**](ServerApi.md#get_server) | **GET** /servers/{id} | 
-[**get_servers**](ServerApi.md#get_servers) | **GET** /servers | 
+[**get_server**](ServerApi.md#get_server) | **GET** /servers/{id} | Retrieve server
+[**get_servers**](ServerApi.md#get_servers) | **GET** /servers | Retrieve servers
 
 
 # **get_server**
 > Server get_server(id)
 
-
+Retrieve server
 
 Retrieve server
 
@@ -34,6 +34,7 @@ api_instance = wodby.ServerApi(wodby.ApiClient(configuration))
 id = 'id_example' # str | Server ID
 
 try:
+    # Retrieve server
     api_response = api_instance.get_server(id)
     pprint(api_response)
 except ApiException as e:
@@ -64,7 +65,7 @@ Name | Type | Description  | Notes
 # **get_servers**
 > list[Server] get_servers(org_id=org_id, name=name)
 
-
+Retrieve servers
 
 Retrieve servers
 
@@ -88,6 +89,7 @@ org_id = 'org_id_example' # str | Organization ID (optional)
 name = 'name_example' # str | Server name (optional)
 
 try:
+    # Retrieve servers
     api_response = api_instance.get_servers(org_id=org_id, name=name)
     pprint(api_response)
 except ApiException as e:

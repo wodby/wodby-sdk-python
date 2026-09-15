@@ -4,14 +4,14 @@ All URIs are relative to *https://api.wodby.com/api/v3*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_task**](TaskApi.md#get_task) | **GET** /tasks/{id} | 
-[**get_tasks**](TaskApi.md#get_tasks) | **GET** /tasks | 
+[**get_task**](TaskApi.md#get_task) | **GET** /tasks/{id} | Retrieve task
+[**get_tasks**](TaskApi.md#get_tasks) | **GET** /tasks | Retrieve tasks
 
 
 # **get_task**
 > Task get_task(id)
 
-
+Retrieve task
 
 Retrieve task
 
@@ -34,6 +34,7 @@ api_instance = wodby.TaskApi(wodby.ApiClient(configuration))
 id = 'id_example' # str | Task ID
 
 try:
+    # Retrieve task
     api_response = api_instance.get_task(id)
     pprint(api_response)
 except ApiException as e:
@@ -64,7 +65,7 @@ Name | Type | Description  | Notes
 # **get_tasks**
 > list[Task] get_tasks(org_id=org_id, user_id=user_id, status=status)
 
-
+Retrieve tasks
 
 Retrieve tasks
 
@@ -89,6 +90,7 @@ user_id = 'user_id_example' # str | User ID (optional)
 status = 'status_example' # str | Task status (optional)
 
 try:
+    # Retrieve tasks
     api_response = api_instance.get_tasks(org_id=org_id, user_id=user_id, status=status)
     pprint(api_response)
 except ApiException as e:

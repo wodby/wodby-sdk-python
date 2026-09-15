@@ -4,20 +4,20 @@ All URIs are relative to *https://api.wodby.com/api/v3*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_instance**](InstanceApi.md#create_instance) | **POST** /instances | 
-[**delete_instance**](InstanceApi.md#delete_instance) | **DELETE** /instances/{id} | 
-[**deploy_instance**](InstanceApi.md#deploy_instance) | **POST** /instances/{id}/deploy | 
-[**deploy_instance_codebase**](InstanceApi.md#deploy_instance_codebase) | **POST** /instances/{id}/deploy-codebase | 
-[**get_instance**](InstanceApi.md#get_instance) | **GET** /instances/{id} | 
-[**get_instances**](InstanceApi.md#get_instances) | **GET** /instances | 
-[**upgrade_instance**](InstanceApi.md#upgrade_instance) | **POST** /instances/{id}/upgrade | 
-[**upgrade_instances**](InstanceApi.md#upgrade_instances) | **POST** /instances/upgrade | 
+[**create_instance**](InstanceApi.md#create_instance) | **POST** /instances | Create instance
+[**delete_instance**](InstanceApi.md#delete_instance) | **DELETE** /instances/{id} | Delete application instance
+[**deploy_instance**](InstanceApi.md#deploy_instance) | **POST** /instances/{id}/deploy | Deploy instance
+[**deploy_instance_codebase**](InstanceApi.md#deploy_instance_codebase) | **POST** /instances/{id}/deploy-codebase | Deploy instance codebase
+[**get_instance**](InstanceApi.md#get_instance) | **GET** /instances/{id} | Retrieve application instance
+[**get_instances**](InstanceApi.md#get_instances) | **GET** /instances | Retrieve instances
+[**upgrade_instance**](InstanceApi.md#upgrade_instance) | **POST** /instances/{id}/upgrade | Upgrade instance
+[**upgrade_instances**](InstanceApi.md#upgrade_instances) | **POST** /instances/upgrade | Upgrade instances
 
 
 # **create_instance**
 > ResponseTaskInstance create_instance(data)
 
-
+Create instance
 
 Create instance
 
@@ -40,6 +40,7 @@ api_instance = wodby.InstanceApi(wodby.ApiClient(configuration))
 data = wodby.RequestInstanceCreate() # RequestInstanceCreate | 
 
 try:
+    # Create instance
     api_response = api_instance.create_instance(data)
     pprint(api_response)
 except ApiException as e:
@@ -70,7 +71,7 @@ Name | Type | Description  | Notes
 # **delete_instance**
 > ResponseTask delete_instance(id)
 
-
+Delete application instance
 
 Delete application instance
 
@@ -93,6 +94,7 @@ api_instance = wodby.InstanceApi(wodby.ApiClient(configuration))
 id = 'id_example' # str | Instance ID
 
 try:
+    # Delete application instance
     api_response = api_instance.delete_instance(id)
     pprint(api_response)
 except ApiException as e:
@@ -123,7 +125,7 @@ Name | Type | Description  | Notes
 # **deploy_instance**
 > ResponseTask deploy_instance(id, data=data)
 
-
+Deploy instance
 
 Deploy instance
 
@@ -147,6 +149,7 @@ id = 'id_example' # str | Instance ID
 data = wodby.RequestInstanceDeploy() # RequestInstanceDeploy |  (optional)
 
 try:
+    # Deploy instance
     api_response = api_instance.deploy_instance(id, data=data)
     pprint(api_response)
 except ApiException as e:
@@ -178,7 +181,7 @@ Name | Type | Description  | Notes
 # **deploy_instance_codebase**
 > ResponseTask deploy_instance_codebase(id, data=data)
 
-
+Deploy instance codebase
 
 Deploy instance codebase
 
@@ -202,6 +205,7 @@ id = 'id_example' # str | Instance ID
 data = wodby.RequestInstanceDeployCodebase() # RequestInstanceDeployCodebase |  (optional)
 
 try:
+    # Deploy instance codebase
     api_response = api_instance.deploy_instance_codebase(id, data=data)
     pprint(api_response)
 except ApiException as e:
@@ -233,7 +237,7 @@ Name | Type | Description  | Notes
 # **get_instance**
 > Instance get_instance(id)
 
-
+Retrieve application instance
 
 Retrieve application instance
 
@@ -256,6 +260,7 @@ api_instance = wodby.InstanceApi(wodby.ApiClient(configuration))
 id = 'id_example' # str | Instance ID
 
 try:
+    # Retrieve application instance
     api_response = api_instance.get_instance(id)
     pprint(api_response)
 except ApiException as e:
@@ -286,7 +291,7 @@ Name | Type | Description  | Notes
 # **get_instances**
 > list[Instance] get_instances(org_id=org_id, server_id=server_id, app_id=app_id, type=type, name=name)
 
-
+Retrieve instances
 
 Retrieve instances
 
@@ -313,6 +318,7 @@ type = 'type_example' # str | Instance type (optional)
 name = 'name_example' # str | Instance name (optional)
 
 try:
+    # Retrieve instances
     api_response = api_instance.get_instances(org_id=org_id, server_id=server_id, app_id=app_id, type=type, name=name)
     pprint(api_response)
 except ApiException as e:
@@ -347,7 +353,7 @@ Name | Type | Description  | Notes
 # **upgrade_instance**
 > ResponseTask upgrade_instance(id)
 
-
+Upgrade instance
 
 Upgrade instance
 
@@ -370,6 +376,7 @@ api_instance = wodby.InstanceApi(wodby.ApiClient(configuration))
 id = 'id_example' # str | Instance ID
 
 try:
+    # Upgrade instance
     api_response = api_instance.upgrade_instance(id)
     pprint(api_response)
 except ApiException as e:
@@ -400,7 +407,7 @@ Name | Type | Description  | Notes
 # **upgrade_instances**
 > ResponseTask upgrade_instances(data)
 
-
+Upgrade instances
 
 Upgrade instances
 
@@ -423,6 +430,7 @@ api_instance = wodby.InstanceApi(wodby.ApiClient(configuration))
 data = wodby.RequestInstancesUpgrade() # RequestInstancesUpgrade | 
 
 try:
+    # Upgrade instances
     api_response = api_instance.upgrade_instances(data)
     pprint(api_response)
 except ApiException as e:

@@ -4,14 +4,14 @@ All URIs are relative to *https://api.wodby.com/api/v3*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_org**](OrganizationApi.md#get_org) | **GET** /orgs/{id} | 
-[**get_orgs**](OrganizationApi.md#get_orgs) | **GET** /orgs | 
+[**get_org**](OrganizationApi.md#get_org) | **GET** /orgs/{id} | Retrieve organization
+[**get_orgs**](OrganizationApi.md#get_orgs) | **GET** /orgs | Retrieve organizations
 
 
 # **get_org**
 > Org get_org(id)
 
-
+Retrieve organization
 
 Retrieve organization
 
@@ -34,6 +34,7 @@ api_instance = wodby.OrganizationApi(wodby.ApiClient(configuration))
 id = 'id_example' # str | Organization ID
 
 try:
+    # Retrieve organization
     api_response = api_instance.get_org(id)
     pprint(api_response)
 except ApiException as e:
@@ -64,7 +65,7 @@ Name | Type | Description  | Notes
 # **get_orgs**
 > list[Org] get_orgs(name=name)
 
-
+Retrieve organizations
 
 Retrieve organizations
 
@@ -87,6 +88,7 @@ api_instance = wodby.OrganizationApi(wodby.ApiClient(configuration))
 name = 'name_example' # str | Organization name (optional)
 
 try:
+    # Retrieve organizations
     api_response = api_instance.get_orgs(name=name)
     pprint(api_response)
 except ApiException as e:
