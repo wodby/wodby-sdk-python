@@ -22,15 +22,11 @@ VERSION = "3.0.19"
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 
-REQUIRES = [
-    "certifi>=2017.4.17",
-    "python-dateutil>=2.1",
-    "six>=1.10",
-    "urllib3>=1.23"
-]
+REQUIRES = ['urllib3>=2.7.0,<3', 'certifi>=2026.7.22', 'python-dateutil>=2.9.0.post0,<3', 'six>=1.17.0,<2']
     
 
 setup(
+    python_requires=">=3.10",
     maintainer="Wodby",
     maintainer_email="hello@wodby.com",
     name=NAME,
