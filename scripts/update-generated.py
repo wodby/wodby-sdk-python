@@ -18,3 +18,10 @@ source = rest.read_text().replace("self.urllib3_response.getheaders()", "self.ur
 source = source.replace("self.urllib3_response.getheader(name, default)", "self.urllib3_response.headers.get(name, default)")
 rest.write_text(source)
 (out / "setup.py.orig").unlink(missing_ok=True)
+
+# Replace the historical documentation URL supplied by the schema.
+readme = out / "README.md"
+readme.write_text(readme.read_text().replace(
+    "Wodby Developer Documentation https://wodby.com/docs/1.0/docs/dev",
+    "Wodby 1.0 API reference: https://wodby.com/docs/1.0/api/",
+))
