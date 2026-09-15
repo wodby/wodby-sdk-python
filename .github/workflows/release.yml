@@ -41,6 +41,39 @@ jobs:
             exit 1
           fi
 
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install release tools
+        run: python -m pip install 'build>=1.6.1,<2' 'twine>=7,<8'
+
+      - name: Build and validate release package
+        run: |
+          python -m build ./src --outdir src/dist
+          python -m twine check src/dist/*
+          python -m pip install src/dist/*.whl
+          python - <<'PYTHON'
+          import os
+          from importlib.metadata import version
+          actual = version('wodby')
+          expected = os.environ['GITHUB_REF_NAME']
+          if actual != expected:
+              raise SystemExit(f'Package version {actual} does not match release tag {expected}')
+          PYTHON
+          python -W error::DeprecationWarning -m unittest discover -s tests -p 'test_*.py'
+
+      - name: Publish package to PyPI
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
+        run: |
+          if [[ -z "${TWINE_PASSWORD}" ]]; then
+            echo '::error::PYPI_TOKEN is required to publish the release'
+            exit 1
+          fi
+          python -m twine upload --non-interactive --skip-existing --repository-url https://upload.pypi.org/legacy/ src/dist/*
+
       - name: Publish GitHub release
         env:
           GH_TOKEN: ${{ github.token }}

@@ -53,3 +53,9 @@ python -m pip_audit -r requirements.txt
 Tests use mocks or a local HTTP server and do not require an API key.
 
 Regenerate with `./pkg-build.sh` (Docker and Java 17 image required). The existing Swagger generator stays pinned to preserve the client API; the post-generation script reapplies modern dependency compatibility.
+
+## Release
+
+An annotated `3.X.Y` tag publishes the committed SDK as the `wodby` package on PyPI and creates a GitHub Release without changing Latest. The package version must match the tag. The workflow builds and checks both a wheel and a source distribution, then runs the local request tests against the installed wheel before uploading.
+
+Publishing uses the repository's `PYPI_TOKEN` secret and fails if it is missing. A retry skips distribution files already uploaded to PyPI. Merge release workflow changes before creating the next SDK tag; existing tags retain their original workflows.
