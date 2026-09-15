@@ -13,6 +13,13 @@ Python client for the Wodby 1.0 public API. This branch maintains SDK 3.x.
 
 Choose the SDK major version for your Wodby platform. Upgrading from SDK 3.x to 4.x changes the target platform to Wodby 2.0.
 
+## Package
+
+- [PyPI: `wodby`](https://pypi.org/project/wodby/)
+- Python import: `wodby`
+
+The PyPI package contains both SDK version lines. Select 3.x for Wodby 1.0 using the version constraint below; an unversioned install can select the 4.x SDK for Wodby 2.0.
+
 ## Requirements
 
 Python 3.10 or newer, with urllib3 2.7+, current certifi, python-dateutil and six. These minimums apply to the next 3.x release; existing releases are unchanged.
@@ -22,12 +29,15 @@ Python 3.10 or newer, with urllib3 2.7+, current certifi, python-dateutil and si
 - [API reference](https://wodby.com/docs/1.0/api/)
 - [Automatically generated documentation](src/README.md)
 
-## Basic usage
+## Install
 
-Install wodby client:
+Install the Wodby 1.0 SDK from PyPI:
+
 ```bash
-pip install "wodby>=3,<4"
+python -m pip install "wodby>=3,<4"
 ```
+
+## Basic usage
 
 Fetch the user's organizations:
 ```python
