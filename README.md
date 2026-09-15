@@ -1,6 +1,17 @@
 # Wodby 2.0 SDK for Python
 
-Python client for the Wodby 2.0 Public API.
+[![Build](https://github.com/wodby/wodby-sdk-python/actions/workflows/build.yml/badge.svg?branch=2.0)](https://github.com/wodby/wodby-sdk-python/actions/workflows/build.yml?query=branch%3A2.0)
+
+Python client for the Wodby 2.0 public API. This branch maintains SDK 4.x.
+
+## Version compatibility
+
+| Wodby platform | SDK version | Branch | API reference |
+| --- | --- | --- | --- |
+| Wodby 1.0 | 3.x | [master](https://github.com/wodby/wodby-sdk-python/tree/master) | [Wodby 1.0 API](https://wodby.com/docs/1.0/api/) |
+| Wodby 2.0 | 4.x | [2.0](https://github.com/wodby/wodby-sdk-python/tree/2.0) | [Wodby 2.0 API](https://wodby.com/docs/2.0/api/) |
+
+Choose the SDK major version for your Wodby platform. Upgrading from SDK 3.x to 4.x changes the target platform to Wodby 2.0.
 
 ## Package
 
@@ -11,12 +22,12 @@ Python client for the Wodby 2.0 Public API.
 
 - [API reference](https://wodby.com/docs/2.0/api/)
 - [OpenAPI schema](https://wodby.com/docs/2.0/api/openapi.yaml)
-- Generated SDK docs: `src/docs`
+- [Generated SDK documentation](src/docs)
 
 ## Install
 
 ```bash
-pip install wodby
+pip install "wodby>=4,<5"
 ```
 
 ## Authentication
