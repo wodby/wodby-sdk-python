@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **type** | [**InstanceType**](InstanceType.md) |  | [optional] 
 **org_id** | **str** |  | 
 **app_id** | **str** |  | 
+**build** | [**Build**](Build.md) |  | [optional] 
 **server_id** | **str** |  | 
 **stack_rev_number** | **int** |  | 
 **stack_version** | **str** |  | 
