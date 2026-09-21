@@ -1,24 +1,24 @@
-# Wodby 1.0 SDK for Python
+# Wodby 1 SDK for Python
 
 [![Build](https://github.com/wodby/wodby-sdk-python/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/wodby/wodby-sdk-python/actions/workflows/build.yml?query=branch%3Amaster)
 
-Python client for the Wodby 1.0 public API. This branch maintains SDK 3.x.
+Python client for the Wodby 1 public API. This branch maintains SDK 3.x.
 
 ## Version compatibility
 
 | Wodby platform | SDK version | Branch | API reference |
 | --- | --- | --- | --- |
-| Wodby 1.0 | 3.x | [master](https://github.com/wodby/wodby-sdk-python/tree/master) | [Wodby 1.0 API](https://wodby.com/docs/1.0/api/) |
-| Wodby 2.0 | 4.x | [2.0](https://github.com/wodby/wodby-sdk-python/tree/2.0) | [Wodby 2.0 API](https://wodby.com/docs/2.0/api/) |
+| Wodby 1 | 3.x | [master](https://github.com/wodby/wodby-sdk-python/tree/master) | [Wodby 1 API](https://wodby.com/docs/1.0/api/) |
+| Wodby 2 | 4.x | [2.0](https://github.com/wodby/wodby-sdk-python/tree/2.0) | [Wodby 2 API](https://wodby.com/docs/2.0/api/) |
 
-Choose the SDK major version for your Wodby platform. Upgrading from SDK 3.x to 4.x changes the target platform to Wodby 2.0.
+Choose the SDK major version for your Wodby platform. Upgrading from SDK 3.x to 4.x changes the target platform to Wodby 2.
 
 ## Package
 
 - [PyPI: `wodby`](https://pypi.org/project/wodby/)
 - Python import: `wodby`
 
-The PyPI package contains both SDK version lines. Select 3.x for Wodby 1.0 using the version constraint below; an unversioned install can select the 4.x SDK for Wodby 2.0.
+The PyPI package contains both SDK version lines. Select 3.x for Wodby 1 using the version constraint below; an unversioned install can select the 4.x SDK for Wodby 2.
 
 ## Requirements
 
@@ -31,7 +31,7 @@ Python 3.10 or newer, with urllib3 2.7+, current certifi, python-dateutil and si
 
 ## Install
 
-Install the Wodby 1.0 SDK from PyPI:
+Install the Wodby 1 SDK from PyPI:
 
 ```bash
 python -m pip install "wodby>=3,<4"
