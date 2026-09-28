@@ -13,10 +13,15 @@ Method | HTTP request | Description
 [**get_app_environment_by_name**](AppEnvironmentsApi.md#get_app_environment_by_name) | **GET** /app-environments/by-name/{appName}/{environmentName} | Get app environment by name
 [**get_app_environment_cicd_settings**](AppEnvironmentsApi.md#get_app_environment_cicd_settings) | **GET** /app-environments/cicd-settings/{id} | Get app environment CI/CD settings
 [**get_app_environment_stack_upgrade_changelog**](AppEnvironmentsApi.md#get_app_environment_stack_upgrade_changelog) | **GET** /app-environment-stack-upgrade-changelogs/{id} | Preview app environment stack upgrade
+[**get_workspace_connection**](AppEnvironmentsApi.md#get_workspace_connection) | **GET** /workspaces/{id}/connection | Get workspace SSH connection
 [**list_app_access_cleanups**](AppEnvironmentsApi.md#list_app_access_cleanups) | **GET** /app-access-cleanups | List app-access cleanups
 [**list_app_environments**](AppEnvironmentsApi.md#list_app_environments) | **GET** /app-environments | List app environments
+[**pause_workspace**](AppEnvironmentsApi.md#pause_workspace) | **POST** /workspaces/{id}/actions/pause | Pause workspace
 [**preflight_app_access**](AppEnvironmentsApi.md#preflight_app_access) | **POST** /app-accesses/actions/preflight | Preflight app environment access
+[**prepare_workspace**](AppEnvironmentsApi.md#prepare_workspace) | **POST** /workspaces/{id}/actions/prepare | Prepare workspace
 [**reconcile_app_environment_stack**](AppEnvironmentsApi.md#reconcile_app_environment_stack) | **POST** /app-environments/{id}/actions/reconcile-stack | Reconcile app environment stack
+[**restart_workspace**](AppEnvironmentsApi.md#restart_workspace) | **POST** /workspaces/{id}/actions/restart | Restart workspace
+[**resume_workspace**](AppEnvironmentsApi.md#resume_workspace) | **POST** /workspaces/{id}/actions/resume | Resume workspace
 [**retry_app_access_cleanup**](AppEnvironmentsApi.md#retry_app_access_cleanup) | **POST** /app-access-cleanups/{id}/actions/retry | Retry app-access cleanup
 [**update_app_access**](AppEnvironmentsApi.md#update_app_access) | **PUT** /app-accesses/{id} | Update app access
 [**update_app_environment**](AppEnvironmentsApi.md#update_app_environment) | **PUT** /app-environments/{id} | Update app environment
@@ -24,6 +29,7 @@ Method | HTTP request | Description
 [**update_app_environment_maintenance_mode**](AppEnvironmentsApi.md#update_app_environment_maintenance_mode) | **PUT** /app-environments/{id}/actions/maintenance-mode | Update app environment maintenance mode
 [**update_app_environment_settings**](AppEnvironmentsApi.md#update_app_environment_settings) | **PUT** /app-environments/settings/{id} | Update app environment settings
 [**upgrade_app_environment_stack**](AppEnvironmentsApi.md#upgrade_app_environment_stack) | **POST** /app-environments/{id}/actions/upgrade-stack | Upgrade app environment stack
+[**workspace_eligibility**](AppEnvironmentsApi.md#workspace_eligibility) | **POST** /workspace-eligibility | Check workspace service eligibility
 
 
 # **create_app_access**
@@ -765,6 +771,87 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_workspace_connection**
+> WorkspaceConnection get_workspace_connection(id)
+
+Get workspace SSH connection
+
+Return the owner-only SSH endpoint, readiness and stable host fingerprint.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.workspace_connection import WorkspaceConnection
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppEnvironmentsApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # Get workspace SSH connection
+        api_response = api_instance.get_workspace_connection(id)
+        print("The response of AppEnvironmentsApi->get_workspace_connection:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppEnvironmentsApi->get_workspace_connection: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**WorkspaceConnection**](WorkspaceConnection.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Owner SSH connection details without credentials |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **list_app_access_cleanups**
 > List[AppAccessCleanup] list_app_access_cleanups(app_instance_id=app_instance_id, integration_id=integration_id)
 
@@ -937,6 +1024,87 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **pause_workspace**
+> Task pause_workspace(id)
+
+Pause workspace
+
+Pause workspace. Workspace operations preserve the persistent checkout.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.task import Task
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppEnvironmentsApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # Pause workspace
+        api_response = api_instance.pause_workspace(id)
+        print("The response of AppEnvironmentsApi->pause_workspace:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppEnvironmentsApi->pause_workspace: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**Task**](Task.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Workspace operation queued |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **preflight_app_access**
 > ValidationResult preflight_app_access(new_app_environment_access_input)
 
@@ -1014,6 +1182,87 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Preflight result |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **prepare_workspace**
+> Task prepare_workspace(id)
+
+Prepare workspace
+
+Prepare workspace. Workspace operations preserve the persistent checkout.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.task import Task
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppEnvironmentsApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # Prepare workspace
+        api_response = api_instance.prepare_workspace(id)
+        print("The response of AppEnvironmentsApi->prepare_workspace:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppEnvironmentsApi->prepare_workspace: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**Task**](Task.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Workspace operation queued |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 
@@ -1098,6 +1347,168 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Reconciliation result |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **restart_workspace**
+> Task restart_workspace(id)
+
+Restart workspace
+
+Restart the SSH runner, ending existing sessions while preserving code and home volumes.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.task import Task
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppEnvironmentsApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # Restart workspace
+        api_response = api_instance.restart_workspace(id)
+        print("The response of AppEnvironmentsApi->restart_workspace:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppEnvironmentsApi->restart_workspace: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**Task**](Task.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Workspace operation queued |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **resume_workspace**
+> Task resume_workspace(id)
+
+Resume workspace
+
+Resume workspace. Workspace operations preserve the persistent checkout.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.task import Task
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppEnvironmentsApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # Resume workspace
+        api_response = api_instance.resume_workspace(id)
+        print("The response of AppEnvironmentsApi->resume_workspace:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppEnvironmentsApi->resume_workspace: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**Task**](Task.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Workspace operation queued |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 
@@ -1683,6 +2094,88 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Upgrade result |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **workspace_eligibility**
+> WorkspaceEligibility200Response workspace_eligibility(workspace_eligibility_request)
+
+Check workspace service eligibility
+
+Check the selected stack service graph. Creation separately validates repository, shared storage, access and resource limits.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.workspace_eligibility200_response import WorkspaceEligibility200Response
+from wodby.models.workspace_eligibility_request import WorkspaceEligibilityRequest
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppEnvironmentsApi(api_client)
+    workspace_eligibility_request = wodby.WorkspaceEligibilityRequest() # WorkspaceEligibilityRequest | 
+
+    try:
+        # Check workspace service eligibility
+        api_response = api_instance.workspace_eligibility(workspace_eligibility_request)
+        print("The response of AppEnvironmentsApi->workspace_eligibility:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppEnvironmentsApi->workspace_eligibility: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **workspace_eligibility_request** | [**WorkspaceEligibilityRequest**](WorkspaceEligibilityRequest.md)|  | 
+
+### Return type
+
+[**WorkspaceEligibility200Response**](WorkspaceEligibility200Response.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Service capability result |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 

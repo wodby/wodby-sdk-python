@@ -22,6 +22,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.app_environment_settings_input import AppEnvironmentSettingsInput
 from wodby.models.new_app_environment_access_input import NewAppEnvironmentAccessInput
 from wodby.models.new_app_service_input import NewAppServiceInput
+from wodby.models.new_workspace_input import NewWorkspaceInput
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -29,6 +30,8 @@ class NewAppInput(BaseModel):
     """
     NewAppInput
     """ # noqa: E501
+    execution_mode: Optional[StrictStr] = Field(default='standard', alias="executionMode")
+    workspace: Optional[NewWorkspaceInput] = None
     org_id: Optional[StrictInt] = Field(default=None, description="Optional for API-key requests; defaults to the API key's organization.", alias="orgId")
     name: StrictStr
     title: Optional[StrictStr] = Field(default=None, description="Defaults to name when omitted.")
@@ -45,7 +48,17 @@ class NewAppInput(BaseModel):
     defer_initial_deployment: Optional[StrictBool] = Field(default=False, description="Defers the automatic initial build and deployment while preserving app environment initialization. Intended for automation that configures the environment before explicitly starting its first build.", alias="deferInitialDeployment")
     settings: Optional[AppEnvironmentSettingsInput] = None
     access: Optional[NewAppEnvironmentAccessInput] = None
-    __properties: ClassVar[List[str]] = ["orgId", "name", "title", "environmentName", "environmentTitle", "environmentType", "domain", "projectId", "stackRevId", "services", "clusterId", "ciIntegrationId", "registryIntegrationId", "deferInitialDeployment", "settings", "access"]
+    __properties: ClassVar[List[str]] = ["executionMode", "workspace", "orgId", "name", "title", "environmentName", "environmentTitle", "environmentType", "domain", "projectId", "stackRevId", "services", "clusterId", "ciIntegrationId", "registryIntegrationId", "deferInitialDeployment", "settings", "access"]
+
+    @field_validator('execution_mode')
+    def execution_mode_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['standard', 'workspace']):
+            raise ValueError("must be one of enum values ('standard', 'workspace')")
+        return value
 
     @field_validator('environment_type')
     def environment_type_validate_enum(cls, value):
@@ -93,6 +106,9 @@ class NewAppInput(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of workspace
+        if self.workspace:
+            _dict['workspace'] = self.workspace.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in services (list)
         _items = []
         if self.services:
@@ -138,6 +154,8 @@ class NewAppInput(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "executionMode": obj.get("executionMode") if obj.get("executionMode") is not None else 'standard',
+            "workspace": NewWorkspaceInput.from_dict(obj["workspace"]) if obj.get("workspace") is not None else None,
             "orgId": obj.get("orgId"),
             "name": obj.get("name"),
             "title": obj.get("title"),

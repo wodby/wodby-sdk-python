@@ -5,6 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**execution_mode** | **str** |  | [optional] [default to 'standard']
+**workspace** | [**NewWorkspaceInput**](NewWorkspaceInput.md) |  | [optional] 
 **org_id** | **int** | Optional for API-key requests; defaults to the API key&#39;s organization. | [optional] 
 **name** | **str** |  | 
 **title** | **str** | Defaults to name when omitted. | [optional] 

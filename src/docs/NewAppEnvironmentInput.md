@@ -5,6 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**execution_mode** | **str** |  | [optional] [default to 'standard']
+**workspace** | [**NewWorkspaceInput**](NewWorkspaceInput.md) |  | [optional] 
 **app_id** | **int** |  | 
 **environment_name** | **str** |  | 
 **environment_title** | **str** | Defaults to environmentName when omitted. | [optional] 

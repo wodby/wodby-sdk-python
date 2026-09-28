@@ -207,6 +207,7 @@ docs/NewStackServiceScopedValueInput.md
 docs/NewStackServiceTokenInput.md
 docs/NewVariableProviderFieldInput.md
 docs/NewVariableProviderInput.md
+docs/NewWorkspaceInput.md
 docs/OperationResult.md
 docs/Org.md
 docs/OrgCapabilities.md
@@ -336,6 +337,10 @@ docs/UserApi.md
 docs/ValidateAppAccessHostnameInput.md
 docs/ValidationResult.md
 docs/VolumeSizeInput.md
+docs/Workspace.md
+docs/WorkspaceConnection.md
+docs/WorkspaceEligibility200Response.md
+docs/WorkspaceEligibilityRequest.md
 git_push.sh
 pyproject.toml
 requirements.txt
@@ -343,6 +348,11 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_new_workspace_input.py
+test/test_workspace.py
+test/test_workspace_connection.py
+test/test_workspace_eligibility200_response.py
+test/test_workspace_eligibility_request.py
 tox.ini
 wodby/__init__.py
 wodby/api/__init__.py
@@ -565,6 +575,7 @@ wodby/models/new_stack_service_scoped_value_input.py
 wodby/models/new_stack_service_token_input.py
 wodby/models/new_variable_provider_field_input.py
 wodby/models/new_variable_provider_input.py
+wodby/models/new_workspace_input.py
 wodby/models/operation_result.py
 wodby/models/org.py
 wodby/models/org_capabilities.py
@@ -684,5 +695,9 @@ wodby/models/user.py
 wodby/models/validate_app_access_hostname_input.py
 wodby/models/validation_result.py
 wodby/models/volume_size_input.py
+wodby/models/workspace.py
+wodby/models/workspace_connection.py
+wodby/models/workspace_eligibility200_response.py
+wodby/models/workspace_eligibility_request.py
 wodby/py.typed
 wodby/rest.py

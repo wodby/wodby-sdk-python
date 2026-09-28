@@ -5,6 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**execution_mode** | **str** |  | [optional] [default to 'standard']
+**workspace** | [**Workspace**](Workspace.md) |  | [optional] 
 **id** | **int** |  | 
 **name** | **str** |  | 
 **title** | **str** |  | 

@@ -25,6 +25,7 @@ from wodby.models.app_environment_health import AppEnvironmentHealth
 from wodby.models.app_environment_main_route_cert import AppEnvironmentMainRouteCert
 from wodby.models.app_environment_settings import AppEnvironmentSettings
 from wodby.models.app_service_configuration_issue import AppServiceConfigurationIssue
+from wodby.models.workspace import Workspace
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -32,6 +33,8 @@ class AppEnvironment(BaseModel):
     """
     AppEnvironment
     """ # noqa: E501
+    execution_mode: Optional[StrictStr] = Field(default='standard', alias="executionMode")
+    workspace: Optional[Workspace] = None
     id: StrictInt
     name: StrictStr
     title: StrictStr
@@ -60,7 +63,17 @@ class AppEnvironment(BaseModel):
     health: AppEnvironmentHealth
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "environmentType", "status", "outdated", "mainDomain", "mainRouteCert", "appId", "clusterId", "stackId", "stackRevId", "stackName", "stackTitle", "stackIcon", "stackRevNumber", "stackVersion", "access", "routingMode", "routingPending", "maintenanceMode", "maintenanceModeActive", "configurationReady", "configurationIssues", "settings", "health", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["executionMode", "workspace", "id", "name", "title", "environmentType", "status", "outdated", "mainDomain", "mainRouteCert", "appId", "clusterId", "stackId", "stackRevId", "stackName", "stackTitle", "stackIcon", "stackRevNumber", "stackVersion", "access", "routingMode", "routingPending", "maintenanceMode", "maintenanceModeActive", "configurationReady", "configurationIssues", "settings", "health", "createdAt", "updatedAt"]
+
+    @field_validator('execution_mode')
+    def execution_mode_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['standard', 'workspace']):
+            raise ValueError("must be one of enum values ('standard', 'workspace')")
+        return value
 
     @field_validator('environment_type')
     def environment_type_validate_enum(cls, value):
@@ -108,6 +121,9 @@ class AppEnvironment(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of workspace
+        if self.workspace:
+            _dict['workspace'] = self.workspace.to_dict()
         # override the default output from pydantic by calling `to_dict()` of main_route_cert
         if self.main_route_cert:
             _dict['mainRouteCert'] = self.main_route_cert.to_dict()
@@ -154,6 +170,8 @@ class AppEnvironment(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "executionMode": obj.get("executionMode") if obj.get("executionMode") is not None else 'standard',
+            "workspace": Workspace.from_dict(obj["workspace"]) if obj.get("workspace") is not None else None,
             "id": obj.get("id"),
             "name": obj.get("name"),
             "title": obj.get("title"),

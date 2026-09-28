@@ -244,6 +244,7 @@ from wodby.models.new_stack_service_scoped_value_input import NewStackServiceSco
 from wodby.models.new_stack_service_token_input import NewStackServiceTokenInput
 from wodby.models.new_variable_provider_field_input import NewVariableProviderFieldInput
 from wodby.models.new_variable_provider_input import NewVariableProviderInput
+from wodby.models.new_workspace_input import NewWorkspaceInput
 from wodby.models.operation_result import OperationResult
 from wodby.models.org import Org
 from wodby.models.org_capabilities import OrgCapabilities
@@ -363,3 +364,7 @@ from wodby.models.user import User
 from wodby.models.validate_app_access_hostname_input import ValidateAppAccessHostnameInput
 from wodby.models.validation_result import ValidationResult
 from wodby.models.volume_size_input import VolumeSizeInput
+from wodby.models.workspace import Workspace
+from wodby.models.workspace_connection import WorkspaceConnection
+from wodby.models.workspace_eligibility200_response import WorkspaceEligibility200Response
+from wodby.models.workspace_eligibility_request import WorkspaceEligibilityRequest

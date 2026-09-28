@@ -22,6 +22,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.app_environment_settings_input import AppEnvironmentSettingsInput
 from wodby.models.new_app_environment_access_input import NewAppEnvironmentAccessInput
 from wodby.models.new_app_service_input import NewAppServiceInput
+from wodby.models.new_workspace_input import NewWorkspaceInput
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -29,6 +30,8 @@ class NewAppEnvironmentInput(BaseModel):
     """
     NewAppEnvironmentInput
     """ # noqa: E501
+    execution_mode: Optional[StrictStr] = Field(default='standard', alias="executionMode")
+    workspace: Optional[NewWorkspaceInput] = None
     app_id: StrictInt = Field(alias="appId")
     environment_name: StrictStr = Field(alias="environmentName")
     environment_title: Optional[StrictStr] = Field(default=None, description="Defaults to environmentName when omitted.", alias="environmentTitle")
@@ -42,7 +45,17 @@ class NewAppEnvironmentInput(BaseModel):
     defer_initial_deployment: Optional[StrictBool] = Field(default=False, alias="deferInitialDeployment")
     settings: Optional[AppEnvironmentSettingsInput] = None
     access: Optional[NewAppEnvironmentAccessInput] = None
-    __properties: ClassVar[List[str]] = ["appId", "environmentName", "environmentTitle", "environmentType", "domain", "stackRevId", "services", "clusterId", "ciIntegrationId", "registryIntegrationId", "deferInitialDeployment", "settings", "access"]
+    __properties: ClassVar[List[str]] = ["executionMode", "workspace", "appId", "environmentName", "environmentTitle", "environmentType", "domain", "stackRevId", "services", "clusterId", "ciIntegrationId", "registryIntegrationId", "deferInitialDeployment", "settings", "access"]
+
+    @field_validator('execution_mode')
+    def execution_mode_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['standard', 'workspace']):
+            raise ValueError("must be one of enum values ('standard', 'workspace')")
+        return value
 
     @field_validator('environment_type')
     def environment_type_validate_enum(cls, value):
@@ -90,6 +103,9 @@ class NewAppEnvironmentInput(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of workspace
+        if self.workspace:
+            _dict['workspace'] = self.workspace.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in services (list)
         _items = []
         if self.services:
@@ -130,6 +146,8 @@ class NewAppEnvironmentInput(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "executionMode": obj.get("executionMode") if obj.get("executionMode") is not None else 'standard',
+            "workspace": NewWorkspaceInput.from_dict(obj["workspace"]) if obj.get("workspace") is not None else None,
             "appId": obj.get("appId"),
             "environmentName": obj.get("environmentName"),
             "environmentTitle": obj.get("environmentTitle"),
