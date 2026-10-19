@@ -14,6 +14,8 @@ Method | HTTP request | Description
 [**get_stack_origin_sync_changelog**](StacksApi.md#get_stack_origin_sync_changelog) | **GET** /stack-origin-sync-changelogs/{id} | Preview stack origin synchronization
 [**get_stack_revision**](StacksApi.md#get_stack_revision) | **GET** /stack-revisions/{id} | Get stack revision
 [**get_stack_service_update_changelog**](StacksApi.md#get_stack_service_update_changelog) | **GET** /stack-service-update-changelogs/{id} | Preview stack service revision updates
+[**get_stack_sharing**](StacksApi.md#get_stack_sharing) | **GET** /stacks/sharing/{id} | Get stack sharing
+[**ignore_stack_service_revision**](StacksApi.md#ignore_stack_service_revision) | **POST** /stacks/{id}/actions/ignore-service-revision | Ignore stack service revision
 [**import_stacks**](StacksApi.md#import_stacks) | **POST** /stacks/actions/import | Import stacks from Git
 [**list_public_stacks**](StacksApi.md#list_public_stacks) | **GET** /catalog/stacks | List public catalog stacks
 [**list_stack_env_vars**](StacksApi.md#list_stack_env_vars) | **GET** /stack-revisions/{id}/env-vars | List stack env vars
@@ -27,6 +29,7 @@ Method | HTTP request | Description
 [**update_stack_from_git**](StacksApi.md#update_stack_from_git) | **POST** /stacks/{id}/actions/update-from-git | Update stack from git
 [**update_stack_service_revisions**](StacksApi.md#update_stack_service_revisions) | **POST** /stacks/{id}/actions/update-service-revisions | Update stack service revisions
 [**update_stack_settings**](StacksApi.md#update_stack_settings) | **PUT** /stacks/settings/{id} | Update stack settings
+[**update_stack_sharing**](StacksApi.md#update_stack_sharing) | **PUT** /stacks/sharing/{id} | Update stack sharing
 [**validate_stack_manifest**](StacksApi.md#validate_stack_manifest) | **POST** /stacks/actions/validate-manifest | Validate stack manifest
 
 
@@ -851,8 +854,173 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_stack_sharing**
+> ResourceSharing get_stack_sharing(id)
+
+Get stack sharing
+
+Returns who owns the stack and which projects can use it.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.resource_sharing import ResourceSharing
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.StacksApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # Get stack sharing
+        api_response = api_instance.get_stack_sharing(id)
+        print("The response of StacksApi->get_stack_sharing:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling StacksApi->get_stack_sharing: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**ResourceSharing**](ResourceSharing.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Stack sharing |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **ignore_stack_service_revision**
+> Stack ignore_stack_service_revision(id, ignore_stack_service_revision_input)
+
+Ignore stack service revision
+
+Stops offering one service revision as an update for a stack service and its derivatives. A newer service revision is offered again. Returns the stack.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.ignore_stack_service_revision_input import IgnoreStackServiceRevisionInput
+from wodby.models.stack import Stack
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.StacksApi(api_client)
+    id = 56 # int | 
+    ignore_stack_service_revision_input = wodby.IgnoreStackServiceRevisionInput() # IgnoreStackServiceRevisionInput | 
+
+    try:
+        # Ignore stack service revision
+        api_response = api_instance.ignore_stack_service_revision(id, ignore_stack_service_revision_input)
+        print("The response of StacksApi->ignore_stack_service_revision:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling StacksApi->ignore_stack_service_revision: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **ignore_stack_service_revision_input** | [**IgnoreStackServiceRevisionInput**](IgnoreStackServiceRevisionInput.md)|  | 
+
+### Return type
+
+[**Stack**](Stack.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Updated stack |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **import_stacks**
-> OperationResult import_stacks(import_catalog_from_git_input)
+> OperationResult import_stacks(import_stacks_from_git_input)
 
 Import stacks from Git
 
@@ -864,7 +1032,7 @@ Starts a task that imports stacks from a Git repository.
 
 ```python
 import wodby
-from wodby.models.import_catalog_from_git_input import ImportCatalogFromGitInput
+from wodby.models.import_stacks_from_git_input import ImportStacksFromGitInput
 from wodby.models.operation_result import OperationResult
 from wodby.rest import ApiException
 from pprint import pprint
@@ -890,11 +1058,11 @@ configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
 with wodby.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = wodby.StacksApi(api_client)
-    import_catalog_from_git_input = wodby.ImportCatalogFromGitInput() # ImportCatalogFromGitInput | 
+    import_stacks_from_git_input = wodby.ImportStacksFromGitInput() # ImportStacksFromGitInput | 
 
     try:
         # Import stacks from Git
-        api_response = api_instance.import_stacks(import_catalog_from_git_input)
+        api_response = api_instance.import_stacks(import_stacks_from_git_input)
         print("The response of StacksApi->import_stacks:\n")
         pprint(api_response)
     except Exception as e:
@@ -908,7 +1076,7 @@ with wodby.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **import_catalog_from_git_input** | [**ImportCatalogFromGitInput**](ImportCatalogFromGitInput.md)|  | 
+ **import_stacks_from_git_input** | [**ImportStacksFromGitInput**](ImportStacksFromGitInput.md)|  | 
 
 ### Return type
 
@@ -1922,6 +2090,90 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Updated stack |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_stack_sharing**
+> ResourceSharing update_stack_sharing(id, resource_sharing_input)
+
+Update stack sharing
+
+Changes the stack owner and replaces the projects it is shared with. It can also make an organization-owned stack available to every project. Returns the resulting sharing.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.resource_sharing import ResourceSharing
+from wodby.models.resource_sharing_input import ResourceSharingInput
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.StacksApi(api_client)
+    id = 56 # int | 
+    resource_sharing_input = wodby.ResourceSharingInput() # ResourceSharingInput | 
+
+    try:
+        # Update stack sharing
+        api_response = api_instance.update_stack_sharing(id, resource_sharing_input)
+        print("The response of StacksApi->update_stack_sharing:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling StacksApi->update_stack_sharing: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **resource_sharing_input** | [**ResourceSharingInput**](ResourceSharingInput.md)|  | 
+
+### Return type
+
+[**ResourceSharing**](ResourceSharing.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Updated stack sharing |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 

@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from wodby.models.backup_option import BackupOption
@@ -39,14 +39,27 @@ class Backup(BaseModel):
     backup_preset_id: Optional[StrictInt] = Field(default=None, alias="backupPresetId")
     manual: StrictBool
     integration_id: Optional[StrictInt] = Field(description="Storage integration that owns the backup. Null identifies Wodby's built-in blob storage.", alias="integrationId")
+    blob_storage_region: Optional[StrictStr] = Field(default=None, description="Region used by Wodby Blob Storage. Null for third-party storage and legacy backups.", alias="blobStorageRegion")
     task_id: Optional[StrictInt] = Field(default=None, alias="taskId")
     size: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(default=None, description="Final stored archive size in bytes. Null when the size has not been recorded.")
+    file_deleted: StrictBool = Field(description="Whether the stored backup file has been permanently removed.", alias="fileDeleted")
+    can_void_file: StrictBool = Field(description="Whether the backup file can be permanently removed now.", alias="canVoidFile")
     options: List[BackupOption]
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
     started_at: Optional[datetime] = Field(default=None, alias="startedAt")
     ended_at: Optional[datetime] = Field(default=None, alias="endedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "status", "appInstanceId", "appServiceId", "databaseId", "databaseDbId", "backupPresetId", "manual", "integrationId", "taskId", "size", "options", "createdAt", "updatedAt", "startedAt", "endedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "status", "appInstanceId", "appServiceId", "databaseId", "databaseDbId", "backupPresetId", "manual", "integrationId", "blobStorageRegion", "taskId", "size", "fileDeleted", "canVoidFile", "options", "createdAt", "updatedAt", "startedAt", "endedAt"]
+
+    @field_validator('blob_storage_region')
+    def blob_storage_region_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['eu', 'us']):
+            raise ValueError("must be one of enum values ('eu', 'us')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -124,6 +137,11 @@ class Backup(BaseModel):
         if self.integration_id is None and "integration_id" in self.model_fields_set:
             _dict['integrationId'] = None
 
+        # set to None if blob_storage_region (nullable) is None
+        # and model_fields_set contains the field
+        if self.blob_storage_region is None and "blob_storage_region" in self.model_fields_set:
+            _dict['blobStorageRegion'] = None
+
         # set to None if task_id (nullable) is None
         # and model_fields_set contains the field
         if self.task_id is None and "task_id" in self.model_fields_set:
@@ -166,8 +184,11 @@ class Backup(BaseModel):
             "backupPresetId": obj.get("backupPresetId"),
             "manual": obj.get("manual"),
             "integrationId": obj.get("integrationId"),
+            "blobStorageRegion": obj.get("blobStorageRegion"),
             "taskId": obj.get("taskId"),
             "size": obj.get("size"),
+            "fileDeleted": obj.get("fileDeleted"),
+            "canVoidFile": obj.get("canVoidFile"),
             "options": [BackupOption.from_dict(_item) for _item in obj["options"]] if obj.get("options") is not None else None,
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt"),

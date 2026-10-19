@@ -4,6 +4,7 @@ All URIs are relative to */v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**cleanup_app_environment_migration**](AppEnvironmentsApi.md#cleanup_app_environment_migration) | **POST** /app-environment-migrations/{id}/actions/cleanup | Clean up app environment migration
 [**create_app_access**](AppEnvironmentsApi.md#create_app_access) | **POST** /app-environment-accesses/{id} | Create app environment access
 [**create_app_environment**](AppEnvironmentsApi.md#create_app_environment) | **POST** /app-environments | Create app environment
 [**delete_app_access**](AppEnvironmentsApi.md#delete_app_access) | **DELETE** /app-accesses/{id} | Delete app access
@@ -12,17 +13,24 @@ Method | HTTP request | Description
 [**get_app_environment_access**](AppEnvironmentsApi.md#get_app_environment_access) | **GET** /app-environment-accesses/{id} | Get app environment access
 [**get_app_environment_by_name**](AppEnvironmentsApi.md#get_app_environment_by_name) | **GET** /app-environments/by-name/{appName}/{environmentName} | Get app environment by name
 [**get_app_environment_cicd_settings**](AppEnvironmentsApi.md#get_app_environment_cicd_settings) | **GET** /app-environments/cicd-settings/{id} | Get app environment CI/CD settings
+[**get_app_environment_migration**](AppEnvironmentsApi.md#get_app_environment_migration) | **GET** /app-environment-migrations/{id} | Get app environment migration
 [**get_app_environment_stack_upgrade_changelog**](AppEnvironmentsApi.md#get_app_environment_stack_upgrade_changelog) | **GET** /app-environment-stack-upgrade-changelogs/{id} | Preview app environment stack upgrade
 [**get_workspace_connection**](AppEnvironmentsApi.md#get_workspace_connection) | **GET** /workspaces/{id}/connection | Get workspace SSH connection
+[**get_workspace_git_diff**](AppEnvironmentsApi.md#get_workspace_git_diff) | **GET** /workspaces/{id}/git-diff | Get workspace file diff
+[**get_workspace_git_status**](AppEnvironmentsApi.md#get_workspace_git_status) | **GET** /workspaces/{id}/git-status | Get workspace Git status
 [**list_app_access_cleanups**](AppEnvironmentsApi.md#list_app_access_cleanups) | **GET** /app-access-cleanups | List app-access cleanups
+[**list_app_environment_migrations**](AppEnvironmentsApi.md#list_app_environment_migrations) | **GET** /app-environment-migrations | List app environment migrations
 [**list_app_environments**](AppEnvironmentsApi.md#list_app_environments) | **GET** /app-environments | List app environments
+[**migrate_app_environment**](AppEnvironmentsApi.md#migrate_app_environment) | **POST** /app-environments/{id}/actions/migrate | Migrate app environment to another cluster
 [**pause_workspace**](AppEnvironmentsApi.md#pause_workspace) | **POST** /workspaces/{id}/actions/pause | Pause workspace
 [**preflight_app_access**](AppEnvironmentsApi.md#preflight_app_access) | **POST** /app-accesses/actions/preflight | Preflight app environment access
 [**prepare_workspace**](AppEnvironmentsApi.md#prepare_workspace) | **POST** /workspaces/{id}/actions/prepare | Prepare workspace
+[**pull_workspace**](AppEnvironmentsApi.md#pull_workspace) | **POST** /workspaces/{id}/actions/pull | Pull workspace
 [**reconcile_app_environment_stack**](AppEnvironmentsApi.md#reconcile_app_environment_stack) | **POST** /app-environments/{id}/actions/reconcile-stack | Reconcile app environment stack
 [**restart_workspace**](AppEnvironmentsApi.md#restart_workspace) | **POST** /workspaces/{id}/actions/restart | Restart workspace
 [**resume_workspace**](AppEnvironmentsApi.md#resume_workspace) | **POST** /workspaces/{id}/actions/resume | Resume workspace
 [**retry_app_access_cleanup**](AppEnvironmentsApi.md#retry_app_access_cleanup) | **POST** /app-access-cleanups/{id}/actions/retry | Retry app-access cleanup
+[**rollback_app_environment_migration**](AppEnvironmentsApi.md#rollback_app_environment_migration) | **POST** /app-environment-migrations/{id}/actions/rollback | Roll back app environment migration
 [**update_app_access**](AppEnvironmentsApi.md#update_app_access) | **PUT** /app-accesses/{id} | Update app access
 [**update_app_environment**](AppEnvironmentsApi.md#update_app_environment) | **PUT** /app-environments/{id} | Update app environment
 [**update_app_environment_cicd_settings**](AppEnvironmentsApi.md#update_app_environment_cicd_settings) | **PUT** /app-environments/cicd-settings/{id} | Update app environment CI/CD settings
@@ -31,6 +39,87 @@ Method | HTTP request | Description
 [**upgrade_app_environment_stack**](AppEnvironmentsApi.md#upgrade_app_environment_stack) | **POST** /app-environments/{id}/actions/upgrade-stack | Upgrade app environment stack
 [**workspace_eligibility**](AppEnvironmentsApi.md#workspace_eligibility) | **POST** /workspace-eligibility | Check workspace service eligibility
 
+
+# **cleanup_app_environment_migration**
+> AppEnvironmentMigrationOperationResult cleanup_app_environment_migration(id)
+
+Clean up app environment migration
+
+Removes the app environment's retained resources from the source cluster after a completed migration. The migration can no longer be rolled back afterwards.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.app_environment_migration_operation_result import AppEnvironmentMigrationOperationResult
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppEnvironmentsApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # Clean up app environment migration
+        api_response = api_instance.cleanup_app_environment_migration(id)
+        print("The response of AppEnvironmentsApi->cleanup_app_environment_migration:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppEnvironmentsApi->cleanup_app_environment_migration: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**AppEnvironmentMigrationOperationResult**](AppEnvironmentMigrationOperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Cleanup started |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_app_access**
 > AppAccessOperationResult create_app_access(id, new_app_access_input)
@@ -690,6 +779,87 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_app_environment_migration**
+> AppEnvironmentMigration get_app_environment_migration(id)
+
+Get app environment migration
+
+Returns one cluster migration with the progress of each copied service.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.app_environment_migration import AppEnvironmentMigration
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppEnvironmentsApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # Get app environment migration
+        api_response = api_instance.get_app_environment_migration(id)
+        print("The response of AppEnvironmentsApi->get_app_environment_migration:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppEnvironmentsApi->get_app_environment_migration: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**AppEnvironmentMigration**](AppEnvironmentMigration.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | App environment migration |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_app_environment_stack_upgrade_changelog**
 > AppEnvironmentStackUpgradeChangelog get_app_environment_stack_upgrade_changelog(id)
 
@@ -852,12 +1022,178 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_workspace_git_diff**
+> WorkspaceGitDiff get_workspace_git_diff(id, path, original_path=original_path)
+
+Get workspace file diff
+
+Owner-only. Returns how one file in the workspace checkout differs from the last commit, with staged and unstaged changes together. An untracked file is shown as added. When the diff cannot be read, available is false and reason explains why.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.workspace_git_diff import WorkspaceGitDiff
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppEnvironmentsApi(api_client)
+    id = 56 # int | 
+    path = 'path_example' # str | File path relative to the checkout, as listed by the workspace Git status.
+    original_path = 'original_path_example' # str | Previous path of a renamed or copied file. (optional)
+
+    try:
+        # Get workspace file diff
+        api_response = api_instance.get_workspace_git_diff(id, path, original_path=original_path)
+        print("The response of AppEnvironmentsApi->get_workspace_git_diff:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppEnvironmentsApi->get_workspace_git_diff: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **path** | **str**| File path relative to the checkout, as listed by the workspace Git status. | 
+ **original_path** | **str**| Previous path of a renamed or copied file. | [optional] 
+
+### Return type
+
+[**WorkspaceGitDiff**](WorkspaceGitDiff.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Diff of the file |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_workspace_git_status**
+> WorkspaceGitStatus get_workspace_git_status(id)
+
+Get workspace Git status
+
+Owner-only. Run a read-only Git command in the workspace runner and return the current branch, HEAD commit and uncommitted changes. When the state cannot be read, available is false and reason explains why.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.workspace_git_status import WorkspaceGitStatus
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppEnvironmentsApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # Get workspace Git status
+        api_response = api_instance.get_workspace_git_status(id)
+        print("The response of AppEnvironmentsApi->get_workspace_git_status:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppEnvironmentsApi->get_workspace_git_status: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**WorkspaceGitStatus**](WorkspaceGitStatus.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Live Git state of the workspace checkout |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **list_app_access_cleanups**
 > List[AppAccessCleanup] list_app_access_cleanups(app_instance_id=app_instance_id, integration_id=integration_id)
 
 List app-access cleanups
 
-Returns cleanup records for exactly one app instance or integration.
+Returns cleanup records for exactly one app environment or integration.
 
 ### Example
 
@@ -930,6 +1266,87 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Cleanup records |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **list_app_environment_migrations**
+> List[AppEnvironmentMigration] list_app_environment_migrations(app_environment_id)
+
+List app environment migrations
+
+Returns the cluster migrations of one app environment.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.app_environment_migration import AppEnvironmentMigration
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppEnvironmentsApi(api_client)
+    app_environment_id = 56 # int | 
+
+    try:
+        # List app environment migrations
+        api_response = api_instance.list_app_environment_migrations(app_environment_id)
+        print("The response of AppEnvironmentsApi->list_app_environment_migrations:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppEnvironmentsApi->list_app_environment_migrations: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **app_environment_id** | **int**|  | 
+
+### Return type
+
+[**List[AppEnvironmentMigration]**](AppEnvironmentMigration.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | App environment migrations |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 
@@ -1019,6 +1436,90 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of app environments |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **migrate_app_environment**
+> AppEnvironmentMigrationOperationResult migrate_app_environment(id, app_environment_migration_input)
+
+Migrate app environment to another cluster
+
+Starts moving the app environment and its data to another cluster of the same organization. The source stays available for rollback until the migration is cleaned up or its retention ends.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.app_environment_migration_input import AppEnvironmentMigrationInput
+from wodby.models.app_environment_migration_operation_result import AppEnvironmentMigrationOperationResult
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppEnvironmentsApi(api_client)
+    id = 56 # int | 
+    app_environment_migration_input = wodby.AppEnvironmentMigrationInput() # AppEnvironmentMigrationInput | 
+
+    try:
+        # Migrate app environment to another cluster
+        api_response = api_instance.migrate_app_environment(id, app_environment_migration_input)
+        print("The response of AppEnvironmentsApi->migrate_app_environment:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppEnvironmentsApi->migrate_app_environment: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **app_environment_migration_input** | [**AppEnvironmentMigrationInput**](AppEnvironmentMigrationInput.md)|  | 
+
+### Return type
+
+[**AppEnvironmentMigrationOperationResult**](AppEnvironmentMigrationOperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Migration started |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 
@@ -1263,6 +1764,90 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **202** | Workspace operation queued |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **pull_workspace**
+> Task pull_workspace(id, workspace_pull_input=workspace_pull_input)
+
+Pull workspace
+
+Owner-only. Fast-forwards the workspace checkout to its upstream branch, keeping uncommitted changes, then runs the environment's post-deployment scripts unless scripts is false.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.task import Task
+from wodby.models.workspace_pull_input import WorkspacePullInput
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppEnvironmentsApi(api_client)
+    id = 56 # int | 
+    workspace_pull_input = wodby.WorkspacePullInput() # WorkspacePullInput |  (optional)
+
+    try:
+        # Pull workspace
+        api_response = api_instance.pull_workspace(id, workspace_pull_input=workspace_pull_input)
+        print("The response of AppEnvironmentsApi->pull_workspace:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppEnvironmentsApi->pull_workspace: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **workspace_pull_input** | [**WorkspacePullInput**](WorkspacePullInput.md)|  | [optional] 
+
+### Return type
+
+[**Task**](Task.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Workspace pull queued |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 
@@ -1590,6 +2175,87 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Retry operation result |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **rollback_app_environment_migration**
+> AppEnvironmentMigrationOperationResult rollback_app_environment_migration(id)
+
+Roll back app environment migration
+
+Moves the app environment back to its source cluster while the source is still retained.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.app_environment_migration_operation_result import AppEnvironmentMigrationOperationResult
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppEnvironmentsApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # Roll back app environment migration
+        api_response = api_instance.rollback_app_environment_migration(id)
+        print("The response of AppEnvironmentsApi->rollback_app_environment_migration:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppEnvironmentsApi->rollback_app_environment_migration: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**AppEnvironmentMigrationOperationResult**](AppEnvironmentMigrationOperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Rollback started |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 

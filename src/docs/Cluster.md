@@ -33,6 +33,7 @@ Name | Type | Description | Notes
 **org_id** | **int** |  | 
 **ownership_scope** | **str** |  | 
 **owner_project_id** | **int** |  | [optional] 
+**available_to_all_projects** | **bool** | True when every project in the organization can use the resource without a project share. | 
 **capabilities** | [**ClusterCapabilities**](ClusterCapabilities.md) |  | 
 **settings** | [**ClusterSettings**](ClusterSettings.md) |  | [optional] 
 **storage_classes** | [**List[StorageClass]**](StorageClass.md) |  | [optional] 

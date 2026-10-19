@@ -6,6 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **auto_stack_upgrade** | [**AppEnvironmentAutoStackUpgradeSettings**](AppEnvironmentAutoStackUpgradeSettings.md) |  | [optional] 
+**build_image_cleanup** | [**BuildImageCleanupSettings**](BuildImageCleanupSettings.md) |  | [optional] 
 
 ## Example
 

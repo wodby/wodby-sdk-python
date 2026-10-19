@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from wodby.models.gpu_resources import GPUResources
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -26,6 +27,7 @@ class StackServiceContainer(BaseModel):
     """
     StackServiceContainer
     """ # noqa: E501
+    gpu: Optional[GPUResources] = None
     id: Optional[StrictInt] = None
     stack_service_id: StrictInt = Field(alias="stackServiceId")
     workload: StrictStr
@@ -34,7 +36,7 @@ class StackServiceContainer(BaseModel):
     request_mem: Optional[StrictInt] = Field(default=None, alias="requestMem")
     limit_cpu: Optional[StrictInt] = Field(default=None, alias="limitCPU")
     limit_mem: Optional[StrictInt] = Field(default=None, alias="limitMem")
-    __properties: ClassVar[List[str]] = ["id", "stackServiceId", "workload", "name", "requestCPU", "requestMem", "limitCPU", "limitMem"]
+    __properties: ClassVar[List[str]] = ["gpu", "id", "stackServiceId", "workload", "name", "requestCPU", "requestMem", "limitCPU", "limitMem"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -75,6 +77,14 @@ class StackServiceContainer(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of gpu
+        if self.gpu:
+            _dict['gpu'] = self.gpu.to_dict()
+        # set to None if gpu (nullable) is None
+        # and model_fields_set contains the field
+        if self.gpu is None and "gpu" in self.model_fields_set:
+            _dict['gpu'] = None
+
         # set to None if id (nullable) is None
         # and model_fields_set contains the field
         if self.id is None and "id" in self.model_fields_set:
@@ -112,6 +122,7 @@ class StackServiceContainer(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "gpu": GPUResources.from_dict(obj["gpu"]) if obj.get("gpu") is not None else None,
             "id": obj.get("id"),
             "stackServiceId": obj.get("stackServiceId"),
             "workload": obj.get("workload"),

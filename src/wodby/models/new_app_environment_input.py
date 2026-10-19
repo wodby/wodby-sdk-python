@@ -22,6 +22,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.app_environment_settings_input import AppEnvironmentSettingsInput
 from wodby.models.new_app_environment_access_input import NewAppEnvironmentAccessInput
 from wodby.models.new_app_service_input import NewAppServiceInput
+from wodby.models.new_app_service_override_input import NewAppServiceOverrideInput
 from wodby.models.new_workspace_input import NewWorkspaceInput
 from typing import Optional, Set
 from typing_extensions import Self
@@ -39,13 +40,14 @@ class NewAppEnvironmentInput(BaseModel):
     domain: Optional[StrictStr] = Field(default=None, description="Defaults to environmentName.appName.orgDomain when omitted.")
     stack_rev_id: StrictInt = Field(alias="stackRevId")
     services: Optional[List[NewAppServiceInput]] = Field(default=None, description="Defaults to the stack revision's service defaults when omitted.")
+    service_overrides: Optional[List[NewAppServiceOverrideInput]] = Field(default=None, description="Changes to the stack revision's service defaults. Use it instead of services to set only what differs, such as the repository of a workspace. Not allowed with services.", alias="serviceOverrides")
     cluster_id: Optional[StrictInt] = Field(default=None, alias="clusterId")
     ci_integration_id: Optional[StrictInt] = Field(default=None, alias="ciIntegrationId")
     registry_integration_id: Optional[StrictInt] = Field(default=None, alias="registryIntegrationId")
     defer_initial_deployment: Optional[StrictBool] = Field(default=False, alias="deferInitialDeployment")
     settings: Optional[AppEnvironmentSettingsInput] = None
     access: Optional[NewAppEnvironmentAccessInput] = None
-    __properties: ClassVar[List[str]] = ["executionMode", "workspace", "appId", "environmentName", "environmentTitle", "environmentType", "domain", "stackRevId", "services", "clusterId", "ciIntegrationId", "registryIntegrationId", "deferInitialDeployment", "settings", "access"]
+    __properties: ClassVar[List[str]] = ["executionMode", "workspace", "appId", "environmentName", "environmentTitle", "environmentType", "domain", "stackRevId", "services", "serviceOverrides", "clusterId", "ciIntegrationId", "registryIntegrationId", "deferInitialDeployment", "settings", "access"]
 
     @field_validator('execution_mode')
     def execution_mode_validate_enum(cls, value):
@@ -113,6 +115,13 @@ class NewAppEnvironmentInput(BaseModel):
                 if _item_services:
                     _items.append(_item_services.to_dict())
             _dict['services'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in service_overrides (list)
+        _items = []
+        if self.service_overrides:
+            for _item_service_overrides in self.service_overrides:
+                if _item_service_overrides:
+                    _items.append(_item_service_overrides.to_dict())
+            _dict['serviceOverrides'] = _items
         # override the default output from pydantic by calling `to_dict()` of settings
         if self.settings:
             _dict['settings'] = self.settings.to_dict()
@@ -155,6 +164,7 @@ class NewAppEnvironmentInput(BaseModel):
             "domain": obj.get("domain"),
             "stackRevId": obj.get("stackRevId"),
             "services": [NewAppServiceInput.from_dict(_item) for _item in obj["services"]] if obj.get("services") is not None else None,
+            "serviceOverrides": [NewAppServiceOverrideInput.from_dict(_item) for _item in obj["serviceOverrides"]] if obj.get("serviceOverrides") is not None else None,
             "clusterId": obj.get("clusterId"),
             "ciIntegrationId": obj.get("ciIntegrationId"),
             "registryIntegrationId": obj.get("registryIntegrationId"),

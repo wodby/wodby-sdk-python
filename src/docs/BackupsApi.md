@@ -13,6 +13,7 @@ Method | HTTP request | Description
 [**list_backup_presets**](BackupsApi.md#list_backup_presets) | **GET** /backup-presets | List backup presets
 [**list_backups**](BackupsApi.md#list_backups) | **GET** /backups | List backups
 [**update_backup_preset**](BackupsApi.md#update_backup_preset) | **PUT** /backup-presets/{id} | Update backup preset
+[**void_backup_file**](BackupsApi.md#void_backup_file) | **POST** /backups/{id}/actions/void-file | Void backup file
 
 
 # **create_backup**
@@ -770,6 +771,87 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Updated backup preset |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **void_backup_file**
+> Backup void_backup_file(id)
+
+Void backup file
+
+Permanently removes a completed backup file from Wodby Blob Storage while retaining its backup record. The operation is unavailable while an import is using the backup.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.backup import Backup
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.BackupsApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # Void backup file
+        api_response = api_instance.void_backup_file(id)
+        print("The response of BackupsApi->void_backup_file:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling BackupsApi->void_backup_file: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**Backup**](Backup.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Backup with its file marked as voided |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 

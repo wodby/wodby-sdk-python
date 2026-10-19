@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.git_auto_update_settings_input import GitAutoUpdateSettingsInput
 from typing import Optional, Set
@@ -35,7 +35,8 @@ class ImportServicesFromGitInput(BaseModel):
     git_ref_type: StrictStr = Field(alias="gitRefType")
     auto_update: Optional[GitAutoUpdateSettingsInput] = Field(default=None, alias="autoUpdate")
     registry_integration_id: Optional[StrictInt] = Field(default=None, description="Optional registry integration used when an imported service image requires authentication.", alias="registryIntegrationId")
-    __properties: ClassVar[List[str]] = ["orgId", "projectId", "integrationId", "remoteGitRepoId", "gitRef", "gitRefType", "autoUpdate", "registryIntegrationId"]
+    available_to_all_projects: Optional[StrictBool] = Field(default=None, description="Lets every project in the organization use the imported services without a project share. Only organization-owned services, imported without projectId, can be available to all projects.", alias="availableToAllProjects")
+    __properties: ClassVar[List[str]] = ["orgId", "projectId", "integrationId", "remoteGitRepoId", "gitRef", "gitRefType", "autoUpdate", "registryIntegrationId", "availableToAllProjects"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -89,6 +90,11 @@ class ImportServicesFromGitInput(BaseModel):
         if self.registry_integration_id is None and "registry_integration_id" in self.model_fields_set:
             _dict['registryIntegrationId'] = None
 
+        # set to None if available_to_all_projects (nullable) is None
+        # and model_fields_set contains the field
+        if self.available_to_all_projects is None and "available_to_all_projects" in self.model_fields_set:
+            _dict['availableToAllProjects'] = None
+
         return _dict
 
     @classmethod
@@ -108,7 +114,8 @@ class ImportServicesFromGitInput(BaseModel):
             "gitRef": obj.get("gitRef"),
             "gitRefType": obj.get("gitRefType"),
             "autoUpdate": GitAutoUpdateSettingsInput.from_dict(obj["autoUpdate"]) if obj.get("autoUpdate") is not None else None,
-            "registryIntegrationId": obj.get("registryIntegrationId")
+            "registryIntegrationId": obj.get("registryIntegrationId"),
+            "availableToAllProjects": obj.get("availableToAllProjects")
         })
         return _obj
 

@@ -5,6 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**initiator** | [**TaskInitiator**](TaskInitiator.md) | Absent when provenance is unknown; absence does not imply human initiation. | [optional] 
 **id** | **int** |  | 
 **name** | **str** |  | 
 **title** | **str** |  | 

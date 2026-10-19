@@ -16,6 +16,8 @@ Name | Type | Description | Notes
 **zone** | **str** |  | [optional] 
 **integration_id** | **int** |  | [optional] 
 **app_service_id** | **int** |  | [optional] 
+**ownership_scope** | **str** | org when the organization owns the resource, project when one project owns it. | 
+**owner_project_id** | **int** |  | [optional] 
 **env_id** | **int** | Legacy internal environment entity ID. Use envType. | 
 **env_type** | **str** |  | 
 **org_id** | **int** |  | 

@@ -5,6 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**gpu** | [**GPUResources**](GPUResources.md) | Omitted or null preserves an existing GPU override. Count zero disables GPUs. | [optional] 
 **workload** | **str** |  | [optional] 
 **container** | **str** |  | [optional] 
 **request_cpu** | **int** |  | [optional] 

@@ -15,6 +15,9 @@ Name | Type | Description | Notes
 **rev_id** | **int** |  | 
 **latest_rev_number** | **int** |  | 
 **org_id** | **int** |  | 
+**ownership_scope** | **str** | org when the organization owns the resource, project when one project owns it. | 
+**owner_project_id** | **int** |  | [optional] 
+**available_to_all_projects** | **bool** | True when every project in the organization can use the resource without a project share. | 
 **settings** | [**ServiceSettings**](ServiceSettings.md) |  | [optional] 
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 

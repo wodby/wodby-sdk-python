@@ -94,7 +94,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_integration_kind_database_machine_types**
-> List[Dict[str, object]] list_integration_kind_database_machine_types(id, db_type, version, ha=ha, region=region, zone=zone)
+> List[CloudMachineType] list_integration_kind_database_machine_types(id, db_type, version, ha=ha, region=region, zone=zone)
 
 List database machine types
 
@@ -106,6 +106,7 @@ Returns database machine types matching the request filters.
 
 ```python
 import wodby
+from wodby.models.cloud_machine_type import CloudMachineType
 from wodby.rest import ApiException
 from pprint import pprint
 
@@ -162,7 +163,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[Dict[str, object]]**
+[**List[CloudMachineType]**](CloudMachineType.md)
 
 ### Authorization
 

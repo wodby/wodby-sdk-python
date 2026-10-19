@@ -29,6 +29,7 @@ class NewClusterInput(BaseModel):
     """ # noqa: E501
     org_id: Optional[StrictInt] = Field(default=None, description="Optional for API-key requests; defaults to the API key's organization.", alias="orgId")
     project_id: Optional[StrictInt] = Field(default=None, alias="projectId")
+    available_to_all_projects: Optional[StrictBool] = Field(default=None, description="Lets every project in the organization use the new resource without a project share. Only an organization-owned resource, created without projectId, can be available to all projects.", alias="availableToAllProjects")
     integration_id: StrictInt = Field(alias="integrationId")
     name: StrictStr
     title: StrictStr
@@ -45,7 +46,7 @@ class NewClusterInput(BaseModel):
     disable_monitoring: StrictBool = Field(alias="disableMonitoring")
     auto_infrastructure_upgrade: Optional[StrictBool] = Field(default=None, alias="autoInfrastructureUpgrade")
     environment_policy: Optional[ClusterEnvironmentPolicyInput] = Field(default=None, alias="environmentPolicy")
-    __properties: ClassVar[List[str]] = ["orgId", "projectId", "integrationId", "name", "title", "serverless", "singleNode", "version", "machineType", "minNodeCount", "maxNodeCount", "nodeDiskSize", "zone", "region", "billingOption", "disableMonitoring", "autoInfrastructureUpgrade", "environmentPolicy"]
+    __properties: ClassVar[List[str]] = ["orgId", "projectId", "availableToAllProjects", "integrationId", "name", "title", "serverless", "singleNode", "version", "machineType", "minNodeCount", "maxNodeCount", "nodeDiskSize", "zone", "region", "billingOption", "disableMonitoring", "autoInfrastructureUpgrade", "environmentPolicy"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -93,6 +94,11 @@ class NewClusterInput(BaseModel):
         # and model_fields_set contains the field
         if self.project_id is None and "project_id" in self.model_fields_set:
             _dict['projectId'] = None
+
+        # set to None if available_to_all_projects (nullable) is None
+        # and model_fields_set contains the field
+        if self.available_to_all_projects is None and "available_to_all_projects" in self.model_fields_set:
+            _dict['availableToAllProjects'] = None
 
         # set to None if single_node (nullable) is None
         # and model_fields_set contains the field
@@ -158,6 +164,7 @@ class NewClusterInput(BaseModel):
         _obj = cls.model_validate({
             "orgId": obj.get("orgId"),
             "projectId": obj.get("projectId"),
+            "availableToAllProjects": obj.get("availableToAllProjects"),
             "integrationId": obj.get("integrationId"),
             "name": obj.get("name"),
             "title": obj.get("title"),

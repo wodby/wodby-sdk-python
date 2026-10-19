@@ -5,6 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**gpu** | [**GPUResources**](GPUResources.md) |  | [optional] 
 **id** | **int** |  | [optional] 
 **stack_service_id** | **int** |  | 
 **workload** | **str** |  | 

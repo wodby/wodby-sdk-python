@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.backup_option import BackupOption
 from typing import Optional, Set
@@ -29,12 +29,24 @@ class NewBackupInput(BaseModel):
     """ # noqa: E501
     app_service_id: Optional[StrictInt] = Field(default=None, alias="appServiceId")
     database_db_id: Optional[StrictInt] = Field(default=None, alias="databaseDbId")
+    backup_preset_id: Optional[StrictInt] = Field(default=None, description="Associates a one-off backup with the preset used to populate its destination and options.", alias="backupPresetId")
     backup_name: Optional[StrictStr] = Field(default=None, alias="backupName")
     integration_id: StrictInt = Field(description="Use 0 for Wodby Blob Storage.", alias="integrationId")
     bucket: StrictStr = Field(description="Must be empty for Wodby Blob Storage.")
     storage_class: Optional[StrictStr] = Field(default=None, alias="storageClass")
+    blob_storage_region: Optional[StrictStr] = Field(default='eu', description="Wodby Blob Storage region. Omit to use Europe; must be omitted for third-party storage.", alias="blobStorageRegion")
     options: Optional[List[BackupOption]] = None
-    __properties: ClassVar[List[str]] = ["appServiceId", "databaseDbId", "backupName", "integrationId", "bucket", "storageClass", "options"]
+    __properties: ClassVar[List[str]] = ["appServiceId", "databaseDbId", "backupPresetId", "backupName", "integrationId", "bucket", "storageClass", "blobStorageRegion", "options"]
+
+    @field_validator('blob_storage_region')
+    def blob_storage_region_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['eu', 'us']):
+            raise ValueError("must be one of enum values ('eu', 'us')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -92,6 +104,11 @@ class NewBackupInput(BaseModel):
         if self.database_db_id is None and "database_db_id" in self.model_fields_set:
             _dict['databaseDbId'] = None
 
+        # set to None if backup_preset_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.backup_preset_id is None and "backup_preset_id" in self.model_fields_set:
+            _dict['backupPresetId'] = None
+
         # set to None if backup_name (nullable) is None
         # and model_fields_set contains the field
         if self.backup_name is None and "backup_name" in self.model_fields_set:
@@ -101,6 +118,11 @@ class NewBackupInput(BaseModel):
         # and model_fields_set contains the field
         if self.storage_class is None and "storage_class" in self.model_fields_set:
             _dict['storageClass'] = None
+
+        # set to None if blob_storage_region (nullable) is None
+        # and model_fields_set contains the field
+        if self.blob_storage_region is None and "blob_storage_region" in self.model_fields_set:
+            _dict['blobStorageRegion'] = None
 
         # set to None if options (nullable) is None
         # and model_fields_set contains the field
@@ -121,10 +143,12 @@ class NewBackupInput(BaseModel):
         _obj = cls.model_validate({
             "appServiceId": obj.get("appServiceId"),
             "databaseDbId": obj.get("databaseDbId"),
+            "backupPresetId": obj.get("backupPresetId"),
             "backupName": obj.get("backupName"),
             "integrationId": obj.get("integrationId"),
             "bucket": obj.get("bucket"),
             "storageClass": obj.get("storageClass"),
+            "blobStorageRegion": obj.get("blobStorageRegion") if obj.get("blobStorageRegion") is not None else 'eu',
             "options": [BackupOption.from_dict(_item) for _item in obj["options"]] if obj.get("options") is not None else None
         })
         return _obj

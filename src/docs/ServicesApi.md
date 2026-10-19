@@ -8,12 +8,14 @@ Method | HTTP request | Description
 [**get_service**](ServicesApi.md#get_service) | **GET** /services/{id} | Get service
 [**get_service_by_name**](ServicesApi.md#get_service_by_name) | **GET** /services/by-name/{name} | Get service by name
 [**get_service_revision**](ServicesApi.md#get_service_revision) | **GET** /service-revisions/{id} | Get service revision
+[**get_service_sharing**](ServicesApi.md#get_service_sharing) | **GET** /services/sharing/{id} | Get service sharing
 [**import_services**](ServicesApi.md#import_services) | **POST** /services/actions/import | Import services from Git
 [**list_service_link_candidates**](ServicesApi.md#list_service_link_candidates) | **GET** /services/{name}/options/link-candidates | List service link candidates
 [**list_services**](ServicesApi.md#list_services) | **GET** /services | List services
 [**scaffold_service_from_helm_chart**](ServicesApi.md#scaffold_service_from_helm_chart) | **POST** /services/actions/scaffold-from-helm-chart | Scaffold service from Helm chart
 [**update_service_from_manifest**](ServicesApi.md#update_service_from_manifest) | **POST** /services/{id}/actions/update-from-manifest | Update service from manifest
 [**update_service_settings**](ServicesApi.md#update_service_settings) | **PUT** /services/settings/{id} | Update service settings
+[**update_service_sharing**](ServicesApi.md#update_service_sharing) | **PUT** /services/sharing/{id} | Update service sharing
 [**validate_service_manifest**](ServicesApi.md#validate_service_manifest) | **POST** /services/actions/validate-manifest | Validate service manifest
 
 
@@ -339,6 +341,87 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Service revision |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_service_sharing**
+> ResourceSharing get_service_sharing(id)
+
+Get service sharing
+
+Returns who owns the service and which projects can use it.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.resource_sharing import ResourceSharing
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.ServicesApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # Get service sharing
+        api_response = api_instance.get_service_sharing(id)
+        print("The response of ServicesApi->get_service_sharing:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ServicesApi->get_service_sharing: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**ResourceSharing**](ResourceSharing.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Service sharing |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 
@@ -840,6 +923,90 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Updated service |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_service_sharing**
+> ResourceSharing update_service_sharing(id, resource_sharing_input)
+
+Update service sharing
+
+Changes the service owner and replaces the projects it is shared with. It can also make an organization-owned service available to every project. Returns the resulting sharing.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.resource_sharing import ResourceSharing
+from wodby.models.resource_sharing_input import ResourceSharingInput
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.ServicesApi(api_client)
+    id = 56 # int | 
+    resource_sharing_input = wodby.ResourceSharingInput() # ResourceSharingInput | 
+
+    try:
+        # Update service sharing
+        api_response = api_instance.update_service_sharing(id, resource_sharing_input)
+        print("The response of ServicesApi->update_service_sharing:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ServicesApi->update_service_sharing: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **resource_sharing_input** | [**ResourceSharingInput**](ResourceSharingInput.md)|  | 
+
+### Return type
+
+[**ResourceSharing**](ResourceSharing.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Updated service sharing |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 

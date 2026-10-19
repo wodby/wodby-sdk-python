@@ -18,6 +18,7 @@ from typing_extensions import Annotated
 
 from pydantic import StrictBool, StrictInt, StrictStr
 from typing import Any, Dict, List, Optional
+from wodby.models.cloud_machine_type import CloudMachineType
 from wodby.models.database_type import DatabaseType
 from wodby.models.database_version import DatabaseVersion
 
@@ -342,7 +343,7 @@ class IntegrationKindsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[Dict[str, object]]:
+    ) -> List[CloudMachineType]:
         """List database machine types
 
         Returns database machine types matching the request filters.
@@ -395,7 +396,7 @@ class IntegrationKindsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[Dict[str, object]]",
+            '200': "List[CloudMachineType]",
             '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
@@ -430,7 +431,7 @@ class IntegrationKindsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[Dict[str, object]]]:
+    ) -> ApiResponse[List[CloudMachineType]]:
         """List database machine types
 
         Returns database machine types matching the request filters.
@@ -483,7 +484,7 @@ class IntegrationKindsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[Dict[str, object]]",
+            '200': "List[CloudMachineType]",
             '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(
@@ -571,7 +572,7 @@ class IntegrationKindsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[Dict[str, object]]",
+            '200': "List[CloudMachineType]",
             '4XX': "ProblemDetails",
         }
         response_data = self.api_client.call_api(

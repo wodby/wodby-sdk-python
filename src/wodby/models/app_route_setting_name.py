@@ -34,6 +34,8 @@ class AppRouteSettingName(str, Enum):
     HSTS = 'HSTS'
     REQUEST_TIMEOUT = 'REQUEST_TIMEOUT'
     BACKEND_REQUEST_TIMEOUT = 'BACKEND_REQUEST_TIMEOUT'
+    RATE_LIMIT_PER_IP = 'RATE_LIMIT_PER_IP'
+    RATE_LIMIT_TOTAL = 'RATE_LIMIT_TOTAL'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

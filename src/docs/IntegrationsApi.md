@@ -12,6 +12,7 @@ Method | HTTP request | Description
 [**get_integration_kube_settings**](IntegrationsApi.md#get_integration_kube_settings) | **GET** /integrations/{id}/options/kube-settings | Get Kubernetes settings
 [**get_integration_provider_revision_upgrade**](IntegrationsApi.md#get_integration_provider_revision_upgrade) | **GET** /integration-provider-revision-upgrades/{id} | Preview provider revision upgrade
 [**get_integration_remote_git_repo_file_presence**](IntegrationsApi.md#get_integration_remote_git_repo_file_presence) | **GET** /integrations/{id}/options/remote-git-repo-file | Check a remote Git repository file
+[**get_integration_sharing**](IntegrationsApi.md#get_integration_sharing) | **GET** /integrations/sharing/{id} | Get integration sharing
 [**list_integration_kube_machine_types**](IntegrationsApi.md#list_integration_kube_machine_types) | **GET** /integrations/{id}/options/kube-machine-types | List Kubernetes machine types
 [**list_integration_kube_regions**](IntegrationsApi.md#list_integration_kube_regions) | **GET** /integrations/{id}/options/kube-regions | List Kubernetes regions
 [**list_integration_kube_versions**](IntegrationsApi.md#list_integration_kube_versions) | **GET** /integrations/{id}/options/kube-versions | List Kubernetes versions
@@ -22,12 +23,14 @@ Method | HTTP request | Description
 [**list_integration_scopes**](IntegrationsApi.md#list_integration_scopes) | **GET** /integrations/{id}/options/scopes | List integration scopes
 [**list_integration_storage_buckets**](IntegrationsApi.md#list_integration_storage_buckets) | **GET** /integrations/{id}/options/storage-buckets | List storage buckets
 [**list_integration_storage_classes**](IntegrationsApi.md#list_integration_storage_classes) | **GET** /integrations/{id}/options/storage-classes | List storage classes
+[**list_integration_usages**](IntegrationsApi.md#list_integration_usages) | **GET** /integrations/usages/{id} | List integration usages
 [**list_integrations**](IntegrationsApi.md#list_integrations) | **GET** /integrations | List integrations
 [**resolve_integration**](IntegrationsApi.md#resolve_integration) | **POST** /integrations/actions/resolve | Resolve or create integration
 [**search_integrations**](IntegrationsApi.md#search_integrations) | **POST** /integrations/actions/search | Search integrations
 [**test_integration_permissions**](IntegrationsApi.md#test_integration_permissions) | **POST** /integrations/{id}/actions/test-permissions | Test integration permissions
 [**update_integration**](IntegrationsApi.md#update_integration) | **PUT** /integrations/{id} | Update integration
 [**update_integration_environment_policy**](IntegrationsApi.md#update_integration_environment_policy) | **PUT** /integrations/environment-policy/{id} | Update integration environment policy
+[**update_integration_sharing**](IntegrationsApi.md#update_integration_sharing) | **PUT** /integrations/sharing/{id} | Update integration sharing
 [**upgrade_integration_provider_revision**](IntegrationsApi.md#upgrade_integration_provider_revision) | **POST** /integrations/{id}/actions/upgrade-provider-revision | Upgrade integration provider revision
 [**validate_app_access_hostname**](IntegrationsApi.md#validate_app_access_hostname) | **POST** /integrations/{id}/actions/validate-app-access-hostname | Validate an app-access hostname
 
@@ -689,8 +692,89 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_integration_sharing**
+> ResourceSharing get_integration_sharing(id)
+
+Get integration sharing
+
+Returns who owns the integration and which projects can use it.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.resource_sharing import ResourceSharing
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.IntegrationsApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # Get integration sharing
+        api_response = api_instance.get_integration_sharing(id)
+        print("The response of IntegrationsApi->get_integration_sharing:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling IntegrationsApi->get_integration_sharing: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**ResourceSharing**](ResourceSharing.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Integration sharing |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **list_integration_kube_machine_types**
-> List[Dict[str, object]] list_integration_kube_machine_types(id, location)
+> List[CloudMachineType] list_integration_kube_machine_types(id, location)
 
 List Kubernetes machine types
 
@@ -702,6 +786,7 @@ Returns Kubernetes machine types matching the request filters.
 
 ```python
 import wodby
+from wodby.models.cloud_machine_type import CloudMachineType
 from wodby.rest import ApiException
 from pprint import pprint
 
@@ -750,7 +835,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[Dict[str, object]]**
+[**List[CloudMachineType]**](CloudMachineType.md)
 
 ### Authorization
 
@@ -1500,6 +1585,91 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **list_integration_usages**
+> IntegrationUsagesResponse list_integration_usages(id, page=page, page_size=page_size)
+
+List integration usages
+
+Lists what uses the integration, such as services, environments, builds, backups and organization defaults, so you can check it before you change or delete the integration. Only usages you can see are listed.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.integration_usages_response import IntegrationUsagesResponse
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.IntegrationsApi(api_client)
+    id = 56 # int | 
+    page = 56 # int | Page number, defaults to 1 (optional)
+    page_size = 56 # int | Page size, defaults to 30 (optional)
+
+    try:
+        # List integration usages
+        api_response = api_instance.list_integration_usages(id, page=page, page_size=page_size)
+        print("The response of IntegrationsApi->list_integration_usages:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling IntegrationsApi->list_integration_usages: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **page** | **int**| Page number, defaults to 1 | [optional] 
+ **page_size** | **int**| Page size, defaults to 30 | [optional] 
+
+### Return type
+
+[**IntegrationUsagesResponse**](IntegrationUsagesResponse.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Integration usages |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **list_integrations**
 > List[Integration] list_integrations(org_id=org_id, project_ids=project_ids, labels=labels, env_id=env_id, env_type=env_type)
 
@@ -1997,6 +2167,90 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Updated integration |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_integration_sharing**
+> ResourceSharing update_integration_sharing(id, resource_sharing_input)
+
+Update integration sharing
+
+Changes the integration owner and replaces the projects it is shared with. It can also make an organization-owned integration available to every project. Returns the resulting sharing.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.resource_sharing import ResourceSharing
+from wodby.models.resource_sharing_input import ResourceSharingInput
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.IntegrationsApi(api_client)
+    id = 56 # int | 
+    resource_sharing_input = wodby.ResourceSharingInput() # ResourceSharingInput | 
+
+    try:
+        # Update integration sharing
+        api_response = api_instance.update_integration_sharing(id, resource_sharing_input)
+        print("The response of IntegrationsApi->update_integration_sharing:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling IntegrationsApi->update_integration_sharing: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **resource_sharing_input** | [**ResourceSharingInput**](ResourceSharingInput.md)|  | 
+
+### Return type
+
+[**ResourceSharing**](ResourceSharing.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Updated integration sharing |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 

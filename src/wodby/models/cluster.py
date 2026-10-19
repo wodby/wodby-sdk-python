@@ -58,13 +58,14 @@ class Cluster(BaseModel):
     org_id: StrictInt = Field(alias="orgId")
     ownership_scope: StrictStr = Field(alias="ownershipScope")
     owner_project_id: Optional[StrictInt] = Field(default=None, alias="ownerProjectId")
+    available_to_all_projects: StrictBool = Field(description="True when every project in the organization can use the resource without a project share.", alias="availableToAllProjects")
     capabilities: ClusterCapabilities
     settings: Optional[ClusterSettings] = None
     storage_classes: Optional[List[StorageClass]] = Field(default=None, alias="storageClasses")
     storage_classes_observed_at: Optional[datetime] = Field(default=None, alias="storageClassesObservedAt")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "serverless", "demo", "wodby", "k3s", "singleNode", "version", "infraVersion", "minNodeCount", "maxNodeCount", "lastNodesReady", "lastNodesTotal", "region", "zone", "ips", "hostname", "integrationId", "envId", "envType", "envScope", "allowedEnvIds", "allowedEnvTypes", "orgId", "ownershipScope", "ownerProjectId", "capabilities", "settings", "storageClasses", "storageClassesObservedAt", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "serverless", "demo", "wodby", "k3s", "singleNode", "version", "infraVersion", "minNodeCount", "maxNodeCount", "lastNodesReady", "lastNodesTotal", "region", "zone", "ips", "hostname", "integrationId", "envId", "envType", "envScope", "allowedEnvIds", "allowedEnvTypes", "orgId", "ownershipScope", "ownerProjectId", "availableToAllProjects", "capabilities", "settings", "storageClasses", "storageClassesObservedAt", "createdAt", "updatedAt"]
 
     @field_validator('env_type')
     def env_type_validate_enum(cls, value):
@@ -252,6 +253,7 @@ class Cluster(BaseModel):
             "orgId": obj.get("orgId"),
             "ownershipScope": obj.get("ownershipScope"),
             "ownerProjectId": obj.get("ownerProjectId"),
+            "availableToAllProjects": obj.get("availableToAllProjects"),
             "capabilities": ClusterCapabilities.from_dict(obj["capabilities"]) if obj.get("capabilities") is not None else None,
             "settings": ClusterSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None,
             "storageClasses": [StorageClass.from_dict(_item) for _item in obj["storageClasses"]] if obj.get("storageClasses") is not None else None,

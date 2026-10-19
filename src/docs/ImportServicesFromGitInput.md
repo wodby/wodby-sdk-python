@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **git_ref_type** | **str** |  | 
 **auto_update** | [**GitAutoUpdateSettingsInput**](GitAutoUpdateSettingsInput.md) |  | [optional] 
 **registry_integration_id** | **int** | Optional registry integration used when an imported service image requires authentication. | [optional] 
+**available_to_all_projects** | **bool** | Lets every project in the organization use the imported services without a project share. Only organization-owned services, imported without projectId, can be available to all projects. | [optional] 
 
 ## Example
 

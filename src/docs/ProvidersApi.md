@@ -9,11 +9,13 @@ Method | HTTP request | Description
 [**get_provider**](ProvidersApi.md#get_provider) | **GET** /providers/{id} | Get provider
 [**get_provider_by_name**](ProvidersApi.md#get_provider_by_name) | **GET** /providers/by-name/{name} | Get provider by name
 [**get_provider_revision**](ProvidersApi.md#get_provider_revision) | **GET** /provider-revisions/{id} | Get provider revision
+[**get_provider_sharing**](ProvidersApi.md#get_provider_sharing) | **GET** /providers/sharing/{id} | Get provider sharing
 [**import_providers**](ProvidersApi.md#import_providers) | **POST** /providers/actions/import | Import providers from Git
 [**list_providers**](ProvidersApi.md#list_providers) | **GET** /providers | List providers
 [**update_provider_from_git**](ProvidersApi.md#update_provider_from_git) | **POST** /providers/{id}/actions/update-from-git | Update provider from Git
 [**update_provider_from_manifest**](ProvidersApi.md#update_provider_from_manifest) | **POST** /providers/{id}/actions/update-from-manifest | Update provider from manifest
 [**update_provider_settings**](ProvidersApi.md#update_provider_settings) | **PUT** /providers/settings/{id} | Update provider settings
+[**update_provider_sharing**](ProvidersApi.md#update_provider_sharing) | **PUT** /providers/sharing/{id} | Update provider sharing
 
 
 # **create_provider_from_manifest**
@@ -418,6 +420,87 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Provider revision |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_provider_sharing**
+> ResourceSharing get_provider_sharing(id)
+
+Get provider sharing
+
+Returns who owns the provider and which projects can use it.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.resource_sharing import ResourceSharing
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.ProvidersApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # Get provider sharing
+        api_response = api_instance.get_provider_sharing(id)
+        print("The response of ProvidersApi->get_provider_sharing:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProvidersApi->get_provider_sharing: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**ResourceSharing**](ResourceSharing.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Provider sharing |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 
@@ -843,6 +926,90 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Updated provider |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_provider_sharing**
+> ResourceSharing update_provider_sharing(id, resource_sharing_input)
+
+Update provider sharing
+
+Changes the provider owner and replaces the projects it is shared with. Returns the resulting sharing.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.resource_sharing import ResourceSharing
+from wodby.models.resource_sharing_input import ResourceSharingInput
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.ProvidersApi(api_client)
+    id = 56 # int | 
+    resource_sharing_input = wodby.ResourceSharingInput() # ResourceSharingInput | 
+
+    try:
+        # Update provider sharing
+        api_response = api_instance.update_provider_sharing(id, resource_sharing_input)
+        print("The response of ProvidersApi->update_provider_sharing:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProvidersApi->update_provider_sharing: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **resource_sharing_input** | [**ResourceSharingInput**](ResourceSharingInput.md)|  | 
+
+### Return type
+
+[**ResourceSharing**](ResourceSharing.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Updated provider sharing |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 

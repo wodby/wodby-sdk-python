@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.app_service_build import AppServiceBuild
 from wodby.models.task import Task
@@ -30,7 +30,7 @@ class AppBuild(BaseModel):
     AppBuild
     """ # noqa: E501
     id: StrictInt
-    number: StrictInt = Field(description="App-instance build-launch number. Build records created by the same Wodby CI launch share this number.")
+    number: StrictInt = Field(description="App environment build-launch number. Build records created by the same Wodby CI launch share this number.")
     status: StrictStr
     app_instance_id: StrictInt = Field(alias="appInstanceId")
     app_service_id: StrictInt = Field(alias="appServiceId")
@@ -41,11 +41,27 @@ class AppBuild(BaseModel):
     git_ref: StrictStr = Field(alias="gitRef")
     commit_hash: StrictStr = Field(alias="commitHash")
     commit_message: StrictStr = Field(alias="commitMessage")
+    author_name: Optional[StrictStr] = Field(default=None, alias="authorName")
+    author_email: Optional[StrictStr] = Field(default=None, alias="authorEmail")
+    workflow: StrictStr = Field(description="CI workflow that produced an externally built image. Empty for Wodby CI builds.")
+    stack_rev_id: Optional[StrictInt] = Field(default=None, description="Stack revision the build was made for.", alias="stackRevId")
+    git_repo_id: Optional[StrictInt] = Field(default=None, alias="gitRepoId")
+    ci_integration_id: Optional[StrictInt] = Field(default=None, alias="ciIntegrationId")
+    registry_integration_id: Optional[StrictInt] = Field(default=None, alias="registryIntegrationId")
+    image_void_status: StrictStr = Field(description="Whether the build's images were voided and can no longer be deployed.", alias="imageVoidStatus")
+    can_void_images: StrictBool = Field(description="True when the build's images can be voided now.", alias="canVoidImages")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
     started_at: Optional[datetime] = Field(default=None, alias="startedAt")
     ended_at: Optional[datetime] = Field(default=None, alias="endedAt")
-    __properties: ClassVar[List[str]] = ["id", "number", "status", "appInstanceId", "appServiceId", "taskId", "task", "appServiceBuilds", "gitRefType", "gitRef", "commitHash", "commitMessage", "createdAt", "updatedAt", "startedAt", "endedAt"]
+    __properties: ClassVar[List[str]] = ["id", "number", "status", "appInstanceId", "appServiceId", "taskId", "task", "appServiceBuilds", "gitRefType", "gitRef", "commitHash", "commitMessage", "authorName", "authorEmail", "workflow", "stackRevId", "gitRepoId", "ciIntegrationId", "registryIntegrationId", "imageVoidStatus", "canVoidImages", "createdAt", "updatedAt", "startedAt", "endedAt"]
+
+    @field_validator('image_void_status')
+    def image_void_status_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(['none', 'partially_voided', 'voided']):
+            raise ValueError("must be one of enum values ('none', 'partially_voided', 'voided')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -106,6 +122,36 @@ class AppBuild(BaseModel):
         if self.task is None and "task" in self.model_fields_set:
             _dict['task'] = None
 
+        # set to None if author_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.author_name is None and "author_name" in self.model_fields_set:
+            _dict['authorName'] = None
+
+        # set to None if author_email (nullable) is None
+        # and model_fields_set contains the field
+        if self.author_email is None and "author_email" in self.model_fields_set:
+            _dict['authorEmail'] = None
+
+        # set to None if stack_rev_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.stack_rev_id is None and "stack_rev_id" in self.model_fields_set:
+            _dict['stackRevId'] = None
+
+        # set to None if git_repo_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.git_repo_id is None and "git_repo_id" in self.model_fields_set:
+            _dict['gitRepoId'] = None
+
+        # set to None if ci_integration_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.ci_integration_id is None and "ci_integration_id" in self.model_fields_set:
+            _dict['ciIntegrationId'] = None
+
+        # set to None if registry_integration_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.registry_integration_id is None and "registry_integration_id" in self.model_fields_set:
+            _dict['registryIntegrationId'] = None
+
         # set to None if started_at (nullable) is None
         # and model_fields_set contains the field
         if self.started_at is None and "started_at" in self.model_fields_set:
@@ -140,6 +186,15 @@ class AppBuild(BaseModel):
             "gitRef": obj.get("gitRef"),
             "commitHash": obj.get("commitHash"),
             "commitMessage": obj.get("commitMessage"),
+            "authorName": obj.get("authorName"),
+            "authorEmail": obj.get("authorEmail"),
+            "workflow": obj.get("workflow"),
+            "stackRevId": obj.get("stackRevId"),
+            "gitRepoId": obj.get("gitRepoId"),
+            "ciIntegrationId": obj.get("ciIntegrationId"),
+            "registryIntegrationId": obj.get("registryIntegrationId"),
+            "imageVoidStatus": obj.get("imageVoidStatus"),
+            "canVoidImages": obj.get("canVoidImages"),
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt"),
             "startedAt": obj.get("startedAt"),

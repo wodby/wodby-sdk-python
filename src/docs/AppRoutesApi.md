@@ -4,17 +4,103 @@ All URIs are relative to */v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**bulk_operate_app_routes**](AppRoutesApi.md#bulk_operate_app_routes) | **POST** /app-routes/actions/bulk | Enable, disable or delete app routes
 [**create_app_route**](AppRoutesApi.md#create_app_route) | **POST** /app-routes | Create app route
 [**delete_app_route**](AppRoutesApi.md#delete_app_route) | **DELETE** /app-routes/{id} | Delete app route
 [**delete_app_route_setting**](AppRoutesApi.md#delete_app_route_setting) | **DELETE** /app-routes/{id}/settings/{name} | Delete app route setting
 [**get_app_route**](AppRoutesApi.md#get_app_route) | **GET** /app-routes/{id} | Get app route
+[**list_app_environment_route_settings**](AppRoutesApi.md#list_app_environment_route_settings) | **GET** /app-environments/route-settings/{id} | List app environment default route settings
 [**list_app_route_settings**](AppRoutesApi.md#list_app_route_settings) | **GET** /app-routes/{id}/settings | List app route settings
 [**list_app_routes**](AppRoutesApi.md#list_app_routes) | **GET** /app-routes | List app routes
 [**list_effective_app_route_settings**](AppRoutesApi.md#list_effective_app_route_settings) | **GET** /app-routes/{id}/effective-settings | List effective app route settings
+[**replace_app_environment_route_settings**](AppRoutesApi.md#replace_app_environment_route_settings) | **PUT** /app-environments/route-settings/{id} | Replace app environment default route settings
+[**replace_app_route_settings**](AppRoutesApi.md#replace_app_route_settings) | **PUT** /app-routes/{id}/settings | Replace app route settings
 [**retry_app_route_certificate**](AppRoutesApi.md#retry_app_route_certificate) | **POST** /app-routes/{id}/actions/retry-certificate | Retry app route certificate
 [**set_app_route_setting**](AppRoutesApi.md#set_app_route_setting) | **PUT** /app-routes/{id}/settings/{name} | Set app route setting
 [**update_app_route**](AppRoutesApi.md#update_app_route) | **PUT** /app-routes/{id} | Update app route
 
+
+# **bulk_operate_app_routes**
+> OperationResult bulk_operate_app_routes(bulk_app_route_operation_input)
+
+Enable, disable or delete app routes
+
+Applies one operation to several routes of an app environment in one task.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.bulk_app_route_operation_input import BulkAppRouteOperationInput
+from wodby.models.operation_result import OperationResult
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppRoutesApi(api_client)
+    bulk_app_route_operation_input = wodby.BulkAppRouteOperationInput() # BulkAppRouteOperationInput | 
+
+    try:
+        # Enable, disable or delete app routes
+        api_response = api_instance.bulk_operate_app_routes(bulk_app_route_operation_input)
+        print("The response of AppRoutesApi->bulk_operate_app_routes:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppRoutesApi->bulk_operate_app_routes: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **bulk_app_route_operation_input** | [**BulkAppRouteOperationInput**](BulkAppRouteOperationInput.md)|  | 
+
+### Return type
+
+[**OperationResult**](OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Route operation started |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_app_route**
 > AppRoute create_app_route(new_app_route_input)
@@ -344,6 +430,87 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **list_app_environment_route_settings**
+> List[AppRouteSetting] list_app_environment_route_settings(id)
+
+List app environment default route settings
+
+Returns the app environment's default route settings. Every route inherits them unless it overrides them.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.app_route_setting import AppRouteSetting
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppRoutesApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # List app environment default route settings
+        api_response = api_instance.list_app_environment_route_settings(id)
+        print("The response of AppRoutesApi->list_app_environment_route_settings:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppRoutesApi->list_app_environment_route_settings: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**List[AppRouteSetting]**](AppRouteSetting.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Default route settings |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **list_app_route_settings**
 > List[AppRouteSetting] list_app_route_settings(id)
 
@@ -582,6 +749,174 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of effective app route settings |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **replace_app_environment_route_settings**
+> List[AppRouteSetting] replace_app_environment_route_settings(id, app_route_settings_input)
+
+Replace app environment default route settings
+
+Replaces all default route settings of the app environment. A setting left out is removed, so routes fall back to the service default. Returns the stored settings.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.app_route_setting import AppRouteSetting
+from wodby.models.app_route_settings_input import AppRouteSettingsInput
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppRoutesApi(api_client)
+    id = 56 # int | 
+    app_route_settings_input = wodby.AppRouteSettingsInput() # AppRouteSettingsInput | 
+
+    try:
+        # Replace app environment default route settings
+        api_response = api_instance.replace_app_environment_route_settings(id, app_route_settings_input)
+        print("The response of AppRoutesApi->replace_app_environment_route_settings:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppRoutesApi->replace_app_environment_route_settings: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **app_route_settings_input** | [**AppRouteSettingsInput**](AppRouteSettingsInput.md)|  | 
+
+### Return type
+
+[**List[AppRouteSetting]**](AppRouteSetting.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Stored default route settings |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **replace_app_route_settings**
+> List[AppRouteSetting] replace_app_route_settings(id, app_route_settings_input)
+
+Replace app route settings
+
+Replaces all setting overrides of the route. A setting left out is removed, so the route inherits the app environment or service default. Returns the stored overrides.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.app_route_setting import AppRouteSetting
+from wodby.models.app_route_settings_input import AppRouteSettingsInput
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppRoutesApi(api_client)
+    id = 56 # int | 
+    app_route_settings_input = wodby.AppRouteSettingsInput() # AppRouteSettingsInput | 
+
+    try:
+        # Replace app route settings
+        api_response = api_instance.replace_app_route_settings(id, app_route_settings_input)
+        print("The response of AppRoutesApi->replace_app_route_settings:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppRoutesApi->replace_app_route_settings: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **app_route_settings_input** | [**AppRouteSettingsInput**](AppRouteSettingsInput.md)|  | 
+
+### Return type
+
+[**List[AppRouteSetting]**](AppRouteSetting.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Stored route setting overrides |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 

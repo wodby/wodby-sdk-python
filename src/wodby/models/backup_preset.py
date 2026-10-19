@@ -43,6 +43,7 @@ class BackupPreset(BaseModel):
     integration_id: StrictInt = Field(alias="integrationId")
     bucket: StrictStr
     storage_class: Optional[StrictStr] = Field(default=None, alias="storageClass")
+    blob_storage_region: Optional[StrictStr] = Field(default=None, description="Region used by Wodby Blob Storage. Null for third-party storage and legacy presets.", alias="blobStorageRegion")
     options: List[BackupOption]
     override: StrictBool
     auto: StrictBool
@@ -53,7 +54,7 @@ class BackupPreset(BaseModel):
     next_run_at: Optional[datetime] = Field(default=None, alias="nextRunAt")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "appInstanceId", "appServiceId", "databaseId", "databaseDbId", "orgId", "envId", "envTypes", "backupCategory", "backupName", "integrationId", "bucket", "storageClass", "options", "override", "auto", "disabled", "crontab", "timeWindow", "duration", "nextRunAt", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "appInstanceId", "appServiceId", "databaseId", "databaseDbId", "orgId", "envId", "envTypes", "backupCategory", "backupName", "integrationId", "bucket", "storageClass", "blobStorageRegion", "options", "override", "auto", "disabled", "crontab", "timeWindow", "duration", "nextRunAt", "createdAt", "updatedAt"]
 
     @field_validator('env_types')
     def env_types_validate_enum(cls, value):
@@ -68,6 +69,16 @@ class BackupPreset(BaseModel):
         """Validates the enum"""
         if value not in set(['any', 'files', 'database']):
             raise ValueError("must be one of enum values ('any', 'files', 'database')")
+        return value
+
+    @field_validator('blob_storage_region')
+    def blob_storage_region_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['eu', 'us']):
+            raise ValueError("must be one of enum values ('eu', 'us')")
         return value
 
     model_config = ConfigDict(
@@ -159,6 +170,11 @@ class BackupPreset(BaseModel):
         if self.storage_class is None and "storage_class" in self.model_fields_set:
             _dict['storageClass'] = None
 
+        # set to None if blob_storage_region (nullable) is None
+        # and model_fields_set contains the field
+        if self.blob_storage_region is None and "blob_storage_region" in self.model_fields_set:
+            _dict['blobStorageRegion'] = None
+
         # set to None if crontab (nullable) is None
         # and model_fields_set contains the field
         if self.crontab is None and "crontab" in self.model_fields_set:
@@ -199,6 +215,7 @@ class BackupPreset(BaseModel):
             "integrationId": obj.get("integrationId"),
             "bucket": obj.get("bucket"),
             "storageClass": obj.get("storageClass"),
+            "blobStorageRegion": obj.get("blobStorageRegion"),
             "options": [BackupOption.from_dict(_item) for _item in obj["options"]] if obj.get("options") is not None else None,
             "override": obj.get("override"),
             "auto": obj.get("auto"),

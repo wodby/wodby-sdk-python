@@ -32,7 +32,9 @@ class AppDeployment(BaseModel):
     """ # noqa: E501
     id: StrictInt
     number: StrictInt
-    status: StrictStr
+    status: StrictStr = Field(description="Overall result, including the routing updates that follow the service rollout.")
+    rollout_status: StrictStr = Field(description="Progress of rolling out the selected services. It does not show whether routing has finished.", alias="rolloutStatus")
+    rollout_ended_at: Optional[datetime] = Field(default=None, alias="rolloutEndedAt")
     rollback_status: StrictStr = Field(alias="rollbackStatus")
     post_deployment_status: StrictStr = Field(alias="postDeploymentStatus")
     skip_rollback: StrictBool = Field(alias="skipRollback")
@@ -46,11 +48,20 @@ class AppDeployment(BaseModel):
     post_deployment_task_id: Optional[StrictInt] = Field(default=None, alias="postDeploymentTaskId")
     post_deployment_task: Optional[Task] = Field(default=None, alias="postDeploymentTask")
     app_service_deployments: List[AppServiceDeployment] = Field(alias="appServiceDeployments")
+    post_deployment_scripts: List[StrictStr] = Field(description="Post-deployment scripts that the deployment's builds provide.", alias="postDeploymentScripts")
+    skip_post_deployment_scripts: StrictBool = Field(description="True when the deployment does not run the post-deployment scripts its builds provide.", alias="skipPostDeploymentScripts")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
     started_at: Optional[datetime] = Field(default=None, alias="startedAt")
     ended_at: Optional[datetime] = Field(default=None, alias="endedAt")
-    __properties: ClassVar[List[str]] = ["id", "number", "status", "rollbackStatus", "postDeploymentStatus", "skipRollback", "canCancel", "appInstanceId", "builds", "preparationTaskId", "preparationTask", "taskId", "task", "postDeploymentTaskId", "postDeploymentTask", "appServiceDeployments", "createdAt", "updatedAt", "startedAt", "endedAt"]
+    __properties: ClassVar[List[str]] = ["id", "number", "status", "rolloutStatus", "rolloutEndedAt", "rollbackStatus", "postDeploymentStatus", "skipRollback", "canCancel", "appInstanceId", "builds", "preparationTaskId", "preparationTask", "taskId", "task", "postDeploymentTaskId", "postDeploymentTask", "appServiceDeployments", "postDeploymentScripts", "skipPostDeploymentScripts", "createdAt", "updatedAt", "startedAt", "endedAt"]
+
+    @field_validator('rollout_status')
+    def rollout_status_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(['unknown', 'pending', 'in_progress', 'completed', 'canceled', 'errored']):
+            raise ValueError("must be one of enum values ('unknown', 'pending', 'in_progress', 'completed', 'canceled', 'errored')")
+        return value
 
     @field_validator('rollback_status')
     def rollback_status_validate_enum(cls, value):
@@ -128,6 +139,11 @@ class AppDeployment(BaseModel):
                 if _item_app_service_deployments:
                     _items.append(_item_app_service_deployments.to_dict())
             _dict['appServiceDeployments'] = _items
+        # set to None if rollout_ended_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.rollout_ended_at is None and "rollout_ended_at" in self.model_fields_set:
+            _dict['rolloutEndedAt'] = None
+
         # set to None if preparation_task_id (nullable) is None
         # and model_fields_set contains the field
         if self.preparation_task_id is None and "preparation_task_id" in self.model_fields_set:
@@ -183,6 +199,8 @@ class AppDeployment(BaseModel):
             "id": obj.get("id"),
             "number": obj.get("number"),
             "status": obj.get("status"),
+            "rolloutStatus": obj.get("rolloutStatus"),
+            "rolloutEndedAt": obj.get("rolloutEndedAt"),
             "rollbackStatus": obj.get("rollbackStatus"),
             "postDeploymentStatus": obj.get("postDeploymentStatus"),
             "skipRollback": obj.get("skipRollback"),
@@ -196,6 +214,8 @@ class AppDeployment(BaseModel):
             "postDeploymentTaskId": obj.get("postDeploymentTaskId"),
             "postDeploymentTask": Task.from_dict(obj["postDeploymentTask"]) if obj.get("postDeploymentTask") is not None else None,
             "appServiceDeployments": [AppServiceDeployment.from_dict(_item) for _item in obj["appServiceDeployments"]] if obj.get("appServiceDeployments") is not None else None,
+            "postDeploymentScripts": obj.get("postDeploymentScripts"),
+            "skipPostDeploymentScripts": obj.get("skipPostDeploymentScripts"),
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt"),
             "startedAt": obj.get("startedAt"),

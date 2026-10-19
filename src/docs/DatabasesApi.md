@@ -13,11 +13,13 @@ Method | HTTP request | Description
 [**get_database**](DatabasesApi.md#get_database) | **GET** /databases/{id} | Get database
 [**get_database_by_name**](DatabasesApi.md#get_database_by_name) | **GET** /databases/by-name/{name} | Get database by name
 [**get_database_db**](DatabasesApi.md#get_database_db) | **GET** /database-dbs/{id} | Get database DB
+[**get_database_sharing**](DatabasesApi.md#get_database_sharing) | **GET** /databases/sharing/{id} | Get database sharing
 [**list_database_charsets**](DatabasesApi.md#list_database_charsets) | **GET** /databases/{id}/options/charsets | List database charsets
 [**list_database_dbs**](DatabasesApi.md#list_database_dbs) | **GET** /database-dbs | List database DBs
 [**list_database_users**](DatabasesApi.md#list_database_users) | **GET** /database-users | List database users
 [**list_databases**](DatabasesApi.md#list_databases) | **GET** /databases | List databases
 [**update_database**](DatabasesApi.md#update_database) | **PUT** /databases/{id} | Update database
+[**update_database_sharing**](DatabasesApi.md#update_database_sharing) | **PUT** /databases/sharing/{id} | Update database sharing
 [**update_database_user_dbs**](DatabasesApi.md#update_database_user_dbs) | **PUT** /database-users/{id}/dbs | Update database user DB grants
 
 
@@ -755,6 +757,87 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_database_sharing**
+> ResourceSharing get_database_sharing(id)
+
+Get database sharing
+
+Returns who owns the database and which projects can use it.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.resource_sharing import ResourceSharing
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.DatabasesApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # Get database sharing
+        api_response = api_instance.get_database_sharing(id)
+        print("The response of DatabasesApi->get_database_sharing:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DatabasesApi->get_database_sharing: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**ResourceSharing**](ResourceSharing.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Database sharing |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **list_database_charsets**
 > List[DatabaseCharset] list_database_charsets(id)
 
@@ -1162,6 +1245,90 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Updated database |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_database_sharing**
+> ResourceSharing update_database_sharing(id, resource_sharing_input)
+
+Update database sharing
+
+Changes the database owner and replaces the projects it is shared with. Returns the resulting sharing.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.resource_sharing import ResourceSharing
+from wodby.models.resource_sharing_input import ResourceSharingInput
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.DatabasesApi(api_client)
+    id = 56 # int | 
+    resource_sharing_input = wodby.ResourceSharingInput() # ResourceSharingInput | 
+
+    try:
+        # Update database sharing
+        api_response = api_instance.update_database_sharing(id, resource_sharing_input)
+        print("The response of DatabasesApi->update_database_sharing:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DatabasesApi->update_database_sharing: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **resource_sharing_input** | [**ResourceSharingInput**](ResourceSharingInput.md)|  | 
+
+### Return type
+
+[**ResourceSharing**](ResourceSharing.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Updated database sharing |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 

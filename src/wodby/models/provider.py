@@ -18,8 +18,8 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -34,9 +34,18 @@ class Provider(BaseModel):
     public: StrictBool
     rev_id: StrictInt = Field(alias="revId")
     org_id: StrictInt = Field(alias="orgId")
+    ownership_scope: StrictStr = Field(description="org when the organization owns the resource, project when one project owns it.", alias="ownershipScope")
+    owner_project_id: Optional[StrictInt] = Field(default=None, alias="ownerProjectId")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "public", "revId", "orgId", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "public", "revId", "orgId", "ownershipScope", "ownerProjectId", "createdAt", "updatedAt"]
+
+    @field_validator('ownership_scope')
+    def ownership_scope_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(['org', 'project']):
+            raise ValueError("must be one of enum values ('org', 'project')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -77,6 +86,11 @@ class Provider(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if owner_project_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.owner_project_id is None and "owner_project_id" in self.model_fields_set:
+            _dict['ownerProjectId'] = None
+
         return _dict
 
     @classmethod
@@ -96,6 +110,8 @@ class Provider(BaseModel):
             "public": obj.get("public"),
             "revId": obj.get("revId"),
             "orgId": obj.get("orgId"),
+            "ownershipScope": obj.get("ownershipScope"),
+            "ownerProjectId": obj.get("ownerProjectId"),
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt")
         })

@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from wodby.models.task_initiator import TaskInitiator
 from wodby.models.task_job import TaskJob
 from wodby.models.user import User
 from typing import Optional, Set
@@ -29,6 +30,7 @@ class Task(BaseModel):
     """
     Task
     """ # noqa: E501
+    initiator: Optional[TaskInitiator] = Field(default=None, description="Absent when provenance is unknown; absence does not imply human initiation.")
     id: StrictInt
     name: StrictStr
     title: StrictStr
@@ -59,7 +61,7 @@ class Task(BaseModel):
     updated_at: datetime = Field(alias="updatedAt")
     started_at: Optional[datetime] = Field(default=None, alias="startedAt")
     ended_at: Optional[datetime] = Field(default=None, alias="endedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "compactTitle", "executionScope", "status", "progress", "silent", "system", "userId", "user", "orgId", "projectIds", "appId", "appInstanceId", "appServiceId", "clusterId", "databaseId", "integrationId", "serviceId", "stackId", "providerId", "originTaskId", "spawnedTaskIds", "repeatedTaskId", "jobs", "createdAt", "updatedAt", "startedAt", "endedAt"]
+    __properties: ClassVar[List[str]] = ["initiator", "id", "name", "title", "compactTitle", "executionScope", "status", "progress", "silent", "system", "userId", "user", "orgId", "projectIds", "appId", "appInstanceId", "appServiceId", "clusterId", "databaseId", "integrationId", "serviceId", "stackId", "providerId", "originTaskId", "spawnedTaskIds", "repeatedTaskId", "jobs", "createdAt", "updatedAt", "startedAt", "endedAt"]
 
     @field_validator('execution_scope')
     def execution_scope_validate_enum(cls, value):
@@ -107,6 +109,9 @@ class Task(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of initiator
+        if self.initiator:
+            _dict['initiator'] = self.initiator.to_dict()
         # override the default output from pydantic by calling `to_dict()` of user
         if self.user:
             _dict['user'] = self.user.to_dict()
@@ -117,6 +122,11 @@ class Task(BaseModel):
                 if _item_jobs:
                     _items.append(_item_jobs.to_dict())
             _dict['jobs'] = _items
+        # set to None if initiator (nullable) is None
+        # and model_fields_set contains the field
+        if self.initiator is None and "initiator" in self.model_fields_set:
+            _dict['initiator'] = None
+
         # set to None if user (nullable) is None
         # and model_fields_set contains the field
         if self.user is None and "user" in self.model_fields_set:
@@ -204,6 +214,7 @@ class Task(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "initiator": TaskInitiator.from_dict(obj["initiator"]) if obj.get("initiator") is not None else None,
             "id": obj.get("id"),
             "name": obj.get("name"),
             "title": obj.get("title"),

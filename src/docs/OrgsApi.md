@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**list_orgs**](OrgsApi.md#list_orgs) | **GET** /orgs | List orgs
 [**preflight_app_service_capacity**](OrgsApi.md#preflight_app_service_capacity) | **POST** /orgs/{id}/actions/preflight-app-service-capacity | Preflight app-service capacity
 [**update_org**](OrgsApi.md#update_org) | **PUT** /orgs/{id} | Update org
+[**update_org_settings**](OrgsApi.md#update_org_settings) | **PUT** /orgs/{id}/settings | Update organization settings
 
 
 # **get_org**
@@ -413,6 +414,90 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Updated org |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_org_settings**
+> Org update_org_settings(id, org_settings_input)
+
+Update organization settings
+
+Updates organization defaults and returns the organization. A new build image retention also applies to every app environment that still uses the previous organization value; environments with their own value keep it, and new environments inherit the new value.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.org import Org
+from wodby.models.org_settings_input import OrgSettingsInput
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.OrgsApi(api_client)
+    id = 56 # int | 
+    org_settings_input = wodby.OrgSettingsInput() # OrgSettingsInput | 
+
+    try:
+        # Update organization settings
+        api_response = api_instance.update_org_settings(id, org_settings_input)
+        print("The response of OrgsApi->update_org_settings:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling OrgsApi->update_org_settings: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **org_settings_input** | [**OrgSettingsInput**](OrgSettingsInput.md)|  | 
+
+### Return type
+
+[**Org**](Org.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Updated organization |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 

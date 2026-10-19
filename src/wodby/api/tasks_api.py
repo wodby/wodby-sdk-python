@@ -580,6 +580,8 @@ class TasksApi:
         project_ids: Annotated[Optional[StrictStr], Field(description="Comma-separated project ids")] = None,
         view: Annotated[Optional[StrictStr], Field(description="Return matching tasks as a flat page or as filter-scoped task trees. Tree responses support user, organization, project, and resource filters, keep paginated roots in items, and include current-page tree nodes in treeItems. Root pages are capped at 100 tasks. Tree responses include up to 250 authorized tasks and set treeTruncated when additional visible descendants exist; exceeding the 10-level depth limit still returns 422.")] = None,
         without_origin: Annotated[Optional[StrictBool], Field(description="Deprecated compatibility alias for view=tree")] = None,
+        agent_connection_id: Annotated[Optional[StrictInt], Field(description="Restrict tasks to an authorized agent connection in the requested organization.")] = None,
+        mcp_only: Annotated[Optional[StrictBool], Field(description="Only tasks known to originate through MCP, including spawned work. Unknown historical tasks are excluded.")] = None,
         include_system: Annotated[Optional[StrictBool], Field(description="Include operator-only system tasks when authorized")] = None,
         statuses: Annotated[Optional[StrictStr], Field(description="Comma-separated task statuses")] = None,
         names: Annotated[Optional[StrictStr], Field(description="Comma-separated exact task names")] = None,
@@ -621,6 +623,10 @@ class TasksApi:
         :type view: str
         :param without_origin: Deprecated compatibility alias for view=tree
         :type without_origin: bool
+        :param agent_connection_id: Restrict tasks to an authorized agent connection in the requested organization.
+        :type agent_connection_id: int
+        :param mcp_only: Only tasks known to originate through MCP, including spawned work. Unknown historical tasks are excluded.
+        :type mcp_only: bool
         :param include_system: Include operator-only system tasks when authorized
         :type include_system: bool
         :param statuses: Comma-separated task statuses
@@ -677,6 +683,8 @@ class TasksApi:
             project_ids=project_ids,
             view=view,
             without_origin=without_origin,
+            agent_connection_id=agent_connection_id,
+            mcp_only=mcp_only,
             include_system=include_system,
             statuses=statuses,
             names=names,
@@ -720,6 +728,8 @@ class TasksApi:
         project_ids: Annotated[Optional[StrictStr], Field(description="Comma-separated project ids")] = None,
         view: Annotated[Optional[StrictStr], Field(description="Return matching tasks as a flat page or as filter-scoped task trees. Tree responses support user, organization, project, and resource filters, keep paginated roots in items, and include current-page tree nodes in treeItems. Root pages are capped at 100 tasks. Tree responses include up to 250 authorized tasks and set treeTruncated when additional visible descendants exist; exceeding the 10-level depth limit still returns 422.")] = None,
         without_origin: Annotated[Optional[StrictBool], Field(description="Deprecated compatibility alias for view=tree")] = None,
+        agent_connection_id: Annotated[Optional[StrictInt], Field(description="Restrict tasks to an authorized agent connection in the requested organization.")] = None,
+        mcp_only: Annotated[Optional[StrictBool], Field(description="Only tasks known to originate through MCP, including spawned work. Unknown historical tasks are excluded.")] = None,
         include_system: Annotated[Optional[StrictBool], Field(description="Include operator-only system tasks when authorized")] = None,
         statuses: Annotated[Optional[StrictStr], Field(description="Comma-separated task statuses")] = None,
         names: Annotated[Optional[StrictStr], Field(description="Comma-separated exact task names")] = None,
@@ -761,6 +771,10 @@ class TasksApi:
         :type view: str
         :param without_origin: Deprecated compatibility alias for view=tree
         :type without_origin: bool
+        :param agent_connection_id: Restrict tasks to an authorized agent connection in the requested organization.
+        :type agent_connection_id: int
+        :param mcp_only: Only tasks known to originate through MCP, including spawned work. Unknown historical tasks are excluded.
+        :type mcp_only: bool
         :param include_system: Include operator-only system tasks when authorized
         :type include_system: bool
         :param statuses: Comma-separated task statuses
@@ -817,6 +831,8 @@ class TasksApi:
             project_ids=project_ids,
             view=view,
             without_origin=without_origin,
+            agent_connection_id=agent_connection_id,
+            mcp_only=mcp_only,
             include_system=include_system,
             statuses=statuses,
             names=names,
@@ -860,6 +876,8 @@ class TasksApi:
         project_ids: Annotated[Optional[StrictStr], Field(description="Comma-separated project ids")] = None,
         view: Annotated[Optional[StrictStr], Field(description="Return matching tasks as a flat page or as filter-scoped task trees. Tree responses support user, organization, project, and resource filters, keep paginated roots in items, and include current-page tree nodes in treeItems. Root pages are capped at 100 tasks. Tree responses include up to 250 authorized tasks and set treeTruncated when additional visible descendants exist; exceeding the 10-level depth limit still returns 422.")] = None,
         without_origin: Annotated[Optional[StrictBool], Field(description="Deprecated compatibility alias for view=tree")] = None,
+        agent_connection_id: Annotated[Optional[StrictInt], Field(description="Restrict tasks to an authorized agent connection in the requested organization.")] = None,
+        mcp_only: Annotated[Optional[StrictBool], Field(description="Only tasks known to originate through MCP, including spawned work. Unknown historical tasks are excluded.")] = None,
         include_system: Annotated[Optional[StrictBool], Field(description="Include operator-only system tasks when authorized")] = None,
         statuses: Annotated[Optional[StrictStr], Field(description="Comma-separated task statuses")] = None,
         names: Annotated[Optional[StrictStr], Field(description="Comma-separated exact task names")] = None,
@@ -901,6 +919,10 @@ class TasksApi:
         :type view: str
         :param without_origin: Deprecated compatibility alias for view=tree
         :type without_origin: bool
+        :param agent_connection_id: Restrict tasks to an authorized agent connection in the requested organization.
+        :type agent_connection_id: int
+        :param mcp_only: Only tasks known to originate through MCP, including spawned work. Unknown historical tasks are excluded.
+        :type mcp_only: bool
         :param include_system: Include operator-only system tasks when authorized
         :type include_system: bool
         :param statuses: Comma-separated task statuses
@@ -957,6 +979,8 @@ class TasksApi:
             project_ids=project_ids,
             view=view,
             without_origin=without_origin,
+            agent_connection_id=agent_connection_id,
+            mcp_only=mcp_only,
             include_system=include_system,
             statuses=statuses,
             names=names,
@@ -995,6 +1019,8 @@ class TasksApi:
         project_ids,
         view,
         without_origin,
+        agent_connection_id,
+        mcp_only,
         include_system,
         statuses,
         names,
@@ -1050,6 +1076,14 @@ class TasksApi:
         if without_origin is not None:
             
             _query_params.append(('withoutOrigin', without_origin))
+            
+        if agent_connection_id is not None:
+            
+            _query_params.append(('agentConnectionId', agent_connection_id))
+            
+        if mcp_only is not None:
+            
+            _query_params.append(('mcpOnly', mcp_only))
             
         if include_system is not None:
             

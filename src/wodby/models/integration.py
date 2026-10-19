@@ -40,9 +40,12 @@ class Integration(BaseModel):
     env_scope: StrictStr = Field(alias="envScope")
     allowed_env_ids: List[StrictInt] = Field(description="Legacy internal environment entity IDs. Use allowedEnvTypes.", alias="allowedEnvIds")
     allowed_env_types: List[StrictStr] = Field(alias="allowedEnvTypes")
+    ownership_scope: StrictStr = Field(description="org when the organization owns the resource, project when one project owns it.", alias="ownershipScope")
+    owner_project_id: Optional[StrictInt] = Field(default=None, alias="ownerProjectId")
+    available_to_all_projects: StrictBool = Field(description="True when every project in the organization can use the resource without a project share.", alias="availableToAllProjects")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "title", "status", "scope", "auth", "outdated", "providerRevId", "orgId", "primaryEnvId", "primaryEnvType", "envScope", "allowedEnvIds", "allowedEnvTypes", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "title", "status", "scope", "auth", "outdated", "providerRevId", "orgId", "primaryEnvId", "primaryEnvType", "envScope", "allowedEnvIds", "allowedEnvTypes", "ownershipScope", "ownerProjectId", "availableToAllProjects", "createdAt", "updatedAt"]
 
     @field_validator('primary_env_type')
     def primary_env_type_validate_enum(cls, value):
@@ -67,6 +70,13 @@ class Integration(BaseModel):
         for i in value:
             if i not in set(['prod', 'test', 'staging', 'dev', 'feature']):
                 raise ValueError("each list item must be one of ('prod', 'test', 'staging', 'dev', 'feature')")
+        return value
+
+    @field_validator('ownership_scope')
+    def ownership_scope_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(['org', 'project']):
+            raise ValueError("must be one of enum values ('org', 'project')")
         return value
 
     model_config = ConfigDict(
@@ -128,6 +138,11 @@ class Integration(BaseModel):
         if self.primary_env_type is None and "primary_env_type" in self.model_fields_set:
             _dict['primaryEnvType'] = None
 
+        # set to None if owner_project_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.owner_project_id is None and "owner_project_id" in self.model_fields_set:
+            _dict['ownerProjectId'] = None
+
         return _dict
 
     @classmethod
@@ -153,6 +168,9 @@ class Integration(BaseModel):
             "envScope": obj.get("envScope"),
             "allowedEnvIds": obj.get("allowedEnvIds"),
             "allowedEnvTypes": obj.get("allowedEnvTypes"),
+            "ownershipScope": obj.get("ownershipScope"),
+            "ownerProjectId": obj.get("ownerProjectId"),
+            "availableToAllProjects": obj.get("availableToAllProjects"),
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt")
         })

@@ -38,12 +38,21 @@ class Database(BaseModel):
     zone: Optional[StrictStr] = None
     integration_id: Optional[StrictInt] = Field(default=None, alias="integrationId")
     app_service_id: Optional[StrictInt] = Field(default=None, alias="appServiceId")
+    ownership_scope: StrictStr = Field(description="org when the organization owns the resource, project when one project owns it.", alias="ownershipScope")
+    owner_project_id: Optional[StrictInt] = Field(default=None, alias="ownerProjectId")
     env_id: StrictInt = Field(description="Legacy internal environment entity ID. Use envType.", alias="envId")
     env_type: StrictStr = Field(alias="envType")
     org_id: StrictInt = Field(alias="orgId")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "type", "kind", "status", "version", "region", "zone", "integrationId", "appServiceId", "envId", "envType", "orgId", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "type", "kind", "status", "version", "region", "zone", "integrationId", "appServiceId", "ownershipScope", "ownerProjectId", "envId", "envType", "orgId", "createdAt", "updatedAt"]
+
+    @field_validator('ownership_scope')
+    def ownership_scope_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(['org', 'project']):
+            raise ValueError("must be one of enum values ('org', 'project')")
+        return value
 
     @field_validator('env_type')
     def env_type_validate_enum(cls, value):
@@ -111,6 +120,11 @@ class Database(BaseModel):
         if self.app_service_id is None and "app_service_id" in self.model_fields_set:
             _dict['appServiceId'] = None
 
+        # set to None if owner_project_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.owner_project_id is None and "owner_project_id" in self.model_fields_set:
+            _dict['ownerProjectId'] = None
+
         return _dict
 
     @classmethod
@@ -134,6 +148,8 @@ class Database(BaseModel):
             "zone": obj.get("zone"),
             "integrationId": obj.get("integrationId"),
             "appServiceId": obj.get("appServiceId"),
+            "ownershipScope": obj.get("ownershipScope"),
+            "ownerProjectId": obj.get("ownerProjectId"),
             "envId": obj.get("envId"),
             "envType": obj.get("envType"),
             "orgId": obj.get("orgId"),

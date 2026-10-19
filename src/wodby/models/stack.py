@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.stack_settings import StackSettings
 from typing import Optional, Set
@@ -49,10 +49,20 @@ class Stack(BaseModel):
     origin_stack_rev_version: Optional[StrictStr] = Field(default=None, alias="originStackRevVersion")
     origin_stack_rev_created_at: Optional[datetime] = Field(default=None, alias="originStackRevCreatedAt")
     org_id: StrictInt = Field(alias="orgId")
+    ownership_scope: StrictStr = Field(description="org when the organization owns the resource, project when one project owns it.", alias="ownershipScope")
+    owner_project_id: Optional[StrictInt] = Field(default=None, alias="ownerProjectId")
+    available_to_all_projects: StrictBool = Field(description="True when every project in the organization can use the resource without a project share.", alias="availableToAllProjects")
     settings: Optional[StackSettings] = None
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "icon", "status", "outdated", "public", "revId", "draftRevId", "latestRevNumber", "gitRepoId", "gitRepoRemoteId", "gitRepoRef", "gitRepoRefType", "originStackRevId", "originStackRevStackId", "originStackRevName", "originStackRevNumber", "originStackRevVersion", "originStackRevCreatedAt", "orgId", "settings", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "icon", "status", "outdated", "public", "revId", "draftRevId", "latestRevNumber", "gitRepoId", "gitRepoRemoteId", "gitRepoRef", "gitRepoRefType", "originStackRevId", "originStackRevStackId", "originStackRevName", "originStackRevNumber", "originStackRevVersion", "originStackRevCreatedAt", "orgId", "ownershipScope", "ownerProjectId", "availableToAllProjects", "settings", "createdAt", "updatedAt"]
+
+    @field_validator('ownership_scope')
+    def ownership_scope_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(['org', 'project']):
+            raise ValueError("must be one of enum values ('org', 'project')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -151,6 +161,11 @@ class Stack(BaseModel):
         if self.origin_stack_rev_created_at is None and "origin_stack_rev_created_at" in self.model_fields_set:
             _dict['originStackRevCreatedAt'] = None
 
+        # set to None if owner_project_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.owner_project_id is None and "owner_project_id" in self.model_fields_set:
+            _dict['ownerProjectId'] = None
+
         return _dict
 
     @classmethod
@@ -184,6 +199,9 @@ class Stack(BaseModel):
             "originStackRevVersion": obj.get("originStackRevVersion"),
             "originStackRevCreatedAt": obj.get("originStackRevCreatedAt"),
             "orgId": obj.get("orgId"),
+            "ownershipScope": obj.get("ownershipScope"),
+            "ownerProjectId": obj.get("ownerProjectId"),
+            "availableToAllProjects": obj.get("availableToAllProjects"),
             "settings": StackSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None,
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt")

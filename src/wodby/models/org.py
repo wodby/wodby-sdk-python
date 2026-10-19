@@ -21,6 +21,7 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.org_capabilities import OrgCapabilities
+from wodby.models.org_settings import OrgSettings
 from wodby.models.org_subscription import OrgSubscription
 from typing import Optional, Set
 from typing_extensions import Self
@@ -36,11 +37,12 @@ class Org(BaseModel):
     default_time_zone: StrictStr = Field(alias="defaultTimeZone")
     ci_integration_id: StrictInt = Field(description="Effective default CI integration ID. Zero selects the built-in Wodby CI service.", alias="ciIntegrationId")
     registry_integration_id: StrictInt = Field(description="Effective default registry integration ID. Zero selects the built-in Wodby registry service.", alias="registryIntegrationId")
+    settings: Optional[OrgSettings] = None
     capabilities: Optional[OrgCapabilities] = None
     subscription: Optional[OrgSubscription] = Field(default=None, description="Billing summary. Omitted when the caller does not have billing-view access.")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "domain", "defaultTimeZone", "ciIntegrationId", "registryIntegrationId", "capabilities", "subscription", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "domain", "defaultTimeZone", "ciIntegrationId", "registryIntegrationId", "settings", "capabilities", "subscription", "createdAt", "updatedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -81,6 +83,9 @@ class Org(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of settings
+        if self.settings:
+            _dict['settings'] = self.settings.to_dict()
         # override the default output from pydantic by calling `to_dict()` of capabilities
         if self.capabilities:
             _dict['capabilities'] = self.capabilities.to_dict()
@@ -106,6 +111,7 @@ class Org(BaseModel):
             "defaultTimeZone": obj.get("defaultTimeZone"),
             "ciIntegrationId": obj.get("ciIntegrationId"),
             "registryIntegrationId": obj.get("registryIntegrationId"),
+            "settings": OrgSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None,
             "capabilities": OrgCapabilities.from_dict(obj["capabilities"]) if obj.get("capabilities") is not None else None,
             "subscription": OrgSubscription.from_dict(obj["subscription"]) if obj.get("subscription") is not None else None,
             "createdAt": obj.get("createdAt"),

@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.field_input import FieldInput
 from wodby.models.integration_environment_policy_input import IntegrationEnvironmentPolicyInput
@@ -34,10 +34,11 @@ class NewIntegrationInput(BaseModel):
     kinds: List[StrictStr]
     auth: Optional[StrictStr] = None
     project_id: Optional[StrictInt] = Field(default=None, alias="projectId")
+    available_to_all_projects: Optional[StrictBool] = Field(default=None, description="Lets every project in the organization use the new resource without a project share. Only an organization-owned resource, created without projectId, can be available to all projects.", alias="availableToAllProjects")
     fields_input: Optional[List[FieldInput]] = Field(default=None, alias="fieldsInput")
     scope: Optional[StrictStr] = None
     environment_policy: Optional[IntegrationEnvironmentPolicyInput] = Field(default=None, alias="environmentPolicy")
-    __properties: ClassVar[List[str]] = ["orgId", "providerId", "title", "kinds", "auth", "projectId", "fieldsInput", "scope", "environmentPolicy"]
+    __properties: ClassVar[List[str]] = ["orgId", "providerId", "title", "kinds", "auth", "projectId", "availableToAllProjects", "fieldsInput", "scope", "environmentPolicy"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -98,6 +99,11 @@ class NewIntegrationInput(BaseModel):
         if self.project_id is None and "project_id" in self.model_fields_set:
             _dict['projectId'] = None
 
+        # set to None if available_to_all_projects (nullable) is None
+        # and model_fields_set contains the field
+        if self.available_to_all_projects is None and "available_to_all_projects" in self.model_fields_set:
+            _dict['availableToAllProjects'] = None
+
         # set to None if scope (nullable) is None
         # and model_fields_set contains the field
         if self.scope is None and "scope" in self.model_fields_set:
@@ -121,6 +127,7 @@ class NewIntegrationInput(BaseModel):
             "kinds": obj.get("kinds"),
             "auth": obj.get("auth"),
             "projectId": obj.get("projectId"),
+            "availableToAllProjects": obj.get("availableToAllProjects"),
             "fieldsInput": [FieldInput.from_dict(_item) for _item in obj["fieldsInput"]] if obj.get("fieldsInput") is not None else None,
             "scope": obj.get("scope"),
             "environmentPolicy": IntegrationEnvironmentPolicyInput.from_dict(obj["environmentPolicy"]) if obj.get("environmentPolicy") is not None else None

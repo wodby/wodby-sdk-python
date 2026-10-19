@@ -20,6 +20,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.cluster_auto_infrastructure_upgrade_settings import ClusterAutoInfrastructureUpgradeSettings
+from wodby.models.cluster_capability_policy import ClusterCapabilityPolicy
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,7 +29,8 @@ class ClusterSettings(BaseModel):
     ClusterSettings
     """ # noqa: E501
     auto_infrastructure_upgrade: Optional[ClusterAutoInfrastructureUpgradeSettings] = Field(default=None, alias="autoInfrastructureUpgrade")
-    __properties: ClassVar[List[str]] = ["autoInfrastructureUpgrade"]
+    cluster_capabilities: Optional[ClusterCapabilityPolicy] = Field(default=None, alias="clusterCapabilities")
+    __properties: ClassVar[List[str]] = ["autoInfrastructureUpgrade", "clusterCapabilities"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -72,6 +74,9 @@ class ClusterSettings(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of auto_infrastructure_upgrade
         if self.auto_infrastructure_upgrade:
             _dict['autoInfrastructureUpgrade'] = self.auto_infrastructure_upgrade.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of cluster_capabilities
+        if self.cluster_capabilities:
+            _dict['clusterCapabilities'] = self.cluster_capabilities.to_dict()
         return _dict
 
     @classmethod
@@ -84,7 +89,8 @@ class ClusterSettings(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "autoInfrastructureUpgrade": ClusterAutoInfrastructureUpgradeSettings.from_dict(obj["autoInfrastructureUpgrade"]) if obj.get("autoInfrastructureUpgrade") is not None else None
+            "autoInfrastructureUpgrade": ClusterAutoInfrastructureUpgradeSettings.from_dict(obj["autoInfrastructureUpgrade"]) if obj.get("autoInfrastructureUpgrade") is not None else None,
+            "clusterCapabilities": ClusterCapabilityPolicy.from_dict(obj["clusterCapabilities"]) if obj.get("clusterCapabilities") is not None else None
         })
         return _obj
 

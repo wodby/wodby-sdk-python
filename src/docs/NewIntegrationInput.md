@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **kinds** | **List[str]** |  | 
 **auth** | **str** |  | [optional] 
 **project_id** | **int** |  | [optional] 
+**available_to_all_projects** | **bool** | Lets every project in the organization use the new resource without a project share. Only an organization-owned resource, created without projectId, can be available to all projects. | [optional] 
 **fields_input** | [**List[FieldInput]**](FieldInput.md) |  | [optional] 
 **scope** | **str** |  | [optional] 
 **environment_policy** | [**IntegrationEnvironmentPolicyInput**](IntegrationEnvironmentPolicyInput.md) |  | [optional] 

@@ -7,7 +7,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** |  | 
 **number** | **int** |  | 
-**status** | **str** |  | 
+**status** | **str** | Overall result, including the routing updates that follow the service rollout. | 
+**rollout_status** | **str** | Progress of rolling out the selected services. It does not show whether routing has finished. | 
+**rollout_ended_at** | **datetime** |  | [optional] 
 **rollback_status** | **str** |  | 
 **post_deployment_status** | **str** |  | 
 **skip_rollback** | **bool** |  | 
@@ -21,6 +23,8 @@ Name | Type | Description | Notes
 **post_deployment_task_id** | **int** |  | [optional] 
 **post_deployment_task** | [**Task**](Task.md) |  | [optional] 
 **app_service_deployments** | [**List[AppServiceDeployment]**](AppServiceDeployment.md) |  | 
+**post_deployment_scripts** | **List[str]** | Post-deployment scripts that the deployment&#39;s builds provide. | 
+**skip_post_deployment_scripts** | **bool** | True when the deployment does not run the post-deployment scripts its builds provide. | 
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 
 **started_at** | **datetime** |  | [optional] 

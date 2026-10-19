@@ -33,7 +33,10 @@ class WorkspaceConnection(BaseModel):
     username: StrictStr
     working_directory: StrictStr = Field(alias="workingDirectory")
     host_key_fingerprint: StrictStr = Field(alias="hostKeyFingerprint")
-    __properties: ClassVar[List[str]] = ["ready", "reason", "host", "port", "username", "workingDirectory", "hostKeyFingerprint"]
+    agents: List[StrictStr] = Field(description="Coding agent commands pre-installed in the SSH runner, such as claude, codex and opencode. Empty when the runner has none.")
+    git_credentials: StrictBool = Field(description="True when git push and fetch in the SSH runner authenticate to the app's repository with the app's Git integration.", alias="gitCredentials")
+    ai_credits: StrictBool = Field(description="True when opencode in the SSH runner uses the organization's AI credits by default.", alias="aiCredits")
+    __properties: ClassVar[List[str]] = ["ready", "reason", "host", "port", "username", "workingDirectory", "hostKeyFingerprint", "agents", "gitCredentials", "aiCredits"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -92,7 +95,10 @@ class WorkspaceConnection(BaseModel):
             "port": obj.get("port"),
             "username": obj.get("username"),
             "workingDirectory": obj.get("workingDirectory"),
-            "hostKeyFingerprint": obj.get("hostKeyFingerprint")
+            "hostKeyFingerprint": obj.get("hostKeyFingerprint"),
+            "agents": obj.get("agents"),
+            "gitCredentials": obj.get("gitCredentials"),
+            "aiCredits": obj.get("aiCredits")
         })
         return _obj
 

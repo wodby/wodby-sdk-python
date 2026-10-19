@@ -41,6 +41,7 @@ class NewBackupPresetInput(BaseModel):
     integration_id: StrictInt = Field(description="Use 0 for Wodby Blob Storage. Free subscriptions may create only an automatic preset that is disabled.", alias="integrationId")
     bucket: StrictStr = Field(description="Must be empty for Wodby Blob Storage.")
     storage_class: Optional[StrictStr] = Field(default=None, alias="storageClass")
+    blob_storage_region: Optional[StrictStr] = Field(default='eu', description="Wodby Blob Storage region. Omit to use Europe; must be omitted for third-party storage.", alias="blobStorageRegion")
     options: Optional[List[BackupOption]] = None
     disabled: StrictBool
     override: StrictBool
@@ -48,7 +49,7 @@ class NewBackupPresetInput(BaseModel):
     crontab: Optional[StrictStr] = None
     time_window: Optional[AutomationTimeWindowInput] = Field(default=None, alias="timeWindow")
     duration: Optional[Annotated[int, Field(le=180, strict=True, ge=30)]] = None
-    __properties: ClassVar[List[str]] = ["appInstanceId", "appServiceId", "databaseId", "databaseDbId", "orgId", "envId", "envTypes", "backupCategory", "backupName", "integrationId", "bucket", "storageClass", "options", "disabled", "override", "auto", "crontab", "timeWindow", "duration"]
+    __properties: ClassVar[List[str]] = ["appInstanceId", "appServiceId", "databaseId", "databaseDbId", "orgId", "envId", "envTypes", "backupCategory", "backupName", "integrationId", "bucket", "storageClass", "blobStorageRegion", "options", "disabled", "override", "auto", "crontab", "timeWindow", "duration"]
 
     @field_validator('env_types')
     def env_types_validate_enum(cls, value):
@@ -69,6 +70,16 @@ class NewBackupPresetInput(BaseModel):
 
         if value not in set(['any', 'files', 'database']):
             raise ValueError("must be one of enum values ('any', 'files', 'database')")
+        return value
+
+    @field_validator('blob_storage_region')
+    def blob_storage_region_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['eu', 'us']):
+            raise ValueError("must be one of enum values ('eu', 'us')")
         return value
 
     model_config = ConfigDict(
@@ -170,6 +181,11 @@ class NewBackupPresetInput(BaseModel):
         if self.storage_class is None and "storage_class" in self.model_fields_set:
             _dict['storageClass'] = None
 
+        # set to None if blob_storage_region (nullable) is None
+        # and model_fields_set contains the field
+        if self.blob_storage_region is None and "blob_storage_region" in self.model_fields_set:
+            _dict['blobStorageRegion'] = None
+
         # set to None if options (nullable) is None
         # and model_fields_set contains the field
         if self.options is None and "options" in self.model_fields_set:
@@ -214,6 +230,7 @@ class NewBackupPresetInput(BaseModel):
             "integrationId": obj.get("integrationId"),
             "bucket": obj.get("bucket"),
             "storageClass": obj.get("storageClass"),
+            "blobStorageRegion": obj.get("blobStorageRegion") if obj.get("blobStorageRegion") is not None else 'eu',
             "options": [BackupOption.from_dict(_item) for _item in obj["options"]] if obj.get("options") is not None else None,
             "disabled": obj.get("disabled"),
             "override": obj.get("override"),

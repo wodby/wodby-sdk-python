@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.copy_stack_settings_input import CopyStackSettingsInput
 from typing import Optional, Set
@@ -29,9 +29,10 @@ class DuplicateStackRequest(BaseModel):
     """ # noqa: E501
     org_id: Optional[StrictInt] = Field(default=None, description="Optional for API-key requests; defaults to the API key's organization.", alias="orgId")
     project_id: Optional[StrictInt] = Field(default=None, alias="projectId")
+    available_to_all_projects: Optional[StrictBool] = Field(default=None, description="Lets every project in the organization use the new resource without a project share. Only an organization-owned resource, created without projectId, can be available to all projects.", alias="availableToAllProjects")
     source_rev_id: Optional[StrictInt] = Field(default=None, description="Optional immutable source stack revision to duplicate. It must belong to the stack in the request path.", alias="sourceRevId")
     settings: Optional[CopyStackSettingsInput] = None
-    __properties: ClassVar[List[str]] = ["orgId", "projectId", "sourceRevId", "settings"]
+    __properties: ClassVar[List[str]] = ["orgId", "projectId", "availableToAllProjects", "sourceRevId", "settings"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -80,6 +81,11 @@ class DuplicateStackRequest(BaseModel):
         if self.project_id is None and "project_id" in self.model_fields_set:
             _dict['projectId'] = None
 
+        # set to None if available_to_all_projects (nullable) is None
+        # and model_fields_set contains the field
+        if self.available_to_all_projects is None and "available_to_all_projects" in self.model_fields_set:
+            _dict['availableToAllProjects'] = None
+
         # set to None if source_rev_id (nullable) is None
         # and model_fields_set contains the field
         if self.source_rev_id is None and "source_rev_id" in self.model_fields_set:
@@ -99,6 +105,7 @@ class DuplicateStackRequest(BaseModel):
         _obj = cls.model_validate({
             "orgId": obj.get("orgId"),
             "projectId": obj.get("projectId"),
+            "availableToAllProjects": obj.get("availableToAllProjects"),
             "sourceRevId": obj.get("sourceRevId"),
             "settings": CopyStackSettingsInput.from_dict(obj["settings"]) if obj.get("settings") is not None else None
         })

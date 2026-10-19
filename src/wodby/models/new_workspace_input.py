@@ -28,8 +28,8 @@ class NewWorkspaceInput(BaseModel):
     NewWorkspaceInput
     """ # noqa: E501
     branch: StrictStr
-    storage_class_name: Optional[StrictStr] = Field(default=None, alias="storageClassName")
-    storage_service_name: Optional[StrictStr] = Field(default=None, alias="storageServiceName")
+    storage_class_name: Optional[StrictStr] = Field(default=None, description="Storage class for the workspace code and home volumes. Every Pod that mounts the code then runs on one node. Omit both storage fields to use the cluster's default storage class. Not allowed with storageServiceName.", alias="storageClassName")
+    storage_service_name: Optional[StrictStr] = Field(default=None, description="Enabled storage service in the selected stack that shares the workspace files across nodes. Not allowed with storageClassName.", alias="storageServiceName")
     code_size: Optional[Annotated[int, Field(strict=True, ge=1)]] = Field(default=10, alias="codeSize")
     home_size: Optional[Annotated[int, Field(strict=True, ge=1)]] = Field(default=5, alias="homeSize")
     __properties: ClassVar[List[str]] = ["branch", "storageClassName", "storageServiceName", "codeSize", "homeSize"]

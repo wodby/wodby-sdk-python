@@ -19,6 +19,10 @@
 
 * `BACKEND_REQUEST_TIMEOUT` (value: `'BACKEND_REQUEST_TIMEOUT'`)
 
+* `RATE_LIMIT_PER_IP` (value: `'RATE_LIMIT_PER_IP'`)
+
+* `RATE_LIMIT_TOTAL` (value: `'RATE_LIMIT_TOTAL'`)
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

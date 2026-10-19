@@ -29,7 +29,7 @@ class Cert(BaseModel):
     """ # noqa: E501
     id: StrictInt
     custom: StrictBool
-    issuer: StrictStr = Field(description="Human-readable certificate authority name parsed from uploaded certificates, or the managed issuer identifier.")
+    issuer: StrictStr = Field(description="Issuer label: a certificate authority name for uploaded or temporary AWS certificates, otherwise the managed issuer identifier.")
     domain: StrictStr
     dns_names: List[StrictStr] = Field(alias="dnsNames")
     route_ids: List[StrictInt] = Field(alias="routeIds")
