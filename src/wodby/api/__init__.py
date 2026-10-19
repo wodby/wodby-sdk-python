@@ -20,7 +20,9 @@ from wodby.api.imports_api import ImportsApi
 from wodby.api.integration_kinds_api import IntegrationKindsApi
 from wodby.api.integrations_api import IntegrationsApi
 from wodby.api.org_memberships_api import OrgMembershipsApi
+from wodby.api.org_sso_api import OrgSsoApi
 from wodby.api.orgs_api import OrgsApi
+from wodby.api.project_memberships_api import ProjectMembershipsApi
 from wodby.api.projects_api import ProjectsApi
 from wodby.api.providers_api import ProvidersApi
 from wodby.api.services_api import ServicesApi
@@ -28,5 +30,6 @@ from wodby.api.stack_services_api import StackServicesApi
 from wodby.api.stacks_api import StacksApi
 from wodby.api.task_steps_api import TaskStepsApi
 from wodby.api.tasks_api import TasksApi
+from wodby.api.teams_api import TeamsApi
 from wodby.api.user_api import UserApi
 

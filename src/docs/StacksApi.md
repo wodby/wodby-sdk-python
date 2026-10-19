@@ -4,10 +4,18 @@ All URIs are relative to */v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**create_stack**](StacksApi.md#create_stack) | **POST** /stacks | Create stack
+[**create_stack_annotation**](StacksApi.md#create_stack_annotation) | **POST** /stacks/{id}/configuration/annotations | Create stack annotation
 [**create_stack_env_var**](StacksApi.md#create_stack_env_var) | **POST** /stacks/{id}/configuration/env-vars | Create stack env var
 [**create_stack_from_manifest**](StacksApi.md#create_stack_from_manifest) | **POST** /stacks/actions/create-from-manifest | Create stack from manifest
+[**create_stack_helm_value**](StacksApi.md#create_stack_helm_value) | **POST** /stacks/{id}/configuration/helm-values | Create stack Helm value
+[**create_stack_token**](StacksApi.md#create_stack_token) | **POST** /stacks/{id}/configuration/tokens | Create stack token
 [**delete_stack**](StacksApi.md#delete_stack) | **DELETE** /stacks/{id} | Delete stack
+[**delete_stack_annotation**](StacksApi.md#delete_stack_annotation) | **DELETE** /stack-annotations/{id} | Delete stack annotation
 [**delete_stack_env_var**](StacksApi.md#delete_stack_env_var) | **DELETE** /stack-env-vars/{id} | Delete stack env var
+[**delete_stack_helm_value**](StacksApi.md#delete_stack_helm_value) | **DELETE** /stack-helm-values/{id} | Delete stack Helm value
+[**delete_stack_token**](StacksApi.md#delete_stack_token) | **DELETE** /stack-tokens/{id} | Delete stack token
+[**discard_stack_draft**](StacksApi.md#discard_stack_draft) | **POST** /stacks/{id}/actions/discard-draft | Discard stack draft
 [**duplicate_stack**](StacksApi.md#duplicate_stack) | **POST** /stacks/{id}/actions/duplicate | Duplicate stack
 [**get_stack**](StacksApi.md#get_stack) | **GET** /stacks/{id} | Get stack
 [**get_stack_by_name**](StacksApi.md#get_stack_by_name) | **GET** /stacks/by-name/{name} | Get stack by name
@@ -17,9 +25,13 @@ Method | HTTP request | Description
 [**get_stack_sharing**](StacksApi.md#get_stack_sharing) | **GET** /stacks/sharing/{id} | Get stack sharing
 [**ignore_stack_service_revision**](StacksApi.md#ignore_stack_service_revision) | **POST** /stacks/{id}/actions/ignore-service-revision | Ignore stack service revision
 [**import_stacks**](StacksApi.md#import_stacks) | **POST** /stacks/actions/import | Import stacks from Git
+[**list_infra_stacks**](StacksApi.md#list_infra_stacks) | **GET** /catalog/infra-stacks | List infrastructure stacks
 [**list_public_stacks**](StacksApi.md#list_public_stacks) | **GET** /catalog/stacks | List public catalog stacks
+[**list_stack_annotations**](StacksApi.md#list_stack_annotations) | **GET** /stack-revisions/{id}/annotations | List stack annotations
 [**list_stack_env_vars**](StacksApi.md#list_stack_env_vars) | **GET** /stack-revisions/{id}/env-vars | List stack env vars
+[**list_stack_helm_values**](StacksApi.md#list_stack_helm_values) | **GET** /stack-revisions/{id}/helm-values | List stack Helm values
 [**list_stack_revision_services**](StacksApi.md#list_stack_revision_services) | **GET** /stack-revisions/{id}/services | List stack services
+[**list_stack_tokens**](StacksApi.md#list_stack_tokens) | **GET** /stack-revisions/{id}/tokens | List stack tokens
 [**list_stacks**](StacksApi.md#list_stacks) | **GET** /stacks | List stacks
 [**publish_stack_draft**](StacksApi.md#publish_stack_draft) | **POST** /stacks/{id}/actions/publish-draft | Publish stack draft
 [**scaffold_stack_from_helm_chart**](StacksApi.md#scaffold_stack_from_helm_chart) | **POST** /stacks/actions/scaffold-from-helm-chart | Scaffold stack from Helm chart
@@ -27,11 +39,179 @@ Method | HTTP request | Description
 [**update_stack**](StacksApi.md#update_stack) | **PUT** /stacks/{id} | Rename stack
 [**update_stack_env_var**](StacksApi.md#update_stack_env_var) | **PUT** /stack-env-vars/{id} | Update stack env var
 [**update_stack_from_git**](StacksApi.md#update_stack_from_git) | **POST** /stacks/{id}/actions/update-from-git | Update stack from git
+[**update_stack_helm_value**](StacksApi.md#update_stack_helm_value) | **PUT** /stack-helm-values/{id} | Update stack Helm value
 [**update_stack_service_revisions**](StacksApi.md#update_stack_service_revisions) | **POST** /stacks/{id}/actions/update-service-revisions | Update stack service revisions
 [**update_stack_settings**](StacksApi.md#update_stack_settings) | **PUT** /stacks/settings/{id} | Update stack settings
 [**update_stack_sharing**](StacksApi.md#update_stack_sharing) | **PUT** /stacks/sharing/{id} | Update stack sharing
+[**update_stack_token**](StacksApi.md#update_stack_token) | **PUT** /stack-tokens/{id} | Update stack token
 [**validate_stack_manifest**](StacksApi.md#validate_stack_manifest) | **POST** /stacks/actions/validate-manifest | Validate stack manifest
 
+
+# **create_stack**
+> Stack create_stack(new_stack_input)
+
+Create stack
+
+Creates a stack from catalog services without a manifest. Use POST /stacks/actions/create-from-manifest for a stack.yml.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.new_stack_input import NewStackInput
+from wodby.models.stack import Stack
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.StacksApi(api_client)
+    new_stack_input = wodby.NewStackInput() # NewStackInput | 
+
+    try:
+        # Create stack
+        api_response = api_instance.create_stack(new_stack_input)
+        print("The response of StacksApi->create_stack:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling StacksApi->create_stack: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **new_stack_input** | [**NewStackInput**](NewStackInput.md)|  | 
+
+### Return type
+
+[**Stack**](Stack.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Created stack |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **create_stack_annotation**
+> StackAnnotation create_stack_annotation(id, new_stack_annotation_input)
+
+Create stack annotation
+
+Adds a stack-level annotation to the stack and creates a new draft revision when needed.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.new_stack_annotation_input import NewStackAnnotationInput
+from wodby.models.stack_annotation import StackAnnotation
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.StacksApi(api_client)
+    id = 56 # int | 
+    new_stack_annotation_input = wodby.NewStackAnnotationInput() # NewStackAnnotationInput | 
+
+    try:
+        # Create stack annotation
+        api_response = api_instance.create_stack_annotation(id, new_stack_annotation_input)
+        print("The response of StacksApi->create_stack_annotation:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling StacksApi->create_stack_annotation: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **new_stack_annotation_input** | [**NewStackAnnotationInput**](NewStackAnnotationInput.md)|  | 
+
+### Return type
+
+[**StackAnnotation**](StackAnnotation.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Created stack annotation |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_stack_env_var**
 > StackEnvVar create_stack_env_var(id, new_stack_env_var_input)
@@ -199,6 +379,174 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **create_stack_helm_value**
+> StackHelmValue create_stack_helm_value(id, new_stack_helm_value_input)
+
+Create stack Helm value
+
+Adds a stack-level Helm value to the stack and creates a new draft revision when needed.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.new_stack_helm_value_input import NewStackHelmValueInput
+from wodby.models.stack_helm_value import StackHelmValue
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.StacksApi(api_client)
+    id = 56 # int | 
+    new_stack_helm_value_input = wodby.NewStackHelmValueInput() # NewStackHelmValueInput | 
+
+    try:
+        # Create stack Helm value
+        api_response = api_instance.create_stack_helm_value(id, new_stack_helm_value_input)
+        print("The response of StacksApi->create_stack_helm_value:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling StacksApi->create_stack_helm_value: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **new_stack_helm_value_input** | [**NewStackHelmValueInput**](NewStackHelmValueInput.md)|  | 
+
+### Return type
+
+[**StackHelmValue**](StackHelmValue.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Created stack Helm value |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **create_stack_token**
+> StackToken create_stack_token(id, new_stack_token_input)
+
+Create stack token
+
+Adds a stack-level token to the stack and creates a new draft revision when needed.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.new_stack_token_input import NewStackTokenInput
+from wodby.models.stack_token import StackToken
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.StacksApi(api_client)
+    id = 56 # int | 
+    new_stack_token_input = wodby.NewStackTokenInput() # NewStackTokenInput | 
+
+    try:
+        # Create stack token
+        api_response = api_instance.create_stack_token(id, new_stack_token_input)
+        print("The response of StacksApi->create_stack_token:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling StacksApi->create_stack_token: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **new_stack_token_input** | [**NewStackTokenInput**](NewStackTokenInput.md)|  | 
+
+### Return type
+
+[**StackToken**](StackToken.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Created stack token |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **delete_stack**
 > OperationResult delete_stack(id)
 
@@ -280,6 +628,87 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **delete_stack_annotation**
+> OperationResult delete_stack_annotation(id)
+
+Delete stack annotation
+
+Deletes a stack-level annotation.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.operation_result import OperationResult
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.StacksApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # Delete stack annotation
+        api_response = api_instance.delete_stack_annotation(id)
+        print("The response of StacksApi->delete_stack_annotation:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling StacksApi->delete_stack_annotation: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**OperationResult**](OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Deletion result |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **delete_stack_env_var**
 > OperationResult delete_stack_env_var(id)
 
@@ -356,6 +785,249 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Delete result |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_stack_helm_value**
+> OperationResult delete_stack_helm_value(id)
+
+Delete stack Helm value
+
+Deletes a stack-level Helm value.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.operation_result import OperationResult
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.StacksApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # Delete stack Helm value
+        api_response = api_instance.delete_stack_helm_value(id)
+        print("The response of StacksApi->delete_stack_helm_value:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling StacksApi->delete_stack_helm_value: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**OperationResult**](OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Deletion result |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_stack_token**
+> OperationResult delete_stack_token(id)
+
+Delete stack token
+
+Deletes a stack-level token.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.operation_result import OperationResult
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.StacksApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # Delete stack token
+        api_response = api_instance.delete_stack_token(id)
+        print("The response of StacksApi->delete_stack_token:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling StacksApi->delete_stack_token: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**OperationResult**](OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Deletion result |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **discard_stack_draft**
+> Stack discard_stack_draft(id)
+
+Discard stack draft
+
+Drops the stack's unpublished draft revision and returns the stack.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.stack import Stack
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.StacksApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # Discard stack draft
+        api_response = api_instance.discard_stack_draft(id)
+        print("The response of StacksApi->discard_stack_draft:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling StacksApi->discard_stack_draft: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**Stack**](Stack.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Stack without its draft |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 
@@ -1101,6 +1773,87 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **list_infra_stacks**
+> List[Stack] list_infra_stacks(provider)
+
+List infrastructure stacks
+
+Returns the infrastructure stacks Wodby installs on clusters of a public Kubernetes provider.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.stack import Stack
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.StacksApi(api_client)
+    provider = 'provider_example' # str | Provider name, such as aws or digitalocean.
+
+    try:
+        # List infrastructure stacks
+        api_response = api_instance.list_infra_stacks(provider)
+        print("The response of StacksApi->list_infra_stacks:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling StacksApi->list_infra_stacks: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **provider** | **str**| Provider name, such as aws or digitalocean. | 
+
+### Return type
+
+[**List[Stack]**](Stack.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Infrastructure stacks |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **list_public_stacks**
 > List[Stack] list_public_stacks()
 
@@ -1173,6 +1926,87 @@ This endpoint does not need any parameter.
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Public catalog stacks |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **list_stack_annotations**
+> List[StackAnnotation] list_stack_annotations(id)
+
+List stack annotations
+
+Returns the stack-level annotations of a stack revision. They apply to every service of the stack.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.stack_annotation import StackAnnotation
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.StacksApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # List stack annotations
+        api_response = api_instance.list_stack_annotations(id)
+        print("The response of StacksApi->list_stack_annotations:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling StacksApi->list_stack_annotations: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**List[StackAnnotation]**](StackAnnotation.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Stack annotations |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 
@@ -1259,6 +2093,87 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **list_stack_helm_values**
+> List[StackHelmValue] list_stack_helm_values(id)
+
+List stack Helm values
+
+Returns the stack-level Helm values of a stack revision. They apply to every service of the stack.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.stack_helm_value import StackHelmValue
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.StacksApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # List stack Helm values
+        api_response = api_instance.list_stack_helm_values(id)
+        print("The response of StacksApi->list_stack_helm_values:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling StacksApi->list_stack_helm_values: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**List[StackHelmValue]**](StackHelmValue.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Stack Helm values |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **list_stack_revision_services**
 > List[StackService] list_stack_revision_services(id)
 
@@ -1335,6 +2250,87 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Stack services |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **list_stack_tokens**
+> List[StackToken] list_stack_tokens(id)
+
+List stack tokens
+
+Returns the stack-level tokens of a stack revision. They apply to every service of the stack.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.stack_token import StackToken
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.StacksApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # List stack tokens
+        api_response = api_instance.list_stack_tokens(id)
+        print("The response of StacksApi->list_stack_tokens:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling StacksApi->list_stack_tokens: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**List[StackToken]**](StackToken.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Stack tokens |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 
@@ -1928,6 +2924,90 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **update_stack_helm_value**
+> StackHelmValue update_stack_helm_value(id, update_stack_helm_value_input)
+
+Update stack Helm value
+
+Changes a stack-level Helm value.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.stack_helm_value import StackHelmValue
+from wodby.models.update_stack_helm_value_input import UpdateStackHelmValueInput
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.StacksApi(api_client)
+    id = 56 # int | 
+    update_stack_helm_value_input = wodby.UpdateStackHelmValueInput() # UpdateStackHelmValueInput | 
+
+    try:
+        # Update stack Helm value
+        api_response = api_instance.update_stack_helm_value(id, update_stack_helm_value_input)
+        print("The response of StacksApi->update_stack_helm_value:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling StacksApi->update_stack_helm_value: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **update_stack_helm_value_input** | [**UpdateStackHelmValueInput**](UpdateStackHelmValueInput.md)|  | 
+
+### Return type
+
+[**StackHelmValue**](StackHelmValue.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Updated stack Helm value |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **update_stack_service_revisions**
 > OperationResult update_stack_service_revisions(id, scope=scope)
 
@@ -2174,6 +3254,90 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Updated stack sharing |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_stack_token**
+> StackToken update_stack_token(id, update_stack_token_input)
+
+Update stack token
+
+Changes a stack-level token.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.stack_token import StackToken
+from wodby.models.update_stack_token_input import UpdateStackTokenInput
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.StacksApi(api_client)
+    id = 56 # int | 
+    update_stack_token_input = wodby.UpdateStackTokenInput() # UpdateStackTokenInput | 
+
+    try:
+        # Update stack token
+        api_response = api_instance.update_stack_token(id, update_stack_token_input)
+        print("The response of StacksApi->update_stack_token:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling StacksApi->update_stack_token: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **update_stack_token_input** | [**UpdateStackTokenInput**](UpdateStackTokenInput.md)|  | 
+
+### Return type
+
+[**StackToken**](StackToken.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Updated stack token |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 

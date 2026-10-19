@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_app_auth**](AppAuthsApi.md#create_app_auth) | **POST** /app-auths | Create app auth
 [**delete_app_auth**](AppAuthsApi.md#delete_app_auth) | **DELETE** /app-auths/{id} | Delete app auth
+[**get_app_auth**](AppAuthsApi.md#get_app_auth) | **GET** /app-auths/{id} | Get HTTP basic authentication
 [**list_app_auths**](AppAuthsApi.md#list_app_auths) | **GET** /app-auths | List app auths
 [**update_app_auth**](AppAuthsApi.md#update_app_auth) | **PUT** /app-auths/{id} | Update app auth
 
@@ -168,6 +169,87 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Delete result |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_app_auth**
+> AppAuth get_app_auth(id)
+
+Get HTTP basic authentication
+
+Returns one HTTP basic authentication credential without its password.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.app_auth import AppAuth
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppAuthsApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # Get HTTP basic authentication
+        api_response = api_instance.get_app_auth(id)
+        print("The response of AppAuthsApi->get_app_auth:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppAuthsApi->get_app_auth: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**AppAuth**](AppAuth.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | HTTP basic authentication |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 

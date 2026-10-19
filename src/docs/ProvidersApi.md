@@ -6,12 +6,14 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_provider_from_manifest**](ProvidersApi.md#create_provider_from_manifest) | **POST** /providers/actions/create-from-manifest | Create provider from manifest
 [**create_variable_provider**](ProvidersApi.md#create_variable_provider) | **POST** /providers/actions/create-variable | Create variable provider
+[**delete_provider**](ProvidersApi.md#delete_provider) | **DELETE** /providers/{id} | Delete provider
 [**get_provider**](ProvidersApi.md#get_provider) | **GET** /providers/{id} | Get provider
 [**get_provider_by_name**](ProvidersApi.md#get_provider_by_name) | **GET** /providers/by-name/{name} | Get provider by name
 [**get_provider_revision**](ProvidersApi.md#get_provider_revision) | **GET** /provider-revisions/{id} | Get provider revision
 [**get_provider_sharing**](ProvidersApi.md#get_provider_sharing) | **GET** /providers/sharing/{id} | Get provider sharing
 [**import_providers**](ProvidersApi.md#import_providers) | **POST** /providers/actions/import | Import providers from Git
 [**list_providers**](ProvidersApi.md#list_providers) | **GET** /providers | List providers
+[**update_provider**](ProvidersApi.md#update_provider) | **PUT** /providers/{id} | Update provider
 [**update_provider_from_git**](ProvidersApi.md#update_provider_from_git) | **POST** /providers/{id}/actions/update-from-git | Update provider from Git
 [**update_provider_from_manifest**](ProvidersApi.md#update_provider_from_manifest) | **POST** /providers/{id}/actions/update-from-manifest | Update provider from manifest
 [**update_provider_settings**](ProvidersApi.md#update_provider_settings) | **PUT** /providers/settings/{id} | Update provider settings
@@ -177,6 +179,87 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **201** | Variable provider created |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_provider**
+> OperationResult delete_provider(id)
+
+Delete provider
+
+Deletes a custom provider that no integration uses.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.operation_result import OperationResult
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.ProvidersApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # Delete provider
+        api_response = api_instance.delete_provider(id)
+        print("The response of ProvidersApi->delete_provider:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProvidersApi->delete_provider: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**OperationResult**](OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Deletion result |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 
@@ -674,6 +757,90 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Providers response |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_provider**
+> Provider update_provider(id, update_provider_input)
+
+Update provider
+
+Changes the provider title and returns the provider.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.provider import Provider
+from wodby.models.update_provider_input import UpdateProviderInput
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.ProvidersApi(api_client)
+    id = 56 # int | 
+    update_provider_input = wodby.UpdateProviderInput() # UpdateProviderInput | 
+
+    try:
+        # Update provider
+        api_response = api_instance.update_provider(id, update_provider_input)
+        print("The response of ProvidersApi->update_provider:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProvidersApi->update_provider: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **update_provider_input** | [**UpdateProviderInput**](UpdateProviderInput.md)|  | 
+
+### Return type
+
+[**Provider**](Provider.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Updated provider |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 

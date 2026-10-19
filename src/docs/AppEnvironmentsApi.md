@@ -6,9 +6,13 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**cleanup_app_environment_migration**](AppEnvironmentsApi.md#cleanup_app_environment_migration) | **POST** /app-environment-migrations/{id}/actions/cleanup | Clean up app environment migration
 [**create_app_access**](AppEnvironmentsApi.md#create_app_access) | **POST** /app-environment-accesses/{id} | Create app environment access
+[**create_app_annotation**](AppEnvironmentsApi.md#create_app_annotation) | **POST** /app-annotations | Create app annotation
 [**create_app_environment**](AppEnvironmentsApi.md#create_app_environment) | **POST** /app-environments | Create app environment
 [**delete_app_access**](AppEnvironmentsApi.md#delete_app_access) | **DELETE** /app-accesses/{id} | Delete app access
+[**delete_app_annotation**](AppEnvironmentsApi.md#delete_app_annotation) | **DELETE** /app-annotations/{id} | Delete app annotation
 [**delete_app_environment**](AppEnvironmentsApi.md#delete_app_environment) | **DELETE** /app-environments/{id} | Delete app environment
+[**get_app_access**](AppEnvironmentsApi.md#get_app_access) | **GET** /app-accesses/{id} | Get app access
+[**get_app_annotation**](AppEnvironmentsApi.md#get_app_annotation) | **GET** /app-annotations/{id} | Get app annotation
 [**get_app_environment**](AppEnvironmentsApi.md#get_app_environment) | **GET** /app-environments/{id} | Get app environment
 [**get_app_environment_access**](AppEnvironmentsApi.md#get_app_environment_access) | **GET** /app-environment-accesses/{id} | Get app environment access
 [**get_app_environment_by_name**](AppEnvironmentsApi.md#get_app_environment_by_name) | **GET** /app-environments/by-name/{appName}/{environmentName} | Get app environment by name
@@ -19,6 +23,7 @@ Method | HTTP request | Description
 [**get_workspace_git_diff**](AppEnvironmentsApi.md#get_workspace_git_diff) | **GET** /workspaces/{id}/git-diff | Get workspace file diff
 [**get_workspace_git_status**](AppEnvironmentsApi.md#get_workspace_git_status) | **GET** /workspaces/{id}/git-status | Get workspace Git status
 [**list_app_access_cleanups**](AppEnvironmentsApi.md#list_app_access_cleanups) | **GET** /app-access-cleanups | List app-access cleanups
+[**list_app_annotations**](AppEnvironmentsApi.md#list_app_annotations) | **GET** /app-annotations | List app annotations
 [**list_app_environment_migrations**](AppEnvironmentsApi.md#list_app_environment_migrations) | **GET** /app-environment-migrations | List app environment migrations
 [**list_app_environments**](AppEnvironmentsApi.md#list_app_environments) | **GET** /app-environments | List app environments
 [**migrate_app_environment**](AppEnvironmentsApi.md#migrate_app_environment) | **POST** /app-environments/{id}/actions/migrate | Migrate app environment to another cluster
@@ -32,6 +37,7 @@ Method | HTTP request | Description
 [**retry_app_access_cleanup**](AppEnvironmentsApi.md#retry_app_access_cleanup) | **POST** /app-access-cleanups/{id}/actions/retry | Retry app-access cleanup
 [**rollback_app_environment_migration**](AppEnvironmentsApi.md#rollback_app_environment_migration) | **POST** /app-environment-migrations/{id}/actions/rollback | Roll back app environment migration
 [**update_app_access**](AppEnvironmentsApi.md#update_app_access) | **PUT** /app-accesses/{id} | Update app access
+[**update_app_annotation**](AppEnvironmentsApi.md#update_app_annotation) | **PUT** /app-annotations/{id} | Update app annotation
 [**update_app_environment**](AppEnvironmentsApi.md#update_app_environment) | **PUT** /app-environments/{id} | Update app environment
 [**update_app_environment_cicd_settings**](AppEnvironmentsApi.md#update_app_environment_cicd_settings) | **PUT** /app-environments/cicd-settings/{id} | Update app environment CI/CD settings
 [**update_app_environment_maintenance_mode**](AppEnvironmentsApi.md#update_app_environment_maintenance_mode) | **PUT** /app-environments/{id}/actions/maintenance-mode | Update app environment maintenance mode
@@ -205,6 +211,88 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **create_app_annotation**
+> AppAnnotation create_app_annotation(new_app_annotation_input)
+
+Create app annotation
+
+Adds an ingress annotation to the app environment, or to one of its services or routes.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.app_annotation import AppAnnotation
+from wodby.models.new_app_annotation_input import NewAppAnnotationInput
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppEnvironmentsApi(api_client)
+    new_app_annotation_input = wodby.NewAppAnnotationInput() # NewAppAnnotationInput | 
+
+    try:
+        # Create app annotation
+        api_response = api_instance.create_app_annotation(new_app_annotation_input)
+        print("The response of AppEnvironmentsApi->create_app_annotation:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppEnvironmentsApi->create_app_annotation: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **new_app_annotation_input** | [**NewAppAnnotationInput**](NewAppAnnotationInput.md)|  | 
+
+### Return type
+
+[**AppAnnotation**](AppAnnotation.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Created app annotation |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **create_app_environment**
 > AppEnvironment create_app_environment(new_app_environment_input)
 
@@ -368,6 +456,87 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **delete_app_annotation**
+> OperationResult delete_app_annotation(id)
+
+Delete app annotation
+
+Deletes an app annotation.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.operation_result import OperationResult
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppEnvironmentsApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # Delete app annotation
+        api_response = api_instance.delete_app_annotation(id)
+        print("The response of AppEnvironmentsApi->delete_app_annotation:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppEnvironmentsApi->delete_app_annotation: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**OperationResult**](OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Deletion result |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **delete_app_environment**
 > OperationResult delete_app_environment(id, force=force)
 
@@ -446,6 +615,168 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Delete result |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_app_access**
+> AppAccess get_app_access(id)
+
+Get app access
+
+Returns one app access configuration.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.app_access import AppAccess
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppEnvironmentsApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # Get app access
+        api_response = api_instance.get_app_access(id)
+        print("The response of AppEnvironmentsApi->get_app_access:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppEnvironmentsApi->get_app_access: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**AppAccess**](AppAccess.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | App access |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_app_annotation**
+> AppAnnotation get_app_annotation(id)
+
+Get app annotation
+
+Returns one app annotation.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.app_annotation import AppAnnotation
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppEnvironmentsApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # Get app annotation
+        api_response = api_instance.get_app_annotation(id)
+        print("The response of AppEnvironmentsApi->get_app_annotation:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppEnvironmentsApi->get_app_annotation: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**AppAnnotation**](AppAnnotation.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | App annotation |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 
@@ -1266,6 +1597,89 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Cleanup records |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **list_app_annotations**
+> List[AppAnnotation] list_app_annotations(app_environment_id, types=types)
+
+List app annotations
+
+Returns the ingress annotations of an app environment, its services and routes.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.app_annotation import AppAnnotation
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppEnvironmentsApi(api_client)
+    app_environment_id = 56 # int | 
+    types = 'types_example' # str | Comma-separated annotation types, such as ingress. (optional)
+
+    try:
+        # List app annotations
+        api_response = api_instance.list_app_annotations(app_environment_id, types=types)
+        print("The response of AppEnvironmentsApi->list_app_annotations:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppEnvironmentsApi->list_app_annotations: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **app_environment_id** | **int**|  | 
+ **types** | **str**| Comma-separated annotation types, such as ingress. | [optional] 
+
+### Return type
+
+[**List[AppAnnotation]**](AppAnnotation.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | App annotations |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 
@@ -2340,6 +2754,90 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Updated app access and reconciliation task |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_app_annotation**
+> AppAnnotation update_app_annotation(id, update_app_annotation_input)
+
+Update app annotation
+
+Changes an app annotation and returns it.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.app_annotation import AppAnnotation
+from wodby.models.update_app_annotation_input import UpdateAppAnnotationInput
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppEnvironmentsApi(api_client)
+    id = 56 # int | 
+    update_app_annotation_input = wodby.UpdateAppAnnotationInput() # UpdateAppAnnotationInput | 
+
+    try:
+        # Update app annotation
+        api_response = api_instance.update_app_annotation(id, update_app_annotation_input)
+        print("The response of AppEnvironmentsApi->update_app_annotation:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppEnvironmentsApi->update_app_annotation: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **update_app_annotation_input** | [**UpdateAppAnnotationInput**](UpdateAppAnnotationInput.md)|  | 
+
+### Return type
+
+[**AppAnnotation**](AppAnnotation.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Updated app annotation |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 

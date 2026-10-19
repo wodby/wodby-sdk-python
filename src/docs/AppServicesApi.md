@@ -20,6 +20,7 @@ Method | HTTP request | Description
 [**delete_app_service_token**](AppServicesApi.md#delete_app_service_token) | **DELETE** /app-service-tokens/{id} | Delete app service token
 [**get_app_service**](AppServicesApi.md#get_app_service) | **GET** /app-services/{id} | Get app service
 [**get_app_service_cron_job**](AppServicesApi.md#get_app_service_cron_job) | **GET** /app-service-cron-jobs/{id} | Get app service cron job
+[**get_app_service_cron_schedule**](AppServicesApi.md#get_app_service_cron_schedule) | **GET** /app-service-cron-schedules/{id} | Get app service cron schedule
 [**keep_log_stream_alive**](AppServicesApi.md#keep_log_stream_alive) | **POST** /log-streams/{id}/keep-alive | Keep log stream alive
 [**list_app_service_annotations**](AppServicesApi.md#list_app_service_annotations) | **GET** /app-services/{id}/annotations | List app service annotations
 [**list_app_service_backup_option_defaults**](AppServicesApi.md#list_app_service_backup_option_defaults) | **GET** /app-services/{id}/options/backup-option-defaults | List effective backup option defaults
@@ -31,6 +32,7 @@ Method | HTTP request | Description
 [**list_app_service_helm_values**](AppServicesApi.md#list_app_service_helm_values) | **GET** /app-services/{id}/helm-values | List app service Helm values
 [**list_app_service_integrations**](AppServicesApi.md#list_app_service_integrations) | **GET** /app-services/{id}/integrations | List app service integrations
 [**list_app_service_links**](AppServicesApi.md#list_app_service_links) | **GET** /app-services/{id}/links | List app service links
+[**list_app_service_pods**](AppServicesApi.md#list_app_service_pods) | **GET** /app-services/{id}/pods | List app service pods
 [**list_app_service_settings**](AppServicesApi.md#list_app_service_settings) | **GET** /app-services/{id}/settings | List app service settings
 [**list_app_service_tokens**](AppServicesApi.md#list_app_service_tokens) | **GET** /app-services/{id}/tokens | List app service tokens
 [**list_app_service_volume_storage_classes**](AppServicesApi.md#list_app_service_volume_storage_classes) | **GET** /app-services/{id}/options/volume-storage-classes | List app service volume storage-class state
@@ -1372,6 +1374,87 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_app_service_cron_schedule**
+> AppServiceCronSchedule get_app_service_cron_schedule(id)
+
+Get app service cron schedule
+
+Returns one cron schedule of an app service.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.app_service_cron_schedule import AppServiceCronSchedule
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppServicesApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # Get app service cron schedule
+        api_response = api_instance.get_app_service_cron_schedule(id)
+        print("The response of AppServicesApi->get_app_service_cron_schedule:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppServicesApi->get_app_service_cron_schedule: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**AppServiceCronSchedule**](AppServiceCronSchedule.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Cron schedule |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **keep_log_stream_alive**
 > OperationResult keep_log_stream_alive(id)
 
@@ -2268,6 +2351,93 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of app service links |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **list_app_service_pods**
+> List[AppServicePod] list_app_service_pods(id, mode=mode, workload=workload, container=container)
+
+List app service pods
+
+Returns the Kubernetes pods of an app service with their containers, state and resource use.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.app_service_pod import AppServicePod
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppServicesApi(api_client)
+    id = 56 # int | 
+    mode = 'mode_example' # str | primary for the main workload (default) or all for every workload. (optional)
+    workload = 'workload_example' # str | Only pods of this workload. (optional)
+    container = 'container_example' # str | Only pods with this container. (optional)
+
+    try:
+        # List app service pods
+        api_response = api_instance.list_app_service_pods(id, mode=mode, workload=workload, container=container)
+        print("The response of AppServicesApi->list_app_service_pods:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppServicesApi->list_app_service_pods: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **mode** | **str**| primary for the main workload (default) or all for every workload. | [optional] 
+ **workload** | **str**| Only pods of this workload. | [optional] 
+ **container** | **str**| Only pods with this container. | [optional] 
+
+### Return type
+
+[**List[AppServicePod]**](AppServicePod.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | App service pods |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 

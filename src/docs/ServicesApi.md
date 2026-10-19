@@ -5,14 +5,18 @@ All URIs are relative to */v1*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_service_from_manifest**](ServicesApi.md#create_service_from_manifest) | **POST** /services/actions/create-from-manifest | Create service from manifest
+[**delete_service**](ServicesApi.md#delete_service) | **DELETE** /services/{id} | Delete service
 [**get_service**](ServicesApi.md#get_service) | **GET** /services/{id} | Get service
 [**get_service_by_name**](ServicesApi.md#get_service_by_name) | **GET** /services/by-name/{name} | Get service by name
 [**get_service_revision**](ServicesApi.md#get_service_revision) | **GET** /service-revisions/{id} | Get service revision
 [**get_service_sharing**](ServicesApi.md#get_service_sharing) | **GET** /services/sharing/{id} | Get service sharing
 [**import_services**](ServicesApi.md#import_services) | **POST** /services/actions/import | Import services from Git
+[**list_inheriting_services**](ServicesApi.md#list_inheriting_services) | **GET** /services/by-name/{name}/inheriting-services | List inheriting services
+[**list_resolved_service_configs**](ServicesApi.md#list_resolved_service_configs) | **GET** /service-revisions/{id}/configs | List resolved service configs
 [**list_service_link_candidates**](ServicesApi.md#list_service_link_candidates) | **GET** /services/{name}/options/link-candidates | List service link candidates
 [**list_services**](ServicesApi.md#list_services) | **GET** /services | List services
 [**scaffold_service_from_helm_chart**](ServicesApi.md#scaffold_service_from_helm_chart) | **POST** /services/actions/scaffold-from-helm-chart | Scaffold service from Helm chart
+[**update_service_from_git**](ServicesApi.md#update_service_from_git) | **POST** /services/{id}/actions/update-from-git | Update service from Git
 [**update_service_from_manifest**](ServicesApi.md#update_service_from_manifest) | **POST** /services/{id}/actions/update-from-manifest | Update service from manifest
 [**update_service_settings**](ServicesApi.md#update_service_settings) | **PUT** /services/settings/{id} | Update service settings
 [**update_service_sharing**](ServicesApi.md#update_service_sharing) | **PUT** /services/sharing/{id} | Update service sharing
@@ -96,6 +100,87 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **201** | Created service |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_service**
+> OperationResult delete_service(id)
+
+Delete service
+
+Deletes a service that no stack uses.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.operation_result import OperationResult
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.ServicesApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # Delete service
+        api_response = api_instance.delete_service(id)
+        print("The response of ServicesApi->delete_service:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ServicesApi->delete_service: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**OperationResult**](OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Deletion result |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 
@@ -509,6 +594,172 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **list_inheriting_services**
+> List[Service] list_inheriting_services(name)
+
+List inheriting services
+
+Returns the services whose manifests inherit from the named service with from.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.service import Service
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.ServicesApi(api_client)
+    name = 'name_example' # str | 
+
+    try:
+        # List inheriting services
+        api_response = api_instance.list_inheriting_services(name)
+        print("The response of ServicesApi->list_inheriting_services:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ServicesApi->list_inheriting_services: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**|  | 
+
+### Return type
+
+[**List[Service]**](Service.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Inheriting services |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **list_resolved_service_configs**
+> List[ResolvedServiceConfig] list_resolved_service_configs(id, option_version, platform=platform)
+
+List resolved service configs
+
+Returns the configuration files of a service revision with the default content Wodby resolved for one option version and platform.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.resolved_service_config import ResolvedServiceConfig
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.ServicesApi(api_client)
+    id = 56 # int | 
+    option_version = 'option_version_example' # str | Service option version.
+    platform = 'platform_example' # str | Image platform. Defaults to linux/amd64. (optional)
+
+    try:
+        # List resolved service configs
+        api_response = api_instance.list_resolved_service_configs(id, option_version, platform=platform)
+        print("The response of ServicesApi->list_resolved_service_configs:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ServicesApi->list_resolved_service_configs: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **option_version** | **str**| Service option version. | 
+ **platform** | **str**| Image platform. Defaults to linux/amd64. | [optional] 
+
+### Return type
+
+[**List[ResolvedServiceConfig]**](ResolvedServiceConfig.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Resolved configuration files |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **list_service_link_candidates**
 > List[Dict[str, object]] list_service_link_candidates(name)
 
@@ -755,6 +1006,90 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Generated service manifest |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_service_from_git**
+> OperationResult update_service_from_git(id, update_stack_from_git_request)
+
+Update service from Git
+
+Starts a task that moves a Git-sourced service to another ref.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.operation_result import OperationResult
+from wodby.models.update_stack_from_git_request import UpdateStackFromGitRequest
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.ServicesApi(api_client)
+    id = 56 # int | 
+    update_stack_from_git_request = wodby.UpdateStackFromGitRequest() # UpdateStackFromGitRequest | 
+
+    try:
+        # Update service from Git
+        api_response = api_instance.update_service_from_git(id, update_stack_from_git_request)
+        print("The response of ServicesApi->update_service_from_git:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ServicesApi->update_service_from_git: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **update_stack_from_git_request** | [**UpdateStackFromGitRequest**](UpdateStackFromGitRequest.md)|  | 
+
+### Return type
+
+[**OperationResult**](OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Service update task result |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 
