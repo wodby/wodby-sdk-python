@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **service_id** | **int** |  | 
 **manifest** | [**ServiceManifest**](ServiceManifest.md) |  | [optional] 
 **created_at** | **datetime** |  | 
+**excluded_base_version** | [**ServiceExcludedBaseVersion**](ServiceExcludedBaseVersion.md) |  | [optional] 
 
 ## Example
 

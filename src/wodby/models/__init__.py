@@ -299,6 +299,7 @@ from wodby.models.service_deployment_configuration_input import ServiceDeploymen
 from wodby.models.service_deployment_input import ServiceDeploymentInput
 from wodby.models.service_deployment_policy import ServiceDeploymentPolicy
 from wodby.models.service_deployment_strategy import ServiceDeploymentStrategy
+from wodby.models.service_excluded_base_version import ServiceExcludedBaseVersion
 from wodby.models.service_integration_requirement import ServiceIntegrationRequirement
 from wodby.models.service_manifest import ServiceManifest
 from wodby.models.service_manifest_env_var import ServiceManifestEnvVar

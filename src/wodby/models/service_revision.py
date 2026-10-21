@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from wodby.models.service_excluded_base_version import ServiceExcludedBaseVersion
 from wodby.models.service_manifest import ServiceManifest
 from typing import Optional, Set
 from typing_extensions import Self
@@ -38,7 +39,8 @@ class ServiceRevision(BaseModel):
     service_id: StrictInt = Field(alias="serviceId")
     manifest: Optional[ServiceManifest] = None
     created_at: datetime = Field(alias="createdAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "type", "external", "number", "version", "serviceId", "manifest", "createdAt"]
+    excluded_base_version: Optional[ServiceExcludedBaseVersion] = Field(default=None, alias="excludedBaseVersion")
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "type", "external", "number", "version", "serviceId", "manifest", "createdAt", "excludedBaseVersion"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,6 +84,9 @@ class ServiceRevision(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of manifest
         if self.manifest:
             _dict['manifest'] = self.manifest.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of excluded_base_version
+        if self.excluded_base_version:
+            _dict['excludedBaseVersion'] = self.excluded_base_version.to_dict()
         return _dict
 
     @classmethod
@@ -103,7 +108,8 @@ class ServiceRevision(BaseModel):
             "version": obj.get("version"),
             "serviceId": obj.get("serviceId"),
             "manifest": ServiceManifest.from_dict(obj["manifest"]) if obj.get("manifest") is not None else None,
-            "createdAt": obj.get("createdAt")
+            "createdAt": obj.get("createdAt"),
+            "excludedBaseVersion": ServiceExcludedBaseVersion.from_dict(obj["excludedBaseVersion"]) if obj.get("excludedBaseVersion") is not None else None
         })
         return _obj
 
