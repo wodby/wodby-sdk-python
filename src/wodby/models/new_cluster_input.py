@@ -20,6 +20,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.cluster_environment_policy_input import ClusterEnvironmentPolicyInput
+from wodby.models.cluster_node_pool_input import ClusterNodePoolInput
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -40,13 +41,14 @@ class NewClusterInput(BaseModel):
     min_node_count: Optional[StrictInt] = Field(default=None, alias="minNodeCount")
     max_node_count: Optional[StrictInt] = Field(default=None, alias="maxNodeCount")
     node_disk_size: Optional[StrictInt] = Field(default=None, alias="nodeDiskSize")
+    gpu_node_pool: Optional[ClusterNodePoolInput] = Field(default=None, alias="gpuNodePool")
     zone: Optional[StrictStr] = None
     region: Optional[StrictStr] = None
     billing_option: Optional[StrictStr] = Field(default=None, alias="billingOption")
     disable_monitoring: StrictBool = Field(alias="disableMonitoring")
     auto_infrastructure_upgrade: Optional[StrictBool] = Field(default=None, alias="autoInfrastructureUpgrade")
     environment_policy: Optional[ClusterEnvironmentPolicyInput] = Field(default=None, alias="environmentPolicy")
-    __properties: ClassVar[List[str]] = ["orgId", "projectId", "availableToAllProjects", "integrationId", "name", "title", "serverless", "singleNode", "version", "machineType", "minNodeCount", "maxNodeCount", "nodeDiskSize", "zone", "region", "billingOption", "disableMonitoring", "autoInfrastructureUpgrade", "environmentPolicy"]
+    __properties: ClassVar[List[str]] = ["orgId", "projectId", "availableToAllProjects", "integrationId", "name", "title", "serverless", "singleNode", "version", "machineType", "minNodeCount", "maxNodeCount", "nodeDiskSize", "gpuNodePool", "zone", "region", "billingOption", "disableMonitoring", "autoInfrastructureUpgrade", "environmentPolicy"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -87,6 +89,9 @@ class NewClusterInput(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of gpu_node_pool
+        if self.gpu_node_pool:
+            _dict['gpuNodePool'] = self.gpu_node_pool.to_dict()
         # override the default output from pydantic by calling `to_dict()` of environment_policy
         if self.environment_policy:
             _dict['environmentPolicy'] = self.environment_policy.to_dict()
@@ -129,6 +134,11 @@ class NewClusterInput(BaseModel):
         # and model_fields_set contains the field
         if self.node_disk_size is None and "node_disk_size" in self.model_fields_set:
             _dict['nodeDiskSize'] = None
+
+        # set to None if gpu_node_pool (nullable) is None
+        # and model_fields_set contains the field
+        if self.gpu_node_pool is None and "gpu_node_pool" in self.model_fields_set:
+            _dict['gpuNodePool'] = None
 
         # set to None if zone (nullable) is None
         # and model_fields_set contains the field
@@ -175,6 +185,7 @@ class NewClusterInput(BaseModel):
             "minNodeCount": obj.get("minNodeCount"),
             "maxNodeCount": obj.get("maxNodeCount"),
             "nodeDiskSize": obj.get("nodeDiskSize"),
+            "gpuNodePool": ClusterNodePoolInput.from_dict(obj["gpuNodePool"]) if obj.get("gpuNodePool") is not None else None,
             "zone": obj.get("zone"),
             "region": obj.get("region"),
             "billingOption": obj.get("billingOption"),

@@ -3009,11 +3009,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_stack_service_revisions**
-> OperationResult update_stack_service_revisions(id, scope=scope)
+> OperationResult update_stack_service_revisions(id, scope=scope, update_stack_service_revisions_input=update_stack_service_revisions_input)
 
 Update stack service revisions
 
-Starts a task that advances unpinned stack services to their eligible revisions.
+Starts a task that advances unpinned stack services to their eligible revisions. Send stackServiceIds to advance only those stack services.
 
 ### Example
 
@@ -3022,6 +3022,7 @@ Starts a task that advances unpinned stack services to their eligible revisions.
 ```python
 import wodby
 from wodby.models.operation_result import OperationResult
+from wodby.models.update_stack_service_revisions_input import UpdateStackServiceRevisionsInput
 from wodby.rest import ApiException
 from pprint import pprint
 
@@ -3048,10 +3049,11 @@ with wodby.ApiClient(configuration) as api_client:
     api_instance = wodby.StacksApi(api_client)
     id = 56 # int | 
     scope = all # str | Limits the update to all services or stateless services. Defaults to all. (optional) (default to all)
+    update_stack_service_revisions_input = wodby.UpdateStackServiceRevisionsInput() # UpdateStackServiceRevisionsInput |  (optional)
 
     try:
         # Update stack service revisions
-        api_response = api_instance.update_stack_service_revisions(id, scope=scope)
+        api_response = api_instance.update_stack_service_revisions(id, scope=scope, update_stack_service_revisions_input=update_stack_service_revisions_input)
         print("The response of StacksApi->update_stack_service_revisions:\n")
         pprint(api_response)
     except Exception as e:
@@ -3067,6 +3069,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **int**|  | 
  **scope** | **str**| Limits the update to all services or stateless services. Defaults to all. | [optional] [default to all]
+ **update_stack_service_revisions_input** | [**UpdateStackServiceRevisionsInput**](UpdateStackServiceRevisionsInput.md)|  | [optional] 
 
 ### Return type
 
@@ -3078,7 +3081,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: application/json, application/problem+json
 
 ### HTTP response details

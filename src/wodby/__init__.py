@@ -17,6 +17,7 @@
 __version__ = "1.0.0"
 
 # import apis into sdk package
+from wodby.api.agent_chats_api import AgentChatsApi
 from wodby.api.app_auths_api import AppAuthsApi
 from wodby.api.app_builds_api import AppBuildsApi
 from wodby.api.app_deployments_api import AppDeploymentsApi
@@ -62,6 +63,15 @@ from wodby.exceptions import ApiException
 
 # import models into sdk package
 from wodby.models.add_app_service_volume_input import AddAppServiceVolumeInput
+from wodby.models.agent_chat import AgentChat
+from wodby.models.agent_chat_answer_request import AgentChatAnswerRequest
+from wodby.models.agent_chat_approval_mode import AgentChatApprovalMode
+from wodby.models.agent_chat_approval_mode_request import AgentChatApprovalModeRequest
+from wodby.models.agent_chat_approval_request import AgentChatApprovalRequest
+from wodby.models.agent_chat_detail import AgentChatDetail
+from wodby.models.agent_chat_message import AgentChatMessage
+from wodby.models.agent_chat_message_request import AgentChatMessageRequest
+from wodby.models.agent_chat_tool_target import AgentChatToolTarget
 from wodby.models.app import App
 from wodby.models.app_access import AppAccess
 from wodby.models.app_access_cleanup import AppAccessCleanup
@@ -181,6 +191,8 @@ from wodby.models.cluster_capability_policy import ClusterCapabilityPolicy
 from wodby.models.cluster_creation_result import ClusterCreationResult
 from wodby.models.cluster_environment_policy_input import ClusterEnvironmentPolicyInput
 from wodby.models.cluster_infra_app_upgrade_changelog import ClusterInfraAppUpgradeChangelog
+from wodby.models.cluster_node_pool import ClusterNodePool
+from wodby.models.cluster_node_pool_input import ClusterNodePoolInput
 from wodby.models.cluster_settings import ClusterSettings
 from wodby.models.cluster_settings_input import ClusterSettingsInput
 from wodby.models.config_override_input import ConfigOverrideInput
@@ -392,6 +404,7 @@ from wodby.models.stack_sync_options import StackSyncOptions
 from wodby.models.stack_sync_options_input import StackSyncOptionsInput
 from wodby.models.stack_token import StackToken
 from wodby.models.stacks_response import StacksResponse
+from wodby.models.start_agent_chat_request import StartAgentChatRequest
 from wodby.models.storage_class import StorageClass
 from wodby.models.task import Task
 from wodby.models.task_initiator import TaskInitiator
@@ -414,6 +427,7 @@ from wodby.models.update_app_service_cron_schedule_input import UpdateAppService
 from wodby.models.update_app_service_database_input import UpdateAppServiceDatabaseInput
 from wodby.models.update_app_service_env_var_input import UpdateAppServiceEnvVarInput
 from wodby.models.update_backup_preset_input import UpdateBackupPresetInput
+from wodby.models.update_cluster_gpu_node_pool_input import UpdateClusterGPUNodePoolInput
 from wodby.models.update_current_user_request import UpdateCurrentUserRequest
 from wodby.models.update_database_user_dbs_input import UpdateDatabaseUserDBsInput
 from wodby.models.update_integration_input import UpdateIntegrationInput
@@ -429,6 +443,7 @@ from wodby.models.update_stack_helm_value_input import UpdateStackHelmValueInput
 from wodby.models.update_stack_request import UpdateStackRequest
 from wodby.models.update_stack_service_cron_schedule_input import UpdateStackServiceCronScheduleInput
 from wodby.models.update_stack_service_env_var_input import UpdateStackServiceEnvVarInput
+from wodby.models.update_stack_service_revisions_input import UpdateStackServiceRevisionsInput
 from wodby.models.update_stack_service_token_input import UpdateStackServiceTokenInput
 from wodby.models.update_stack_token_input import UpdateStackTokenInput
 from wodby.models.update_title_request import UpdateTitleRequest

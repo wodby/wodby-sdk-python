@@ -21,6 +21,7 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.cluster_capabilities import ClusterCapabilities
+from wodby.models.cluster_node_pool import ClusterNodePool
 from wodby.models.cluster_settings import ClusterSettings
 from wodby.models.storage_class import StorageClass
 from typing import Optional, Set
@@ -43,6 +44,7 @@ class Cluster(BaseModel):
     infra_version: StrictStr = Field(alias="infraVersion")
     min_node_count: Optional[StrictInt] = Field(default=None, alias="minNodeCount")
     max_node_count: Optional[StrictInt] = Field(default=None, alias="maxNodeCount")
+    gpu_node_pool: Optional[ClusterNodePool] = Field(default=None, alias="gpuNodePool")
     last_nodes_ready: Optional[StrictInt] = Field(default=None, alias="lastNodesReady")
     last_nodes_total: Optional[StrictInt] = Field(default=None, alias="lastNodesTotal")
     region: Optional[StrictStr] = None
@@ -65,7 +67,7 @@ class Cluster(BaseModel):
     storage_classes_observed_at: Optional[datetime] = Field(default=None, alias="storageClassesObservedAt")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "serverless", "demo", "wodby", "k3s", "singleNode", "version", "infraVersion", "minNodeCount", "maxNodeCount", "lastNodesReady", "lastNodesTotal", "region", "zone", "ips", "hostname", "integrationId", "envId", "envType", "envScope", "allowedEnvIds", "allowedEnvTypes", "orgId", "ownershipScope", "ownerProjectId", "availableToAllProjects", "capabilities", "settings", "storageClasses", "storageClassesObservedAt", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "serverless", "demo", "wodby", "k3s", "singleNode", "version", "infraVersion", "minNodeCount", "maxNodeCount", "gpuNodePool", "lastNodesReady", "lastNodesTotal", "region", "zone", "ips", "hostname", "integrationId", "envId", "envType", "envScope", "allowedEnvIds", "allowedEnvTypes", "orgId", "ownershipScope", "ownerProjectId", "availableToAllProjects", "capabilities", "settings", "storageClasses", "storageClassesObservedAt", "createdAt", "updatedAt"]
 
     @field_validator('env_type')
     def env_type_validate_enum(cls, value):
@@ -135,6 +137,9 @@ class Cluster(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of gpu_node_pool
+        if self.gpu_node_pool:
+            _dict['gpuNodePool'] = self.gpu_node_pool.to_dict()
         # override the default output from pydantic by calling `to_dict()` of capabilities
         if self.capabilities:
             _dict['capabilities'] = self.capabilities.to_dict()
@@ -162,6 +167,11 @@ class Cluster(BaseModel):
         # and model_fields_set contains the field
         if self.max_node_count is None and "max_node_count" in self.model_fields_set:
             _dict['maxNodeCount'] = None
+
+        # set to None if gpu_node_pool (nullable) is None
+        # and model_fields_set contains the field
+        if self.gpu_node_pool is None and "gpu_node_pool" in self.model_fields_set:
+            _dict['gpuNodePool'] = None
 
         # set to None if last_nodes_ready (nullable) is None
         # and model_fields_set contains the field
@@ -238,6 +248,7 @@ class Cluster(BaseModel):
             "infraVersion": obj.get("infraVersion"),
             "minNodeCount": obj.get("minNodeCount"),
             "maxNodeCount": obj.get("maxNodeCount"),
+            "gpuNodePool": ClusterNodePool.from_dict(obj["gpuNodePool"]) if obj.get("gpuNodePool") is not None else None,
             "lastNodesReady": obj.get("lastNodesReady"),
             "lastNodesTotal": obj.get("lastNodesTotal"),
             "region": obj.get("region"),

@@ -20,6 +20,7 @@ Method | HTTP request | Description
 [**scale_cluster**](ClustersApi.md#scale_cluster) | **POST** /clusters/{id}/actions/scale | Scale cluster nodes
 [**update_cluster**](ClustersApi.md#update_cluster) | **PUT** /clusters/{id} | Update cluster
 [**update_cluster_environment_policy**](ClustersApi.md#update_cluster_environment_policy) | **PUT** /clusters/environment-policy/{id} | Update cluster environment policy
+[**update_cluster_gpu_node_pool**](ClustersApi.md#update_cluster_gpu_node_pool) | **POST** /clusters/{id}/actions/gpu-node-pool | Update the GPU node pool
 [**update_cluster_kubernetes_version**](ClustersApi.md#update_cluster_kubernetes_version) | **POST** /clusters/{id}/actions/update-kubernetes-version | Update cluster Kubernetes version
 [**update_cluster_settings**](ClustersApi.md#update_cluster_settings) | **PUT** /clusters/settings/{id} | Update cluster settings
 [**update_cluster_sharing**](ClustersApi.md#update_cluster_sharing) | **PUT** /clusters/sharing/{id} | Update cluster sharing
@@ -1339,6 +1340,90 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Updated cluster |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_cluster_gpu_node_pool**
+> OperationResult update_cluster_gpu_node_pool(id, update_cluster_gpu_node_pool_input)
+
+Update the GPU node pool
+
+Adds, resizes, replaces or removes the cluster's optional GPU node pool. Pods that request GPUs are scheduled onto this pool. Set gpuNodePool to null to remove the pool; removal is refused while pods on the cluster request GPUs. Changing the machine type creates the new pool before the old one is deleted.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.operation_result import OperationResult
+from wodby.models.update_cluster_gpu_node_pool_input import UpdateClusterGPUNodePoolInput
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.ClustersApi(api_client)
+    id = 56 # int | 
+    update_cluster_gpu_node_pool_input = wodby.UpdateClusterGPUNodePoolInput() # UpdateClusterGPUNodePoolInput | 
+
+    try:
+        # Update the GPU node pool
+        api_response = api_instance.update_cluster_gpu_node_pool(id, update_cluster_gpu_node_pool_input)
+        print("The response of ClustersApi->update_cluster_gpu_node_pool:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ClustersApi->update_cluster_gpu_node_pool: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **update_cluster_gpu_node_pool_input** | [**UpdateClusterGPUNodePoolInput**](UpdateClusterGPUNodePoolInput.md)|  | 
+
+### Return type
+
+[**OperationResult**](OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | GPU node pool task result |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 

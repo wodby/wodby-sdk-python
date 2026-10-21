@@ -50,6 +50,7 @@ from wodby.models.update_stack_env_var_input import UpdateStackEnvVarInput
 from wodby.models.update_stack_from_git_request import UpdateStackFromGitRequest
 from wodby.models.update_stack_helm_value_input import UpdateStackHelmValueInput
 from wodby.models.update_stack_request import UpdateStackRequest
+from wodby.models.update_stack_service_revisions_input import UpdateStackServiceRevisionsInput
 from wodby.models.update_stack_token_input import UpdateStackTokenInput
 
 from wodby.api_client import ApiClient, RequestSerialized
@@ -10066,6 +10067,7 @@ class StacksApi:
         self,
         id: StrictInt,
         scope: Annotated[Optional[StrictStr], Field(description="Limits the update to all services or stateless services. Defaults to all.")] = None,
+        update_stack_service_revisions_input: Optional[UpdateStackServiceRevisionsInput] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -10081,12 +10083,14 @@ class StacksApi:
     ) -> OperationResult:
         """Update stack service revisions
 
-        Starts a task that advances unpinned stack services to their eligible revisions.
+        Starts a task that advances unpinned stack services to their eligible revisions. Send stackServiceIds to advance only those stack services.
 
         :param id: (required)
         :type id: int
         :param scope: Limits the update to all services or stateless services. Defaults to all.
         :type scope: str
+        :param update_stack_service_revisions_input:
+        :type update_stack_service_revisions_input: UpdateStackServiceRevisionsInput
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -10112,6 +10116,7 @@ class StacksApi:
         _param = self._update_stack_service_revisions_serialize(
             id=id,
             scope=scope,
+            update_stack_service_revisions_input=update_stack_service_revisions_input,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -10138,6 +10143,7 @@ class StacksApi:
         self,
         id: StrictInt,
         scope: Annotated[Optional[StrictStr], Field(description="Limits the update to all services or stateless services. Defaults to all.")] = None,
+        update_stack_service_revisions_input: Optional[UpdateStackServiceRevisionsInput] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -10153,12 +10159,14 @@ class StacksApi:
     ) -> ApiResponse[OperationResult]:
         """Update stack service revisions
 
-        Starts a task that advances unpinned stack services to their eligible revisions.
+        Starts a task that advances unpinned stack services to their eligible revisions. Send stackServiceIds to advance only those stack services.
 
         :param id: (required)
         :type id: int
         :param scope: Limits the update to all services or stateless services. Defaults to all.
         :type scope: str
+        :param update_stack_service_revisions_input:
+        :type update_stack_service_revisions_input: UpdateStackServiceRevisionsInput
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -10184,6 +10192,7 @@ class StacksApi:
         _param = self._update_stack_service_revisions_serialize(
             id=id,
             scope=scope,
+            update_stack_service_revisions_input=update_stack_service_revisions_input,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -10210,6 +10219,7 @@ class StacksApi:
         self,
         id: StrictInt,
         scope: Annotated[Optional[StrictStr], Field(description="Limits the update to all services or stateless services. Defaults to all.")] = None,
+        update_stack_service_revisions_input: Optional[UpdateStackServiceRevisionsInput] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -10225,12 +10235,14 @@ class StacksApi:
     ) -> RESTResponseType:
         """Update stack service revisions
 
-        Starts a task that advances unpinned stack services to their eligible revisions.
+        Starts a task that advances unpinned stack services to their eligible revisions. Send stackServiceIds to advance only those stack services.
 
         :param id: (required)
         :type id: int
         :param scope: Limits the update to all services or stateless services. Defaults to all.
         :type scope: str
+        :param update_stack_service_revisions_input:
+        :type update_stack_service_revisions_input: UpdateStackServiceRevisionsInput
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -10256,6 +10268,7 @@ class StacksApi:
         _param = self._update_stack_service_revisions_serialize(
             id=id,
             scope=scope,
+            update_stack_service_revisions_input=update_stack_service_revisions_input,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -10277,6 +10290,7 @@ class StacksApi:
         self,
         id,
         scope,
+        update_stack_service_revisions_input,
         _request_auth,
         _content_type,
         _headers,
@@ -10308,6 +10322,8 @@ class StacksApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
+        if update_stack_service_revisions_input is not None:
+            _body_params = update_stack_service_revisions_input
 
 
         # set the HTTP header `Accept`
@@ -10319,6 +10335,19 @@ class StacksApi:
                 ]
             )
 
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
 
         # authentication setting
         _auth_settings: List[str] = [

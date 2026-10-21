@@ -1,6 +1,7 @@
 # flake8: noqa
 
 # import apis into api package
+from wodby.api.agent_chats_api import AgentChatsApi
 from wodby.api.app_auths_api import AppAuthsApi
 from wodby.api.app_builds_api import AppBuildsApi
 from wodby.api.app_deployments_api import AppDeploymentsApi
