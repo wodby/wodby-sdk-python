@@ -241,12 +241,15 @@ Class | Method | HTTP request | Description
 *AppServicesApi* | [**update_app_service_helm_value**](docs/AppServicesApi.md#update_app_service_helm_value) | **PUT** /app-service-helm-values/{id} | Update app service Helm value
 *AppServicesApi* | [**update_app_service_token**](docs/AppServicesApi.md#update_app_service_token) | **PUT** /app-service-tokens/{id} | Update app service token
 *AppsApi* | [**create_app**](docs/AppsApi.md#create_app) | **POST** /apps | Create app
+*AppsApi* | [**create_app_preview_environment**](docs/AppsApi.md#create_app_preview_environment) | **POST** /apps/preview-environments/{id} | Create a pull request preview environment
 *AppsApi* | [**delete_app**](docs/AppsApi.md#delete_app) | **DELETE** /apps/{id} | Delete app
 *AppsApi* | [**get_app**](docs/AppsApi.md#get_app) | **GET** /apps/{id} | Get app
 *AppsApi* | [**get_app_by_name**](docs/AppsApi.md#get_app_by_name) | **GET** /apps/by-name/{name} | Get app by name
 *AppsApi* | [**get_app_sharing**](docs/AppsApi.md#get_app_sharing) | **GET** /apps/sharing/{id} | Get app sharing
+*AppsApi* | [**list_app_preview_pull_requests**](docs/AppsApi.md#list_app_preview_pull_requests) | **GET** /apps/preview-pull-requests/{id} | List pull requests for preview environments
 *AppsApi* | [**list_apps**](docs/AppsApi.md#list_apps) | **GET** /apps | List apps
 *AppsApi* | [**update_app**](docs/AppsApi.md#update_app) | **PUT** /apps/{id} | Update app
+*AppsApi* | [**update_app_settings**](docs/AppsApi.md#update_app_settings) | **PUT** /apps/settings/{id} | Update app settings
 *AppsApi* | [**update_app_sharing**](docs/AppsApi.md#update_app_sharing) | **PUT** /apps/sharing/{id} | Update app sharing
 *BackupsApi* | [**create_backup**](docs/BackupsApi.md#create_backup) | **POST** /backups | Create backup
 *BackupsApi* | [**create_backup_preset**](docs/BackupsApi.md#create_backup_preset) | **POST** /backup-presets | Create backup preset
@@ -543,6 +546,7 @@ Class | Method | HTTP request | Description
  - [AppEnvironmentMigrationInput](docs/AppEnvironmentMigrationInput.md)
  - [AppEnvironmentMigrationOperationResult](docs/AppEnvironmentMigrationOperationResult.md)
  - [AppEnvironmentMigrationVolumeInput](docs/AppEnvironmentMigrationVolumeInput.md)
+ - [AppEnvironmentPreview](docs/AppEnvironmentPreview.md)
  - [AppEnvironmentSettings](docs/AppEnvironmentSettings.md)
  - [AppEnvironmentSettingsInput](docs/AppEnvironmentSettingsInput.md)
  - [AppEnvironmentStackReconciliationInput](docs/AppEnvironmentStackReconciliationInput.md)
@@ -555,6 +559,11 @@ Class | Method | HTTP request | Description
  - [AppPortSettingInput](docs/AppPortSettingInput.md)
  - [AppPortSettingName](docs/AppPortSettingName.md)
  - [AppPortSettingsInput](docs/AppPortSettingsInput.md)
+ - [AppPreviewEnvironmentsSettings](docs/AppPreviewEnvironmentsSettings.md)
+ - [AppPreviewEnvironmentsSettingsInput](docs/AppPreviewEnvironmentsSettingsInput.md)
+ - [AppPreviewImport](docs/AppPreviewImport.md)
+ - [AppPreviewPullRequest](docs/AppPreviewPullRequest.md)
+ - [AppPreviewPullRequestList](docs/AppPreviewPullRequestList.md)
  - [AppRoute](docs/AppRoute.md)
  - [AppRouteSetting](docs/AppRouteSetting.md)
  - [AppRouteSettingInput](docs/AppRouteSettingInput.md)
@@ -597,6 +606,8 @@ Class | Method | HTTP request | Description
  - [AppServiceToken](docs/AppServiceToken.md)
  - [AppServiceVolume](docs/AppServiceVolume.md)
  - [AppServiceVolumeStorageClassState](docs/AppServiceVolumeStorageClassState.md)
+ - [AppSettings](docs/AppSettings.md)
+ - [AppSettingsInput](docs/AppSettingsInput.md)
  - [AutomationTimeWindow](docs/AutomationTimeWindow.md)
  - [AutomationTimeWindowInput](docs/AutomationTimeWindowInput.md)
  - [Backup](docs/Backup.md)
@@ -700,6 +711,7 @@ Class | Method | HTTP request | Description
  - [NewAppEnvironmentAccessInput](docs/NewAppEnvironmentAccessInput.md)
  - [NewAppEnvironmentInput](docs/NewAppEnvironmentInput.md)
  - [NewAppInput](docs/NewAppInput.md)
+ - [NewAppPreviewEnvironmentRequest](docs/NewAppPreviewEnvironmentRequest.md)
  - [NewAppRouteInput](docs/NewAppRouteInput.md)
  - [NewAppServiceCronScheduleInput](docs/NewAppServiceCronScheduleInput.md)
  - [NewAppServiceEnvVarInput](docs/NewAppServiceEnvVarInput.md)

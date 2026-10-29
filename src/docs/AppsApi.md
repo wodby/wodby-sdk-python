@@ -5,12 +5,15 @@ All URIs are relative to */v1*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_app**](AppsApi.md#create_app) | **POST** /apps | Create app
+[**create_app_preview_environment**](AppsApi.md#create_app_preview_environment) | **POST** /apps/preview-environments/{id} | Create a pull request preview environment
 [**delete_app**](AppsApi.md#delete_app) | **DELETE** /apps/{id} | Delete app
 [**get_app**](AppsApi.md#get_app) | **GET** /apps/{id} | Get app
 [**get_app_by_name**](AppsApi.md#get_app_by_name) | **GET** /apps/by-name/{name} | Get app by name
 [**get_app_sharing**](AppsApi.md#get_app_sharing) | **GET** /apps/sharing/{id} | Get app sharing
+[**list_app_preview_pull_requests**](AppsApi.md#list_app_preview_pull_requests) | **GET** /apps/preview-pull-requests/{id} | List pull requests for preview environments
 [**list_apps**](AppsApi.md#list_apps) | **GET** /apps | List apps
 [**update_app**](AppsApi.md#update_app) | **PUT** /apps/{id} | Update app
+[**update_app_settings**](AppsApi.md#update_app_settings) | **PUT** /apps/settings/{id} | Update app settings
 [**update_app_sharing**](AppsApi.md#update_app_sharing) | **PUT** /apps/sharing/{id} | Update app sharing
 
 
@@ -91,6 +94,90 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **201** | Created app |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **create_app_preview_environment**
+> OperationResult create_app_preview_environment(id, new_app_preview_environment_request)
+
+Create a pull request preview environment
+
+Creates a preview environment for one open pull request of the app and returns the task that creates it in the background. Draft pull requests are accepted even when draft previews are off. Pull requests from forks, pull requests that already have a preview environment, a base environment that is not in OK status, and a full concurrency limit are refused.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.new_app_preview_environment_request import NewAppPreviewEnvironmentRequest
+from wodby.models.operation_result import OperationResult
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppsApi(api_client)
+    id = 56 # int | 
+    new_app_preview_environment_request = wodby.NewAppPreviewEnvironmentRequest() # NewAppPreviewEnvironmentRequest | 
+
+    try:
+        # Create a pull request preview environment
+        api_response = api_instance.create_app_preview_environment(id, new_app_preview_environment_request)
+        print("The response of AppsApi->create_app_preview_environment:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppsApi->create_app_preview_environment: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **new_app_preview_environment_request** | [**NewAppPreviewEnvironmentRequest**](NewAppPreviewEnvironmentRequest.md)|  | 
+
+### Return type
+
+[**OperationResult**](OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Creation result |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 
@@ -422,6 +509,87 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **list_app_preview_pull_requests**
+> AppPreviewPullRequestList list_app_preview_pull_requests(id)
+
+List pull requests for preview environments
+
+Lists the app's open pull requests into the branch the preview base environment tracks, most recently updated first, with the preview environment each one has and why a preview environment cannot be created for it now. When preview environments are not configured for the app, `configured` is false and the list is empty.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.app_preview_pull_request_list import AppPreviewPullRequestList
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppsApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # List pull requests for preview environments
+        api_response = api_instance.list_app_preview_pull_requests(id)
+        print("The response of AppsApi->list_app_preview_pull_requests:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppsApi->list_app_preview_pull_requests: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**AppPreviewPullRequestList**](AppPreviewPullRequestList.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Open pull requests |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **list_apps**
 > List[App] list_apps(org_id=org_id, project_ids=project_ids, cluster_app=cluster_app)
 
@@ -567,6 +735,90 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **int**|  | 
  **update_title_request** | [**UpdateTitleRequest**](UpdateTitleRequest.md)|  | 
+
+### Return type
+
+[**App**](App.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Updated app |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_app_settings**
+> App update_app_settings(id, app_settings_input)
+
+Update app settings
+
+Updates application-wide settings such as pull request preview environments and returns the updated app.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.app import App
+from wodby.models.app_settings_input import AppSettingsInput
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppsApi(api_client)
+    id = 56 # int | 
+    app_settings_input = wodby.AppSettingsInput() # AppSettingsInput | 
+
+    try:
+        # Update app settings
+        api_response = api_instance.update_app_settings(id, app_settings_input)
+        print("The response of AppsApi->update_app_settings:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppsApi->update_app_settings: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **app_settings_input** | [**AppSettingsInput**](AppSettingsInput.md)|  | 
 
 ### Return type
 

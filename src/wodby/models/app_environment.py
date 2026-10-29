@@ -23,6 +23,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.app_access import AppAccess
 from wodby.models.app_environment_health import AppEnvironmentHealth
 from wodby.models.app_environment_main_route_cert import AppEnvironmentMainRouteCert
+from wodby.models.app_environment_preview import AppEnvironmentPreview
 from wodby.models.app_environment_settings import AppEnvironmentSettings
 from wodby.models.app_service_configuration_issue import AppServiceConfigurationIssue
 from wodby.models.workspace import Workspace
@@ -60,10 +61,11 @@ class AppEnvironment(BaseModel):
     configuration_ready: StrictBool = Field(alias="configurationReady")
     configuration_issues: List[AppServiceConfigurationIssue] = Field(alias="configurationIssues")
     settings: Optional[AppEnvironmentSettings] = None
+    preview: Optional[AppEnvironmentPreview] = None
     health: AppEnvironmentHealth
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["executionMode", "workspace", "id", "name", "title", "environmentType", "status", "outdated", "mainDomain", "mainRouteCert", "appId", "clusterId", "stackId", "stackRevId", "stackName", "stackTitle", "stackIcon", "stackRevNumber", "stackVersion", "access", "routingMode", "routingPending", "maintenanceMode", "maintenanceModeActive", "configurationReady", "configurationIssues", "settings", "health", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["executionMode", "workspace", "id", "name", "title", "environmentType", "status", "outdated", "mainDomain", "mainRouteCert", "appId", "clusterId", "stackId", "stackRevId", "stackName", "stackTitle", "stackIcon", "stackRevNumber", "stackVersion", "access", "routingMode", "routingPending", "maintenanceMode", "maintenanceModeActive", "configurationReady", "configurationIssues", "settings", "preview", "health", "createdAt", "updatedAt"]
 
     @field_validator('execution_mode')
     def execution_mode_validate_enum(cls, value):
@@ -140,6 +142,9 @@ class AppEnvironment(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of settings
         if self.settings:
             _dict['settings'] = self.settings.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of preview
+        if self.preview:
+            _dict['preview'] = self.preview.to_dict()
         # override the default output from pydantic by calling `to_dict()` of health
         if self.health:
             _dict['health'] = self.health.to_dict()
@@ -157,6 +162,11 @@ class AppEnvironment(BaseModel):
         # and model_fields_set contains the field
         if self.access is None and "access" in self.model_fields_set:
             _dict['access'] = None
+
+        # set to None if preview (nullable) is None
+        # and model_fields_set contains the field
+        if self.preview is None and "preview" in self.model_fields_set:
+            _dict['preview'] = None
 
         return _dict
 
@@ -197,6 +207,7 @@ class AppEnvironment(BaseModel):
             "configurationReady": obj.get("configurationReady"),
             "configurationIssues": [AppServiceConfigurationIssue.from_dict(_item) for _item in obj["configurationIssues"]] if obj.get("configurationIssues") is not None else None,
             "settings": AppEnvironmentSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None,
+            "preview": AppEnvironmentPreview.from_dict(obj["preview"]) if obj.get("preview") is not None else None,
             "health": AppEnvironmentHealth.from_dict(obj["health"]) if obj.get("health") is not None else None,
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt")

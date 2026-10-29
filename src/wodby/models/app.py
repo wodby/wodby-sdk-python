@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from wodby.models.app_settings import AppSettings
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -35,9 +36,10 @@ class App(BaseModel):
     org_id: StrictInt = Field(alias="orgId")
     ownership_scope: StrictStr = Field(alias="ownershipScope")
     owner_project_id: Optional[StrictInt] = Field(default=None, alias="ownerProjectId")
+    settings: Optional[AppSettings] = None
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "clusterApp", "orgId", "ownershipScope", "ownerProjectId", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "clusterApp", "orgId", "ownershipScope", "ownerProjectId", "settings", "createdAt", "updatedAt"]
 
     @field_validator('ownership_scope')
     def ownership_scope_validate_enum(cls, value):
@@ -85,6 +87,9 @@ class App(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of settings
+        if self.settings:
+            _dict['settings'] = self.settings.to_dict()
         # set to None if owner_project_id (nullable) is None
         # and model_fields_set contains the field
         if self.owner_project_id is None and "owner_project_id" in self.model_fields_set:
@@ -110,6 +115,7 @@ class App(BaseModel):
             "orgId": obj.get("orgId"),
             "ownershipScope": obj.get("ownershipScope"),
             "ownerProjectId": obj.get("ownerProjectId"),
+            "settings": AppSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None,
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt")
         })

@@ -55,6 +55,7 @@ docs/AppEnvironmentMigrationComponent.md
 docs/AppEnvironmentMigrationInput.md
 docs/AppEnvironmentMigrationOperationResult.md
 docs/AppEnvironmentMigrationVolumeInput.md
+docs/AppEnvironmentPreview.md
 docs/AppEnvironmentSettings.md
 docs/AppEnvironmentSettingsInput.md
 docs/AppEnvironmentStackReconciliationInput.md
@@ -69,6 +70,11 @@ docs/AppPortSettingInput.md
 docs/AppPortSettingName.md
 docs/AppPortSettingsInput.md
 docs/AppPortsApi.md
+docs/AppPreviewEnvironmentsSettings.md
+docs/AppPreviewEnvironmentsSettingsInput.md
+docs/AppPreviewImport.md
+docs/AppPreviewPullRequest.md
+docs/AppPreviewPullRequestList.md
 docs/AppRoute.md
 docs/AppRouteSetting.md
 docs/AppRouteSettingInput.md
@@ -113,6 +119,8 @@ docs/AppServiceToken.md
 docs/AppServiceVolume.md
 docs/AppServiceVolumeStorageClassState.md
 docs/AppServicesApi.md
+docs/AppSettings.md
+docs/AppSettingsInput.md
 docs/AppsApi.md
 docs/AutomationTimeWindow.md
 docs/AutomationTimeWindowInput.md
@@ -227,6 +235,7 @@ docs/NewAppEnvironmentAccessEndpointInput.md
 docs/NewAppEnvironmentAccessInput.md
 docs/NewAppEnvironmentInput.md
 docs/NewAppInput.md
+docs/NewAppPreviewEnvironmentRequest.md
 docs/NewAppRouteInput.md
 docs/NewAppServiceCronScheduleInput.md
 docs/NewAppServiceEnvVarInput.md
@@ -443,6 +452,15 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_app_environment_preview.py
+test/test_app_preview_environments_settings.py
+test/test_app_preview_environments_settings_input.py
+test/test_app_preview_import.py
+test/test_app_preview_pull_request.py
+test/test_app_preview_pull_request_list.py
+test/test_app_settings.py
+test/test_app_settings_input.py
+test/test_new_app_preview_environment_request.py
 tox.ini
 wodby/__init__.py
 wodby/api/__init__.py
@@ -531,6 +549,7 @@ wodby/models/app_environment_migration_component.py
 wodby/models/app_environment_migration_input.py
 wodby/models/app_environment_migration_operation_result.py
 wodby/models/app_environment_migration_volume_input.py
+wodby/models/app_environment_preview.py
 wodby/models/app_environment_settings.py
 wodby/models/app_environment_settings_input.py
 wodby/models/app_environment_stack_reconciliation_input.py
@@ -543,6 +562,11 @@ wodby/models/app_port_setting.py
 wodby/models/app_port_setting_input.py
 wodby/models/app_port_setting_name.py
 wodby/models/app_port_settings_input.py
+wodby/models/app_preview_environments_settings.py
+wodby/models/app_preview_environments_settings_input.py
+wodby/models/app_preview_import.py
+wodby/models/app_preview_pull_request.py
+wodby/models/app_preview_pull_request_list.py
 wodby/models/app_route.py
 wodby/models/app_route_setting.py
 wodby/models/app_route_setting_input.py
@@ -585,6 +609,8 @@ wodby/models/app_service_setting_input.py
 wodby/models/app_service_token.py
 wodby/models/app_service_volume.py
 wodby/models/app_service_volume_storage_class_state.py
+wodby/models/app_settings.py
+wodby/models/app_settings_input.py
 wodby/models/automation_time_window.py
 wodby/models/automation_time_window_input.py
 wodby/models/backup.py
@@ -688,6 +714,7 @@ wodby/models/new_app_environment_access_endpoint_input.py
 wodby/models/new_app_environment_access_input.py
 wodby/models/new_app_environment_input.py
 wodby/models/new_app_input.py
+wodby/models/new_app_preview_environment_request.py
 wodby/models/new_app_route_input.py
 wodby/models/new_app_service_cron_schedule_input.py
 wodby/models/new_app_service_env_var_input.py

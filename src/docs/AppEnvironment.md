@@ -32,6 +32,7 @@ Name | Type | Description | Notes
 **configuration_ready** | **bool** |  | 
 **configuration_issues** | [**List[AppServiceConfigurationIssue]**](AppServiceConfigurationIssue.md) |  | 
 **settings** | [**AppEnvironmentSettings**](AppEnvironmentSettings.md) |  | [optional] 
+**preview** | [**AppEnvironmentPreview**](AppEnvironmentPreview.md) |  | [optional] 
 **health** | [**AppEnvironmentHealth**](AppEnvironmentHealth.md) |  | 
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 

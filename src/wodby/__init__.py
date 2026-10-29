@@ -110,6 +110,7 @@ from wodby.models.app_environment_migration_component import AppEnvironmentMigra
 from wodby.models.app_environment_migration_input import AppEnvironmentMigrationInput
 from wodby.models.app_environment_migration_operation_result import AppEnvironmentMigrationOperationResult
 from wodby.models.app_environment_migration_volume_input import AppEnvironmentMigrationVolumeInput
+from wodby.models.app_environment_preview import AppEnvironmentPreview
 from wodby.models.app_environment_settings import AppEnvironmentSettings
 from wodby.models.app_environment_settings_input import AppEnvironmentSettingsInput
 from wodby.models.app_environment_stack_reconciliation_input import AppEnvironmentStackReconciliationInput
@@ -122,6 +123,11 @@ from wodby.models.app_port_setting import AppPortSetting
 from wodby.models.app_port_setting_input import AppPortSettingInput
 from wodby.models.app_port_setting_name import AppPortSettingName
 from wodby.models.app_port_settings_input import AppPortSettingsInput
+from wodby.models.app_preview_environments_settings import AppPreviewEnvironmentsSettings
+from wodby.models.app_preview_environments_settings_input import AppPreviewEnvironmentsSettingsInput
+from wodby.models.app_preview_import import AppPreviewImport
+from wodby.models.app_preview_pull_request import AppPreviewPullRequest
+from wodby.models.app_preview_pull_request_list import AppPreviewPullRequestList
 from wodby.models.app_route import AppRoute
 from wodby.models.app_route_setting import AppRouteSetting
 from wodby.models.app_route_setting_input import AppRouteSettingInput
@@ -164,6 +170,8 @@ from wodby.models.app_service_setting_input import AppServiceSettingInput
 from wodby.models.app_service_token import AppServiceToken
 from wodby.models.app_service_volume import AppServiceVolume
 from wodby.models.app_service_volume_storage_class_state import AppServiceVolumeStorageClassState
+from wodby.models.app_settings import AppSettings
+from wodby.models.app_settings_input import AppSettingsInput
 from wodby.models.automation_time_window import AutomationTimeWindow
 from wodby.models.automation_time_window_input import AutomationTimeWindowInput
 from wodby.models.backup import Backup
@@ -267,6 +275,7 @@ from wodby.models.new_app_environment_access_endpoint_input import NewAppEnviron
 from wodby.models.new_app_environment_access_input import NewAppEnvironmentAccessInput
 from wodby.models.new_app_environment_input import NewAppEnvironmentInput
 from wodby.models.new_app_input import NewAppInput
+from wodby.models.new_app_preview_environment_request import NewAppPreviewEnvironmentRequest
 from wodby.models.new_app_route_input import NewAppRouteInput
 from wodby.models.new_app_service_cron_schedule_input import NewAppServiceCronScheduleInput
 from wodby.models.new_app_service_env_var_input import NewAppServiceEnvVarInput

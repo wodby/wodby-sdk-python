@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **org_id** | **int** |  | 
 **ownership_scope** | **str** |  | 
 **owner_project_id** | **int** |  | [optional] 
+**settings** | [**AppSettings**](AppSettings.md) |  | [optional] 
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 
 
