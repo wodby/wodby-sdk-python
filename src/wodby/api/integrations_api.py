@@ -912,9 +912,9 @@ class IntegrationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AppAccessProviderOptions:
-        """Get app-access provider options
+        """Get Private App Access provider options
 
-        Returns supported app-access modes, scopes, fields, and hostname behavior for the integration.
+        Returns supported Private App Access modes, scopes, fields, and hostname behavior for the integration.
 
         :param id: (required)
         :type id: int
@@ -980,9 +980,9 @@ class IntegrationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[AppAccessProviderOptions]:
-        """Get app-access provider options
+        """Get Private App Access provider options
 
-        Returns supported app-access modes, scopes, fields, and hostname behavior for the integration.
+        Returns supported Private App Access modes, scopes, fields, and hostname behavior for the integration.
 
         :param id: (required)
         :type id: int
@@ -1048,9 +1048,9 @@ class IntegrationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get app-access provider options
+        """Get Private App Access provider options
 
-        Returns supported app-access modes, scopes, fields, and hostname behavior for the integration.
+        Returns supported Private App Access modes, scopes, fields, and hostname behavior for the integration.
 
         :param id: (required)
         :type id: int
@@ -1444,7 +1444,7 @@ class IntegrationsApi:
     ) -> Dict[str, object]:
         """Get Kubernetes settings
 
-        Returns what clusters of the integration's Kubernetes provider support: highAvailability, nodeDiskSizeIsConfigurable, noSingleAZ, singleNode, serverless, billingOptions, gpuNodePool (whether a cluster can have an optional GPU node pool) and gpuNodePoolScalesToZero (whether that pool's minimum may be 0).
+        Returns what clusters of the integration's Kubernetes provider support: highAvailability, nodeDiskSizeIsConfigurable, noSingleAZ, singleNode, serverless, billingOptions, gpuNodePool (whether a cluster can have an optional GPU node pool), gpuNodePoolScalesToZero (whether that pool's minimum may be 0) and nodeRecycling (whether a running cluster's worker nodes can be recycled).
 
         :param id: (required)
         :type id: int
@@ -1512,7 +1512,7 @@ class IntegrationsApi:
     ) -> ApiResponse[Dict[str, object]]:
         """Get Kubernetes settings
 
-        Returns what clusters of the integration's Kubernetes provider support: highAvailability, nodeDiskSizeIsConfigurable, noSingleAZ, singleNode, serverless, billingOptions, gpuNodePool (whether a cluster can have an optional GPU node pool) and gpuNodePoolScalesToZero (whether that pool's minimum may be 0).
+        Returns what clusters of the integration's Kubernetes provider support: highAvailability, nodeDiskSizeIsConfigurable, noSingleAZ, singleNode, serverless, billingOptions, gpuNodePool (whether a cluster can have an optional GPU node pool), gpuNodePoolScalesToZero (whether that pool's minimum may be 0) and nodeRecycling (whether a running cluster's worker nodes can be recycled).
 
         :param id: (required)
         :type id: int
@@ -1580,7 +1580,7 @@ class IntegrationsApi:
     ) -> RESTResponseType:
         """Get Kubernetes settings
 
-        Returns what clusters of the integration's Kubernetes provider support: highAvailability, nodeDiskSizeIsConfigurable, noSingleAZ, singleNode, serverless, billingOptions, gpuNodePool (whether a cluster can have an optional GPU node pool) and gpuNodePoolScalesToZero (whether that pool's minimum may be 0).
+        Returns what clusters of the integration's Kubernetes provider support: highAvailability, nodeDiskSizeIsConfigurable, noSingleAZ, singleNode, serverless, billingOptions, gpuNodePool (whether a cluster can have an optional GPU node pool), gpuNodePoolScalesToZero (whether that pool's minimum may be 0) and nodeRecycling (whether a running cluster's worker nodes can be recycled).
 
         :param id: (required)
         :type id: int
@@ -7899,9 +7899,9 @@ class IntegrationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ValidationResult:
-        """Validate an app-access hostname
+        """Validate a Private App Access hostname
 
-        Validates an app-access hostname against the provider settings of the integration.
+        Validates a Private App Access hostname against the provider settings of the integration.
 
         :param id: (required)
         :type id: int
@@ -7971,9 +7971,9 @@ class IntegrationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ValidationResult]:
-        """Validate an app-access hostname
+        """Validate a Private App Access hostname
 
-        Validates an app-access hostname against the provider settings of the integration.
+        Validates a Private App Access hostname against the provider settings of the integration.
 
         :param id: (required)
         :type id: int
@@ -8043,9 +8043,9 @@ class IntegrationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Validate an app-access hostname
+        """Validate a Private App Access hostname
 
-        Validates an app-access hostname against the provider settings of the integration.
+        Validates a Private App Access hostname against the provider settings of the integration.
 
         :param id: (required)
         :type id: int

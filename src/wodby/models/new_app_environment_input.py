@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, SecretStr, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.app_environment_settings_input import AppEnvironmentSettingsInput
 from wodby.models.new_app_environment_access_input import NewAppEnvironmentAccessInput
@@ -47,7 +47,10 @@ class NewAppEnvironmentInput(BaseModel):
     defer_initial_deployment: Optional[StrictBool] = Field(default=False, alias="deferInitialDeployment")
     settings: Optional[AppEnvironmentSettingsInput] = None
     access: Optional[NewAppEnvironmentAccessInput] = None
-    __properties: ClassVar[List[str]] = ["executionMode", "workspace", "appId", "environmentName", "environmentTitle", "environmentType", "domain", "stackRevId", "services", "serviceOverrides", "clusterId", "ciIntegrationId", "registryIntegrationId", "deferInitialDeployment", "settings", "access"]
+    basic_auth: Optional[StrictBool] = Field(default=None, description="Protect the whole new environment with basic auth, by default with the username wodby and a generated password revealed in Wodby. Cannot be combined with access (Private App Access).", alias="basicAuth")
+    basic_auth_username: Optional[StrictStr] = Field(default=None, description="Username of the environment's basic auth. Requires basicAuth. Defaults to wodby.", alias="basicAuthUsername")
+    basic_auth_password: Optional[SecretStr] = Field(default=None, description="Password of the environment's basic auth. Requires basicAuth. Omit to let Wodby generate one.", alias="basicAuthPassword")
+    __properties: ClassVar[List[str]] = ["executionMode", "workspace", "appId", "environmentName", "environmentTitle", "environmentType", "domain", "stackRevId", "services", "serviceOverrides", "clusterId", "ciIntegrationId", "registryIntegrationId", "deferInitialDeployment", "settings", "access", "basicAuth", "basicAuthUsername", "basicAuthPassword"]
 
     @field_validator('execution_mode')
     def execution_mode_validate_enum(cls, value):
@@ -170,7 +173,10 @@ class NewAppEnvironmentInput(BaseModel):
             "registryIntegrationId": obj.get("registryIntegrationId"),
             "deferInitialDeployment": obj.get("deferInitialDeployment") if obj.get("deferInitialDeployment") is not None else False,
             "settings": AppEnvironmentSettingsInput.from_dict(obj["settings"]) if obj.get("settings") is not None else None,
-            "access": NewAppEnvironmentAccessInput.from_dict(obj["access"]) if obj.get("access") is not None else None
+            "access": NewAppEnvironmentAccessInput.from_dict(obj["access"]) if obj.get("access") is not None else None,
+            "basicAuth": obj.get("basicAuth"),
+            "basicAuthUsername": obj.get("basicAuthUsername"),
+            "basicAuthPassword": obj.get("basicAuthPassword")
         })
         return _obj
 

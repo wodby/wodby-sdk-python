@@ -9,9 +9,10 @@ Name | Type | Description | Notes
 **app_service_ids** | **List[int]** | App services to protect. Omit or pass an empty list to protect the whole app environment. | [optional] 
 **app_service_id** | **int** | Single-service scope. Ignored when appServiceIds is supplied. | [optional] 
 **app_route_id** | **int** | Route scope. The owning app service is derived from the route. | [optional] 
-**login** | **str** |  | 
-**password** | **str** |  | 
-**realm** | **str** |  | 
+**login** | **str** | Defaults to wodby. Ignored for exemptions. | [optional] 
+**password** | **str** | Omit to let Wodby generate a password, which you reveal in the dashboard. Ignored for exemptions. | [optional] 
+**realm** | **str** |  | [optional] 
+**exempt** | **bool** | Switch basic auth off for the given app services or route even when a wider entry covers them. Requires appServiceIds or appRouteId. | [optional] 
 
 ## Example
 

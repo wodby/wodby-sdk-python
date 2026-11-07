@@ -21,6 +21,9 @@ Name | Type | Description | Notes
 **defer_initial_deployment** | **bool** |  | [optional] [default to False]
 **settings** | [**AppEnvironmentSettingsInput**](AppEnvironmentSettingsInput.md) |  | [optional] 
 **access** | [**NewAppEnvironmentAccessInput**](NewAppEnvironmentAccessInput.md) |  | [optional] 
+**basic_auth** | **bool** | Protect the whole new environment with basic auth, by default with the username wodby and a generated password revealed in Wodby. Cannot be combined with access (Private App Access). | [optional] 
+**basic_auth_username** | **str** | Username of the environment&#39;s basic auth. Requires basicAuth. Defaults to wodby. | [optional] 
+**basic_auth_password** | **str** | Password of the environment&#39;s basic auth. Requires basicAuth. Omit to let Wodby generate one. | [optional] 
 
 ## Example
 

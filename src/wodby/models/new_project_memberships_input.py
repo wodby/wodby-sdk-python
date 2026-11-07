@@ -30,13 +30,14 @@ class NewProjectMembershipsInput(BaseModel):
     org_membership_ids: Optional[List[StrictInt]] = Field(default=None, alias="orgMembershipIds")
     team_ids: Optional[List[StrictInt]] = Field(default=None, alias="teamIds")
     role: StrictStr
-    __properties: ClassVar[List[str]] = ["projectId", "orgMembershipIds", "teamIds", "role"]
+    custom_role_id: Optional[StrictInt] = Field(default=None, description="Required when role is custom; a custom role of the project's organization.", alias="customRoleId")
+    __properties: ClassVar[List[str]] = ["projectId", "orgMembershipIds", "teamIds", "role", "customRoleId"]
 
     @field_validator('role')
     def role_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['read', 'write', 'admin']):
-            raise ValueError("must be one of enum values ('read', 'write', 'admin')")
+        if value not in set(['read', 'write', 'admin', 'developer', 'developer_non_production', 'custom']):
+            raise ValueError("must be one of enum values ('read', 'write', 'admin', 'developer', 'developer_non_production', 'custom')")
         return value
 
     model_config = ConfigDict(
@@ -93,7 +94,8 @@ class NewProjectMembershipsInput(BaseModel):
             "projectId": obj.get("projectId"),
             "orgMembershipIds": obj.get("orgMembershipIds"),
             "teamIds": obj.get("teamIds"),
-            "role": obj.get("role")
+            "role": obj.get("role"),
+            "customRoleId": obj.get("customRoleId")
         })
         return _obj
 

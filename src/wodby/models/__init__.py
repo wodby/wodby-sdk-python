@@ -40,8 +40,10 @@ from wodby.models.app_access_setting_input import AppAccessSettingInput
 from wodby.models.app_annotation import AppAnnotation
 from wodby.models.app_auth import AppAuth
 from wodby.models.app_auth_scope import AppAuthScope
+from wodby.models.app_auth_source import AppAuthSource
 from wodby.models.app_build import AppBuild
 from wodby.models.app_build_config import AppBuildConfig
+from wodby.models.app_build_vulnerability_scan import AppBuildVulnerabilityScan
 from wodby.models.app_builds_create_response import AppBuildsCreateResponse
 from wodby.models.app_builds_response import AppBuildsResponse
 from wodby.models.app_deployment import AppDeployment
@@ -93,6 +95,7 @@ from wodby.models.app_service_annotation_source import AppServiceAnnotationSourc
 from wodby.models.app_service_build import AppServiceBuild
 from wodby.models.app_service_build_arg import AppServiceBuildArg
 from wodby.models.app_service_build_config import AppServiceBuildConfig
+from wodby.models.app_service_build_vulnerability_scan import AppServiceBuildVulnerabilityScan
 from wodby.models.app_service_capacity_preflight import AppServiceCapacityPreflight
 from wodby.models.app_service_capacity_preflight_request import AppServiceCapacityPreflightRequest
 from wodby.models.app_service_config import AppServiceConfig
@@ -101,6 +104,10 @@ from wodby.models.app_service_container import AppServiceContainer
 from wodby.models.app_service_cron_job import AppServiceCronJob
 from wodby.models.app_service_cron_jobs_response import AppServiceCronJobsResponse
 from wodby.models.app_service_cron_schedule import AppServiceCronSchedule
+from wodby.models.app_service_custom_link import AppServiceCustomLink
+from wodby.models.app_service_custom_link_input import AppServiceCustomLinkInput
+from wodby.models.app_service_custom_link_input_values_inner import AppServiceCustomLinkInputValuesInner
+from wodby.models.app_service_custom_link_value import AppServiceCustomLinkValue
 from wodby.models.app_service_database_input import AppServiceDatabaseInput
 from wodby.models.app_service_deployment import AppServiceDeployment
 from wodby.models.app_service_deployment_request import AppServiceDeploymentRequest
@@ -112,6 +119,7 @@ from wodby.models.app_service_input import AppServiceInput
 from wodby.models.app_service_integration import AppServiceIntegration
 from wodby.models.app_service_integration_input import AppServiceIntegrationInput
 from wodby.models.app_service_link import AppServiceLink
+from wodby.models.app_service_link_candidate import AppServiceLinkCandidate
 from wodby.models.app_service_link_input import AppServiceLinkInput
 from wodby.models.app_service_pod import AppServicePod
 from wodby.models.app_service_pod_container import AppServicePodContainer
@@ -148,6 +156,8 @@ from wodby.models.cluster_auto_upgrade_version_policy import ClusterAutoUpgradeV
 from wodby.models.cluster_auto_upgrade_version_policy_input import ClusterAutoUpgradeVersionPolicyInput
 from wodby.models.cluster_capabilities import ClusterCapabilities
 from wodby.models.cluster_capability_policy import ClusterCapabilityPolicy
+from wodby.models.cluster_component import ClusterComponent
+from wodby.models.cluster_component_update import ClusterComponentUpdate
 from wodby.models.cluster_creation_result import ClusterCreationResult
 from wodby.models.cluster_environment_policy_input import ClusterEnvironmentPolicyInput
 from wodby.models.cluster_infra_app_upgrade_changelog import ClusterInfraAppUpgradeChangelog
@@ -267,6 +277,8 @@ from wodby.models.org import Org
 from wodby.models.org_capabilities import OrgCapabilities
 from wodby.models.org_membership import OrgMembership
 from wodby.models.org_membership_role_input import OrgMembershipRoleInput
+from wodby.models.org_membership_teams_input import OrgMembershipTeamsInput
+from wodby.models.org_membership_teams_input_teams_inner import OrgMembershipTeamsInputTeamsInner
 from wodby.models.org_sso_domain import OrgSSODomain
 from wodby.models.org_sso_provider import OrgSSOProvider
 from wodby.models.org_sso_provider_input import OrgSSOProviderInput
@@ -276,11 +288,18 @@ from wodby.models.org_subscription import OrgSubscription
 from wodby.models.org_subscription_details import OrgSubscriptionDetails
 from wodby.models.org_subscription_plan import OrgSubscriptionPlan
 from wodby.models.org_subscription_plan_details import OrgSubscriptionPlanDetails
+from wodby.models.org_usage_item import OrgUsageItem
+from wodby.models.org_usage_period import OrgUsagePeriod
+from wodby.models.org_usage_project import OrgUsageProject
+from wodby.models.org_usage_report import OrgUsageReport
 from wodby.models.problem_details import ProblemDetails
 from wodby.models.problem_field_error import ProblemFieldError
 from wodby.models.project import Project
 from wodby.models.project_membership import ProjectMembership
 from wodby.models.project_membership_role_input import ProjectMembershipRoleInput
+from wodby.models.project_permission import ProjectPermission
+from wodby.models.project_role import ProjectRole
+from wodby.models.project_role_input import ProjectRoleInput
 from wodby.models.project_share_input import ProjectShareInput
 from wodby.models.provider import Provider
 from wodby.models.provider_manifest_input import ProviderManifestInput
@@ -293,6 +312,8 @@ from wodby.models.remote_git_repo_file_presence import RemoteGitRepoFilePresence
 from wodby.models.repeat_task_request import RepeatTaskRequest
 from wodby.models.resolve_integration_result import ResolveIntegrationResult
 from wodby.models.resolved_service_config import ResolvedServiceConfig
+from wodby.models.resource_preset import ResourcePreset
+from wodby.models.resource_preset_input import ResourcePresetInput
 from wodby.models.resource_project_share import ResourceProjectShare
 from wodby.models.resource_sharing import ResourceSharing
 from wodby.models.resource_sharing_input import ResourceSharingInput
@@ -389,6 +410,7 @@ from wodby.models.update_app_service_cron_schedule_input import UpdateAppService
 from wodby.models.update_app_service_database_input import UpdateAppServiceDatabaseInput
 from wodby.models.update_app_service_env_var_input import UpdateAppServiceEnvVarInput
 from wodby.models.update_backup_preset_input import UpdateBackupPresetInput
+from wodby.models.update_cluster_component_request import UpdateClusterComponentRequest
 from wodby.models.update_cluster_gpu_node_pool_input import UpdateClusterGPUNodePoolInput
 from wodby.models.update_current_user_request import UpdateCurrentUserRequest
 from wodby.models.update_database_user_dbs_input import UpdateDatabaseUserDBsInput
@@ -415,6 +437,8 @@ from wodby.models.validate_app_access_hostname_input import ValidateAppAccessHos
 from wodby.models.validation_result import ValidationResult
 from wodby.models.verify_org_sso_domain_input import VerifyOrgSSODomainInput
 from wodby.models.volume_size_input import VolumeSizeInput
+from wodby.models.vulnerability_counts import VulnerabilityCounts
+from wodby.models.vulnerability_scan_status import VulnerabilityScanStatus
 from wodby.models.wodby_cloud_machine_type import WodbyCloudMachineType
 from wodby.models.workspace import Workspace
 from wodby.models.workspace_connection import WorkspaceConnection

@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **org_membership_id** | **int** |  | [optional] 
 **team_id** | **int** |  | [optional] 
 **role** | **str** |  | 
+**custom_role_id** | **int** | The custom role when role is custom. | [optional] 
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 
 

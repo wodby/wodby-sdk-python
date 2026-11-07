@@ -17,8 +17,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,13 +27,14 @@ class ProjectMembershipRoleInput(BaseModel):
     ProjectMembershipRoleInput
     """ # noqa: E501
     role: StrictStr
-    __properties: ClassVar[List[str]] = ["role"]
+    custom_role_id: Optional[StrictInt] = Field(default=None, description="Required when role is custom; a custom role of the project's organization.", alias="customRoleId")
+    __properties: ClassVar[List[str]] = ["role", "customRoleId"]
 
     @field_validator('role')
     def role_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['read', 'write', 'admin']):
-            raise ValueError("must be one of enum values ('read', 'write', 'admin')")
+        if value not in set(['read', 'write', 'admin', 'developer', 'developer_non_production', 'custom']):
+            raise ValueError("must be one of enum values ('read', 'write', 'admin', 'developer', 'developer_non_production', 'custom')")
         return value
 
     model_config = ConfigDict(
@@ -87,7 +88,8 @@ class ProjectMembershipRoleInput(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "role": obj.get("role")
+            "role": obj.get("role"),
+            "customRoleId": obj.get("customRoleId")
         })
         return _obj
 

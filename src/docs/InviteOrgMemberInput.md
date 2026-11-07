@@ -8,8 +8,6 @@ Name | Type | Description | Notes
 **org_id** | **int** | Optional for API-key requests; defaults to the API key&#39;s organization. | [optional] 
 **email** | **str** |  | 
 **role** | **str** |  | 
-**team_ids** | **List[int]** |  | [optional] 
-**project_ids** | **List[int]** |  | [optional] 
 
 ## Example
 

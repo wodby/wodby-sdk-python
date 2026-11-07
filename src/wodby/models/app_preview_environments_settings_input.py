@@ -35,7 +35,8 @@ class AppPreviewEnvironmentsSettingsInput(BaseModel):
     run_cron_jobs: Optional[StrictBool] = Field(default=None, description="Omitted keeps the stored value; apps that never set it do not run cron jobs in previews.", alias="runCronJobs")
     max_concurrent: Optional[StrictInt] = Field(default=None, alias="maxConcurrent")
     idle_ttl_days: Optional[StrictInt] = Field(default=None, alias="idleTtlDays")
-    __properties: ClassVar[List[str]] = ["enabled", "baseAppEnvironmentId", "environmentType", "imports", "buildDrafts", "runCronJobs", "maxConcurrent", "idleTtlDays"]
+    basic_auth: Optional[StrictBool] = Field(default=None, description="Protect every preview with basic auth and one shared generated password. Defaults to true.", alias="basicAuth")
+    __properties: ClassVar[List[str]] = ["enabled", "baseAppEnvironmentId", "environmentType", "imports", "buildDrafts", "runCronJobs", "maxConcurrent", "idleTtlDays", "basicAuth"]
 
     @field_validator('environment_type')
     def environment_type_validate_enum(cls, value):
@@ -112,7 +113,8 @@ class AppPreviewEnvironmentsSettingsInput(BaseModel):
             "buildDrafts": obj.get("buildDrafts"),
             "runCronJobs": obj.get("runCronJobs"),
             "maxConcurrent": obj.get("maxConcurrent"),
-            "idleTtlDays": obj.get("idleTtlDays")
+            "idleTtlDays": obj.get("idleTtlDays"),
+            "basicAuth": obj.get("basicAuth")
         })
         return _obj
 

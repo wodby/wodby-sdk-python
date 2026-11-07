@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **name** | **str** |  | 
 **backup_id** | **int** |  | 
 **backup_status** | **str** |  | [optional] 
+**existing_backup** | **bool** | True when the component restores a backup chosen at the start instead of a final backup. | 
 **import_id** | **int** |  | 
 **import_status** | **str** |  | [optional] 
 

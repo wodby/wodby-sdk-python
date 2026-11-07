@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, SecretStr, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, SecretStr, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -30,10 +30,11 @@ class NewAppAuthInput(BaseModel):
     app_service_ids: Optional[List[StrictInt]] = Field(default=None, description="App services to protect. Omit or pass an empty list to protect the whole app environment.", alias="appServiceIds")
     app_service_id: Optional[StrictInt] = Field(default=None, description="Single-service scope. Ignored when appServiceIds is supplied.", alias="appServiceId")
     app_route_id: Optional[StrictInt] = Field(default=None, description="Route scope. The owning app service is derived from the route.", alias="appRouteId")
-    login: StrictStr
-    password: SecretStr
-    realm: StrictStr
-    __properties: ClassVar[List[str]] = ["appInstanceId", "appServiceIds", "appServiceId", "appRouteId", "login", "password", "realm"]
+    login: Optional[StrictStr] = Field(default=None, description="Defaults to wodby. Ignored for exemptions.")
+    password: Optional[SecretStr] = Field(default=None, description="Omit to let Wodby generate a password, which you reveal in the dashboard. Ignored for exemptions.")
+    realm: Optional[StrictStr] = None
+    exempt: Optional[StrictBool] = Field(default=None, description="Switch basic auth off for the given app services or route even when a wider entry covers them. Requires appServiceIds or appRouteId.")
+    __properties: ClassVar[List[str]] = ["appInstanceId", "appServiceIds", "appServiceId", "appRouteId", "login", "password", "realm", "exempt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -107,7 +108,8 @@ class NewAppAuthInput(BaseModel):
             "appRouteId": obj.get("appRouteId"),
             "login": obj.get("login"),
             "password": obj.get("password"),
-            "realm": obj.get("realm")
+            "realm": obj.get("realm"),
+            "exempt": obj.get("exempt")
         })
         return _obj
 

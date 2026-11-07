@@ -968,7 +968,7 @@ class AgentChatsApi:
     ) -> AgentChatDetail:
         """Get agent chat
 
-        Returns a chat with its messages. A tool message with approval pending is a change that waits for approval, or, for the tool ask_user, a question that waits for an answer.
+        Returns a chat with its messages. A tool message with approval pending is a change that waits for approval, or, for the tool ask_user, a question that waits for an answer. Support members can read any chat in the organization; other members can read only their own.
 
         :param id: (required)
         :type id: int
@@ -1040,7 +1040,7 @@ class AgentChatsApi:
     ) -> ApiResponse[AgentChatDetail]:
         """Get agent chat
 
-        Returns a chat with its messages. A tool message with approval pending is a change that waits for approval, or, for the tool ask_user, a question that waits for an answer.
+        Returns a chat with its messages. A tool message with approval pending is a change that waits for approval, or, for the tool ask_user, a question that waits for an answer. Support members can read any chat in the organization; other members can read only their own.
 
         :param id: (required)
         :type id: int
@@ -1112,7 +1112,7 @@ class AgentChatsApi:
     ) -> RESTResponseType:
         """Get agent chat
 
-        Returns a chat with its messages. A tool message with approval pending is a change that waits for approval, or, for the tool ask_user, a question that waits for an answer.
+        Returns a chat with its messages. A tool message with approval pending is a change that waits for approval, or, for the tool ask_user, a question that waits for an answer. Support members can read any chat in the organization; other members can read only their own.
 
         :param id: (required)
         :type id: int
@@ -1249,7 +1249,7 @@ class AgentChatsApi:
     ) -> List[AgentChat]:
         """List agent chats
 
-        Returns the API key user's chats with Wodby Agent in the organization, the most recently active first.
+        Returns the API key user's chats with Wodby Agent in the organization, the most recently active first. Support members receive all members' chats in the organization.
 
         :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
@@ -1317,7 +1317,7 @@ class AgentChatsApi:
     ) -> ApiResponse[List[AgentChat]]:
         """List agent chats
 
-        Returns the API key user's chats with Wodby Agent in the organization, the most recently active first.
+        Returns the API key user's chats with Wodby Agent in the organization, the most recently active first. Support members receive all members' chats in the organization.
 
         :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int
@@ -1385,7 +1385,7 @@ class AgentChatsApi:
     ) -> RESTResponseType:
         """List agent chats
 
-        Returns the API key user's chats with Wodby Agent in the organization, the most recently active first.
+        Returns the API key user's chats with Wodby Agent in the organization, the most recently active first. Support members receive all members' chats in the organization.
 
         :param org_id: Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
         :type org_id: int

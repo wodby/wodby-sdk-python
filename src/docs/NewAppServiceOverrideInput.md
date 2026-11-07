@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **build_source** | [**BuildSourceInput**](BuildSourceInput.md) |  | [optional] 
 **settings** | [**List[AppServiceSettingInput]**](AppServiceSettingInput.md) | Service settings to set. A setting that is not named keeps its default. Use it to supply a required setting that has no default. | [optional] 
 **database** | [**AppServiceDatabaseInput**](AppServiceDatabaseInput.md) | The database server, and optionally the database, of a database service. Required to enable an external database service, such as a managed PostgreSQL server. | [optional] 
+**basic_auth** | **bool** | Protect the service&#39;s public HTTP endpoints with their own basic auth and a generated password, or not. Omit to follow the stack service&#39;s basicAuthDefault. | [optional] 
 
 ## Example
 

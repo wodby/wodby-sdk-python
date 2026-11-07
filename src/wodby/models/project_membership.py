@@ -32,15 +32,16 @@ class ProjectMembership(BaseModel):
     org_membership_id: Optional[StrictInt] = Field(default=None, alias="orgMembershipId")
     team_id: Optional[StrictInt] = Field(default=None, alias="teamId")
     role: StrictStr
+    custom_role_id: Optional[StrictInt] = Field(default=None, description="The custom role when role is custom.", alias="customRoleId")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "projectId", "orgMembershipId", "teamId", "role", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "projectId", "orgMembershipId", "teamId", "role", "customRoleId", "createdAt", "updatedAt"]
 
     @field_validator('role')
     def role_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['read', 'write', 'admin']):
-            raise ValueError("must be one of enum values ('read', 'write', 'admin')")
+        if value not in set(['read', 'write', 'admin', 'developer', 'developer_non_production', 'custom']):
+            raise ValueError("must be one of enum values ('read', 'write', 'admin', 'developer', 'developer_non_production', 'custom')")
         return value
 
     model_config = ConfigDict(
@@ -92,6 +93,11 @@ class ProjectMembership(BaseModel):
         if self.team_id is None and "team_id" in self.model_fields_set:
             _dict['teamId'] = None
 
+        # set to None if custom_role_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.custom_role_id is None and "custom_role_id" in self.model_fields_set:
+            _dict['customRoleId'] = None
+
         return _dict
 
     @classmethod
@@ -109,6 +115,7 @@ class ProjectMembership(BaseModel):
             "orgMembershipId": obj.get("orgMembershipId"),
             "teamId": obj.get("teamId"),
             "role": obj.get("role"),
+            "customRoleId": obj.get("customRoleId"),
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt")
         })

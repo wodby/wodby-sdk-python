@@ -352,9 +352,9 @@ class AppEnvironmentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AppAccessOperationResult:
-        """Create app environment access
+        """Create Private App Access
 
-        Creates external access for the app environment identified by the path. An active paid subscription is required.
+        Creates Private App Access for the app environment identified by the path. An active paid subscription is required.
 
         :param id: (required)
         :type id: int
@@ -424,9 +424,9 @@ class AppEnvironmentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[AppAccessOperationResult]:
-        """Create app environment access
+        """Create Private App Access
 
-        Creates external access for the app environment identified by the path. An active paid subscription is required.
+        Creates Private App Access for the app environment identified by the path. An active paid subscription is required.
 
         :param id: (required)
         :type id: int
@@ -496,9 +496,9 @@ class AppEnvironmentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Create app environment access
+        """Create Private App Access
 
-        Creates external access for the app environment identified by the path. An active paid subscription is required.
+        Creates Private App Access for the app environment identified by the path. An active paid subscription is required.
 
         :param id: (required)
         :type id: int
@@ -1200,9 +1200,9 @@ class AppEnvironmentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> OperationResult:
-        """Delete app access
+        """Delete Private App Access
 
-        Removes app access and returns the cleanup task identifier.
+        Removes Private App Access and returns the cleanup task identifier.
 
         :param id: (required)
         :type id: int
@@ -1268,9 +1268,9 @@ class AppEnvironmentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[OperationResult]:
-        """Delete app access
+        """Delete Private App Access
 
-        Removes app access and returns the cleanup task identifier.
+        Removes Private App Access and returns the cleanup task identifier.
 
         :param id: (required)
         :type id: int
@@ -1336,9 +1336,9 @@ class AppEnvironmentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Delete app access
+        """Delete Private App Access
 
-        Removes app access and returns the cleanup task identifier.
+        Removes Private App Access and returns the cleanup task identifier.
 
         :param id: (required)
         :type id: int
@@ -2012,9 +2012,9 @@ class AppEnvironmentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AppAccess:
-        """Get app access
+        """Get Private App Access
 
-        Returns one app access configuration.
+        Returns one Private App Access configuration.
 
         :param id: (required)
         :type id: int
@@ -2080,9 +2080,9 @@ class AppEnvironmentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[AppAccess]:
-        """Get app access
+        """Get Private App Access
 
-        Returns one app access configuration.
+        Returns one Private App Access configuration.
 
         :param id: (required)
         :type id: int
@@ -2148,9 +2148,9 @@ class AppEnvironmentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get app access
+        """Get Private App Access
 
-        Returns one app access configuration.
+        Returns one Private App Access configuration.
 
         :param id: (required)
         :type id: int
@@ -2807,9 +2807,9 @@ class AppEnvironmentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AppAccess:
-        """Get app environment access
+        """Get app environment Private App Access
 
-        Returns the external access configuration for the app environment identified by the path.
+        Returns the Private App Access configuration of the app environment identified by the path.
 
         :param id: (required)
         :type id: int
@@ -2875,9 +2875,9 @@ class AppEnvironmentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[AppAccess]:
-        """Get app environment access
+        """Get app environment Private App Access
 
-        Returns the external access configuration for the app environment identified by the path.
+        Returns the Private App Access configuration of the app environment identified by the path.
 
         :param id: (required)
         :type id: int
@@ -2943,9 +2943,9 @@ class AppEnvironmentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get app environment access
+        """Get app environment Private App Access
 
-        Returns the external access configuration for the app environment identified by the path.
+        Returns the Private App Access configuration of the app environment identified by the path.
 
         :param id: (required)
         :type id: int
@@ -4994,7 +4994,7 @@ class AppEnvironmentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[AppAccessCleanup]:
-        """List app-access cleanups
+        """List Private App Access cleanups
 
         Returns cleanup records for exactly one app environment or integration.
 
@@ -5066,7 +5066,7 @@ class AppEnvironmentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[List[AppAccessCleanup]]:
-        """List app-access cleanups
+        """List Private App Access cleanups
 
         Returns cleanup records for exactly one app environment or integration.
 
@@ -5138,7 +5138,7 @@ class AppEnvironmentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """List app-access cleanups
+        """List Private App Access cleanups
 
         Returns cleanup records for exactly one app environment or integration.
 
@@ -6721,9 +6721,9 @@ class AppEnvironmentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ValidationResult:
-        """Preflight app environment access
+        """Preflight Private App Access
 
-        Validates a proposed app-access configuration before an app environment or access resource is created. An active paid subscription is required.
+        Validates a proposed Private App Access configuration before an app environment or access resource is created. An active paid subscription is required.
 
         :param new_app_environment_access_input: (required)
         :type new_app_environment_access_input: NewAppEnvironmentAccessInput
@@ -6789,9 +6789,9 @@ class AppEnvironmentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ValidationResult]:
-        """Preflight app environment access
+        """Preflight Private App Access
 
-        Validates a proposed app-access configuration before an app environment or access resource is created. An active paid subscription is required.
+        Validates a proposed Private App Access configuration before an app environment or access resource is created. An active paid subscription is required.
 
         :param new_app_environment_access_input: (required)
         :type new_app_environment_access_input: NewAppEnvironmentAccessInput
@@ -6857,9 +6857,9 @@ class AppEnvironmentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Preflight app environment access
+        """Preflight Private App Access
 
-        Validates a proposed app-access configuration before an app environment or access resource is created. An active paid subscription is required.
+        Validates a proposed Private App Access configuration before an app environment or access resource is created. An active paid subscription is required.
 
         :param new_app_environment_access_input: (required)
         :type new_app_environment_access_input: NewAppEnvironmentAccessInput
@@ -8380,9 +8380,9 @@ class AppEnvironmentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> OperationResult:
-        """Retry app-access cleanup
+        """Retry Private App Access cleanup
 
-        Retries a failed app-access cleanup and returns its task identifier.
+        Retries a failed Private App Access cleanup and returns its task identifier.
 
         :param id: (required)
         :type id: int
@@ -8448,9 +8448,9 @@ class AppEnvironmentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[OperationResult]:
-        """Retry app-access cleanup
+        """Retry Private App Access cleanup
 
-        Retries a failed app-access cleanup and returns its task identifier.
+        Retries a failed Private App Access cleanup and returns its task identifier.
 
         :param id: (required)
         :type id: int
@@ -8516,9 +8516,9 @@ class AppEnvironmentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Retry app-access cleanup
+        """Retry Private App Access cleanup
 
-        Retries a failed app-access cleanup and returns its task identifier.
+        Retries a failed Private App Access cleanup and returns its task identifier.
 
         :param id: (required)
         :type id: int
@@ -8911,9 +8911,9 @@ class AppEnvironmentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AppAccessOperationResult:
-        """Update app access
+        """Update Private App Access
 
-        Updates an existing app-access configuration and starts its reconciliation task. An active paid subscription is required.
+        Updates an existing Private App Access configuration and starts its reconciliation task. An active paid subscription is required.
 
         :param id: (required)
         :type id: int
@@ -8983,9 +8983,9 @@ class AppEnvironmentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[AppAccessOperationResult]:
-        """Update app access
+        """Update Private App Access
 
-        Updates an existing app-access configuration and starts its reconciliation task. An active paid subscription is required.
+        Updates an existing Private App Access configuration and starts its reconciliation task. An active paid subscription is required.
 
         :param id: (required)
         :type id: int
@@ -9055,9 +9055,9 @@ class AppEnvironmentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Update app access
+        """Update Private App Access
 
-        Updates an existing app-access configuration and starts its reconciliation task. An active paid subscription is required.
+        Updates an existing Private App Access configuration and starts its reconciliation task. An active paid subscription is required.
 
         :param id: (required)
         :type id: int

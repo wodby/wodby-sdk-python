@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, SecretStr, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, SecretStr, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,10 +29,11 @@ class UpdateAppAuthInput(BaseModel):
     app_service_ids: Optional[List[StrictInt]] = Field(default=None, description="App services to protect. Omit every scope field to preserve the current scope, or pass an empty list to protect the whole app environment.", alias="appServiceIds")
     app_service_id: Optional[StrictInt] = Field(default=None, description="Single-service scope. Ignored when appServiceIds is supplied.", alias="appServiceId")
     app_route_id: Optional[StrictInt] = Field(default=None, description="Moves the entry to route scope. The owning app service is derived from the route.", alias="appRouteId")
-    login: StrictStr
+    login: Optional[StrictStr] = Field(default=None, description="Omit to keep the current login.")
     password: Optional[SecretStr] = Field(default=None, description="Replaces the existing secret when supplied; omit to keep the current password.")
-    realm: StrictStr
-    __properties: ClassVar[List[str]] = ["appServiceIds", "appServiceId", "appRouteId", "login", "password", "realm"]
+    generate_password: Optional[StrictBool] = Field(default=None, description="Replace the password with a newly generated one. Ignored when password is given.", alias="generatePassword")
+    realm: Optional[StrictStr] = Field(default=None, description="Omit to keep the current realm.")
+    __properties: ClassVar[List[str]] = ["appServiceIds", "appServiceId", "appRouteId", "login", "password", "generatePassword", "realm"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -110,6 +111,7 @@ class UpdateAppAuthInput(BaseModel):
             "appRouteId": obj.get("appRouteId"),
             "login": obj.get("login"),
             "password": obj.get("password"),
+            "generatePassword": obj.get("generatePassword"),
             "realm": obj.get("realm")
         })
         return _obj

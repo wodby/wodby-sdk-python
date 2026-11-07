@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.build_source_input import BuildSourceInput
 from wodby.models.service_deployment_configuration_input import ServiceDeploymentConfigurationInput
@@ -30,13 +30,24 @@ class StackServiceInput(BaseModel):
     """ # noqa: E501
     replicas: Optional[StrictInt] = None
     required: Optional[StrictBool] = None
+    basic_auth_override: Optional[StrictStr] = Field(default=None, description="Follow the service's basic auth default, or protect new app services with basic auth or not.", alias="basicAuthOverride")
     disabled: Optional[StrictBool] = None
     main: Optional[StrictBool] = None
     service_rev_pinned: Optional[StrictBool] = Field(default=None, alias="serviceRevPinned")
     title: Optional[StrictStr] = None
     build_source: Optional[BuildSourceInput] = Field(default=None, alias="buildSource")
     deployment: Optional[ServiceDeploymentConfigurationInput] = None
-    __properties: ClassVar[List[str]] = ["replicas", "required", "disabled", "main", "serviceRevPinned", "title", "buildSource", "deployment"]
+    __properties: ClassVar[List[str]] = ["replicas", "required", "basicAuthOverride", "disabled", "main", "serviceRevPinned", "title", "buildSource", "deployment"]
+
+    @field_validator('basic_auth_override')
+    def basic_auth_override_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['inherit', 'enabled', 'disabled']):
+            raise ValueError("must be one of enum values ('inherit', 'enabled', 'disabled')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -93,6 +104,11 @@ class StackServiceInput(BaseModel):
         if self.required is None and "required" in self.model_fields_set:
             _dict['required'] = None
 
+        # set to None if basic_auth_override (nullable) is None
+        # and model_fields_set contains the field
+        if self.basic_auth_override is None and "basic_auth_override" in self.model_fields_set:
+            _dict['basicAuthOverride'] = None
+
         # set to None if disabled (nullable) is None
         # and model_fields_set contains the field
         if self.disabled is None and "disabled" in self.model_fields_set:
@@ -127,6 +143,7 @@ class StackServiceInput(BaseModel):
         _obj = cls.model_validate({
             "replicas": obj.get("replicas"),
             "required": obj.get("required"),
+            "basicAuthOverride": obj.get("basicAuthOverride"),
             "disabled": obj.get("disabled"),
             "main": obj.get("main"),
             "serviceRevPinned": obj.get("serviceRevPinned"),

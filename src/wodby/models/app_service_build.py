@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from wodby.models.app_service_build_vulnerability_scan import AppServiceBuildVulnerabilityScan
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -39,9 +40,10 @@ class AppServiceBuild(BaseModel):
     previously_deployed: StrictBool = Field(alias="previouslyDeployed")
     currently_deployed: StrictBool = Field(alias="currentlyDeployed")
     current_build_number: Optional[StrictInt] = Field(default=None, alias="currentBuildNumber")
+    vulnerability_scan: Optional[AppServiceBuildVulnerabilityScan] = Field(default=None, description="Latest vulnerability scan of this image. Images are scanned only while they are currently deployed. Omitted when the image was never scanned and is not deployed, when scanning is unavailable for the organization, and for builds nested in deployments.", alias="vulnerabilityScan")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "status", "image", "imageDeleted", "unmanagedImage", "dockerfilePath", "dockerfileHash", "size", "appServiceId", "previouslyDeployed", "currentlyDeployed", "currentBuildNumber", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "status", "image", "imageDeleted", "unmanagedImage", "dockerfilePath", "dockerfileHash", "size", "appServiceId", "previouslyDeployed", "currentlyDeployed", "currentBuildNumber", "vulnerabilityScan", "createdAt", "updatedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,10 +84,18 @@ class AppServiceBuild(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of vulnerability_scan
+        if self.vulnerability_scan:
+            _dict['vulnerabilityScan'] = self.vulnerability_scan.to_dict()
         # set to None if current_build_number (nullable) is None
         # and model_fields_set contains the field
         if self.current_build_number is None and "current_build_number" in self.model_fields_set:
             _dict['currentBuildNumber'] = None
+
+        # set to None if vulnerability_scan (nullable) is None
+        # and model_fields_set contains the field
+        if self.vulnerability_scan is None and "vulnerability_scan" in self.model_fields_set:
+            _dict['vulnerabilityScan'] = None
 
         return _dict
 
@@ -111,6 +121,7 @@ class AppServiceBuild(BaseModel):
             "previouslyDeployed": obj.get("previouslyDeployed"),
             "currentlyDeployed": obj.get("currentlyDeployed"),
             "currentBuildNumber": obj.get("currentBuildNumber"),
+            "vulnerabilityScan": AppServiceBuildVulnerabilityScan.from_dict(obj["vulnerabilityScan"]) if obj.get("vulnerabilityScan") is not None else None,
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt")
         })

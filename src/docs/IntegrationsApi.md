@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**configure_integration**](IntegrationsApi.md#configure_integration) | **PUT** /integrations/configuration/{id} | Configure integration
 [**create_integration**](IntegrationsApi.md#create_integration) | **POST** /integrations | Create integration
 [**delete_integration**](IntegrationsApi.md#delete_integration) | **DELETE** /integrations/{id} | Delete integration
-[**get_app_access_provider_options**](IntegrationsApi.md#get_app_access_provider_options) | **GET** /integrations/{id}/options/app-access | Get app-access provider options
+[**get_app_access_provider_options**](IntegrationsApi.md#get_app_access_provider_options) | **GET** /integrations/{id}/options/app-access | Get Private App Access provider options
 [**get_integration**](IntegrationsApi.md#get_integration) | **GET** /integrations/{id} | Get integration
 [**get_integration_kube_settings**](IntegrationsApi.md#get_integration_kube_settings) | **GET** /integrations/{id}/options/kube-settings | Get Kubernetes settings
 [**get_integration_provider_revision_upgrade**](IntegrationsApi.md#get_integration_provider_revision_upgrade) | **GET** /integration-provider-revision-upgrades/{id} | Preview provider revision upgrade
@@ -32,7 +32,7 @@ Method | HTTP request | Description
 [**update_integration_environment_policy**](IntegrationsApi.md#update_integration_environment_policy) | **PUT** /integrations/environment-policy/{id} | Update integration environment policy
 [**update_integration_sharing**](IntegrationsApi.md#update_integration_sharing) | **PUT** /integrations/sharing/{id} | Update integration sharing
 [**upgrade_integration_provider_revision**](IntegrationsApi.md#upgrade_integration_provider_revision) | **POST** /integrations/{id}/actions/upgrade-provider-revision | Upgrade integration provider revision
-[**validate_app_access_hostname**](IntegrationsApi.md#validate_app_access_hostname) | **POST** /integrations/{id}/actions/validate-app-access-hostname | Validate an app-access hostname
+[**validate_app_access_hostname**](IntegrationsApi.md#validate_app_access_hostname) | **POST** /integrations/{id}/actions/validate-app-access-hostname | Validate a Private App Access hostname
 
 
 # **configure_integration**
@@ -285,9 +285,9 @@ Name | Type | Description  | Notes
 # **get_app_access_provider_options**
 > AppAccessProviderOptions get_app_access_provider_options(id)
 
-Get app-access provider options
+Get Private App Access provider options
 
-Returns supported app-access modes, scopes, fields, and hostname behavior for the integration.
+Returns supported Private App Access modes, scopes, fields, and hostname behavior for the integration.
 
 ### Example
 
@@ -323,7 +323,7 @@ with wodby.ApiClient(configuration) as api_client:
     id = 56 # int | 
 
     try:
-        # Get app-access provider options
+        # Get Private App Access provider options
         api_response = api_instance.get_app_access_provider_options(id)
         print("The response of IntegrationsApi->get_app_access_provider_options:\n")
         pprint(api_response)
@@ -357,7 +357,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | App-access provider options |  -  |
+**200** | Private App Access provider options |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 
@@ -449,7 +449,7 @@ Name | Type | Description  | Notes
 
 Get Kubernetes settings
 
-Returns what clusters of the integration's Kubernetes provider support: highAvailability, nodeDiskSizeIsConfigurable, noSingleAZ, singleNode, serverless, billingOptions, gpuNodePool (whether a cluster can have an optional GPU node pool) and gpuNodePoolScalesToZero (whether that pool's minimum may be 0).
+Returns what clusters of the integration's Kubernetes provider support: highAvailability, nodeDiskSizeIsConfigurable, noSingleAZ, singleNode, serverless, billingOptions, gpuNodePool (whether a cluster can have an optional GPU node pool), gpuNodePoolScalesToZero (whether that pool's minimum may be 0) and nodeRecycling (whether a running cluster's worker nodes can be recycled).
 
 ### Example
 
@@ -2343,9 +2343,9 @@ Name | Type | Description  | Notes
 # **validate_app_access_hostname**
 > ValidationResult validate_app_access_hostname(id, validate_app_access_hostname_input)
 
-Validate an app-access hostname
+Validate a Private App Access hostname
 
-Validates an app-access hostname against the provider settings of the integration.
+Validates a Private App Access hostname against the provider settings of the integration.
 
 ### Example
 
@@ -2383,7 +2383,7 @@ with wodby.ApiClient(configuration) as api_client:
     validate_app_access_hostname_input = wodby.ValidateAppAccessHostnameInput() # ValidateAppAccessHostnameInput | 
 
     try:
-        # Validate an app-access hostname
+        # Validate a Private App Access hostname
         api_response = api_instance.validate_app_access_hostname(id, validate_app_access_hostname_input)
         print("The response of IntegrationsApi->validate_app_access_hostname:\n")
         pprint(api_response)

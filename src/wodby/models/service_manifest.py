@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.service_integration_requirement import ServiceIntegrationRequirement
 from typing import Optional, Set
@@ -29,9 +29,10 @@ class ServiceManifest(BaseModel):
     """ # noqa: E501
     raw: StrictStr
     scalable: StrictBool
+    basic_auth: Optional[StrictBool] = Field(default=None, description="Whether the service asks for its public HTTP endpoints to be protected with basic auth by default.", alias="basicAuth")
     integrations: Optional[List[ServiceIntegrationRequirement]] = None
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["raw", "scalable", "integrations"]
+    __properties: ClassVar[List[str]] = ["raw", "scalable", "basicAuth", "integrations"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -100,6 +101,7 @@ class ServiceManifest(BaseModel):
         _obj = cls.model_validate({
             "raw": obj.get("raw"),
             "scalable": obj.get("scalable"),
+            "basicAuth": obj.get("basicAuth"),
             "integrations": [ServiceIntegrationRequirement.from_dict(_item) for _item in obj["integrations"]] if obj.get("integrations") is not None else None
         })
         # store additional fields in additional_properties

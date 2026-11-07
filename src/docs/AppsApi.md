@@ -12,6 +12,7 @@ Method | HTTP request | Description
 [**get_app_sharing**](AppsApi.md#get_app_sharing) | **GET** /apps/sharing/{id} | Get app sharing
 [**list_app_preview_pull_requests**](AppsApi.md#list_app_preview_pull_requests) | **GET** /apps/preview-pull-requests/{id} | List pull requests for preview environments
 [**list_apps**](AppsApi.md#list_apps) | **GET** /apps | List apps
+[**regenerate_app_preview_password**](AppsApi.md#regenerate_app_preview_password) | **POST** /apps/preview-password/regenerate/{id} | Regenerate the preview password
 [**update_app**](AppsApi.md#update_app) | **PUT** /apps/{id} | Update app
 [**update_app_settings**](AppsApi.md#update_app_settings) | **PUT** /apps/settings/{id} | Update app settings
 [**update_app_sharing**](AppsApi.md#update_app_sharing) | **PUT** /apps/sharing/{id} | Update app sharing
@@ -104,7 +105,7 @@ Name | Type | Description  | Notes
 
 Create a pull request preview environment
 
-Creates a preview environment for one open pull request of the app and returns the task that creates it in the background. Draft pull requests are accepted even when draft previews are off. Pull requests from forks, pull requests that already have a preview environment, a base environment that is not in OK status, and a full concurrency limit are refused.
+Creates a preview environment for one open pull request of the app and returns the task that creates it in the background. An active paid subscription is required. Draft pull requests are accepted even when draft previews are off. Pull requests from forks, pull requests that already have a preview environment, a base environment that is not in OK status, and a full concurrency limit are refused.
 
 ### Example
 
@@ -675,6 +676,87 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **regenerate_app_preview_password**
+> App regenerate_app_preview_password(id)
+
+Regenerate the preview password
+
+Replaces the basic auth password shared by the app's pull request preview environments. Every preview switches to the new password, which members reveal in the dashboard. Requires basic auth to be on in the app's preview settings.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.app import App
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppsApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # Regenerate the preview password
+        api_response = api_instance.regenerate_app_preview_password(id)
+        print("The response of AppsApi->regenerate_app_preview_password:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppsApi->regenerate_app_preview_password: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**App**](App.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Updated app |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **update_app**
 > App update_app(id, update_title_request)
 
@@ -764,7 +846,7 @@ Name | Type | Description  | Notes
 
 Update app settings
 
-Updates application-wide settings such as pull request preview environments and returns the updated app.
+Updates application-wide settings such as pull request preview environments and returns the updated app. Enabling preview environments requires an active paid subscription.
 
 ### Example
 

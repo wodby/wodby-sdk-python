@@ -45,7 +45,8 @@ class NewAppServiceInput(BaseModel):
     database: Optional[AppServiceDatabaseInput] = None
     resources: Optional[ResourcesInput] = None
     scalability: Optional[ScalabilityInput] = None
-    __properties: ClassVar[List[str]] = ["id", "disabled", "version", "buildSource", "imports", "volumes", "integrations", "settings", "database", "resources", "scalability"]
+    basic_auth: Optional[StrictBool] = Field(default=None, description="Protect the service's public HTTP endpoints with their own basic auth and a generated password, or not. Omit to follow the stack service's basicAuthDefault.", alias="basicAuth")
+    __properties: ClassVar[List[str]] = ["id", "disabled", "version", "buildSource", "imports", "volumes", "integrations", "settings", "database", "resources", "scalability", "basicAuth"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -153,7 +154,8 @@ class NewAppServiceInput(BaseModel):
             "settings": [AppServiceSettingInput.from_dict(_item) for _item in obj["settings"]] if obj.get("settings") is not None else None,
             "database": AppServiceDatabaseInput.from_dict(obj["database"]) if obj.get("database") is not None else None,
             "resources": ResourcesInput.from_dict(obj["resources"]) if obj.get("resources") is not None else None,
-            "scalability": ScalabilityInput.from_dict(obj["scalability"]) if obj.get("scalability") is not None else None
+            "scalability": ScalabilityInput.from_dict(obj["scalability"]) if obj.get("scalability") is not None else None,
+            "basicAuth": obj.get("basicAuth")
         })
         return _obj
 

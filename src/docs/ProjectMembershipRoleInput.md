@@ -6,6 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **role** | **str** |  | 
+**custom_role_id** | **int** | Required when role is custom; a custom role of the project&#39;s organization. | [optional] 
 
 ## Example
 

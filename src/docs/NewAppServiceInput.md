@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **database** | [**AppServiceDatabaseInput**](AppServiceDatabaseInput.md) |  | [optional] 
 **resources** | [**ResourcesInput**](ResourcesInput.md) |  | [optional] 
 **scalability** | [**ScalabilityInput**](ScalabilityInput.md) |  | [optional] 
+**basic_auth** | **bool** | Protect the service&#39;s public HTTP endpoints with their own basic auth and a generated password, or not. Omit to follow the stack service&#39;s basicAuthDefault. | [optional] 
 
 ## Example
 

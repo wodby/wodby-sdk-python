@@ -9,6 +9,13 @@ Name | Type | Description | Notes
 **app_service_id** | **int** |  | 
 **linked_app_service_id** | **int** |  | 
 **name** | **str** |  | 
+**cross_app** | **bool** | The linked app service is in another app environment, of the same app or another one. | 
+**target_app_instance_id** | **int** | The app environment of a linked app service in another environment; null otherwise. | [optional] 
+**target_app_instance_name** | **str** |  | [optional] 
+**target_app_instance_title** | **str** |  | [optional] 
+**target_app_id** | **int** | The app of a linked app service in another environment; null otherwise. | [optional] 
+**target_app_name** | **str** |  | [optional] 
+**target_app_title** | **str** |  | [optional] 
 
 ## Example
 

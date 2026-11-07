@@ -10,6 +10,8 @@ Method | HTTP request | Description
 [**delete_cluster**](ClustersApi.md#delete_cluster) | **DELETE** /clusters/{id} | Delete cluster
 [**get_cluster**](ClustersApi.md#get_cluster) | **GET** /clusters/{id} | Get cluster
 [**get_cluster_by_name**](ClustersApi.md#get_cluster_by_name) | **GET** /clusters/by-name/{name} | Get cluster by name
+[**get_cluster_component_updates**](ClustersApi.md#get_cluster_component_updates) | **GET** /cluster-component-updates/{id} | List cluster component updates
+[**get_cluster_components**](ClustersApi.md#get_cluster_components) | **GET** /cluster-components/{id} | List cluster components
 [**get_cluster_infra_app_upgrade_changelog**](ClustersApi.md#get_cluster_infra_app_upgrade_changelog) | **GET** /cluster-infra-app-upgrade-changelogs/{id} | Preview cluster infrastructure app upgrades
 [**get_cluster_sharing**](ClustersApi.md#get_cluster_sharing) | **GET** /clusters/sharing/{id} | Get cluster sharing
 [**get_k3_s_cluster_install_command**](ClustersApi.md#get_k3_s_cluster_install_command) | **GET** /clusters/k3s-install-command/{id} | Get k3s install command
@@ -19,6 +21,7 @@ Method | HTTP request | Description
 [**recycle_cluster_nodes**](ClustersApi.md#recycle_cluster_nodes) | **POST** /clusters/{id}/actions/recycle-nodes | Recycle cluster nodes
 [**scale_cluster**](ClustersApi.md#scale_cluster) | **POST** /clusters/{id}/actions/scale | Scale cluster nodes
 [**update_cluster**](ClustersApi.md#update_cluster) | **PUT** /clusters/{id} | Update cluster
+[**update_cluster_component**](ClustersApi.md#update_cluster_component) | **POST** /clusters/{id}/actions/update-component | Update a cluster component
 [**update_cluster_environment_policy**](ClustersApi.md#update_cluster_environment_policy) | **PUT** /clusters/environment-policy/{id} | Update cluster environment policy
 [**update_cluster_gpu_node_pool**](ClustersApi.md#update_cluster_gpu_node_pool) | **POST** /clusters/{id}/actions/gpu-node-pool | Update the GPU node pool
 [**update_cluster_kubernetes_version**](ClustersApi.md#update_cluster_kubernetes_version) | **POST** /clusters/{id}/actions/update-kubernetes-version | Update cluster Kubernetes version
@@ -522,6 +525,168 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_cluster_component_updates**
+> List[ClusterComponentUpdate] get_cluster_component_updates(id)
+
+List cluster component updates
+
+Returns the updates Wodby can apply to single components of a healthy cluster, without a Kubernetes or infrastructure upgrade. The ID is the cluster's. Most components cannot be updated this way, because their provider or K3S release owns them, so the list is often empty.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.cluster_component_update import ClusterComponentUpdate
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.ClustersApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # List cluster component updates
+        api_response = api_instance.get_cluster_component_updates(id)
+        print("The response of ClustersApi->get_cluster_component_updates:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ClustersApi->get_cluster_component_updates: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**List[ClusterComponentUpdate]**](ClusterComponentUpdate.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Cluster component updates |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_cluster_components**
+> List[ClusterComponent] get_cluster_components(id)
+
+List cluster components
+
+Returns the infrastructure software last observed running on a cluster: system pods, infrastructure apps and node software such as the kubelet, container runtime, operating system and kernel. Customer application namespaces are not included. The ID is the cluster's. The list is empty until the first observation, and each item's observedAt shows how recent it is.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.cluster_component import ClusterComponent
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.ClustersApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # List cluster components
+        api_response = api_instance.get_cluster_components(id)
+        print("The response of ClustersApi->get_cluster_components:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ClustersApi->get_cluster_components: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**List[ClusterComponent]**](ClusterComponent.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Cluster components |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_cluster_infra_app_upgrade_changelog**
 > List[ClusterInfraAppUpgradeChangelog] get_cluster_infra_app_upgrade_changelog(id, app_instance_id=app_instance_id)
 
@@ -1017,7 +1182,7 @@ This endpoint does not need any parameter.
 
 Recycle cluster nodes
 
-Replaces the cluster nodes one at a time so they come back with a fresh machine image.
+Starts refreshing the cluster's worker nodes, so applications restart as their pods move. EKS moves each node group to its latest node image and leaves a group that already runs it in place. AKS and DigitalOcean replace every node. Refused for providers whose kube settings report nodeRecycling as false, currently GKE and OVHcloud, for Wodby Cloud, serverless and single-node clusters, and while application operations are active. New deployments wait until it ends.
 
 ### Example
 
@@ -1256,6 +1421,90 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Updated cluster |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_cluster_component**
+> OperationResult update_cluster_component(id, update_cluster_component_request)
+
+Update a cluster component
+
+Starts a task that applies one of the updates listed for the cluster, and returns the task result.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.operation_result import OperationResult
+from wodby.models.update_cluster_component_request import UpdateClusterComponentRequest
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.ClustersApi(api_client)
+    id = 56 # int | 
+    update_cluster_component_request = wodby.UpdateClusterComponentRequest() # UpdateClusterComponentRequest | 
+
+    try:
+        # Update a cluster component
+        api_response = api_instance.update_cluster_component(id, update_cluster_component_request)
+        print("The response of ClustersApi->update_cluster_component:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ClustersApi->update_cluster_component: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **update_cluster_component_request** | [**UpdateClusterComponentRequest**](UpdateClusterComponentRequest.md)|  | 
+
+### Return type
+
+[**OperationResult**](OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Update task result |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 

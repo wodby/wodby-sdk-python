@@ -14,6 +14,8 @@ Name | Type | Description | Notes
 **run_cron_jobs** | **bool** | Run the base environment&#39;s cron jobs in every preview. When false, the default, cron jobs are copied disabled. Previews never copy backup presets and run every service with one replica. | 
 **max_concurrent** | **int** |  | 
 **idle_ttl_days** | **int** |  | 
+**basic_auth** | **bool** | Every preview is protected with basic auth using one generated password shared by all previews of the app. | 
+**basic_auth_username** | **str** | Username of the shared preview basic auth. Members reveal the password in the dashboard. | 
 
 ## Example
 

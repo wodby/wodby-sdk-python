@@ -37,7 +37,9 @@ class OrgCapabilities(BaseModel):
     app_access: StrictBool = Field(alias="appAccess")
     org_sso: StrictBool = Field(alias="orgSSO")
     wodby_cloud: StrictBool = Field(alias="wodbyCloud")
-    __properties: ClassVar[List[str]] = ["customDomains", "autoBackups", "users", "projects", "cronSchedules", "autoscale", "appInstancePause", "webShell", "appAccess", "orgSSO", "wodbyCloud"]
+    vulnerability_scanning: StrictBool = Field(description="Whether the organization's plan includes vulnerability scanning of deployed builds.", alias="vulnerabilityScanning")
+    preview_environments: StrictBool = Field(description="Whether the organization's plan includes pull request preview environments.", alias="previewEnvironments")
+    __properties: ClassVar[List[str]] = ["customDomains", "autoBackups", "users", "projects", "cronSchedules", "autoscale", "appInstancePause", "webShell", "appAccess", "orgSSO", "wodbyCloud", "vulnerabilityScanning", "previewEnvironments"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -100,7 +102,9 @@ class OrgCapabilities(BaseModel):
             "webShell": obj.get("webShell"),
             "appAccess": obj.get("appAccess"),
             "orgSSO": obj.get("orgSSO"),
-            "wodbyCloud": obj.get("wodbyCloud")
+            "wodbyCloud": obj.get("wodbyCloud"),
+            "vulnerabilityScanning": obj.get("vulnerabilityScanning"),
+            "previewEnvironments": obj.get("previewEnvironments")
         })
         return _obj
 

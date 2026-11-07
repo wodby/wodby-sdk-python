@@ -29,7 +29,7 @@ class ResourceSharingInput(BaseModel):
     """ # noqa: E501
     ownership_scope: StrictStr = Field(description="org to make the organization the owner, project to make one project the owner.", alias="ownershipScope")
     owner_project_id: Optional[StrictInt] = Field(default=None, description="Project that becomes the owner. Required when ownershipScope is project.", alias="ownerProjectId")
-    shared_projects: List[ProjectShareInput] = Field(description="The complete list of project shares. A project left out loses its share. The owning project always keeps write access. You need write access to every project whose share you add or remove.", alias="sharedProjects")
+    shared_projects: List[ProjectShareInput] = Field(description="The complete list of project shares. A project left out loses its share. The owning project always keeps write access. You need Admin access to every project whose share you add or remove.", alias="sharedProjects")
     available_to_all_projects: Optional[StrictBool] = Field(default=None, description="Lets every project in the organization use the resource without a project share. Only organization-owned clusters, integrations, services and stacks can be available to all projects. Omit it to keep the current setting.", alias="availableToAllProjects")
     __properties: ClassVar[List[str]] = ["ownershipScope", "ownerProjectId", "sharedProjects", "availableToAllProjects"]
 

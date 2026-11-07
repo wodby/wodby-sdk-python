@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**invite_org_member**](OrgMembershipsApi.md#invite_org_member) | **POST** /org-memberships | Invite organization member
 [**list_org_memberships**](OrgMembershipsApi.md#list_org_memberships) | **GET** /org-memberships | List org memberships
 [**update_org_membership**](OrgMembershipsApi.md#update_org_membership) | **PUT** /org-memberships/{id} | Update organization member role
+[**update_org_membership_teams**](OrgMembershipsApi.md#update_org_membership_teams) | **PUT** /org-memberships/{id}/teams | Set organization member teams
 
 
 # **delete_org_membership**
@@ -178,7 +179,7 @@ Name | Type | Description  | Notes
 
 Invite organization member
 
-Invites a person by email with an organization role, optionally adding them to teams and projects. The membership has the invited status until they accept.
+Invites a person by email with an organization role. The membership has the invited status until they accept. Add the member to teams and projects separately.
 
 ### Example
 
@@ -396,6 +397,90 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **int**|  | 
  **org_membership_role_input** | [**OrgMembershipRoleInput**](OrgMembershipRoleInput.md)|  | 
+
+### Return type
+
+[**OrgMembership**](OrgMembership.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Updated membership |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_org_membership_teams**
+> OrgMembership update_org_membership_teams(id, org_membership_teams_input)
+
+Set organization member teams
+
+Replaces the teams an organization member belongs to, with a role in each team. Teams that are not listed lose the member. Organization owners and admins only.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.org_membership import OrgMembership
+from wodby.models.org_membership_teams_input import OrgMembershipTeamsInput
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.OrgMembershipsApi(api_client)
+    id = 56 # int | 
+    org_membership_teams_input = wodby.OrgMembershipTeamsInput() # OrgMembershipTeamsInput | 
+
+    try:
+        # Set organization member teams
+        api_response = api_instance.update_org_membership_teams(id, org_membership_teams_input)
+        print("The response of OrgMembershipsApi->update_org_membership_teams:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling OrgMembershipsApi->update_org_membership_teams: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **org_membership_teams_input** | [**OrgMembershipTeamsInput**](OrgMembershipTeamsInput.md)|  | 
 
 ### Return type
 

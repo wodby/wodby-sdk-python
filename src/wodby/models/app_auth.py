@@ -18,9 +18,10 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.app_auth_scope import AppAuthScope
+from wodby.models.app_auth_source import AppAuthSource
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -34,11 +35,14 @@ class AppAuth(BaseModel):
     app_service_ids: List[StrictInt] = Field(description="App services protected by this entry. Empty unless scope is SERVICE.", alias="appServiceIds")
     app_service_id: Optional[StrictInt] = Field(default=None, description="Single protected app service. Null when the entry protects several services or the whole app environment.", alias="appServiceId")
     app_route_id: Optional[StrictInt] = Field(default=None, alias="appRouteId")
-    login: StrictStr
+    login: StrictStr = Field(description="Empty for exemptions.")
     realm: StrictStr
+    source: AppAuthSource
+    generated: StrictBool = Field(description="True while the password is one Wodby generated. Setting a password by hand clears it.")
+    exempt: StrictBool = Field(description="Exemptions switch basic auth off for their services or route even when a wider entry covers them. They have no login or password.")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "appInstanceId", "scope", "appServiceIds", "appServiceId", "appRouteId", "login", "realm", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "appInstanceId", "scope", "appServiceIds", "appServiceId", "appRouteId", "login", "realm", "source", "generated", "exempt", "createdAt", "updatedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -109,6 +113,9 @@ class AppAuth(BaseModel):
             "appRouteId": obj.get("appRouteId"),
             "login": obj.get("login"),
             "realm": obj.get("realm"),
+            "source": obj.get("source"),
+            "generated": obj.get("generated"),
+            "exempt": obj.get("exempt"),
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt")
         })

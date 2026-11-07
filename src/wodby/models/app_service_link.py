@@ -17,8 +17,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,7 +30,14 @@ class AppServiceLink(BaseModel):
     app_service_id: StrictInt = Field(alias="appServiceId")
     linked_app_service_id: StrictInt = Field(alias="linkedAppServiceId")
     name: StrictStr
-    __properties: ClassVar[List[str]] = ["id", "appServiceId", "linkedAppServiceId", "name"]
+    cross_app: StrictBool = Field(description="The linked app service is in another app environment, of the same app or another one.", alias="crossApp")
+    target_app_instance_id: Optional[StrictInt] = Field(default=None, description="The app environment of a linked app service in another environment; null otherwise.", alias="targetAppInstanceId")
+    target_app_instance_name: Optional[StrictStr] = Field(default=None, alias="targetAppInstanceName")
+    target_app_instance_title: Optional[StrictStr] = Field(default=None, alias="targetAppInstanceTitle")
+    target_app_id: Optional[StrictInt] = Field(default=None, description="The app of a linked app service in another environment; null otherwise.", alias="targetAppId")
+    target_app_name: Optional[StrictStr] = Field(default=None, alias="targetAppName")
+    target_app_title: Optional[StrictStr] = Field(default=None, alias="targetAppTitle")
+    __properties: ClassVar[List[str]] = ["id", "appServiceId", "linkedAppServiceId", "name", "crossApp", "targetAppInstanceId", "targetAppInstanceName", "targetAppInstanceTitle", "targetAppId", "targetAppName", "targetAppTitle"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -71,6 +78,36 @@ class AppServiceLink(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if target_app_instance_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.target_app_instance_id is None and "target_app_instance_id" in self.model_fields_set:
+            _dict['targetAppInstanceId'] = None
+
+        # set to None if target_app_instance_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.target_app_instance_name is None and "target_app_instance_name" in self.model_fields_set:
+            _dict['targetAppInstanceName'] = None
+
+        # set to None if target_app_instance_title (nullable) is None
+        # and model_fields_set contains the field
+        if self.target_app_instance_title is None and "target_app_instance_title" in self.model_fields_set:
+            _dict['targetAppInstanceTitle'] = None
+
+        # set to None if target_app_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.target_app_id is None and "target_app_id" in self.model_fields_set:
+            _dict['targetAppId'] = None
+
+        # set to None if target_app_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.target_app_name is None and "target_app_name" in self.model_fields_set:
+            _dict['targetAppName'] = None
+
+        # set to None if target_app_title (nullable) is None
+        # and model_fields_set contains the field
+        if self.target_app_title is None and "target_app_title" in self.model_fields_set:
+            _dict['targetAppTitle'] = None
+
         return _dict
 
     @classmethod
@@ -86,7 +123,14 @@ class AppServiceLink(BaseModel):
             "id": obj.get("id"),
             "appServiceId": obj.get("appServiceId"),
             "linkedAppServiceId": obj.get("linkedAppServiceId"),
-            "name": obj.get("name")
+            "name": obj.get("name"),
+            "crossApp": obj.get("crossApp"),
+            "targetAppInstanceId": obj.get("targetAppInstanceId"),
+            "targetAppInstanceName": obj.get("targetAppInstanceName"),
+            "targetAppInstanceTitle": obj.get("targetAppInstanceTitle"),
+            "targetAppId": obj.get("targetAppId"),
+            "targetAppName": obj.get("targetAppName"),
+            "targetAppTitle": obj.get("targetAppTitle")
         })
         return _obj
 

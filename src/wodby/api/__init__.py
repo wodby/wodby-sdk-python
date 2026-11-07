@@ -24,6 +24,7 @@ from wodby.api.org_memberships_api import OrgMembershipsApi
 from wodby.api.org_sso_api import OrgSsoApi
 from wodby.api.orgs_api import OrgsApi
 from wodby.api.project_memberships_api import ProjectMembershipsApi
+from wodby.api.project_roles_api import ProjectRolesApi
 from wodby.api.projects_api import ProjectsApi
 from wodby.api.providers_api import ProvidersApi
 from wodby.api.services_api import ServicesApi

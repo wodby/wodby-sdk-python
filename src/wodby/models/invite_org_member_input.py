@@ -29,9 +29,7 @@ class InviteOrgMemberInput(BaseModel):
     org_id: Optional[StrictInt] = Field(default=None, description="Optional for API-key requests; defaults to the API key's organization.", alias="orgId")
     email: StrictStr
     role: StrictStr
-    team_ids: Optional[List[StrictInt]] = Field(default=None, alias="teamIds")
-    project_ids: Optional[List[StrictInt]] = Field(default=None, alias="projectIds")
-    __properties: ClassVar[List[str]] = ["orgId", "email", "role", "teamIds", "projectIds"]
+    __properties: ClassVar[List[str]] = ["orgId", "email", "role"]
 
     @field_validator('role')
     def role_validate_enum(cls, value):
@@ -93,9 +91,7 @@ class InviteOrgMemberInput(BaseModel):
         _obj = cls.model_validate({
             "orgId": obj.get("orgId"),
             "email": obj.get("email"),
-            "role": obj.get("role"),
-            "teamIds": obj.get("teamIds"),
-            "projectIds": obj.get("projectIds")
+            "role": obj.get("role")
         })
         return _obj
 

@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **run_cron_jobs** | **bool** | Omitted keeps the stored value; apps that never set it do not run cron jobs in previews. | [optional] 
 **max_concurrent** | **int** |  | [optional] 
 **idle_ttl_days** | **int** |  | [optional] 
+**basic_auth** | **bool** | Protect every preview with basic auth and one shared generated password. Defaults to true. | [optional] 
 
 ## Example
 

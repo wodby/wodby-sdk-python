@@ -35,7 +35,9 @@ class AppPreviewEnvironmentsSettings(BaseModel):
     run_cron_jobs: StrictBool = Field(description="Run the base environment's cron jobs in every preview. When false, the default, cron jobs are copied disabled. Previews never copy backup presets and run every service with one replica.", alias="runCronJobs")
     max_concurrent: StrictInt = Field(alias="maxConcurrent")
     idle_ttl_days: StrictInt = Field(alias="idleTtlDays")
-    __properties: ClassVar[List[str]] = ["enabled", "baseAppEnvironmentId", "environmentType", "imports", "buildDrafts", "runCronJobs", "maxConcurrent", "idleTtlDays"]
+    basic_auth: StrictBool = Field(description="Every preview is protected with basic auth using one generated password shared by all previews of the app.", alias="basicAuth")
+    basic_auth_username: StrictStr = Field(description="Username of the shared preview basic auth. Members reveal the password in the dashboard.", alias="basicAuthUsername")
+    __properties: ClassVar[List[str]] = ["enabled", "baseAppEnvironmentId", "environmentType", "imports", "buildDrafts", "runCronJobs", "maxConcurrent", "idleTtlDays", "basicAuth", "basicAuthUsername"]
 
     @field_validator('environment_type')
     def environment_type_validate_enum(cls, value):
@@ -114,7 +116,9 @@ class AppPreviewEnvironmentsSettings(BaseModel):
             "buildDrafts": obj.get("buildDrafts"),
             "runCronJobs": obj.get("runCronJobs"),
             "maxConcurrent": obj.get("maxConcurrent"),
-            "idleTtlDays": obj.get("idleTtlDays")
+            "idleTtlDays": obj.get("idleTtlDays"),
+            "basicAuth": obj.get("basicAuth"),
+            "basicAuthUsername": obj.get("basicAuthUsername")
         })
         return _obj
 

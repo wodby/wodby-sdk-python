@@ -35,7 +35,8 @@ class NewAppServiceOverrideInput(BaseModel):
     build_source: Optional[BuildSourceInput] = Field(default=None, alias="buildSource")
     settings: Optional[List[AppServiceSettingInput]] = Field(default=None, description="Service settings to set. A setting that is not named keeps its default. Use it to supply a required setting that has no default.")
     database: Optional[AppServiceDatabaseInput] = Field(default=None, description="The database server, and optionally the database, of a database service. Required to enable an external database service, such as a managed PostgreSQL server.")
-    __properties: ClassVar[List[str]] = ["id", "disabled", "version", "buildSource", "settings", "database"]
+    basic_auth: Optional[StrictBool] = Field(default=None, description="Protect the service's public HTTP endpoints with their own basic auth and a generated password, or not. Omit to follow the stack service's basicAuthDefault.", alias="basicAuth")
+    __properties: ClassVar[List[str]] = ["id", "disabled", "version", "buildSource", "settings", "database", "basicAuth"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -106,7 +107,8 @@ class NewAppServiceOverrideInput(BaseModel):
             "version": obj.get("version"),
             "buildSource": BuildSourceInput.from_dict(obj["buildSource"]) if obj.get("buildSource") is not None else None,
             "settings": [AppServiceSettingInput.from_dict(_item) for _item in obj["settings"]] if obj.get("settings") is not None else None,
-            "database": AppServiceDatabaseInput.from_dict(obj["database"]) if obj.get("database") is not None else None
+            "database": AppServiceDatabaseInput.from_dict(obj["database"]) if obj.get("database") is not None else None,
+            "basicAuth": obj.get("basicAuth")
         })
         return _obj
 

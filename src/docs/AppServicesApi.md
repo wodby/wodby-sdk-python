@@ -12,12 +12,15 @@ Method | HTTP request | Description
 [**create_app_service_integration**](AppServicesApi.md#create_app_service_integration) | **POST** /app-services/{id}/integrations | Create app service integration
 [**create_app_service_log_stream**](AppServicesApi.md#create_app_service_log_stream) | **POST** /app-services/{id}/log-streams | Create app service log stream
 [**create_app_service_token**](AppServicesApi.md#create_app_service_token) | **POST** /app-services/{id}/tokens | Create app service token
+[**create_resource_preset**](AppServicesApi.md#create_resource_preset) | **POST** /resource-presets | Create custom resource preset
 [**delete_app_service_annotation**](AppServicesApi.md#delete_app_service_annotation) | **DELETE** /app-service-annotations/{id} | Delete app service annotation
 [**delete_app_service_cron_schedule**](AppServicesApi.md#delete_app_service_cron_schedule) | **DELETE** /app-service-cron-schedules/{id} | Delete app service cron schedule
+[**delete_app_service_custom_link**](AppServicesApi.md#delete_app_service_custom_link) | **DELETE** /app-services/{id}/custom-links/{name} | Delete app service custom link
 [**delete_app_service_env_var**](AppServicesApi.md#delete_app_service_env_var) | **DELETE** /app-service-env-vars/{id} | Delete app service env var
 [**delete_app_service_helm_value**](AppServicesApi.md#delete_app_service_helm_value) | **DELETE** /app-service-helm-values/{id} | Delete app service Helm value
 [**delete_app_service_integration**](AppServicesApi.md#delete_app_service_integration) | **DELETE** /app-service-integrations/{id} | Delete app service integration
 [**delete_app_service_token**](AppServicesApi.md#delete_app_service_token) | **DELETE** /app-service-tokens/{id} | Delete app service token
+[**delete_resource_preset**](AppServicesApi.md#delete_resource_preset) | **DELETE** /resource-presets/{id} | Delete custom resource preset
 [**get_app_service**](AppServicesApi.md#get_app_service) | **GET** /app-services/{id} | Get app service
 [**get_app_service_cron_job**](AppServicesApi.md#get_app_service_cron_job) | **GET** /app-service-cron-jobs/{id} | Get app service cron job
 [**get_app_service_cron_schedule**](AppServicesApi.md#get_app_service_cron_schedule) | **GET** /app-service-cron-schedules/{id} | Get app service cron schedule
@@ -28,9 +31,11 @@ Method | HTTP request | Description
 [**list_app_service_containers**](AppServicesApi.md#list_app_service_containers) | **GET** /app-services/{id}/containers | List app service containers
 [**list_app_service_cron_jobs**](AppServicesApi.md#list_app_service_cron_jobs) | **GET** /app-service-cron-jobs | List app service cron jobs
 [**list_app_service_cron_schedules**](AppServicesApi.md#list_app_service_cron_schedules) | **GET** /app-services/{id}/cron-schedules | List app service cron schedules
+[**list_app_service_custom_links**](AppServicesApi.md#list_app_service_custom_links) | **GET** /app-services/{id}/custom-links | List app service custom links
 [**list_app_service_env_vars**](AppServicesApi.md#list_app_service_env_vars) | **GET** /app-services/{id}/env-vars | List app service env vars
 [**list_app_service_helm_values**](AppServicesApi.md#list_app_service_helm_values) | **GET** /app-services/{id}/helm-values | List app service Helm values
 [**list_app_service_integrations**](AppServicesApi.md#list_app_service_integrations) | **GET** /app-services/{id}/integrations | List app service integrations
+[**list_app_service_link_candidates**](AppServicesApi.md#list_app_service_link_candidates) | **GET** /app-services/{id}/links/{name}/candidates | List app service link candidates
 [**list_app_service_links**](AppServicesApi.md#list_app_service_links) | **GET** /app-services/{id}/links | List app service links
 [**list_app_service_pods**](AppServicesApi.md#list_app_service_pods) | **GET** /app-services/{id}/pods | List app service pods
 [**list_app_service_settings**](AppServicesApi.md#list_app_service_settings) | **GET** /app-services/{id}/settings | List app service settings
@@ -38,9 +43,11 @@ Method | HTTP request | Description
 [**list_app_service_volume_storage_classes**](AppServicesApi.md#list_app_service_volume_storage_classes) | **GET** /app-services/{id}/options/volume-storage-classes | List app service volume storage-class state
 [**list_app_service_volumes**](AppServicesApi.md#list_app_service_volumes) | **GET** /app-services/{id}/volumes | List app service volumes
 [**list_app_services**](AppServicesApi.md#list_app_services) | **GET** /app-services | List app services
+[**list_resource_presets**](AppServicesApi.md#list_resource_presets) | **GET** /resource-presets | List resource presets
 [**run_app_service_action**](AppServicesApi.md#run_app_service_action) | **POST** /app-services/{id}/actions/{name} | Run app service action
 [**run_app_service_cron_schedule**](AppServicesApi.md#run_app_service_cron_schedule) | **POST** /app-service-cron-schedules/{id}/run | Run app service cron schedule
 [**set_app_service_config**](AppServicesApi.md#set_app_service_config) | **PUT** /app-services/{id}/configs/{name} | Set app service config
+[**set_app_service_custom_link**](AppServicesApi.md#set_app_service_custom_link) | **PUT** /app-services/{id}/custom-links/{name} | Set app service custom link
 [**set_app_service_link**](AppServicesApi.md#set_app_service_link) | **PUT** /app-services/{id}/links/{name} | Set app service link
 [**set_app_service_resources**](AppServicesApi.md#set_app_service_resources) | **PUT** /app-services/{id}/resources | Set app service resources
 [**set_app_service_setting**](AppServicesApi.md#set_app_service_setting) | **PUT** /app-services/{id}/settings/{name} | Set app service setting
@@ -52,6 +59,7 @@ Method | HTTP request | Description
 [**update_app_service_env_var**](AppServicesApi.md#update_app_service_env_var) | **PUT** /app-service-env-vars/{id} | Update app service env var
 [**update_app_service_helm_value**](AppServicesApi.md#update_app_service_helm_value) | **PUT** /app-service-helm-values/{id} | Update app service Helm value
 [**update_app_service_token**](AppServicesApi.md#update_app_service_token) | **PUT** /app-service-tokens/{id} | Update app service token
+[**update_resource_preset**](AppServicesApi.md#update_resource_preset) | **PUT** /resource-presets/{id} | Update custom resource preset
 
 
 # **add_app_service_volume**
@@ -726,6 +734,88 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **create_resource_preset**
+> ResourcePreset create_resource_preset(resource_preset_input)
+
+Create custom resource preset
+
+Adds a custom resource preset to an organization. Organization owners and admins only.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.resource_preset import ResourcePreset
+from wodby.models.resource_preset_input import ResourcePresetInput
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppServicesApi(api_client)
+    resource_preset_input = wodby.ResourcePresetInput() # ResourcePresetInput | 
+
+    try:
+        # Create custom resource preset
+        api_response = api_instance.create_resource_preset(resource_preset_input)
+        print("The response of AppServicesApi->create_resource_preset:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppServicesApi->create_resource_preset: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **resource_preset_input** | [**ResourcePresetInput**](ResourcePresetInput.md)|  | 
+
+### Return type
+
+[**ResourcePreset**](ResourcePreset.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Created preset |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **delete_app_service_annotation**
 > OperationResult delete_app_service_annotation(id)
 
@@ -864,6 +954,89 @@ with wodby.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **int**|  | 
+
+### Return type
+
+[**OperationResult**](OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Delete result |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_app_service_custom_link**
+> OperationResult delete_app_service_custom_link(id, name)
+
+Delete app service custom link
+
+Removes the custom target of a link. A required link cannot be removed.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.operation_result import OperationResult
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppServicesApi(api_client)
+    id = 56 # int | 
+    name = 'name_example' # str | 
+
+    try:
+        # Delete app service custom link
+        api_response = api_instance.delete_app_service_custom_link(id, name)
+        print("The response of AppServicesApi->delete_app_service_custom_link:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppServicesApi->delete_app_service_custom_link: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **name** | **str**|  | 
 
 ### Return type
 
@@ -1207,6 +1380,87 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Delete result |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_resource_preset**
+> OperationResult delete_resource_preset(id)
+
+Delete custom resource preset
+
+Deletes a custom resource preset. Resources already set from it keep their values. Organization owners and admins only.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.operation_result import OperationResult
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppServicesApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # Delete custom resource preset
+        api_response = api_instance.delete_resource_preset(id)
+        print("The response of AppServicesApi->delete_resource_preset:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppServicesApi->delete_resource_preset: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**OperationResult**](OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Deletion result |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 
@@ -2032,6 +2286,87 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **list_app_service_custom_links**
+> List[AppServiceCustomLink] list_app_service_custom_links(id)
+
+List app service custom links
+
+Returns the links of an app service that have a custom target: values entered by hand instead of another app service. A link name is either here or in the app service's links, never both. Secret values are never returned.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.app_service_custom_link import AppServiceCustomLink
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppServicesApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # List app service custom links
+        api_response = api_instance.list_app_service_custom_links(id)
+        print("The response of AppServicesApi->list_app_service_custom_links:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppServicesApi->list_app_service_custom_links: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**List[AppServiceCustomLink]**](AppServiceCustomLink.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | List of app service custom links |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **list_app_service_env_vars**
 > List[AppServiceEnvVar] list_app_service_env_vars(id)
 
@@ -2270,6 +2605,89 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of app service integrations |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **list_app_service_link_candidates**
+> List[AppServiceLinkCandidate] list_app_service_link_candidates(id, name)
+
+List app service link candidates
+
+Returns the app services a named link of an app service may point at: services of its own environment that satisfy the link's selectors and, for a link that accepts targets in other app environments, services of the organization's other environments that accept such links, satisfy the selectors, and that the caller may use (revealing their environment's runtime secrets) and this app's owner may use.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.app_service_link_candidate import AppServiceLinkCandidate
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppServicesApi(api_client)
+    id = 56 # int | 
+    name = 'name_example' # str | 
+
+    try:
+        # List app service link candidates
+        api_response = api_instance.list_app_service_link_candidates(id, name)
+        print("The response of AppServicesApi->list_app_service_link_candidates:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppServicesApi->list_app_service_link_candidates: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **name** | **str**|  | 
+
+### Return type
+
+[**List[AppServiceLinkCandidate]**](AppServiceLinkCandidate.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | List of link candidates |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 
@@ -2848,6 +3266,87 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **list_resource_presets**
+> List[ResourcePreset] list_resource_presets(org_id=org_id)
+
+List resource presets
+
+Returns Wodby's CPU and memory presets, smallest first, then the organization's custom presets when orgId is given. Resources inputs can name any of them; service and stack manifests can name only Wodby's presets. Choosing a preset copies its values.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.resource_preset import ResourcePreset
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppServicesApi(api_client)
+    org_id = 56 # int | Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization. (optional)
+
+    try:
+        # List resource presets
+        api_response = api_instance.list_resource_presets(org_id=org_id)
+        print("The response of AppServicesApi->list_resource_presets:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppServicesApi->list_resource_presets: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **org_id** | **int**| Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. | [optional] 
+
+### Return type
+
+[**List[ResourcePreset]**](ResourcePreset.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Resource presets |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **run_app_service_action**
 > OperationResult run_app_service_action(id, name)
 
@@ -3098,12 +3597,98 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **set_app_service_custom_link**
+> OperationResult set_app_service_custom_link(id, name, app_service_custom_link_input)
+
+Set app service custom link
+
+Gives a link that accepts a custom target the values it hands to the service, replacing another app service it pointed at. The values are the complete set: give every value that is not optional each time, secret ones included. An optional value left out is cleared.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.app_service_custom_link_input import AppServiceCustomLinkInput
+from wodby.models.operation_result import OperationResult
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppServicesApi(api_client)
+    id = 56 # int | 
+    name = 'name_example' # str | 
+    app_service_custom_link_input = wodby.AppServiceCustomLinkInput() # AppServiceCustomLinkInput | 
+
+    try:
+        # Set app service custom link
+        api_response = api_instance.set_app_service_custom_link(id, name, app_service_custom_link_input)
+        print("The response of AppServicesApi->set_app_service_custom_link:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppServicesApi->set_app_service_custom_link: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **name** | **str**|  | 
+ **app_service_custom_link_input** | [**AppServiceCustomLinkInput**](AppServiceCustomLinkInput.md)|  | 
+
+### Return type
+
+[**OperationResult**](OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Update result |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **set_app_service_link**
 > OperationResult set_app_service_link(id, name, app_service_link_input)
 
 Set app service link
 
-Links or unlinks another app service for a named link slot.
+Links or unlinks another app service for a named link slot. The app service may be in another app environment, of the same app or another one, when the link accepts that (crossApp) and the target's service accepts links from other environments. Linking across environments needs permission to reveal the runtime secrets of the target environment, and the target's app must belong to the same organization and be usable by this app's owner. Unlinking also removes a target in another environment or a custom target.
 
 ### Example
 
@@ -4015,6 +4600,90 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Updated app service token |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_resource_preset**
+> ResourcePreset update_resource_preset(id, resource_preset_input)
+
+Update custom resource preset
+
+Replaces a custom preset's name, title and values. Resources already set from the preset keep their values. Organization owners and admins only.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.resource_preset import ResourcePreset
+from wodby.models.resource_preset_input import ResourcePresetInput
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppServicesApi(api_client)
+    id = 56 # int | 
+    resource_preset_input = wodby.ResourcePresetInput() # ResourcePresetInput | 
+
+    try:
+        # Update custom resource preset
+        api_response = api_instance.update_resource_preset(id, resource_preset_input)
+        print("The response of AppServicesApi->update_resource_preset:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppServicesApi->update_resource_preset: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **resource_preset_input** | [**ResourcePresetInput**](ResourcePresetInput.md)|  | 
+
+### Return type
+
+[**ResourcePreset**](ResourcePreset.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Updated preset |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 

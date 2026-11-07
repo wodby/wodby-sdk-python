@@ -4,13 +4,98 @@ All URIs are relative to */v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**export_org_usage_csv**](OrgsApi.md#export_org_usage_csv) | **GET** /orgs/{id}/usage/csv | Export org usage by project as CSV
 [**get_org**](OrgsApi.md#get_org) | **GET** /orgs/{id} | Get org
 [**get_org_subscription**](OrgsApi.md#get_org_subscription) | **GET** /orgs/{id}/subscription | Get org subscription
+[**get_org_usage**](OrgsApi.md#get_org_usage) | **GET** /orgs/{id}/usage | Get org usage by project
+[**list_org_usage_periods**](OrgsApi.md#list_org_usage_periods) | **GET** /orgs/{id}/usage/periods | List org usage periods
 [**list_orgs**](OrgsApi.md#list_orgs) | **GET** /orgs | List orgs
 [**preflight_app_service_capacity**](OrgsApi.md#preflight_app_service_capacity) | **POST** /orgs/{id}/actions/preflight-app-service-capacity | Preflight app-service capacity
 [**update_org**](OrgsApi.md#update_org) | **PUT** /orgs/{id} | Update org
 [**update_org_settings**](OrgsApi.md#update_org_settings) | **PUT** /orgs/{id}/settings | Update organization settings
 
+
+# **export_org_usage_csv**
+> str export_org_usage_csv(id, period_start=period_start)
+
+Export org usage by project as CSV
+
+Returns the usage report as CSV with one row per project and billing item and the columns period_start, period_end, project_id, project_name, project_title, item, quantity, unit, amount_usd, and invoice_share_usd, which is empty while the invoiced amount is unknown. Requires billing-view access to the organization.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.OrgsApi(api_client)
+    id = 56 # int | 
+    period_start = '2013-10-20T19:20:30+01:00' # datetime | Start of the billing period as listed by listOrgUsagePeriods. Defaults to the current period. (optional)
+
+    try:
+        # Export org usage by project as CSV
+        api_response = api_instance.export_org_usage_csv(id, period_start=period_start)
+        print("The response of OrgsApi->export_org_usage_csv:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling OrgsApi->export_org_usage_csv: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **period_start** | **datetime**| Start of the billing period as listed by listOrgUsagePeriods. Defaults to the current period. | [optional] 
+
+### Return type
+
+**str**
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/csv, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Usage per project as CSV |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_org**
 > Org get_org(id)
@@ -169,6 +254,170 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Organization subscription details |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_org_usage**
+> OrgUsageReport get_org_usage(id, period_start=period_start)
+
+Get org usage by project
+
+Returns the organization's usage per project and billing item in one billing period, for internal chargeback. Amounts are public list prices in USD before included usage and discounts, so they show each project's share of usage. For a past period whose invoices are final, invoiceShare splits what the invoices charged per item between projects in proportion to their amounts. Usage of organization-owned resources and usage without a project is reported in one row without a project ID. Requires billing-view access to the organization.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.org_usage_report import OrgUsageReport
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.OrgsApi(api_client)
+    id = 56 # int | 
+    period_start = '2013-10-20T19:20:30+01:00' # datetime | Start of the billing period as listed by listOrgUsagePeriods. Defaults to the current period. (optional)
+
+    try:
+        # Get org usage by project
+        api_response = api_instance.get_org_usage(id, period_start=period_start)
+        print("The response of OrgsApi->get_org_usage:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling OrgsApi->get_org_usage: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **period_start** | **datetime**| Start of the billing period as listed by listOrgUsagePeriods. Defaults to the current period. | [optional] 
+
+### Return type
+
+[**OrgUsageReport**](OrgUsageReport.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Usage per project |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **list_org_usage_periods**
+> List[OrgUsagePeriod] list_org_usage_periods(id)
+
+List org usage periods
+
+Returns the billing periods available in the usage report, newest first, including the current period. Requires billing-view access to the organization.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.org_usage_period import OrgUsagePeriod
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.OrgsApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # List org usage periods
+        api_response = api_instance.list_org_usage_periods(id)
+        print("The response of OrgsApi->list_org_usage_periods:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling OrgsApi->list_org_usage_periods: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**List[OrgUsagePeriod]**](OrgUsagePeriod.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Billing periods |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 

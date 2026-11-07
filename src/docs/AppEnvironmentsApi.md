@@ -5,16 +5,16 @@ All URIs are relative to */v1*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**cleanup_app_environment_migration**](AppEnvironmentsApi.md#cleanup_app_environment_migration) | **POST** /app-environment-migrations/{id}/actions/cleanup | Clean up app environment migration
-[**create_app_access**](AppEnvironmentsApi.md#create_app_access) | **POST** /app-environment-accesses/{id} | Create app environment access
+[**create_app_access**](AppEnvironmentsApi.md#create_app_access) | **POST** /app-environment-accesses/{id} | Create Private App Access
 [**create_app_annotation**](AppEnvironmentsApi.md#create_app_annotation) | **POST** /app-annotations | Create app annotation
 [**create_app_environment**](AppEnvironmentsApi.md#create_app_environment) | **POST** /app-environments | Create app environment
-[**delete_app_access**](AppEnvironmentsApi.md#delete_app_access) | **DELETE** /app-accesses/{id} | Delete app access
+[**delete_app_access**](AppEnvironmentsApi.md#delete_app_access) | **DELETE** /app-accesses/{id} | Delete Private App Access
 [**delete_app_annotation**](AppEnvironmentsApi.md#delete_app_annotation) | **DELETE** /app-annotations/{id} | Delete app annotation
 [**delete_app_environment**](AppEnvironmentsApi.md#delete_app_environment) | **DELETE** /app-environments/{id} | Delete app environment
-[**get_app_access**](AppEnvironmentsApi.md#get_app_access) | **GET** /app-accesses/{id} | Get app access
+[**get_app_access**](AppEnvironmentsApi.md#get_app_access) | **GET** /app-accesses/{id} | Get Private App Access
 [**get_app_annotation**](AppEnvironmentsApi.md#get_app_annotation) | **GET** /app-annotations/{id} | Get app annotation
 [**get_app_environment**](AppEnvironmentsApi.md#get_app_environment) | **GET** /app-environments/{id} | Get app environment
-[**get_app_environment_access**](AppEnvironmentsApi.md#get_app_environment_access) | **GET** /app-environment-accesses/{id} | Get app environment access
+[**get_app_environment_access**](AppEnvironmentsApi.md#get_app_environment_access) | **GET** /app-environment-accesses/{id} | Get app environment Private App Access
 [**get_app_environment_by_name**](AppEnvironmentsApi.md#get_app_environment_by_name) | **GET** /app-environments/by-name/{appName}/{environmentName} | Get app environment by name
 [**get_app_environment_cicd_settings**](AppEnvironmentsApi.md#get_app_environment_cicd_settings) | **GET** /app-environments/cicd-settings/{id} | Get app environment CI/CD settings
 [**get_app_environment_migration**](AppEnvironmentsApi.md#get_app_environment_migration) | **GET** /app-environment-migrations/{id} | Get app environment migration
@@ -22,21 +22,21 @@ Method | HTTP request | Description
 [**get_workspace_connection**](AppEnvironmentsApi.md#get_workspace_connection) | **GET** /workspaces/{id}/connection | Get workspace SSH connection
 [**get_workspace_git_diff**](AppEnvironmentsApi.md#get_workspace_git_diff) | **GET** /workspaces/{id}/git-diff | Get workspace file diff
 [**get_workspace_git_status**](AppEnvironmentsApi.md#get_workspace_git_status) | **GET** /workspaces/{id}/git-status | Get workspace Git status
-[**list_app_access_cleanups**](AppEnvironmentsApi.md#list_app_access_cleanups) | **GET** /app-access-cleanups | List app-access cleanups
+[**list_app_access_cleanups**](AppEnvironmentsApi.md#list_app_access_cleanups) | **GET** /app-access-cleanups | List Private App Access cleanups
 [**list_app_annotations**](AppEnvironmentsApi.md#list_app_annotations) | **GET** /app-annotations | List app annotations
 [**list_app_environment_migrations**](AppEnvironmentsApi.md#list_app_environment_migrations) | **GET** /app-environment-migrations | List app environment migrations
 [**list_app_environments**](AppEnvironmentsApi.md#list_app_environments) | **GET** /app-environments | List app environments
 [**migrate_app_environment**](AppEnvironmentsApi.md#migrate_app_environment) | **POST** /app-environments/{id}/actions/migrate | Migrate app environment to another cluster
 [**pause_workspace**](AppEnvironmentsApi.md#pause_workspace) | **POST** /workspaces/{id}/actions/pause | Pause workspace
-[**preflight_app_access**](AppEnvironmentsApi.md#preflight_app_access) | **POST** /app-accesses/actions/preflight | Preflight app environment access
+[**preflight_app_access**](AppEnvironmentsApi.md#preflight_app_access) | **POST** /app-accesses/actions/preflight | Preflight Private App Access
 [**prepare_workspace**](AppEnvironmentsApi.md#prepare_workspace) | **POST** /workspaces/{id}/actions/prepare | Prepare workspace
 [**pull_workspace**](AppEnvironmentsApi.md#pull_workspace) | **POST** /workspaces/{id}/actions/pull | Pull workspace
 [**reconcile_app_environment_stack**](AppEnvironmentsApi.md#reconcile_app_environment_stack) | **POST** /app-environments/{id}/actions/reconcile-stack | Reconcile app environment stack
 [**restart_workspace**](AppEnvironmentsApi.md#restart_workspace) | **POST** /workspaces/{id}/actions/restart | Restart workspace
 [**resume_workspace**](AppEnvironmentsApi.md#resume_workspace) | **POST** /workspaces/{id}/actions/resume | Resume workspace
-[**retry_app_access_cleanup**](AppEnvironmentsApi.md#retry_app_access_cleanup) | **POST** /app-access-cleanups/{id}/actions/retry | Retry app-access cleanup
+[**retry_app_access_cleanup**](AppEnvironmentsApi.md#retry_app_access_cleanup) | **POST** /app-access-cleanups/{id}/actions/retry | Retry Private App Access cleanup
 [**rollback_app_environment_migration**](AppEnvironmentsApi.md#rollback_app_environment_migration) | **POST** /app-environment-migrations/{id}/actions/rollback | Roll back app environment migration
-[**update_app_access**](AppEnvironmentsApi.md#update_app_access) | **PUT** /app-accesses/{id} | Update app access
+[**update_app_access**](AppEnvironmentsApi.md#update_app_access) | **PUT** /app-accesses/{id} | Update Private App Access
 [**update_app_annotation**](AppEnvironmentsApi.md#update_app_annotation) | **PUT** /app-annotations/{id} | Update app annotation
 [**update_app_environment**](AppEnvironmentsApi.md#update_app_environment) | **PUT** /app-environments/{id} | Update app environment
 [**update_app_environment_cicd_settings**](AppEnvironmentsApi.md#update_app_environment_cicd_settings) | **PUT** /app-environments/cicd-settings/{id} | Update app environment CI/CD settings
@@ -130,9 +130,9 @@ Name | Type | Description  | Notes
 # **create_app_access**
 > AppAccessOperationResult create_app_access(id, new_app_access_input)
 
-Create app environment access
+Create Private App Access
 
-Creates external access for the app environment identified by the path. An active paid subscription is required.
+Creates Private App Access for the app environment identified by the path. An active paid subscription is required.
 
 ### Example
 
@@ -170,7 +170,7 @@ with wodby.ApiClient(configuration) as api_client:
     new_app_access_input = wodby.NewAppAccessInput() # NewAppAccessInput | 
 
     try:
-        # Create app environment access
+        # Create Private App Access
         api_response = api_instance.create_app_access(id, new_app_access_input)
         print("The response of AppEnvironmentsApi->create_app_access:\n")
         pprint(api_response)
@@ -205,7 +205,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**201** | Created app access and provisioning task |  -  |
+**201** | Created Private App Access and provisioning task |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 
@@ -378,9 +378,9 @@ Name | Type | Description  | Notes
 # **delete_app_access**
 > OperationResult delete_app_access(id)
 
-Delete app access
+Delete Private App Access
 
-Removes app access and returns the cleanup task identifier.
+Removes Private App Access and returns the cleanup task identifier.
 
 ### Example
 
@@ -416,7 +416,7 @@ with wodby.ApiClient(configuration) as api_client:
     id = 56 # int | 
 
     try:
-        # Delete app access
+        # Delete Private App Access
         api_response = api_instance.delete_app_access(id)
         print("The response of AppEnvironmentsApi->delete_app_access:\n")
         pprint(api_response)
@@ -623,9 +623,9 @@ Name | Type | Description  | Notes
 # **get_app_access**
 > AppAccess get_app_access(id)
 
-Get app access
+Get Private App Access
 
-Returns one app access configuration.
+Returns one Private App Access configuration.
 
 ### Example
 
@@ -661,7 +661,7 @@ with wodby.ApiClient(configuration) as api_client:
     id = 56 # int | 
 
     try:
-        # Get app access
+        # Get Private App Access
         api_response = api_instance.get_app_access(id)
         print("The response of AppEnvironmentsApi->get_app_access:\n")
         pprint(api_response)
@@ -695,7 +695,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | App access |  -  |
+**200** | Private App Access |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 
@@ -866,9 +866,9 @@ Name | Type | Description  | Notes
 # **get_app_environment_access**
 > AppAccess get_app_environment_access(id)
 
-Get app environment access
+Get app environment Private App Access
 
-Returns the external access configuration for the app environment identified by the path.
+Returns the Private App Access configuration of the app environment identified by the path.
 
 ### Example
 
@@ -904,7 +904,7 @@ with wodby.ApiClient(configuration) as api_client:
     id = 56 # int | 
 
     try:
-        # Get app environment access
+        # Get app environment Private App Access
         api_response = api_instance.get_app_environment_access(id)
         print("The response of AppEnvironmentsApi->get_app_environment_access:\n")
         pprint(api_response)
@@ -938,7 +938,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | App access configuration |  -  |
+**200** | Private App Access configuration |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 
@@ -1522,7 +1522,7 @@ Name | Type | Description  | Notes
 # **list_app_access_cleanups**
 > List[AppAccessCleanup] list_app_access_cleanups(app_instance_id=app_instance_id, integration_id=integration_id)
 
-List app-access cleanups
+List Private App Access cleanups
 
 Returns cleanup records for exactly one app environment or integration.
 
@@ -1561,7 +1561,7 @@ with wodby.ApiClient(configuration) as api_client:
     integration_id = 56 # int |  (optional)
 
     try:
-        # List app-access cleanups
+        # List Private App Access cleanups
         api_response = api_instance.list_app_access_cleanups(app_instance_id=app_instance_id, integration_id=integration_id)
         print("The response of AppEnvironmentsApi->list_app_access_cleanups:\n")
         pprint(api_response)
@@ -2023,9 +2023,9 @@ Name | Type | Description  | Notes
 # **preflight_app_access**
 > ValidationResult preflight_app_access(new_app_environment_access_input)
 
-Preflight app environment access
+Preflight Private App Access
 
-Validates a proposed app-access configuration before an app environment or access resource is created. An active paid subscription is required.
+Validates a proposed Private App Access configuration before an app environment or access resource is created. An active paid subscription is required.
 
 ### Example
 
@@ -2062,7 +2062,7 @@ with wodby.ApiClient(configuration) as api_client:
     new_app_environment_access_input = wodby.NewAppEnvironmentAccessInput() # NewAppEnvironmentAccessInput | 
 
     try:
-        # Preflight app environment access
+        # Preflight Private App Access
         api_response = api_instance.preflight_app_access(new_app_environment_access_input)
         print("The response of AppEnvironmentsApi->preflight_app_access:\n")
         pprint(api_response)
@@ -2516,9 +2516,9 @@ Name | Type | Description  | Notes
 # **retry_app_access_cleanup**
 > OperationResult retry_app_access_cleanup(id)
 
-Retry app-access cleanup
+Retry Private App Access cleanup
 
-Retries a failed app-access cleanup and returns its task identifier.
+Retries a failed Private App Access cleanup and returns its task identifier.
 
 ### Example
 
@@ -2554,7 +2554,7 @@ with wodby.ApiClient(configuration) as api_client:
     id = 56 # int | 
 
     try:
-        # Retry app-access cleanup
+        # Retry Private App Access cleanup
         api_response = api_instance.retry_app_access_cleanup(id)
         print("The response of AppEnvironmentsApi->retry_app_access_cleanup:\n")
         pprint(api_response)
@@ -2678,9 +2678,9 @@ Name | Type | Description  | Notes
 # **update_app_access**
 > AppAccessOperationResult update_app_access(id, update_app_access_input)
 
-Update app access
+Update Private App Access
 
-Updates an existing app-access configuration and starts its reconciliation task. An active paid subscription is required.
+Updates an existing Private App Access configuration and starts its reconciliation task. An active paid subscription is required.
 
 ### Example
 
@@ -2718,7 +2718,7 @@ with wodby.ApiClient(configuration) as api_client:
     update_app_access_input = wodby.UpdateAppAccessInput() # UpdateAppAccessInput | 
 
     try:
-        # Update app access
+        # Update Private App Access
         api_response = api_instance.update_app_access(id, update_app_access_input)
         print("The response of AppEnvironmentsApi->update_app_access:\n")
         pprint(api_response)
@@ -2753,7 +2753,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Updated app access and reconciliation task |  -  |
+**200** | Updated Private App Access and reconciliation task |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 

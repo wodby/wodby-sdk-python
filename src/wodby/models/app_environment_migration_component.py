@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -31,9 +31,10 @@ class AppEnvironmentMigrationComponent(BaseModel):
     name: StrictStr
     backup_id: StrictInt = Field(alias="backupId")
     backup_status: Optional[StrictStr] = Field(default=None, alias="backupStatus")
+    existing_backup: StrictBool = Field(description="True when the component restores a backup chosen at the start instead of a final backup.", alias="existingBackup")
     import_id: StrictInt = Field(alias="importId")
     import_status: Optional[StrictStr] = Field(default=None, alias="importStatus")
-    __properties: ClassVar[List[str]] = ["id", "appServiceId", "name", "backupId", "backupStatus", "importId", "importStatus"]
+    __properties: ClassVar[List[str]] = ["id", "appServiceId", "name", "backupId", "backupStatus", "existingBackup", "importId", "importStatus"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -101,6 +102,7 @@ class AppEnvironmentMigrationComponent(BaseModel):
             "name": obj.get("name"),
             "backupId": obj.get("backupId"),
             "backupStatus": obj.get("backupStatus"),
+            "existingBackup": obj.get("existingBackup"),
             "importId": obj.get("importId"),
             "importStatus": obj.get("importStatus")
         })

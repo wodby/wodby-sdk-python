@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.service_deployment_configuration import ServiceDeploymentConfiguration
 from wodby.models.stack_service_container import StackServiceContainer
@@ -38,6 +38,8 @@ class StackService(BaseModel):
     main: StrictBool
     disabled: StrictBool
     required: StrictBool
+    basic_auth_override: StrictStr = Field(description="Whether the stack overrides the service's basic auth default.", alias="basicAuthOverride")
+    basic_auth_default: StrictBool = Field(description="Whether new app services of this stack service get their own basic auth entry by default. Always false without a public HTTP endpoint.", alias="basicAuthDefault")
     replicas: StrictInt
     service_rev_pinned: StrictBool = Field(alias="serviceRevPinned")
     outdated: StrictBool
@@ -53,7 +55,14 @@ class StackService(BaseModel):
     deployment_configuration: ServiceDeploymentConfiguration = Field(alias="deploymentConfiguration")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "type", "main", "disabled", "required", "replicas", "serviceRevPinned", "outdated", "serviceRevId", "serviceRevName", "serviceRevTitle", "serviceRevVersion", "buildSourceIntegrationId", "buildSourceRemoteRepoId", "options", "settings", "containers", "deploymentConfiguration", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "type", "main", "disabled", "required", "basicAuthOverride", "basicAuthDefault", "replicas", "serviceRevPinned", "outdated", "serviceRevId", "serviceRevName", "serviceRevTitle", "serviceRevVersion", "buildSourceIntegrationId", "buildSourceRemoteRepoId", "options", "settings", "containers", "deploymentConfiguration", "createdAt", "updatedAt"]
+
+    @field_validator('basic_auth_override')
+    def basic_auth_override_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(['inherit', 'enabled', 'disabled']):
+            raise ValueError("must be one of enum values ('inherit', 'enabled', 'disabled')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -147,6 +156,8 @@ class StackService(BaseModel):
             "main": obj.get("main"),
             "disabled": obj.get("disabled"),
             "required": obj.get("required"),
+            "basicAuthOverride": obj.get("basicAuthOverride"),
+            "basicAuthDefault": obj.get("basicAuthDefault"),
             "replicas": obj.get("replicas"),
             "serviceRevPinned": obj.get("serviceRevPinned"),
             "outdated": obj.get("outdated"),

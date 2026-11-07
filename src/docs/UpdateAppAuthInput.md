@@ -8,9 +8,10 @@ Name | Type | Description | Notes
 **app_service_ids** | **List[int]** | App services to protect. Omit every scope field to preserve the current scope, or pass an empty list to protect the whole app environment. | [optional] 
 **app_service_id** | **int** | Single-service scope. Ignored when appServiceIds is supplied. | [optional] 
 **app_route_id** | **int** | Moves the entry to route scope. The owning app service is derived from the route. | [optional] 
-**login** | **str** |  | 
+**login** | **str** | Omit to keep the current login. | [optional] 
 **password** | **str** | Replaces the existing secret when supplied; omit to keep the current password. | [optional] 
-**realm** | **str** |  | 
+**generate_password** | **bool** | Replace the password with a newly generated one. Ignored when password is given. | [optional] 
+**realm** | **str** | Omit to keep the current realm. | [optional] 
 
 ## Example
 

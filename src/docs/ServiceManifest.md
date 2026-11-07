@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **raw** | **str** |  | 
 **scalable** | **bool** |  | 
+**basic_auth** | **bool** | Whether the service asks for its public HTTP endpoints to be protected with basic auth by default. | [optional] 
 **integrations** | [**List[ServiceIntegrationRequirement]**](ServiceIntegrationRequirement.md) |  | [optional] 
 
 ## Example

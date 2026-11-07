@@ -30,6 +30,7 @@ Name | Type | Description | Notes
 **updated_at** | **datetime** |  | 
 **started_at** | **datetime** |  | [optional] 
 **ended_at** | **datetime** |  | [optional] 
+**vulnerability_scan** | [**AppBuildVulnerabilityScan**](AppBuildVulnerabilityScan.md) | Vulnerability scan summary of the build&#39;s currently deployed images. Omitted when none of its images is currently deployed or scanning is unavailable for the organization. | [optional] 
 
 ## Example
 

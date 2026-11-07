@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from wodby.models.app_build_vulnerability_scan import AppBuildVulnerabilityScan
 from wodby.models.app_service_build import AppServiceBuild
 from wodby.models.task import Task
 from typing import Optional, Set
@@ -54,7 +55,8 @@ class AppBuild(BaseModel):
     updated_at: datetime = Field(alias="updatedAt")
     started_at: Optional[datetime] = Field(default=None, alias="startedAt")
     ended_at: Optional[datetime] = Field(default=None, alias="endedAt")
-    __properties: ClassVar[List[str]] = ["id", "number", "status", "appInstanceId", "appServiceId", "taskId", "task", "appServiceBuilds", "gitRefType", "gitRef", "commitHash", "commitMessage", "authorName", "authorEmail", "workflow", "stackRevId", "gitRepoId", "ciIntegrationId", "registryIntegrationId", "imageVoidStatus", "canVoidImages", "createdAt", "updatedAt", "startedAt", "endedAt"]
+    vulnerability_scan: Optional[AppBuildVulnerabilityScan] = Field(default=None, description="Vulnerability scan summary of the build's currently deployed images. Omitted when none of its images is currently deployed or scanning is unavailable for the organization.", alias="vulnerabilityScan")
+    __properties: ClassVar[List[str]] = ["id", "number", "status", "appInstanceId", "appServiceId", "taskId", "task", "appServiceBuilds", "gitRefType", "gitRef", "commitHash", "commitMessage", "authorName", "authorEmail", "workflow", "stackRevId", "gitRepoId", "ciIntegrationId", "registryIntegrationId", "imageVoidStatus", "canVoidImages", "createdAt", "updatedAt", "startedAt", "endedAt", "vulnerabilityScan"]
 
     @field_validator('image_void_status')
     def image_void_status_validate_enum(cls, value):
@@ -112,6 +114,9 @@ class AppBuild(BaseModel):
                 if _item_app_service_builds:
                     _items.append(_item_app_service_builds.to_dict())
             _dict['appServiceBuilds'] = _items
+        # override the default output from pydantic by calling `to_dict()` of vulnerability_scan
+        if self.vulnerability_scan:
+            _dict['vulnerabilityScan'] = self.vulnerability_scan.to_dict()
         # set to None if task_id (nullable) is None
         # and model_fields_set contains the field
         if self.task_id is None and "task_id" in self.model_fields_set:
@@ -162,6 +167,11 @@ class AppBuild(BaseModel):
         if self.ended_at is None and "ended_at" in self.model_fields_set:
             _dict['endedAt'] = None
 
+        # set to None if vulnerability_scan (nullable) is None
+        # and model_fields_set contains the field
+        if self.vulnerability_scan is None and "vulnerability_scan" in self.model_fields_set:
+            _dict['vulnerabilityScan'] = None
+
         return _dict
 
     @classmethod
@@ -198,7 +208,8 @@ class AppBuild(BaseModel):
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt"),
             "startedAt": obj.get("startedAt"),
-            "endedAt": obj.get("endedAt")
+            "endedAt": obj.get("endedAt"),
+            "vulnerabilityScan": AppBuildVulnerabilityScan.from_dict(obj["vulnerabilityScan"]) if obj.get("vulnerabilityScan") is not None else None
         })
         return _obj
 

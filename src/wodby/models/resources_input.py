@@ -30,11 +30,12 @@ class ResourcesInput(BaseModel):
     gpu: Optional[GPUResources] = Field(default=None, description="Omitted or null preserves an existing GPU override. Count zero disables GPUs.")
     workload: Optional[StrictStr] = None
     container: Optional[StrictStr] = None
+    preset: Optional[StrictStr] = Field(default=None, description="Name of a Wodby preset or of a custom preset of the organization, from listResourcePresets. Its values fill the CPU and memory fields this input leaves out; the values are stored, not the preset.")
     request_cpu: Optional[StrictInt] = Field(default=None, alias="requestCPU")
     request_mem: Optional[StrictInt] = Field(default=None, alias="requestMem")
     limit_cpu: Optional[StrictInt] = Field(default=None, alias="limitCPU")
     limit_mem: Optional[StrictInt] = Field(default=None, alias="limitMem")
-    __properties: ClassVar[List[str]] = ["gpu", "workload", "container", "requestCPU", "requestMem", "limitCPU", "limitMem"]
+    __properties: ClassVar[List[str]] = ["gpu", "workload", "container", "preset", "requestCPU", "requestMem", "limitCPU", "limitMem"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -93,6 +94,11 @@ class ResourcesInput(BaseModel):
         if self.container is None and "container" in self.model_fields_set:
             _dict['container'] = None
 
+        # set to None if preset (nullable) is None
+        # and model_fields_set contains the field
+        if self.preset is None and "preset" in self.model_fields_set:
+            _dict['preset'] = None
+
         # set to None if request_cpu (nullable) is None
         # and model_fields_set contains the field
         if self.request_cpu is None and "request_cpu" in self.model_fields_set:
@@ -128,6 +134,7 @@ class ResourcesInput(BaseModel):
             "gpu": GPUResources.from_dict(obj["gpu"]) if obj.get("gpu") is not None else None,
             "workload": obj.get("workload"),
             "container": obj.get("container"),
+            "preset": obj.get("preset"),
             "requestCPU": obj.get("requestCPU"),
             "requestMem": obj.get("requestMem"),
             "limitCPU": obj.get("limitCPU"),

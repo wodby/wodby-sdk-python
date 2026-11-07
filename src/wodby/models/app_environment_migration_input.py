@@ -29,7 +29,8 @@ class AppEnvironmentMigrationInput(BaseModel):
     """ # noqa: E501
     target_cluster_id: StrictInt = Field(description="Cluster of the same organization that the environment moves to.", alias="targetClusterId")
     volumes: Optional[List[AppEnvironmentMigrationVolumeInput]] = Field(default=None, description="Target cluster storage classes for the environment's volumes. A volume left out uses its current storage class, which must exist on the target cluster.")
-    __properties: ClassVar[List[str]] = ["targetClusterId", "volumes"]
+    existing_backup_ids: Optional[List[StrictInt]] = Field(default=None, description="Completed backups of this environment to restore instead of creating final backups. Data written after a backup was taken does not reach the target. Components without a backup listed here get a final backup.", alias="existingBackupIds")
+    __properties: ClassVar[List[str]] = ["targetClusterId", "volumes", "existingBackupIds"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -90,7 +91,8 @@ class AppEnvironmentMigrationInput(BaseModel):
 
         _obj = cls.model_validate({
             "targetClusterId": obj.get("targetClusterId"),
-            "volumes": [AppEnvironmentMigrationVolumeInput.from_dict(_item) for _item in obj["volumes"]] if obj.get("volumes") is not None else None
+            "volumes": [AppEnvironmentMigrationVolumeInput.from_dict(_item) for _item in obj["volumes"]] if obj.get("volumes") is not None else None,
+            "existingBackupIds": obj.get("existingBackupIds")
         })
         return _obj
 
