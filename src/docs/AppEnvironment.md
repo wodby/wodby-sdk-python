@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **status** | **str** |  | 
 **outdated** | **bool** |  | 
 **main_domain** | **str** |  | [optional] 
+**main_domain_basic_auth** | **bool** | Whether basic auth protects the environment&#39;s main domain. | 
 **main_route_cert** | [**AppEnvironmentMainRouteCert**](AppEnvironmentMainRouteCert.md) |  | 
 **app_id** | **int** |  | 
 **cluster_id** | **int** |  | 
@@ -33,6 +34,7 @@ Name | Type | Description | Notes
 **configuration_issues** | [**List[AppServiceConfigurationIssue]**](AppServiceConfigurationIssue.md) |  | 
 **settings** | [**AppEnvironmentSettings**](AppEnvironmentSettings.md) |  | [optional] 
 **preview** | [**AppEnvironmentPreview**](AppEnvironmentPreview.md) |  | [optional] 
+**permissions** | [**AppEnvironmentPermissions**](AppEnvironmentPermissions.md) |  | [optional] 
 **health** | [**AppEnvironmentHealth**](AppEnvironmentHealth.md) |  | 
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 

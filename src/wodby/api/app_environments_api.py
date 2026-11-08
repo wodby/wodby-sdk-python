@@ -2544,7 +2544,7 @@ class AppEnvironmentsApi:
     ) -> AppEnvironment:
         """Get app environment
 
-        Returns the app environment identified by the request path.
+        Returns the app environment identified by the request path, with the caller's permissions in it.
 
         :param id: (required)
         :type id: int
@@ -2612,7 +2612,7 @@ class AppEnvironmentsApi:
     ) -> ApiResponse[AppEnvironment]:
         """Get app environment
 
-        Returns the app environment identified by the request path.
+        Returns the app environment identified by the request path, with the caller's permissions in it.
 
         :param id: (required)
         :type id: int
@@ -2680,7 +2680,7 @@ class AppEnvironmentsApi:
     ) -> RESTResponseType:
         """Get app environment
 
-        Returns the app environment identified by the request path.
+        Returns the app environment identified by the request path, with the caller's permissions in it.
 
         :param id: (required)
         :type id: int
@@ -3076,7 +3076,7 @@ class AppEnvironmentsApi:
     ) -> AppEnvironment:
         """Get app environment by name
 
-        Returns the app environment identified by app and environment name.
+        Returns the app environment identified by app and environment name, with the caller's permissions in it.
 
         :param app_name: (required)
         :type app_name: str
@@ -3152,7 +3152,7 @@ class AppEnvironmentsApi:
     ) -> ApiResponse[AppEnvironment]:
         """Get app environment by name
 
-        Returns the app environment identified by app and environment name.
+        Returns the app environment identified by app and environment name, with the caller's permissions in it.
 
         :param app_name: (required)
         :type app_name: str
@@ -3228,7 +3228,7 @@ class AppEnvironmentsApi:
     ) -> RESTResponseType:
         """Get app environment by name
 
-        Returns the app environment identified by app and environment name.
+        Returns the app environment identified by app and environment name, with the caller's permissions in it.
 
         :param app_name: (required)
         :type app_name: str

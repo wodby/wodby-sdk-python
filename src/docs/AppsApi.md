@@ -270,7 +270,7 @@ Name | Type | Description  | Notes
 
 Get app
 
-Returns the app identified by the request path.
+Returns the app identified by the request path, with the environment types the caller can create and whether pull request previews can work for it.
 
 ### Example
 
@@ -351,7 +351,7 @@ Name | Type | Description  | Notes
 
 Get app by name
 
-Returns the app identified by name.
+Returns the app identified by name, with the environment types the caller can create and whether pull request previews can work for it.
 
 ### Example
 

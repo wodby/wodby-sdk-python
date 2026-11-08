@@ -20,19 +20,27 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.service_integration_requirement import ServiceIntegrationRequirement
+from wodby.models.service_manifest_export import ServiceManifestExport
+from wodby.models.service_manifest_link import ServiceManifestLink
+from wodby.models.service_manifest_link_group import ServiceManifestLinkGroup
 from typing import Optional, Set
 from typing_extensions import Self
 
 class ServiceManifest(BaseModel):
     """
-    ServiceManifest
+    Typed fields of a service revision's manifest. raw holds the complete manifest as JSON, including the sections that have no typed field here.
     """ # noqa: E501
     raw: StrictStr
     scalable: StrictBool
-    basic_auth: Optional[StrictBool] = Field(default=None, description="Whether the service asks for its public HTTP endpoints to be protected with basic auth by default.", alias="basicAuth")
+    basic_auth: StrictBool = Field(description="Whether the service asks for its public HTTP endpoints to be protected with basic auth by default.", alias="basicAuth")
+    labels: Optional[List[StrictStr]] = None
+    cross_app: StrictBool = Field(description="Whether links of services in other app environments, of the same app or another one, may point at this service.", alias="crossApp")
+    exports: List[ServiceManifestExport] = Field(description="Values the services linking to this one read as {{link.exports.<name>}}.")
     integrations: Optional[List[ServiceIntegrationRequirement]] = None
+    links: Optional[List[ServiceManifestLink]] = None
+    link_groups: Optional[List[ServiceManifestLinkGroup]] = Field(default=None, description="Links that are alternatives to one another. An enabled app service needs at least min of them configured.", alias="linkGroups")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["raw", "scalable", "basicAuth", "integrations"]
+    __properties: ClassVar[List[str]] = ["raw", "scalable", "basicAuth", "labels", "crossApp", "exports", "integrations", "links", "linkGroups"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -75,6 +83,13 @@ class ServiceManifest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in exports (list)
+        _items = []
+        if self.exports:
+            for _item_exports in self.exports:
+                if _item_exports:
+                    _items.append(_item_exports.to_dict())
+            _dict['exports'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in integrations (list)
         _items = []
         if self.integrations:
@@ -82,6 +97,20 @@ class ServiceManifest(BaseModel):
                 if _item_integrations:
                     _items.append(_item_integrations.to_dict())
             _dict['integrations'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in links (list)
+        _items = []
+        if self.links:
+            for _item_links in self.links:
+                if _item_links:
+                    _items.append(_item_links.to_dict())
+            _dict['links'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in link_groups (list)
+        _items = []
+        if self.link_groups:
+            for _item_link_groups in self.link_groups:
+                if _item_link_groups:
+                    _items.append(_item_link_groups.to_dict())
+            _dict['linkGroups'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -102,7 +131,12 @@ class ServiceManifest(BaseModel):
             "raw": obj.get("raw"),
             "scalable": obj.get("scalable"),
             "basicAuth": obj.get("basicAuth"),
-            "integrations": [ServiceIntegrationRequirement.from_dict(_item) for _item in obj["integrations"]] if obj.get("integrations") is not None else None
+            "labels": obj.get("labels"),
+            "crossApp": obj.get("crossApp"),
+            "exports": [ServiceManifestExport.from_dict(_item) for _item in obj["exports"]] if obj.get("exports") is not None else None,
+            "integrations": [ServiceIntegrationRequirement.from_dict(_item) for _item in obj["integrations"]] if obj.get("integrations") is not None else None,
+            "links": [ServiceManifestLink.from_dict(_item) for _item in obj["links"]] if obj.get("links") is not None else None,
+            "linkGroups": [ServiceManifestLinkGroup.from_dict(_item) for _item in obj["linkGroups"]] if obj.get("linkGroups") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

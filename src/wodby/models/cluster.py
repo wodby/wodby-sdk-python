@@ -41,6 +41,8 @@ class Cluster(BaseModel):
     k3s: StrictBool
     single_node: StrictBool = Field(alias="singleNode")
     version: Optional[StrictStr] = None
+    kubernetes_version_eol: StrictBool = Field(description="Whether the cluster's Kubernetes version has reached its end of life. Always false for Wodby Cloud and serverless clusters and for versions Wodby has no lifecycle data for.", alias="kubernetesVersionEol")
+    kubernetes_version_eol_date: Optional[datetime] = Field(default=None, description="When the cluster's Kubernetes version reaches or reached its end of life, when known.", alias="kubernetesVersionEolDate")
     infra_version: StrictStr = Field(alias="infraVersion")
     min_node_count: Optional[StrictInt] = Field(default=None, alias="minNodeCount")
     max_node_count: Optional[StrictInt] = Field(default=None, alias="maxNodeCount")
@@ -67,7 +69,7 @@ class Cluster(BaseModel):
     storage_classes_observed_at: Optional[datetime] = Field(default=None, alias="storageClassesObservedAt")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "serverless", "demo", "wodby", "k3s", "singleNode", "version", "infraVersion", "minNodeCount", "maxNodeCount", "gpuNodePool", "lastNodesReady", "lastNodesTotal", "region", "zone", "ips", "hostname", "integrationId", "envId", "envType", "envScope", "allowedEnvIds", "allowedEnvTypes", "orgId", "ownershipScope", "ownerProjectId", "availableToAllProjects", "capabilities", "settings", "storageClasses", "storageClassesObservedAt", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "serverless", "demo", "wodby", "k3s", "singleNode", "version", "kubernetesVersionEol", "kubernetesVersionEolDate", "infraVersion", "minNodeCount", "maxNodeCount", "gpuNodePool", "lastNodesReady", "lastNodesTotal", "region", "zone", "ips", "hostname", "integrationId", "envId", "envType", "envScope", "allowedEnvIds", "allowedEnvTypes", "orgId", "ownershipScope", "ownerProjectId", "availableToAllProjects", "capabilities", "settings", "storageClasses", "storageClassesObservedAt", "createdAt", "updatedAt"]
 
     @field_validator('env_type')
     def env_type_validate_enum(cls, value):
@@ -158,6 +160,11 @@ class Cluster(BaseModel):
         if self.version is None and "version" in self.model_fields_set:
             _dict['version'] = None
 
+        # set to None if kubernetes_version_eol_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.kubernetes_version_eol_date is None and "kubernetes_version_eol_date" in self.model_fields_set:
+            _dict['kubernetesVersionEolDate'] = None
+
         # set to None if min_node_count (nullable) is None
         # and model_fields_set contains the field
         if self.min_node_count is None and "min_node_count" in self.model_fields_set:
@@ -245,6 +252,8 @@ class Cluster(BaseModel):
             "k3s": obj.get("k3s"),
             "singleNode": obj.get("singleNode"),
             "version": obj.get("version"),
+            "kubernetesVersionEol": obj.get("kubernetesVersionEol"),
+            "kubernetesVersionEolDate": obj.get("kubernetesVersionEolDate"),
             "infraVersion": obj.get("infraVersion"),
             "minNodeCount": obj.get("minNodeCount"),
             "maxNodeCount": obj.get("maxNodeCount"),

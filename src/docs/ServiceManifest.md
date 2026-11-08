@@ -1,5 +1,6 @@
 # ServiceManifest
 
+Typed fields of a service revision's manifest. raw holds the complete manifest as JSON, including the sections that have no typed field here.
 
 ## Properties
 
@@ -7,8 +8,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **raw** | **str** |  | 
 **scalable** | **bool** |  | 
-**basic_auth** | **bool** | Whether the service asks for its public HTTP endpoints to be protected with basic auth by default. | [optional] 
+**basic_auth** | **bool** | Whether the service asks for its public HTTP endpoints to be protected with basic auth by default. | 
+**labels** | **List[str]** |  | [optional] 
+**cross_app** | **bool** | Whether links of services in other app environments, of the same app or another one, may point at this service. | 
+**exports** | [**List[ServiceManifestExport]**](ServiceManifestExport.md) | Values the services linking to this one read as {{link.exports.&lt;name&gt;}}. | 
 **integrations** | [**List[ServiceIntegrationRequirement]**](ServiceIntegrationRequirement.md) |  | [optional] 
+**links** | [**List[ServiceManifestLink]**](ServiceManifestLink.md) |  | [optional] 
+**link_groups** | [**List[ServiceManifestLinkGroup]**](ServiceManifestLinkGroup.md) | Links that are alternatives to one another. An enabled app service needs at least min of them configured. | [optional] 
 
 ## Example
 

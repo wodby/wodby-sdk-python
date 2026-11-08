@@ -33,6 +33,7 @@ Method | HTTP request | Description
 [**list_stack_revision_services**](StacksApi.md#list_stack_revision_services) | **GET** /stack-revisions/{id}/services | List stack services
 [**list_stack_tokens**](StacksApi.md#list_stack_tokens) | **GET** /stack-revisions/{id}/tokens | List stack tokens
 [**list_stacks**](StacksApi.md#list_stacks) | **GET** /stacks | List stacks
+[**preview_stack_sync_with_origin**](StacksApi.md#preview_stack_sync_with_origin) | **POST** /stacks/{id}/actions/preview-sync-origin | Preview stack sync with origin
 [**publish_stack_draft**](StacksApi.md#publish_stack_draft) | **POST** /stacks/{id}/actions/publish-draft | Publish stack draft
 [**scaffold_stack_from_helm_chart**](StacksApi.md#scaffold_stack_from_helm_chart) | **POST** /stacks/actions/scaffold-from-helm-chart | Scaffold stack from Helm chart
 [**sync_stack_with_origin**](StacksApi.md#sync_stack_with_origin) | **POST** /stacks/{id}/actions/sync-origin | Sync stack with origin
@@ -2425,6 +2426,90 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **preview_stack_sync_with_origin**
+> StackOriginSyncPreview preview_stack_sync_with_origin(id, stack_sync_options_input=stack_sync_options_input)
+
+Preview stack sync with origin
+
+Returns what syncing the stack with its origin with these options would do, without changing the stack: the stack services the sync has to update to the service version the origin uses, the error the sync would fail with, and the changes its task log would list. Returns null when the stack already follows the origin's latest revision.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.stack_origin_sync_preview import StackOriginSyncPreview
+from wodby.models.stack_sync_options_input import StackSyncOptionsInput
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.StacksApi(api_client)
+    id = 56 # int | 
+    stack_sync_options_input = wodby.StackSyncOptionsInput() # StackSyncOptionsInput |  (optional)
+
+    try:
+        # Preview stack sync with origin
+        api_response = api_instance.preview_stack_sync_with_origin(id, stack_sync_options_input=stack_sync_options_input)
+        print("The response of StacksApi->preview_stack_sync_with_origin:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling StacksApi->preview_stack_sync_with_origin: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **stack_sync_options_input** | [**StackSyncOptionsInput**](StackSyncOptionsInput.md)|  | [optional] 
+
+### Return type
+
+[**StackOriginSyncPreview**](StackOriginSyncPreview.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Stack origin sync preview |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **publish_stack_draft**
 > Stack publish_stack_draft(id)
 
@@ -2589,7 +2674,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **sync_stack_with_origin**
-> Stack sync_stack_with_origin(id, stack_sync_options_input=stack_sync_options_input)
+> Stack sync_stack_with_origin(id, sync_stack_with_origin_input=sync_stack_with_origin_input)
 
 Sync stack with origin
 
@@ -2602,7 +2687,7 @@ Syncs the stack with its origin stack revision.
 ```python
 import wodby
 from wodby.models.stack import Stack
-from wodby.models.stack_sync_options_input import StackSyncOptionsInput
+from wodby.models.sync_stack_with_origin_input import SyncStackWithOriginInput
 from wodby.rest import ApiException
 from pprint import pprint
 
@@ -2628,11 +2713,11 @@ with wodby.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = wodby.StacksApi(api_client)
     id = 56 # int | 
-    stack_sync_options_input = wodby.StackSyncOptionsInput() # StackSyncOptionsInput |  (optional)
+    sync_stack_with_origin_input = wodby.SyncStackWithOriginInput() # SyncStackWithOriginInput |  (optional)
 
     try:
         # Sync stack with origin
-        api_response = api_instance.sync_stack_with_origin(id, stack_sync_options_input=stack_sync_options_input)
+        api_response = api_instance.sync_stack_with_origin(id, sync_stack_with_origin_input=sync_stack_with_origin_input)
         print("The response of StacksApi->sync_stack_with_origin:\n")
         pprint(api_response)
     except Exception as e:
@@ -2647,7 +2732,7 @@ with wodby.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **int**|  | 
- **stack_sync_options_input** | [**StackSyncOptionsInput**](StackSyncOptionsInput.md)|  | [optional] 
+ **sync_stack_with_origin_input** | [**SyncStackWithOriginInput**](SyncStackWithOriginInput.md)|  | [optional] 
 
 ### Return type
 

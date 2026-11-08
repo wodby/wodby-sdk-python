@@ -64,6 +64,7 @@ from wodby.models.app_environment_migration_component import AppEnvironmentMigra
 from wodby.models.app_environment_migration_input import AppEnvironmentMigrationInput
 from wodby.models.app_environment_migration_operation_result import AppEnvironmentMigrationOperationResult
 from wodby.models.app_environment_migration_volume_input import AppEnvironmentMigrationVolumeInput
+from wodby.models.app_environment_permissions import AppEnvironmentPermissions
 from wodby.models.app_environment_preview import AppEnvironmentPreview
 from wodby.models.app_environment_settings import AppEnvironmentSettings
 from wodby.models.app_environment_settings_input import AppEnvironmentSettingsInput
@@ -277,6 +278,7 @@ from wodby.models.org import Org
 from wodby.models.org_capabilities import OrgCapabilities
 from wodby.models.org_membership import OrgMembership
 from wodby.models.org_membership_role_input import OrgMembershipRoleInput
+from wodby.models.org_membership_team_membership import OrgMembershipTeamMembership
 from wodby.models.org_membership_teams_input import OrgMembershipTeamsInput
 from wodby.models.org_membership_teams_input_teams_inner import OrgMembershipTeamsInputTeamsInner
 from wodby.models.org_sso_domain import OrgSSODomain
@@ -333,6 +335,11 @@ from wodby.models.service_excluded_base_version import ServiceExcludedBaseVersio
 from wodby.models.service_integration_requirement import ServiceIntegrationRequirement
 from wodby.models.service_manifest import ServiceManifest
 from wodby.models.service_manifest_env_var import ServiceManifestEnvVar
+from wodby.models.service_manifest_export import ServiceManifestExport
+from wodby.models.service_manifest_link import ServiceManifestLink
+from wodby.models.service_manifest_link_group import ServiceManifestLinkGroup
+from wodby.models.service_manifest_link_selector import ServiceManifestLinkSelector
+from wodby.models.service_manifest_link_value import ServiceManifestLinkValue
 from wodby.models.service_manifest_update_input import ServiceManifestUpdateInput
 from wodby.models.service_revision import ServiceRevision
 from wodby.models.service_revision_change import ServiceRevisionChange
@@ -358,6 +365,8 @@ from wodby.models.stack_auto_update_version_policy_input import StackAutoUpdateV
 from wodby.models.stack_env_var import StackEnvVar
 from wodby.models.stack_helm_value import StackHelmValue
 from wodby.models.stack_origin_sync_changelog import StackOriginSyncChangelog
+from wodby.models.stack_origin_sync_preview import StackOriginSyncPreview
+from wodby.models.stack_origin_sync_service_update import StackOriginSyncServiceUpdate
 from wodby.models.stack_revision import StackRevision
 from wodby.models.stack_revision_link_issue import StackRevisionLinkIssue
 from wodby.models.stack_service import StackService
@@ -389,6 +398,7 @@ from wodby.models.stack_token import StackToken
 from wodby.models.stacks_response import StacksResponse
 from wodby.models.start_agent_chat_request import StartAgentChatRequest
 from wodby.models.storage_class import StorageClass
+from wodby.models.sync_stack_with_origin_input import SyncStackWithOriginInput
 from wodby.models.task import Task
 from wodby.models.task_initiator import TaskInitiator
 from wodby.models.task_job import TaskJob

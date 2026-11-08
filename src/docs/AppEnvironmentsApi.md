@@ -787,7 +787,7 @@ Name | Type | Description  | Notes
 
 Get app environment
 
-Returns the app environment identified by the request path.
+Returns the app environment identified by the request path, with the caller's permissions in it.
 
 ### Example
 
@@ -949,7 +949,7 @@ Name | Type | Description  | Notes
 
 Get app environment by name
 
-Returns the app environment identified by app and environment name.
+Returns the app environment identified by app and environment name, with the caller's permissions in it.
 
 ### Example
 

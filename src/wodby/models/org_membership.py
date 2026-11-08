@@ -20,6 +20,8 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from wodby.models.org_membership_team_membership import OrgMembershipTeamMembership
+from wodby.models.project_membership import ProjectMembership
 from wodby.models.user import User
 from typing import Optional, Set
 from typing_extensions import Self
@@ -36,9 +38,11 @@ class OrgMembership(BaseModel):
     role: StrictStr
     status: StrictStr
     joined_at: Optional[datetime] = Field(default=None, alias="joinedAt")
+    project_memberships: Optional[List[ProjectMembership]] = Field(default=None, description="The member's project access: their direct project memberships, then the memberships of every team they belong to (those have teamId set). Returned for a single membership to organization owners, admins and support members; omitted otherwise.", alias="projectMemberships")
+    team_memberships: Optional[List[OrgMembershipTeamMembership]] = Field(default=None, description="The teams the member belongs to. Returned for a single membership to organization owners, admins and support members; omitted otherwise.", alias="teamMemberships")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "userId", "user", "email", "orgId", "role", "status", "joinedAt", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "userId", "user", "email", "orgId", "role", "status", "joinedAt", "projectMemberships", "teamMemberships", "createdAt", "updatedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,6 +86,20 @@ class OrgMembership(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of user
         if self.user:
             _dict['user'] = self.user.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in project_memberships (list)
+        _items = []
+        if self.project_memberships:
+            for _item_project_memberships in self.project_memberships:
+                if _item_project_memberships:
+                    _items.append(_item_project_memberships.to_dict())
+            _dict['projectMemberships'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in team_memberships (list)
+        _items = []
+        if self.team_memberships:
+            for _item_team_memberships in self.team_memberships:
+                if _item_team_memberships:
+                    _items.append(_item_team_memberships.to_dict())
+            _dict['teamMemberships'] = _items
         # set to None if user_id (nullable) is None
         # and model_fields_set contains the field
         if self.user_id is None and "user_id" in self.model_fields_set:
@@ -122,6 +140,8 @@ class OrgMembership(BaseModel):
             "role": obj.get("role"),
             "status": obj.get("status"),
             "joinedAt": obj.get("joinedAt"),
+            "projectMemberships": [ProjectMembership.from_dict(_item) for _item in obj["projectMemberships"]] if obj.get("projectMemberships") is not None else None,
+            "teamMemberships": [OrgMembershipTeamMembership.from_dict(_item) for _item in obj["teamMemberships"]] if obj.get("teamMemberships") is not None else None,
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt")
         })

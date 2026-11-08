@@ -23,6 +23,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.app_access import AppAccess
 from wodby.models.app_environment_health import AppEnvironmentHealth
 from wodby.models.app_environment_main_route_cert import AppEnvironmentMainRouteCert
+from wodby.models.app_environment_permissions import AppEnvironmentPermissions
 from wodby.models.app_environment_preview import AppEnvironmentPreview
 from wodby.models.app_environment_settings import AppEnvironmentSettings
 from wodby.models.app_service_configuration_issue import AppServiceConfigurationIssue
@@ -43,6 +44,7 @@ class AppEnvironment(BaseModel):
     status: StrictStr
     outdated: StrictBool
     main_domain: Optional[StrictStr] = Field(default=None, alias="mainDomain")
+    main_domain_basic_auth: StrictBool = Field(description="Whether basic auth protects the environment's main domain.", alias="mainDomainBasicAuth")
     main_route_cert: Optional[AppEnvironmentMainRouteCert] = Field(alias="mainRouteCert")
     app_id: StrictInt = Field(alias="appId")
     cluster_id: StrictInt = Field(alias="clusterId")
@@ -62,10 +64,11 @@ class AppEnvironment(BaseModel):
     configuration_issues: List[AppServiceConfigurationIssue] = Field(alias="configurationIssues")
     settings: Optional[AppEnvironmentSettings] = None
     preview: Optional[AppEnvironmentPreview] = None
+    permissions: Optional[AppEnvironmentPermissions] = None
     health: AppEnvironmentHealth
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["executionMode", "workspace", "id", "name", "title", "environmentType", "status", "outdated", "mainDomain", "mainRouteCert", "appId", "clusterId", "stackId", "stackRevId", "stackName", "stackTitle", "stackIcon", "stackRevNumber", "stackVersion", "access", "routingMode", "routingPending", "maintenanceMode", "maintenanceModeActive", "configurationReady", "configurationIssues", "settings", "preview", "health", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["executionMode", "workspace", "id", "name", "title", "environmentType", "status", "outdated", "mainDomain", "mainDomainBasicAuth", "mainRouteCert", "appId", "clusterId", "stackId", "stackRevId", "stackName", "stackTitle", "stackIcon", "stackRevNumber", "stackVersion", "access", "routingMode", "routingPending", "maintenanceMode", "maintenanceModeActive", "configurationReady", "configurationIssues", "settings", "preview", "permissions", "health", "createdAt", "updatedAt"]
 
     @field_validator('execution_mode')
     def execution_mode_validate_enum(cls, value):
@@ -145,6 +148,9 @@ class AppEnvironment(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of preview
         if self.preview:
             _dict['preview'] = self.preview.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of permissions
+        if self.permissions:
+            _dict['permissions'] = self.permissions.to_dict()
         # override the default output from pydantic by calling `to_dict()` of health
         if self.health:
             _dict['health'] = self.health.to_dict()
@@ -189,6 +195,7 @@ class AppEnvironment(BaseModel):
             "status": obj.get("status"),
             "outdated": obj.get("outdated"),
             "mainDomain": obj.get("mainDomain"),
+            "mainDomainBasicAuth": obj.get("mainDomainBasicAuth"),
             "mainRouteCert": AppEnvironmentMainRouteCert.from_dict(obj["mainRouteCert"]) if obj.get("mainRouteCert") is not None else None,
             "appId": obj.get("appId"),
             "clusterId": obj.get("clusterId"),
@@ -208,6 +215,7 @@ class AppEnvironment(BaseModel):
             "configurationIssues": [AppServiceConfigurationIssue.from_dict(_item) for _item in obj["configurationIssues"]] if obj.get("configurationIssues") is not None else None,
             "settings": AppEnvironmentSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None,
             "preview": AppEnvironmentPreview.from_dict(obj["preview"]) if obj.get("preview") is not None else None,
+            "permissions": AppEnvironmentPermissions.from_dict(obj["permissions"]) if obj.get("permissions") is not None else None,
             "health": AppEnvironmentHealth.from_dict(obj["health"]) if obj.get("health") is not None else None,
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt")

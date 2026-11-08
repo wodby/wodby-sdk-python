@@ -37,15 +37,28 @@ class App(BaseModel):
     ownership_scope: StrictStr = Field(alias="ownershipScope")
     owner_project_id: Optional[StrictInt] = Field(default=None, alias="ownerProjectId")
     settings: Optional[AppSettings] = None
+    creatable_environment_types: Optional[List[StrictStr]] = Field(default=None, description="Environment types the caller can create app environments of. Returned by getApp and getAppByName only.", alias="creatableEnvironmentTypes")
+    previews_available: Optional[StrictBool] = Field(default=None, description="Whether pull request preview environments can work for this app: one of its environments has an enabled service connected to a branch of its own Git repository. Returned by getApp and getAppByName only.", alias="previewsAvailable")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "clusterApp", "orgId", "ownershipScope", "ownerProjectId", "settings", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "clusterApp", "orgId", "ownershipScope", "ownerProjectId", "settings", "creatableEnvironmentTypes", "previewsAvailable", "createdAt", "updatedAt"]
 
     @field_validator('ownership_scope')
     def ownership_scope_validate_enum(cls, value):
         """Validates the enum"""
         if value not in set(['org', 'project']):
             raise ValueError("must be one of enum values ('org', 'project')")
+        return value
+
+    @field_validator('creatable_environment_types')
+    def creatable_environment_types_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        for i in value:
+            if i not in set(['prod', 'test', 'staging', 'dev', 'feature']):
+                raise ValueError("each list item must be one of ('prod', 'test', 'staging', 'dev', 'feature')")
         return value
 
     model_config = ConfigDict(
@@ -116,6 +129,8 @@ class App(BaseModel):
             "ownershipScope": obj.get("ownershipScope"),
             "ownerProjectId": obj.get("ownerProjectId"),
             "settings": AppSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None,
+            "creatableEnvironmentTypes": obj.get("creatableEnvironmentTypes"),
+            "previewsAvailable": obj.get("previewsAvailable"),
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt")
         })
