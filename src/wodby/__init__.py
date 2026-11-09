@@ -444,6 +444,7 @@ from wodby.models.stack_settings_input import StackSettingsInput
 from wodby.models.stack_sync_options import StackSyncOptions
 from wodby.models.stack_sync_options_input import StackSyncOptionsInput
 from wodby.models.stack_token import StackToken
+from wodby.models.stack_upgrade_volume_deletion import StackUpgradeVolumeDeletion
 from wodby.models.stacks_response import StacksResponse
 from wodby.models.start_agent_chat_request import StartAgentChatRequest
 from wodby.models.storage_class import StorageClass

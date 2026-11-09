@@ -20,6 +20,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List
 from wodby.models.service_revision_change import ServiceRevisionChange
+from wodby.models.stack_upgrade_volume_deletion import StackUpgradeVolumeDeletion
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -32,7 +33,8 @@ class AppEnvironmentStackUpgradeChangelog(BaseModel):
     previous_stack_rev_number: StrictInt = Field(alias="previousStackRevNumber")
     stack_rev_number: StrictInt = Field(alias="stackRevNumber")
     service_changes: List[ServiceRevisionChange] = Field(alias="serviceChanges")
-    __properties: ClassVar[List[str]] = ["previousStackVersion", "stackVersion", "previousStackRevNumber", "stackRevNumber", "serviceChanges"]
+    volume_deletions: List[StackUpgradeVolumeDeletion] = Field(description="Volumes the upgrade deletes with their data. The upgrade refuses unless volume changes are enabled.", alias="volumeDeletions")
+    __properties: ClassVar[List[str]] = ["previousStackVersion", "stackVersion", "previousStackRevNumber", "stackRevNumber", "serviceChanges", "volumeDeletions"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -80,6 +82,13 @@ class AppEnvironmentStackUpgradeChangelog(BaseModel):
                 if _item_service_changes:
                     _items.append(_item_service_changes.to_dict())
             _dict['serviceChanges'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in volume_deletions (list)
+        _items = []
+        if self.volume_deletions:
+            for _item_volume_deletions in self.volume_deletions:
+                if _item_volume_deletions:
+                    _items.append(_item_volume_deletions.to_dict())
+            _dict['volumeDeletions'] = _items
         return _dict
 
     @classmethod
@@ -96,7 +105,8 @@ class AppEnvironmentStackUpgradeChangelog(BaseModel):
             "stackVersion": obj.get("stackVersion"),
             "previousStackRevNumber": obj.get("previousStackRevNumber"),
             "stackRevNumber": obj.get("stackRevNumber"),
-            "serviceChanges": [ServiceRevisionChange.from_dict(_item) for _item in obj["serviceChanges"]] if obj.get("serviceChanges") is not None else None
+            "serviceChanges": [ServiceRevisionChange.from_dict(_item) for _item in obj["serviceChanges"]] if obj.get("serviceChanges") is not None else None,
+            "volumeDeletions": [StackUpgradeVolumeDeletion.from_dict(_item) for _item in obj["volumeDeletions"]] if obj.get("volumeDeletions") is not None else None
         })
         return _obj
 

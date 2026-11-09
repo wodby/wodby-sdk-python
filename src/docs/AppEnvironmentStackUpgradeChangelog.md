@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **previous_stack_rev_number** | **int** |  | 
 **stack_rev_number** | **int** |  | 
 **service_changes** | [**List[ServiceRevisionChange]**](ServiceRevisionChange.md) |  | 
+**volume_deletions** | [**List[StackUpgradeVolumeDeletion]**](StackUpgradeVolumeDeletion.md) | Volumes the upgrade deletes with their data. The upgrade refuses unless volume changes are enabled. | 
 
 ## Example
 

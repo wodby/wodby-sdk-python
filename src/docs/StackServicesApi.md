@@ -2265,7 +2265,7 @@ Name | Type | Description  | Notes
 
 Set stack service resources
 
-Sets CPU and memory requests or limits for a stack service container.
+Sets CPU and memory requests or limits for a stack service container. Each value replaces only the service's default for that value: an omitted value keeps the default, and 0 means none.
 
 ### Example
 
