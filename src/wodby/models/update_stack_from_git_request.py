@@ -18,17 +18,18 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
 class UpdateStackFromGitRequest(BaseModel):
     """
-    UpdateStackFromGitRequest
+    The Git ref to update from. Stack, service, provider and Git repository updates from Git share this body.
     """ # noqa: E501
     git_ref: StrictStr = Field(alias="gitRef")
     git_ref_type: StrictStr = Field(alias="gitRefType")
-    __properties: ClassVar[List[str]] = ["gitRef", "gitRefType"]
+    service_updates: Optional[StrictStr] = Field(default=None, description="Stack updates only; other updates ignore it. What this update does with existing stack services whose stack.yml reference has no version, instead of the stack's gitServiceUpdates setting: latest, auto_update_settings or keep.", alias="serviceUpdates")
+    __properties: ClassVar[List[str]] = ["gitRef", "gitRefType", "serviceUpdates"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -69,6 +70,11 @@ class UpdateStackFromGitRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if service_updates (nullable) is None
+        # and model_fields_set contains the field
+        if self.service_updates is None and "service_updates" in self.model_fields_set:
+            _dict['serviceUpdates'] = None
+
         return _dict
 
     @classmethod
@@ -82,7 +88,8 @@ class UpdateStackFromGitRequest(BaseModel):
 
         _obj = cls.model_validate({
             "gitRef": obj.get("gitRef"),
-            "gitRefType": obj.get("gitRefType")
+            "gitRefType": obj.get("gitRefType"),
+            "serviceUpdates": obj.get("serviceUpdates")
         })
         return _obj
 

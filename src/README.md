@@ -906,7 +906,6 @@ Class | Method | HTTP request | Description
  - [StackSyncOptions](docs/StackSyncOptions.md)
  - [StackSyncOptionsInput](docs/StackSyncOptionsInput.md)
  - [StackToken](docs/StackToken.md)
- - [StackUpdateFromGitRequest](docs/StackUpdateFromGitRequest.md)
  - [StackUpgradeVolumeDeletion](docs/StackUpgradeVolumeDeletion.md)
  - [StacksResponse](docs/StacksResponse.md)
  - [StartAgentChatRequest](docs/StartAgentChatRequest.md)

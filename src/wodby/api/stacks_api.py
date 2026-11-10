@@ -46,10 +46,10 @@ from wodby.models.stack_service_update_changelog import StackServiceUpdateChange
 from wodby.models.stack_settings_input import StackSettingsInput
 from wodby.models.stack_sync_options_input import StackSyncOptionsInput
 from wodby.models.stack_token import StackToken
-from wodby.models.stack_update_from_git_request import StackUpdateFromGitRequest
 from wodby.models.stacks_response import StacksResponse
 from wodby.models.sync_stack_with_origin_input import SyncStackWithOriginInput
 from wodby.models.update_stack_env_var_input import UpdateStackEnvVarInput
+from wodby.models.update_stack_from_git_request import UpdateStackFromGitRequest
 from wodby.models.update_stack_helm_value_input import UpdateStackHelmValueInput
 from wodby.models.update_stack_request import UpdateStackRequest
 from wodby.models.update_stack_service_revisions_input import UpdateStackServiceRevisionsInput
@@ -9775,7 +9775,7 @@ class StacksApi:
     def update_stack_from_git(
         self,
         id: StrictInt,
-        stack_update_from_git_request: StackUpdateFromGitRequest,
+        update_stack_from_git_request: UpdateStackFromGitRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9795,8 +9795,8 @@ class StacksApi:
 
         :param id: (required)
         :type id: int
-        :param stack_update_from_git_request: (required)
-        :type stack_update_from_git_request: StackUpdateFromGitRequest
+        :param update_stack_from_git_request: (required)
+        :type update_stack_from_git_request: UpdateStackFromGitRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -9821,7 +9821,7 @@ class StacksApi:
 
         _param = self._update_stack_from_git_serialize(
             id=id,
-            stack_update_from_git_request=stack_update_from_git_request,
+            update_stack_from_git_request=update_stack_from_git_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -9847,7 +9847,7 @@ class StacksApi:
     def update_stack_from_git_with_http_info(
         self,
         id: StrictInt,
-        stack_update_from_git_request: StackUpdateFromGitRequest,
+        update_stack_from_git_request: UpdateStackFromGitRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9867,8 +9867,8 @@ class StacksApi:
 
         :param id: (required)
         :type id: int
-        :param stack_update_from_git_request: (required)
-        :type stack_update_from_git_request: StackUpdateFromGitRequest
+        :param update_stack_from_git_request: (required)
+        :type update_stack_from_git_request: UpdateStackFromGitRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -9893,7 +9893,7 @@ class StacksApi:
 
         _param = self._update_stack_from_git_serialize(
             id=id,
-            stack_update_from_git_request=stack_update_from_git_request,
+            update_stack_from_git_request=update_stack_from_git_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -9919,7 +9919,7 @@ class StacksApi:
     def update_stack_from_git_without_preload_content(
         self,
         id: StrictInt,
-        stack_update_from_git_request: StackUpdateFromGitRequest,
+        update_stack_from_git_request: UpdateStackFromGitRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9939,8 +9939,8 @@ class StacksApi:
 
         :param id: (required)
         :type id: int
-        :param stack_update_from_git_request: (required)
-        :type stack_update_from_git_request: StackUpdateFromGitRequest
+        :param update_stack_from_git_request: (required)
+        :type update_stack_from_git_request: UpdateStackFromGitRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -9965,7 +9965,7 @@ class StacksApi:
 
         _param = self._update_stack_from_git_serialize(
             id=id,
-            stack_update_from_git_request=stack_update_from_git_request,
+            update_stack_from_git_request=update_stack_from_git_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -9986,7 +9986,7 @@ class StacksApi:
     def _update_stack_from_git_serialize(
         self,
         id,
-        stack_update_from_git_request,
+        update_stack_from_git_request,
         _request_auth,
         _content_type,
         _headers,
@@ -10014,8 +10014,8 @@ class StacksApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if stack_update_from_git_request is not None:
-            _body_params = stack_update_from_git_request
+        if update_stack_from_git_request is not None:
+            _body_params = update_stack_from_git_request
 
 
         # set the HTTP header `Accept`
