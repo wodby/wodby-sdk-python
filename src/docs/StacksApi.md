@@ -2926,7 +2926,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_stack_from_git**
-> OperationResult update_stack_from_git(id, update_stack_from_git_request)
+> OperationResult update_stack_from_git(id, stack_update_from_git_request)
 
 Update stack from git
 
@@ -2939,7 +2939,7 @@ Starts a task that updates the stack from its configured Git source.
 ```python
 import wodby
 from wodby.models.operation_result import OperationResult
-from wodby.models.update_stack_from_git_request import UpdateStackFromGitRequest
+from wodby.models.stack_update_from_git_request import StackUpdateFromGitRequest
 from wodby.rest import ApiException
 from pprint import pprint
 
@@ -2965,11 +2965,11 @@ with wodby.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = wodby.StacksApi(api_client)
     id = 56 # int | 
-    update_stack_from_git_request = wodby.UpdateStackFromGitRequest() # UpdateStackFromGitRequest | 
+    stack_update_from_git_request = wodby.StackUpdateFromGitRequest() # StackUpdateFromGitRequest | 
 
     try:
         # Update stack from git
-        api_response = api_instance.update_stack_from_git(id, update_stack_from_git_request)
+        api_response = api_instance.update_stack_from_git(id, stack_update_from_git_request)
         print("The response of StacksApi->update_stack_from_git:\n")
         pprint(api_response)
     except Exception as e:
@@ -2984,7 +2984,7 @@ with wodby.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **int**|  | 
- **update_stack_from_git_request** | [**UpdateStackFromGitRequest**](UpdateStackFromGitRequest.md)|  | 
+ **stack_update_from_git_request** | [**StackUpdateFromGitRequest**](StackUpdateFromGitRequest.md)|  | 
 
 ### Return type
 

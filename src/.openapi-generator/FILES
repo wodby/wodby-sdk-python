@@ -153,6 +153,8 @@ docs/ClusterAutoInfrastructureComponentSettings.md
 docs/ClusterAutoInfrastructureComponentSettingsInput.md
 docs/ClusterAutoInfrastructureUpgradeSettings.md
 docs/ClusterAutoInfrastructureUpgradeSettingsInput.md
+docs/ClusterAutoKubernetesUpgradeSettings.md
+docs/ClusterAutoKubernetesUpgradeSettingsInput.md
 docs/ClusterAutoUpgradeVersionPolicy.md
 docs/ClusterAutoUpgradeVersionPolicyInput.md
 docs/ClusterCapabilities.md
@@ -161,6 +163,7 @@ docs/ClusterComponent.md
 docs/ClusterComponentUpdate.md
 docs/ClusterCreationResult.md
 docs/ClusterEnvironmentPolicyInput.md
+docs/ClusterHostCheck.md
 docs/ClusterInfraAppUpgradeChangelog.md
 docs/ClusterNodePool.md
 docs/ClusterNodePoolInput.md
@@ -412,6 +415,7 @@ docs/StackSettingsInput.md
 docs/StackSyncOptions.md
 docs/StackSyncOptionsInput.md
 docs/StackToken.md
+docs/StackUpdateFromGitRequest.md
 docs/StackUpgradeVolumeDeletion.md
 docs/StacksApi.md
 docs/StacksResponse.md
@@ -488,7 +492,10 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_stack_upgrade_volume_deletion.py
+test/test_cluster_auto_kubernetes_upgrade_settings.py
+test/test_cluster_auto_kubernetes_upgrade_settings_input.py
+test/test_cluster_host_check.py
+test/test_stack_update_from_git_request.py
 tox.ini
 wodby/__init__.py
 wodby/api/__init__.py
@@ -669,6 +676,8 @@ wodby/models/cluster_auto_infrastructure_component_settings.py
 wodby/models/cluster_auto_infrastructure_component_settings_input.py
 wodby/models/cluster_auto_infrastructure_upgrade_settings.py
 wodby/models/cluster_auto_infrastructure_upgrade_settings_input.py
+wodby/models/cluster_auto_kubernetes_upgrade_settings.py
+wodby/models/cluster_auto_kubernetes_upgrade_settings_input.py
 wodby/models/cluster_auto_upgrade_version_policy.py
 wodby/models/cluster_auto_upgrade_version_policy_input.py
 wodby/models/cluster_capabilities.py
@@ -677,6 +686,7 @@ wodby/models/cluster_component.py
 wodby/models/cluster_component_update.py
 wodby/models/cluster_creation_result.py
 wodby/models/cluster_environment_policy_input.py
+wodby/models/cluster_host_check.py
 wodby/models/cluster_infra_app_upgrade_changelog.py
 wodby/models/cluster_node_pool.py
 wodby/models/cluster_node_pool_input.py
@@ -911,6 +921,7 @@ wodby/models/stack_settings_input.py
 wodby/models/stack_sync_options.py
 wodby/models/stack_sync_options_input.py
 wodby/models/stack_token.py
+wodby/models/stack_update_from_git_request.py
 wodby/models/stack_upgrade_volume_deletion.py
 wodby/models/stacks_response.py
 wodby/models/start_agent_chat_request.py

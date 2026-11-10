@@ -12,6 +12,7 @@ Method | HTTP request | Description
 [**get_cluster_by_name**](ClustersApi.md#get_cluster_by_name) | **GET** /clusters/by-name/{name} | Get cluster by name
 [**get_cluster_component_updates**](ClustersApi.md#get_cluster_component_updates) | **GET** /cluster-component-updates/{id} | List cluster component updates
 [**get_cluster_components**](ClustersApi.md#get_cluster_components) | **GET** /cluster-components/{id} | List cluster components
+[**get_cluster_host_checks**](ClustersApi.md#get_cluster_host_checks) | **GET** /cluster-host-checks/{id} | List cluster host checks
 [**get_cluster_infra_app_upgrade_changelog**](ClustersApi.md#get_cluster_infra_app_upgrade_changelog) | **GET** /cluster-infra-app-upgrade-changelogs/{id} | Preview cluster infrastructure app upgrades
 [**get_cluster_sharing**](ClustersApi.md#get_cluster_sharing) | **GET** /clusters/sharing/{id} | Get cluster sharing
 [**get_k3_s_cluster_install_command**](ClustersApi.md#get_k3_s_cluster_install_command) | **GET** /clusters/k3s-install-command/{id} | Get k3s install command
@@ -682,6 +683,87 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Cluster components |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_cluster_host_checks**
+> List[ClusterHostCheck] get_cluster_host_checks(id)
+
+List cluster host checks
+
+Returns what a K3S cluster's server last reported about its protections against the Linux kernel bug CVE-2026-98432. The server checks after each boot and once a day, puts back a protection that is missing, and reports the result. The ID is the cluster's. Every known check is listed, as unknown when the server hasn't reported it or its last report is more than two days old. Managed clusters return an empty list.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.cluster_host_check import ClusterHostCheck
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.ClustersApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # List cluster host checks
+        api_response = api_instance.get_cluster_host_checks(id)
+        print("The response of ClustersApi->get_cluster_host_checks:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ClustersApi->get_cluster_host_checks: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**List[ClusterHostCheck]**](ClusterHostCheck.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Cluster host checks |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 

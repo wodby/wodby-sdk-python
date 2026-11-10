@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.git_auto_update_settings import GitAutoUpdateSettings
 from wodby.models.stack_auto_origin_update_settings import StackAutoOriginUpdateSettings
@@ -32,7 +32,8 @@ class StackSettings(BaseModel):
     git_auto_update: Optional[GitAutoUpdateSettings] = Field(default=None, alias="gitAutoUpdate")
     auto_service_revision_update: Optional[StackAutoServiceRevisionUpdateSettings] = Field(default=None, alias="autoServiceRevisionUpdate")
     auto_origin_stack_update: Optional[StackAutoOriginUpdateSettings] = Field(default=None, alias="autoOriginStackUpdate")
-    __properties: ClassVar[List[str]] = ["gitAutoUpdate", "autoServiceRevisionUpdate", "autoOriginStackUpdate"]
+    git_service_updates: Optional[StrictStr] = Field(default=None, description="What an update from Git does with existing stack services whose stack.yml reference has no version: latest moves them to the service's latest version, auto_update_settings moves them only as far as the stack's service auto update settings allow, and keep keeps their version. Versioned references, pinned stack services and new ones resolve the same way in every mode, and a stack service whose stack.yml configures something only a newer version has always moves to it.", alias="gitServiceUpdates")
+    __properties: ClassVar[List[str]] = ["gitAutoUpdate", "autoServiceRevisionUpdate", "autoOriginStackUpdate", "gitServiceUpdates"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -96,7 +97,8 @@ class StackSettings(BaseModel):
         _obj = cls.model_validate({
             "gitAutoUpdate": GitAutoUpdateSettings.from_dict(obj["gitAutoUpdate"]) if obj.get("gitAutoUpdate") is not None else None,
             "autoServiceRevisionUpdate": StackAutoServiceRevisionUpdateSettings.from_dict(obj["autoServiceRevisionUpdate"]) if obj.get("autoServiceRevisionUpdate") is not None else None,
-            "autoOriginStackUpdate": StackAutoOriginUpdateSettings.from_dict(obj["autoOriginStackUpdate"]) if obj.get("autoOriginStackUpdate") is not None else None
+            "autoOriginStackUpdate": StackAutoOriginUpdateSettings.from_dict(obj["autoOriginStackUpdate"]) if obj.get("autoOriginStackUpdate") is not None else None,
+            "gitServiceUpdates": obj.get("gitServiceUpdates")
         })
         return _obj
 

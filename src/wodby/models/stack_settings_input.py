@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.git_auto_update_settings_input import GitAutoUpdateSettingsInput
 from wodby.models.stack_auto_origin_update_settings_input import StackAutoOriginUpdateSettingsInput
@@ -32,7 +32,8 @@ class StackSettingsInput(BaseModel):
     git_auto_update: Optional[GitAutoUpdateSettingsInput] = Field(default=None, alias="gitAutoUpdate")
     auto_service_revision_update: Optional[StackAutoServiceRevisionUpdateSettingsInput] = Field(default=None, alias="autoServiceRevisionUpdate")
     auto_origin_stack_update: Optional[StackAutoOriginUpdateSettingsInput] = Field(default=None, alias="autoOriginStackUpdate")
-    __properties: ClassVar[List[str]] = ["gitAutoUpdate", "autoServiceRevisionUpdate", "autoOriginStackUpdate"]
+    git_service_updates: Optional[StrictStr] = Field(default=None, description="What an update from Git does with existing stack services' versions; see StackSettings.", alias="gitServiceUpdates")
+    __properties: ClassVar[List[str]] = ["gitAutoUpdate", "autoServiceRevisionUpdate", "autoOriginStackUpdate", "gitServiceUpdates"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,6 +83,11 @@ class StackSettingsInput(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of auto_origin_stack_update
         if self.auto_origin_stack_update:
             _dict['autoOriginStackUpdate'] = self.auto_origin_stack_update.to_dict()
+        # set to None if git_service_updates (nullable) is None
+        # and model_fields_set contains the field
+        if self.git_service_updates is None and "git_service_updates" in self.model_fields_set:
+            _dict['gitServiceUpdates'] = None
+
         return _dict
 
     @classmethod
@@ -96,7 +102,8 @@ class StackSettingsInput(BaseModel):
         _obj = cls.model_validate({
             "gitAutoUpdate": GitAutoUpdateSettingsInput.from_dict(obj["gitAutoUpdate"]) if obj.get("gitAutoUpdate") is not None else None,
             "autoServiceRevisionUpdate": StackAutoServiceRevisionUpdateSettingsInput.from_dict(obj["autoServiceRevisionUpdate"]) if obj.get("autoServiceRevisionUpdate") is not None else None,
-            "autoOriginStackUpdate": StackAutoOriginUpdateSettingsInput.from_dict(obj["autoOriginStackUpdate"]) if obj.get("autoOriginStackUpdate") is not None else None
+            "autoOriginStackUpdate": StackAutoOriginUpdateSettingsInput.from_dict(obj["autoOriginStackUpdate"]) if obj.get("autoOriginStackUpdate") is not None else None,
+            "gitServiceUpdates": obj.get("gitServiceUpdates")
         })
         return _obj
 

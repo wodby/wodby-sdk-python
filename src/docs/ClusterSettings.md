@@ -6,6 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **auto_infrastructure_upgrade** | [**ClusterAutoInfrastructureUpgradeSettings**](ClusterAutoInfrastructureUpgradeSettings.md) |  | [optional] 
+**auto_kubernetes_upgrade** | [**ClusterAutoKubernetesUpgradeSettings**](ClusterAutoKubernetesUpgradeSettings.md) |  | [optional] 
 **cluster_capabilities** | [**ClusterCapabilityPolicy**](ClusterCapabilityPolicy.md) |  | [optional] 
 
 ## Example
