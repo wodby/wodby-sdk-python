@@ -48,6 +48,11 @@ class Stack(BaseModel):
     origin_stack_rev_number: Optional[StrictInt] = Field(default=None, alias="originStackRevNumber")
     origin_stack_rev_version: Optional[StrictStr] = Field(default=None, alias="originStackRevVersion")
     origin_stack_rev_created_at: Optional[datetime] = Field(default=None, alias="originStackRevCreatedAt")
+    variant_of_stack_id: Optional[StrictInt] = Field(default=None, description="Main stack this stack is a variant of, such as Drupal for a high-availability Drupal stack. Absent when the stack is not a variant, or the main stack does not exist or is not visible to you.", alias="variantOfStackId")
+    variant_of_stack_name: Optional[StrictStr] = Field(default=None, alias="variantOfStackName")
+    variant_title: Optional[StrictStr] = Field(default=None, description="Short label that tells this variant apart, such as High availability.", alias="variantTitle")
+    variant_description: Optional[StrictStr] = Field(default=None, description="When to choose this stack over the other stacks of its variant family, such as building the app from your own repository to customize it. A main stack can have one too.", alias="variantDescription")
+    variant_stack_ids: List[StrictInt] = Field(description="Variants of this stack that you can see, ordered by title. Empty for a stack that is a variant itself.", alias="variantStackIds")
     org_id: StrictInt = Field(alias="orgId")
     ownership_scope: StrictStr = Field(description="org when the organization owns the resource, project when one project owns it.", alias="ownershipScope")
     owner_project_id: Optional[StrictInt] = Field(default=None, alias="ownerProjectId")
@@ -55,7 +60,7 @@ class Stack(BaseModel):
     settings: Optional[StackSettings] = None
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "icon", "status", "outdated", "public", "revId", "draftRevId", "latestRevNumber", "gitRepoId", "gitRepoRemoteId", "gitRepoRef", "gitRepoRefType", "originStackRevId", "originStackRevStackId", "originStackRevName", "originStackRevNumber", "originStackRevVersion", "originStackRevCreatedAt", "orgId", "ownershipScope", "ownerProjectId", "availableToAllProjects", "settings", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "icon", "status", "outdated", "public", "revId", "draftRevId", "latestRevNumber", "gitRepoId", "gitRepoRemoteId", "gitRepoRef", "gitRepoRefType", "originStackRevId", "originStackRevStackId", "originStackRevName", "originStackRevNumber", "originStackRevVersion", "originStackRevCreatedAt", "variantOfStackId", "variantOfStackName", "variantTitle", "variantDescription", "variantStackIds", "orgId", "ownershipScope", "ownerProjectId", "availableToAllProjects", "settings", "createdAt", "updatedAt"]
 
     @field_validator('ownership_scope')
     def ownership_scope_validate_enum(cls, value):
@@ -161,6 +166,26 @@ class Stack(BaseModel):
         if self.origin_stack_rev_created_at is None and "origin_stack_rev_created_at" in self.model_fields_set:
             _dict['originStackRevCreatedAt'] = None
 
+        # set to None if variant_of_stack_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.variant_of_stack_id is None and "variant_of_stack_id" in self.model_fields_set:
+            _dict['variantOfStackId'] = None
+
+        # set to None if variant_of_stack_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.variant_of_stack_name is None and "variant_of_stack_name" in self.model_fields_set:
+            _dict['variantOfStackName'] = None
+
+        # set to None if variant_title (nullable) is None
+        # and model_fields_set contains the field
+        if self.variant_title is None and "variant_title" in self.model_fields_set:
+            _dict['variantTitle'] = None
+
+        # set to None if variant_description (nullable) is None
+        # and model_fields_set contains the field
+        if self.variant_description is None and "variant_description" in self.model_fields_set:
+            _dict['variantDescription'] = None
+
         # set to None if owner_project_id (nullable) is None
         # and model_fields_set contains the field
         if self.owner_project_id is None and "owner_project_id" in self.model_fields_set:
@@ -198,6 +223,11 @@ class Stack(BaseModel):
             "originStackRevNumber": obj.get("originStackRevNumber"),
             "originStackRevVersion": obj.get("originStackRevVersion"),
             "originStackRevCreatedAt": obj.get("originStackRevCreatedAt"),
+            "variantOfStackId": obj.get("variantOfStackId"),
+            "variantOfStackName": obj.get("variantOfStackName"),
+            "variantTitle": obj.get("variantTitle"),
+            "variantDescription": obj.get("variantDescription"),
+            "variantStackIds": obj.get("variantStackIds"),
             "orgId": obj.get("orgId"),
             "ownershipScope": obj.get("ownershipScope"),
             "ownerProjectId": obj.get("ownerProjectId"),
