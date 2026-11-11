@@ -284,6 +284,7 @@ Class | Method | HTTP request | Description
 *ClustersApi* | [**get_cluster_components**](docs/ClustersApi.md#get_cluster_components) | **GET** /cluster-components/{id} | List cluster components
 *ClustersApi* | [**get_cluster_host_checks**](docs/ClustersApi.md#get_cluster_host_checks) | **GET** /cluster-host-checks/{id} | List cluster host checks
 *ClustersApi* | [**get_cluster_infra_app_upgrade_changelog**](docs/ClustersApi.md#get_cluster_infra_app_upgrade_changelog) | **GET** /cluster-infra-app-upgrade-changelogs/{id} | Preview cluster infrastructure app upgrades
+*ClustersApi* | [**get_cluster_security_advisories**](docs/ClustersApi.md#get_cluster_security_advisories) | **GET** /cluster-security-advisories/{id} | List cluster security advisories
 *ClustersApi* | [**get_cluster_sharing**](docs/ClustersApi.md#get_cluster_sharing) | **GET** /clusters/sharing/{id} | Get cluster sharing
 *ClustersApi* | [**get_k3_s_cluster_install_command**](docs/ClustersApi.md#get_k3_s_cluster_install_command) | **GET** /clusters/k3s-install-command/{id} | Get k3s install command
 *ClustersApi* | [**get_kubernetes_version_upgrade_plan**](docs/ClustersApi.md#get_kubernetes_version_upgrade_plan) | **GET** /cluster-kubernetes-version-upgrade-plans/{id} | Get Kubernetes version upgrade plan
@@ -675,6 +676,7 @@ Class | Method | HTTP request | Description
  - [ClusterInfraAppUpgradeChangelog](docs/ClusterInfraAppUpgradeChangelog.md)
  - [ClusterNodePool](docs/ClusterNodePool.md)
  - [ClusterNodePoolInput](docs/ClusterNodePoolInput.md)
+ - [ClusterSecurityAdvisory](docs/ClusterSecurityAdvisory.md)
  - [ClusterSettings](docs/ClusterSettings.md)
  - [ClusterSettingsInput](docs/ClusterSettingsInput.md)
  - [ConfigOverrideInput](docs/ConfigOverrideInput.md)

@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **allow_patch** | **bool** |  | [optional] 
 **allow_minor** | **bool** |  | [optional] 
 **minor_only_after_end_of_life** | **bool** |  | [optional] 
+**include_component_updates** | **bool** |  | [optional] 
 **time_window** | [**AutomationTimeWindowInput**](AutomationTimeWindowInput.md) | A window with enabled false lets upgrades start at any time. | [optional] 
 
 ## Example

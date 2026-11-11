@@ -34,8 +34,9 @@ class NewK3SClusterInput(BaseModel):
     title: StrictStr
     disable_monitoring: StrictBool = Field(alias="disableMonitoring")
     auto_infrastructure_upgrade: Optional[StrictBool] = Field(default=None, alias="autoInfrastructureUpgrade")
+    auto_kubernetes_upgrade: Optional[StrictBool] = Field(default=None, description="Turns automatic Kubernetes version and component upgrades on or off. On by default.", alias="autoKubernetesUpgrade")
     environment_policy: Optional[ClusterEnvironmentPolicyInput] = Field(default=None, alias="environmentPolicy")
-    __properties: ClassVar[List[str]] = ["orgId", "projectId", "availableToAllProjects", "name", "title", "disableMonitoring", "autoInfrastructureUpgrade", "environmentPolicy"]
+    __properties: ClassVar[List[str]] = ["orgId", "projectId", "availableToAllProjects", "name", "title", "disableMonitoring", "autoInfrastructureUpgrade", "autoKubernetesUpgrade", "environmentPolicy"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -94,6 +95,11 @@ class NewK3SClusterInput(BaseModel):
         if self.auto_infrastructure_upgrade is None and "auto_infrastructure_upgrade" in self.model_fields_set:
             _dict['autoInfrastructureUpgrade'] = None
 
+        # set to None if auto_kubernetes_upgrade (nullable) is None
+        # and model_fields_set contains the field
+        if self.auto_kubernetes_upgrade is None and "auto_kubernetes_upgrade" in self.model_fields_set:
+            _dict['autoKubernetesUpgrade'] = None
+
         return _dict
 
     @classmethod
@@ -113,6 +119,7 @@ class NewK3SClusterInput(BaseModel):
             "title": obj.get("title"),
             "disableMonitoring": obj.get("disableMonitoring"),
             "autoInfrastructureUpgrade": obj.get("autoInfrastructureUpgrade"),
+            "autoKubernetesUpgrade": obj.get("autoKubernetesUpgrade"),
             "environmentPolicy": ClusterEnvironmentPolicyInput.from_dict(obj["environmentPolicy"]) if obj.get("environmentPolicy") is not None else None
         })
         return _obj

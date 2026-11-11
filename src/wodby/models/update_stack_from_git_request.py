@@ -28,7 +28,7 @@ class UpdateStackFromGitRequest(BaseModel):
     """ # noqa: E501
     git_ref: StrictStr = Field(alias="gitRef")
     git_ref_type: StrictStr = Field(alias="gitRefType")
-    service_updates: Optional[StrictStr] = Field(default=None, description="Stack updates only; other updates ignore it. What this update does with existing stack services whose stack.yml reference has no version, instead of the stack's gitServiceUpdates setting: latest, auto_update_settings or keep.", alias="serviceUpdates")
+    service_updates: Optional[StrictStr] = Field(default=None, description="Stack updates only; other updates ignore it. What this update does with existing stack services whose stack.yml reference has no version: latest (the default), auto_update_settings or keep.", alias="serviceUpdates")
     __properties: ClassVar[List[str]] = ["gitRef", "gitRefType", "serviceUpdates"]
 
     model_config = ConfigDict(

@@ -29,13 +29,15 @@ class ClusterHostCheck(BaseModel):
     """ # noqa: E501
     name: StrictStr = Field(description="Identifies the check, such as ipv4_options_filter or mptcp_disabled. More checks may be added.")
     title: StrictStr
+    advisory: StrictStr = Field(description="The security advisory the check protects against, such as CVE-2026-98432. Group checks by this field.")
+    advisory_title: StrictStr = Field(description="Describes the advisory, such as Linux kernel TCP bug.", alias="advisoryTitle")
     node: StrictStr = Field(description="The node that reported the check; empty when no node has reported.")
     state: StrictStr = Field(description="Whether the protection is in place. unknown means the server hasn't reported the check, or its last report is more than two days old.")
     message: StrictStr = Field(description="What the state means and what to do about it.")
     kernel: StrictStr = Field(description="The kernel release the server ran at the check; empty when it hasn't reported.")
     checked_at: Optional[datetime] = Field(default=None, description="When the server ran the check. Absent when it hasn't reported.", alias="checkedAt")
     observed_at: Optional[datetime] = Field(default=None, description="When Wodby read the report. Absent when the server hasn't reported.", alias="observedAt")
-    __properties: ClassVar[List[str]] = ["name", "title", "node", "state", "message", "kernel", "checkedAt", "observedAt"]
+    __properties: ClassVar[List[str]] = ["name", "title", "advisory", "advisoryTitle", "node", "state", "message", "kernel", "checkedAt", "observedAt"]
 
     @field_validator('state')
     def state_validate_enum(cls, value):
@@ -97,6 +99,8 @@ class ClusterHostCheck(BaseModel):
         _obj = cls.model_validate({
             "name": obj.get("name"),
             "title": obj.get("title"),
+            "advisory": obj.get("advisory"),
+            "advisoryTitle": obj.get("advisoryTitle"),
             "node": obj.get("node"),
             "state": obj.get("state"),
             "message": obj.get("message"),

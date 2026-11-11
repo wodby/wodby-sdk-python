@@ -216,6 +216,7 @@ from wodby.models.cluster_host_check import ClusterHostCheck
 from wodby.models.cluster_infra_app_upgrade_changelog import ClusterInfraAppUpgradeChangelog
 from wodby.models.cluster_node_pool import ClusterNodePool
 from wodby.models.cluster_node_pool_input import ClusterNodePoolInput
+from wodby.models.cluster_security_advisory import ClusterSecurityAdvisory
 from wodby.models.cluster_settings import ClusterSettings
 from wodby.models.cluster_settings_input import ClusterSettingsInput
 from wodby.models.config_override_input import ConfigOverrideInput

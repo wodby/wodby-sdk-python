@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **git_ref** | **str** |  | 
 **git_ref_type** | **str** |  | 
-**service_updates** | **str** | Stack updates only; other updates ignore it. What this update does with existing stack services whose stack.yml reference has no version, instead of the stack&#39;s gitServiceUpdates setting: latest, auto_update_settings or keep. | [optional] 
+**service_updates** | **str** | Stack updates only; other updates ignore it. What this update does with existing stack services whose stack.yml reference has no version: latest (the default), auto_update_settings or keep. | [optional] 
 
 ## Example
 

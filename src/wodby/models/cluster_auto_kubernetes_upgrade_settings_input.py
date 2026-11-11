@@ -31,8 +31,9 @@ class ClusterAutoKubernetesUpgradeSettingsInput(BaseModel):
     allow_patch: Optional[StrictBool] = Field(default=None, alias="allowPatch")
     allow_minor: Optional[StrictBool] = Field(default=None, alias="allowMinor")
     minor_only_after_end_of_life: Optional[StrictBool] = Field(default=None, alias="minorOnlyAfterEndOfLife")
+    include_component_updates: Optional[StrictBool] = Field(default=None, alias="includeComponentUpdates")
     time_window: Optional[AutomationTimeWindowInput] = Field(default=None, description="A window with enabled false lets upgrades start at any time.", alias="timeWindow")
-    __properties: ClassVar[List[str]] = ["enabled", "allowPatch", "allowMinor", "minorOnlyAfterEndOfLife", "timeWindow"]
+    __properties: ClassVar[List[str]] = ["enabled", "allowPatch", "allowMinor", "minorOnlyAfterEndOfLife", "includeComponentUpdates", "timeWindow"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -96,6 +97,11 @@ class ClusterAutoKubernetesUpgradeSettingsInput(BaseModel):
         if self.minor_only_after_end_of_life is None and "minor_only_after_end_of_life" in self.model_fields_set:
             _dict['minorOnlyAfterEndOfLife'] = None
 
+        # set to None if include_component_updates (nullable) is None
+        # and model_fields_set contains the field
+        if self.include_component_updates is None and "include_component_updates" in self.model_fields_set:
+            _dict['includeComponentUpdates'] = None
+
         return _dict
 
     @classmethod
@@ -112,6 +118,7 @@ class ClusterAutoKubernetesUpgradeSettingsInput(BaseModel):
             "allowPatch": obj.get("allowPatch"),
             "allowMinor": obj.get("allowMinor"),
             "minorOnlyAfterEndOfLife": obj.get("minorOnlyAfterEndOfLife"),
+            "includeComponentUpdates": obj.get("includeComponentUpdates"),
             "timeWindow": AutomationTimeWindowInput.from_dict(obj["timeWindow"]) if obj.get("timeWindow") is not None else None
         })
         return _obj

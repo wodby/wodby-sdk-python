@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **git_auto_update** | [**GitAutoUpdateSettingsInput**](GitAutoUpdateSettingsInput.md) |  | [optional] 
 **auto_service_revision_update** | [**StackAutoServiceRevisionUpdateSettingsInput**](StackAutoServiceRevisionUpdateSettingsInput.md) |  | [optional] 
 **auto_origin_stack_update** | [**StackAutoOriginUpdateSettingsInput**](StackAutoOriginUpdateSettingsInput.md) |  | [optional] 
-**git_service_updates** | **str** | What an update from Git does with existing stack services&#39; versions; see StackSettings. | [optional] 
+**git_service_updates** | **str** | What an automatic update from Git does with existing stack services&#39; versions; see StackSettings. | [optional] 
 
 ## Example
 

@@ -32,7 +32,7 @@ class StackSettingsInput(BaseModel):
     git_auto_update: Optional[GitAutoUpdateSettingsInput] = Field(default=None, alias="gitAutoUpdate")
     auto_service_revision_update: Optional[StackAutoServiceRevisionUpdateSettingsInput] = Field(default=None, alias="autoServiceRevisionUpdate")
     auto_origin_stack_update: Optional[StackAutoOriginUpdateSettingsInput] = Field(default=None, alias="autoOriginStackUpdate")
-    git_service_updates: Optional[StrictStr] = Field(default=None, description="What an update from Git does with existing stack services' versions; see StackSettings.", alias="gitServiceUpdates")
+    git_service_updates: Optional[StrictStr] = Field(default=None, description="What an automatic update from Git does with existing stack services' versions; see StackSettings.", alias="gitServiceUpdates")
     __properties: ClassVar[List[str]] = ["gitAutoUpdate", "autoServiceRevisionUpdate", "autoOriginStackUpdate", "gitServiceUpdates"]
 
     model_config = ConfigDict(

@@ -167,6 +167,7 @@ docs/ClusterHostCheck.md
 docs/ClusterInfraAppUpgradeChangelog.md
 docs/ClusterNodePool.md
 docs/ClusterNodePoolInput.md
+docs/ClusterSecurityAdvisory.md
 docs/ClusterSettings.md
 docs/ClusterSettingsInput.md
 docs/ClustersApi.md
@@ -491,6 +492,7 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_cluster_security_advisory.py
 tox.ini
 wodby/__init__.py
 wodby/api/__init__.py
@@ -685,6 +687,7 @@ wodby/models/cluster_host_check.py
 wodby/models/cluster_infra_app_upgrade_changelog.py
 wodby/models/cluster_node_pool.py
 wodby/models/cluster_node_pool_input.py
+wodby/models/cluster_security_advisory.py
 wodby/models/cluster_settings.py
 wodby/models/cluster_settings_input.py
 wodby/models/config_override_input.py
