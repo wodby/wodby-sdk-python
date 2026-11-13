@@ -37,6 +37,7 @@ class NewBackupPresetInput(BaseModel):
     env_id: Optional[StrictInt] = Field(default=None, alias="envId")
     env_types: Optional[List[StrictStr]] = Field(default=None, alias="envTypes")
     backup_category: Optional[StrictStr] = Field(default='any', alias="backupCategory")
+    project_ids: Optional[List[StrictInt]] = Field(default=None, description="Organization-wide presets only. Limits the preset to apps and databases in these projects of the organization; omit or leave empty for every project.", alias="projectIds")
     backup_name: Optional[StrictStr] = Field(default=None, alias="backupName")
     integration_id: StrictInt = Field(description="Use 0 for Wodby Blob Storage. Free subscriptions may create only an automatic preset that is disabled.", alias="integrationId")
     bucket: StrictStr = Field(description="Must be empty for Wodby Blob Storage.")
@@ -49,7 +50,7 @@ class NewBackupPresetInput(BaseModel):
     crontab: Optional[StrictStr] = None
     time_window: Optional[AutomationTimeWindowInput] = Field(default=None, alias="timeWindow")
     duration: Optional[Annotated[int, Field(le=180, strict=True, ge=30)]] = None
-    __properties: ClassVar[List[str]] = ["appInstanceId", "appServiceId", "databaseId", "databaseDbId", "orgId", "envId", "envTypes", "backupCategory", "backupName", "integrationId", "bucket", "storageClass", "blobStorageRegion", "options", "disabled", "override", "auto", "crontab", "timeWindow", "duration"]
+    __properties: ClassVar[List[str]] = ["appInstanceId", "appServiceId", "databaseId", "databaseDbId", "orgId", "envId", "envTypes", "backupCategory", "projectIds", "backupName", "integrationId", "bucket", "storageClass", "blobStorageRegion", "options", "disabled", "override", "auto", "crontab", "timeWindow", "duration"]
 
     @field_validator('env_types')
     def env_types_validate_enum(cls, value):
@@ -171,6 +172,11 @@ class NewBackupPresetInput(BaseModel):
         if self.backup_category is None and "backup_category" in self.model_fields_set:
             _dict['backupCategory'] = None
 
+        # set to None if project_ids (nullable) is None
+        # and model_fields_set contains the field
+        if self.project_ids is None and "project_ids" in self.model_fields_set:
+            _dict['projectIds'] = None
+
         # set to None if backup_name (nullable) is None
         # and model_fields_set contains the field
         if self.backup_name is None and "backup_name" in self.model_fields_set:
@@ -226,6 +232,7 @@ class NewBackupPresetInput(BaseModel):
             "envId": obj.get("envId"),
             "envTypes": obj.get("envTypes"),
             "backupCategory": obj.get("backupCategory") if obj.get("backupCategory") is not None else 'any',
+            "projectIds": obj.get("projectIds"),
             "backupName": obj.get("backupName"),
             "integrationId": obj.get("integrationId"),
             "bucket": obj.get("bucket"),

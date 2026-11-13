@@ -1972,6 +1972,8 @@ class BackupsApi:
         backup_name: Optional[StrictStr] = None,
         applicable_env_id: Annotated[Optional[StrictInt], Field(description="Return only presets that apply to this environment.")] = None,
         applicable_backup_category: Annotated[Optional[StrictStr], Field(description="Return only presets that apply to this backup category.")] = None,
+        applicable_app_instance_id: Annotated[Optional[StrictInt], Field(description="Return only presets that apply to this app environment, by its environment and the projects its app is in.")] = None,
+        applicable_database_id: Annotated[Optional[StrictInt], Field(description="Return only presets that apply to this database, by its environment and the projects it is in.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2005,6 +2007,10 @@ class BackupsApi:
         :type applicable_env_id: int
         :param applicable_backup_category: Return only presets that apply to this backup category.
         :type applicable_backup_category: str
+        :param applicable_app_instance_id: Return only presets that apply to this app environment, by its environment and the projects its app is in.
+        :type applicable_app_instance_id: int
+        :param applicable_database_id: Return only presets that apply to this database, by its environment and the projects it is in.
+        :type applicable_database_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2036,6 +2042,8 @@ class BackupsApi:
             backup_name=backup_name,
             applicable_env_id=applicable_env_id,
             applicable_backup_category=applicable_backup_category,
+            applicable_app_instance_id=applicable_app_instance_id,
+            applicable_database_id=applicable_database_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2068,6 +2076,8 @@ class BackupsApi:
         backup_name: Optional[StrictStr] = None,
         applicable_env_id: Annotated[Optional[StrictInt], Field(description="Return only presets that apply to this environment.")] = None,
         applicable_backup_category: Annotated[Optional[StrictStr], Field(description="Return only presets that apply to this backup category.")] = None,
+        applicable_app_instance_id: Annotated[Optional[StrictInt], Field(description="Return only presets that apply to this app environment, by its environment and the projects its app is in.")] = None,
+        applicable_database_id: Annotated[Optional[StrictInt], Field(description="Return only presets that apply to this database, by its environment and the projects it is in.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2101,6 +2111,10 @@ class BackupsApi:
         :type applicable_env_id: int
         :param applicable_backup_category: Return only presets that apply to this backup category.
         :type applicable_backup_category: str
+        :param applicable_app_instance_id: Return only presets that apply to this app environment, by its environment and the projects its app is in.
+        :type applicable_app_instance_id: int
+        :param applicable_database_id: Return only presets that apply to this database, by its environment and the projects it is in.
+        :type applicable_database_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2132,6 +2146,8 @@ class BackupsApi:
             backup_name=backup_name,
             applicable_env_id=applicable_env_id,
             applicable_backup_category=applicable_backup_category,
+            applicable_app_instance_id=applicable_app_instance_id,
+            applicable_database_id=applicable_database_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2164,6 +2180,8 @@ class BackupsApi:
         backup_name: Optional[StrictStr] = None,
         applicable_env_id: Annotated[Optional[StrictInt], Field(description="Return only presets that apply to this environment.")] = None,
         applicable_backup_category: Annotated[Optional[StrictStr], Field(description="Return only presets that apply to this backup category.")] = None,
+        applicable_app_instance_id: Annotated[Optional[StrictInt], Field(description="Return only presets that apply to this app environment, by its environment and the projects its app is in.")] = None,
+        applicable_database_id: Annotated[Optional[StrictInt], Field(description="Return only presets that apply to this database, by its environment and the projects it is in.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2197,6 +2215,10 @@ class BackupsApi:
         :type applicable_env_id: int
         :param applicable_backup_category: Return only presets that apply to this backup category.
         :type applicable_backup_category: str
+        :param applicable_app_instance_id: Return only presets that apply to this app environment, by its environment and the projects its app is in.
+        :type applicable_app_instance_id: int
+        :param applicable_database_id: Return only presets that apply to this database, by its environment and the projects it is in.
+        :type applicable_database_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2228,6 +2250,8 @@ class BackupsApi:
             backup_name=backup_name,
             applicable_env_id=applicable_env_id,
             applicable_backup_category=applicable_backup_category,
+            applicable_app_instance_id=applicable_app_instance_id,
+            applicable_database_id=applicable_database_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2255,6 +2279,8 @@ class BackupsApi:
         backup_name,
         applicable_env_id,
         applicable_backup_category,
+        applicable_app_instance_id,
+        applicable_database_id,
         _request_auth,
         _content_type,
         _headers,
@@ -2308,6 +2334,14 @@ class BackupsApi:
         if applicable_backup_category is not None:
             
             _query_params.append(('applicableBackupCategory', applicable_backup_category))
+            
+        if applicable_app_instance_id is not None:
+            
+            _query_params.append(('applicableAppInstanceId', applicable_app_instance_id))
+            
+        if applicable_database_id is not None:
+            
+            _query_params.append(('applicableDatabaseId', applicable_database_id))
             
         # process the header parameters
         # process the form parameters

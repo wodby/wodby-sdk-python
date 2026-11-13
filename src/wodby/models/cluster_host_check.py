@@ -31,7 +31,7 @@ class ClusterHostCheck(BaseModel):
     title: StrictStr
     advisory: StrictStr = Field(description="The security advisory the check protects against, such as CVE-2026-98432. Group checks by this field.")
     advisory_title: StrictStr = Field(description="Describes the advisory, such as Linux kernel TCP bug.", alias="advisoryTitle")
-    node: StrictStr = Field(description="The node that reported the check; empty when no node has reported.")
+    node: StrictStr = Field(description="The node the check is for. Each node of the cluster is listed; empty when the nodes have not been observed yet.")
     state: StrictStr = Field(description="Whether the protection is in place. unknown means the server hasn't reported the check, or its last report is more than two days old.")
     message: StrictStr = Field(description="What the state means and what to do about it.")
     kernel: StrictStr = Field(description="The kernel release the server ran at the check; empty when it hasn't reported.")

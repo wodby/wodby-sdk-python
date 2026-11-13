@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **env_types** | **List[str]** | Omit to preserve the current filter; use an empty array to clear it. | [optional] 
 **backup_category** | **str** | Omit to preserve the current category. | [optional] 
+**project_ids** | **List[int]** | Organization-wide presets only. Omit to preserve the current project selection; use an empty array to apply the preset to every project. | [optional] 
 **integration_id** | **int** | Use 0 for Wodby Blob Storage. Enabling the preset requires a paid subscription. | 
 **bucket** | **str** | Must be empty for Wodby Blob Storage. | 
 **storage_class** | **str** |  | [optional] 

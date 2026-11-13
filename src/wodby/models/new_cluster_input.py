@@ -47,7 +47,7 @@ class NewClusterInput(BaseModel):
     billing_option: Optional[StrictStr] = Field(default=None, alias="billingOption")
     disable_monitoring: StrictBool = Field(alias="disableMonitoring")
     auto_infrastructure_upgrade: Optional[StrictBool] = Field(default=None, alias="autoInfrastructureUpgrade")
-    auto_kubernetes_upgrade: Optional[StrictBool] = Field(default=None, description="Turns automatic Kubernetes version and component upgrades on or off. On by default.", alias="autoKubernetesUpgrade")
+    auto_kubernetes_upgrade: Optional[StrictBool] = Field(default=None, description="Turns automatic Kubernetes version and component upgrades on or off. Off by default, because each Kubernetes upgrade of a managed cluster replaces its nodes and restarts every pod. Serverless clusters are always off.", alias="autoKubernetesUpgrade")
     environment_policy: Optional[ClusterEnvironmentPolicyInput] = Field(default=None, alias="environmentPolicy")
     __properties: ClassVar[List[str]] = ["orgId", "projectId", "availableToAllProjects", "integrationId", "name", "title", "serverless", "singleNode", "version", "machineType", "minNodeCount", "maxNodeCount", "nodeDiskSize", "gpuNodePool", "zone", "region", "billingOption", "disableMonitoring", "autoInfrastructureUpgrade", "autoKubernetesUpgrade", "environmentPolicy"]
 

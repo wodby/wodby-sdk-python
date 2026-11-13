@@ -17,10 +17,13 @@ Method | HTTP request | Description
 [**get_cluster_security_advisories**](ClustersApi.md#get_cluster_security_advisories) | **GET** /cluster-security-advisories/{id} | List cluster security advisories
 [**get_cluster_sharing**](ClustersApi.md#get_cluster_sharing) | **GET** /clusters/sharing/{id} | Get cluster sharing
 [**get_k3_s_cluster_install_command**](ClustersApi.md#get_k3_s_cluster_install_command) | **GET** /clusters/k3s-install-command/{id} | Get k3s install command
+[**get_k3_s_cluster_join_command**](ClustersApi.md#get_k3_s_cluster_join_command) | **GET** /clusters/k3s-join-command/{id} | Get k3s join command
 [**get_kubernetes_version_upgrade_plan**](ClustersApi.md#get_kubernetes_version_upgrade_plan) | **GET** /cluster-kubernetes-version-upgrade-plans/{id} | Get Kubernetes version upgrade plan
 [**list_clusters**](ClustersApi.md#list_clusters) | **GET** /clusters | List clusters
+[**list_k3_s_cluster_nodes**](ClustersApi.md#list_k3_s_cluster_nodes) | **GET** /cluster-k3s-nodes/{id} | List k3s cluster nodes
 [**list_wodby_cloud_machine_types**](ClustersApi.md#list_wodby_cloud_machine_types) | **GET** /wodby-cloud/machine-types | List Wodby Cloud machine types
 [**recycle_cluster_nodes**](ClustersApi.md#recycle_cluster_nodes) | **POST** /clusters/{id}/actions/recycle-nodes | Recycle cluster nodes
+[**remove_k3_s_cluster_node**](ClustersApi.md#remove_k3_s_cluster_node) | **POST** /clusters/{id}/actions/remove-k3s-node | Remove k3s cluster node
 [**scale_cluster**](ClustersApi.md#scale_cluster) | **POST** /clusters/{id}/actions/scale | Scale cluster nodes
 [**update_cluster**](ClustersApi.md#update_cluster) | **PUT** /clusters/{id} | Update cluster
 [**update_cluster_component**](ClustersApi.md#update_cluster_component) | **POST** /clusters/{id}/actions/update-component | Update a cluster component
@@ -1096,6 +1099,87 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_k3_s_cluster_join_command**
+> K3SJoinCommand get_k3_s_cluster_join_command(id)
+
+Get k3s join command
+
+Returns a one-time shell command that joins another server to a k3s cluster as a worker node. Run it as root on that server within 15 minutes. Both servers must share a private network, and the cluster must be in OK status on current infrastructure. The command contains short-lived credentials; treat it as a secret.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.k3_s_join_command import K3SJoinCommand
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.ClustersApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # Get k3s join command
+        api_response = api_instance.get_k3_s_cluster_join_command(id)
+        print("The response of ClustersApi->get_k3_s_cluster_join_command:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ClustersApi->get_k3_s_cluster_join_command: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**K3SJoinCommand**](K3SJoinCommand.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Join command |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_kubernetes_version_upgrade_plan**
 > KubernetesVersionUpgradePlan get_kubernetes_version_upgrade_plan(id)
 
@@ -1264,6 +1348,87 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **list_k3_s_cluster_nodes**
+> List[K3SClusterNode] list_k3_s_cluster_nodes(id)
+
+List k3s cluster nodes
+
+Returns the nodes of a k3s cluster, read live from the cluster, the server first. The ID is the cluster's.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.k3_s_cluster_node import K3SClusterNode
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.ClustersApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # List k3s cluster nodes
+        api_response = api_instance.list_k3_s_cluster_nodes(id)
+        print("The response of ClustersApi->list_k3_s_cluster_nodes:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ClustersApi->list_k3_s_cluster_nodes: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**List[K3SClusterNode]**](K3SClusterNode.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Cluster nodes |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **list_wodby_cloud_machine_types**
 > List[WodbyCloudMachineType] list_wodby_cloud_machine_types()
 
@@ -1346,7 +1511,7 @@ This endpoint does not need any parameter.
 
 Recycle cluster nodes
 
-Starts refreshing the cluster's worker nodes, so applications restart as their pods move. EKS moves each node group to its latest node image and leaves a group that already runs it in place. AKS and DigitalOcean replace every node. Refused for providers whose kube settings report nodeRecycling as false, currently GKE and OVHcloud, for Wodby Cloud, serverless and single-node clusters, and while application operations are active. New deployments wait until it ends.
+Starts refreshing the cluster's worker nodes, so applications restart as their pods move. EKS moves each node group to its latest node image and leaves a group that already runs it in place. AKS and DigitalOcean replace every node. A single-node DigitalOcean cluster gets a temporary second node first, and its public IP changes: Wodby updates the technical domains, but custom domains with an A record to the old IP must be updated. Refused for providers whose kube settings report nodeRecycling as false, currently GKE and OVHcloud, for K3S, Wodby Cloud and serverless clusters, and while application operations are active. New deployments wait until it ends.
 
 ### Example
 
@@ -1417,6 +1582,90 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Node recycling task result |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **remove_k3_s_cluster_node**
+> OperationResult remove_k3_s_cluster_node(id, remove_k3_s_cluster_node_input)
+
+Remove k3s cluster node
+
+Takes a worker node out of a k3s cluster: moves its pods to other nodes, stops k3s on it and deletes the node. Refuses the server, and without force a node that stores persistent volumes, whose data would be lost. Run sudo /usr/local/bin/wodby-k3s-uninstall on that server afterwards to remove k3s from it.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.operation_result import OperationResult
+from wodby.models.remove_k3_s_cluster_node_input import RemoveK3SClusterNodeInput
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.ClustersApi(api_client)
+    id = 56 # int | 
+    remove_k3_s_cluster_node_input = wodby.RemoveK3SClusterNodeInput() # RemoveK3SClusterNodeInput | 
+
+    try:
+        # Remove k3s cluster node
+        api_response = api_instance.remove_k3_s_cluster_node(id, remove_k3_s_cluster_node_input)
+        print("The response of ClustersApi->remove_k3_s_cluster_node:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ClustersApi->remove_k3_s_cluster_node: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **remove_k3_s_cluster_node_input** | [**RemoveK3SClusterNodeInput**](RemoveK3SClusterNodeInput.md)|  | 
+
+### Return type
+
+[**OperationResult**](OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Node removal task result |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 

@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **env_id** | **int** |  | [optional] 
 **env_types** | **List[str]** |  | [optional] 
 **backup_category** | **str** |  | [optional] [default to 'any']
+**project_ids** | **List[int]** | Organization-wide presets only. Limits the preset to apps and databases in these projects of the organization; omit or leave empty for every project. | [optional] 
 **backup_name** | **str** |  | [optional] 
 **integration_id** | **int** | Use 0 for Wodby Blob Storage. Free subscriptions may create only an automatic preset that is disabled. | 
 **bucket** | **str** | Must be empty for Wodby Blob Storage. | 

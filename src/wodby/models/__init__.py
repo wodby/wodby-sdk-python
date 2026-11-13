@@ -224,7 +224,9 @@ from wodby.models.integration_usages_response import IntegrationUsagesResponse
 from wodby.models.integration_variable_requirement import IntegrationVariableRequirement
 from wodby.models.integration_variable_requirement_input import IntegrationVariableRequirementInput
 from wodby.models.invite_org_member_input import InviteOrgMemberInput
+from wodby.models.k3_s_cluster_node import K3SClusterNode
 from wodby.models.k3_s_install_command import K3SInstallCommand
+from wodby.models.k3_s_join_command import K3SJoinCommand
 from wodby.models.kube_version import KubeVersion
 from wodby.models.kubernetes_version_upgrade_plan import KubernetesVersionUpgradePlan
 from wodby.models.kubernetes_version_upgrade_target import KubernetesVersionUpgradeTarget
@@ -315,6 +317,7 @@ from wodby.models.provider_settings_input import ProviderSettingsInput
 from wodby.models.providers_response import ProvidersResponse
 from wodby.models.remote_git_repo import RemoteGitRepo
 from wodby.models.remote_git_repo_file_presence import RemoteGitRepoFilePresence
+from wodby.models.remove_k3_s_cluster_node_input import RemoveK3SClusterNodeInput
 from wodby.models.repeat_task_request import RepeatTaskRequest
 from wodby.models.resolve_integration_result import ResolveIntegrationResult
 from wodby.models.resolved_service_config import ResolvedServiceConfig

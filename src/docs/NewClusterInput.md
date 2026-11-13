@@ -24,7 +24,7 @@ Name | Type | Description | Notes
 **billing_option** | **str** |  | [optional] 
 **disable_monitoring** | **bool** |  | 
 **auto_infrastructure_upgrade** | **bool** |  | [optional] 
-**auto_kubernetes_upgrade** | **bool** | Turns automatic Kubernetes version and component upgrades on or off. On by default. | [optional] 
+**auto_kubernetes_upgrade** | **bool** | Turns automatic Kubernetes version and component upgrades on or off. Off by default, because each Kubernetes upgrade of a managed cluster replaces its nodes and restarts every pod. Serverless clusters are always off. | [optional] 
 **environment_policy** | [**ClusterEnvironmentPolicyInput**](ClusterEnvironmentPolicyInput.md) |  | [optional] 
 
 ## Example

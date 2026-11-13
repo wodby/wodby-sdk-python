@@ -232,7 +232,9 @@ docs/IntegrationVariableRequirement.md
 docs/IntegrationVariableRequirementInput.md
 docs/IntegrationsApi.md
 docs/InviteOrgMemberInput.md
+docs/K3SClusterNode.md
 docs/K3SInstallCommand.md
+docs/K3SJoinCommand.md
 docs/KubeVersion.md
 docs/KubernetesVersionUpgradePlan.md
 docs/KubernetesVersionUpgradeTarget.md
@@ -330,6 +332,7 @@ docs/ProvidersApi.md
 docs/ProvidersResponse.md
 docs/RemoteGitRepo.md
 docs/RemoteGitRepoFilePresence.md
+docs/RemoveK3SClusterNodeInput.md
 docs/RepeatTaskRequest.md
 docs/ResolveIntegrationResult.md
 docs/ResolvedServiceConfig.md
@@ -492,6 +495,9 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_k3_s_cluster_node.py
+test/test_k3_s_join_command.py
+test/test_remove_k3_s_cluster_node_input.py
 tox.ini
 wodby/__init__.py
 wodby/api/__init__.py
@@ -743,7 +749,9 @@ wodby/models/integration_usages_response.py
 wodby/models/integration_variable_requirement.py
 wodby/models/integration_variable_requirement_input.py
 wodby/models/invite_org_member_input.py
+wodby/models/k3_s_cluster_node.py
 wodby/models/k3_s_install_command.py
+wodby/models/k3_s_join_command.py
 wodby/models/kube_version.py
 wodby/models/kubernetes_version_upgrade_plan.py
 wodby/models/kubernetes_version_upgrade_target.py
@@ -834,6 +842,7 @@ wodby/models/provider_settings_input.py
 wodby/models/providers_response.py
 wodby/models/remote_git_repo.py
 wodby/models/remote_git_repo_file_presence.py
+wodby/models/remove_k3_s_cluster_node_input.py
 wodby/models/repeat_task_request.py
 wodby/models/resolve_integration_result.py
 wodby/models/resolved_service_config.py

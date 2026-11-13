@@ -45,6 +45,7 @@ class AppEnvironment(BaseModel):
     outdated: StrictBool
     main_domain: Optional[StrictStr] = Field(default=None, alias="mainDomain")
     main_domain_basic_auth: StrictBool = Field(description="Whether basic auth protects the environment's main domain.", alias="mainDomainBasicAuth")
+    dns_target: Optional[StrictStr] = Field(default=None, description="Hostname to point custom domains at: a CNAME for subdomains, an ALIAS or flattened CNAME for root domains. Wodby keeps it pointed at wherever the environment runs. Null until it is published.", alias="dnsTarget")
     main_route_cert: Optional[AppEnvironmentMainRouteCert] = Field(alias="mainRouteCert")
     app_id: StrictInt = Field(alias="appId")
     cluster_id: StrictInt = Field(alias="clusterId")
@@ -68,7 +69,7 @@ class AppEnvironment(BaseModel):
     health: AppEnvironmentHealth
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["executionMode", "workspace", "id", "name", "title", "environmentType", "status", "outdated", "mainDomain", "mainDomainBasicAuth", "mainRouteCert", "appId", "clusterId", "stackId", "stackRevId", "stackName", "stackTitle", "stackIcon", "stackRevNumber", "stackVersion", "access", "routingMode", "routingPending", "maintenanceMode", "maintenanceModeActive", "configurationReady", "configurationIssues", "settings", "preview", "permissions", "health", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["executionMode", "workspace", "id", "name", "title", "environmentType", "status", "outdated", "mainDomain", "mainDomainBasicAuth", "dnsTarget", "mainRouteCert", "appId", "clusterId", "stackId", "stackRevId", "stackName", "stackTitle", "stackIcon", "stackRevNumber", "stackVersion", "access", "routingMode", "routingPending", "maintenanceMode", "maintenanceModeActive", "configurationReady", "configurationIssues", "settings", "preview", "permissions", "health", "createdAt", "updatedAt"]
 
     @field_validator('execution_mode')
     def execution_mode_validate_enum(cls, value):
@@ -159,6 +160,11 @@ class AppEnvironment(BaseModel):
         if self.main_domain is None and "main_domain" in self.model_fields_set:
             _dict['mainDomain'] = None
 
+        # set to None if dns_target (nullable) is None
+        # and model_fields_set contains the field
+        if self.dns_target is None and "dns_target" in self.model_fields_set:
+            _dict['dnsTarget'] = None
+
         # set to None if main_route_cert (nullable) is None
         # and model_fields_set contains the field
         if self.main_route_cert is None and "main_route_cert" in self.model_fields_set:
@@ -196,6 +202,7 @@ class AppEnvironment(BaseModel):
             "outdated": obj.get("outdated"),
             "mainDomain": obj.get("mainDomain"),
             "mainDomainBasicAuth": obj.get("mainDomainBasicAuth"),
+            "dnsTarget": obj.get("dnsTarget"),
             "mainRouteCert": AppEnvironmentMainRouteCert.from_dict(obj["mainRouteCert"]) if obj.get("mainRouteCert") is not None else None,
             "appId": obj.get("appId"),
             "clusterId": obj.get("clusterId"),

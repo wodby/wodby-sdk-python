@@ -39,6 +39,7 @@ class BackupPreset(BaseModel):
     env_id: Optional[StrictInt] = Field(default=None, alias="envId")
     env_types: List[StrictStr] = Field(alias="envTypes")
     backup_category: StrictStr = Field(alias="backupCategory")
+    project_ids: List[StrictInt] = Field(description="Organization-wide presets only. Projects whose apps and databases the preset backs up; empty means every project.", alias="projectIds")
     backup_name: Optional[StrictStr] = Field(default=None, alias="backupName")
     integration_id: StrictInt = Field(alias="integrationId")
     bucket: StrictStr
@@ -54,7 +55,7 @@ class BackupPreset(BaseModel):
     next_run_at: Optional[datetime] = Field(default=None, alias="nextRunAt")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "appInstanceId", "appServiceId", "databaseId", "databaseDbId", "orgId", "envId", "envTypes", "backupCategory", "backupName", "integrationId", "bucket", "storageClass", "blobStorageRegion", "options", "override", "auto", "disabled", "crontab", "timeWindow", "duration", "nextRunAt", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "appInstanceId", "appServiceId", "databaseId", "databaseDbId", "orgId", "envId", "envTypes", "backupCategory", "projectIds", "backupName", "integrationId", "bucket", "storageClass", "blobStorageRegion", "options", "override", "auto", "disabled", "crontab", "timeWindow", "duration", "nextRunAt", "createdAt", "updatedAt"]
 
     @field_validator('env_types')
     def env_types_validate_enum(cls, value):
@@ -211,6 +212,7 @@ class BackupPreset(BaseModel):
             "envId": obj.get("envId"),
             "envTypes": obj.get("envTypes"),
             "backupCategory": obj.get("backupCategory"),
+            "projectIds": obj.get("projectIds"),
             "backupName": obj.get("backupName"),
             "integrationId": obj.get("integrationId"),
             "bucket": obj.get("bucket"),

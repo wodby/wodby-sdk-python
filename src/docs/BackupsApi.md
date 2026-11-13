@@ -591,7 +591,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_backup_presets**
-> List[BackupPreset] list_backup_presets(app_instance_id=app_instance_id, app_service_id=app_service_id, database_id=database_id, database_db_id=database_db_id, org_id=org_id, backup_name=backup_name, applicable_env_id=applicable_env_id, applicable_backup_category=applicable_backup_category)
+> List[BackupPreset] list_backup_presets(app_instance_id=app_instance_id, app_service_id=app_service_id, database_id=database_id, database_db_id=database_db_id, org_id=org_id, backup_name=backup_name, applicable_env_id=applicable_env_id, applicable_backup_category=applicable_backup_category, applicable_app_instance_id=applicable_app_instance_id, applicable_database_id=applicable_database_id)
 
 List backup presets
 
@@ -636,10 +636,12 @@ with wodby.ApiClient(configuration) as api_client:
     backup_name = 'backup_name_example' # str |  (optional)
     applicable_env_id = 56 # int | Return only presets that apply to this environment. (optional)
     applicable_backup_category = 'applicable_backup_category_example' # str | Return only presets that apply to this backup category. (optional)
+    applicable_app_instance_id = 56 # int | Return only presets that apply to this app environment, by its environment and the projects its app is in. (optional)
+    applicable_database_id = 56 # int | Return only presets that apply to this database, by its environment and the projects it is in. (optional)
 
     try:
         # List backup presets
-        api_response = api_instance.list_backup_presets(app_instance_id=app_instance_id, app_service_id=app_service_id, database_id=database_id, database_db_id=database_db_id, org_id=org_id, backup_name=backup_name, applicable_env_id=applicable_env_id, applicable_backup_category=applicable_backup_category)
+        api_response = api_instance.list_backup_presets(app_instance_id=app_instance_id, app_service_id=app_service_id, database_id=database_id, database_db_id=database_db_id, org_id=org_id, backup_name=backup_name, applicable_env_id=applicable_env_id, applicable_backup_category=applicable_backup_category, applicable_app_instance_id=applicable_app_instance_id, applicable_database_id=applicable_database_id)
         print("The response of BackupsApi->list_backup_presets:\n")
         pprint(api_response)
     except Exception as e:
@@ -661,6 +663,8 @@ Name | Type | Description  | Notes
  **backup_name** | **str**|  | [optional] 
  **applicable_env_id** | **int**| Return only presets that apply to this environment. | [optional] 
  **applicable_backup_category** | **str**| Return only presets that apply to this backup category. | [optional] 
+ **applicable_app_instance_id** | **int**| Return only presets that apply to this app environment, by its environment and the projects its app is in. | [optional] 
+ **applicable_database_id** | **int**| Return only presets that apply to this database, by its environment and the projects it is in. | [optional] 
 
 ### Return type
 

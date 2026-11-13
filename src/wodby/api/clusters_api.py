@@ -28,12 +28,15 @@ from wodby.models.cluster_host_check import ClusterHostCheck
 from wodby.models.cluster_infra_app_upgrade_changelog import ClusterInfraAppUpgradeChangelog
 from wodby.models.cluster_security_advisory import ClusterSecurityAdvisory
 from wodby.models.cluster_settings_input import ClusterSettingsInput
+from wodby.models.k3_s_cluster_node import K3SClusterNode
 from wodby.models.k3_s_install_command import K3SInstallCommand
+from wodby.models.k3_s_join_command import K3SJoinCommand
 from wodby.models.kubernetes_version_upgrade_plan import KubernetesVersionUpgradePlan
 from wodby.models.new_cluster_input import NewClusterInput
 from wodby.models.new_k3_s_cluster_input import NewK3SClusterInput
 from wodby.models.new_wodby_cloud_cluster_input import NewWodbyCloudClusterInput
 from wodby.models.operation_result import OperationResult
+from wodby.models.remove_k3_s_cluster_node_input import RemoveK3SClusterNodeInput
 from wodby.models.resource_sharing import ResourceSharing
 from wodby.models.resource_sharing_input import ResourceSharingInput
 from wodby.models.scale_cluster_input import ScaleClusterInput
@@ -3598,6 +3601,271 @@ class ClustersApi:
 
 
     @validate_call
+    def get_k3_s_cluster_join_command(
+        self,
+        id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> K3SJoinCommand:
+        """Get k3s join command
+
+        Returns a one-time shell command that joins another server to a k3s cluster as a worker node. Run it as root on that server within 15 minutes. Both servers must share a private network, and the cluster must be in OK status on current infrastructure. The command contains short-lived credentials; treat it as a secret.
+
+        :param id: (required)
+        :type id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_k3_s_cluster_join_command_serialize(
+            id=id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "K3SJoinCommand",
+            '4XX': "ProblemDetails",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_k3_s_cluster_join_command_with_http_info(
+        self,
+        id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[K3SJoinCommand]:
+        """Get k3s join command
+
+        Returns a one-time shell command that joins another server to a k3s cluster as a worker node. Run it as root on that server within 15 minutes. Both servers must share a private network, and the cluster must be in OK status on current infrastructure. The command contains short-lived credentials; treat it as a secret.
+
+        :param id: (required)
+        :type id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_k3_s_cluster_join_command_serialize(
+            id=id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "K3SJoinCommand",
+            '4XX': "ProblemDetails",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_k3_s_cluster_join_command_without_preload_content(
+        self,
+        id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get k3s join command
+
+        Returns a one-time shell command that joins another server to a k3s cluster as a worker node. Run it as root on that server within 15 minutes. Both servers must share a private network, and the cluster must be in OK status on current infrastructure. The command contains short-lived credentials; treat it as a secret.
+
+        :param id: (required)
+        :type id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_k3_s_cluster_join_command_serialize(
+            id=id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "K3SJoinCommand",
+            '4XX': "ProblemDetails",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_k3_s_cluster_join_command_serialize(
+        self,
+        id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if id is not None:
+            _path_params['id'] = id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json', 
+                    'application/problem+json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'apiKeyHeader'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/clusters/k3s-join-command/{id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def get_kubernetes_version_upgrade_plan(
         self,
         id: StrictInt,
@@ -4181,6 +4449,271 @@ class ClustersApi:
 
 
     @validate_call
+    def list_k3_s_cluster_nodes(
+        self,
+        id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> List[K3SClusterNode]:
+        """List k3s cluster nodes
+
+        Returns the nodes of a k3s cluster, read live from the cluster, the server first. The ID is the cluster's.
+
+        :param id: (required)
+        :type id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_k3_s_cluster_nodes_serialize(
+            id=id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[K3SClusterNode]",
+            '4XX': "ProblemDetails",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def list_k3_s_cluster_nodes_with_http_info(
+        self,
+        id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[List[K3SClusterNode]]:
+        """List k3s cluster nodes
+
+        Returns the nodes of a k3s cluster, read live from the cluster, the server first. The ID is the cluster's.
+
+        :param id: (required)
+        :type id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_k3_s_cluster_nodes_serialize(
+            id=id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[K3SClusterNode]",
+            '4XX': "ProblemDetails",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def list_k3_s_cluster_nodes_without_preload_content(
+        self,
+        id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """List k3s cluster nodes
+
+        Returns the nodes of a k3s cluster, read live from the cluster, the server first. The ID is the cluster's.
+
+        :param id: (required)
+        :type id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_k3_s_cluster_nodes_serialize(
+            id=id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[K3SClusterNode]",
+            '4XX': "ProblemDetails",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _list_k3_s_cluster_nodes_serialize(
+        self,
+        id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if id is not None:
+            _path_params['id'] = id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json', 
+                    'application/problem+json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'apiKeyHeader'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/cluster-k3s-nodes/{id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def list_wodby_cloud_machine_types(
         self,
         _request_timeout: Union[
@@ -4449,7 +4982,7 @@ class ClustersApi:
     ) -> OperationResult:
         """Recycle cluster nodes
 
-        Starts refreshing the cluster's worker nodes, so applications restart as their pods move. EKS moves each node group to its latest node image and leaves a group that already runs it in place. AKS and DigitalOcean replace every node. Refused for providers whose kube settings report nodeRecycling as false, currently GKE and OVHcloud, for Wodby Cloud, serverless and single-node clusters, and while application operations are active. New deployments wait until it ends.
+        Starts refreshing the cluster's worker nodes, so applications restart as their pods move. EKS moves each node group to its latest node image and leaves a group that already runs it in place. AKS and DigitalOcean replace every node. A single-node DigitalOcean cluster gets a temporary second node first, and its public IP changes: Wodby updates the technical domains, but custom domains with an A record to the old IP must be updated. Refused for providers whose kube settings report nodeRecycling as false, currently GKE and OVHcloud, for K3S, Wodby Cloud and serverless clusters, and while application operations are active. New deployments wait until it ends.
 
         :param id: (required)
         :type id: int
@@ -4517,7 +5050,7 @@ class ClustersApi:
     ) -> ApiResponse[OperationResult]:
         """Recycle cluster nodes
 
-        Starts refreshing the cluster's worker nodes, so applications restart as their pods move. EKS moves each node group to its latest node image and leaves a group that already runs it in place. AKS and DigitalOcean replace every node. Refused for providers whose kube settings report nodeRecycling as false, currently GKE and OVHcloud, for Wodby Cloud, serverless and single-node clusters, and while application operations are active. New deployments wait until it ends.
+        Starts refreshing the cluster's worker nodes, so applications restart as their pods move. EKS moves each node group to its latest node image and leaves a group that already runs it in place. AKS and DigitalOcean replace every node. A single-node DigitalOcean cluster gets a temporary second node first, and its public IP changes: Wodby updates the technical domains, but custom domains with an A record to the old IP must be updated. Refused for providers whose kube settings report nodeRecycling as false, currently GKE and OVHcloud, for K3S, Wodby Cloud and serverless clusters, and while application operations are active. New deployments wait until it ends.
 
         :param id: (required)
         :type id: int
@@ -4585,7 +5118,7 @@ class ClustersApi:
     ) -> RESTResponseType:
         """Recycle cluster nodes
 
-        Starts refreshing the cluster's worker nodes, so applications restart as their pods move. EKS moves each node group to its latest node image and leaves a group that already runs it in place. AKS and DigitalOcean replace every node. Refused for providers whose kube settings report nodeRecycling as false, currently GKE and OVHcloud, for Wodby Cloud, serverless and single-node clusters, and while application operations are active. New deployments wait until it ends.
+        Starts refreshing the cluster's worker nodes, so applications restart as their pods move. EKS moves each node group to its latest node image and leaves a group that already runs it in place. AKS and DigitalOcean replace every node. A single-node DigitalOcean cluster gets a temporary second node first, and its public IP changes: Wodby updates the technical domains, but custom domains with an A record to the old IP must be updated. Refused for providers whose kube settings report nodeRecycling as false, currently GKE and OVHcloud, for K3S, Wodby Cloud and serverless clusters, and while application operations are active. New deployments wait until it ends.
 
         :param id: (required)
         :type id: int
@@ -4680,6 +5213,299 @@ class ClustersApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/clusters/{id}/actions/recycle-nodes',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def remove_k3_s_cluster_node(
+        self,
+        id: StrictInt,
+        remove_k3_s_cluster_node_input: RemoveK3SClusterNodeInput,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> OperationResult:
+        """Remove k3s cluster node
+
+        Takes a worker node out of a k3s cluster: moves its pods to other nodes, stops k3s on it and deletes the node. Refuses the server, and without force a node that stores persistent volumes, whose data would be lost. Run sudo /usr/local/bin/wodby-k3s-uninstall on that server afterwards to remove k3s from it.
+
+        :param id: (required)
+        :type id: int
+        :param remove_k3_s_cluster_node_input: (required)
+        :type remove_k3_s_cluster_node_input: RemoveK3SClusterNodeInput
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._remove_k3_s_cluster_node_serialize(
+            id=id,
+            remove_k3_s_cluster_node_input=remove_k3_s_cluster_node_input,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "OperationResult",
+            '4XX': "ProblemDetails",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def remove_k3_s_cluster_node_with_http_info(
+        self,
+        id: StrictInt,
+        remove_k3_s_cluster_node_input: RemoveK3SClusterNodeInput,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[OperationResult]:
+        """Remove k3s cluster node
+
+        Takes a worker node out of a k3s cluster: moves its pods to other nodes, stops k3s on it and deletes the node. Refuses the server, and without force a node that stores persistent volumes, whose data would be lost. Run sudo /usr/local/bin/wodby-k3s-uninstall on that server afterwards to remove k3s from it.
+
+        :param id: (required)
+        :type id: int
+        :param remove_k3_s_cluster_node_input: (required)
+        :type remove_k3_s_cluster_node_input: RemoveK3SClusterNodeInput
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._remove_k3_s_cluster_node_serialize(
+            id=id,
+            remove_k3_s_cluster_node_input=remove_k3_s_cluster_node_input,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "OperationResult",
+            '4XX': "ProblemDetails",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def remove_k3_s_cluster_node_without_preload_content(
+        self,
+        id: StrictInt,
+        remove_k3_s_cluster_node_input: RemoveK3SClusterNodeInput,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Remove k3s cluster node
+
+        Takes a worker node out of a k3s cluster: moves its pods to other nodes, stops k3s on it and deletes the node. Refuses the server, and without force a node that stores persistent volumes, whose data would be lost. Run sudo /usr/local/bin/wodby-k3s-uninstall on that server afterwards to remove k3s from it.
+
+        :param id: (required)
+        :type id: int
+        :param remove_k3_s_cluster_node_input: (required)
+        :type remove_k3_s_cluster_node_input: RemoveK3SClusterNodeInput
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._remove_k3_s_cluster_node_serialize(
+            id=id,
+            remove_k3_s_cluster_node_input=remove_k3_s_cluster_node_input,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "OperationResult",
+            '4XX': "ProblemDetails",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _remove_k3_s_cluster_node_serialize(
+        self,
+        id,
+        remove_k3_s_cluster_node_input,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if id is not None:
+            _path_params['id'] = id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if remove_k3_s_cluster_node_input is not None:
+            _body_params = remove_k3_s_cluster_node_input
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json', 
+                    'application/problem+json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'apiKeyHeader'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/clusters/{id}/actions/remove-k3s-node',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

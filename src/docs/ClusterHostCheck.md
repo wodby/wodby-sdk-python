@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **title** | **str** |  | 
 **advisory** | **str** | The security advisory the check protects against, such as CVE-2026-98432. Group checks by this field. | 
 **advisory_title** | **str** | Describes the advisory, such as Linux kernel TCP bug. | 
-**node** | **str** | The node that reported the check; empty when no node has reported. | 
+**node** | **str** | The node the check is for. Each node of the cluster is listed; empty when the nodes have not been observed yet. | 
 **state** | **str** | Whether the protection is in place. unknown means the server hasn&#39;t reported the check, or its last report is more than two days old. | 
 **message** | **str** | What the state means and what to do about it. | 
 **kernel** | **str** | The kernel release the server ran at the check; empty when it hasn&#39;t reported. | 
