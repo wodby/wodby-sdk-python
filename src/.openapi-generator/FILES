@@ -501,12 +501,6 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_app_service_customization.py
-test/test_app_service_workspace_mount.py
-test/test_integration_field_value.py
-test/test_integration_kind.py
-test/test_k3_s_private_address.py
-test/test_switch_k3_s_server_address_input.py
 tox.ini
 wodby/__init__.py
 wodby/api/__init__.py
