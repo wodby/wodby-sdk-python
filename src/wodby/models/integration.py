@@ -20,6 +20,8 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from wodby.models.integration_field_value import IntegrationFieldValue
+from wodby.models.integration_kind import IntegrationKind
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -43,9 +45,12 @@ class Integration(BaseModel):
     ownership_scope: StrictStr = Field(description="org when the organization owns the resource, project when one project owns it.", alias="ownershipScope")
     owner_project_id: Optional[StrictInt] = Field(default=None, alias="ownerProjectId")
     available_to_all_projects: StrictBool = Field(description="True when every project in the organization can use the resource without a project share.", alias="availableToAllProjects")
+    icon: Optional[StrictStr] = None
+    kinds: Optional[List[IntegrationKind]] = Field(default=None, description="The integration types the credentials are set up for.")
+    field_values: Optional[List[IntegrationFieldValue]] = Field(default=None, description="The provider fields of the integration. A secret field is returned without its value. Returned only by GET /integrations/{id}.", alias="fieldValues")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "title", "status", "scope", "auth", "outdated", "providerRevId", "orgId", "primaryEnvId", "primaryEnvType", "envScope", "allowedEnvIds", "allowedEnvTypes", "ownershipScope", "ownerProjectId", "availableToAllProjects", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "title", "status", "scope", "auth", "outdated", "providerRevId", "orgId", "primaryEnvId", "primaryEnvType", "envScope", "allowedEnvIds", "allowedEnvTypes", "ownershipScope", "ownerProjectId", "availableToAllProjects", "icon", "kinds", "fieldValues", "createdAt", "updatedAt"]
 
     @field_validator('primary_env_type')
     def primary_env_type_validate_enum(cls, value):
@@ -118,6 +123,20 @@ class Integration(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in kinds (list)
+        _items = []
+        if self.kinds:
+            for _item_kinds in self.kinds:
+                if _item_kinds:
+                    _items.append(_item_kinds.to_dict())
+            _dict['kinds'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in field_values (list)
+        _items = []
+        if self.field_values:
+            for _item_field_values in self.field_values:
+                if _item_field_values:
+                    _items.append(_item_field_values.to_dict())
+            _dict['fieldValues'] = _items
         # set to None if scope (nullable) is None
         # and model_fields_set contains the field
         if self.scope is None and "scope" in self.model_fields_set:
@@ -171,6 +190,9 @@ class Integration(BaseModel):
             "ownershipScope": obj.get("ownershipScope"),
             "ownerProjectId": obj.get("ownerProjectId"),
             "availableToAllProjects": obj.get("availableToAllProjects"),
+            "icon": obj.get("icon"),
+            "kinds": [IntegrationKind.from_dict(_item) for _item in obj["kinds"]] if obj.get("kinds") is not None else None,
+            "fieldValues": [IntegrationFieldValue.from_dict(_item) for _item in obj["fieldValues"]] if obj.get("fieldValues") is not None else None,
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt")
         })

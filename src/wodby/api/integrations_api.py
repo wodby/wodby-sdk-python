@@ -1444,7 +1444,7 @@ class IntegrationsApi:
     ) -> Dict[str, object]:
         """Get Kubernetes settings
 
-        Returns what clusters of the integration's Kubernetes provider support: highAvailability, nodeDiskSizeIsConfigurable, noSingleAZ, singleNode, serverless, billingOptions, gpuNodePool (whether a cluster can have an optional GPU node pool), gpuNodePoolScalesToZero (whether that pool's minimum may be 0) and nodeRecycling (whether a running cluster's worker nodes can be recycled).
+        Returns what clusters of the integration's Kubernetes provider support: highAvailability, nodeDiskSizeIsConfigurable, noSingleAZ, singleNode, serverless, billingOptions, gpuNodePool (whether a cluster can have an optional GPU node pool), gpuNodePoolScalesToZero (whether that pool's minimum may be 0), nodeRecycling (whether a running cluster's worker nodes can be recycled) and nodeAutoscaling (whether the provider scales nodes between the minimum and maximum node counts; when false, a cluster has a fixed number of nodes and must be created and scaled with equal minimum and maximum node counts).
 
         :param id: (required)
         :type id: int
@@ -1512,7 +1512,7 @@ class IntegrationsApi:
     ) -> ApiResponse[Dict[str, object]]:
         """Get Kubernetes settings
 
-        Returns what clusters of the integration's Kubernetes provider support: highAvailability, nodeDiskSizeIsConfigurable, noSingleAZ, singleNode, serverless, billingOptions, gpuNodePool (whether a cluster can have an optional GPU node pool), gpuNodePoolScalesToZero (whether that pool's minimum may be 0) and nodeRecycling (whether a running cluster's worker nodes can be recycled).
+        Returns what clusters of the integration's Kubernetes provider support: highAvailability, nodeDiskSizeIsConfigurable, noSingleAZ, singleNode, serverless, billingOptions, gpuNodePool (whether a cluster can have an optional GPU node pool), gpuNodePoolScalesToZero (whether that pool's minimum may be 0), nodeRecycling (whether a running cluster's worker nodes can be recycled) and nodeAutoscaling (whether the provider scales nodes between the minimum and maximum node counts; when false, a cluster has a fixed number of nodes and must be created and scaled with equal minimum and maximum node counts).
 
         :param id: (required)
         :type id: int
@@ -1580,7 +1580,7 @@ class IntegrationsApi:
     ) -> RESTResponseType:
         """Get Kubernetes settings
 
-        Returns what clusters of the integration's Kubernetes provider support: highAvailability, nodeDiskSizeIsConfigurable, noSingleAZ, singleNode, serverless, billingOptions, gpuNodePool (whether a cluster can have an optional GPU node pool), gpuNodePoolScalesToZero (whether that pool's minimum may be 0) and nodeRecycling (whether a running cluster's worker nodes can be recycled).
+        Returns what clusters of the integration's Kubernetes provider support: highAvailability, nodeDiskSizeIsConfigurable, noSingleAZ, singleNode, serverless, billingOptions, gpuNodePool (whether a cluster can have an optional GPU node pool), gpuNodePoolScalesToZero (whether that pool's minimum may be 0), nodeRecycling (whether a running cluster's worker nodes can be recycled) and nodeAutoscaling (whether the provider scales nodes between the minimum and maximum node counts; when false, a cluster has a fixed number of nodes and must be created and scaled with equal minimum and maximum node counts).
 
         :param id: (required)
         :type id: int

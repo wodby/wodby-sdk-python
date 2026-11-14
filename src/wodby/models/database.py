@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -36,6 +36,19 @@ class Database(BaseModel):
     version: StrictStr
     region: Optional[StrictStr] = None
     zone: Optional[StrictStr] = None
+    replicas: Optional[StrictInt] = None
+    storage_size: Optional[StrictInt] = Field(default=None, description="Storage size in GB. Null when the database does not set one.", alias="storageSize")
+    storage_iops: Optional[StrictInt] = Field(default=None, description="Provisioned storage IOPS. Null when the database does not set them.", alias="storageIOPS")
+    machine_type: Optional[StrictStr] = Field(default=None, alias="machineType")
+    high_availability: Optional[StrictBool] = Field(default=None, alias="highAvailability")
+    external: Optional[StrictBool] = Field(default=None, description="True for a database that runs outside Wodby, such as a provider-managed database server.")
+    external_id: Optional[StrictStr] = Field(default=None, description="The database's ID at its provider.", alias="externalId")
+    ssl: Optional[StrictBool] = Field(default=None, description="True when connections to the database use TLS.")
+    public_host: Optional[StrictStr] = Field(default=None, description="Host name for connections from outside the database's network. Null when the database has none.", alias="publicHost")
+    public_port: Optional[StrictInt] = Field(default=None, alias="publicPort")
+    private_host: Optional[StrictStr] = Field(default=None, description="Host name for connections from inside the database's network.", alias="privateHost")
+    cluster_id: Optional[StrictInt] = Field(default=None, description="The cluster that runs the database.", alias="clusterId")
+    resided_cluster_id: Optional[StrictInt] = Field(default=None, description="The cluster whose network a provider-managed database is placed in.", alias="residedClusterId")
     integration_id: Optional[StrictInt] = Field(default=None, alias="integrationId")
     app_service_id: Optional[StrictInt] = Field(default=None, alias="appServiceId")
     ownership_scope: StrictStr = Field(description="org when the organization owns the resource, project when one project owns it.", alias="ownershipScope")
@@ -45,7 +58,7 @@ class Database(BaseModel):
     org_id: StrictInt = Field(alias="orgId")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "type", "kind", "status", "version", "region", "zone", "integrationId", "appServiceId", "ownershipScope", "ownerProjectId", "envId", "envType", "orgId", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "type", "kind", "status", "version", "region", "zone", "replicas", "storageSize", "storageIOPS", "machineType", "highAvailability", "external", "externalId", "ssl", "publicHost", "publicPort", "privateHost", "clusterId", "residedClusterId", "integrationId", "appServiceId", "ownershipScope", "ownerProjectId", "envId", "envType", "orgId", "createdAt", "updatedAt"]
 
     @field_validator('ownership_scope')
     def ownership_scope_validate_enum(cls, value):
@@ -110,6 +123,51 @@ class Database(BaseModel):
         if self.zone is None and "zone" in self.model_fields_set:
             _dict['zone'] = None
 
+        # set to None if storage_size (nullable) is None
+        # and model_fields_set contains the field
+        if self.storage_size is None and "storage_size" in self.model_fields_set:
+            _dict['storageSize'] = None
+
+        # set to None if storage_iops (nullable) is None
+        # and model_fields_set contains the field
+        if self.storage_iops is None and "storage_iops" in self.model_fields_set:
+            _dict['storageIOPS'] = None
+
+        # set to None if machine_type (nullable) is None
+        # and model_fields_set contains the field
+        if self.machine_type is None and "machine_type" in self.model_fields_set:
+            _dict['machineType'] = None
+
+        # set to None if external_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.external_id is None and "external_id" in self.model_fields_set:
+            _dict['externalId'] = None
+
+        # set to None if public_host (nullable) is None
+        # and model_fields_set contains the field
+        if self.public_host is None and "public_host" in self.model_fields_set:
+            _dict['publicHost'] = None
+
+        # set to None if public_port (nullable) is None
+        # and model_fields_set contains the field
+        if self.public_port is None and "public_port" in self.model_fields_set:
+            _dict['publicPort'] = None
+
+        # set to None if private_host (nullable) is None
+        # and model_fields_set contains the field
+        if self.private_host is None and "private_host" in self.model_fields_set:
+            _dict['privateHost'] = None
+
+        # set to None if cluster_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.cluster_id is None and "cluster_id" in self.model_fields_set:
+            _dict['clusterId'] = None
+
+        # set to None if resided_cluster_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.resided_cluster_id is None and "resided_cluster_id" in self.model_fields_set:
+            _dict['residedClusterId'] = None
+
         # set to None if integration_id (nullable) is None
         # and model_fields_set contains the field
         if self.integration_id is None and "integration_id" in self.model_fields_set:
@@ -146,6 +204,19 @@ class Database(BaseModel):
             "version": obj.get("version"),
             "region": obj.get("region"),
             "zone": obj.get("zone"),
+            "replicas": obj.get("replicas"),
+            "storageSize": obj.get("storageSize"),
+            "storageIOPS": obj.get("storageIOPS"),
+            "machineType": obj.get("machineType"),
+            "highAvailability": obj.get("highAvailability"),
+            "external": obj.get("external"),
+            "externalId": obj.get("externalId"),
+            "ssl": obj.get("ssl"),
+            "publicHost": obj.get("publicHost"),
+            "publicPort": obj.get("publicPort"),
+            "privateHost": obj.get("privateHost"),
+            "clusterId": obj.get("clusterId"),
+            "residedClusterId": obj.get("residedClusterId"),
             "integrationId": obj.get("integrationId"),
             "appServiceId": obj.get("appServiceId"),
             "ownershipScope": obj.get("ownershipScope"),

@@ -43,6 +43,10 @@ class StackService(BaseModel):
     replicas: StrictInt
     service_rev_pinned: StrictBool = Field(alias="serviceRevPinned")
     outdated: StrictBool
+    icon: Optional[StrictStr] = None
+    eol: Optional[StrictBool] = Field(default=None, description="True when the version of the stack service's default option has reached its end of life.")
+    derivative: Optional[StrictStr] = Field(default=None, description="The service derivative the stack service runs. Null for the service itself.")
+    parent_stack_service_id: Optional[StrictInt] = Field(default=None, description="The stack service this derivative stack service belongs to. Null for the service itself.", alias="parentStackServiceId")
     service_rev_id: StrictInt = Field(alias="serviceRevId")
     service_rev_name: StrictStr = Field(alias="serviceRevName")
     service_rev_title: StrictStr = Field(alias="serviceRevTitle")
@@ -55,7 +59,7 @@ class StackService(BaseModel):
     deployment_configuration: ServiceDeploymentConfiguration = Field(alias="deploymentConfiguration")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "type", "main", "disabled", "required", "basicAuthOverride", "basicAuthDefault", "replicas", "serviceRevPinned", "outdated", "serviceRevId", "serviceRevName", "serviceRevTitle", "serviceRevVersion", "buildSourceIntegrationId", "buildSourceRemoteRepoId", "options", "settings", "containers", "deploymentConfiguration", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "type", "main", "disabled", "required", "basicAuthOverride", "basicAuthDefault", "replicas", "serviceRevPinned", "outdated", "icon", "eol", "derivative", "parentStackServiceId", "serviceRevId", "serviceRevName", "serviceRevTitle", "serviceRevVersion", "buildSourceIntegrationId", "buildSourceRemoteRepoId", "options", "settings", "containers", "deploymentConfiguration", "createdAt", "updatedAt"]
 
     @field_validator('basic_auth_override')
     def basic_auth_override_validate_enum(cls, value):
@@ -127,6 +131,16 @@ class StackService(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of deployment_configuration
         if self.deployment_configuration:
             _dict['deploymentConfiguration'] = self.deployment_configuration.to_dict()
+        # set to None if derivative (nullable) is None
+        # and model_fields_set contains the field
+        if self.derivative is None and "derivative" in self.model_fields_set:
+            _dict['derivative'] = None
+
+        # set to None if parent_stack_service_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.parent_stack_service_id is None and "parent_stack_service_id" in self.model_fields_set:
+            _dict['parentStackServiceId'] = None
+
         # set to None if build_source_integration_id (nullable) is None
         # and model_fields_set contains the field
         if self.build_source_integration_id is None and "build_source_integration_id" in self.model_fields_set:
@@ -161,6 +175,10 @@ class StackService(BaseModel):
             "replicas": obj.get("replicas"),
             "serviceRevPinned": obj.get("serviceRevPinned"),
             "outdated": obj.get("outdated"),
+            "icon": obj.get("icon"),
+            "eol": obj.get("eol"),
+            "derivative": obj.get("derivative"),
+            "parentStackServiceId": obj.get("parentStackServiceId"),
             "serviceRevId": obj.get("serviceRevId"),
             "serviceRevName": obj.get("serviceRevName"),
             "serviceRevTitle": obj.get("serviceRevTitle"),

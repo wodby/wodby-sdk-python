@@ -109,6 +109,7 @@ from wodby.models.app_service_custom_link import AppServiceCustomLink
 from wodby.models.app_service_custom_link_input import AppServiceCustomLinkInput
 from wodby.models.app_service_custom_link_input_values_inner import AppServiceCustomLinkInputValuesInner
 from wodby.models.app_service_custom_link_value import AppServiceCustomLinkValue
+from wodby.models.app_service_customization import AppServiceCustomization
 from wodby.models.app_service_database_input import AppServiceDatabaseInput
 from wodby.models.app_service_deployment import AppServiceDeployment
 from wodby.models.app_service_deployment_request import AppServiceDeploymentRequest
@@ -131,6 +132,7 @@ from wodby.models.app_service_setting_input import AppServiceSettingInput
 from wodby.models.app_service_token import AppServiceToken
 from wodby.models.app_service_volume import AppServiceVolume
 from wodby.models.app_service_volume_storage_class_state import AppServiceVolumeStorageClassState
+from wodby.models.app_service_workspace_mount import AppServiceWorkspaceMount
 from wodby.models.app_settings import AppSettings
 from wodby.models.app_settings_input import AppSettingsInput
 from wodby.models.automation_time_window import AutomationTimeWindow
@@ -215,6 +217,8 @@ from wodby.models.import_stacks_from_git_input import ImportStacksFromGitInput
 from wodby.models.integration import Integration
 from wodby.models.integration_configuration_result import IntegrationConfigurationResult
 from wodby.models.integration_environment_policy_input import IntegrationEnvironmentPolicyInput
+from wodby.models.integration_field_value import IntegrationFieldValue
+from wodby.models.integration_kind import IntegrationKind
 from wodby.models.integration_link_input import IntegrationLinkInput
 from wodby.models.integration_provider_revision_upgrade import IntegrationProviderRevisionUpgrade
 from wodby.models.integration_scope import IntegrationScope
@@ -227,6 +231,7 @@ from wodby.models.invite_org_member_input import InviteOrgMemberInput
 from wodby.models.k3_s_cluster_node import K3SClusterNode
 from wodby.models.k3_s_install_command import K3SInstallCommand
 from wodby.models.k3_s_join_command import K3SJoinCommand
+from wodby.models.k3_s_private_address import K3SPrivateAddress
 from wodby.models.kube_version import KubeVersion
 from wodby.models.kubernetes_version_upgrade_plan import KubernetesVersionUpgradePlan
 from wodby.models.kubernetes_version_upgrade_target import KubernetesVersionUpgradeTarget
@@ -406,6 +411,7 @@ from wodby.models.stack_upgrade_volume_deletion import StackUpgradeVolumeDeletio
 from wodby.models.stacks_response import StacksResponse
 from wodby.models.start_agent_chat_request import StartAgentChatRequest
 from wodby.models.storage_class import StorageClass
+from wodby.models.switch_k3_s_server_address_input import SwitchK3SServerAddressInput
 from wodby.models.sync_stack_with_origin_input import SyncStackWithOriginInput
 from wodby.models.task import Task
 from wodby.models.task_initiator import TaskInitiator

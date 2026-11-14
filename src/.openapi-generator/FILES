@@ -105,6 +105,7 @@ docs/AppServiceCustomLink.md
 docs/AppServiceCustomLinkInput.md
 docs/AppServiceCustomLinkInputValuesInner.md
 docs/AppServiceCustomLinkValue.md
+docs/AppServiceCustomization.md
 docs/AppServiceDatabaseInput.md
 docs/AppServiceDeployment.md
 docs/AppServiceDeploymentRequest.md
@@ -127,6 +128,7 @@ docs/AppServiceSettingInput.md
 docs/AppServiceToken.md
 docs/AppServiceVolume.md
 docs/AppServiceVolumeStorageClassState.md
+docs/AppServiceWorkspaceMount.md
 docs/AppServicesApi.md
 docs/AppSettings.md
 docs/AppSettingsInput.md
@@ -221,6 +223,8 @@ docs/ImportsApi.md
 docs/Integration.md
 docs/IntegrationConfigurationResult.md
 docs/IntegrationEnvironmentPolicyInput.md
+docs/IntegrationFieldValue.md
+docs/IntegrationKind.md
 docs/IntegrationKindsApi.md
 docs/IntegrationLinkInput.md
 docs/IntegrationProviderRevisionUpgrade.md
@@ -235,6 +239,7 @@ docs/InviteOrgMemberInput.md
 docs/K3SClusterNode.md
 docs/K3SInstallCommand.md
 docs/K3SJoinCommand.md
+docs/K3SPrivateAddress.md
 docs/KubeVersion.md
 docs/KubernetesVersionUpgradePlan.md
 docs/KubernetesVersionUpgradeTarget.md
@@ -424,6 +429,7 @@ docs/StacksApi.md
 docs/StacksResponse.md
 docs/StartAgentChatRequest.md
 docs/StorageClass.md
+docs/SwitchK3SServerAddressInput.md
 docs/SyncStackWithOriginInput.md
 docs/Task.md
 docs/TaskInitiator.md
@@ -495,9 +501,12 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_k3_s_cluster_node.py
-test/test_k3_s_join_command.py
-test/test_remove_k3_s_cluster_node_input.py
+test/test_app_service_customization.py
+test/test_app_service_workspace_mount.py
+test/test_integration_field_value.py
+test/test_integration_kind.py
+test/test_k3_s_private_address.py
+test/test_switch_k3_s_server_address_input.py
 tox.ini
 wodby/__init__.py
 wodby/api/__init__.py
@@ -634,6 +643,7 @@ wodby/models/app_service_custom_link.py
 wodby/models/app_service_custom_link_input.py
 wodby/models/app_service_custom_link_input_values_inner.py
 wodby/models/app_service_custom_link_value.py
+wodby/models/app_service_customization.py
 wodby/models/app_service_database_input.py
 wodby/models/app_service_deployment.py
 wodby/models/app_service_deployment_request.py
@@ -656,6 +666,7 @@ wodby/models/app_service_setting_input.py
 wodby/models/app_service_token.py
 wodby/models/app_service_volume.py
 wodby/models/app_service_volume_storage_class_state.py
+wodby/models/app_service_workspace_mount.py
 wodby/models/app_settings.py
 wodby/models/app_settings_input.py
 wodby/models/automation_time_window.py
@@ -740,6 +751,8 @@ wodby/models/import_stacks_from_git_input.py
 wodby/models/integration.py
 wodby/models/integration_configuration_result.py
 wodby/models/integration_environment_policy_input.py
+wodby/models/integration_field_value.py
+wodby/models/integration_kind.py
 wodby/models/integration_link_input.py
 wodby/models/integration_provider_revision_upgrade.py
 wodby/models/integration_scope.py
@@ -752,6 +765,7 @@ wodby/models/invite_org_member_input.py
 wodby/models/k3_s_cluster_node.py
 wodby/models/k3_s_install_command.py
 wodby/models/k3_s_join_command.py
+wodby/models/k3_s_private_address.py
 wodby/models/kube_version.py
 wodby/models/kubernetes_version_upgrade_plan.py
 wodby/models/kubernetes_version_upgrade_target.py
@@ -931,6 +945,7 @@ wodby/models/stack_upgrade_volume_deletion.py
 wodby/models/stacks_response.py
 wodby/models/start_agent_chat_request.py
 wodby/models/storage_class.py
+wodby/models/switch_k3_s_server_address_input.py
 wodby/models/sync_stack_with_origin_input.py
 wodby/models/task.py
 wodby/models/task_initiator.py

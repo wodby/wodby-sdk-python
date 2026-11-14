@@ -21,7 +21,9 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.app_service_configuration_issue import AppServiceConfigurationIssue
+from wodby.models.app_service_customization import AppServiceCustomization
 from wodby.models.app_service_scalability import AppServiceScalability
+from wodby.models.app_service_workspace_mount import AppServiceWorkspaceMount
 from wodby.models.service_deployment_configuration import ServiceDeploymentConfiguration
 from typing import Optional, Set
 from typing_extensions import Self
@@ -54,9 +56,18 @@ class AppService(BaseModel):
     service_rev_id: StrictInt = Field(alias="serviceRevId")
     parent_app_service_id: Optional[StrictInt] = Field(default=None, alias="parentAppServiceId")
     deployment_configuration: ServiceDeploymentConfiguration = Field(alias="deploymentConfiguration")
+    icon: Optional[StrictStr] = None
+    eol: Optional[StrictBool] = Field(default=None, description="True when the app service's version has reached its end of life.")
+    build_source_type: Optional[StrictStr] = Field(default=None, description="How the app service gets its source code to build, public, clone or connect. Null when it is not built from source.", alias="buildSourceType")
+    derivative: Optional[StrictStr] = Field(default=None, description="The service derivative the app service runs. Null for the service itself.")
+    git_repo_id: Optional[StrictInt] = Field(default=None, alias="gitRepoId")
+    workspace_mounts: Optional[List[AppServiceWorkspaceMount]] = Field(default=None, description="Workspace code mounts of the service, with its settings resolved in the paths. Empty without a workspace contract.", alias="workspaceMounts")
+    database_db_id: Optional[StrictInt] = Field(default=None, description="The database the app service uses on a provider-managed database server.", alias="databaseDbId")
+    database_user_id: Optional[StrictInt] = Field(default=None, description="The database user the app service connects as on a provider-managed database server.", alias="databaseUserId")
+    customizations: Optional[List[AppServiceCustomization]] = Field(default=None, description="What this app environment set differently from the stack service the app service was created from, such as a setting value, an extra variable or another link target. Only names are returned, never values. Returned only by GET /app-services/{id}.")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "type", "status", "replicas", "scalability", "version", "main", "disabled", "external", "required", "needsRebuild", "needsRedeploy", "stackState", "configurationReady", "buildSourceBoilerplate", "ciPolicy", "effectiveCiIntegrationId", "configurationIssues", "appInstanceId", "serviceRevId", "parentAppServiceId", "deploymentConfiguration", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "type", "status", "replicas", "scalability", "version", "main", "disabled", "external", "required", "needsRebuild", "needsRedeploy", "stackState", "configurationReady", "buildSourceBoilerplate", "ciPolicy", "effectiveCiIntegrationId", "configurationIssues", "appInstanceId", "serviceRevId", "parentAppServiceId", "deploymentConfiguration", "icon", "eol", "buildSourceType", "derivative", "gitRepoId", "workspaceMounts", "databaseDbId", "databaseUserId", "customizations", "createdAt", "updatedAt"]
 
     @field_validator('stack_state')
     def stack_state_validate_enum(cls, value):
@@ -124,6 +135,20 @@ class AppService(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of deployment_configuration
         if self.deployment_configuration:
             _dict['deploymentConfiguration'] = self.deployment_configuration.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in workspace_mounts (list)
+        _items = []
+        if self.workspace_mounts:
+            for _item_workspace_mounts in self.workspace_mounts:
+                if _item_workspace_mounts:
+                    _items.append(_item_workspace_mounts.to_dict())
+            _dict['workspaceMounts'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in customizations (list)
+        _items = []
+        if self.customizations:
+            for _item_customizations in self.customizations:
+                if _item_customizations:
+                    _items.append(_item_customizations.to_dict())
+            _dict['customizations'] = _items
         # set to None if scalability (nullable) is None
         # and model_fields_set contains the field
         if self.scalability is None and "scalability" in self.model_fields_set:
@@ -143,6 +168,31 @@ class AppService(BaseModel):
         # and model_fields_set contains the field
         if self.parent_app_service_id is None and "parent_app_service_id" in self.model_fields_set:
             _dict['parentAppServiceId'] = None
+
+        # set to None if build_source_type (nullable) is None
+        # and model_fields_set contains the field
+        if self.build_source_type is None and "build_source_type" in self.model_fields_set:
+            _dict['buildSourceType'] = None
+
+        # set to None if derivative (nullable) is None
+        # and model_fields_set contains the field
+        if self.derivative is None and "derivative" in self.model_fields_set:
+            _dict['derivative'] = None
+
+        # set to None if git_repo_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.git_repo_id is None and "git_repo_id" in self.model_fields_set:
+            _dict['gitRepoId'] = None
+
+        # set to None if database_db_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.database_db_id is None and "database_db_id" in self.model_fields_set:
+            _dict['databaseDbId'] = None
+
+        # set to None if database_user_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.database_user_id is None and "database_user_id" in self.model_fields_set:
+            _dict['databaseUserId'] = None
 
         return _dict
 
@@ -180,6 +230,15 @@ class AppService(BaseModel):
             "serviceRevId": obj.get("serviceRevId"),
             "parentAppServiceId": obj.get("parentAppServiceId"),
             "deploymentConfiguration": ServiceDeploymentConfiguration.from_dict(obj["deploymentConfiguration"]) if obj.get("deploymentConfiguration") is not None else None,
+            "icon": obj.get("icon"),
+            "eol": obj.get("eol"),
+            "buildSourceType": obj.get("buildSourceType"),
+            "derivative": obj.get("derivative"),
+            "gitRepoId": obj.get("gitRepoId"),
+            "workspaceMounts": [AppServiceWorkspaceMount.from_dict(_item) for _item in obj["workspaceMounts"]] if obj.get("workspaceMounts") is not None else None,
+            "databaseDbId": obj.get("databaseDbId"),
+            "databaseUserId": obj.get("databaseUserId"),
+            "customizations": [AppServiceCustomization.from_dict(_item) for _item in obj["customizations"]] if obj.get("customizations") is not None else None,
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt")
         })

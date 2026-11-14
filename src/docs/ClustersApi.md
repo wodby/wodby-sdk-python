@@ -21,10 +21,12 @@ Method | HTTP request | Description
 [**get_kubernetes_version_upgrade_plan**](ClustersApi.md#get_kubernetes_version_upgrade_plan) | **GET** /cluster-kubernetes-version-upgrade-plans/{id} | Get Kubernetes version upgrade plan
 [**list_clusters**](ClustersApi.md#list_clusters) | **GET** /clusters | List clusters
 [**list_k3_s_cluster_nodes**](ClustersApi.md#list_k3_s_cluster_nodes) | **GET** /cluster-k3s-nodes/{id} | List k3s cluster nodes
+[**list_k3_s_server_private_addresses**](ClustersApi.md#list_k3_s_server_private_addresses) | **GET** /cluster-k3s-private-addresses/{id} | List k3s server private addresses
 [**list_wodby_cloud_machine_types**](ClustersApi.md#list_wodby_cloud_machine_types) | **GET** /wodby-cloud/machine-types | List Wodby Cloud machine types
 [**recycle_cluster_nodes**](ClustersApi.md#recycle_cluster_nodes) | **POST** /clusters/{id}/actions/recycle-nodes | Recycle cluster nodes
 [**remove_k3_s_cluster_node**](ClustersApi.md#remove_k3_s_cluster_node) | **POST** /clusters/{id}/actions/remove-k3s-node | Remove k3s cluster node
 [**scale_cluster**](ClustersApi.md#scale_cluster) | **POST** /clusters/{id}/actions/scale | Scale cluster nodes
+[**switch_k3_s_server_address**](ClustersApi.md#switch_k3_s_server_address) | **POST** /clusters/{id}/actions/switch-k3s-server-address | Switch k3s server to a private address
 [**update_cluster**](ClustersApi.md#update_cluster) | **PUT** /clusters/{id} | Update cluster
 [**update_cluster_component**](ClustersApi.md#update_cluster_component) | **POST** /clusters/{id}/actions/update-component | Update a cluster component
 [**update_cluster_environment_policy**](ClustersApi.md#update_cluster_environment_policy) | **PUT** /clusters/environment-policy/{id} | Update cluster environment policy
@@ -1429,6 +1431,87 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **list_k3_s_server_private_addresses**
+> List[K3SPrivateAddress] list_k3_s_server_private_addresses(id)
+
+List k3s server private addresses
+
+Returns the private addresses the server of a k3s cluster could switch to, read from the server itself. Only for a server that uses its public address for cluster traffic, which keeps worker nodes out. Runs a short check on the server and needs permission to modify the cluster. The ID is the cluster's.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.k3_s_private_address import K3SPrivateAddress
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.ClustersApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # List k3s server private addresses
+        api_response = api_instance.list_k3_s_server_private_addresses(id)
+        print("The response of ClustersApi->list_k3_s_server_private_addresses:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ClustersApi->list_k3_s_server_private_addresses: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**List[K3SPrivateAddress]**](K3SPrivateAddress.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Private addresses |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **list_wodby_cloud_machine_types**
 > List[WodbyCloudMachineType] list_wodby_cloud_machine_types()
 
@@ -1750,6 +1833,90 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Scaling task result |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **switch_k3_s_server_address**
+> OperationResult switch_k3_s_server_address(id, switch_k3_s_server_address_input)
+
+Switch k3s server to a private address
+
+Switches the server of a k3s cluster from its public address to a private one from GET /cluster-k3s-private-addresses/{id} for cluster traffic, so worker nodes can join, and keeps the public address for public traffic. k3s restarts once: the Kubernetes API pauses for about a minute while apps keep running, and new deployments wait until the switch ends. Refused while application operations are active. If k3s doesn't come back on the private address, the server restores its previous settings.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.operation_result import OperationResult
+from wodby.models.switch_k3_s_server_address_input import SwitchK3SServerAddressInput
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.ClustersApi(api_client)
+    id = 56 # int | 
+    switch_k3_s_server_address_input = wodby.SwitchK3SServerAddressInput() # SwitchK3SServerAddressInput | 
+
+    try:
+        # Switch k3s server to a private address
+        api_response = api_instance.switch_k3_s_server_address(id, switch_k3_s_server_address_input)
+        print("The response of ClustersApi->switch_k3_s_server_address:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ClustersApi->switch_k3_s_server_address: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **switch_k3_s_server_address_input** | [**SwitchK3SServerAddressInput**](SwitchK3SServerAddressInput.md)|  | 
+
+### Return type
+
+[**OperationResult**](OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Address switch task result |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 

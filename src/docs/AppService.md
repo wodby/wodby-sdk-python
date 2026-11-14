@@ -29,6 +29,15 @@ Name | Type | Description | Notes
 **service_rev_id** | **int** |  | 
 **parent_app_service_id** | **int** |  | [optional] 
 **deployment_configuration** | [**ServiceDeploymentConfiguration**](ServiceDeploymentConfiguration.md) |  | 
+**icon** | **str** |  | [optional] 
+**eol** | **bool** | True when the app service&#39;s version has reached its end of life. | [optional] 
+**build_source_type** | **str** | How the app service gets its source code to build, public, clone or connect. Null when it is not built from source. | [optional] 
+**derivative** | **str** | The service derivative the app service runs. Null for the service itself. | [optional] 
+**git_repo_id** | **int** |  | [optional] 
+**workspace_mounts** | [**List[AppServiceWorkspaceMount]**](AppServiceWorkspaceMount.md) | Workspace code mounts of the service, with its settings resolved in the paths. Empty without a workspace contract. | [optional] 
+**database_db_id** | **int** | The database the app service uses on a provider-managed database server. | [optional] 
+**database_user_id** | **int** | The database user the app service connects as on a provider-managed database server. | [optional] 
+**customizations** | [**List[AppServiceCustomization]**](AppServiceCustomization.md) | What this app environment set differently from the stack service the app service was created from, such as a setting value, an extra variable or another link target. Only names are returned, never values. Returned only by GET /app-services/{id}. | [optional] 
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 
 

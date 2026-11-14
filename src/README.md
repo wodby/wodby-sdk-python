@@ -291,10 +291,12 @@ Class | Method | HTTP request | Description
 *ClustersApi* | [**get_kubernetes_version_upgrade_plan**](docs/ClustersApi.md#get_kubernetes_version_upgrade_plan) | **GET** /cluster-kubernetes-version-upgrade-plans/{id} | Get Kubernetes version upgrade plan
 *ClustersApi* | [**list_clusters**](docs/ClustersApi.md#list_clusters) | **GET** /clusters | List clusters
 *ClustersApi* | [**list_k3_s_cluster_nodes**](docs/ClustersApi.md#list_k3_s_cluster_nodes) | **GET** /cluster-k3s-nodes/{id} | List k3s cluster nodes
+*ClustersApi* | [**list_k3_s_server_private_addresses**](docs/ClustersApi.md#list_k3_s_server_private_addresses) | **GET** /cluster-k3s-private-addresses/{id} | List k3s server private addresses
 *ClustersApi* | [**list_wodby_cloud_machine_types**](docs/ClustersApi.md#list_wodby_cloud_machine_types) | **GET** /wodby-cloud/machine-types | List Wodby Cloud machine types
 *ClustersApi* | [**recycle_cluster_nodes**](docs/ClustersApi.md#recycle_cluster_nodes) | **POST** /clusters/{id}/actions/recycle-nodes | Recycle cluster nodes
 *ClustersApi* | [**remove_k3_s_cluster_node**](docs/ClustersApi.md#remove_k3_s_cluster_node) | **POST** /clusters/{id}/actions/remove-k3s-node | Remove k3s cluster node
 *ClustersApi* | [**scale_cluster**](docs/ClustersApi.md#scale_cluster) | **POST** /clusters/{id}/actions/scale | Scale cluster nodes
+*ClustersApi* | [**switch_k3_s_server_address**](docs/ClustersApi.md#switch_k3_s_server_address) | **POST** /clusters/{id}/actions/switch-k3s-server-address | Switch k3s server to a private address
 *ClustersApi* | [**update_cluster**](docs/ClustersApi.md#update_cluster) | **PUT** /clusters/{id} | Update cluster
 *ClustersApi* | [**update_cluster_component**](docs/ClustersApi.md#update_cluster_component) | **POST** /clusters/{id}/actions/update-component | Update a cluster component
 *ClustersApi* | [**update_cluster_environment_policy**](docs/ClustersApi.md#update_cluster_environment_policy) | **PUT** /clusters/environment-policy/{id} | Update cluster environment policy
@@ -621,6 +623,7 @@ Class | Method | HTTP request | Description
  - [AppServiceCustomLinkInput](docs/AppServiceCustomLinkInput.md)
  - [AppServiceCustomLinkInputValuesInner](docs/AppServiceCustomLinkInputValuesInner.md)
  - [AppServiceCustomLinkValue](docs/AppServiceCustomLinkValue.md)
+ - [AppServiceCustomization](docs/AppServiceCustomization.md)
  - [AppServiceDatabaseInput](docs/AppServiceDatabaseInput.md)
  - [AppServiceDeployment](docs/AppServiceDeployment.md)
  - [AppServiceDeploymentRequest](docs/AppServiceDeploymentRequest.md)
@@ -643,6 +646,7 @@ Class | Method | HTTP request | Description
  - [AppServiceToken](docs/AppServiceToken.md)
  - [AppServiceVolume](docs/AppServiceVolume.md)
  - [AppServiceVolumeStorageClassState](docs/AppServiceVolumeStorageClassState.md)
+ - [AppServiceWorkspaceMount](docs/AppServiceWorkspaceMount.md)
  - [AppSettings](docs/AppSettings.md)
  - [AppSettingsInput](docs/AppSettingsInput.md)
  - [AutomationTimeWindow](docs/AutomationTimeWindow.md)
@@ -727,6 +731,8 @@ Class | Method | HTTP request | Description
  - [Integration](docs/Integration.md)
  - [IntegrationConfigurationResult](docs/IntegrationConfigurationResult.md)
  - [IntegrationEnvironmentPolicyInput](docs/IntegrationEnvironmentPolicyInput.md)
+ - [IntegrationFieldValue](docs/IntegrationFieldValue.md)
+ - [IntegrationKind](docs/IntegrationKind.md)
  - [IntegrationLinkInput](docs/IntegrationLinkInput.md)
  - [IntegrationProviderRevisionUpgrade](docs/IntegrationProviderRevisionUpgrade.md)
  - [IntegrationScope](docs/IntegrationScope.md)
@@ -739,6 +745,7 @@ Class | Method | HTTP request | Description
  - [K3SClusterNode](docs/K3SClusterNode.md)
  - [K3SInstallCommand](docs/K3SInstallCommand.md)
  - [K3SJoinCommand](docs/K3SJoinCommand.md)
+ - [K3SPrivateAddress](docs/K3SPrivateAddress.md)
  - [KubeVersion](docs/KubeVersion.md)
  - [KubernetesVersionUpgradePlan](docs/KubernetesVersionUpgradePlan.md)
  - [KubernetesVersionUpgradeTarget](docs/KubernetesVersionUpgradeTarget.md)
@@ -918,6 +925,7 @@ Class | Method | HTTP request | Description
  - [StacksResponse](docs/StacksResponse.md)
  - [StartAgentChatRequest](docs/StartAgentChatRequest.md)
  - [StorageClass](docs/StorageClass.md)
+ - [SwitchK3SServerAddressInput](docs/SwitchK3SServerAddressInput.md)
  - [SyncStackWithOriginInput](docs/SyncStackWithOriginInput.md)
  - [Task](docs/Task.md)
  - [TaskInitiator](docs/TaskInitiator.md)
