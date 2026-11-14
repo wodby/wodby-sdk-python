@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **cron** | [**AppEnvironmentCronHealth**](AppEnvironmentCronHealth.md) |  | 
 **backups** | [**AppEnvironmentBackupHealth**](AppEnvironmentBackupHealth.md) |  | 
+**vulnerabilities** | [**AppEnvironmentVulnerabilityHealth**](AppEnvironmentVulnerabilityHealth.md) | Critical and high vulnerabilities in the build images the environment currently runs, from their last successful scans. Null when vulnerability scanning is unavailable for the organization. | [optional] 
 
 ## Example
 

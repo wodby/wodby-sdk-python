@@ -6,11 +6,14 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_app**](AppsApi.md#create_app) | **POST** /apps | Create app
 [**create_app_preview_environment**](AppsApi.md#create_app_preview_environment) | **POST** /apps/preview-environments/{id} | Create a pull request preview environment
+[**create_app_vulnerability_ignore**](AppsApi.md#create_app_vulnerability_ignore) | **POST** /apps/vulnerability-ignores/{id} | Ignore a vulnerability
 [**delete_app**](AppsApi.md#delete_app) | **DELETE** /apps/{id} | Delete app
+[**delete_app_vulnerability_ignore**](AppsApi.md#delete_app_vulnerability_ignore) | **DELETE** /app-vulnerability-ignores/{id} | Stop ignoring a vulnerability
 [**get_app**](AppsApi.md#get_app) | **GET** /apps/{id} | Get app
 [**get_app_by_name**](AppsApi.md#get_app_by_name) | **GET** /apps/by-name/{name} | Get app by name
 [**get_app_sharing**](AppsApi.md#get_app_sharing) | **GET** /apps/sharing/{id} | Get app sharing
 [**list_app_preview_pull_requests**](AppsApi.md#list_app_preview_pull_requests) | **GET** /apps/preview-pull-requests/{id} | List pull requests for preview environments
+[**list_app_vulnerability_ignores**](AppsApi.md#list_app_vulnerability_ignores) | **GET** /apps/vulnerability-ignores/{id} | List ignored vulnerabilities
 [**list_apps**](AppsApi.md#list_apps) | **GET** /apps | List apps
 [**regenerate_app_preview_password**](AppsApi.md#regenerate_app_preview_password) | **POST** /apps/preview-password/regenerate/{id} | Regenerate the preview password
 [**update_app**](AppsApi.md#update_app) | **PUT** /apps/{id} | Update app
@@ -184,6 +187,90 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **create_app_vulnerability_ignore**
+> AppVulnerabilityIgnore create_app_vulnerability_ignore(id, app_vulnerability_ignore_input)
+
+Ignore a vulnerability
+
+Ignores a vulnerability in one package for every build of the app, including later scans. Ignored findings are left out of vulnerability counts and reported in the ignored count instead. Needs permission to modify the app and vulnerability scanning on the organization's plan. Fails when the app already ignores the vulnerability in that package.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.app_vulnerability_ignore import AppVulnerabilityIgnore
+from wodby.models.app_vulnerability_ignore_input import AppVulnerabilityIgnoreInput
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppsApi(api_client)
+    id = 56 # int | 
+    app_vulnerability_ignore_input = wodby.AppVulnerabilityIgnoreInput() # AppVulnerabilityIgnoreInput | 
+
+    try:
+        # Ignore a vulnerability
+        api_response = api_instance.create_app_vulnerability_ignore(id, app_vulnerability_ignore_input)
+        print("The response of AppsApi->create_app_vulnerability_ignore:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppsApi->create_app_vulnerability_ignore: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **app_vulnerability_ignore_input** | [**AppVulnerabilityIgnoreInput**](AppVulnerabilityIgnoreInput.md)|  | 
+
+### Return type
+
+[**AppVulnerabilityIgnore**](AppVulnerabilityIgnore.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Created ignore |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **delete_app**
 > OperationResult delete_app(id)
 
@@ -260,6 +347,87 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Delete result |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_app_vulnerability_ignore**
+> OperationResult delete_app_vulnerability_ignore(id)
+
+Stop ignoring a vulnerability
+
+Removes an ignore, so matching findings count again. Needs permission to modify the app.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.operation_result import OperationResult
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppsApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # Stop ignoring a vulnerability
+        api_response = api_instance.delete_app_vulnerability_ignore(id)
+        print("The response of AppsApi->delete_app_vulnerability_ignore:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppsApi->delete_app_vulnerability_ignore: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**OperationResult**](OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Deletion result |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 
@@ -586,6 +754,87 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Open pull requests |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **list_app_vulnerability_ignores**
+> List[AppVulnerabilityIgnore] list_app_vulnerability_ignores(id)
+
+List ignored vulnerabilities
+
+Lists the vulnerabilities the app ignores, newest first. Each one applies to its package in every build of every environment of the app.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.app_vulnerability_ignore import AppVulnerabilityIgnore
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppsApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # List ignored vulnerabilities
+        api_response = api_instance.list_app_vulnerability_ignores(id)
+        print("The response of AppsApi->list_app_vulnerability_ignores:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppsApi->list_app_vulnerability_ignores: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**List[AppVulnerabilityIgnore]**](AppVulnerabilityIgnore.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Ignored vulnerabilities |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 

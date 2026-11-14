@@ -66,6 +66,7 @@ docs/AppEnvironmentStackUpgradeChangelog.md
 docs/AppEnvironmentStackUpgradeInput.md
 docs/AppEnvironmentStackUpgradeSettings.md
 docs/AppEnvironmentStackUpgradeSettingsInput.md
+docs/AppEnvironmentVulnerabilityHealth.md
 docs/AppEnvironmentsApi.md
 docs/AppPort.md
 docs/AppPortSetting.md
@@ -132,6 +133,8 @@ docs/AppServiceWorkspaceMount.md
 docs/AppServicesApi.md
 docs/AppSettings.md
 docs/AppSettingsInput.md
+docs/AppVulnerabilityIgnore.md
+docs/AppVulnerabilityIgnoreInput.md
 docs/AppsApi.md
 docs/AutomationTimeWindow.md
 docs/AutomationTimeWindowInput.md
@@ -167,6 +170,9 @@ docs/ClusterCreationResult.md
 docs/ClusterEnvironmentPolicyInput.md
 docs/ClusterHostCheck.md
 docs/ClusterInfraAppUpgradeChangelog.md
+docs/ClusterKubernetesVulnerabilities.md
+docs/ClusterKubernetesVulnerability.md
+docs/ClusterNode.md
 docs/ClusterNodePool.md
 docs/ClusterNodePoolInput.md
 docs/ClusterSecurityAdvisory.md
@@ -292,6 +298,7 @@ docs/NewVariableProviderFieldInput.md
 docs/NewVariableProviderInput.md
 docs/NewWodbyCloudClusterInput.md
 docs/NewWorkspaceInput.md
+docs/NodeCapacity.md
 docs/OperationResult.md
 docs/Org.md
 docs/OrgCapabilities.md
@@ -460,6 +467,7 @@ docs/UpdateClusterGPUNodePoolInput.md
 docs/UpdateCurrentUserRequest.md
 docs/UpdateDatabaseUserDBsInput.md
 docs/UpdateIntegrationInput.md
+docs/UpdateK3SClusterMaxPodsInput.md
 docs/UpdateK3SClusterPublicIPInput.md
 docs/UpdateKubernetesVersionInput.md
 docs/UpdateOrgRequest.md
@@ -501,6 +509,14 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_app_environment_vulnerability_health.py
+test/test_app_vulnerability_ignore.py
+test/test_app_vulnerability_ignore_input.py
+test/test_cluster_kubernetes_vulnerabilities.py
+test/test_cluster_kubernetes_vulnerability.py
+test/test_cluster_node.py
+test/test_node_capacity.py
+test/test_update_k3_s_cluster_max_pods_input.py
 tox.ini
 wodby/__init__.py
 wodby/api/__init__.py
@@ -601,6 +617,7 @@ wodby/models/app_environment_stack_upgrade_changelog.py
 wodby/models/app_environment_stack_upgrade_input.py
 wodby/models/app_environment_stack_upgrade_settings.py
 wodby/models/app_environment_stack_upgrade_settings_input.py
+wodby/models/app_environment_vulnerability_health.py
 wodby/models/app_port.py
 wodby/models/app_port_setting.py
 wodby/models/app_port_setting_input.py
@@ -663,6 +680,8 @@ wodby/models/app_service_volume_storage_class_state.py
 wodby/models/app_service_workspace_mount.py
 wodby/models/app_settings.py
 wodby/models/app_settings_input.py
+wodby/models/app_vulnerability_ignore.py
+wodby/models/app_vulnerability_ignore_input.py
 wodby/models/automation_time_window.py
 wodby/models/automation_time_window_input.py
 wodby/models/backup.py
@@ -695,6 +714,9 @@ wodby/models/cluster_creation_result.py
 wodby/models/cluster_environment_policy_input.py
 wodby/models/cluster_host_check.py
 wodby/models/cluster_infra_app_upgrade_changelog.py
+wodby/models/cluster_kubernetes_vulnerabilities.py
+wodby/models/cluster_kubernetes_vulnerability.py
+wodby/models/cluster_node.py
 wodby/models/cluster_node_pool.py
 wodby/models/cluster_node_pool_input.py
 wodby/models/cluster_security_advisory.py
@@ -812,6 +834,7 @@ wodby/models/new_variable_provider_field_input.py
 wodby/models/new_variable_provider_input.py
 wodby/models/new_wodby_cloud_cluster_input.py
 wodby/models/new_workspace_input.py
+wodby/models/node_capacity.py
 wodby/models/operation_result.py
 wodby/models/org.py
 wodby/models/org_capabilities.py
@@ -966,6 +989,7 @@ wodby/models/update_cluster_gpu_node_pool_input.py
 wodby/models/update_current_user_request.py
 wodby/models/update_database_user_dbs_input.py
 wodby/models/update_integration_input.py
+wodby/models/update_k3_s_cluster_max_pods_input.py
 wodby/models/update_k3_s_cluster_public_ip_input.py
 wodby/models/update_kubernetes_version_input.py
 wodby/models/update_org_request.py

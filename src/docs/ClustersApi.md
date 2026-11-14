@@ -5,7 +5,7 @@ All URIs are relative to */v1*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_cluster**](ClustersApi.md#create_cluster) | **POST** /clusters | Create cluster
-[**create_k3_s_cluster**](ClustersApi.md#create_k3_s_cluster) | **POST** /clusters/actions/create-k3s | Create k3s cluster
+[**create_k3_s_cluster**](ClustersApi.md#create_k3_s_cluster) | **POST** /clusters/actions/create-k3s | Create K3s cluster
 [**create_wodby_cloud_cluster**](ClustersApi.md#create_wodby_cloud_cluster) | **POST** /clusters/actions/create-wodby-cloud | Create Wodby Cloud cluster
 [**delete_cluster**](ClustersApi.md#delete_cluster) | **DELETE** /clusters/{id} | Delete cluster
 [**get_cluster**](ClustersApi.md#get_cluster) | **GET** /clusters/{id} | Get cluster
@@ -14,19 +14,21 @@ Method | HTTP request | Description
 [**get_cluster_components**](ClustersApi.md#get_cluster_components) | **GET** /cluster-components/{id} | List cluster components
 [**get_cluster_host_checks**](ClustersApi.md#get_cluster_host_checks) | **GET** /cluster-host-checks/{id} | List cluster host checks
 [**get_cluster_infra_app_upgrade_changelog**](ClustersApi.md#get_cluster_infra_app_upgrade_changelog) | **GET** /cluster-infra-app-upgrade-changelogs/{id} | Preview cluster infrastructure app upgrades
+[**get_cluster_kubernetes_vulnerabilities**](ClustersApi.md#get_cluster_kubernetes_vulnerabilities) | **GET** /cluster-kubernetes-vulnerabilities/{id} | List Kubernetes version vulnerabilities
 [**get_cluster_security_advisories**](ClustersApi.md#get_cluster_security_advisories) | **GET** /cluster-security-advisories/{id} | List cluster security advisories
 [**get_cluster_sharing**](ClustersApi.md#get_cluster_sharing) | **GET** /clusters/sharing/{id} | Get cluster sharing
-[**get_k3_s_cluster_install_command**](ClustersApi.md#get_k3_s_cluster_install_command) | **GET** /clusters/k3s-install-command/{id} | Get k3s install command
-[**get_k3_s_cluster_join_command**](ClustersApi.md#get_k3_s_cluster_join_command) | **GET** /clusters/k3s-join-command/{id} | Get k3s join command
+[**get_k3_s_cluster_install_command**](ClustersApi.md#get_k3_s_cluster_install_command) | **GET** /clusters/k3s-install-command/{id} | Get K3s install command
+[**get_k3_s_cluster_join_command**](ClustersApi.md#get_k3_s_cluster_join_command) | **GET** /clusters/k3s-join-command/{id} | Get K3s join command
 [**get_kubernetes_version_upgrade_plan**](ClustersApi.md#get_kubernetes_version_upgrade_plan) | **GET** /cluster-kubernetes-version-upgrade-plans/{id} | Get Kubernetes version upgrade plan
+[**list_cluster_nodes**](ClustersApi.md#list_cluster_nodes) | **GET** /cluster-nodes/{id} | List cluster nodes
 [**list_clusters**](ClustersApi.md#list_clusters) | **GET** /clusters | List clusters
-[**list_k3_s_cluster_nodes**](ClustersApi.md#list_k3_s_cluster_nodes) | **GET** /cluster-k3s-nodes/{id} | List k3s cluster nodes
-[**list_k3_s_server_private_addresses**](ClustersApi.md#list_k3_s_server_private_addresses) | **GET** /cluster-k3s-private-addresses/{id} | List k3s server private addresses
+[**list_k3_s_cluster_nodes**](ClustersApi.md#list_k3_s_cluster_nodes) | **GET** /cluster-k3s-nodes/{id} | List K3s cluster nodes
+[**list_k3_s_server_private_addresses**](ClustersApi.md#list_k3_s_server_private_addresses) | **GET** /cluster-k3s-private-addresses/{id} | List K3s server private addresses
 [**list_wodby_cloud_machine_types**](ClustersApi.md#list_wodby_cloud_machine_types) | **GET** /wodby-cloud/machine-types | List Wodby Cloud machine types
 [**recycle_cluster_nodes**](ClustersApi.md#recycle_cluster_nodes) | **POST** /clusters/{id}/actions/recycle-nodes | Recycle cluster nodes
-[**remove_k3_s_cluster_node**](ClustersApi.md#remove_k3_s_cluster_node) | **POST** /clusters/{id}/actions/remove-k3s-node | Remove k3s cluster node
+[**remove_k3_s_cluster_node**](ClustersApi.md#remove_k3_s_cluster_node) | **POST** /clusters/{id}/actions/remove-k3s-node | Remove K3s cluster node
 [**scale_cluster**](ClustersApi.md#scale_cluster) | **POST** /clusters/{id}/actions/scale | Scale cluster nodes
-[**switch_k3_s_server_address**](ClustersApi.md#switch_k3_s_server_address) | **POST** /clusters/{id}/actions/switch-k3s-server-address | Switch k3s server to a private address
+[**switch_k3_s_server_address**](ClustersApi.md#switch_k3_s_server_address) | **POST** /clusters/{id}/actions/switch-k3s-server-address | Switch K3s server to a private address
 [**update_cluster**](ClustersApi.md#update_cluster) | **PUT** /clusters/{id} | Update cluster
 [**update_cluster_component**](ClustersApi.md#update_cluster_component) | **POST** /clusters/{id}/actions/update-component | Update a cluster component
 [**update_cluster_environment_policy**](ClustersApi.md#update_cluster_environment_policy) | **PUT** /clusters/environment-policy/{id} | Update cluster environment policy
@@ -34,7 +36,8 @@ Method | HTTP request | Description
 [**update_cluster_kubernetes_version**](ClustersApi.md#update_cluster_kubernetes_version) | **POST** /clusters/{id}/actions/update-kubernetes-version | Update cluster Kubernetes version
 [**update_cluster_settings**](ClustersApi.md#update_cluster_settings) | **PUT** /clusters/settings/{id} | Update cluster settings
 [**update_cluster_sharing**](ClustersApi.md#update_cluster_sharing) | **PUT** /clusters/sharing/{id} | Update cluster sharing
-[**update_k3_s_cluster_public_ip**](ClustersApi.md#update_k3_s_cluster_public_ip) | **POST** /clusters/{id}/actions/update-k3s-public-ip | Update k3s cluster public IP
+[**update_k3_s_cluster_max_pods**](ClustersApi.md#update_k3_s_cluster_max_pods) | **POST** /clusters/{id}/actions/update-k3s-max-pods | Set pods per node of a K3s cluster
+[**update_k3_s_cluster_public_ip**](ClustersApi.md#update_k3_s_cluster_public_ip) | **POST** /clusters/{id}/actions/update-k3s-public-ip | Update K3s cluster public IP
 [**upgrade_cluster_infra**](ClustersApi.md#upgrade_cluster_infra) | **POST** /clusters/{id}/actions/upgrade-infra | Upgrade cluster infrastructure
 [**upgrade_cluster_infra_apps**](ClustersApi.md#upgrade_cluster_infra_apps) | **POST** /clusters/{id}/actions/upgrade-infra-apps | Upgrade cluster infrastructure app stacks
 
@@ -124,9 +127,9 @@ Name | Type | Description  | Notes
 # **create_k3_s_cluster**
 > Cluster create_k3_s_cluster(new_k3_s_cluster_input)
 
-Create k3s cluster
+Create K3s cluster
 
-Registers a self-hosted k3s cluster. Run the command from GET /clusters/k3s-install-command/{id} on the server to connect it.
+Registers a self-hosted K3s cluster. Run the command from GET /clusters/k3s-install-command/{id} on the server to connect it.
 
 ### Example
 
@@ -163,7 +166,7 @@ with wodby.ApiClient(configuration) as api_client:
     new_k3_s_cluster_input = wodby.NewK3SClusterInput() # NewK3SClusterInput | 
 
     try:
-        # Create k3s cluster
+        # Create K3s cluster
         api_response = api_instance.create_k3_s_cluster(new_k3_s_cluster_input)
         print("The response of ClustersApi->create_k3_s_cluster:\n")
         pprint(api_response)
@@ -537,7 +540,7 @@ Name | Type | Description  | Notes
 
 List cluster component updates
 
-Returns the updates Wodby can apply to single components of a healthy cluster, without a Kubernetes or infrastructure upgrade. The ID is the cluster's. Most components cannot be updated this way, because their provider or K3S release owns them, so the list is often empty.
+Returns the updates Wodby can apply to single components of a healthy cluster, without a Kubernetes or infrastructure upgrade. The ID is the cluster's. Most components cannot be updated this way, because their provider or K3s release owns them, so the list is often empty.
 
 ### Example
 
@@ -699,7 +702,7 @@ Name | Type | Description  | Notes
 
 List cluster host checks
 
-Returns what a K3S cluster's server last reported about its protections against the Linux kernel bug CVE-2026-98432. The server checks after each boot and once a day, puts back a protection that is missing, and reports the result. The ID is the cluster's. Every known check is listed, as unknown when the server hasn't reported it or its last report is more than two days old. Managed clusters return an empty list.
+Returns what a K3s cluster's server last reported about its protections against the Linux kernel bug CVE-2026-98432. The server checks after each boot and once a day, puts back a protection that is missing, and reports the result. The ID is the cluster's. Every known check is listed, as unknown when the server hasn't reported it or its last report is more than two days old. Managed clusters return an empty list.
 
 ### Example
 
@@ -858,12 +861,93 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_cluster_kubernetes_vulnerabilities**
+> ClusterKubernetesVulnerabilities get_cluster_kubernetes_vulnerabilities(id)
+
+List Kubernetes version vulnerabilities
+
+Returns the known upstream vulnerabilities of the Kubernetes version the cluster last reported. The ID is the cluster's. The vulnerabilities describe the upstream patch level of the version; K3s and managed Kubernetes builds can carry fixes that are newer than that patch. Returns null while they are unknown: for Wodby Cloud and serverless clusters, before the cluster reports its version, or while they can't be loaded.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.cluster_kubernetes_vulnerabilities import ClusterKubernetesVulnerabilities
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.ClustersApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # List Kubernetes version vulnerabilities
+        api_response = api_instance.get_cluster_kubernetes_vulnerabilities(id)
+        print("The response of ClustersApi->get_cluster_kubernetes_vulnerabilities:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ClustersApi->get_cluster_kubernetes_vulnerabilities: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**ClusterKubernetesVulnerabilities**](ClusterKubernetesVulnerabilities.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Kubernetes version vulnerabilities, or null while they are unknown |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_cluster_security_advisories**
 > List[ClusterSecurityAdvisory] get_cluster_security_advisories(id)
 
 List cluster security advisories
 
-Returns where the cluster stands on each security advisory Wodby tracks, such as CVE-2026-98432. The ID is the cluster's. A K3S cluster is mitigated or not by the protections Wodby keeps on its server. A managed cluster is fixed or not by the node images its provider ships. An advisory is left out when Wodby can't tell, for example when the provider hasn't said which node images carry the fix. Wodby Cloud and serverless clusters return an empty list.
+Returns where the cluster stands on each security advisory Wodby tracks, such as CVE-2026-98432. The ID is the cluster's. A K3s cluster is mitigated or not by the protections Wodby keeps on its server. A managed cluster is fixed or not by the node images its provider ships, as Wodby last checked them: once a day, and when a task that replaces nodes finishes. A managed cluster returns an empty list until its first check, within minutes of its creation. An advisory is left out when Wodby can't tell, for example when the provider hasn't said which node images carry the fix. Wodby Cloud and serverless clusters return an empty list.
 
 ### Example
 
@@ -1023,9 +1107,9 @@ Name | Type | Description  | Notes
 # **get_k3_s_cluster_install_command**
 > K3SInstallCommand get_k3_s_cluster_install_command(id)
 
-Get k3s install command
+Get K3s install command
 
-Returns the shell command that installs Wodby on the k3s server and connects the cluster. The command contains short-lived credentials; treat it as a secret.
+Returns the shell command that installs Wodby on the K3s server and connects the cluster. The command contains short-lived credentials; treat it as a secret.
 
 ### Example
 
@@ -1061,7 +1145,7 @@ with wodby.ApiClient(configuration) as api_client:
     id = 56 # int | 
 
     try:
-        # Get k3s install command
+        # Get K3s install command
         api_response = api_instance.get_k3_s_cluster_install_command(id)
         print("The response of ClustersApi->get_k3_s_cluster_install_command:\n")
         pprint(api_response)
@@ -1104,9 +1188,9 @@ Name | Type | Description  | Notes
 # **get_k3_s_cluster_join_command**
 > K3SJoinCommand get_k3_s_cluster_join_command(id)
 
-Get k3s join command
+Get K3s join command
 
-Returns a one-time shell command that joins another server to a k3s cluster as a worker node. Run it as root on that server within 15 minutes. Both servers must share a private network, and the cluster must be in OK status on current infrastructure. The command contains short-lived credentials; treat it as a secret.
+Returns a one-time shell command that joins another server to a K3s cluster as a worker node. Run it as root on that server within 15 minutes. Both servers must share a private network, and the cluster must be in OK status on current infrastructure. The command contains short-lived credentials; treat it as a secret.
 
 ### Example
 
@@ -1142,7 +1226,7 @@ with wodby.ApiClient(configuration) as api_client:
     id = 56 # int | 
 
     try:
-        # Get k3s join command
+        # Get K3s join command
         api_response = api_instance.get_k3_s_cluster_join_command(id)
         print("The response of ClustersApi->get_k3_s_cluster_join_command:\n")
         pprint(api_response)
@@ -1263,6 +1347,87 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **list_cluster_nodes**
+> List[ClusterNode] list_cluster_nodes(id)
+
+List cluster nodes
+
+Returns the nodes of a cluster, read live from the cluster: the general nodes first, then the GPU node pool. Wodby Cloud and serverless clusters don't list nodes. The ID is the cluster's.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.cluster_node import ClusterNode
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.ClustersApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # List cluster nodes
+        api_response = api_instance.list_cluster_nodes(id)
+        print("The response of ClustersApi->list_cluster_nodes:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ClustersApi->list_cluster_nodes: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**List[ClusterNode]**](ClusterNode.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Cluster nodes |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **list_clusters**
 > List[Cluster] list_clusters(org_id=org_id, project_ids=project_ids, integration_id=integration_id, environment_id=environment_id)
 
@@ -1353,9 +1518,9 @@ Name | Type | Description  | Notes
 # **list_k3_s_cluster_nodes**
 > List[K3SClusterNode] list_k3_s_cluster_nodes(id)
 
-List k3s cluster nodes
+List K3s cluster nodes
 
-Returns the nodes of a k3s cluster, read live from the cluster, the server first. The ID is the cluster's.
+Returns the nodes of a K3s cluster, read live from the cluster, the server first. The ID is the cluster's.
 
 ### Example
 
@@ -1391,7 +1556,7 @@ with wodby.ApiClient(configuration) as api_client:
     id = 56 # int | 
 
     try:
-        # List k3s cluster nodes
+        # List K3s cluster nodes
         api_response = api_instance.list_k3_s_cluster_nodes(id)
         print("The response of ClustersApi->list_k3_s_cluster_nodes:\n")
         pprint(api_response)
@@ -1434,9 +1599,9 @@ Name | Type | Description  | Notes
 # **list_k3_s_server_private_addresses**
 > List[K3SPrivateAddress] list_k3_s_server_private_addresses(id)
 
-List k3s server private addresses
+List K3s server private addresses
 
-Returns the private addresses the server of a k3s cluster could switch to, read from the server itself. Only for a server that uses its public address for cluster traffic, which keeps worker nodes out. Runs a short check on the server and needs permission to modify the cluster. The ID is the cluster's.
+Returns the private addresses the server of a K3s cluster could switch to, read from the server itself. Only for a server that uses its public address for cluster traffic, which keeps worker nodes out. Runs a short check on the server and needs permission to modify the cluster. The ID is the cluster's.
 
 ### Example
 
@@ -1472,7 +1637,7 @@ with wodby.ApiClient(configuration) as api_client:
     id = 56 # int | 
 
     try:
-        # List k3s server private addresses
+        # List K3s server private addresses
         api_response = api_instance.list_k3_s_server_private_addresses(id)
         print("The response of ClustersApi->list_k3_s_server_private_addresses:\n")
         pprint(api_response)
@@ -1594,7 +1759,7 @@ This endpoint does not need any parameter.
 
 Recycle cluster nodes
 
-Starts refreshing the cluster's worker nodes, so applications restart as their pods move. EKS moves each node group to its latest node image and leaves a group that already runs it in place. AKS and DigitalOcean replace every node. A single-node DigitalOcean cluster gets a temporary second node first, and its public IP changes: Wodby updates the technical domains, but custom domains with an A record to the old IP must be updated. Refused for providers whose kube settings report nodeRecycling as false, currently GKE and OVHcloud, for K3S, Wodby Cloud and serverless clusters, and while application operations are active. New deployments wait until it ends.
+Starts refreshing the cluster's worker nodes, so applications restart as their pods move. EKS moves each node group to its latest node image and leaves a group that already runs it in place. AKS and DigitalOcean replace every node. A single-node DigitalOcean cluster gets a temporary second node first, and its public IP changes: Wodby updates the technical domains, but custom domains with an A record to the old IP must be updated. Refused for providers whose kube settings report nodeRecycling as false, currently GKE and OVHcloud, for K3s, Wodby Cloud and serverless clusters, and while application operations are active. New deployments wait until it ends.
 
 ### Example
 
@@ -1673,9 +1838,9 @@ Name | Type | Description  | Notes
 # **remove_k3_s_cluster_node**
 > OperationResult remove_k3_s_cluster_node(id, remove_k3_s_cluster_node_input)
 
-Remove k3s cluster node
+Remove K3s cluster node
 
-Takes a worker node out of a k3s cluster: moves its pods to other nodes, stops k3s on it and deletes the node. Refuses the server, and without force a node that stores persistent volumes, whose data would be lost. Run sudo /usr/local/bin/wodby-k3s-uninstall on that server afterwards to remove k3s from it.
+Takes a worker node out of a K3s cluster: moves its pods to other nodes, stops K3s on it and deletes the node. Refuses the server, and without force a node that stores persistent volumes, whose data would be lost. Run sudo /usr/local/bin/wodby-k3s-uninstall on that server afterwards to remove K3s from it.
 
 ### Example
 
@@ -1713,7 +1878,7 @@ with wodby.ApiClient(configuration) as api_client:
     remove_k3_s_cluster_node_input = wodby.RemoveK3SClusterNodeInput() # RemoveK3SClusterNodeInput | 
 
     try:
-        # Remove k3s cluster node
+        # Remove K3s cluster node
         api_response = api_instance.remove_k3_s_cluster_node(id, remove_k3_s_cluster_node_input)
         print("The response of ClustersApi->remove_k3_s_cluster_node:\n")
         pprint(api_response)
@@ -1841,9 +2006,9 @@ Name | Type | Description  | Notes
 # **switch_k3_s_server_address**
 > OperationResult switch_k3_s_server_address(id, switch_k3_s_server_address_input)
 
-Switch k3s server to a private address
+Switch K3s server to a private address
 
-Switches the server of a k3s cluster from its public address to a private one from GET /cluster-k3s-private-addresses/{id} for cluster traffic, so worker nodes can join, and keeps the public address for public traffic. k3s restarts once: the Kubernetes API pauses for about a minute while apps keep running, and new deployments wait until the switch ends. Refused while application operations are active. If k3s doesn't come back on the private address, the server restores its previous settings.
+Switches the server of a K3s cluster from its public address to a private one from GET /cluster-k3s-private-addresses/{id} for cluster traffic, so worker nodes can join, and keeps the public address for public traffic. K3s restarts once: the Kubernetes API pauses for about a minute while apps keep running, and new deployments wait until the switch ends. Refused while application operations are active. If K3s doesn't come back on the private address, the server restores its previous settings.
 
 ### Example
 
@@ -1881,7 +2046,7 @@ with wodby.ApiClient(configuration) as api_client:
     switch_k3_s_server_address_input = wodby.SwitchK3SServerAddressInput() # SwitchK3SServerAddressInput | 
 
     try:
-        # Switch k3s server to a private address
+        # Switch K3s server to a private address
         api_response = api_instance.switch_k3_s_server_address(id, switch_k3_s_server_address_input)
         print("The response of ClustersApi->switch_k3_s_server_address:\n")
         pprint(api_response)
@@ -2510,12 +2675,96 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **update_k3_s_cluster_max_pods**
+> OperationResult update_k3_s_cluster_max_pods(id, update_k3_s_cluster_max_pods_input)
+
+Set pods per node of a K3s cluster
+
+Sets how many pods each node of a K3s cluster runs at most. K3s restarts on every node whose setting changes, one node at a time: apps keep running, the Kubernetes API pauses for about a minute while the server restarts, and new deployments wait until it ends. Refused while application operations are active, below the pods a node already runs, on a node with no free pod slot, and before the cluster's infrastructure upgrade that sets it.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.operation_result import OperationResult
+from wodby.models.update_k3_s_cluster_max_pods_input import UpdateK3SClusterMaxPodsInput
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.ClustersApi(api_client)
+    id = 56 # int | 
+    update_k3_s_cluster_max_pods_input = wodby.UpdateK3SClusterMaxPodsInput() # UpdateK3SClusterMaxPodsInput | 
+
+    try:
+        # Set pods per node of a K3s cluster
+        api_response = api_instance.update_k3_s_cluster_max_pods(id, update_k3_s_cluster_max_pods_input)
+        print("The response of ClustersApi->update_k3_s_cluster_max_pods:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ClustersApi->update_k3_s_cluster_max_pods: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **update_k3_s_cluster_max_pods_input** | [**UpdateK3SClusterMaxPodsInput**](UpdateK3SClusterMaxPodsInput.md)|  | 
+
+### Return type
+
+[**OperationResult**](OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Pods per node task result |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **update_k3_s_cluster_public_ip**
 > Cluster update_k3_s_cluster_public_ip(id, update_k3_s_cluster_public_ip_input)
 
-Update k3s cluster public IP
+Update K3s cluster public IP
 
-Changes the public IP address that routes to a self-hosted k3s cluster. Returns the cluster.
+Changes the public IP address that routes to a self-hosted K3s cluster. Returns the cluster.
 
 ### Example
 
@@ -2553,7 +2802,7 @@ with wodby.ApiClient(configuration) as api_client:
     update_k3_s_cluster_public_ip_input = wodby.UpdateK3SClusterPublicIPInput() # UpdateK3SClusterPublicIPInput | 
 
     try:
-        # Update k3s cluster public IP
+        # Update K3s cluster public IP
         api_response = api_instance.update_k3_s_cluster_public_ip(id, update_k3_s_cluster_public_ip_input)
         print("The response of ClustersApi->update_k3_s_cluster_public_ip:\n")
         pprint(api_response)

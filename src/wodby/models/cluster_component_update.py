@@ -26,7 +26,7 @@ class ClusterComponentUpdate(BaseModel):
     """
     ClusterComponentUpdate
     """ # noqa: E501
-    kind: StrictStr = Field(description="cilium upgrades the Cilium release on a K3S cluster; provider_addon asks the provider to update an add-on.")
+    kind: StrictStr = Field(description="cilium upgrades the Cilium release on a K3s cluster; provider_addon asks the provider to update an add-on.")
     name: StrictStr = Field(description="Identifies the update within its cluster.")
     current_version: Optional[StrictStr] = Field(default=None, description="Absent when the update replaces a copy the provider does not manage yet.", alias="currentVersion")
     target_version: StrictStr = Field(alias="targetVersion")

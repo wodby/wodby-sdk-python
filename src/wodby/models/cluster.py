@@ -46,6 +46,7 @@ class Cluster(BaseModel):
     infra_version: StrictStr = Field(alias="infraVersion")
     min_node_count: Optional[StrictInt] = Field(default=None, alias="minNodeCount")
     max_node_count: Optional[StrictInt] = Field(default=None, alias="maxNodeCount")
+    k3s_max_pods: Optional[StrictInt] = Field(default=None, description="How many pods each node of a K3s cluster runs at most. Absent when it can't be changed: the cluster isn't k3s, or its infrastructure hasn't been upgraded to set it yet.", alias="k3sMaxPods")
     gpu_node_pool: Optional[ClusterNodePool] = Field(default=None, alias="gpuNodePool")
     last_nodes_ready: Optional[StrictInt] = Field(default=None, alias="lastNodesReady")
     last_nodes_total: Optional[StrictInt] = Field(default=None, alias="lastNodesTotal")
@@ -69,7 +70,7 @@ class Cluster(BaseModel):
     storage_classes_observed_at: Optional[datetime] = Field(default=None, alias="storageClassesObservedAt")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "serverless", "demo", "wodby", "k3s", "singleNode", "version", "kubernetesVersionEol", "kubernetesVersionEolDate", "infraVersion", "minNodeCount", "maxNodeCount", "gpuNodePool", "lastNodesReady", "lastNodesTotal", "region", "zone", "ips", "hostname", "integrationId", "envId", "envType", "envScope", "allowedEnvIds", "allowedEnvTypes", "orgId", "ownershipScope", "ownerProjectId", "availableToAllProjects", "capabilities", "settings", "storageClasses", "storageClassesObservedAt", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "status", "serverless", "demo", "wodby", "k3s", "singleNode", "version", "kubernetesVersionEol", "kubernetesVersionEolDate", "infraVersion", "minNodeCount", "maxNodeCount", "k3sMaxPods", "gpuNodePool", "lastNodesReady", "lastNodesTotal", "region", "zone", "ips", "hostname", "integrationId", "envId", "envType", "envScope", "allowedEnvIds", "allowedEnvTypes", "orgId", "ownershipScope", "ownerProjectId", "availableToAllProjects", "capabilities", "settings", "storageClasses", "storageClassesObservedAt", "createdAt", "updatedAt"]
 
     @field_validator('env_type')
     def env_type_validate_enum(cls, value):
@@ -175,6 +176,11 @@ class Cluster(BaseModel):
         if self.max_node_count is None and "max_node_count" in self.model_fields_set:
             _dict['maxNodeCount'] = None
 
+        # set to None if k3s_max_pods (nullable) is None
+        # and model_fields_set contains the field
+        if self.k3s_max_pods is None and "k3s_max_pods" in self.model_fields_set:
+            _dict['k3sMaxPods'] = None
+
         # set to None if gpu_node_pool (nullable) is None
         # and model_fields_set contains the field
         if self.gpu_node_pool is None and "gpu_node_pool" in self.model_fields_set:
@@ -257,6 +263,7 @@ class Cluster(BaseModel):
             "infraVersion": obj.get("infraVersion"),
             "minNodeCount": obj.get("minNodeCount"),
             "maxNodeCount": obj.get("maxNodeCount"),
+            "k3sMaxPods": obj.get("k3sMaxPods"),
             "gpuNodePool": ClusterNodePool.from_dict(obj["gpuNodePool"]) if obj.get("gpuNodePool") is not None else None,
             "lastNodesReady": obj.get("lastNodesReady"),
             "lastNodesTotal": obj.get("lastNodesTotal"),

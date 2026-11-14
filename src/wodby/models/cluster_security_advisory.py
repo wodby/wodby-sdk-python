@@ -28,7 +28,7 @@ class ClusterSecurityAdvisory(BaseModel):
     """ # noqa: E501
     advisory: StrictStr = Field(description="The advisory, such as CVE-2026-98432.")
     title: StrictStr
-    state: StrictStr = Field(description="mitigated or not_mitigated for a K3S cluster, by the protections Wodby keeps on its server. fixed or not_fixed for a managed cluster, by the node images its provider ships.")
+    state: StrictStr = Field(description="mitigated or not_mitigated for a K3s cluster, by the protections Wodby keeps on its server. fixed or not_fixed for a managed cluster, by the node images its provider ships.")
     action: Optional[StrictStr] = Field(default=None, description="The operation that fixes or mitigates the advisory. Absent when nothing is needed, or when the provider has no fixed node image yet.")
     message: StrictStr = Field(description="Why the cluster is in this state and what to do about it.")
     __properties: ClassVar[List[str]] = ["advisory", "title", "state", "action", "message"]

@@ -27,7 +27,7 @@ class AppServiceDeploymentRequest(BaseModel):
     AppServiceDeploymentRequest
     """ # noqa: E501
     app_service_id: StrictInt = Field(alias="appServiceId")
-    app_service_build_id: Optional[StrictInt] = Field(default=None, alias="appServiceBuildId")
+    app_service_build_id: Optional[StrictInt] = Field(default=None, description="Build image to deploy for this service: the `id` of an item in an app build's `appServiceBuilds` that belongs to this service, not the app build `id`. A derivative service may name its parent service's build. Use `0` to start a new build. Required for services with a build source. To deploy every image of an app build, use `POST /app-builds/{id}/deploy` instead.", alias="appServiceBuildId")
     skip_post_deployment: Optional[StrictBool] = Field(default=None, alias="skipPostDeployment")
     force: StrictBool
     __properties: ClassVar[List[str]] = ["appServiceId", "appServiceBuildId", "skipPostDeployment", "force"]

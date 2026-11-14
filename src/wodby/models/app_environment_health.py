@@ -17,10 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, Field
+from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.app_environment_backup_health import AppEnvironmentBackupHealth
 from wodby.models.app_environment_cron_health import AppEnvironmentCronHealth
+from wodby.models.app_environment_vulnerability_health import AppEnvironmentVulnerabilityHealth
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,7 +31,8 @@ class AppEnvironmentHealth(BaseModel):
     """ # noqa: E501
     cron: AppEnvironmentCronHealth
     backups: AppEnvironmentBackupHealth
-    __properties: ClassVar[List[str]] = ["cron", "backups"]
+    vulnerabilities: Optional[AppEnvironmentVulnerabilityHealth] = Field(default=None, description="Critical and high vulnerabilities in the build images the environment currently runs, from their last successful scans. Null when vulnerability scanning is unavailable for the organization.")
+    __properties: ClassVar[List[str]] = ["cron", "backups", "vulnerabilities"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -77,6 +79,14 @@ class AppEnvironmentHealth(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of backups
         if self.backups:
             _dict['backups'] = self.backups.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of vulnerabilities
+        if self.vulnerabilities:
+            _dict['vulnerabilities'] = self.vulnerabilities.to_dict()
+        # set to None if vulnerabilities (nullable) is None
+        # and model_fields_set contains the field
+        if self.vulnerabilities is None and "vulnerabilities" in self.model_fields_set:
+            _dict['vulnerabilities'] = None
+
         return _dict
 
     @classmethod
@@ -90,7 +100,8 @@ class AppEnvironmentHealth(BaseModel):
 
         _obj = cls.model_validate({
             "cron": AppEnvironmentCronHealth.from_dict(obj["cron"]) if obj.get("cron") is not None else None,
-            "backups": AppEnvironmentBackupHealth.from_dict(obj["backups"]) if obj.get("backups") is not None else None
+            "backups": AppEnvironmentBackupHealth.from_dict(obj["backups"]) if obj.get("backups") is not None else None,
+            "vulnerabilities": AppEnvironmentVulnerabilityHealth.from_dict(obj["vulnerabilities"]) if obj.get("vulnerabilities") is not None else None
         })
         return _obj
 

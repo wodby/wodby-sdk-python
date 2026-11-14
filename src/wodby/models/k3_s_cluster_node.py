@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from wodby.models.node_capacity import NodeCapacity
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,15 +29,16 @@ class K3SClusterNode(BaseModel):
     K3SClusterNode
     """ # noqa: E501
     name: StrictStr
-    role: StrictStr = Field(description="server runs the k3s control plane; agent is a worker node joined with the join command.")
+    role: StrictStr = Field(description="server runs the K3s control plane; agent is a worker node joined with the join command.")
     ready: StrictBool
     schedulable: StrictBool = Field(description="Whether the node accepts new pods. A node being removed or upgraded doesn't.")
-    version: StrictStr = Field(description="The node's k3s release, such as v1.36.6+k3s1.")
+    version: StrictStr = Field(description="The node's K3s release, such as v1.36.6+k3s1.")
     internal_ip: Optional[StrictStr] = Field(default=None, description="The private address the node uses for cluster traffic.", alias="internalIp")
     external_ip: Optional[StrictStr] = Field(default=None, alias="externalIp")
     local_volumes: List[StrictStr] = Field(description="Persistent volumes stored on the node, as namespace/name of their claims. Their data stays on that server, so removing the node loses it.", alias="localVolumes")
+    capacity: NodeCapacity
     created_at: datetime = Field(alias="createdAt")
-    __properties: ClassVar[List[str]] = ["name", "role", "ready", "schedulable", "version", "internalIp", "externalIp", "localVolumes", "createdAt"]
+    __properties: ClassVar[List[str]] = ["name", "role", "ready", "schedulable", "version", "internalIp", "externalIp", "localVolumes", "capacity", "createdAt"]
 
     @field_validator('role')
     def role_validate_enum(cls, value):
@@ -84,6 +86,9 @@ class K3SClusterNode(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of capacity
+        if self.capacity:
+            _dict['capacity'] = self.capacity.to_dict()
         return _dict
 
     @classmethod
@@ -104,6 +109,7 @@ class K3SClusterNode(BaseModel):
             "internalIp": obj.get("internalIp"),
             "externalIp": obj.get("externalIp"),
             "localVolumes": obj.get("localVolumes"),
+            "capacity": NodeCapacity.from_dict(obj["capacity"]) if obj.get("capacity") is not None else None,
             "createdAt": obj.get("createdAt")
         })
         return _obj

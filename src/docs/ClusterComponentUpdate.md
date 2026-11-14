@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**kind** | **str** | cilium upgrades the Cilium release on a K3S cluster; provider_addon asks the provider to update an add-on. | 
+**kind** | **str** | cilium upgrades the Cilium release on a K3s cluster; provider_addon asks the provider to update an add-on. | 
 **name** | **str** | Identifies the update within its cluster. | 
 **current_version** | **str** | Absent when the update replaces a copy the provider does not manage yet. | [optional] 
 **target_version** | **str** |  | 

@@ -122,6 +122,7 @@ from wodby.models.app_environment_stack_upgrade_changelog import AppEnvironmentS
 from wodby.models.app_environment_stack_upgrade_input import AppEnvironmentStackUpgradeInput
 from wodby.models.app_environment_stack_upgrade_settings import AppEnvironmentStackUpgradeSettings
 from wodby.models.app_environment_stack_upgrade_settings_input import AppEnvironmentStackUpgradeSettingsInput
+from wodby.models.app_environment_vulnerability_health import AppEnvironmentVulnerabilityHealth
 from wodby.models.app_port import AppPort
 from wodby.models.app_port_setting import AppPortSetting
 from wodby.models.app_port_setting_input import AppPortSettingInput
@@ -184,6 +185,8 @@ from wodby.models.app_service_volume_storage_class_state import AppServiceVolume
 from wodby.models.app_service_workspace_mount import AppServiceWorkspaceMount
 from wodby.models.app_settings import AppSettings
 from wodby.models.app_settings_input import AppSettingsInput
+from wodby.models.app_vulnerability_ignore import AppVulnerabilityIgnore
+from wodby.models.app_vulnerability_ignore_input import AppVulnerabilityIgnoreInput
 from wodby.models.automation_time_window import AutomationTimeWindow
 from wodby.models.automation_time_window_input import AutomationTimeWindowInput
 from wodby.models.backup import Backup
@@ -216,6 +219,9 @@ from wodby.models.cluster_creation_result import ClusterCreationResult
 from wodby.models.cluster_environment_policy_input import ClusterEnvironmentPolicyInput
 from wodby.models.cluster_host_check import ClusterHostCheck
 from wodby.models.cluster_infra_app_upgrade_changelog import ClusterInfraAppUpgradeChangelog
+from wodby.models.cluster_kubernetes_vulnerabilities import ClusterKubernetesVulnerabilities
+from wodby.models.cluster_kubernetes_vulnerability import ClusterKubernetesVulnerability
+from wodby.models.cluster_node import ClusterNode
 from wodby.models.cluster_node_pool import ClusterNodePool
 from wodby.models.cluster_node_pool_input import ClusterNodePoolInput
 from wodby.models.cluster_security_advisory import ClusterSecurityAdvisory
@@ -333,6 +339,7 @@ from wodby.models.new_variable_provider_field_input import NewVariableProviderFi
 from wodby.models.new_variable_provider_input import NewVariableProviderInput
 from wodby.models.new_wodby_cloud_cluster_input import NewWodbyCloudClusterInput
 from wodby.models.new_workspace_input import NewWorkspaceInput
+from wodby.models.node_capacity import NodeCapacity
 from wodby.models.operation_result import OperationResult
 from wodby.models.org import Org
 from wodby.models.org_capabilities import OrgCapabilities
@@ -488,6 +495,7 @@ from wodby.models.update_cluster_gpu_node_pool_input import UpdateClusterGPUNode
 from wodby.models.update_current_user_request import UpdateCurrentUserRequest
 from wodby.models.update_database_user_dbs_input import UpdateDatabaseUserDBsInput
 from wodby.models.update_integration_input import UpdateIntegrationInput
+from wodby.models.update_k3_s_cluster_max_pods_input import UpdateK3SClusterMaxPodsInput
 from wodby.models.update_k3_s_cluster_public_ip_input import UpdateK3SClusterPublicIPInput
 from wodby.models.update_kubernetes_version_input import UpdateKubernetesVersionInput
 from wodby.models.update_org_request import UpdateOrgRequest

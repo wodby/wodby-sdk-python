@@ -6,13 +6,14 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** |  | 
-**role** | **str** | server runs the k3s control plane; agent is a worker node joined with the join command. | 
+**role** | **str** | server runs the K3s control plane; agent is a worker node joined with the join command. | 
 **ready** | **bool** |  | 
 **schedulable** | **bool** | Whether the node accepts new pods. A node being removed or upgraded doesn&#39;t. | 
-**version** | **str** | The node&#39;s k3s release, such as v1.36.6+k3s1. | 
+**version** | **str** | The node&#39;s K3s release, such as v1.36.6+k3s1. | 
 **internal_ip** | **str** | The private address the node uses for cluster traffic. | [optional] 
 **external_ip** | **str** |  | [optional] 
 **local_volumes** | **List[str]** | Persistent volumes stored on the node, as namespace/name of their claims. Their data stays on that server, so removing the node loses it. | 
+**capacity** | [**NodeCapacity**](NodeCapacity.md) |  | 
 **created_at** | **datetime** |  | 
 
 ## Example

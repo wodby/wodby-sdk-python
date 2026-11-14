@@ -29,7 +29,7 @@ class K3SPrivateAddress(BaseModel):
     address: StrictStr
     network_interface: StrictStr = Field(description="The network interface the address is on, such as enp0s31f6.4000 for a VLAN.", alias="networkInterface")
     mtu: StrictInt = Field(description="The interface's MTU, or 0 when the server doesn't report it.")
-    persistent: StrictBool = Field(description="Whether the server's network configuration brings the address back after a reboot. k3s doesn't start when its address is gone, so switching to an address that isn't persistent needs force.")
+    persistent: StrictBool = Field(description="Whether the server's network configuration brings the address back after a reboot. K3s doesn't start when its address is gone, so switching to an address that isn't persistent needs force.")
     persistent_source: Optional[StrictStr] = Field(default=None, description="What keeps the address after a reboot, such as systemd-networkd or NetworkManager.", alias="persistentSource")
     __properties: ClassVar[List[str]] = ["address", "networkInterface", "mtu", "persistent", "persistentSource"]
 
