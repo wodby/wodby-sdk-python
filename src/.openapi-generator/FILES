@@ -178,6 +178,9 @@ docs/ClusterNodePoolInput.md
 docs/ClusterSecurityAdvisory.md
 docs/ClusterSettings.md
 docs/ClusterSettingsInput.md
+docs/ClusterVulnerabilitiesResponse.md
+docs/ClusterVulnerability.md
+docs/ClusterVulnerabilitySource.md
 docs/ClustersApi.md
 docs/ConfigOverrideInput.md
 docs/CopyStackSettingsInput.md
@@ -310,7 +313,6 @@ docs/OrgMembershipTeamsInputTeamsInner.md
 docs/OrgMembershipsApi.md
 docs/OrgSSODomain.md
 docs/OrgSSOProvider.md
-docs/OrgSSOProviderInput.md
 docs/OrgSettings.md
 docs/OrgSettingsInput.md
 docs/OrgSsoApi.md
@@ -489,7 +491,6 @@ docs/User.md
 docs/UserApi.md
 docs/ValidateAppAccessHostnameInput.md
 docs/ValidationResult.md
-docs/VerifyOrgSSODomainInput.md
 docs/VolumeSizeInput.md
 docs/VulnerabilityCounts.md
 docs/VulnerabilityScanStatus.md
@@ -509,14 +510,9 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_app_environment_vulnerability_health.py
-test/test_app_vulnerability_ignore.py
-test/test_app_vulnerability_ignore_input.py
-test/test_cluster_kubernetes_vulnerabilities.py
-test/test_cluster_kubernetes_vulnerability.py
-test/test_cluster_node.py
-test/test_node_capacity.py
-test/test_update_k3_s_cluster_max_pods_input.py
+test/test_cluster_vulnerabilities_response.py
+test/test_cluster_vulnerability.py
+test/test_cluster_vulnerability_source.py
 tox.ini
 wodby/__init__.py
 wodby/api/__init__.py
@@ -722,6 +718,9 @@ wodby/models/cluster_node_pool_input.py
 wodby/models/cluster_security_advisory.py
 wodby/models/cluster_settings.py
 wodby/models/cluster_settings_input.py
+wodby/models/cluster_vulnerabilities_response.py
+wodby/models/cluster_vulnerability.py
+wodby/models/cluster_vulnerability_source.py
 wodby/models/config_override_input.py
 wodby/models/copy_stack_settings_input.py
 wodby/models/create_build_request.py
@@ -847,7 +846,6 @@ wodby/models/org_settings.py
 wodby/models/org_settings_input.py
 wodby/models/org_sso_domain.py
 wodby/models/org_sso_provider.py
-wodby/models/org_sso_provider_input.py
 wodby/models/org_subscription.py
 wodby/models/org_subscription_details.py
 wodby/models/org_subscription_plan.py
@@ -1011,7 +1009,6 @@ wodby/models/url_response.py
 wodby/models/user.py
 wodby/models/validate_app_access_hostname_input.py
 wodby/models/validation_result.py
-wodby/models/verify_org_sso_domain_input.py
 wodby/models/volume_size_input.py
 wodby/models/vulnerability_counts.py
 wodby/models/vulnerability_scan_status.py

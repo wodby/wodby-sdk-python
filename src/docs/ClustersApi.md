@@ -21,6 +21,7 @@ Method | HTTP request | Description
 [**get_k3_s_cluster_join_command**](ClustersApi.md#get_k3_s_cluster_join_command) | **GET** /clusters/k3s-join-command/{id} | Get K3s join command
 [**get_kubernetes_version_upgrade_plan**](ClustersApi.md#get_kubernetes_version_upgrade_plan) | **GET** /cluster-kubernetes-version-upgrade-plans/{id} | Get Kubernetes version upgrade plan
 [**list_cluster_nodes**](ClustersApi.md#list_cluster_nodes) | **GET** /cluster-nodes/{id} | List cluster nodes
+[**list_cluster_vulnerabilities**](ClustersApi.md#list_cluster_vulnerabilities) | **GET** /cluster-vulnerabilities/{id} | List cluster vulnerabilities
 [**list_clusters**](ClustersApi.md#list_clusters) | **GET** /clusters | List clusters
 [**list_k3_s_cluster_nodes**](ClustersApi.md#list_k3_s_cluster_nodes) | **GET** /cluster-k3s-nodes/{id} | List K3s cluster nodes
 [**list_k3_s_server_private_addresses**](ClustersApi.md#list_k3_s_server_private_addresses) | **GET** /cluster-k3s-private-addresses/{id} | List K3s server private addresses
@@ -1423,6 +1424,97 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Cluster nodes |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **list_cluster_vulnerabilities**
+> ClusterVulnerabilitiesResponse list_cluster_vulnerabilities(id, components=components, severities=severities, unresolved=unresolved, page=page, page_size=page_size)
+
+List cluster vulnerabilities
+
+Lists the cluster's vulnerabilities from every source Wodby has, in one list: the security advisories Wodby tracks, the scans of a K3s cluster's server packages, managed node pools on an outdated image, the known vulnerabilities of the cluster's Kubernetes version, and the scans of the images Wodby's infrastructure apps run. The ID is the cluster's. Vulnerabilities the cluster is still exposed to come first, then the most severe. Wodby Cloud and serverless clusters return an empty list.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.cluster_vulnerabilities_response import ClusterVulnerabilitiesResponse
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.ClustersApi(api_client)
+    id = 56 # int | 
+    components = 'components_example' # str | Comma-separated components to list: operating_system, node_image, kubernetes, infrastructure_app. All when omitted. (optional)
+    severities = 'severities_example' # str | Comma-separated severities to list, such as critical,high. All when omitted. (optional)
+    unresolved = True # bool | Only vulnerabilities the cluster is still exposed to. (optional)
+    page = 56 # int | Page number, defaults to 1 (optional)
+    page_size = 56 # int | Page size, defaults to 30 (optional)
+
+    try:
+        # List cluster vulnerabilities
+        api_response = api_instance.list_cluster_vulnerabilities(id, components=components, severities=severities, unresolved=unresolved, page=page, page_size=page_size)
+        print("The response of ClustersApi->list_cluster_vulnerabilities:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ClustersApi->list_cluster_vulnerabilities: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **components** | **str**| Comma-separated components to list: operating_system, node_image, kubernetes, infrastructure_app. All when omitted. | [optional] 
+ **severities** | **str**| Comma-separated severities to list, such as critical,high. All when omitted. | [optional] 
+ **unresolved** | **bool**| Only vulnerabilities the cluster is still exposed to. | [optional] 
+ **page** | **int**| Page number, defaults to 1 | [optional] 
+ **page_size** | **int**| Page size, defaults to 30 | [optional] 
+
+### Return type
+
+[**ClusterVulnerabilitiesResponse**](ClusterVulnerabilitiesResponse.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | One page of the cluster&#39;s vulnerabilities |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 
