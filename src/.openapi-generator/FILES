@@ -513,9 +513,6 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_cluster_vulnerability_ignore.py
-test/test_cluster_vulnerability_ignore_input.py
-test/test_k3_s_server_nodes_input.py
 tox.ini
 wodby/__init__.py
 wodby/api/__init__.py
