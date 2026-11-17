@@ -180,6 +180,8 @@ docs/ClusterSettings.md
 docs/ClusterSettingsInput.md
 docs/ClusterVulnerabilitiesResponse.md
 docs/ClusterVulnerability.md
+docs/ClusterVulnerabilityIgnore.md
+docs/ClusterVulnerabilityIgnoreInput.md
 docs/ClusterVulnerabilitySource.md
 docs/ClustersApi.md
 docs/ConfigOverrideInput.md
@@ -249,6 +251,7 @@ docs/K3SClusterNode.md
 docs/K3SInstallCommand.md
 docs/K3SJoinCommand.md
 docs/K3SPrivateAddress.md
+docs/K3SServerNodesInput.md
 docs/KubeVersion.md
 docs/KubernetesVersionUpgradePlan.md
 docs/KubernetesVersionUpgradeTarget.md
@@ -510,6 +513,9 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_cluster_vulnerability_ignore.py
+test/test_cluster_vulnerability_ignore_input.py
+test/test_k3_s_server_nodes_input.py
 tox.ini
 wodby/__init__.py
 wodby/api/__init__.py
@@ -717,6 +723,8 @@ wodby/models/cluster_settings.py
 wodby/models/cluster_settings_input.py
 wodby/models/cluster_vulnerabilities_response.py
 wodby/models/cluster_vulnerability.py
+wodby/models/cluster_vulnerability_ignore.py
+wodby/models/cluster_vulnerability_ignore_input.py
 wodby/models/cluster_vulnerability_source.py
 wodby/models/config_override_input.py
 wodby/models/copy_stack_settings_input.py
@@ -778,6 +786,7 @@ wodby/models/k3_s_cluster_node.py
 wodby/models/k3_s_install_command.py
 wodby/models/k3_s_join_command.py
 wodby/models/k3_s_private_address.py
+wodby/models/k3_s_server_nodes_input.py
 wodby/models/kube_version.py
 wodby/models/kubernetes_version_upgrade_plan.py
 wodby/models/kubernetes_version_upgrade_target.py

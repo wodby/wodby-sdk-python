@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.cluster_vulnerability import ClusterVulnerability
 from wodby.models.cluster_vulnerability_source import ClusterVulnerabilitySource
@@ -34,7 +34,10 @@ class ClusterVulnerabilitiesResponse(BaseModel):
     next_page: Optional[StrictInt] = Field(default=None, alias="nextPage")
     counts: VulnerabilityCounts
     sources: List[ClusterVulnerabilitySource]
-    __properties: ClassVar[List[str]] = ["items", "totalCount", "nextPage", "counts", "sources"]
+    scanning: StrictBool = Field(description="Whether a vulnerability check of the cluster is waiting or running. Until it ends, the list shows the results of the checks that finished before it.")
+    restart_required: StrictInt = Field(description="The cluster's critical and high vulnerabilities, not ignored, that a restart of its K3s servers fixes: the fix is installed and runs after the restart. Covers the whole cluster, whatever the filter.", alias="restartRequired")
+    waiting_for_upstream: StrictInt = Field(description="The cluster's critical and high vulnerabilities, not ignored, that wait for a fix from an infrastructure image's maintainers. They aren't in counts. Covers the whole cluster, whatever the filter.", alias="waitingForUpstream")
+    __properties: ClassVar[List[str]] = ["items", "totalCount", "nextPage", "counts", "sources", "scanning", "restartRequired", "waitingForUpstream"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -108,7 +111,10 @@ class ClusterVulnerabilitiesResponse(BaseModel):
             "totalCount": obj.get("totalCount"),
             "nextPage": obj.get("nextPage"),
             "counts": VulnerabilityCounts.from_dict(obj["counts"]) if obj.get("counts") is not None else None,
-            "sources": [ClusterVulnerabilitySource.from_dict(_item) for _item in obj["sources"]] if obj.get("sources") is not None else None
+            "sources": [ClusterVulnerabilitySource.from_dict(_item) for _item in obj["sources"]] if obj.get("sources") is not None else None,
+            "scanning": obj.get("scanning"),
+            "restartRequired": obj.get("restartRequired"),
+            "waitingForUpstream": obj.get("waitingForUpstream")
         })
         return _obj
 

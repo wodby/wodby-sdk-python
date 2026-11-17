@@ -5,9 +5,11 @@ All URIs are relative to */v1*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_cluster**](ClustersApi.md#create_cluster) | **POST** /clusters | Create cluster
+[**create_cluster_vulnerability_ignore**](ClustersApi.md#create_cluster_vulnerability_ignore) | **POST** /clusters/vulnerability-ignores/{id} | Ignore a cluster vulnerability
 [**create_k3_s_cluster**](ClustersApi.md#create_k3_s_cluster) | **POST** /clusters/actions/create-k3s | Create K3s cluster
 [**create_wodby_cloud_cluster**](ClustersApi.md#create_wodby_cloud_cluster) | **POST** /clusters/actions/create-wodby-cloud | Create Wodby Cloud cluster
 [**delete_cluster**](ClustersApi.md#delete_cluster) | **DELETE** /clusters/{id} | Delete cluster
+[**delete_cluster_vulnerability_ignore**](ClustersApi.md#delete_cluster_vulnerability_ignore) | **DELETE** /cluster-vulnerability-ignores/{id} | Stop ignoring a cluster vulnerability
 [**get_cluster**](ClustersApi.md#get_cluster) | **GET** /clusters/{id} | Get cluster
 [**get_cluster_by_name**](ClustersApi.md#get_cluster_by_name) | **GET** /clusters/by-name/{name} | Get cluster by name
 [**get_cluster_component_updates**](ClustersApi.md#get_cluster_component_updates) | **GET** /cluster-component-updates/{id} | List cluster component updates
@@ -22,12 +24,14 @@ Method | HTTP request | Description
 [**get_kubernetes_version_upgrade_plan**](ClustersApi.md#get_kubernetes_version_upgrade_plan) | **GET** /cluster-kubernetes-version-upgrade-plans/{id} | Get Kubernetes version upgrade plan
 [**list_cluster_nodes**](ClustersApi.md#list_cluster_nodes) | **GET** /cluster-nodes/{id} | List cluster nodes
 [**list_cluster_vulnerabilities**](ClustersApi.md#list_cluster_vulnerabilities) | **GET** /cluster-vulnerabilities/{id} | List cluster vulnerabilities
+[**list_cluster_vulnerability_ignores**](ClustersApi.md#list_cluster_vulnerability_ignores) | **GET** /clusters/vulnerability-ignores/{id} | List ignored cluster vulnerabilities
 [**list_clusters**](ClustersApi.md#list_clusters) | **GET** /clusters | List clusters
 [**list_k3_s_cluster_nodes**](ClustersApi.md#list_k3_s_cluster_nodes) | **GET** /cluster-k3s-nodes/{id} | List K3s cluster nodes
 [**list_k3_s_server_private_addresses**](ClustersApi.md#list_k3_s_server_private_addresses) | **GET** /cluster-k3s-private-addresses/{id} | List K3s server private addresses
 [**list_wodby_cloud_machine_types**](ClustersApi.md#list_wodby_cloud_machine_types) | **GET** /wodby-cloud/machine-types | List Wodby Cloud machine types
 [**recycle_cluster_nodes**](ClustersApi.md#recycle_cluster_nodes) | **POST** /clusters/{id}/actions/recycle-nodes | Recycle cluster nodes
 [**remove_k3_s_cluster_node**](ClustersApi.md#remove_k3_s_cluster_node) | **POST** /clusters/{id}/actions/remove-k3s-node | Remove K3s cluster node
+[**restart_k3_s_servers**](ClustersApi.md#restart_k3_s_servers) | **POST** /clusters/{id}/actions/restart-k3s-servers | Restart K3s servers
 [**scale_cluster**](ClustersApi.md#scale_cluster) | **POST** /clusters/{id}/actions/scale | Scale cluster nodes
 [**switch_k3_s_server_address**](ClustersApi.md#switch_k3_s_server_address) | **POST** /clusters/{id}/actions/switch-k3s-server-address | Switch K3s server to a private address
 [**update_cluster**](ClustersApi.md#update_cluster) | **PUT** /clusters/{id} | Update cluster
@@ -39,6 +43,7 @@ Method | HTTP request | Description
 [**update_cluster_sharing**](ClustersApi.md#update_cluster_sharing) | **PUT** /clusters/sharing/{id} | Update cluster sharing
 [**update_k3_s_cluster_max_pods**](ClustersApi.md#update_k3_s_cluster_max_pods) | **POST** /clusters/{id}/actions/update-k3s-max-pods | Set pods per node of a K3s cluster
 [**update_k3_s_cluster_public_ip**](ClustersApi.md#update_k3_s_cluster_public_ip) | **POST** /clusters/{id}/actions/update-k3s-public-ip | Update K3s cluster public IP
+[**update_k3_s_server_packages**](ClustersApi.md#update_k3_s_server_packages) | **POST** /clusters/{id}/actions/update-k3s-server-packages | Update K3s server packages
 [**upgrade_cluster_infra**](ClustersApi.md#upgrade_cluster_infra) | **POST** /clusters/{id}/actions/upgrade-infra | Upgrade cluster infrastructure
 [**upgrade_cluster_infra_apps**](ClustersApi.md#upgrade_cluster_infra_apps) | **POST** /clusters/{id}/actions/upgrade-infra-apps | Upgrade cluster infrastructure app stacks
 
@@ -120,6 +125,90 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **201** | Created cluster |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **create_cluster_vulnerability_ignore**
+> ClusterVulnerabilityIgnore create_cluster_vulnerability_ignore(id, cluster_vulnerability_ignore_input)
+
+Ignore a cluster vulnerability
+
+Ignores a vulnerability in every component of the cluster, including later checks. Ignored vulnerabilities stay listed, last, and are left out of the cluster's vulnerability counts and reported in the ignored count instead. Only vulnerabilities listed as ignorable are affected. The ID is the cluster's. Needs permission to modify the cluster. Fails when the cluster already ignores the vulnerability.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.cluster_vulnerability_ignore import ClusterVulnerabilityIgnore
+from wodby.models.cluster_vulnerability_ignore_input import ClusterVulnerabilityIgnoreInput
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.ClustersApi(api_client)
+    id = 56 # int | 
+    cluster_vulnerability_ignore_input = wodby.ClusterVulnerabilityIgnoreInput() # ClusterVulnerabilityIgnoreInput | 
+
+    try:
+        # Ignore a cluster vulnerability
+        api_response = api_instance.create_cluster_vulnerability_ignore(id, cluster_vulnerability_ignore_input)
+        print("The response of ClustersApi->create_cluster_vulnerability_ignore:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ClustersApi->create_cluster_vulnerability_ignore: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **cluster_vulnerability_ignore_input** | [**ClusterVulnerabilityIgnoreInput**](ClusterVulnerabilityIgnoreInput.md)|  | 
+
+### Return type
+
+[**ClusterVulnerabilityIgnore**](ClusterVulnerabilityIgnore.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Created ignore |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 
@@ -367,6 +456,87 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Delete result |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_cluster_vulnerability_ignore**
+> OperationResult delete_cluster_vulnerability_ignore(id)
+
+Stop ignoring a cluster vulnerability
+
+Removes an ignore, so the vulnerability counts again. The ID is the ignore's. Needs permission to modify the cluster.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.operation_result import OperationResult
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.ClustersApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # Stop ignoring a cluster vulnerability
+        api_response = api_instance.delete_cluster_vulnerability_ignore(id)
+        print("The response of ClustersApi->delete_cluster_vulnerability_ignore:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ClustersApi->delete_cluster_vulnerability_ignore: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**OperationResult**](OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Deletion result |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 
@@ -1470,7 +1640,7 @@ with wodby.ApiClient(configuration) as api_client:
     id = 56 # int | 
     components = 'components_example' # str | Comma-separated components to list: operating_system, node_image, kubernetes, infrastructure_app. All when omitted. (optional)
     severities = 'severities_example' # str | Comma-separated severities to list, such as critical,high. All when omitted. (optional)
-    unresolved = True # bool | Only vulnerabilities the cluster is still exposed to. (optional)
+    unresolved = True # bool | Only vulnerabilities the cluster is still exposed to and doesn't ignore. (optional)
     page = 56 # int | Page number, defaults to 1 (optional)
     page_size = 56 # int | Page size, defaults to 30 (optional)
 
@@ -1493,7 +1663,7 @@ Name | Type | Description  | Notes
  **id** | **int**|  | 
  **components** | **str**| Comma-separated components to list: operating_system, node_image, kubernetes, infrastructure_app. All when omitted. | [optional] 
  **severities** | **str**| Comma-separated severities to list, such as critical,high. All when omitted. | [optional] 
- **unresolved** | **bool**| Only vulnerabilities the cluster is still exposed to. | [optional] 
+ **unresolved** | **bool**| Only vulnerabilities the cluster is still exposed to and doesn&#39;t ignore. | [optional] 
  **page** | **int**| Page number, defaults to 1 | [optional] 
  **page_size** | **int**| Page size, defaults to 30 | [optional] 
 
@@ -1515,6 +1685,87 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | One page of the cluster&#39;s vulnerabilities |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **list_cluster_vulnerability_ignores**
+> List[ClusterVulnerabilityIgnore] list_cluster_vulnerability_ignores(id)
+
+List ignored cluster vulnerabilities
+
+Lists the vulnerabilities the cluster ignores, newest first, including those that match nothing listed now. The ID is the cluster's.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.cluster_vulnerability_ignore import ClusterVulnerabilityIgnore
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.ClustersApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # List ignored cluster vulnerabilities
+        api_response = api_instance.list_cluster_vulnerability_ignores(id)
+        print("The response of ClustersApi->list_cluster_vulnerability_ignores:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ClustersApi->list_cluster_vulnerability_ignores: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**List[ClusterVulnerabilityIgnore]**](ClusterVulnerabilityIgnore.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Ignored vulnerabilities |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 
@@ -2006,6 +2257,90 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Node removal task result |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **restart_k3_s_servers**
+> OperationResult restart_k3_s_servers(id, k3_s_server_nodes_input=k3_s_server_nodes_input)
+
+Restart K3s servers
+
+Restarts a K3s cluster's nodes one at a time and waits for each to come back Ready. Leave nodes empty to restart only the nodes that say a restart is pending. A node is drained first when another node can take its pods; on a cluster with one node, every app is unavailable until the node is back, usually a few minutes. New deployments wait until the restarts end. Refused while application operations are active.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.k3_s_server_nodes_input import K3SServerNodesInput
+from wodby.models.operation_result import OperationResult
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.ClustersApi(api_client)
+    id = 56 # int | 
+    k3_s_server_nodes_input = wodby.K3SServerNodesInput() # K3SServerNodesInput |  (optional)
+
+    try:
+        # Restart K3s servers
+        api_response = api_instance.restart_k3_s_servers(id, k3_s_server_nodes_input=k3_s_server_nodes_input)
+        print("The response of ClustersApi->restart_k3_s_servers:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ClustersApi->restart_k3_s_servers: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **k3_s_server_nodes_input** | [**K3SServerNodesInput**](K3SServerNodesInput.md)|  | [optional] 
+
+### Return type
+
+[**OperationResult**](OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Restart task result |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 
@@ -2930,6 +3265,90 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Updated cluster |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_k3_s_server_packages**
+> OperationResult update_k3_s_server_packages(id, k3_s_server_nodes_input=k3_s_server_nodes_input)
+
+Update K3s server packages
+
+Updates the operating system packages of a K3s cluster's nodes with each server's package manager, one node at a time, within the installed release. Leave nodes empty to update every node. Apps keep running. A node that needs a restart to apply the updates, such as for a new kernel, shows it in GET /cluster-vulnerabilities/{id} after its next scan. Supported on Debian, Ubuntu, RHEL-family and SUSE servers that run systemd.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.k3_s_server_nodes_input import K3SServerNodesInput
+from wodby.models.operation_result import OperationResult
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.ClustersApi(api_client)
+    id = 56 # int | 
+    k3_s_server_nodes_input = wodby.K3SServerNodesInput() # K3SServerNodesInput |  (optional)
+
+    try:
+        # Update K3s server packages
+        api_response = api_instance.update_k3_s_server_packages(id, k3_s_server_nodes_input=k3_s_server_nodes_input)
+        print("The response of ClustersApi->update_k3_s_server_packages:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ClustersApi->update_k3_s_server_packages: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **k3_s_server_nodes_input** | [**K3SServerNodesInput**](K3SServerNodesInput.md)|  | [optional] 
+
+### Return type
+
+[**OperationResult**](OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Package update task result |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 

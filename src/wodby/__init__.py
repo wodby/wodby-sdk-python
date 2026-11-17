@@ -229,6 +229,8 @@ from wodby.models.cluster_settings import ClusterSettings
 from wodby.models.cluster_settings_input import ClusterSettingsInput
 from wodby.models.cluster_vulnerabilities_response import ClusterVulnerabilitiesResponse
 from wodby.models.cluster_vulnerability import ClusterVulnerability
+from wodby.models.cluster_vulnerability_ignore import ClusterVulnerabilityIgnore
+from wodby.models.cluster_vulnerability_ignore_input import ClusterVulnerabilityIgnoreInput
 from wodby.models.cluster_vulnerability_source import ClusterVulnerabilitySource
 from wodby.models.config_override_input import ConfigOverrideInput
 from wodby.models.copy_stack_settings_input import CopyStackSettingsInput
@@ -290,6 +292,7 @@ from wodby.models.k3_s_cluster_node import K3SClusterNode
 from wodby.models.k3_s_install_command import K3SInstallCommand
 from wodby.models.k3_s_join_command import K3SJoinCommand
 from wodby.models.k3_s_private_address import K3SPrivateAddress
+from wodby.models.k3_s_server_nodes_input import K3SServerNodesInput
 from wodby.models.kube_version import KubeVersion
 from wodby.models.kubernetes_version_upgrade_plan import KubernetesVersionUpgradePlan
 from wodby.models.kubernetes_version_upgrade_target import KubernetesVersionUpgradeTarget

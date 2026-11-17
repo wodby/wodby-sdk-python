@@ -31,11 +31,11 @@ class NewWodbyCloudClusterInput(BaseModel):
     project_id: Optional[StrictInt] = Field(default=None, alias="projectId")
     available_to_all_projects: Optional[StrictBool] = Field(default=None, description="Lets every project in the organization use the new resource without a project share. Only an organization-owned resource, created without projectId, can be available to all projects.", alias="availableToAllProjects")
     demo: StrictBool = Field(description="Create a free demo cluster with limited resources.")
-    single_node: Optional[StrictBool] = Field(default=None, alias="singleNode")
+    single_node: Optional[StrictBool] = Field(default=None, description="Persistent Wodby Cloud clusters can't be single-node; true is refused unless demo is true. Set minNodeCount and maxNodeCount instead. Demo clusters always run on one node.", alias="singleNode")
     region: Optional[StrictStr] = None
     machine_type: Optional[StrictStr] = Field(default=None, description="Machine type name from GET /wodby-cloud/machine-types.", alias="machineType")
-    min_node_count: Optional[StrictInt] = Field(default=None, alias="minNodeCount")
-    max_node_count: Optional[StrictInt] = Field(default=None, alias="maxNodeCount")
+    min_node_count: Optional[StrictInt] = Field(default=None, description="Minimum node count of a persistent cluster, at least 1. Required unless demo is true.", alias="minNodeCount")
+    max_node_count: Optional[StrictInt] = Field(default=None, description="Maximum node count of a persistent cluster. Required unless demo is true.", alias="maxNodeCount")
     environment_policy: Optional[ClusterEnvironmentPolicyInput] = Field(default=None, alias="environmentPolicy")
     __properties: ClassVar[List[str]] = ["orgId", "projectId", "availableToAllProjects", "demo", "singleNode", "region", "machineType", "minNodeCount", "maxNodeCount", "environmentPolicy"]
 
