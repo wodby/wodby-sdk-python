@@ -4,11 +4,66 @@ All URIs are relative to *https://api.wodby.com/api/v3*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**add_stack**](StackApi.md#add_stack) | **POST** /stacks | Add catalog stack
 [**get_stack**](StackApi.md#get_stack) | **GET** /stacks/{id} | Retrieve stack
 [**get_stacks**](StackApi.md#get_stacks) | **GET** /stacks | Retrieve stacks
 [**update_stack_from_upstream**](StackApi.md#update_stack_from_upstream) | **POST** /stacks/{id}/update | Update official stack from upstream
 [**update_stacks_from_upstream**](StackApi.md#update_stacks_from_upstream) | **POST** /stacks/update | Update official stacks from upstream
 
+
+# **add_stack**
+> ResponseTaskStack add_stack(data)
+
+Add catalog stack
+
+Add a catalog stack, such as WordPress, to an organization. The organization gets its own copy, which its apps are created from.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import wodby
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: ApiKeyAuth
+configuration = wodby.Configuration()
+configuration.api_key['X-API-KEY'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['X-API-KEY'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = wodby.StackApi(wodby.ApiClient(configuration))
+data = wodby.RequestStackAdd() # RequestStackAdd | 
+
+try:
+    # Add catalog stack
+    api_response = api_instance.add_stack(data)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling StackApi->add_stack: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **data** | [**RequestStackAdd**](RequestStackAdd.md)|  | 
+
+### Return type
+
+[**ResponseTaskStack**](ResponseTaskStack.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_stack**
 > Stack get_stack(id)
