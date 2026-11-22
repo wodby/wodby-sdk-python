@@ -126,6 +126,7 @@ from wodby.models.app_service_link import AppServiceLink
 from wodby.models.app_service_link_candidate import AppServiceLinkCandidate
 from wodby.models.app_service_link_input import AppServiceLinkInput
 from wodby.models.app_service_pod import AppServicePod
+from wodby.models.app_service_pod_condition import AppServicePodCondition
 from wodby.models.app_service_pod_container import AppServicePodContainer
 from wodby.models.app_service_scalability import AppServiceScalability
 from wodby.models.app_service_scalability_update_input import AppServiceScalabilityUpdateInput
@@ -246,6 +247,7 @@ from wodby.models.k3_s_join_command import K3SJoinCommand
 from wodby.models.k3_s_private_address import K3SPrivateAddress
 from wodby.models.k3_s_server_nodes_input import K3SServerNodesInput
 from wodby.models.kube_version import KubeVersion
+from wodby.models.kubernetes_event import KubernetesEvent
 from wodby.models.kubernetes_version_upgrade_plan import KubernetesVersionUpgradePlan
 from wodby.models.kubernetes_version_upgrade_target import KubernetesVersionUpgradeTarget
 from wodby.models.log_line import LogLine

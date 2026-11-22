@@ -38,13 +38,16 @@ class AppServicePodContainer(BaseModel):
     exit_code: Optional[StrictInt] = Field(default=None, alias="exitCode")
     started_at: Optional[datetime] = Field(default=None, alias="startedAt")
     finished_at: Optional[datetime] = Field(default=None, alias="finishedAt")
+    last_termination_reason: Optional[StrictStr] = Field(default=None, description="Why the container's previous run ended, such as OOMKilled or Error. Null when it hasn't restarted.", alias="lastTerminationReason")
+    last_exit_code: Optional[StrictInt] = Field(default=None, description="Exit code of the container's previous run. Null when it hasn't restarted.", alias="lastExitCode")
+    last_finished_at: Optional[datetime] = Field(default=None, description="When the container's previous run ended. Null when it hasn't restarted.", alias="lastFinishedAt")
     cpu_usage: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="cpuUsage")
     memory_usage: Optional[StrictInt] = Field(default=None, alias="memoryUsage")
     cpu_request: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="cpuRequest")
     memory_request: Optional[StrictInt] = Field(default=None, alias="memoryRequest")
     cpu_limit: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="cpuLimit")
     memory_limit: Optional[StrictInt] = Field(default=None, alias="memoryLimit")
-    __properties: ClassVar[List[str]] = ["id", "name", "primary", "ready", "restarts", "state", "reason", "message", "exitCode", "startedAt", "finishedAt", "cpuUsage", "memoryUsage", "cpuRequest", "memoryRequest", "cpuLimit", "memoryLimit"]
+    __properties: ClassVar[List[str]] = ["id", "name", "primary", "ready", "restarts", "state", "reason", "message", "exitCode", "startedAt", "finishedAt", "lastTerminationReason", "lastExitCode", "lastFinishedAt", "cpuUsage", "memoryUsage", "cpuRequest", "memoryRequest", "cpuLimit", "memoryLimit"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -110,6 +113,21 @@ class AppServicePodContainer(BaseModel):
         if self.finished_at is None and "finished_at" in self.model_fields_set:
             _dict['finishedAt'] = None
 
+        # set to None if last_termination_reason (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_termination_reason is None and "last_termination_reason" in self.model_fields_set:
+            _dict['lastTerminationReason'] = None
+
+        # set to None if last_exit_code (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_exit_code is None and "last_exit_code" in self.model_fields_set:
+            _dict['lastExitCode'] = None
+
+        # set to None if last_finished_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_finished_at is None and "last_finished_at" in self.model_fields_set:
+            _dict['lastFinishedAt'] = None
+
         # set to None if cpu_usage (nullable) is None
         # and model_fields_set contains the field
         if self.cpu_usage is None and "cpu_usage" in self.model_fields_set:
@@ -163,6 +181,9 @@ class AppServicePodContainer(BaseModel):
             "exitCode": obj.get("exitCode"),
             "startedAt": obj.get("startedAt"),
             "finishedAt": obj.get("finishedAt"),
+            "lastTerminationReason": obj.get("lastTerminationReason"),
+            "lastExitCode": obj.get("lastExitCode"),
+            "lastFinishedAt": obj.get("lastFinishedAt"),
             "cpuUsage": obj.get("cpuUsage"),
             "memoryUsage": obj.get("memoryUsage"),
             "cpuRequest": obj.get("cpuRequest"),

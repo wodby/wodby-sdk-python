@@ -35,6 +35,7 @@ from wodby.models.app_environment_stack_reconciliation_input import AppEnvironme
 from wodby.models.app_environment_stack_upgrade_changelog import AppEnvironmentStackUpgradeChangelog
 from wodby.models.app_environment_stack_upgrade_input import AppEnvironmentStackUpgradeInput
 from wodby.models.app_service_build import AppServiceBuild
+from wodby.models.kubernetes_event import KubernetesEvent
 from wodby.models.new_app_access_input import NewAppAccessInput
 from wodby.models.new_app_annotation_input import NewAppAnnotationInput
 from wodby.models.new_app_environment_access_input import NewAppEnvironmentAccessInput
@@ -5530,6 +5531,322 @@ class AppEnvironmentsApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/app-annotations',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def list_app_environment_events(
+        self,
+        id: StrictInt,
+        app_service_id: Annotated[Optional[StrictInt], Field(description="Only events about this app service's workloads, pods and volume claims.")] = None,
+        warnings_only: Annotated[Optional[StrictBool], Field(description="Only warnings (default true). Set to false to include normal events.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="At most this many events, 50 by default and 200 at most.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> List[KubernetesEvent]:
+        """List app environment events
+
+        Returns recent Kubernetes events in the app environment, newest first: for example why a pod can't be scheduled, fails its health checks, can't pull its image or mount a volume. Kubernetes keeps events for about an hour. Repeats of the same event are merged, and known secret values in messages are masked.
+
+        :param id: (required)
+        :type id: int
+        :param app_service_id: Only events about this app service's workloads, pods and volume claims.
+        :type app_service_id: int
+        :param warnings_only: Only warnings (default true). Set to false to include normal events.
+        :type warnings_only: bool
+        :param limit: At most this many events, 50 by default and 200 at most.
+        :type limit: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_app_environment_events_serialize(
+            id=id,
+            app_service_id=app_service_id,
+            warnings_only=warnings_only,
+            limit=limit,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[KubernetesEvent]",
+            '4XX': "ProblemDetails",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def list_app_environment_events_with_http_info(
+        self,
+        id: StrictInt,
+        app_service_id: Annotated[Optional[StrictInt], Field(description="Only events about this app service's workloads, pods and volume claims.")] = None,
+        warnings_only: Annotated[Optional[StrictBool], Field(description="Only warnings (default true). Set to false to include normal events.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="At most this many events, 50 by default and 200 at most.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[List[KubernetesEvent]]:
+        """List app environment events
+
+        Returns recent Kubernetes events in the app environment, newest first: for example why a pod can't be scheduled, fails its health checks, can't pull its image or mount a volume. Kubernetes keeps events for about an hour. Repeats of the same event are merged, and known secret values in messages are masked.
+
+        :param id: (required)
+        :type id: int
+        :param app_service_id: Only events about this app service's workloads, pods and volume claims.
+        :type app_service_id: int
+        :param warnings_only: Only warnings (default true). Set to false to include normal events.
+        :type warnings_only: bool
+        :param limit: At most this many events, 50 by default and 200 at most.
+        :type limit: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_app_environment_events_serialize(
+            id=id,
+            app_service_id=app_service_id,
+            warnings_only=warnings_only,
+            limit=limit,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[KubernetesEvent]",
+            '4XX': "ProblemDetails",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def list_app_environment_events_without_preload_content(
+        self,
+        id: StrictInt,
+        app_service_id: Annotated[Optional[StrictInt], Field(description="Only events about this app service's workloads, pods and volume claims.")] = None,
+        warnings_only: Annotated[Optional[StrictBool], Field(description="Only warnings (default true). Set to false to include normal events.")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="At most this many events, 50 by default and 200 at most.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """List app environment events
+
+        Returns recent Kubernetes events in the app environment, newest first: for example why a pod can't be scheduled, fails its health checks, can't pull its image or mount a volume. Kubernetes keeps events for about an hour. Repeats of the same event are merged, and known secret values in messages are masked.
+
+        :param id: (required)
+        :type id: int
+        :param app_service_id: Only events about this app service's workloads, pods and volume claims.
+        :type app_service_id: int
+        :param warnings_only: Only warnings (default true). Set to false to include normal events.
+        :type warnings_only: bool
+        :param limit: At most this many events, 50 by default and 200 at most.
+        :type limit: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_app_environment_events_serialize(
+            id=id,
+            app_service_id=app_service_id,
+            warnings_only=warnings_only,
+            limit=limit,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[KubernetesEvent]",
+            '4XX': "ProblemDetails",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _list_app_environment_events_serialize(
+        self,
+        id,
+        app_service_id,
+        warnings_only,
+        limit,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if id is not None:
+            _path_params['id'] = id
+        # process the query parameters
+        if app_service_id is not None:
+            
+            _query_params.append(('appServiceId', app_service_id))
+            
+        if warnings_only is not None:
+            
+            _query_params.append(('warningsOnly', warnings_only))
+            
+        if limit is not None:
+            
+            _query_params.append(('limit', limit))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json', 
+                    'application/problem+json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'apiKeyHeader'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/app-environments/events/{id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

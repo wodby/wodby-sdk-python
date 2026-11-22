@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **cpu_limit** | **float** |  | [optional] 
 **memory_limit** | **int** |  | [optional] 
 **containers** | [**List[AppServicePodContainer]**](AppServicePodContainer.md) |  | 
+**conditions** | [**List[AppServicePodCondition]**](AppServicePodCondition.md) | The pod&#39;s conditions that aren&#39;t met and say why, such as PodScheduled with reason Unschedulable. Known secret values in messages are masked. | 
 
 ## Example
 

@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
+from wodby.models.app_service_pod_condition import AppServicePodCondition
 from wodby.models.app_service_pod_container import AppServicePodContainer
 from typing import Optional, Set
 from typing_extensions import Self
@@ -46,7 +47,8 @@ class AppServicePod(BaseModel):
     cpu_limit: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="cpuLimit")
     memory_limit: Optional[StrictInt] = Field(default=None, alias="memoryLimit")
     containers: List[AppServicePodContainer]
-    __properties: ClassVar[List[str]] = ["id", "name", "workload", "kubeWorkloadName", "node", "phase", "ready", "terminating", "reason", "message", "createdAt", "cpuUsage", "memoryUsage", "cpuRequest", "memoryRequest", "cpuLimit", "memoryLimit", "containers"]
+    conditions: List[AppServicePodCondition] = Field(description="The pod's conditions that aren't met and say why, such as PodScheduled with reason Unschedulable. Known secret values in messages are masked.")
+    __properties: ClassVar[List[str]] = ["id", "name", "workload", "kubeWorkloadName", "node", "phase", "ready", "terminating", "reason", "message", "createdAt", "cpuUsage", "memoryUsage", "cpuRequest", "memoryRequest", "cpuLimit", "memoryLimit", "containers", "conditions"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -94,6 +96,13 @@ class AppServicePod(BaseModel):
                 if _item_containers:
                     _items.append(_item_containers.to_dict())
             _dict['containers'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in conditions (list)
+        _items = []
+        if self.conditions:
+            for _item_conditions in self.conditions:
+                if _item_conditions:
+                    _items.append(_item_conditions.to_dict())
+            _dict['conditions'] = _items
         # set to None if node (nullable) is None
         # and model_fields_set contains the field
         if self.node is None and "node" in self.model_fields_set:
@@ -168,7 +177,8 @@ class AppServicePod(BaseModel):
             "memoryRequest": obj.get("memoryRequest"),
             "cpuLimit": obj.get("cpuLimit"),
             "memoryLimit": obj.get("memoryLimit"),
-            "containers": [AppServicePodContainer.from_dict(_item) for _item in obj["containers"]] if obj.get("containers") is not None else None
+            "containers": [AppServicePodContainer.from_dict(_item) for _item in obj["containers"]] if obj.get("containers") is not None else None,
+            "conditions": [AppServicePodCondition.from_dict(_item) for _item in obj["conditions"]] if obj.get("conditions") is not None else None
         })
         return _obj
 

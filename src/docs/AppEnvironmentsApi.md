@@ -24,6 +24,7 @@ Method | HTTP request | Description
 [**get_workspace_git_status**](AppEnvironmentsApi.md#get_workspace_git_status) | **GET** /workspaces/{id}/git-status | Get workspace Git status
 [**list_app_access_cleanups**](AppEnvironmentsApi.md#list_app_access_cleanups) | **GET** /app-access-cleanups | List Private App Access cleanups
 [**list_app_annotations**](AppEnvironmentsApi.md#list_app_annotations) | **GET** /app-annotations | List app annotations
+[**list_app_environment_events**](AppEnvironmentsApi.md#list_app_environment_events) | **GET** /app-environments/events/{id} | List app environment events
 [**list_app_environment_migrations**](AppEnvironmentsApi.md#list_app_environment_migrations) | **GET** /app-environment-migrations | List app environment migrations
 [**list_app_environment_vulnerability_scans**](AppEnvironmentsApi.md#list_app_environment_vulnerability_scans) | **GET** /app-environment-vulnerability-scans/{id} | List app environment vulnerability scans
 [**list_app_environments**](AppEnvironmentsApi.md#list_app_environments) | **GET** /app-environments | List app environments
@@ -1681,6 +1682,93 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | App annotations |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **list_app_environment_events**
+> List[KubernetesEvent] list_app_environment_events(id, app_service_id=app_service_id, warnings_only=warnings_only, limit=limit)
+
+List app environment events
+
+Returns recent Kubernetes events in the app environment, newest first: for example why a pod can't be scheduled, fails its health checks, can't pull its image or mount a volume. Kubernetes keeps events for about an hour. Repeats of the same event are merged, and known secret values in messages are masked.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.kubernetes_event import KubernetesEvent
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppEnvironmentsApi(api_client)
+    id = 56 # int | 
+    app_service_id = 56 # int | Only events about this app service's workloads, pods and volume claims. (optional)
+    warnings_only = True # bool | Only warnings (default true). Set to false to include normal events. (optional) (default to True)
+    limit = 56 # int | At most this many events, 50 by default and 200 at most. (optional)
+
+    try:
+        # List app environment events
+        api_response = api_instance.list_app_environment_events(id, app_service_id=app_service_id, warnings_only=warnings_only, limit=limit)
+        print("The response of AppEnvironmentsApi->list_app_environment_events:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppEnvironmentsApi->list_app_environment_events: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+ **app_service_id** | **int**| Only events about this app service&#39;s workloads, pods and volume claims. | [optional] 
+ **warnings_only** | **bool**| Only warnings (default true). Set to false to include normal events. | [optional] [default to True]
+ **limit** | **int**| At most this many events, 50 by default and 200 at most. | [optional] 
+
+### Return type
+
+[**List[KubernetesEvent]**](KubernetesEvent.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | App environment events |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 
