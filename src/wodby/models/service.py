@@ -21,6 +21,7 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.service_settings import ServiceSettings
+from wodby.models.service_vulnerability_health import ServiceVulnerabilityHealth
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -42,9 +43,10 @@ class Service(BaseModel):
     owner_project_id: Optional[StrictInt] = Field(default=None, alias="ownerProjectId")
     available_to_all_projects: StrictBool = Field(description="True when every project in the organization can use the resource without a project share.", alias="availableToAllProjects")
     settings: Optional[ServiceSettings] = None
+    vulnerabilities: Optional[ServiceVulnerabilityHealth] = None
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "type", "status", "external", "public", "revId", "latestRevNumber", "orgId", "ownershipScope", "ownerProjectId", "availableToAllProjects", "settings", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "type", "status", "external", "public", "revId", "latestRevNumber", "orgId", "ownershipScope", "ownerProjectId", "availableToAllProjects", "settings", "vulnerabilities", "createdAt", "updatedAt"]
 
     @field_validator('ownership_scope')
     def ownership_scope_validate_enum(cls, value):
@@ -95,6 +97,9 @@ class Service(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of settings
         if self.settings:
             _dict['settings'] = self.settings.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of vulnerabilities
+        if self.vulnerabilities:
+            _dict['vulnerabilities'] = self.vulnerabilities.to_dict()
         # set to None if owner_project_id (nullable) is None
         # and model_fields_set contains the field
         if self.owner_project_id is None and "owner_project_id" in self.model_fields_set:
@@ -126,6 +131,7 @@ class Service(BaseModel):
             "ownerProjectId": obj.get("ownerProjectId"),
             "availableToAllProjects": obj.get("availableToAllProjects"),
             "settings": ServiceSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None,
+            "vulnerabilities": ServiceVulnerabilityHealth.from_dict(obj["vulnerabilities"]) if obj.get("vulnerabilities") is not None else None,
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt")
         })

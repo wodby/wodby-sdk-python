@@ -20,6 +20,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.app_environment_auto_stack_upgrade_settings_input import AppEnvironmentAutoStackUpgradeSettingsInput
+from wodby.models.app_environment_deployment_settings import AppEnvironmentDeploymentSettings
 from wodby.models.build_image_cleanup_settings_input import BuildImageCleanupSettingsInput
 from typing import Optional, Set
 from typing_extensions import Self
@@ -30,7 +31,8 @@ class AppEnvironmentSettingsInput(BaseModel):
     """ # noqa: E501
     auto_stack_upgrade: Optional[AppEnvironmentAutoStackUpgradeSettingsInput] = Field(default=None, alias="autoStackUpgrade")
     build_image_cleanup: Optional[BuildImageCleanupSettingsInput] = Field(default=None, description="Omit it to keep the current build image retention.", alias="buildImageCleanup")
-    __properties: ClassVar[List[str]] = ["autoStackUpgrade", "buildImageCleanup"]
+    deployment: Optional[AppEnvironmentDeploymentSettings] = Field(default=None, description="Omit it to keep the current deployment settings.")
+    __properties: ClassVar[List[str]] = ["autoStackUpgrade", "buildImageCleanup", "deployment"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -77,6 +79,9 @@ class AppEnvironmentSettingsInput(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of build_image_cleanup
         if self.build_image_cleanup:
             _dict['buildImageCleanup'] = self.build_image_cleanup.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of deployment
+        if self.deployment:
+            _dict['deployment'] = self.deployment.to_dict()
         return _dict
 
     @classmethod
@@ -90,7 +95,8 @@ class AppEnvironmentSettingsInput(BaseModel):
 
         _obj = cls.model_validate({
             "autoStackUpgrade": AppEnvironmentAutoStackUpgradeSettingsInput.from_dict(obj["autoStackUpgrade"]) if obj.get("autoStackUpgrade") is not None else None,
-            "buildImageCleanup": BuildImageCleanupSettingsInput.from_dict(obj["buildImageCleanup"]) if obj.get("buildImageCleanup") is not None else None
+            "buildImageCleanup": BuildImageCleanupSettingsInput.from_dict(obj["buildImageCleanup"]) if obj.get("buildImageCleanup") is not None else None,
+            "deployment": AppEnvironmentDeploymentSettings.from_dict(obj["deployment"]) if obj.get("deployment") is not None else None
         })
         return _obj
 

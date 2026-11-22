@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **git_commit_message** | **str** |  | [optional] 
 **provider** | **str** |  | 
 **post_deployment** | **str** |  | [optional] 
+**pre_deployment** | **str** | Content of the repository&#39;s .wodby/pre-deployment.yml. A deployment of this build runs these scripts with the new version before rolling the app service out. | [optional] 
 
 ## Example
 

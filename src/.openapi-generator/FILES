@@ -49,6 +49,7 @@ docs/AppEnvironmentBackupHealth.md
 docs/AppEnvironmentCICDSettings.md
 docs/AppEnvironmentCICDSettingsInput.md
 docs/AppEnvironmentCronHealth.md
+docs/AppEnvironmentDeploymentSettings.md
 docs/AppEnvironmentHealth.md
 docs/AppEnvironmentMainRouteCert.md
 docs/AppEnvironmentMaintenanceModeInput.md
@@ -384,6 +385,7 @@ docs/ServiceRevision.md
 docs/ServiceRevisionChange.md
 docs/ServiceSettings.md
 docs/ServiceSettingsInput.md
+docs/ServiceVulnerabilityHealth.md
 docs/ServiceWorkloadDeploymentConfiguration.md
 docs/ServiceWorkloadDeploymentInput.md
 docs/ServicesApi.md
@@ -424,6 +426,7 @@ docs/StackServiceLinkInput.md
 docs/StackServiceOption.md
 docs/StackServiceOptionInput.md
 docs/StackServiceOptionsInput.md
+docs/StackServiceSecurityFix.md
 docs/StackServiceSetting.md
 docs/StackServiceToken.md
 docs/StackServiceUpdateChangelog.md
@@ -513,6 +516,9 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_app_environment_deployment_settings.py
+test/test_service_vulnerability_health.py
+test/test_stack_service_security_fix.py
 tox.ini
 wodby/__init__.py
 wodby/api/__init__.py
@@ -596,6 +602,7 @@ wodby/models/app_environment_backup_health.py
 wodby/models/app_environment_cicd_settings.py
 wodby/models/app_environment_cicd_settings_input.py
 wodby/models/app_environment_cron_health.py
+wodby/models/app_environment_deployment_settings.py
 wodby/models/app_environment_health.py
 wodby/models/app_environment_main_route_cert.py
 wodby/models/app_environment_maintenance_mode_input.py
@@ -909,6 +916,7 @@ wodby/models/service_revision.py
 wodby/models/service_revision_change.py
 wodby/models/service_settings.py
 wodby/models/service_settings_input.py
+wodby/models/service_vulnerability_health.py
 wodby/models/service_workload_deployment_configuration.py
 wodby/models/service_workload_deployment_input.py
 wodby/models/services_response.py
@@ -948,6 +956,7 @@ wodby/models/stack_service_link_input.py
 wodby/models/stack_service_option.py
 wodby/models/stack_service_option_input.py
 wodby/models/stack_service_options_input.py
+wodby/models/stack_service_security_fix.py
 wodby/models/stack_service_setting.py
 wodby/models/stack_service_token.py
 wodby/models/stack_service_update_changelog.py

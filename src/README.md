@@ -148,6 +148,7 @@ Class | Method | HTTP request | Description
 *AppEnvironmentsApi* | [**list_app_access_cleanups**](docs/AppEnvironmentsApi.md#list_app_access_cleanups) | **GET** /app-access-cleanups | List Private App Access cleanups
 *AppEnvironmentsApi* | [**list_app_annotations**](docs/AppEnvironmentsApi.md#list_app_annotations) | **GET** /app-annotations | List app annotations
 *AppEnvironmentsApi* | [**list_app_environment_migrations**](docs/AppEnvironmentsApi.md#list_app_environment_migrations) | **GET** /app-environment-migrations | List app environment migrations
+*AppEnvironmentsApi* | [**list_app_environment_vulnerability_scans**](docs/AppEnvironmentsApi.md#list_app_environment_vulnerability_scans) | **GET** /app-environment-vulnerability-scans/{id} | List app environment vulnerability scans
 *AppEnvironmentsApi* | [**list_app_environments**](docs/AppEnvironmentsApi.md#list_app_environments) | **GET** /app-environments | List app environments
 *AppEnvironmentsApi* | [**migrate_app_environment**](docs/AppEnvironmentsApi.md#migrate_app_environment) | **POST** /app-environments/{id}/actions/migrate | Migrate app environment to another cluster
 *AppEnvironmentsApi* | [**pause_workspace**](docs/AppEnvironmentsApi.md#pause_workspace) | **POST** /workspaces/{id}/actions/pause | Pause workspace
@@ -304,6 +305,7 @@ Class | Method | HTTP request | Description
 *ClustersApi* | [**list_wodby_cloud_machine_types**](docs/ClustersApi.md#list_wodby_cloud_machine_types) | **GET** /wodby-cloud/machine-types | List Wodby Cloud machine types
 *ClustersApi* | [**recycle_cluster_nodes**](docs/ClustersApi.md#recycle_cluster_nodes) | **POST** /clusters/{id}/actions/recycle-nodes | Recycle cluster nodes
 *ClustersApi* | [**remove_k3_s_cluster_node**](docs/ClustersApi.md#remove_k3_s_cluster_node) | **POST** /clusters/{id}/actions/remove-k3s-node | Remove K3s cluster node
+*ClustersApi* | [**rescan_cluster_vulnerabilities**](docs/ClustersApi.md#rescan_cluster_vulnerabilities) | **POST** /clusters/{id}/actions/rescan-vulnerabilities | Rescan cluster vulnerabilities
 *ClustersApi* | [**restart_k3_s_servers**](docs/ClustersApi.md#restart_k3_s_servers) | **POST** /clusters/{id}/actions/restart-k3s-servers | Restart K3s servers
 *ClustersApi* | [**scale_cluster**](docs/ClustersApi.md#scale_cluster) | **POST** /clusters/{id}/actions/scale | Scale cluster nodes
 *ClustersApi* | [**switch_k3_s_server_address**](docs/ClustersApi.md#switch_k3_s_server_address) | **POST** /clusters/{id}/actions/switch-k3s-server-address | Switch K3s server to a private address
@@ -578,6 +580,7 @@ Class | Method | HTTP request | Description
  - [AppEnvironmentCICDSettings](docs/AppEnvironmentCICDSettings.md)
  - [AppEnvironmentCICDSettingsInput](docs/AppEnvironmentCICDSettingsInput.md)
  - [AppEnvironmentCronHealth](docs/AppEnvironmentCronHealth.md)
+ - [AppEnvironmentDeploymentSettings](docs/AppEnvironmentDeploymentSettings.md)
  - [AppEnvironmentHealth](docs/AppEnvironmentHealth.md)
  - [AppEnvironmentMainRouteCert](docs/AppEnvironmentMainRouteCert.md)
  - [AppEnvironmentMaintenanceModeInput](docs/AppEnvironmentMaintenanceModeInput.md)
@@ -891,6 +894,7 @@ Class | Method | HTTP request | Description
  - [ServiceRevisionChange](docs/ServiceRevisionChange.md)
  - [ServiceSettings](docs/ServiceSettings.md)
  - [ServiceSettingsInput](docs/ServiceSettingsInput.md)
+ - [ServiceVulnerabilityHealth](docs/ServiceVulnerabilityHealth.md)
  - [ServiceWorkloadDeploymentConfiguration](docs/ServiceWorkloadDeploymentConfiguration.md)
  - [ServiceWorkloadDeploymentInput](docs/ServiceWorkloadDeploymentInput.md)
  - [ServicesResponse](docs/ServicesResponse.md)
@@ -930,6 +934,7 @@ Class | Method | HTTP request | Description
  - [StackServiceOption](docs/StackServiceOption.md)
  - [StackServiceOptionInput](docs/StackServiceOptionInput.md)
  - [StackServiceOptionsInput](docs/StackServiceOptionsInput.md)
+ - [StackServiceSecurityFix](docs/StackServiceSecurityFix.md)
  - [StackServiceSetting](docs/StackServiceSetting.md)
  - [StackServiceToken](docs/StackServiceToken.md)
  - [StackServiceUpdateChangelog](docs/StackServiceUpdateChangelog.md)

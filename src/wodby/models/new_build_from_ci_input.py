@@ -38,7 +38,8 @@ class NewBuildFromCIInput(BaseModel):
     git_commit_message: Optional[StrictStr] = Field(default=None, alias="gitCommitMessage")
     provider: StrictStr
     post_deployment: Optional[StrictStr] = Field(default=None, alias="postDeployment")
-    __properties: ClassVar[List[str]] = ["appServiceId", "gitCommitSHA", "gitRef", "gitRefType", "buildNum", "buildId", "workflow", "gitCommitAuthorName", "gitCommitAuthorEmail", "gitCommitMessage", "provider", "postDeployment"]
+    pre_deployment: Optional[StrictStr] = Field(default=None, description="Content of the repository's .wodby/pre-deployment.yml. A deployment of this build runs these scripts with the new version before rolling the app service out.", alias="preDeployment")
+    __properties: ClassVar[List[str]] = ["appServiceId", "gitCommitSHA", "gitRef", "gitRefType", "buildNum", "buildId", "workflow", "gitCommitAuthorName", "gitCommitAuthorEmail", "gitCommitMessage", "provider", "postDeployment", "preDeployment"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -104,6 +105,11 @@ class NewBuildFromCIInput(BaseModel):
         if self.post_deployment is None and "post_deployment" in self.model_fields_set:
             _dict['postDeployment'] = None
 
+        # set to None if pre_deployment (nullable) is None
+        # and model_fields_set contains the field
+        if self.pre_deployment is None and "pre_deployment" in self.model_fields_set:
+            _dict['preDeployment'] = None
+
         return _dict
 
     @classmethod
@@ -127,7 +133,8 @@ class NewBuildFromCIInput(BaseModel):
             "gitCommitAuthorEmail": obj.get("gitCommitAuthorEmail"),
             "gitCommitMessage": obj.get("gitCommitMessage"),
             "provider": obj.get("provider"),
-            "postDeployment": obj.get("postDeployment")
+            "postDeployment": obj.get("postDeployment"),
+            "preDeployment": obj.get("preDeployment")
         })
         return _obj
 

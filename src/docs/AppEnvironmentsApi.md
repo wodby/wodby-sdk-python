@@ -25,6 +25,7 @@ Method | HTTP request | Description
 [**list_app_access_cleanups**](AppEnvironmentsApi.md#list_app_access_cleanups) | **GET** /app-access-cleanups | List Private App Access cleanups
 [**list_app_annotations**](AppEnvironmentsApi.md#list_app_annotations) | **GET** /app-annotations | List app annotations
 [**list_app_environment_migrations**](AppEnvironmentsApi.md#list_app_environment_migrations) | **GET** /app-environment-migrations | List app environment migrations
+[**list_app_environment_vulnerability_scans**](AppEnvironmentsApi.md#list_app_environment_vulnerability_scans) | **GET** /app-environment-vulnerability-scans/{id} | List app environment vulnerability scans
 [**list_app_environments**](AppEnvironmentsApi.md#list_app_environments) | **GET** /app-environments | List app environments
 [**migrate_app_environment**](AppEnvironmentsApi.md#migrate_app_environment) | **POST** /app-environments/{id}/actions/migrate | Migrate app environment to another cluster
 [**pause_workspace**](AppEnvironmentsApi.md#pause_workspace) | **POST** /workspaces/{id}/actions/pause | Pause workspace
@@ -1761,6 +1762,87 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | App environment migrations |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **list_app_environment_vulnerability_scans**
+> List[AppServiceBuild] list_app_environment_vulnerability_scans(id)
+
+List app environment vulnerability scans
+
+Lists the build images an app environment currently runs, each with the summary of its latest vulnerability scan, ordered by the app service that built them. The ID is the app environment's. An image several app services run is listed once. Returns null when vulnerability scanning is unavailable for the organization.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.app_service_build import AppServiceBuild
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.AppEnvironmentsApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # List app environment vulnerability scans
+        api_response = api_instance.list_app_environment_vulnerability_scans(id)
+        print("The response of AppEnvironmentsApi->list_app_environment_vulnerability_scans:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AppEnvironmentsApi->list_app_environment_vulnerability_scans: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**List[AppServiceBuild]**](AppServiceBuild.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The images the app environment runs, or null when scanning is unavailable |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 

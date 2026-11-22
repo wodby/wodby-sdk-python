@@ -53,6 +53,8 @@ class Stack(BaseModel):
     variant_title: Optional[StrictStr] = Field(default=None, description="Short label that tells this variant apart, such as High availability.", alias="variantTitle")
     variant_description: Optional[StrictStr] = Field(default=None, description="When to choose this stack over the other stacks of its variant family, such as building the app from your own repository to customize it. A main stack can have one too.", alias="variantDescription")
     variant_stack_ids: List[StrictInt] = Field(description="Variants of this stack that you can see, ordered by title. Empty for a stack that is a variant itself.", alias="variantStackIds")
+    category: Optional[StrictStr] = Field(default=None, description="Catalog category of the stack, such as cms for WordPress. Absent when the stack's template names none.")
+    security_updates: Optional[StrictInt] = Field(default=None, description="How many of the stack's services have an update that fixes a vulnerability known or likely to be exploited, or one Wodby tracks. Each such service lists the vulnerabilities in securityFixes. Absent without vulnerability scanning.", alias="securityUpdates")
     org_id: StrictInt = Field(alias="orgId")
     ownership_scope: StrictStr = Field(description="org when the organization owns the resource, project when one project owns it.", alias="ownershipScope")
     owner_project_id: Optional[StrictInt] = Field(default=None, alias="ownerProjectId")
@@ -60,7 +62,17 @@ class Stack(BaseModel):
     settings: Optional[StackSettings] = None
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "icon", "status", "outdated", "public", "revId", "draftRevId", "latestRevNumber", "gitRepoId", "gitRepoRemoteId", "gitRepoRef", "gitRepoRefType", "originStackRevId", "originStackRevStackId", "originStackRevName", "originStackRevNumber", "originStackRevVersion", "originStackRevCreatedAt", "variantOfStackId", "variantOfStackName", "variantTitle", "variantDescription", "variantStackIds", "orgId", "ownershipScope", "ownerProjectId", "availableToAllProjects", "settings", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "icon", "status", "outdated", "public", "revId", "draftRevId", "latestRevNumber", "gitRepoId", "gitRepoRemoteId", "gitRepoRef", "gitRepoRefType", "originStackRevId", "originStackRevStackId", "originStackRevName", "originStackRevNumber", "originStackRevVersion", "originStackRevCreatedAt", "variantOfStackId", "variantOfStackName", "variantTitle", "variantDescription", "variantStackIds", "category", "securityUpdates", "orgId", "ownershipScope", "ownerProjectId", "availableToAllProjects", "settings", "createdAt", "updatedAt"]
+
+    @field_validator('category')
+    def category_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['javascript', 'frameworks', 'runtimes', 'cms', 'databases', 'datastores', 'search', 'observability', 'data', 'ai', 'devtools', 'collaboration', 'networking', 'platform']):
+            raise ValueError("must be one of enum values ('javascript', 'frameworks', 'runtimes', 'cms', 'databases', 'datastores', 'search', 'observability', 'data', 'ai', 'devtools', 'collaboration', 'networking', 'platform')")
+        return value
 
     @field_validator('ownership_scope')
     def ownership_scope_validate_enum(cls, value):
@@ -186,6 +198,16 @@ class Stack(BaseModel):
         if self.variant_description is None and "variant_description" in self.model_fields_set:
             _dict['variantDescription'] = None
 
+        # set to None if category (nullable) is None
+        # and model_fields_set contains the field
+        if self.category is None and "category" in self.model_fields_set:
+            _dict['category'] = None
+
+        # set to None if security_updates (nullable) is None
+        # and model_fields_set contains the field
+        if self.security_updates is None and "security_updates" in self.model_fields_set:
+            _dict['securityUpdates'] = None
+
         # set to None if owner_project_id (nullable) is None
         # and model_fields_set contains the field
         if self.owner_project_id is None and "owner_project_id" in self.model_fields_set:
@@ -228,6 +250,8 @@ class Stack(BaseModel):
             "variantTitle": obj.get("variantTitle"),
             "variantDescription": obj.get("variantDescription"),
             "variantStackIds": obj.get("variantStackIds"),
+            "category": obj.get("category"),
+            "securityUpdates": obj.get("securityUpdates"),
             "orgId": obj.get("orgId"),
             "ownershipScope": obj.get("ownershipScope"),
             "ownerProjectId": obj.get("ownerProjectId"),

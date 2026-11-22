@@ -56,6 +56,7 @@ from wodby.models.app_environment_backup_health import AppEnvironmentBackupHealt
 from wodby.models.app_environment_cicd_settings import AppEnvironmentCICDSettings
 from wodby.models.app_environment_cicd_settings_input import AppEnvironmentCICDSettingsInput
 from wodby.models.app_environment_cron_health import AppEnvironmentCronHealth
+from wodby.models.app_environment_deployment_settings import AppEnvironmentDeploymentSettings
 from wodby.models.app_environment_health import AppEnvironmentHealth
 from wodby.models.app_environment_main_route_cert import AppEnvironmentMainRouteCert
 from wodby.models.app_environment_maintenance_mode_input import AppEnvironmentMaintenanceModeInput
@@ -369,6 +370,7 @@ from wodby.models.service_revision import ServiceRevision
 from wodby.models.service_revision_change import ServiceRevisionChange
 from wodby.models.service_settings import ServiceSettings
 from wodby.models.service_settings_input import ServiceSettingsInput
+from wodby.models.service_vulnerability_health import ServiceVulnerabilityHealth
 from wodby.models.service_workload_deployment_configuration import ServiceWorkloadDeploymentConfiguration
 from wodby.models.service_workload_deployment_input import ServiceWorkloadDeploymentInput
 from wodby.models.services_response import ServicesResponse
@@ -408,6 +410,7 @@ from wodby.models.stack_service_link_input import StackServiceLinkInput
 from wodby.models.stack_service_option import StackServiceOption
 from wodby.models.stack_service_option_input import StackServiceOptionInput
 from wodby.models.stack_service_options_input import StackServiceOptionsInput
+from wodby.models.stack_service_security_fix import StackServiceSecurityFix
 from wodby.models.stack_service_setting import StackServiceSetting
 from wodby.models.stack_service_token import StackServiceToken
 from wodby.models.stack_service_update_changelog import StackServiceUpdateChangelog

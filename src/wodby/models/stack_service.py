@@ -23,6 +23,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from wodby.models.service_deployment_configuration import ServiceDeploymentConfiguration
 from wodby.models.stack_service_container import StackServiceContainer
 from wodby.models.stack_service_option import StackServiceOption
+from wodby.models.stack_service_security_fix import StackServiceSecurityFix
 from wodby.models.stack_service_setting import StackServiceSetting
 from typing import Optional, Set
 from typing_extensions import Self
@@ -45,6 +46,7 @@ class StackService(BaseModel):
     outdated: StrictBool
     icon: Optional[StrictStr] = None
     eol: Optional[StrictBool] = Field(default=None, description="True when the version of the stack service's default option has reached its end of life.")
+    security_fixes: Optional[List[StackServiceSecurityFix]] = Field(default=None, description="Vulnerabilities known or likely to be exploited, or tracked by Wodby, that an image this stack service deploys has and the image of the service's latest version doesn't, so updating the stack service fixes them. Images are compared for each option version the stack service offers. Empty when the update fixes none of them or the stack service has no update: it is up to date, pinned or a derivative, or its service pulls from a private registry. Absent without vulnerability scanning.", alias="securityFixes")
     derivative: Optional[StrictStr] = Field(default=None, description="The service derivative the stack service runs. Null for the service itself.")
     parent_stack_service_id: Optional[StrictInt] = Field(default=None, description="The stack service this derivative stack service belongs to. Null for the service itself.", alias="parentStackServiceId")
     service_rev_id: StrictInt = Field(alias="serviceRevId")
@@ -59,7 +61,7 @@ class StackService(BaseModel):
     deployment_configuration: ServiceDeploymentConfiguration = Field(alias="deploymentConfiguration")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "type", "main", "disabled", "required", "basicAuthOverride", "basicAuthDefault", "replicas", "serviceRevPinned", "outdated", "icon", "eol", "derivative", "parentStackServiceId", "serviceRevId", "serviceRevName", "serviceRevTitle", "serviceRevVersion", "buildSourceIntegrationId", "buildSourceRemoteRepoId", "options", "settings", "containers", "deploymentConfiguration", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "type", "main", "disabled", "required", "basicAuthOverride", "basicAuthDefault", "replicas", "serviceRevPinned", "outdated", "icon", "eol", "securityFixes", "derivative", "parentStackServiceId", "serviceRevId", "serviceRevName", "serviceRevTitle", "serviceRevVersion", "buildSourceIntegrationId", "buildSourceRemoteRepoId", "options", "settings", "containers", "deploymentConfiguration", "createdAt", "updatedAt"]
 
     @field_validator('basic_auth_override')
     def basic_auth_override_validate_enum(cls, value):
@@ -107,6 +109,13 @@ class StackService(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in security_fixes (list)
+        _items = []
+        if self.security_fixes:
+            for _item_security_fixes in self.security_fixes:
+                if _item_security_fixes:
+                    _items.append(_item_security_fixes.to_dict())
+            _dict['securityFixes'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in options (list)
         _items = []
         if self.options:
@@ -131,6 +140,11 @@ class StackService(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of deployment_configuration
         if self.deployment_configuration:
             _dict['deploymentConfiguration'] = self.deployment_configuration.to_dict()
+        # set to None if security_fixes (nullable) is None
+        # and model_fields_set contains the field
+        if self.security_fixes is None and "security_fixes" in self.model_fields_set:
+            _dict['securityFixes'] = None
+
         # set to None if derivative (nullable) is None
         # and model_fields_set contains the field
         if self.derivative is None and "derivative" in self.model_fields_set:
@@ -177,6 +191,7 @@ class StackService(BaseModel):
             "outdated": obj.get("outdated"),
             "icon": obj.get("icon"),
             "eol": obj.get("eol"),
+            "securityFixes": [StackServiceSecurityFix.from_dict(_item) for _item in obj["securityFixes"]] if obj.get("securityFixes") is not None else None,
             "derivative": obj.get("derivative"),
             "parentStackServiceId": obj.get("parentStackServiceId"),
             "serviceRevId": obj.get("serviceRevId"),
