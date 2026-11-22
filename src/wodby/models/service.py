@@ -44,15 +44,27 @@ class Service(BaseModel):
     available_to_all_projects: StrictBool = Field(description="True when every project in the organization can use the resource without a project share.", alias="availableToAllProjects")
     settings: Optional[ServiceSettings] = None
     vulnerabilities: Optional[ServiceVulnerabilityHealth] = None
+    archived_at: Optional[datetime] = Field(default=None, description="When the service was archived. Absent while the service is in use.", alias="archivedAt")
+    archive_reason: Optional[StrictStr] = Field(default=None, description="Why the service is archived: manual when someone archived it, removed_from_git when a Git update no longer found it in its repository. A removed_from_git service is unarchived and updated when it returns to the repository. Absent while the service is in use.", alias="archiveReason")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "title", "type", "status", "external", "public", "revId", "latestRevNumber", "orgId", "ownershipScope", "ownerProjectId", "availableToAllProjects", "settings", "vulnerabilities", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "title", "type", "status", "external", "public", "revId", "latestRevNumber", "orgId", "ownershipScope", "ownerProjectId", "availableToAllProjects", "settings", "vulnerabilities", "archivedAt", "archiveReason", "createdAt", "updatedAt"]
 
     @field_validator('ownership_scope')
     def ownership_scope_validate_enum(cls, value):
         """Validates the enum"""
         if value not in set(['org', 'project']):
             raise ValueError("must be one of enum values ('org', 'project')")
+        return value
+
+    @field_validator('archive_reason')
+    def archive_reason_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['manual', 'removed_from_git']):
+            raise ValueError("must be one of enum values ('manual', 'removed_from_git')")
         return value
 
     model_config = ConfigDict(
@@ -132,6 +144,8 @@ class Service(BaseModel):
             "availableToAllProjects": obj.get("availableToAllProjects"),
             "settings": ServiceSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None,
             "vulnerabilities": ServiceVulnerabilityHealth.from_dict(obj["vulnerabilities"]) if obj.get("vulnerabilities") is not None else None,
+            "archivedAt": obj.get("archivedAt"),
+            "archiveReason": obj.get("archiveReason"),
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt")
         })

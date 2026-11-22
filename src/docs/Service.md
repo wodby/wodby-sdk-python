@@ -20,6 +20,8 @@ Name | Type | Description | Notes
 **available_to_all_projects** | **bool** | True when every project in the organization can use the resource without a project share. | 
 **settings** | [**ServiceSettings**](ServiceSettings.md) |  | [optional] 
 **vulnerabilities** | [**ServiceVulnerabilityHealth**](ServiceVulnerabilityHealth.md) |  | [optional] 
+**archived_at** | **datetime** | When the service was archived. Absent while the service is in use. | [optional] 
+**archive_reason** | **str** | Why the service is archived: manual when someone archived it, removed_from_git when a Git update no longer found it in its repository. A removed_from_git service is unarchived and updated when it returns to the repository. Absent while the service is in use. | [optional] 
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 
 

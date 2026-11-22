@@ -4,6 +4,7 @@ All URIs are relative to */v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**archive_service**](ServicesApi.md#archive_service) | **POST** /services/{id}/actions/archive | Archive service
 [**create_service_from_manifest**](ServicesApi.md#create_service_from_manifest) | **POST** /services/actions/create-from-manifest | Create service from manifest
 [**delete_service**](ServicesApi.md#delete_service) | **DELETE** /services/{id} | Delete service
 [**get_service**](ServicesApi.md#get_service) | **GET** /services/{id} | Get service
@@ -16,12 +17,94 @@ Method | HTTP request | Description
 [**list_service_link_candidates**](ServicesApi.md#list_service_link_candidates) | **GET** /services/{name}/options/link-candidates | List service link candidates
 [**list_services**](ServicesApi.md#list_services) | **GET** /services | List services
 [**scaffold_service_from_helm_chart**](ServicesApi.md#scaffold_service_from_helm_chart) | **POST** /services/actions/scaffold-from-helm-chart | Scaffold service from Helm chart
+[**unarchive_service**](ServicesApi.md#unarchive_service) | **POST** /services/{id}/actions/unarchive | Unarchive service
 [**update_service_from_git**](ServicesApi.md#update_service_from_git) | **POST** /services/{id}/actions/update-from-git | Update service from Git
 [**update_service_from_manifest**](ServicesApi.md#update_service_from_manifest) | **POST** /services/{id}/actions/update-from-manifest | Update service from manifest
 [**update_service_settings**](ServicesApi.md#update_service_settings) | **PUT** /services/settings/{id} | Update service settings
 [**update_service_sharing**](ServicesApi.md#update_service_sharing) | **PUT** /services/sharing/{id} | Update service sharing
 [**validate_service_manifest**](ServicesApi.md#validate_service_manifest) | **POST** /services/actions/validate-manifest | Validate service manifest
 
+
+# **archive_service**
+> Service archive_service(id)
+
+Archive service
+
+Archives a service that only earlier stack revisions use, when it can no longer be deleted but is not needed. The stack revisions and environments that already use it keep working. Archived services are left out of service lists, and stacks and services cannot start using them until they are unarchived. Fails while the current or draft revision of a stack uses the service, or while a service that is not archived inherits from it.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.service import Service
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.ServicesApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # Archive service
+        api_response = api_instance.archive_service(id)
+        print("The response of ServicesApi->archive_service:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ServicesApi->archive_service: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**Service**](Service.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Archived service |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_service_from_manifest**
 > Service create_service_from_manifest(manifest_from_yaml_input)
@@ -841,7 +924,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_services**
-> ServicesResponse list_services(org_id=org_id, project_ids=project_ids, search=search, page=page, page_size=page_size)
+> ServicesResponse list_services(org_id=org_id, project_ids=project_ids, search=search, archived=archived, page=page, page_size=page_size)
 
 List services
 
@@ -881,12 +964,13 @@ with wodby.ApiClient(configuration) as api_client:
     org_id = 56 # int | Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization. (optional)
     project_ids = 'project_ids_example' # str | Comma-separated project ids (optional)
     search = 'search_example' # str |  (optional)
+    archived = exclude # str | Which services to list: exclude lists the services in use, include lists every service with archived ones last, and only lists archived services. (optional) (default to exclude)
     page = 56 # int | Page number, defaults to 1 (optional)
     page_size = 56 # int | Page size, defaults to 30 (optional)
 
     try:
         # List services
-        api_response = api_instance.list_services(org_id=org_id, project_ids=project_ids, search=search, page=page, page_size=page_size)
+        api_response = api_instance.list_services(org_id=org_id, project_ids=project_ids, search=search, archived=archived, page=page, page_size=page_size)
         print("The response of ServicesApi->list_services:\n")
         pprint(api_response)
     except Exception as e:
@@ -903,6 +987,7 @@ Name | Type | Description  | Notes
  **org_id** | **int**| Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. | [optional] 
  **project_ids** | **str**| Comma-separated project ids | [optional] 
  **search** | **str**|  | [optional] 
+ **archived** | **str**| Which services to list: exclude lists the services in use, include lists every service with archived ones last, and only lists archived services. | [optional] [default to exclude]
  **page** | **int**| Page number, defaults to 1 | [optional] 
  **page_size** | **int**| Page size, defaults to 30 | [optional] 
 
@@ -1006,6 +1091,87 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Generated service manifest |  -  |
+**4XX** | Error response |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **unarchive_service**
+> Service unarchive_service(id)
+
+Unarchive service
+
+Returns an archived service to service lists, so stacks and services can use it again.
+
+### Example
+
+* Api Key Authentication (apiKeyHeader):
+
+```python
+import wodby
+from wodby.models.service import Service
+from wodby.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = wodby.Configuration(
+    host = "/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: apiKeyHeader
+configuration.api_key['apiKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['apiKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with wodby.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = wodby.ServicesApi(api_client)
+    id = 56 # int | 
+
+    try:
+        # Unarchive service
+        api_response = api_instance.unarchive_service(id)
+        print("The response of ServicesApi->unarchive_service:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ServicesApi->unarchive_service: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**|  | 
+
+### Return type
+
+[**Service**](Service.md)
+
+### Authorization
+
+[apiKeyHeader](../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Unarchived service |  -  |
 **4XX** | Error response |  -  |
 **0** | Error response |  -  |
 
