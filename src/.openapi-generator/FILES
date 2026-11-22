@@ -516,9 +516,6 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_app_environment_deployment_settings.py
-test/test_service_vulnerability_health.py
-test/test_stack_service_security_fix.py
 tox.ini
 wodby/__init__.py
 wodby/api/__init__.py
